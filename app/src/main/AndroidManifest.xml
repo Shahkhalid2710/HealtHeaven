@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.applocum.connecttomyhealth">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ConnectToMyHealth">
+        <activity android:name=".ui.BaseActivity"></activity>
+        <activity android:name=".ui.specialists.SpecialistsActivity" />
+        <activity android:name=".ui.medication.MedicationActivity" />
+        <activity android:name=".ui.familyhistory.AddFamilyHistoryActivity" />
+        <activity android:name=".ui.exemptions.ExemptionsActivity" />
+        <activity android:name=".ui.mygp.AddGPServiceActivity" />
+        <activity android:name=".ui.mygp.MyGPActivity" />
+        <activity android:name=".ui.profiledetails.ProfileDetailsActivity" />
+        <activity android:name=".ui.investigation.AddInvestigationActivity" />
+        <activity android:name=".ui.allergyhistory.AddAllergyActivity" />
+        <activity android:name=".ui.investigation.InvestigationActivity" />
+        <activity android:name=".ui.allergyhistory.AllergyHistoryActivity" />
+        <activity android:name=".ui.familyhistory.FamilyHistoryActivity" />
+        <activity android:name=".ui.settings.SettingActivity" />
+        <activity android:name=".ui.changepassword.ChangePasswordActivity" />
+        <activity android:name=".ui.mydownloads.MyDownloadsActivity" />
+        <activity android:name=".ui.clinicalrecords.ClinicalRecordsActivity" />
+        <activity android:name=".ui.personaldetails.PersonalDetailsActivity" />
+        <activity android:name=".ui.bottomnavigationview.BottomNavigationViewActivity"></activity>
+        <activity android:name=".ui.signup.SignupActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.createnewpassword.CreateNewPasswordActivity" />
+        <activity android:name=".ui.verification.VerificationActivity" />
+        <activity android:name=".ui.forgotpassword.ForgotPasswordActivity" />
+        <activity android:name=".ui.login.LoginActivity" />
+    </application>
+
+</manifest>

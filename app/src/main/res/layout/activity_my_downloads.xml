@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.mydownloads.MyDownloadsActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_25"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvMyDownloads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/my_downloads"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_20" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_42"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/tvPrescription"
+            android:layout_width="135dp"
+            android:layout_height="18dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/prescription"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <ImageView
+            android:id="@+id/ivPrescriptionNext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textcolorgrey" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/tvFitNote"
+            android:layout_width="140dp"
+            android:layout_height="18dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/fit_note"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <ImageView
+            android:id="@+id/ivFNNext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textcolorgrey" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/tvReferral"
+            android:layout_width="140dp"
+            android:layout_height="18dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/referral"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <ImageView
+            android:id="@+id/ivReferralNext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textcolorgrey" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/tvOthersNotes"
+            android:layout_width="140dp"
+            android:layout_height="18dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/others_notes"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <ImageView
+            android:id="@+id/ivONNext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+</LinearLayout>

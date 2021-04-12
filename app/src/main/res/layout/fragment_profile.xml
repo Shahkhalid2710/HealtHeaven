@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.profile.ProfileFragment">
+
+        <TextView
+            android:id="@+id/tvProfile"
+            android:layout_width="70dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/profile"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_20" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:background="@color/textcolorgrey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="90dp"
+                android:layout_height="80dp">
+
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_20"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_dr_1" />
+
+                <ImageView
+                    android:id="@+id/ivEdit"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom|end"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_edit" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="120dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="39dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/arkell_charles"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_16" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="@dimen/spacing_35"
+            android:background="@color/textcolorgrey" />
+
+        <RelativeLayout
+            android:id="@+id/rlPersonalDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="@dimen/spacing_16">
+
+            <ImageView
+                android:id="@+id/ivPersonalDetails"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_profile_icon" />
+
+            <TextView
+                android:id="@+id/tvPersonalDetails"
+                android:layout_width="115dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="36dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/personal_details"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_14" />
+
+            <ImageView
+                android:id="@+id/ivPersonalDetailsNext"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/textcolorgrey" />
+
+        <RelativeLayout
+            android:id="@+id/rlClinicalRecords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="@dimen/spacing_16">
+
+            <ImageView
+                android:id="@+id/ivClinicRecords"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_records" />
+
+            <TextView
+                android:id="@+id/tvClinicRecords"
+                android:layout_width="115dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="36dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/clinical_records"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_14" />
+
+            <ImageView
+                android:id="@+id/ivClinicRecordsNext"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/textcolorgrey" />
+
+        <RelativeLayout
+            android:id="@+id/rlMyDownloads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="@dimen/spacing_16">
+
+            <ImageView
+                android:id="@+id/ivMyDownload"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_download" />
+
+            <TextView
+                android:id="@+id/tvMyDwonload"
+                android:layout_width="115dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="36dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/my_downloads"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_14" />
+
+            <ImageView
+                android:id="@+id/ivMyDownloadNext"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/textcolorgrey" />
+
+        <RelativeLayout
+            android:id="@+id/rlPaymentMethods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="@dimen/spacing_16">
+
+            <ImageView
+                android:id="@+id/ivPaymentMethod"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_payment" />
+
+            <TextView
+                android:id="@+id/tvPaymentMethod"
+                android:layout_width="125dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="36dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/payment_method"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_14" />
+
+            <ImageView
+                android:id="@+id/ivPaymentMethodNext"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/textcolorgrey" />
+
+        <RelativeLayout
+            android:id="@+id/rlMemberships"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="@dimen/spacing_16">
+
+            <ImageView
+                android:id="@+id/ivMembership"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_membership" />
+
+            <TextView
+                android:id="@+id/tvMembership"
+                android:layout_width="125dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="36dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/membership"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_14" />
+
+            <ImageView
+                android:id="@+id/ivMembershipNext"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/textcolorgrey" />
+
+        <RelativeLayout
+            android:id="@+id/rlChangePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="@dimen/spacing_16">
+
+            <ImageView
+                android:id="@+id/ivChangePassword"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_changepassword" />
+
+            <TextView
+                android:id="@+id/tvChangePassword"
+                android:layout_width="129dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="36dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/change_password"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_14" />
+
+            <ImageView
+                android:id="@+id/ivChangePasswordNext"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/textcolorgrey" />
+
+        <RelativeLayout
+            android:id="@+id/rlSetting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="@dimen/spacing_16">
+
+            <ImageView
+                android:id="@+id/ivSetting"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_settings" />
+
+            <TextView
+                android:id="@+id/tvSetting"
+                android:layout_width="129dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="36dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/settings"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_14" />
+
+            <ImageView
+                android:id="@+id/ivSettingNext"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/textcolorgrey" />
+
+        <RelativeLayout
+            android:id="@+id/rlHelp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="@dimen/spacing_16">
+
+            <ImageView
+                android:id="@+id/ivHelp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_help" />
+
+            <TextView
+                android:id="@+id/tvHelp"
+                android:layout_width="129dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="36dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/help"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_14" />
+
+            <ImageView
+                android:id="@+id/ivHelpNext"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/textcolorgrey" />
+
+        <Button
+            android:id="@+id/btnSignOut"
+            android:layout_width="168dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="37dp"
+            android:background="@drawable/custom_btn"
+            android:fontFamily="@font/montserrat_semibold"
+            android:layout_marginBottom="88dp"
+            android:text="@string/sign_out"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_12" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

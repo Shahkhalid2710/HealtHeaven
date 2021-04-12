@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:id="@+id/llAddAllergy"
+    tools:context=".ui.allergyhistory.AddAllergyActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_25"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvAddAllergy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/add_allergy"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_20" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/etAddAllergy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_40"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:autofillHints="0"
+        android:backgroundTint="@color/textcolorgrey"
+        android:drawableEnd="@drawable/ic_dropdown_list"
+        android:focusable="false"
+        android:paddingBottom="@dimen/spacing_10"
+        android:fontFamily="@font/montserrat_medium"
+        android:hint="@string/add_allergy"
+        android:inputType="text"
+        android:textColor="@color/aapBlack"
+        android:textColorHint="@color/grey"
+        android:textSize="@dimen/font_12"
+        tools:ignore="LabelFor" />
+
+    <CheckBox
+        android:id="@+id/cbActiveCurrently"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/active_currently"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textColor="@color/grey"
+        android:button="@drawable/checkbox"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="@dimen/font_10"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_24"/>
+
+    <Button
+        android:id="@+id/btnSaveAllergy"
+        android:layout_width="168dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="51dp"
+        android:background="@drawable/custom_btn"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/save_allergy"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_12" />
+</LinearLayout>

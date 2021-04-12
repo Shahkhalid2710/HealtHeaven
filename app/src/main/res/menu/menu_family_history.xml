@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/repair_of_joint_capsule_of_knee"
+        android:title="@string/repair_of_joint_capsule_of_knee" />
+
+    <item
+        android:id="@+id/knee_replacing"
+        android:title="@string/knee_replacing" />
+    <item
+        android:id="@+id/hemoglobin_manitaba"
+        android:title="@string/hemoglobin_manitaba" />
+
+    <item
+        android:id="@+id/neoplasm_of_stomach"
+        android:title="@string/neoplasm_of_stomach" />
+</menu>

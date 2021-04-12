@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.clinicalrecords.ClinicalRecordsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_25"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvClinicRecords"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/clinical_records"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_20" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlMedicalHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_42"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/tvMedicalHistory"
+            android:layout_width="135dp"
+            android:layout_height="18dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/medical_history"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <ImageView
+            android:id="@+id/ivMHNext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textcolorgrey" />
+
+    <RelativeLayout
+        android:id="@+id/rlMedicalBased"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/tvMedicalBased"
+            android:layout_width="140dp"
+            android:layout_height="18dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/medications_based"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <ImageView
+            android:id="@+id/ivMBNext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textcolorgrey" />
+
+    <RelativeLayout
+        android:id="@+id/rlAllergyHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/tvAllergyHistory"
+            android:layout_width="140dp"
+            android:layout_height="18dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/allergy_history"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <ImageView
+            android:id="@+id/ivAHNext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textcolorgrey" />
+
+    <RelativeLayout
+        android:id="@+id/rlInvestigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/tvInvestigation"
+            android:layout_width="140dp"
+            android:layout_height="18dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/investigation"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <ImageView
+            android:id="@+id/ivINext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textcolorgrey" />
+
+    <RelativeLayout
+        android:id="@+id/rlFamilyHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/tvFamilyHistory"
+            android:layout_width="140dp"
+            android:layout_height="18dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/family_history"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <ImageView
+            android:id="@+id/ivFHNext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_next" />
+    </RelativeLayout>
+</LinearLayout>

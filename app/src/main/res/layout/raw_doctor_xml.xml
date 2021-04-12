@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="312dp"
+    android:layout_height="168dp"
+    android:layout_marginTop="@dimen/spacing_16"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+
+            <ImageView
+                android:id="@+id/ivDoctor"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:contentDescription="@string/todo"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_dr_1" />
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_20"
+                android:layout_toEndOf="@+id/ivDoctor"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDoctorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/dr_paulina_gayoso"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_16" />
+
+                <TextView
+                    android:id="@+id/tvProf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/prescription_sick_notes"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="start"
+            android:text="@string/it_was_popularised_in_the_1960s_with_the_release_of_letraset_sheets_containing_lorem"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_11" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:layout_marginBottom="@dimen/spacing_16"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnViewProfile"
+                android:layout_width="132dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:background="@drawable/default_button"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/view_profile"
+                android:textAllCaps="false"
+                android:textColor="@color/green"
+                android:textSize="@dimen/font_12"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btnBookSession"
+                android:layout_width="132dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:background="@drawable/custom_btn"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/book_session"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_12"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

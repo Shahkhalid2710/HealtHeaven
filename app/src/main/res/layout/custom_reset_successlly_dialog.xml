@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="249dp"
+    android:layout_height="177dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/custom_success_xml">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_yes" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/reset_successfully"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_16" />
+
+    <TextView
+        android:layout_width="185dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/your_password_has_been_reset_successfully"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_12" />
+</LinearLayout>

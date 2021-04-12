@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.mygp.AddGPServiceActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_25"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvAddGPService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/add_gp_service"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_20" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:background="@drawable/search_customlayout"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etGpSearch"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_centerInParent="true"
+            android:autofillHints="0"
+            android:backgroundTint="@color/layoutbackground"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/search_gp"
+            android:inputType="text"
+            android:paddingStart="@dimen/spacing_16"
+            android:paddingEnd="0dp"
+            android:textColor="@color/aapBlack"
+            android:textColorHint="@color/grey"
+            android:textSize="@dimen/font_12"
+            tools:ignore="RelativeOverlap" />
+
+        <RelativeLayout
+            android:layout_width="31dp"
+            android:layout_height="31dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/custom_btn">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_search" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

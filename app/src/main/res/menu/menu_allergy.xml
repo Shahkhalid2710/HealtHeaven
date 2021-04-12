@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/food_allerdy"
+        android:title="@string/food_allerdy_diet" />
+
+    <item
+        android:id="@+id/dci_nycler_pleomorphim"
+        android:title="@string/dcis_nucler_pleomorphim" />
+    <item
+        android:id="@+id/quilonia_ethiopica"
+        android:title="@string/quilonia_ethiopica" />
+
+    <item
+        android:id="@+id/oncogene_protine_v_abc"
+        android:title="@string/oncogene_protine_v_abc" />
+    <item
+        android:id="@+id/neoplasm_of_stomach"
+        android:title="@string/neoplasm_of_stomach" />
+
+</menu>

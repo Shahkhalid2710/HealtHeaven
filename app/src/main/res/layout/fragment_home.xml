@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.home.HomeFragment">
+
+        <TextView
+            android:id="@+id/tvWish"
+            android:layout_width="141dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/good_morning"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_18" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="99dp"
+                android:layout_height="31dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/karolina"
+                android:textColor="@color/green"
+                android:textSize="@dimen/font_22" />
+
+            <ImageView
+                android:id="@+id/ivUser"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/profile_image" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:background="@drawable/search_customlayout"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_centerInParent="true"
+                android:autofillHints="0"
+                android:backgroundTint="@color/layoutbackground"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="@string/search_for_symtomps"
+                android:inputType="text"
+                android:paddingStart="@dimen/spacing_16"
+                android:paddingEnd="0dp"
+                android:textColor="@color/aapBlack"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/font_12"
+                tools:ignore="RelativeOverlap" />
+
+            <RelativeLayout
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/custom_btn">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_search" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="114dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_10"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/custom_btn"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/tvConsulatantdoctor"
+                    android:layout_width="204dp"
+                    android:layout_height="@dimen/spacing_40"
+                    android:layout_marginStart="@dimen/spacing_16"
+                    android:layout_marginTop="9dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/need_a_consultation_from_our_top_doctors_and_get_well_soon"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_12" />
+
+                <Button
+                    android:id="@+id/btnBookAppointment"
+                    android:layout_width="150dp"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="@dimen/spacing_16"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:background="@drawable/custombtn_xml"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="8dp"
+                    android:text="@string/book_appointment"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="116dp"
+                android:layout_height="130dp"
+                android:layout_gravity="bottom|end"
+                android:contentDescription="@string/todo"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_dr" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvCategories"
+            android:layout_width="94dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/categories"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_16" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24" />
+
+        <TextView
+            android:id="@+id/tvTopDoctors"
+            android:layout_width="101dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/top_doctors"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_16" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDoctors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="60dp"/>
+    </LinearLayout>
+</ScrollView>
