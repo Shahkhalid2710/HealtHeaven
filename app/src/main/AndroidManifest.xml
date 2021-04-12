@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth">
-        <activity android:name=".ui.BaseActivity"></activity>
+        <activity android:name=".ui.medicalhistory.AddMedicalHistoryActivity"></activity>
+        <activity android:name=".ui.medicalhistory.MedicalHistoryActivity" />
+        <activity android:name=".ui.BaseActivity" />
         <activity android:name=".ui.specialists.SpecialistsActivity" />
         <activity android:name=".ui.medication.MedicationActivity" />
         <activity android:name=".ui.familyhistory.AddFamilyHistoryActivity" />
@@ -30,14 +32,14 @@
         <activity android:name=".ui.mydownloads.MyDownloadsActivity" />
         <activity android:name=".ui.clinicalrecords.ClinicalRecordsActivity" />
         <activity android:name=".ui.personaldetails.PersonalDetailsActivity" />
-        <activity android:name=".ui.bottomnavigationview.BottomNavigationViewActivity"></activity>
-        <activity android:name=".ui.signup.SignupActivity">
+        <activity android:name=".ui.bottomnavigationview.BottomNavigationViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.signup.SignupActivity"></activity>
         <activity android:name=".ui.createnewpassword.CreateNewPasswordActivity" />
         <activity android:name=".ui.verification.VerificationActivity" />
         <activity android:name=".ui.forgotpassword.ForgotPasswordActivity" />

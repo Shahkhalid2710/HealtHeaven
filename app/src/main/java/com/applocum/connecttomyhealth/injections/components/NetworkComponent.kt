@@ -13,6 +13,7 @@ import com.applocum.connecttomyhealth.ui.home.HomeFragment
 import com.applocum.connecttomyhealth.ui.investigation.AddInvestigationActivity
 import com.applocum.connecttomyhealth.ui.investigation.InvestigationActivity
 import com.applocum.connecttomyhealth.ui.login.LoginActivity
+import com.applocum.connecttomyhealth.ui.medicalhistory.AddMedicalHistoryActivity
 import com.applocum.connecttomyhealth.ui.mydownloads.MyDownloadsActivity
 import com.applocum.connecttomyhealth.ui.notification.NotificationFragment
 import com.applocum.connecttomyhealth.ui.personaldetails.PersonalDetailsActivity
@@ -51,6 +52,8 @@ interface NetworkComponent {
     fun inject(activity:AllergyHistoryActivity)
 
     fun inject(activity:AddAllergyActivity)
+
+    fun inject(activity:AddMedicalHistoryActivity)
 
     fun inject(activity:InvestigationActivity)
 

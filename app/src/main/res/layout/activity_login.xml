@@ -1,210 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/green"
-        android:orientation="vertical"
-        android:id="@+id/llLogin"
-        tools:context=".ui.login.LoginActivity">
-
-        <TextView
-            android:id="@+id/tvLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_40"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/login"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_20" />
+        android:background="@color/white">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="11dp"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/ivBackBtn"
-                android:layout_width="5dp"
-                android:layout_height="9dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/back_btn" />
-
-            <TextView
-                android:id="@+id/tvCredentials"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="9dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/please_fill_in_the_credentials"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-
-        <LinearLayout
+            android:id="@+id/llLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginTop="38dp"
-            android:background="@drawable/custom_layout"
-            android:orientation="vertical">
+            android:background="@color/green"
+            android:orientation="vertical"
+            tools:context=".ui.login.LoginActivity">
+
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_40"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_20" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:gravity="center"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="11dp"
                 android:orientation="horizontal"
-                tools:ignore="UselessParent">
+                tools:ignore="UseCompoundDrawables">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/custom_stroke_layout"
-                    android:orientation="horizontal"
-                    android:padding="9dp"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <ImageView
-                        android:id="@+id/ivFb"
-                        android:layout_width="11dp"
-                        android:layout_height="21dp"
-                        android:layout_marginStart="@dimen/spacing_16"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_facebook" />
-
-                    <TextView
-                        android:layout_width="70dp"
-                        android:layout_height="@dimen/spacing_18"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="11dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/facebook"
-                        android:textColor="@color/aapBlack" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:background="@drawable/custom_stroke_layout"
-                    android:orientation="horizontal"
-                    android:padding="9dp"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <ImageView
-                        android:id="@+id/ivGoogle"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="@dimen/spacing_16"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_google" />
-
-                    <TextView
-                        android:layout_width="70dp"
-                        android:layout_height="@dimen/spacing_18"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="11dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/google"
-                        android:textColor="@color/aapBlack" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="73dp"
-                    android:layout_height="1dp"
+                <ImageView
+                    android:id="@+id/ivBackBtn"
+                    android:layout_width="5dp"
+                    android:layout_height="9dp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/spacing_44"
-                    android:layout_marginEnd="8dp"
-                    android:background="@color/textcolorgrey" />
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/back_btn" />
 
                 <TextView
-                    android:id="@+id/tvSigninUsing"
-                    android:layout_width="110dp"
-                    android:layout_height="18dp"
+                    android:id="@+id/tvCredentials"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/or_sign_in_using"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_14" />
-
-                <View
-                    android:layout_width="73dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:background="@color/textcolorgrey" />
+                    android:layout_marginStart="9dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/please_fill_in_the_credentials"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_12" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="104dp"
-                android:layout_height="18dp"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="31dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/email_address"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_14" />
-
-            <EditText
-                android:id="@+id/etEmail"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:autofillHints="0"
-                android:backgroundTint="@color/textcolorgrey"
-                android:fontFamily="@font/montserrat_medium"
-                android:hint="@string/enter_your_email_address"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/aapBlack"
-                android:textColorHint="@color/grey"
-                android:textSize="@dimen/font_12"
-                tools:ignore="LabelFor" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="38dp"
+                android:background="@drawable/custom_layout"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvPassword"
-                android:layout_width="104dp"
-                android:layout_height="18dp"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/password"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_14" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passError"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:backgroundTint="@color/textcolorgrey"
-                app:hintEnabled="false"
-                app:passwordToggleEnabled="true">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/custom_stroke_layout"
+                        android:orientation="horizontal"
+                        android:padding="9dp"
+                        tools:ignore="UseCompoundDrawables">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPassword"
+                        <ImageView
+                            android:id="@+id/ivFb"
+                            android:layout_width="11dp"
+                            android:layout_height="21dp"
+                            android:layout_marginStart="@dimen/spacing_16"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_facebook" />
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="@dimen/spacing_18"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="11dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/facebook"
+                            android:textColor="@color/aapBlack" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:background="@drawable/custom_stroke_layout"
+                        android:orientation="horizontal"
+                        android:padding="9dp"
+                        tools:ignore="UseCompoundDrawables">
+
+                        <ImageView
+                            android:id="@+id/ivGoogle"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="@dimen/spacing_16"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_google" />
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="@dimen/spacing_18"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="11dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/google"
+                            android:textColor="@color/aapBlack" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="73dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/spacing_44"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/textcolorgrey" />
+
+                    <TextView
+                        android:id="@+id/tvSigninUsing"
+                        android:layout_width="110dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/or_sign_in_using"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_14" />
+
+                    <View
+                        android:layout_width="73dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/textcolorgrey" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="104dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="31dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/email_address"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
@@ -212,65 +180,106 @@
                     android:autofillHints="0"
                     android:backgroundTint="@color/textcolorgrey"
                     android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/enter_your_password"
-                    android:drawableEnd="@drawable/ic_eye"
-                    android:inputType="textPassword"
+                    android:hint="@string/enter_your_email_address"
+                    android:inputType="textEmailAddress"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"
                     tools:ignore="LabelFor" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="168dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/spacing_40"
-                android:background="@drawable/custom_btn"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/login"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_12" />
-
-            <TextView
-                android:id="@+id/tvForgotPasword"
-                android:layout_width="113dp"
-                android:layout_height="@dimen/spacing_15"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/forgot_password"
-                android:textColor="@color/green"
-                android:textSize="@dimen/font_12" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="71dp"
-                android:layout_marginBottom="64dp"
-                android:gravity="center"
-                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvNotRegister"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/spacing_15"
+                    android:id="@+id/tvPassword"
+                    android:layout_width="104dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/not_registered"
+                    android:text="@string/password"
                     android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/passError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/textcolorgrey"
+                    app:hintEnabled="false"
+                    app:passwordToggleDrawable="@drawable/show_password_selector"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:autofillHints="0"
+                        android:backgroundTint="@color/textcolorgrey"
+                        android:drawableEnd="@drawable/ic_eye"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="@string/enter_your_password"
+                        android:inputType="textPassword"
+                        android:textColor="@color/aapBlack"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_12"
+                        tools:ignore="LabelFor" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="168dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_40"
+                    android:background="@drawable/custom_btn"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/login"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/font_12" />
 
                 <TextView
-                    android:id="@+id/tvSignup"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvForgotPasword"
+                    android:layout_width="113dp"
                     android:layout_height="@dimen/spacing_15"
-                    android:layout_marginStart="@dimen/spacing_5"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/sign_up"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/forgot_password"
                     android:textColor="@color/green"
                     android:textSize="@dimen/font_12" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="71dp"
+                    android:layout_marginBottom="64dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvNotRegister"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/spacing_15"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@string/not_registered"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_12" />
+
+                    <TextView
+                        android:id="@+id/tvSignup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/spacing_15"
+                        android:layout_marginStart="@dimen/spacing_5"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@string/sign_up"
+                        android:textColor="@color/green"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+<include layout="@layout/custom_progress"/>
+</FrameLayout>

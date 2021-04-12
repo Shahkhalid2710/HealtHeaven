@@ -8,6 +8,5 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutResourceId())
     }
-
     protected  abstract fun getLayoutResourceId(): Int
 }

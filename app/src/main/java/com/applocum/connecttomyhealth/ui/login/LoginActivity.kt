@@ -1,8 +1,8 @@
 package com.applocum.connecttomyhealth.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
@@ -15,6 +15,7 @@ import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.tvSignup
+import kotlinx.android.synthetic.main.custom_progress.*
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(),LoginPresenter.View {
@@ -25,7 +26,6 @@ class LoginActivity : BaseActivity(),LoginPresenter.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
         tvForgotPasword.setOnClickListener {
@@ -53,5 +53,9 @@ class LoginActivity : BaseActivity(),LoginPresenter.View {
         userHolder.userid=""+user.id
         val intent=Intent(this,BottomNavigationViewActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun viewProgress(isShow: Boolean) {
+        progress.visibility = if(isShow) View.VISIBLE else View.GONE
     }
 }

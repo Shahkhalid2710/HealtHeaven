@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/neoplasm_of_abducens_nerve"
+        android:title="@string/neoplasm_of_abducens_nerve" />
+
+    <item
+        android:id="@+id/neoplasm_of_junctional_region_of_epiglottis"
+        android:title="@string/neoplasm_of_junctional_region_of_epiglottis" />
+    <item
+        android:id="@+id/jugular_lymphadenopathy"
+        android:title="@string/jugular_lymphadenopathy" />
+
+    <item
+        android:id="@+id/oncogene_protine_v_abc"
+        android:title="@string/oncogene_protine_v_abc" />
+</menu>

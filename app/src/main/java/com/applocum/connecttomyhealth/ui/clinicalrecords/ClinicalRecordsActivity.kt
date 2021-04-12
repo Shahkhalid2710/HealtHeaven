@@ -8,6 +8,7 @@ import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.AllergyHistoryActivity
 import com.applocum.connecttomyhealth.ui.familyhistory.FamilyHistoryActivity
 import com.applocum.connecttomyhealth.ui.investigation.InvestigationActivity
+import com.applocum.connecttomyhealth.ui.medicalhistory.MedicalHistoryActivity
 import com.applocum.connecttomyhealth.ui.medication.MedicationActivity
 import kotlinx.android.synthetic.main.activity_clinical_records.*
 
@@ -28,6 +29,9 @@ class ClinicalRecordsActivity : BaseActivity() {
         }
         rlMedicalBased.setOnClickListener {
             startActivity(Intent(this,MedicationActivity::class.java))
+        }
+        rlMedicalHistory.setOnClickListener {
+            startActivity(Intent(this,MedicalHistoryActivity::class.java))
         }
     }
 

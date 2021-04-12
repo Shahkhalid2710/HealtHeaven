@@ -82,7 +82,6 @@
     <string name="profile_details">Profile Details</string>
     <string name="my_gp">My GP</string>
     <string name="exemptions">Exemptions</string>
-    <string name="medical_history">Medical History</string>
     <string name="medications_based">Medications Based</string>
     <string name="allergy_history">Allergy History</string>
     <string name="investigation">Investigation</string>
@@ -166,4 +165,18 @@
     <string name="it_was_popularised_in_the_1960s_with_the_release_of_letraset_sheets_containing_lorem">It was popularised in the 1960s with the release of Letraset sheets containing Lorem</string>
     <string name="view_profile">View Profile</string>
     <string name="book_session">Book Session</string>
+    <string name="no_medical_history">No Medical History</string>
+    <string name="to_add_medical_records_tap_on_button">To add Medical records, Tap on button</string>
+    <string name="add_medical_history">Add Medical History</string>
+    <string name="medical_history">Medical History</string>
+    <string name="add_disease_name">Add Disease Name</string>
+    <string name="select_disease_name">Select Disease Name</string>
+    <string name="jugular_lymphadenopathy">Jugular lymphadenopathy</string>
+    <string name="neoplasm_of_junctional_region_of_epiglottis">Neoplasm of junctional region of epiglottis</string>
+    <string name="neoplasm_of_abducens_nerve">Neoplasm of abducens nerve</string>
+    <string name="start_date">Start Date:</string>
+    <string name="select_month">Select Month</string>
+    <string name="select_year">Select Year</string>
+    <string name="end_date">End Date:</string>
+    <string name="save_diseases">Save Diseases</string>
 </resources>

@@ -1,9 +1,12 @@
 package com.applocum.connecttomyhealth.ui.signup
 
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
-import com.applocum.connecttomyhealth.ui.signup.models.UserResponse
 import com.applocum.connecttomyhealth.ui.signup.models.User
+import com.applocum.connecttomyhealth.ui.signup.models.UserResponse
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -36,17 +39,9 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
         gender: String,
         date_of_birth: String
     ) {
-        if (validateSignup(
-                firstname,
-                lastname,
-                email,
-                mobileno,
-                password,
-                confirmPassword,
-                gender,
-                date_of_birth
-            )
+        if (validateSignup(firstname, lastname, email, mobileno, password, confirmPassword, gender, date_of_birth)
         ) {
+            view.viewProgress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("user[email]", email)
@@ -62,24 +57,32 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
             api.signUp(requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onNext = {
-                    val userObject = Gson().fromJson(it.data, UserResponse::class.java)
-                    val user = userObject.user
-                    user.profile.dateOfBirth.let { it1 ->
-                        userHolder.saveUser(
-                            user.id.toString(),
-                            user.firstName,
-                            user.lastName,
-                            user.email,
-                            user.gender,
-                            it1.toString()
-                        )
+                    view.viewProgress(false)
+                    when (it.status) {
+                        Success -> {
+                            val userObject = Gson().fromJson(it.data, UserResponse::class.java)
+                            val user = userObject.user
+                            user.profile.dateOfBirth.let { it1 ->
+                                userHolder.saveUser(
+                                    user.id.toString(),
+                                    user.firstName,
+                                    user.lastName,
+                                    user.email,
+                                    user.gender,
+                                    it1
+                                )
+                            }
+                            view.sendUserData(userObject.user)
+                            println("MessageSignup:: ${it.message}")
+                            view.displaymessage(it.message)
+                        }
+                        InvalidCredentials, InternalServer -> {
+                            view.displaymessage(it.message)
+                        }
                     }
-                    view.sendUserData(userObject.user)
-                    view.displaymessage(it.message)
-                }, onError =
-                {
-
-                    view.displaymessage("demo" + it.message)
+                }, onError = {
+                    view.viewProgress(false)
+                    it.printStackTrace()
                 }).let { disposables.add(it) }
         }
     }
@@ -103,6 +106,9 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
                     "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                     ")+"
         )
+
+       // val PASSWORD_PATTERN=Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\\\S+\$).{4,}\$")
+
         if (firstname.isEmpty()) {
             view.displaymessage("Please Enter First name")
             return false
@@ -127,8 +133,21 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
             view.displaymessage("Please Enter Password")
             return false
         }
+       /* if (!PASSWORD_PATTERN.matcher(password).matches()) {
+            view.displaymessage("Password Pattern Invalid")
+            return false
+        }*/
         if (confirmPassword.isEmpty()) {
             view.displaymessage("Please Enter Confirm Password")
+            return false
+        }
+       /* if (!PASSWORD_PATTERN.matcher(confirmPassword).matches()) {
+            view.displaymessage("Password Pattern Invalid")
+            return false
+        }*/
+        if (!confirmPassword.matches(password.toRegex()))
+        {
+            view.displaymessage("Password Not matching")
             return false
         }
         if (gender.isEmpty()) {
@@ -144,6 +163,9 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
 
     interface View {
         fun displaymessage(message: String?)
+
         fun sendUserData(user: User)
+
+        fun viewProgress(isShow: Boolean)
     }
 }

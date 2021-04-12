@@ -15,5 +15,4 @@ class UserHolderModule {
     @Singleton
     fun provideTokenHolder(): UserHolder =
         UserHolder(MyApplication.instance.getPrefInstance(PrefHelper.prefBasic))
-
 }

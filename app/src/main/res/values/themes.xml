@@ -53,7 +53,7 @@
         <!-- inactive track color (30% transparency) -->
         <item name="android:colorForeground">#42221f1f</item>
     </style>
-    <style name="PasswordEdittextStyle">
+    <style name="PasswordEdittextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:drawableEnd">@drawable/ic_eye</item>
         <item name="android:drawableRight">@drawable/ic_eye</item>
     </style>

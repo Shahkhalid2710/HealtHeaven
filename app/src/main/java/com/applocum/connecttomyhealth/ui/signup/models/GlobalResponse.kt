@@ -9,6 +9,5 @@ data class GlobalResponse(
     @SerializedName("success") var success: String = "",
     @SerializedName("message") var message: String = "",
     @SerializedName("data") var data: JsonElement?,
-    @SerializedName("common") val common : Common,
-    @SerializedName("subscription_plans") val subscriptionPlans : String
+    @SerializedName("common") val common : Common
 ):Serializable

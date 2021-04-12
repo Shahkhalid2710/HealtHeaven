@@ -2,8 +2,6 @@ package com.connectmyhealth.patient.shareddata.interceptors
 
 import android.annotation.SuppressLint
 import com.applocum.connecttomyhealth.MyApplication
-import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
-import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidPassword
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.SessionInvalid
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
@@ -14,7 +12,6 @@ import okhttp3.Response
 import okhttp3.ResponseBody
 import java.io.IOException
 import java.net.UnknownHostException
-import java.util.*
 import javax.inject.Inject
 
 
@@ -58,11 +55,6 @@ class GlobalResponseInterceptor : BaseActivity(), Interceptor {
                             ""
                         )
                     }
-                }
-                InvalidPassword ->{
-
-                }
-                InternalServer -> {
                 }
             }
 

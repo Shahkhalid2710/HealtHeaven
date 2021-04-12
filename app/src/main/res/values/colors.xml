@@ -12,4 +12,5 @@
     <color name="textcolorgrey">#d8d8d8</color>
     <color name="grey">#828282</color>
     <color name="layoutbackground">#e6e6e6</color>
+    <color name="progressback">#80ffffff</color>
 </resources>
