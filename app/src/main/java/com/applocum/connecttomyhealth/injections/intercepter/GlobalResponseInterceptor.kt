@@ -53,7 +53,7 @@ class GlobalResponseInterceptor : BaseActivity(), Interceptor {
                         userHolder.clearUserData(
                             "", "", "", "", "",
                             ""
-                        )
+                        ,"")
                     }
                 }
             }

@@ -18,9 +18,9 @@ import javax.inject.Inject
 
 class SignupPresenter @Inject constructor(val api: AppEndPoint) {
 
-    val disposables = CompositeDisposable()
+    private val disposables = CompositeDisposable()
     lateinit var view: View
-    var devicetype = "android"
+    private var devicetype = "android"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -33,6 +33,7 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
         firstname: String,
         lastname: String,
         email: String,
+        countrycode:String,
         mobileno: String,
         password: String,
         confirmPassword: String,
@@ -47,7 +48,7 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
                 .addFormDataPart("user[email]", email)
                 .addFormDataPart("user[first_name]", firstname)
                 .addFormDataPart("user[last_name]", lastname)
-                .addFormDataPart("user[phone]", mobileno)
+                .addFormDataPart("user[phone]", countrycode+""+mobileno)
                 .addFormDataPart("user[gender]", gender)
                 .addFormDataPart("user[password]", password)
                 .addFormDataPart("profile[date_of_birth]", date_of_birth)
@@ -69,7 +70,7 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
                                     user.lastName,
                                     user.email,
                                     user.gender,
-                                    it1
+                                    it1,user.authToken
                                 )
                             }
                             view.sendUserData(userObject.user)
@@ -133,18 +134,12 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
             view.displaymessage("Please Enter Password")
             return false
         }
-       /* if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            view.displaymessage("Password Pattern Invalid")
-            return false
-        }*/
+
         if (confirmPassword.isEmpty()) {
             view.displaymessage("Please Enter Confirm Password")
             return false
         }
-       /* if (!PASSWORD_PATTERN.matcher(confirmPassword).matches()) {
-            view.displaymessage("Password Pattern Invalid")
-            return false
-        }*/
+
         if (!confirmPassword.matches(password.toRegex()))
         {
             view.displaymessage("Password Not matching")

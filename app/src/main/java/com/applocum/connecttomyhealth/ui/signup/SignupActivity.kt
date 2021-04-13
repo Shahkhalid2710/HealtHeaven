@@ -29,7 +29,8 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuIte
     DatePickerDialog.OnDateSetListener {
     @Inject
     lateinit var presenter: SignupPresenter
-    var countrycode = ""
+
+    private var countrycode = ""
     private var day: Int = 0
     private var month: Int = 0
     private var year: Int = 0
@@ -47,12 +48,10 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuIte
                 etFirstName.text.toString(),
                 etLastName.text.toString(),
                 etEmail.text.toString(),
-                "+" + countrycode + "" + etPhoneNumber.text.toString(),
+                "+" + countrycode,etPhoneNumber.text.toString(),
                 etPassword.text.toString(),
                 etConfirmPassword.text.toString(),
-                etGender.text.toString().toLowerCase(
-                    Locale.ROOT
-                ),
+                etGender.text.toString().toLowerCase(Locale.ROOT),
                 etDOB.text.toString()
             )
         }
@@ -104,7 +103,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuIte
         etDOB.setText(newDateString)
     }
 
-    fun clickHandler()
+    private fun clickHandler()
     {
         ccp.setOnCountryChangeListener {
             countrycode = ccp.selectedCountryCode

@@ -7,6 +7,5 @@ class ErrorCodes {
         const val SessionInvalid = 950
         const val InvalidCredentials = 808
         const val InternalServer = 500
-
     }
 }

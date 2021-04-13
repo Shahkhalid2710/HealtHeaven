@@ -57,7 +57,6 @@ class RetrofitModule {
     fun provideApiService(retrofit: Retrofit): AppEndPoint = retrofit.create(
         AppEndPoint::class.java)
 
-
     /**
      * Below methods are defined for Without Logout Interceptor. And its used for Downloading file
      * from URL. logout Interceptor parsing model create issue while downloading file from URL.

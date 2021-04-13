@@ -1,6 +1,5 @@
 package com.applocum.connecttomyhealth.ui.medicalhistory
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.MenuItem
@@ -9,7 +8,6 @@ import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_add_allergy.*
 import kotlinx.android.synthetic.main.activity_add_medical_history.*
 import kotlinx.android.synthetic.main.activity_add_medical_history.ivBack
 
@@ -21,7 +19,7 @@ class AddMedicalHistoryActivity : BaseActivity(), PopupMenu.OnMenuItemClickListe
 
         etDiseaseName.setOnClickListener {
             val ctw = ContextThemeWrapper(this, R.style.CustomPopupTheme)
-            val popupMenu = PopupMenu(ctw, etAddAllergy)
+            val popupMenu = PopupMenu(ctw, etDiseaseName)
             popupMenu.menuInflater.inflate(R.menu.menu_medical_history, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener(this)
             popupMenu.show()
@@ -29,6 +27,7 @@ class AddMedicalHistoryActivity : BaseActivity(), PopupMenu.OnMenuItemClickListe
     }
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_medical_history
+
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.neoplasm_of_abducens_nerve -> etDiseaseName.setText(R.string.neoplasm_of_abducens_nerve)

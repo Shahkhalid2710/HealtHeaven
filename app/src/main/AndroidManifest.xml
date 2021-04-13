@@ -33,13 +33,15 @@
         <activity android:name=".ui.clinicalrecords.ClinicalRecordsActivity" />
         <activity android:name=".ui.personaldetails.PersonalDetailsActivity" />
         <activity android:name=".ui.bottomnavigationview.BottomNavigationViewActivity">
+
+        </activity>
+        <activity android:name=".ui.signup.SignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.signup.SignupActivity"></activity>
         <activity android:name=".ui.createnewpassword.CreateNewPasswordActivity" />
         <activity android:name=".ui.verification.VerificationActivity" />
         <activity android:name=".ui.forgotpassword.ForgotPasswordActivity" />

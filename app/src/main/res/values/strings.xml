@@ -179,4 +179,17 @@
     <string name="select_year">Select Year</string>
     <string name="end_date">End Date:</string>
     <string name="save_diseases">Save Diseases</string>
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="auguest">Auguest</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+    <string name="my_session">My Session</string>
 </resources>
