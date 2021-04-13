@@ -30,7 +30,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [(RetrofitModule::class),(UserHolderModule::class)])
 interface NetworkComponent {
-
     fun inject(activity:LoginActivity)
 
     fun inject(activity:SignupActivity)
