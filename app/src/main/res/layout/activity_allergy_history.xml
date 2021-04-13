@@ -67,14 +67,15 @@
             app:tabIndicator="@null"
             app:tabIndicatorColor="@color/white"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabTextAppearance="@style/tab_text"
             app:tabTextColor="@color/green" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
+
     <!--  <include
           android:id="@+id/familyhistory"
           layout="@layout/custom_allergy_xml"/>-->

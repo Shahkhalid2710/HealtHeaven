@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/tvProfile"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_height="26dp"
         android:layout_gravity="center"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/montserrat_bold"
