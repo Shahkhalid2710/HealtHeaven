@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    android:orientation="vertical"
+    tools:context=".ui.booksession.BookSessionActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_25"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/ic_back_white" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivDoctor"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="14dp"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/drpaulina" />
+
+    <TextView
+        android:id="@+id/tvDoctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/dr_paulina_gayoso"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_14" />
+
+    <TextView
+        android:id="@+id/tvDoctorProf"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/cardiologists"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_12" />
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="132dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/default_button"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/book_session"
+        android:textAllCaps="false"
+        android:textColor="@color/green"
+        android:textSize="@dimen/font_12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/custom_layout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:background="@drawable/custom_tab_stroke_layout"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_margin="3dp"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabIndicator="@null"
+                app:tabIndicatorColor="@color/white"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextAppearance="@style/tab_text"
+                app:tabTextColor="@color/green" />
+        </LinearLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,6 +1,5 @@
 package com.applocum.connecttomyhealth.ui.specialists
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.R
@@ -16,11 +15,11 @@ class SpecialistsActivity : BaseActivity() {
         ivBack.setOnClickListener { finish() }
 
         val specialists1=Specialists(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
-        val specialists2=Specialists(R.drawable.ic_dr_1,"Dr. Gatsharan Sangrota","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
+        val specialists2=Specialists(R.drawable.drpaulina,"Dr. Gatsharan Sangrota","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
         val specialists3=Specialists(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
-        val specialists4=Specialists(R.drawable.ic_dr_1,"Dr. Gatsharan Sangrota","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
+        val specialists4=Specialists(R.drawable.drpaulina,"Dr. Gatsharan Sangrota","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
         val specialists5=Specialists(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
-        val specialists6=Specialists(R.drawable.ic_dr_1,"Dr. Gatsharan Sangrota","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
+        val specialists6=Specialists(R.drawable.drpaulina,"Dr. Gatsharan Sangrota","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
 
         mList.add(specialists1)
         mList.add(specialists2)

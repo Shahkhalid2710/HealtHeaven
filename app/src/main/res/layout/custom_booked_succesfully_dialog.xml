@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/green"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/ivSuccess"
+        android:layout_width="124dp"
+        android:layout_height="124dp"
+        android:src="@drawable/success"
+        android:layout_gravity="center"
+        android:layout_marginTop="126dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:text="@string/booked_successfully"
+        android:textSize="@dimen/font_20"
+        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_marginTop="@dimen/spacing_24"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:text="@string/thank_you_for_booking_session_with_us"
+        android:textSize="@dimen/font_16"
+        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_semibold"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="277dp"
+        android:layout_height="36dp"
+        android:text="@string/you_can_review_your_booked_session_in_my_session_option"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:fontFamily="@font/montserrat_medium"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="132dp"
+        android:layout_height="34dp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/green"
+        android:text="@string/done"
+        android:textAllCaps="false"
+        android:layout_gravity="center"
+        android:layout_marginTop="126dp"
+        android:background="@drawable/default_button"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textSize="@dimen/font_12"/>
+</LinearLayout>

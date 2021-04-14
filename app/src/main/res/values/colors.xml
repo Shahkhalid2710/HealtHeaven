@@ -13,4 +13,6 @@
     <color name="grey">#828282</color>
     <color name="layoutbackground">#e6e6e6</color>
     <color name="progressback">#80ffffff</color>
+    <color name="red">#ff5656</color>
+    <color name="yellow">#eaa100</color>
 </resources>

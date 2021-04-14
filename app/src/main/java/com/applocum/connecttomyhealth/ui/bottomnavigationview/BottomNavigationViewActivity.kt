@@ -1,7 +1,6 @@
 package com.applocum.connecttomyhealth.ui.bottomnavigationview
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
@@ -27,7 +26,6 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
 
         loadfragment(HomeFragment())
         bottomnavigationView.setBackgroundColor(Color.WHITE)
-
 
     }
 
@@ -62,5 +60,6 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.rlbottomnavigation, fragment)
         transaction.commit()
+
     }
 }

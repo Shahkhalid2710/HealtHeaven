@@ -1,11 +1,13 @@
 package com.applocum.connecttomyhealth.ui.specialists
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.ui.booksession.BookSessionActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialists
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.raw_doctor_xml.view.*
@@ -30,6 +32,11 @@ class SpecialistsAdapter(context: Context,list:ArrayList<Specialists>):RecyclerV
         holder.itemView.tvDoctorName.text=specialists.sName
         holder.itemView.tvProf.text=specialists.sProf
         holder.itemView.tvDes.text=specialists.sDes
+
+        holder.itemView.btnViewProfile.setOnClickListener {
+            val intent=Intent(mContext,BookSessionActivity::class.java)
+            mContext.startActivity(intent)
+        }
 
         Glide.with(mContext).load(specialists.sImage).into(holder.itemView.ivDoctor)
     }

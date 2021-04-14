@@ -3,16 +3,15 @@
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="3dp"/>
-            <stroke
-                android:width="0.6dp"
-                android:color="@color/black" />
+
+            <solid android:color="@color/green"/>
         </shape>
     </item>
     <item
         android:width="@dimen/spacing_10"
         android:height="@dimen/spacing_10"
         android:bottom="2dp"
-        android:drawable="@drawable/tickyes"
+        android:drawable="@drawable/ic_sign_yes"
         android:gravity="center"
         android:left="2dp"
         android:right="2dp"

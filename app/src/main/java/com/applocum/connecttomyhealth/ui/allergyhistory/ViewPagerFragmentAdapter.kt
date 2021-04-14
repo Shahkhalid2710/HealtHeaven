@@ -3,10 +3,9 @@ package com.applocum.connecttomyhealth.ui.allergyhistory
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 
-@Suppress("DEPRECATION")
-class ViewPagerFragmentAdapter(var context: Context, fm: FragmentManager): FragmentPagerAdapter(fm) {
+class ViewPagerFragmentAdapter(var context: Context, fm: FragmentManager): FragmentStatePagerAdapter(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     var list:ArrayList<Fragment> = ArrayList()
     private var titlelist:ArrayList<String> = ArrayList()
 
