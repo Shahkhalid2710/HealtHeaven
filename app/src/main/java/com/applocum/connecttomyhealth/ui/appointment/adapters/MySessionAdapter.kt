@@ -15,14 +15,16 @@ import kotlinx.android.synthetic.main.custom_cancel_book_session_dialog.view.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.btnCancel
 
-class MySessionAdapter(context: Context,list:ArrayList<Session>):RecyclerView.Adapter<MySessionAdapter.SessionHolder>() {
-    var mContext=context
-    var mList=list
+class MySessionAdapter(context: Context, list: ArrayList<Session>) :
+    RecyclerView.Adapter<MySessionAdapter.SessionHolder>() {
+    var mContext = context
+    var mList = list
 
-    inner class SessionHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
+    inner class SessionHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionHolder {
-        val v=LayoutInflater.from(mContext).inflate(com.applocum.connecttomyhealth.R.layout.raw_session_xml,parent,false)
+        val v = LayoutInflater.from(mContext)
+            .inflate(com.applocum.connecttomyhealth.R.layout.raw_session_xml, parent, false)
         return SessionHolder(v)
     }
 
@@ -31,20 +33,22 @@ class MySessionAdapter(context: Context,list:ArrayList<Session>):RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: SessionHolder, position: Int) {
-        val session=mList[position]
-        holder.itemView.tvDoctorName.text=session.sName
-        holder.itemView.tvSessionName.text=session.sSessionType
-        holder.itemView.tvSessioonDate.text=session.sDate
+        val session = mList[position]
+        holder.itemView.tvDoctorName.text = session.sName
+        holder.itemView.tvSessionName.text = session.sSessionType
+        holder.itemView.tvSessioonDate.text = session.sDate
 
         holder.itemView.btnCheckin.setOnClickListener {
-            val intent=Intent(mContext,SessionDetailsActivity::class.java)
+            val intent = Intent(mContext, SessionDetailsActivity::class.java)
             mContext.startActivity(intent)
         }
 
         holder.itemView.btnCancel.setOnClickListener {
-            val showDialogView=LayoutInflater.from(mContext).inflate(R.layout.custom_cancel_book_session_dialog,null,false)
+            val showDialogView = LayoutInflater.from(mContext)
+                .inflate(R.layout.custom_cancel_book_session_dialog, null, false)
             val dialog = AlertDialog.Builder(mContext).create()
             dialog.setView(showDialogView)
+            dialog.setCanceledOnTouchOutside(false)
 
             showDialogView.btnCancel.setOnClickListener {
                 dialog.dismiss()

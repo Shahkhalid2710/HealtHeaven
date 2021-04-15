@@ -13,6 +13,8 @@ class AddCardActivity : BaseActivity(), TextWatcher {
         super.onCreate(savedInstanceState)
         ivBack.setOnClickListener { finish() }
         etCardNumber.addTextChangedListener(this)
+
+        btnAdd.setOnClickListener { finish() }
     }
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_card

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="263dp"
+    android:layout_height="180dp"
+    android:background="@color/white">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/confirm_your_gp_service"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_16" />
+    <TextView
+        android:id="@+id/tvArea"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/route_du_fort_surgery"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_12" />
+    <TextView
+        android:layout_width="143dp"
+        android:layout_height="26dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/lido_m_c_st_saviours_road_st_saviours_jersey"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/font_10" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/spacing_16"
+        android:layout_marginBottom="27dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="88dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_btn"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="88dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:background="@drawable/default_button"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/green"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.booksession
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
+import com.applocum.connecttomyhealth.ui.confirmbooking.ConfirmBookingActivity
 import kotlinx.android.synthetic.main.fragment_availability.*
 import kotlinx.android.synthetic.main.fragment_availability.view.*
 
@@ -17,6 +19,7 @@ class AvailabilityFragment : Fragment(), View.OnClickListener {
     val mListSessionType: ArrayList<SessionType> = ArrayList()
     val mListSelectSlot: ArrayList<SessionType> = ArrayList()
     val mListAvailableTime: ArrayList<SessionType> = ArrayList()
+    private var selectSession = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,6 +77,81 @@ class AvailabilityFragment : Fragment(), View.OnClickListener {
         v.rvAvailableTime.adapter = SessionTypeAdapter(requireActivity(), mListAvailableTime)
 
         v.switchMultiSessions.setOnClickListener(this)
+
+
+        v.ivMinus.setOnClickListener { decreaseInteger() }
+        v.ivPlus.setOnClickListener { increaseInteger() }
+
+        v.cbDaily.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="1"
+                cbWeeklyonthursday.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbEveryWeekday.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        v.cbWeeklyonthursday.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="2"
+                cbDaily.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbEveryWeekday.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        v.cbMonthly1stThursday.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="3"
+                cbDaily.isChecked = false
+                cbWeeklyonthursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbEveryWeekday.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        v.cbAnuallyonApril13th.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="4"
+                cbDaily.isChecked = false
+                cbWeeklyonthursday.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbEveryWeekday.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        v.cbEveryWeekday.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="5"
+                cbDaily.isChecked = false
+                cbWeeklyonthursday.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        v.cbCustom.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="6"
+                cbDaily.isChecked = false
+                cbWeeklyonthursday.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbEveryWeekday.isChecked = false
+            }
+        }
+
+        v.btnContinue.setOnClickListener {
+            startActivity(Intent(requireActivity(),ConfirmBookingActivity::class.java))
+        }
+
         return v
     }
 
@@ -83,5 +161,86 @@ class AvailabilityFragment : Fragment(), View.OnClickListener {
         } else {
             llMultiSessions.visibility = View.GONE
         }
+    }
+    private fun increaseInteger() {
+        display(etSessions.text.toString().toInt() + 1)
+    }
+
+    private fun decreaseInteger() {
+        display(etSessions.text.toString().toInt() - 1)
+    }
+
+    private fun display(number: Int) {
+        etSessions.setText("$number")
+    }
+
+    private fun checkboxCheck()
+    {
+        cbDaily.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="1"
+                cbWeeklyonthursday.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbEveryWeekday.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        cbWeeklyonthursday.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="2"
+                cbDaily.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbEveryWeekday.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        cbMonthly1stThursday.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="3"
+                cbDaily.isChecked = false
+                cbWeeklyonthursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbEveryWeekday.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        cbAnuallyonApril13th.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="4"
+                cbDaily.isChecked = false
+                cbWeeklyonthursday.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbEveryWeekday.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        cbEveryWeekday.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="5"
+                cbDaily.isChecked = false
+                cbWeeklyonthursday.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbCustom.isChecked = false
+            }
+        }
+
+        cbCustom.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                selectSession="6"
+                cbDaily.isChecked = false
+                cbWeeklyonthursday.isChecked = false
+                cbMonthly1stThursday.isChecked = false
+                cbAnuallyonApril13th.isChecked = false
+                cbEveryWeekday.isChecked = false
+            }
+        }
+
     }
 }

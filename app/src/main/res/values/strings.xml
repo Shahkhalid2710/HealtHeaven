@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ConnectToMyHealth</string>
+    <string name="app_name">HealthHeaven</string>
     <string name="login">Login</string>
     <string name="please_fill_in_the_credentials">Please fill in the credentials</string>
     <string name="todo">TODO</string>
@@ -148,7 +148,6 @@
     <string name="search_gp">Search GP</string>
     <string name="no_exemptions_certificate_found">No Exemptions Certificate Found</string>
     <string name="you_have_not_added_any_exemptions_certificate_yet_to_add_tap_on_button">You have not added any Exemptions certificate yet To add Tap on button</string>
-    <string name="add_certificate">Add Certificate</string>
     <string name="save_family_history">Save Family History</string>
     <string name="hemoglobin_manitaba">Hemoglobin manitaba</string>
     <string name="knee_replacing">Knee replacing</string>
@@ -273,4 +272,33 @@
     <string name="anually_on_april_13th">Anually on April 13th</string>
     <string name="every_weekday">Every Weekday</string>
     <string name="custom">Custom</string>
+    <string name="route_du_fort_surgery">Route Du Fort Surgery</string>
+    <string name="st_saviours_road">St. Saviours Road</string>
+    <string name="st_saviours_jersey">St. Saviours, Jersey</string>
+    <string name="it_is_a_long_established_fact_that_a_reader_will_be_distracted_by_the_readable_content_of_a_page_when_looking_at_its_layout_the_point_of_using_lorem_ipsum_is_that_it_has_a_more_or_less_normal_distribution_of_letters_as_opposed_to_using_content">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content</string>
+    <string name="here_content_here_making_it_look_like_readable_english">here, content here\', making it look like readable English.</string>
+    <string name="many_desktop_publishing_packages_and_web_page_editors_now_use_lorem_ipsum_as_their_default_model_text">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</string>
+    <string name="confirm_your_gp_service">Confirm Your GP Service</string>
+    <string name="lido_m_c_st_saviours_road_st_saviours_jersey">Lido M/C, St, Saviours Road St Saviours, Jersey</string>
+    <string name="submit">Submit</string>
+    <string name="more">More</string>
+    <string name="payment">Payment</string>
+    <string name="booked_sessions">Booked Sessions</string>
+    <string name="do_you_have_employee_insurance_or_promo_membership">Do you have employee, insurance or promo membership?</string>
+    <string name="add_a_code">Add a code</string>
+    <string name="don_t_have_a_code">Don’t have a code?</string>
+    <string name="add_payment_method">Add payment method</string>
+    <string name="confirm_session_booking">Confirm Session Booking</string>
+    <string name="add_code">Add Code</string>
+    <string name="add_your_employee_insurance_or_promo_membership_code">Add your employee, insurance or promo membership code</string>
+    <string name="enter_code">Enter Code</string>
+    <string name="dentist_dt130">Dentist - DT130</string>
+    <string name="choose_exemptions">Choose Exemptions</string>
+    <string name="a">A</string>
+    <string name="i_am_under_16_years_of_age">I am under 16 years of age</string>
+    <string name="add_certificate">Add Certificate</string>
+    <string name="aciclovir_500mg_20ml_solution_for_infusion_vials">Aciclovir 500mg/20ml solution for infusion vials</string>
+    <string name="_07_jan_2020">07 Jan 2020</string>
+    <string name="quantity">Quantity</string>
+    <string name="_10">10</string>
 </resources>
