@@ -130,34 +130,40 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginTop="24dp"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="73dp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/spacing_44"
-                        android:layout_marginEnd="8dp"
-                        android:background="@color/textcolorgrey" />
-
-                    <TextView
-                        android:id="@+id/tvSignupUsing"
-                        android:layout_width="110dp"
-                        android:layout_height="18dp"
-                        android:layout_gravity="center"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/or_sign_up_using"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/font_14" />
+                        android:orientation="horizontal"
+                        tools:ignore="UselessParent">
 
-                    <View
-                        android:layout_width="73dp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
-                        android:background="@color/textcolorgrey" />
+                        <View
+                            android:layout_width="73dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="8dp"
+                            android:background="@color/textcolorgrey" />
+
+                        <TextView
+                            android:id="@+id/tvSignupUsing"
+                            android:layout_width="110dp"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/or_sign_up_using"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/font_14" />
+
+                        <View
+                            android:layout_width="73dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="8dp"
+                            android:background="@color/textcolorgrey" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <TextView
@@ -268,6 +274,7 @@
                         app:ccp_arrowColor="@color/textcolorgrey"
                         app:ccp_showFullName="false"
                         app:ccp_textSize="12sp" />
+
                     <EditText
                         android:id="@+id/etPhoneNumber"
                         android:layout_width="match_parent"
@@ -432,6 +439,7 @@
                     android:background="@drawable/custom_btn"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/register"
+                    android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_12" />
 

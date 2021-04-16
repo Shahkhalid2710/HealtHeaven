@@ -13,7 +13,8 @@
         android:layout_height="124dp"
         android:src="@drawable/success"
         android:layout_gravity="center"
-        android:layout_marginTop="126dp"/>
+        android:layout_marginTop="126dp"
+        android:contentDescription="@string/todo" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="24dp"
@@ -26,7 +27,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
+        android:layout_height="23dp"
         android:text="@string/thank_you_for_booking_session_with_us"
         android:textSize="@dimen/font_16"
         android:textColor="@color/white"

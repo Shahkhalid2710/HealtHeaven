@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.verificationdocument.activities.VerifyIdentityActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="88dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/you_are_almost_there"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_20" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/spacing_40"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/verify_your_identity"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_16" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/please_verify_your_id_to_insure_that_we_can_prescribe_medication_and_discuss_your_medical_history_with_you"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/font_11" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/select_your_document"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_16" />
+
+
+    <RelativeLayout
+        android:id="@+id/rlValidPassport"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_24"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:background="@drawable/default_button">
+
+        <TextView
+            android:id="@+id/tvValidPassport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/valid_passport"
+            android:textColor="@color/green"
+            android:textSize="@dimen/font_14"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@+id/ivNextpassport"
+            android:layout_width="6dp"
+            android:layout_height="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_green_next" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlDrivingLicense"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:background="@drawable/default_button">
+
+        <TextView
+            android:id="@+id/tvUKDrivingLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/uk_driving_license"
+            android:textColor="@color/green"
+            android:textSize="@dimen/font_14"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@+id/ivNextDrivingLicense"
+            android:layout_width="6dp"
+            android:layout_height="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_green_next" />
+    </RelativeLayout>
+</LinearLayout>

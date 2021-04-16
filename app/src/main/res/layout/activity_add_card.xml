@@ -93,7 +93,8 @@
                 android:layout_marginEnd="@dimen/spacing_15"
                 android:contentDescription="@string/todo"
                 android:focusable="true"
-                android:src="@drawable/ic_sucess" />
+                android:src="@drawable/ic_sucess"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <View
@@ -145,7 +146,8 @@
                 android:layout_marginEnd="@dimen/spacing_15"
                 android:contentDescription="@string/todo"
                 android:focusable="true"
-                android:src="@drawable/ic_sucess" />
+                android:src="@drawable/ic_sucess"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <View
@@ -195,6 +197,7 @@
                         android:hint="@string/enter_date"
                         android:imeOptions="actionNext"
                         android:inputType="date"
+                        android:maxLength="5"
                         android:textColor="@color/aapBlack"
                         android:textColorHint="@color/grey"
                         android:textSize="@dimen/font_16"
@@ -210,7 +213,8 @@
                         android:layout_marginEnd="@dimen/spacing_15"
                         android:contentDescription="@string/todo"
                         android:focusable="true"
-                        android:src="@drawable/ic_sucess" />
+                        android:src="@drawable/ic_sucess"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <View
@@ -251,13 +255,14 @@
                         android:hint="@string/enter_cvv"
                         android:imeOptions="actionNext"
                         android:inputType="textPassword"
+                        android:maxLength="4"
                         android:textColor="@color/aapBlack"
                         android:textColorHint="@color/grey"
                         android:textSize="@dimen/font_16"
                         tools:ignore="LabelFor,RelativeOverlap" />
 
                     <ImageView
-                        android:id="@+id/ivSuccessCross"
+                        android:id="@+id/ivCrossCVV"
                         android:layout_width="23dp"
                         android:layout_height="23dp"
                         android:layout_alignParentEnd="true"

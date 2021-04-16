@@ -3,15 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.booksession.AvailabilityFragment">
+        tools:context=".ui.booksession.SessionBookActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_25"
+                android:contentDescription="@string/todo"
+                android:focusable="true"
+                android:src="@drawable/ic_back" />
+        </RelativeLayout>
+
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
@@ -80,7 +98,7 @@
             android:layout_marginTop="@dimen/spacing_5"
             android:layout_marginEnd="@dimen/spacing_24" />
 
-      <!--  <androidx.appcompat.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchMultiSessions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -275,6 +293,6 @@
             android:text="@string/_continue"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_12" />-->
+            android:textSize="@dimen/font_12" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

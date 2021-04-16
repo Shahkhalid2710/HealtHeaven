@@ -301,4 +301,15 @@
     <string name="_07_jan_2020">07 Jan 2020</string>
     <string name="quantity">Quantity</string>
     <string name="_10">10</string>
+    <string name="you_are_almost_there">You are almost there</string>
+    <string name="verify_your_identity">Verify Your Identity</string>
+    <string name="please_verify_your_id_to_insure_that_we_can_prescribe_medication_and_discuss_your_medical_history_with_you">Please verify your ID to insure that we can prescribe medication and discuss your medical history with you</string>
+    <string name="select_your_document">Select Your Document</string>
+    <string name="valid_passport">Valid Passport</string>
+    <string name="uk_driving_license">UK Driving License</string>
+    <string name="your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_valid_passport">Your safety is our priority. To prevent misuse of your details, upload a valid form of Valid Passport</string>
+    <string name="capture_a_clear_photo_of_your_passport">Capture a clear photo of your passport</string>
+    <string name="position_the_front_of_your_license_in_the_frame">Position the front of your license in the frame</string>
+    <string name="your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_driving_licence">Your safety is our priority. To prevent misuse of your details, upload a valid form of Driving Licence</string>
+    <string name="front_side_of_the_driver_s_licence">Front side of the driver \'s licence</string>
 </resources>

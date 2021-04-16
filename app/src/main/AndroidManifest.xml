@@ -12,11 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth">
-        <activity android:name=".ui.exemptions.ChooseExemptionActivity"></activity>
+        <activity android:name=".ui.verificationdocument.activities.ValidationValidPassportActivity"></activity>
+        <activity android:name=".ui.verificationdocument.activities.UkDrivingLicenseActivity" />
+        <activity android:name=".ui.verificationdocument.activities.ValidPassportActivity" />
+        <activity android:name=".ui.verificationdocument.activities.VerifyIdentityActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.splashscreen.SplashScreenActivity" />
+        <activity android:name=".ui.booksession.SessionBookActivity" />
+        <activity android:name=".ui.exemptions.ChooseExemptionActivity" />
         <activity android:name=".ui.payment.AddCodeActivity" />
         <activity android:name=".ui.payment.PaymentActivity" />
         <activity android:name=".ui.addcard.AddCardActivity" />
-        <activity android:name=".ui.confirmbooking.ConfirmBookingActivity"></activity>
+        <activity android:name=".ui.confirmbooking.ConfirmBookingActivity" />
         <activity android:name=".ui.sessiondetails.SessionDetailsActivity" />
         <activity android:name=".ui.booksession.BookSessionActivity" />
         <activity android:name=".ui.medicalhistory.AddMedicalHistoryActivity" />
@@ -41,13 +53,7 @@
         <activity android:name=".ui.personaldetails.PersonalDetailsActivity" />
         <activity
             android:name=".ui.bottomnavigationview.BottomNavigationViewActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.signup.SignupActivity" />
         <activity android:name=".ui.createnewpassword.CreateNewPasswordActivity" />
         <activity android:name=".ui.verification.VerificationActivity" />
