@@ -11,8 +11,6 @@
         android:id="@+id/rvPastMedication"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginEnd="@dimen/spacing_24"
         android:layout_marginTop="@dimen/spacing_20"/>
 
 </LinearLayout>

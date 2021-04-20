@@ -2,10 +2,10 @@ package com.applocum.connecttomyhealth.ui.mygp
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
@@ -44,6 +44,8 @@ class GpServiceAdapter(context: Context, list: ArrayList<GpService>) :
 
             showDialogView.btnSubmit.setOnClickListener {
                 dialog.dismiss()
+                val intent= Intent(mContext,GpServiceActivity::class.java)
+                mContext.startActivity(intent)
             }
             showDialogView.btnCancel.setOnClickListener {
                 dialog.dismiss()

@@ -47,7 +47,7 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
         val date = "" + myDay + "/" + (myMonth + 1) + "/" + myYear
         var spf = SimpleDateFormat("dd/MM/yy")
         val newDate = spf.parse(date)
-        spf = SimpleDateFormat("dd/MM/yyyy")
+        spf = SimpleDateFormat("dd MMM yyyy")
         val newDateString = spf.format(newDate)
         println(newDateString)
         etInvestigationdate.setText(newDateString)

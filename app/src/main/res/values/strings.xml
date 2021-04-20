@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HealthHeaven</string>
+    <string name="app_name">HealtHeaven</string>
     <string name="login">Login</string>
     <string name="please_fill_in_the_credentials">Please fill in the credentials</string>
     <string name="todo">TODO</string>
@@ -312,4 +312,19 @@
     <string name="position_the_front_of_your_license_in_the_frame">Position the front of your license in the frame</string>
     <string name="your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_driving_licence">Your safety is our priority. To prevent misuse of your details, upload a valid form of Driving Licence</string>
     <string name="front_side_of_the_driver_s_licence">Front side of the driver \'s licence</string>
+    <string name="retake_a_photo">Retake a photo</string>
+    <string name="verified">Verified!</string>
+    <string name="your_identity_is_successfully_verified">Your Identity is successfully verified</string>
+    <string name="salmonella_lll_arizonae_53_k_z">Salmonella lll arizonae 53:K:Z</string>
+    <string name="_12_aug_2020">12 Aug 2020</string>
+    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_nullam_non_dignissim_ex_a_ornare_augue_donec_id_velit_leo_in_aliquet_ultrices_mauris_sit_amet_posuere_ante_posuere_eget">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non dignissim ex, a ornare augue. Donec id velit leo. In aliquet ultrices mauris, sit amet posuere ante posuere eget.</string>
+    <string name="add_symptoms">Add Symptoms</string>
+    <string name="describe_the_symptoms">Describe the Symptoms</string>
+    <string name="describe_about_your_symptoms_when_it_started_and_what_makes_you_feel_unwell">Describe about your symptoms, when it started and what makes you feel unwell</string>
+    <string name="type_here">Type here . . .</string>
+    <string name="add_image">Add Image</string>
+    <string name="i_allow_alldaydr_to_access_my_geo_location_this_will_only_be_used_in_an_emergency">I allow alldayDr to access my geo Location. (This will only be used in an emergency)</string>
+    <string name="i_give_consult_to_alldaydr_to_share_my_records_with_my_nhs_gp">I give consult to alldayDr to share my records with my NHS GP.</string>
+    <string name="gp_service">GP Service</string>
+    <string name="change">Change</string>
 </resources>

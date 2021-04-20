@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.verificationdocument.activities.ValidationValidPassportActivity">
-
+    tools:context=".ui.verificationdocument.activities.ValidationValidUKDrivingLicenseActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,11 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/valid_passport"
+            android:text="@string/uk_driving_license"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_20" />
     </RelativeLayout>
-
 
     <TextView
         android:layout_width="312dp"
@@ -44,18 +42,18 @@
         android:layout_marginTop="@dimen/spacing_46"
         android:layout_marginEnd="@dimen/spacing_24"
         android:fontFamily="@font/montserrat_medium"
-        android:text="@string/your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_valid_passport"
+        android:text="@string/your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_driving_licence"
         android:textColor="@color/aapBlack"
         android:textSize="@dimen/font_12" />
 
     <ImageView
-        android:id="@+id/ivPassport"
+        android:id="@+id/ivDrivingLicense"
         android:layout_width="248dp"
         android:layout_height="167dp"
         android:layout_gravity="center"
         android:layout_marginTop="37dp"
         android:contentDescription="@string/todo"
-        android:src="@drawable/passport" />
+        android:src="@drawable/driving_license" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,4 +92,5 @@
             android:textSize="@dimen/font_12"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
+
 </LinearLayout>

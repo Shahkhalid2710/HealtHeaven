@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
+import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomsActivity
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import com.applocum.connecttomyhealth.ui.confirmbooking.ConfirmBookingActivity
@@ -152,7 +153,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener {
         }
 
         btnContinue.setOnClickListener {
-            startActivity(Intent(this, ConfirmBookingActivity::class.java))
+            startActivity(Intent(this, AddSymptomsActivity::class.java))
         }
 
     }

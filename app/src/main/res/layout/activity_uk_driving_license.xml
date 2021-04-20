@@ -73,6 +73,7 @@
         android:textSize="@dimen/font_12" />
 
     <RelativeLayout
+        android:id="@+id/rlDrivingLicense"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_gravity="center"

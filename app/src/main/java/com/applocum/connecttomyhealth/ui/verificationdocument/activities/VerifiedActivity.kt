@@ -1,4 +1,4 @@
-package com.applocum.connecttomyhealth.ui.payment
+package com.applocum.connecttomyhealth.ui.verificationdocument.activities
 
 import android.app.ActionBar
 import android.app.Dialog
@@ -9,35 +9,22 @@ import android.view.Window
 import android.view.WindowManager
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.addcard.AddCardActivity
-import com.applocum.connecttomyhealth.ui.verificationdocument.activities.VerifyIdentityActivity
-import kotlinx.android.synthetic.main.activity_payment.*
+import com.applocum.connecttomyhealth.ui.appointment.AppointmentFragment
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.BottomNavigationViewActivity
+import kotlinx.android.synthetic.main.activity_verified.*
 import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 
-
-class PaymentActivity : BaseActivity() {
+class VerifiedActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        tvAddPaymentMethod.setOnClickListener {
-            startActivity(Intent(this,AddCardActivity::class.java))
-        }
-
-        btnConfirmSessionBooking.setOnClickListener {
-            startActivity(Intent(this,VerifyIdentityActivity::class.java))
-
-        }
-
-        etAddCode.setOnClickListener {
-            startActivity(Intent(this,AddCodeActivity::class.java))
+        btnContinue.setOnClickListener {
+            openDialog()
         }
     }
 
-    override fun getLayoutResourceId(): Int= R.layout.activity_payment
-
-    private fun openDialog()
-    {
-        val dialog = Dialog(this,android.R.style.Theme_Translucent_NoTitleBar)
+    override fun getLayoutResourceId(): Int = R.layout.activity_verified
+    private fun openDialog() {
+        val dialog = Dialog(this, android.R.style.Theme_Translucent_NoTitleBar)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_booked_succesfully_dialog)
         val window = dialog.window
@@ -45,7 +32,10 @@ class PaymentActivity : BaseActivity() {
         wlp.gravity = Gravity.CENTER
         wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
         window.attributes = wlp
-        dialog.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
+        dialog.window!!.setLayout(
+            ActionBar.LayoutParams.MATCH_PARENT,
+            ActionBar.LayoutParams.MATCH_PARENT
+        )
 
         dialog.btnDone.setOnClickListener {
             dialog.dismiss()
@@ -54,6 +44,9 @@ class PaymentActivity : BaseActivity() {
             transaction.replace(R.id.llPayment, apointmentFragment)
             transaction.addToBackStack(null)
             transaction.commit()*/
+            startActivity(Intent(this, BottomNavigationViewActivity::class.java))
+            this.finish()
+
         }
         dialog.show()
     }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/tvInvestigationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/salmonella_lll_arizonae_53_k_z"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_14"
+                tools:ignore="RelativeOverlap" />
+
+            <ImageView
+                android:id="@+id/ivList"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_drop_list" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvInvestigationDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/_12_aug_2020"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_12"
+            tools:ignore="RelativeOverlap" />
+
+        <LinearLayout
+            android:id="@+id/llDes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvInvestigationDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_nullam_non_dignissim_ex_a_ornare_augue_donec_id_velit_leo_in_aliquet_ultrices_mauris_sit_amet_posuere_ante_posuere_eget"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_10"
+                tools:ignore="RelativeOverlap" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="@dimen/spacing_16"
+    android:background="@color/textcolorgrey"/>
+</LinearLayout>

@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/tvNoMedicationIssue"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
             android:text="@string/no_medication_issued"

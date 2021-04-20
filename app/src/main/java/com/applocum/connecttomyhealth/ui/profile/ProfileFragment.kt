@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.ui.addcard.AddCardActivity
 import com.applocum.connecttomyhealth.ui.changepassword.ChangePasswordActivity
 import com.applocum.connecttomyhealth.ui.clinicalrecords.ClinicalRecordsActivity
 import com.applocum.connecttomyhealth.ui.mydownloads.MyDownloadsActivity
+import com.applocum.connecttomyhealth.ui.payment.AddCodeActivity
 import com.applocum.connecttomyhealth.ui.personaldetails.PersonalDetailsActivity
 import com.applocum.connecttomyhealth.ui.settings.SettingActivity
 import com.applocum.connecttomyhealth.ui.signup.SignupActivity
@@ -32,6 +34,14 @@ class ProfileFragment : Fragment() {
         v.rlMyDownloads.setOnClickListener {
             startActivity(Intent(requireActivity(),MyDownloadsActivity::class.java))
         }
+        v.rlPaymentMethods.setOnClickListener {
+            startActivity(Intent(requireActivity(),AddCardActivity::class.java))
+        }
+
+        v.rlMemberships.setOnClickListener {
+            startActivity(Intent(requireActivity(),AddCodeActivity::class.java))
+        }
+
         v.rlChangePassword.setOnClickListener {
             startActivity(Intent(requireActivity(),ChangePasswordActivity::class.java))
         }

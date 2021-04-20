@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.familyhistory.FamilyHistoryActivity">
-
+    tools:context=".ui.mygp.GpServiceActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,24 +25,23 @@
             android:src="@drawable/ic_back" />
 
         <TextView
-            android:id="@+id/tvFamilyHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/family_history"
+            android:text="@string/gp_service"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_20" />
 
         <TextView
-            android:id="@+id/tvAddFamilyHistory"
+            android:id="@+id/tvChangeGpService"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/spacing_24"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/add"
+            android:text="@string/change"
             android:textColor="@color/green"
             android:textSize="@dimen/font_16"
             tools:ignore="RelativeOverlap" />
@@ -51,17 +49,20 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_24">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvFamilyHistory"
+        <fragment
+            android:id="@+id/place_autocomplete_fragment"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp" />
+            android:layout_height="wrap_content" />
 
-        <include
-            android:id="@+id/familyhistory"
-            layout="@layout/custom_family_history_xml"
-            android:visibility="visible" />
+        <fragment
+            android:id="@+id/mapwhere"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </FrameLayout>
 </LinearLayout>

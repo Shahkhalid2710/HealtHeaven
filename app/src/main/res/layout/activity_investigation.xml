@@ -6,6 +6,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.investigation.InvestigationActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,21 +33,34 @@
             android:text="@string/investigation"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_20" />
+
         <TextView
             android:id="@+id/tvAddInvestigation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:fontFamily="@font/montserrat_bold"
             android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_bold"
             android:text="@string/add"
             android:textColor="@color/green"
             android:textSize="@dimen/font_16"
             tools:ignore="RelativeOverlap" />
     </RelativeLayout>
 
-    <include
-        android:id="@+id/investigation"
-        layout="@layout/custom_investigation_xml"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvInvestigation"
+            android:layout_width="match_parent"
+            android:layout_marginTop="28dp"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/investigation"
+            layout="@layout/custom_investigation_xml"
+            android:visibility="visible"/>
+    </FrameLayout>
 </LinearLayout>
