@@ -19,7 +19,9 @@ class GpServiceActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         ivBack.setOnClickListener { finish() }
-        supportMapFragment =
+
+
+       supportMapFragment =
             supportFragmentManager.findFragmentById(R.id.mapwhere) as SupportMapFragment
 
 
@@ -35,24 +37,37 @@ class GpServiceActivity : BaseActivity() {
             map.moveCamera(cameraUpdate)
         }
 
-      /* val autocompleteFragment =
-            supportFragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as PlaceAutocompleteFragment
+     /*  val autocompleteFragment =
+              supportFragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as PlaceAutocompleteFragment
 
-        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) {
-                map.clear()
-                map.addMarker(
-                    MarkerOptions().position(place.latLng).title(place.name.toString()))
-                map.moveCamera(CameraUpdateFactory.newLatLng(place.latLng))
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(place.latLng, 12.0f))
-            }
+          autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+              override fun onPlaceSelected(place: Place) {
 
-            override fun onError(status: Status?) {}
-        })*/
+                 map.clear()
+                  map.addMarker(
+                      MarkerOptions().position(place.latLng).title(place.name.toString()))
+                  map.moveCamera(CameraUpdateFactory.newLatLng(place.latLng))
+                  map.animateCamera(CameraUpdateFactory.newLatLngZoom(place.latLng, 15.0f))
+              }
 
+              override fun onError(status: Status?) {
+
+              }
+          })
+*/
     }
 
 
     override fun getLayoutResourceId(): Int = R.layout.activity_gp_service
 
+   /*private fun OpenLocationDialog() {
+        val dialog = BottomSheetDialog(this)
+        val v: View = LayoutInflater.from(this).inflate(R.layout.custom_location, null)
+        dialog.setCancelable(false)
+        dialog.setContentView(v)
+        BottomSheetBehavior.from(v.parent as View).state = BottomSheetBehavior.STATE_EXPANDED
+
+        dialog.show()
+
+    }*/
 }

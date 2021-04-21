@@ -23,7 +23,7 @@ class PastSessionAppointmentFragment : Fragment() {
         val v= inflater.inflate(R.layout.fragment_past_session_appointment, container, false)
 
         val session1=Session(R.drawable.drpaulina,"Dr. Paulina Gayoso","Face To Face | 60 min","Friday, 14th August 2020, 1:00PM")
-        val session2=Session(R.drawable.drpaulina,"Dr. Paulina Gayoso","Video Call | 30 min","Friday, 14th August 2020, 1:00PM")
+        val session2=Session(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Video Call | 30 min","Friday, 14th August 2020, 1:00PM")
         val session3=Session(R.drawable.drpaulina,"Dr. Paulina Gayoso","Face To Face | 60 min","Friday, 14th August 2020, 1:00PM")
 
         mListPastSession.add(session1)

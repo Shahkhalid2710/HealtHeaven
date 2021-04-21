@@ -122,7 +122,6 @@
     <string name="food_allerdy_diet">Food allerdy diet</string>
     <string name="dcis_nucler_pleomorphim">DCIS nucler pleomorphim</string>
     <string name="quilonia_ethiopica">Quilonia Ethiopica</string>
-    <string name="oncogene_protine_v_abc">Oncogene Protine V-ABC</string>
     <string name="neoplasm_of_stomach">Neoplasm of Stomach</string>
     <string name="add_investigation">Add Investigation</string>
     <string name="investigation_name">Investigation Name</string>
@@ -171,7 +170,6 @@
     <string name="select_disease_name">Select Disease Name</string>
     <string name="jugular_lymphadenopathy">Jugular lymphadenopathy</string>
     <string name="neoplasm_of_junctional_region_of_epiglottis">Neoplasm of junctional region of epiglottis</string>
-    <string name="neoplasm_of_abducens_nerve">Neoplasm of abducens nerve</string>
     <string name="start_date">Start Date:</string>
     <string name="select_month">Select Month</string>
     <string name="select_year">Select Year</string>
@@ -327,4 +325,17 @@
     <string name="i_give_consult_to_alldaydr_to_share_my_records_with_my_nhs_gp">I give consult to alldayDr to share my records with my NHS GP.</string>
     <string name="gp_service">GP Service</string>
     <string name="change">Change</string>
+    <string name="upload_certificate">Upload Certificate</string>
+    <string name="i_have_a_valid_medical_exemption_certification">I have a valid medical exemption certification.</string>
+    <string name="e">E</string>
+    <string name="exemption_certificate_number_may_also_be_sufficient_pending_validation">Exemption Certificate number may also be sufficient pending validation</string>
+    <string name="upload_certificate_photo">Upload Certificate Photo</string>
+    <string name="don_t_have_certificate_photo">Don’t have certificate photo?</string>
+    <string name="call_gp_service">Call GP Service</string>
+    <string name="neoplasm_of_abducens_nerve">Neoplasm of abducens nerve</string>
+    <string name="january_2020">January 2020</string>
+    <string name="not_verified">Not Verified</string>
+    <string name="_verified">Verified</string>
+    <string name="oncogene_protine_v_abc">Oncogene Protine V-ABC</string>
+    <string name="deleted_by_dr_robert_martin">Deleted by Dr. Robert Martin</string>
 </resources>

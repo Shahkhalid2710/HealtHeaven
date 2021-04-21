@@ -6,12 +6,9 @@
     android:background="@color/white"
     tools:context=".ui.allergyhistory.ActiveAllergyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Active Fragment"
-        android:gravity="center"
-        android:textColor="@color/aapBlack"/>
-
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/rvActiveAllergy"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="@dimen/spacing_16"/>
 </FrameLayout>

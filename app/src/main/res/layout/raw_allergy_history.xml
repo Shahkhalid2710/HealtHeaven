@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/oncogene_protine_v_abc"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_12" />
+
+
+            <FrameLayout
+                android:id="@+id/flNotVerified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp">
+
+                <RelativeLayout
+                    android:id="@+id/rlNotVerified"
+                    android:layout_width="65dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+                    android:background="@drawable/default_red_btn">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/not_verified"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/font_8" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlDeletedby"
+                    android:layout_width="133dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:background="@drawable/default_red_btn">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/deleted_by_dr_robert_martin"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/font_8" />
+                </RelativeLayout>
+            </FrameLayout>
+        </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:background="@color/textcolorgrey" />
+    </LinearLayout>

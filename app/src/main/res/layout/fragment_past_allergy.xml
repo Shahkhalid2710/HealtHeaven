@@ -6,12 +6,9 @@
     android:background="@color/white"
     tools:context=".ui.allergyhistory.PastAllergyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPastAllergy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Past Fragment"
-        android:textColor="@color/aapBlack"
-        android:gravity="center"/>
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_16"/>
 </FrameLayout>

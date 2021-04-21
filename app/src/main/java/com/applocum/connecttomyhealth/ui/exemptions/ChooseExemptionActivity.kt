@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.exemptions
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.R
@@ -43,6 +44,10 @@ class ChooseExemptionActivity : BaseActivity() {
 
         rvExemptions.layoutManager= LinearLayoutManager(this)
         rvExemptions.adapter=ExemptionAdapter(this,mListExemption)
+
+        btnAddCertificate.setOnClickListener {
+            startActivity(Intent(this,UploadCertificateActivity::class.java))
+        }
     }
 
     override fun getLayoutResourceId(): Int = R.layout.activity_choose_exemption

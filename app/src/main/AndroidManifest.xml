@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
@@ -16,15 +16,14 @@
         android:roundIcon="@drawable/ic_app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth">
+        <activity android:name=".ui.exemptions.UploadCertificateActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ui.mygp.GpServiceActivity">
-
-        </activity>
-        <activity android:name=".ui.addsymptoms.AddSymptomsActivity"></activity>
+        <activity android:name=".ui.mygp.GpServiceActivity"></activity>
+        <activity android:name=".ui.addsymptoms.AddSymptomsActivity" />
         <activity android:name=".ui.verificationdocument.activities.VerifiedActivity" />
         <activity android:name=".ui.verificationdocument.activities.ValidationValidUKDrivingLicenseActivity" />
         <activity android:name=".ui.verificationdocument.activities.ValidationValidPassportActivity" />
@@ -69,7 +68,7 @@
         <activity
             android:name=".ui.bottomnavigationview.BottomNavigationViewActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.signup.SignupActivity" />
+        <activity android:name=".ui.signup.SignupActivity"></activity>
         <activity android:name=".ui.createnewpassword.CreateNewPasswordActivity" />
         <activity android:name=".ui.verification.VerificationActivity" />
         <activity android:name=".ui.forgotpassword.ForgotPasswordActivity" />

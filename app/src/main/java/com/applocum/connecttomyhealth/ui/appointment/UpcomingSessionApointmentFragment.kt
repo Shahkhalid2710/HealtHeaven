@@ -22,8 +22,8 @@ class UpcomingSessionApointmentFragment : Fragment() {
         val  v=inflater.inflate(R.layout.fragment_upcoming_session_apointment, container, false)
         val session1=Session(R.drawable.drpaulina,"Dr. Paulina Gayoso","Face To Face | 60 min","Friday, 14th August 2020, 1:00PM")
         val session3=Session(R.drawable.drpaulina,"Dr. Paulina Gayoso","Face To Face | 60 min","Friday, 14th August 2020, 1:00PM")
-        val session2=Session(R.drawable.drpaulina,"Dr. Paulina Gayoso","Video Call | 30 min","Friday, 14th August 2020, 1:00PM")
-        val session4=Session(R.drawable.drpaulina,"Dr. Paulina Gayoso","Video Call | 30 min","Friday, 14th August 2020, 1:00PM")
+        val session2=Session(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Video Call | 30 min","Friday, 14th August 2020, 1:00PM")
+        val session4=Session(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Video Call | 30 min","Friday, 14th August 2020, 1:00PM")
 
         mListUpcomingSession.add(session1)
         mListUpcomingSession.add(session2)

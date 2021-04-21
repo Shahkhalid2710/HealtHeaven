@@ -49,7 +49,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="460dp"
         android:layout_marginTop="@dimen/spacing_24">
 
         <fragment
@@ -62,7 +62,8 @@
             android:id="@+id/mapwhere"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
     </FrameLayout>
+    <include layout="@layout/custom_location"/>
 </LinearLayout>

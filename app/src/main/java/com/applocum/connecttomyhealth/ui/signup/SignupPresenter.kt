@@ -70,7 +70,8 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
                                     user.lastName,
                                     user.email,
                                     user.gender,
-                                    it1,user.authToken
+                                    it1,
+                                    user.authToken
                                 )
                             }
                             view.sendUserData(userObject.user)
