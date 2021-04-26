@@ -65,6 +65,9 @@
             app:tabIndicator="@null"
             app:tabIndicatorColor="@color/white"
             app:tabSelectedTextColor="@color/white"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabMaxWidth="0dp"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             app:tabTextColor="@color/green" />
     </LinearLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,8 +14,8 @@
 
         <TextView
             android:id="@+id/tvWish"
-            android:layout_width="141dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="28dp"
             android:fontFamily="@font/poppins_light"
@@ -31,12 +32,13 @@
 
             <TextView
                 android:id="@+id/tvName"
-                android:layout_width="99dp"
-                android:layout_height="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/karolina"
                 android:textColor="@color/green"
-                android:textSize="@dimen/font_22" />
+                android:textSize="@dimen/font_22"
+                tools:ignore="RelativeOverlap" />
 
             <ImageView
                 android:id="@+id/ivUser"
@@ -45,49 +47,6 @@
                 android:layout_alignParentEnd="true"
                 android:contentDescription="@string/todo"
                 android:src="@drawable/profile_image" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_20"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:background="@drawable/search_customlayout"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/etSearch"
-                android:layout_width="match_parent"
-                android:layout_height="37dp"
-                android:layout_centerInParent="true"
-                android:autofillHints="0"
-                android:backgroundTint="@color/layoutbackground"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="@string/search_for_symtomps"
-                android:inputType="text"
-                android:paddingStart="@dimen/spacing_16"
-                android:paddingEnd="0dp"
-                android:textColor="@color/aapBlack"
-                android:textColorHint="@color/grey"
-                android:textSize="@dimen/font_12"
-                tools:ignore="RelativeOverlap" />
-
-            <RelativeLayout
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/custom_btn">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_search" />
-            </RelativeLayout>
         </RelativeLayout>
 
         <FrameLayout
@@ -110,7 +69,7 @@
                 <TextView
                     android:id="@+id/tvConsulatantdoctor"
                     android:layout_width="204dp"
-                    android:layout_height="@dimen/spacing_40"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_16"
                     android:layout_marginTop="9dp"
                     android:fontFamily="@font/poppins_medium"
@@ -127,8 +86,8 @@
                     android:background="@drawable/custombtn_xml"
                     android:fontFamily="@font/poppins_semibold"
                     android:padding="8dp"
-                    android:textAllCaps="false"
                     android:text="@string/book_appointment"
+                    android:textAllCaps="false"
                     android:textColor="@color/green"
                     android:textSize="@dimen/font_12" />
             </LinearLayout>
@@ -144,8 +103,8 @@
 
         <TextView
             android:id="@+id/tvCategories"
-            android:layout_width="94dp"
-            android:layout_height="23dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_16"
             android:fontFamily="@font/poppins_semibold"
@@ -233,8 +192,8 @@
 
                 <TextView
                     android:id="@+id/tvMore"
-                    android:layout_width="37dp"
-                    android:layout_height="17dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins_medium"
@@ -246,8 +205,8 @@
 
         <TextView
             android:id="@+id/tvTopDoctors"
-            android:layout_width="101dp"
-            android:layout_height="23dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_16"
             android:fontFamily="@font/poppins_semibold"

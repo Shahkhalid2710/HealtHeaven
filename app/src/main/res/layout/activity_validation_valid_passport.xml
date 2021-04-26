@@ -35,63 +35,77 @@
             android:textSize="@dimen/font_20" />
     </RelativeLayout>
 
-
-    <TextView
-        android:layout_width="312dp"
-        android:layout_height="36dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_46"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="@string/your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_valid_passport"
-        android:textColor="@color/aapBlack"
-        android:textSize="@dimen/font_12" />
-
-    <ImageView
-        android:id="@+id/ivPassport"
-        android:layout_width="248dp"
-        android:layout_height="167dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="37dp"
-        android:contentDescription="@string/todo"
-        android:src="@drawable/passport" />
-
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_16"
-        android:layout_marginTop="182dp"
-        android:layout_marginEnd="@dimen/spacing_16"
-        android:layout_marginBottom="27dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:fillViewport="true"
+        android:background="@color/white">
 
-        <Button
-            android:id="@+id/btnRetakePhoto"
-            android:layout_width="150dp"
-            android:layout_height="34dp"
-            android:layout_gravity="center"
-            android:background="@drawable/default_button"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/retake_a_photo"
-            android:textAllCaps="false"
-            android:textColor="@color/green"
-            android:textSize="@dimen/font_12"
-            tools:ignore="ButtonStyle" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnSubmit"
-            android:layout_width="150dp"
-            android:layout_height="34dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_16"
-            android:background="@drawable/custom_btn"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/submit"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_12"
-            tools:ignore="ButtonStyle" />
-    </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_46"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_valid_passport"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_12" />
+
+            <ImageView
+                android:id="@+id/ivPassport"
+                android:layout_width="248dp"
+                android:layout_height="167dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="37dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/passport" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="182dp"
+                android:layout_marginEnd="@dimen/spacing_16"
+                android:layout_marginBottom="27dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnRetakePhoto"
+                    android:layout_width="150dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/default_button"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/retake_a_photo"
+                    android:textAllCaps="false"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="ButtonStyle" />
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="150dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_16"
+                    android:background="@drawable/custom_btn"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="ButtonStyle" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

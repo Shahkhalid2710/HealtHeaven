@@ -50,10 +50,7 @@ class GlobalResponseInterceptor : BaseActivity(), Interceptor {
                 SessionInvalid -> {
                     runOnUiThread {
                         val email = userHolder.userEmail
-                        userHolder.clearUserData(
-                            "", "", "", "", "",
-                            ""
-                        ,"")
+                        userHolder.clearUserData("", "", "", "", "", "")
                     }
                 }
             }
@@ -70,7 +67,7 @@ class GlobalResponseInterceptor : BaseActivity(), Interceptor {
             }
         }
 
-        return chain.proceed(request)!!
+        return chain.proceed(request)
     }
 
     override fun getLayoutResourceId(): Int = 0

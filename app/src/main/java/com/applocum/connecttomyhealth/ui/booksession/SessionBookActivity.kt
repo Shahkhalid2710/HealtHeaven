@@ -39,8 +39,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener {
         mListSessionType.add(sessionType2)
         mListSessionType.add(sessionType3)
 
-        rvSessionType.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvSessionType.layoutManager = GridLayoutManager(this,3)
         rvSessionType.adapter = SessionTypeAdapter(this, mListSessionType)
 
         val sessionType4 = SessionType("30 min")
@@ -48,8 +47,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener {
 
         mListSelectSlot.add(sessionType4)
         mListSelectSlot.add(sessionType5)
-        rvSelectSlot.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvSelectSlot.layoutManager =GridLayoutManager(this,4)
         rvSelectSlot.adapter = SessionTypeAdapter(this, mListSelectSlot)
 
         val sessionType6 = SessionType("09:00 AM")
@@ -76,7 +74,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener {
         mListAvailableTime.add(sessionType15)
         mListAvailableTime.add(sessionType16)
 
-        rvAvailableTime.layoutManager = GridLayoutManager(this, 3)
+        rvAvailableTime.layoutManager = GridLayoutManager(this, 4)
         rvAvailableTime.adapter = SessionTypeAdapter(this, mListAvailableTime)
 
 

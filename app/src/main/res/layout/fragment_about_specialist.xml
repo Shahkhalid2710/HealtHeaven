@@ -1,49 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".ui.booksession.AboutSpecialistFragment">
+    android:fillViewport="true"
+    android:background="@color/white">
 
-    <TextView
-        android:id="@+id/tvDes1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_24"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:fontFamily="@font/montserrat_medium"
-        android:gravity="start"
-        android:text="@string/it_is_a_long_established_fact_that_a_reader_will_be_distracted_by_the_readable_content_of_a_page_when_looking_at_its_layout_the_point_of_using_lorem_ipsum_is_that_it_has_a_more_or_less_normal_distribution_of_letters_as_opposed_to_using_content"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/font_12" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.booksession.AboutSpecialistFragment">
 
-    <TextView
-        android:id="@+id/tvDes2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_16"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:fontFamily="@font/montserrat_medium"
-        android:gravity="start"
-        android:text="@string/here_content_here_making_it_look_like_readable_english"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/font_12" />
 
-    <TextView
-        android:id="@+id/tvDes3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_16"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:fontFamily="@font/montserrat_medium"
-        android:gravity="start"
-        android:text="@string/many_desktop_publishing_packages_and_web_page_editors_now_use_lorem_ipsum_as_their_default_model_text"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/font_12" />
+        <TextView
+            android:id="@+id/tvDes1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="start"
+            android:text="@string/it_is_a_long_established_fact_that_a_reader_will_be_distracted_by_the_readable_content_of_a_page_when_looking_at_its_layout_the_point_of_using_lorem_ipsum_is_that_it_has_a_more_or_less_normal_distribution_of_letters_as_opposed_to_using_content"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_12" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvDes2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="start"
+            android:text="@string/here_content_here_making_it_look_like_readable_english"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_12" />
+
+        <TextView
+            android:id="@+id/tvDes3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="start"
+            android:text="@string/many_desktop_publishing_packages_and_web_page_editors_now_use_lorem_ipsum_as_their_default_model_text"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_12" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

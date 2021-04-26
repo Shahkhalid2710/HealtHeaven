@@ -1,451 +1,460 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.sessiondetails.SessionDetailsActivity">
 
-    <LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_25"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvSessionDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/session_details"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_20" />
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        tools:context=".ui.sessiondetails.SessionDetailsActivity">
+        android:layout_marginTop="@dimen/spacing_16"
+        android:fillViewport="true"
+        android:scrollbarThumbVertical="@color/white"
+        android:background="@color/white">
 
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="8dp"
-                android:layout_height="15dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/spacing_25"
-                android:contentDescription="@string/todo"
-                android:focusable="true"
-                android:src="@drawable/ic_back" />
-
-            <TextView
-                android:id="@+id/tvSessionDetails"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/session_details"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_20" />
-        </RelativeLayout>
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="61dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                tools:ignore="UselessParent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="61dp"
-            android:layout_marginEnd="@dimen/spacing_24"
-            tools:ignore="UselessParent">
+                <ImageView
+                    android:id="@+id/ivDoctor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="@dimen/spacing_16"
+                    android:contentDescription="@string/todo"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/drpaulina" />
 
-            <ImageView
-                android:id="@+id/ivDoctor"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="@dimen/spacing_16"
-                android:contentDescription="@string/todo"
-                android:scaleType="centerCrop"
-                android:src="@drawable/drpaulina" />
-
-            <LinearLayout
-                android:id="@+id/ll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_16"
-                android:layout_toEndOf="@+id/ivDoctor"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvDoctorName"
+                <LinearLayout
+                    android:id="@+id/ll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/dr_paulina_gayoso"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_16" />
+                    android:layout_marginStart="@dimen/spacing_16"
+                    android:layout_toEndOf="@+id/ivDoctor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDoctorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/dr_paulina_gayoso"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_16" />
+
+                    <TextView
+                        android:id="@+id/tvDoctorGmcno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@string/gmc_no_1356787"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_14" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:background="@color/textcolorgrey" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@string/date"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/_14th_august_2020"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@string/amount"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
+
+                    <TextView
+                        android:id="@+id/tvAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/_80_00"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@string/time"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
+
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/_01_00_pm_02_00_pm"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="Session"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/tvSession"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/face_to_face"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:background="@color/textcolorgrey" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
 
                 <TextView
-                    android:id="@+id/tvDoctorGmcno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/gmc_no_1356787"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_14" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:background="@color/textcolorgrey" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:orientation="vertical"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/date"
+                    android:text="@string/history"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/font_12" />
 
                 <TextView
-                    android:id="@+id/tvDate"
+                    android:id="@+id/tvHistory"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/_14th_august_2020"
+                    android:text="@string/no_history_added"
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_12" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.6"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
                 android:orientation="vertical"
                 tools:ignore="UselessParent">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/amount"
+                    android:text="@string/diagonosis_clinical_impressions"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/font_12" />
 
                 <TextView
-                    android:id="@+id/tvAmount"
+                    android:id="@+id/tvClinicalImpression"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/_80_00"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_12" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:orientation="vertical"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/time"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_12" />
-
-                <TextView
-                    android:id="@+id/tvTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/_01_00_pm_02_00_pm"
+                    android:text="@string/no_management_added"
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_12" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.6"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
                 android:orientation="vertical"
                 tools:ignore="UselessParent">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="Session"
+                    android:text="@string/examination"
                     android:textColor="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="HardcodedText" />
+                    android:textSize="@dimen/font_12" />
 
                 <TextView
-                    android:id="@+id/tvSession"
+                    android:id="@+id/tvExamination"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/face_to_face"
+                    android:text="@string/no_examination_added"
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_12" />
             </LinearLayout>
-        </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:background="@color/textcolorgrey" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:background="@color/textcolorgrey" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:orientation="vertical"
-            tools:ignore="UselessParent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/management_plan"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+
+                <TextView
+                    android:id="@+id/tvManagementPlan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/no_management_plan_added"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/informational_outcomes"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+
+                <TextView
+                    android:id="@+id/tvInformationalOutcomes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/no_informational_outcomes_added"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:background="@color/textcolorgrey" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/video_history"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+
+                <TextView
+                    android:id="@+id/tvVideoHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/yes"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/doctor_patient_conversation"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+
+                <TextView
+                    android:id="@+id/tvDoctorPatientConversation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/no_doctor_patient_conversation_available"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnDownload"
+                android:layout_width="168dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_48"
+                android:layout_marginBottom="@dimen/spacing_40"
+                android:background="@drawable/custom_btn"
                 android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/history"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <TextView
-                android:id="@+id/tvHistory"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/no_history_added"
-                android:textColor="@color/aapBlack"
+                android:text="@string/download"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
                 android:textSize="@dimen/font_12" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:orientation="vertical"
-            tools:ignore="UselessParent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/diagonosis_clinical_impressions"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <TextView
-                android:id="@+id/tvClinicalImpression"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/no_management_added"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:orientation="vertical"
-            tools:ignore="UselessParent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/examination"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <TextView
-                android:id="@+id/tvExamination"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/no_examination_added"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:background="@color/textcolorgrey" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:orientation="vertical"
-            tools:ignore="UselessParent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/management_plan"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <TextView
-                android:id="@+id/tvManagementPlan"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/no_management_plan_added"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:orientation="vertical"
-            tools:ignore="UselessParent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/informational_outcomes"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <TextView
-                android:id="@+id/tvInformationalOutcomes"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/no_informational_outcomes_added"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:background="@color/textcolorgrey" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:orientation="vertical"
-            tools:ignore="UselessParent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/video_history"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <TextView
-                android:id="@+id/tvVideoHistory"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/yes"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:orientation="vertical"
-            tools:ignore="UselessParent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/doctor_patient_conversation"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <TextView
-                android:id="@+id/tvDoctorPatientConversation"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/no_doctor_patient_conversation_available"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnDownload"
-            android:layout_width="168dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/spacing_48"
-            android:layout_marginBottom="33dp"
-            android:background="@drawable/custom_btn"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/download"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_12" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

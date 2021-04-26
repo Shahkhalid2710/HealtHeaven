@@ -27,6 +27,7 @@ import javax.inject.Inject
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuItemClickListener,
     DatePickerDialog.OnDateSetListener {
+
     @Inject
     lateinit var presenter: SignupPresenter
 

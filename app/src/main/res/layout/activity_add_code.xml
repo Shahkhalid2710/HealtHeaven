@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ui.payment.AddCodeActivity">
 
     <RelativeLayout
@@ -35,45 +35,61 @@
             android:textSize="@dimen/font_20" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tvSessionType"
-        android:layout_width="312dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/add_your_employee_insurance_or_promo_membership_code"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/font_12" />
-
-    <EditText
-        android:id="@+id/etCode"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:autofillHints="0"
-        android:backgroundTint="@color/textcolorgrey"
-        android:fontFamily="@font/montserrat_semibold"
-        android:hint="@string/enter_code"
-        android:text="@string/dentist_dt130"
-        android:inputType="textCapSentences"
-        android:textColor="@color/aapBlack"
-        android:textColorHint="@color/grey"
-        android:textSize="@dimen/font_16"
-        tools:ignore="LabelFor" />
+        android:fillViewport="true"
+        android:background="@color/white">
 
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="96dp"
-        android:layout_height="36dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/spacing_48"
-        android:background="@drawable/custom_btn"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/add"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_12" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSessionType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/add_your_employee_insurance_or_promo_membership_code"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_12" />
+
+            <EditText
+                android:id="@+id/etCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:autofillHints="0"
+                android:backgroundTint="@color/textcolorgrey"
+                android:fontFamily="@font/montserrat_semibold"
+                android:hint="@string/enter_code"
+                android:inputType="textCapSentences"
+                android:text="@string/dentist_dt130"
+                android:textColor="@color/aapBlack"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/font_16"
+                tools:ignore="LabelFor" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="96dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_48"
+                android:layout_marginBottom="@dimen/spacing_40"
+                android:background="@drawable/custom_btn"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/add"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

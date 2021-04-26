@@ -8,6 +8,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         android:background="@color/white">
 
         <LinearLayout
@@ -90,7 +91,7 @@
                             android:src="@drawable/ic_facebook" />
 
                         <TextView
-                            android:layout_width="70dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="@dimen/spacing_18"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="11dp"
@@ -117,7 +118,7 @@
                             android:src="@drawable/ic_google" />
 
                         <TextView
-                            android:layout_width="70dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="@dimen/spacing_18"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="11dp"
@@ -131,6 +132,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:weightSum="3"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -141,16 +145,18 @@
                         tools:ignore="UselessParent">
 
                         <View
-                            android:layout_width="73dp"
+                            android:layout_width="0dp"
                             android:layout_height="1dp"
+                            android:layout_weight="1"
                             android:layout_gravity="center"
                             android:layout_marginEnd="8dp"
                             android:background="@color/textcolorgrey" />
 
                         <TextView
                             android:id="@+id/tvSignupUsing"
-                            android:layout_width="110dp"
+                            android:layout_width="0dp"
                             android:layout_height="18dp"
+                            android:layout_weight="1"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@string/or_sign_up_using"
@@ -158,8 +164,9 @@
                             android:textSize="@dimen/font_14" />
 
                         <View
-                            android:layout_width="73dp"
+                            android:layout_width="0dp"
                             android:layout_height="1dp"
+                            android:layout_weight="1"
                             android:layout_gravity="center"
                             android:layout_marginStart="8dp"
                             android:background="@color/textcolorgrey" />
@@ -168,8 +175,8 @@
 
                 <TextView
                     android:id="@+id/tvFirstName"
-                    android:layout_width="104dp"
-                    android:layout_height="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="31dp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -195,8 +202,8 @@
 
                 <TextView
                     android:id="@+id/tvLastName"
-                    android:layout_width="104dp"
-                    android:layout_height="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -222,8 +229,8 @@
 
                 <TextView
                     android:id="@+id/tvEmailAddress"
-                    android:layout_width="104dp"
-                    android:layout_height="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -249,8 +256,8 @@
 
                 <TextView
                     android:id="@+id/tvMobileNumber"
-                    android:layout_width="114dp"
-                    android:layout_height="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -294,8 +301,8 @@
 
                 <TextView
                     android:id="@+id/tvPassword"
-                    android:layout_width="80dp"
-                    android:layout_height="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -334,8 +341,8 @@
 
                 <TextView
                     android:id="@+id/tvConfirmPassword"
-                    android:layout_width="134dp"
-                    android:layout_height="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -374,8 +381,8 @@
 
                 <TextView
                     android:id="@+id/tvGender"
-                    android:layout_width="54dp"
-                    android:layout_height="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -403,8 +410,8 @@
 
                 <TextView
                     android:id="@+id/tvDOB"
-                    android:layout_width="35dp"
-                    android:layout_height="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_semibold"
@@ -454,7 +461,7 @@
                     <TextView
                         android:id="@+id/tvAlreadyRegistered"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/spacing_15"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_semibold"
                         android:text="@string/already_registered"
                         android:textColor="@color/aapBlack"
@@ -463,7 +470,7 @@
                     <TextView
                         android:id="@+id/tvSignin"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/spacing_15"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_5"
                         android:fontFamily="@font/montserrat_semibold"
                         android:text="@string/sign_in"

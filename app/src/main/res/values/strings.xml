@@ -24,7 +24,6 @@
     <string name="create_new_password">Create New password</string>
     <string name="set_up_your_new_password">Set up your new password !</string>
     <string name="reset">Reset</string>
-    <string name="enter_new_password">Enter New Password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="enter_confirm_password">Enter Confirm Password</string>
@@ -338,4 +337,9 @@
     <string name="_verified">Verified</string>
     <string name="oncogene_protine_v_abc">Oncogene Protine V-ABC</string>
     <string name="deleted_by_dr_robert_martin">Deleted by Dr. Robert Martin</string>
+    <string name="skip">Skip</string>
+    <string name="book_appointment_and_get_consult_to_our_great_doctors_via_call_video_and_face_to_face">Book Appointment and get consult to our great doctors via Call, Video and Face to Face</string>
+    <string name="next">Next</string>
+    <string name="get_started">Get Started</string>
+    <string name="enter_new_password">Enter New Password</string>
 </resources>

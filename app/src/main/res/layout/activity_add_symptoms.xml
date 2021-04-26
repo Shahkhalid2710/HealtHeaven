@@ -34,134 +34,148 @@
             android:textSize="@dimen/font_20" />
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/describe_the_symptoms"
-        android:textColor="@color/aapBlack"
-        android:textSize="@dimen/font_16" />
-
-    <TextView
-        android:layout_width="321dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="@string/describe_about_your_symptoms_when_it_started_and_what_makes_you_feel_unwell"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/font_12" />
-
-    <EditText
-        android:id="@+id/etAddSymptoms"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_16"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:autofillHints="0"
-        android:background="@drawable/custom_edittext"
-        android:fontFamily="@font/montserrat_medium"
-        android:gravity="top|start"
-        android:hint="@string/type_here"
-        android:imeOptions="actionDone"
-        android:inputType="textMultiLine"
-        android:lines="7"
-        android:maxLines="10"
-        android:minLines="6"
-        android:paddingStart="@dimen/spacing_16"
-        android:paddingTop="12dp"
-        android:paddingEnd="@dimen/spacing_16"
-        android:paddingBottom="12dp"
-        android:scrollbars="vertical"
-        android:textColor="@color/aapBlack"
-        android:textColorHint="@color/grey"
-        android:textSize="@dimen/font_12"
-        tools:ignore="LabelFor" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:layout_marginTop="@dimen/spacing_16">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_24"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/add_image"
-        android:textColor="@color/aapBlack"
-        android:textSize="@dimen/font_16" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/describe_the_symptoms"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_16" />
 
-        <ImageView
-            android:id="@+id/ivSymptom"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:contentDescription="@string/todo"
-            android:scaleType="centerCrop"
-            android:src="@drawable/drpaulina" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/describe_about_your_symptoms_when_it_started_and_what_makes_you_feel_unwell"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_12" />
 
-        <ImageView
-            android:id="@+id/ivSymptoms"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:layout_marginStart="@dimen/spacing_10"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:contentDescription="@string/todo"
-            android:scaleType="centerCrop"
-            android:src="@drawable/image_blank" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/etAddSymptoms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:autofillHints="0"
+                android:background="@drawable/custom_edittext"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="top|start"
+                android:hint="@string/type_here"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:lines="7"
+                android:maxLines="10"
+                android:minLines="6"
+                android:paddingStart="@dimen/spacing_16"
+                android:paddingTop="12dp"
+                android:paddingEnd="@dimen/spacing_16"
+                android:paddingBottom="12dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/aapBlack"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/font_12"
+                tools:ignore="LabelFor" />
 
-    <CheckBox
-        android:id="@+id/cbGeoLocation"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_24"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:button="@drawable/checkbox"
-        android:fontFamily="@font/montserrat_semibold"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:text="@string/i_allow_alldaydr_to_access_my_geo_location_this_will_only_be_used_in_an_emergency"
-        android:textColor="@color/aapBlack"
-        android:textSize="@dimen/font_12" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_24"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/add_image"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_16" />
 
-    <CheckBox
-        android:id="@+id/cbRecords"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:button="@drawable/checkbox"
-        android:fontFamily="@font/montserrat_semibold"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:text="@string/i_give_consult_to_alldaydr_to_share_my_records_with_my_nhs_gp"
-        android:textColor="@color/aapBlack"
-        android:textSize="@dimen/font_12" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnContinue"
-        android:layout_width="132dp"
-        android:layout_height="34dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/spacing_24"
-        android:layout_marginBottom="83dp"
-        android:background="@drawable/custom_btn"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/_continue"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_12" />
+                <ImageView
+                    android:id="@+id/ivSymptom"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:contentDescription="@string/todo"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/drpaulina" />
+
+                <ImageView
+                    android:id="@+id/ivSymptoms"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:layout_marginStart="@dimen/spacing_10"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:contentDescription="@string/todo"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image_blank" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/cbGeoLocation"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_24"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:button="@drawable/checkbox"
+                android:fontFamily="@font/montserrat_semibold"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/i_allow_alldaydr_to_access_my_geo_location_this_will_only_be_used_in_an_emergency"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_12" />
+
+            <CheckBox
+                android:id="@+id/cbRecords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:button="@drawable/checkbox"
+                android:fontFamily="@font/montserrat_semibold"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/i_give_consult_to_alldaydr_to_share_my_records_with_my_nhs_gp"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_12" />
+
+            <Button
+                android:id="@+id/btnContinue"
+                android:layout_width="132dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_24"
+                android:layout_marginBottom="83dp"
+                android:background="@drawable/custom_btn"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/_continue"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

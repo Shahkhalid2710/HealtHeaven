@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.mygp.AddGPServiceActivity">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,53 +36,66 @@
             android:textSize="@dimen/font_20" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:background="@drawable/search_customlayout"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:fillViewport="true"
+        android:background="@color/white">
 
-        <EditText
-            android:id="@+id/etGpSearch"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:layout_centerInParent="true"
-            android:autofillHints="0"
-            android:backgroundTint="@color/layoutbackground"
-            android:fontFamily="@font/poppins_regular"
-            android:hint="@string/search_gp"
-            android:inputType="text"
-            android:paddingStart="@dimen/spacing_16"
-            android:paddingEnd="0dp"
-            android:textColor="@color/aapBlack"
-            android:textColorHint="@color/grey"
-            android:textSize="@dimen/font_12"
-            tools:ignore="RelativeOverlap" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="31dp"
-            android:layout_height="31dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="4dp"
-            android:background="@drawable/custom_btn">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:background="@drawable/search_customlayout"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerInParent="true"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/ic_search" />
-        </RelativeLayout>
-    </RelativeLayout>
+                <EditText
+                    android:id="@+id/etGpSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:layout_centerInParent="true"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/layoutbackground"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="@string/search_gp"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/spacing_16"
+                    android:paddingEnd="0dp"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="RelativeOverlap" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvAddGp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_24"/>
+                <RelativeLayout
+                    android:layout_width="31dp"
+                    android:layout_height="31dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/custom_btn">
 
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_search" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAddGp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_24" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

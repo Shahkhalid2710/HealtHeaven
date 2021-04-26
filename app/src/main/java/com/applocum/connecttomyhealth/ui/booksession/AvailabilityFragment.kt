@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
@@ -14,9 +13,9 @@ import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import kotlinx.android.synthetic.main.fragment_availability.view.*
 
 class AvailabilityFragment : Fragment() {
-    val mListSessionType: ArrayList<SessionType> = ArrayList()
-    val mListSelectSlot: ArrayList<SessionType> = ArrayList()
-    val mListAvailableTime: ArrayList<SessionType> = ArrayList()
+    private val mListSessionType: ArrayList<SessionType> = ArrayList()
+    private val mListSelectSlot: ArrayList<SessionType> = ArrayList()
+    private val mListAvailableTime: ArrayList<SessionType> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +31,8 @@ class AvailabilityFragment : Fragment() {
         mListSessionType.add(sessionType2)
         mListSessionType.add(sessionType3)
 
-        v.rvSessionType.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        v.rvSessionType.adapter = SessionTypeAdapter(requireActivity(), mListSessionType)
+        v.rvSessionType.layoutManager = GridLayoutManager(requireActivity(),3)
+            v.rvSessionType.adapter = SessionTypeAdapter(requireActivity(), mListSessionType)
 
 
         val sessionType4 = SessionType("30 min")
@@ -42,8 +40,7 @@ class AvailabilityFragment : Fragment() {
 
         mListSelectSlot.add(sessionType4)
         mListSelectSlot.add(sessionType5)
-        v.rvSelectSlot.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        v.rvSelectSlot.layoutManager =GridLayoutManager(requireActivity(),4)
         v.rvSelectSlot.adapter = SessionTypeAdapter(requireActivity(), mListSelectSlot)
 
         val sessionType6 = SessionType("09:00 AM")
@@ -60,7 +57,7 @@ class AvailabilityFragment : Fragment() {
         mListAvailableTime.add(sessionType10)
 
 
-        v.rvAvailableTime.layoutManager = GridLayoutManager(requireActivity(), 3)
+        v.rvAvailableTime.layoutManager = GridLayoutManager(requireActivity(), 4)
         v.rvAvailableTime.adapter = AvailableTimeAdapter(requireActivity(), mListAvailableTime)
 
         return v

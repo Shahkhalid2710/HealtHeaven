@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="@color/white">
 
     <LinearLayout
@@ -25,7 +26,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="@dimen/spacing_24"
@@ -44,7 +45,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_16"
             android:layout_marginEnd="@dimen/spacing_24"
@@ -63,7 +64,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_16"
             android:layout_marginEnd="@dimen/spacing_24"

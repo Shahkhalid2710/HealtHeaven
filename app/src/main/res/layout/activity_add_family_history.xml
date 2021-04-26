@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lladdfamilyhistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:id="@+id/lladdfamilyhistory"
     tools:context=".ui.familyhistory.AddFamilyHistoryActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,35 +36,51 @@
             android:textSize="@dimen/font_20" />
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/etAddFamilyHistory"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_40"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:autofillHints="0"
-        android:backgroundTint="@color/textcolorgrey"
-        android:drawableEnd="@drawable/ic_dropdown_list"
-        android:focusable="false"
-        android:paddingBottom="@dimen/spacing_10"
-        android:fontFamily="@font/montserrat_medium"
-        android:hint="@string/add_family_history"
-        android:inputType="text"
-        android:textColor="@color/aapBlack"
-        android:textColorHint="@color/grey"
-        android:textSize="@dimen/font_12"
-        tools:ignore="LabelFor" />
-    <Button
-        android:id="@+id/btnSaveFamilyHistory"
-        android:layout_width="168dp"
-        android:layout_height="36dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="121dp"
-        android:background="@drawable/custom_btn"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/save_family_history"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_12" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:fillViewport="true"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etAddFamilyHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_40"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:autofillHints="0"
+                android:backgroundTint="@color/textcolorgrey"
+                android:drawableEnd="@drawable/ic_dropdown_list"
+                android:focusable="false"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/add_family_history"
+                android:inputType="text"
+                android:paddingBottom="@dimen/spacing_10"
+                android:textColor="@color/aapBlack"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/font_12"
+                tools:ignore="LabelFor" />
+
+            <Button
+                android:id="@+id/btnSaveFamilyHistory"
+                android:layout_width="168dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="121dp"
+                android:layout_marginBottom="@dimen/spacing_40"
+                android:background="@drawable/custom_btn"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/save_family_history"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

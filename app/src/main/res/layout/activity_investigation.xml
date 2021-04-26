@@ -48,19 +48,34 @@
             tools:ignore="RelativeOverlap" />
     </RelativeLayout>
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:fillViewport="true"
+        android:background="@color/white">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvInvestigation"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="28dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <include
-            android:id="@+id/investigation"
-            layout="@layout/custom_investigation_xml"
-            android:visibility="visible"/>
-    </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvInvestigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp" />
+
+                <include
+                    android:id="@+id/investigation"
+                    layout="@layout/custom_investigation_xml"
+                    android:visibility="visible" />
+            </FrameLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

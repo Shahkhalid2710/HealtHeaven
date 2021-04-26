@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
                 mListCategory
             )
         val doctor1=Doctor(R.drawable.ic_dr_1,"Dr. Jessica Fernandez","Neurosurgeon ","10 AM - 4 PM ")
-        val doctor2=Doctor(R.drawable.ic_dr_1,"Dr. Jessica Fernandez","Neurosurgeon ","12 PM - 4 PM ")
+        val doctor2=Doctor(R.drawable.drpaulina,"Dr. Jessica Fernandez","Neurosurgeon ","12 PM - 4 PM ")
         val doctor3=Doctor(R.drawable.ic_dr_1,"Dr. Jessica Fernandez","Neurosurgeon ","10 PM - 4 AM ")
 
         mListDoctor.add(doctor1)

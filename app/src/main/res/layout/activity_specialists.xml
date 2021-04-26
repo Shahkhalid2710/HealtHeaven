@@ -1,50 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.specialists.SpecialistsActivity">
 
-    <LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_25"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvSpecialists"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/specialists"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_20" />
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        tools:context=".ui.specialists.SpecialistsActivity">
+        android:fillViewport="true"
+        android:layout_marginTop="@dimen/spacing_16">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="8dp"
-                android:layout_height="15dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/spacing_25"
-                android:contentDescription="@string/todo"
-                android:focusable="true"
-                android:src="@drawable/ic_back" />
-
-            <TextView
-                android:id="@+id/tvSpecialists"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/specialists"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_20" />
-        </RelativeLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSpecialists"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginEnd="@dimen/spacing_24" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSpecialists"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginEnd="@dimen/spacing_24" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

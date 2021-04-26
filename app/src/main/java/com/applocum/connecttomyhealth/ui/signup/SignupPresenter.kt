@@ -16,7 +16,7 @@ import okhttp3.RequestBody
 import java.util.regex.Pattern
 import javax.inject.Inject
 
-class SignupPresenter @Inject constructor(val api: AppEndPoint) {
+class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
 
     private val disposables = CompositeDisposable()
     lateinit var view: View
@@ -45,9 +45,9 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
             view.viewProgress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("user[email]", email)
                 .addFormDataPart("user[first_name]", firstname)
                 .addFormDataPart("user[last_name]", lastname)
+                .addFormDataPart("user[email]", email)
                 .addFormDataPart("user[phone]", countrycode+""+mobileno)
                 .addFormDataPart("user[gender]", gender)
                 .addFormDataPart("user[password]", password)
@@ -71,7 +71,7 @@ class SignupPresenter @Inject constructor(val api: AppEndPoint) {
                                     user.email,
                                     user.gender,
                                     it1,
-                                    user.authToken
+                                   // user.authToken
                                 )
                             }
                             view.sendUserData(userObject.user)

@@ -16,11 +16,11 @@ import okhttp3.RequestBody
 import java.util.regex.Pattern
 import javax.inject.Inject
 
-class LoginPresenter @Inject constructor(val api: AppEndPoint) {
-    val disposables = CompositeDisposable()
+class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
+    private val disposables = CompositeDisposable()
     lateinit var view: View
-    var devicetype = "android"
-    var role = "patient"
+    private var devicetype = "android"
+    private var role = "patient"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -43,7 +43,7 @@ class LoginPresenter @Inject constructor(val api: AppEndPoint) {
                 .subscribeBy(onNext = {
                     view.viewProgress(false)
                     when (it.status) {
-                                Success -> {
+                        Success -> {
                             val userObject: UserResponse =
                                 Gson().fromJson(it.data, UserResponse::class.java)
                             view.displaymessage(it.message)
@@ -61,7 +61,7 @@ class LoginPresenter @Inject constructor(val api: AppEndPoint) {
         }
     }
 
-    fun validateLogin(email: String, password: String): Boolean {
+    private fun validateLogin(email: String, password: String): Boolean {
         val EMAIL_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
                     "\\@" +
@@ -85,10 +85,10 @@ class LoginPresenter @Inject constructor(val api: AppEndPoint) {
             view.displaymessage("Please Enter Password")
             return false
         }
-       /* if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            view.displaymessage("Password Pattern Invalid")
-            return false
-        }*/
+        /* if (!PASSWORD_PATTERN.matcher(password).matches()) {
+             view.displaymessage("Password Pattern Invalid")
+             return false
+         }*/
         return true
     }
 

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -16,13 +17,16 @@
         android:roundIcon="@drawable/ic_app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth">
-        <activity android:name=".ui.exemptions.UploadCertificateActivity"></activity>
+        <activity android:name=".ui.walkthrough.WalkThroughActivity">
+
+        </activity>
+        <activity android:name=".ui.exemptions.UploadCertificateActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ui.mygp.GpServiceActivity"></activity>
+        <activity android:name=".ui.mygp.GpServiceActivity" />
         <activity android:name=".ui.addsymptoms.AddSymptomsActivity" />
         <activity android:name=".ui.verificationdocument.activities.VerifiedActivity" />
         <activity android:name=".ui.verificationdocument.activities.ValidationValidUKDrivingLicenseActivity" />
@@ -31,11 +35,7 @@
         <activity android:name=".ui.verificationdocument.activities.ValidPassportActivity" />
         <activity android:name=".ui.verificationdocument.activities.VerifyIdentityActivity" />
         <activity android:name=".ui.splashscreen.SplashScreenActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.booksession.SessionBookActivity" />
         <activity android:name=".ui.exemptions.ChooseExemptionActivity" />
@@ -67,12 +67,23 @@
         <activity android:name=".ui.personaldetails.PersonalDetailsActivity" />
         <activity
             android:name=".ui.bottomnavigationview.BottomNavigationViewActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.signup.SignupActivity"></activity>
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.signup.SignupActivity">
+
+        </activity>
         <activity android:name=".ui.createnewpassword.CreateNewPasswordActivity" />
         <activity android:name=".ui.verification.VerificationActivity" />
         <activity android:name=".ui.forgotpassword.ForgotPasswordActivity" />
-        <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.login.LoginActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

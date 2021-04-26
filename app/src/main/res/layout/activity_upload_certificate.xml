@@ -34,86 +34,101 @@
             android:textSize="@dimen/font_20" />
     </RelativeLayout>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:background="@drawable/custom_exemption_layout"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent">
-
-        <TextView
-            android:id="@+id/tvLetter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_16"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/e"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_20" />
-
-        <TextView
-            android:id="@+id/tvDes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_16"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="@string/i_have_a_valid_medical_exemption_certification"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_12" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_medium"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:text="@string/exemption_certificate_number_may_also_be_sufficient_pending_validation"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/font_10" />
-
-    <Button
-        android:id="@+id/btnUploadCertificatePhoto"
-        android:layout_width="194dp"
-        android:layout_height="34dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/spacing_40"
-        android:background="@drawable/custom_btn"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/upload_certificate_photo"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_12" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:layout_marginBottom="64dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:fillViewport="true"
+        android:background="@color/white">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/don_t_have_certificate_photo"
-            android:textColor="@color/grey"
-            android:textSize="@dimen/font_12" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvContinue"
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_marginStart="@dimen/spacing_5"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/_continue"
-            android:textColor="@color/green"
-            android:textSize="@dimen/font_12" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="38dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:background="@drawable/custom_exemption_layout"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/tvLetter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_16"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/e"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_20" />
+
+                <TextView
+                    android:id="@+id/tvDes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_16"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/i_have_a_valid_medical_exemption_certification"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/exemption_certificate_number_may_also_be_sufficient_pending_validation"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_10" />
+
+            <Button
+                android:id="@+id/btnUploadCertificatePhoto"
+                android:layout_width="194dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_40"
+                android:background="@drawable/custom_btn"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/upload_certificate_photo"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_12" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginBottom="64dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/don_t_have_certificate_photo"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+
+                <TextView
+                    android:id="@+id/tvContinue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_5"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/_continue"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

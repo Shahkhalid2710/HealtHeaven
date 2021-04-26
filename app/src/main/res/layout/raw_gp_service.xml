@@ -25,7 +25,7 @@
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="@string/route_du_fort_surgery"
                 android:textColor="@color/aapBlack"
@@ -34,7 +34,7 @@
             <TextView
                 android:id="@+id/tvArea"
                 android:layout_width="wrap_content"
-                android:layout_height="15dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/st_saviours_road"
@@ -44,7 +44,7 @@
             <TextView
                 android:id="@+id/tvCity"
                 android:layout_width="wrap_content"
-                android:layout_height="15dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/st_saviours_jersey"

@@ -49,15 +49,15 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="460dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_24">
 
-        <fragment
+       <!-- <fragment
             android:id="@+id/place_autocomplete_fragment"
             android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
+-->
         <fragment
             android:id="@+id/mapwhere"
             android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -65,5 +65,7 @@
             android:layout_height="wrap_content" />
 
     </FrameLayout>
+<!--
     <include layout="@layout/custom_location"/>
+-->
 </LinearLayout>

@@ -9,9 +9,9 @@ import retrofit2.http.POST
 interface AppEndPoint {
 
     @POST("/api/users/sign_up.json")
-    fun signUp(@Body requestBody: RequestBody):Observable<GlobalResponse>
+    fun signUp(@Body requestBody: RequestBody): Observable<GlobalResponse>
 
     @POST("/api/users/sign_in.json")
-    fun signin(@Body requestBody: RequestBody):Observable<GlobalResponse>
+    fun signin(@Body requestBody: RequestBody): Observable<GlobalResponse>
 
 }
