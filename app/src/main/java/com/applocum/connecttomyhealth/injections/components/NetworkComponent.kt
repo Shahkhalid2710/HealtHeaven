@@ -21,6 +21,7 @@ import com.applocum.connecttomyhealth.ui.profile.ProfileFragment
 import com.applocum.connecttomyhealth.ui.profiledetails.ProfileDetailsActivity
 import com.applocum.connecttomyhealth.ui.settings.SettingActivity
 import com.applocum.connecttomyhealth.ui.signup.SignupActivity
+import com.applocum.connecttomyhealth.ui.specialists.SpecialistsActivity
 import com.applocum.connecttomyhealth.ui.verification.VerificationActivity
 import com.connectmyhealth.patient.injections.modules.RetrofitModule
 import com.connectmyhealth.patient.shareddata.interceptors.GlobalResponseInterceptor
@@ -59,6 +60,8 @@ interface NetworkComponent {
     fun inject(activity:AddInvestigationActivity)
 
     fun inject(activity:ProfileDetailsActivity)
+
+    fun inject(activity:SpecialistsActivity)
 
     fun inject(fragment:HomeFragment)
 

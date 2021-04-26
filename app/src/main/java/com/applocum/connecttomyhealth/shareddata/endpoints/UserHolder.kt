@@ -22,9 +22,9 @@ class UserHolder(pref: SharedPreferences) {
     var userDOB by pref.prefString()
         private set
 
- /*   var userToken by pref.prefString()
+    var userToken by pref.prefString()
         private set
-*/
+
     fun saveUser(
         id: String,
         firstname: String,
@@ -32,7 +32,7 @@ class UserHolder(pref: SharedPreferences) {
         email: String,
         gender: String,
         dob: String,
-       // token: String
+        token: String
     ) {
         userid = id
         userFirstName = firstname
@@ -40,7 +40,7 @@ class UserHolder(pref: SharedPreferences) {
         userEmail = email
         userGender = gender
         userDOB = dob
-      //  userToken = token
+        userToken = token
     }
 
     fun clearUserData(
@@ -50,7 +50,7 @@ class UserHolder(pref: SharedPreferences) {
         email: String,
         gender: String,
         dob: String,
-       // token: String
+        token: String
     ) {
         userid = id
         userFirstName = firstname
@@ -58,6 +58,6 @@ class UserHolder(pref: SharedPreferences) {
         userEmail = email
         userGender = gender
         userDOB = dob
-      //  userToken = token
+        userToken = token
     }
 }

@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.booksession.BookSessionActivity
-import com.applocum.connecttomyhealth.ui.specialists.models.Specialists
+import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.raw_doctor_xml.view.*
 
-class SpecialistsAdapter(context: Context, list: ArrayList<Specialists>) :
+class SpecialistsAdapter(context: Context, list: ArrayList<Specialist>) :
     RecyclerView.Adapter<SpecialistsAdapter.SpecialistHolder>() {
     private var mContext = context
     private var mList = list
@@ -29,10 +29,11 @@ class SpecialistsAdapter(context: Context, list: ArrayList<Specialists>) :
     }
 
     override fun onBindViewHolder(holder: SpecialistHolder, position: Int) {
-        val specialists = mList[position]
-        holder.itemView.tvDoctorName.text = specialists.sName
-        holder.itemView.tvProf.text = specialists.sProf
-        holder.itemView.tvDes.text = specialists.sDes
+        val specialist = mList[position]
+        holder.itemView.tvDoctorFirstName.text =specialist.first_name
+        holder.itemView.tvDoctorLastName.text = specialist.last_name
+        holder.itemView.tvProf.text = specialist.designation
+        holder.itemView.tvDes.text = specialist.bio
 
         holder.itemView.btnViewProfile.setOnClickListener {
             val intent = Intent(mContext, BookSessionActivity::class.java)
@@ -43,6 +44,6 @@ class SpecialistsAdapter(context: Context, list: ArrayList<Specialists>) :
             mContext.startActivity(intent)
         }
 
-        Glide.with(mContext).load(specialists.sImage).into(holder.itemView.ivDoctor)
+        Glide.with(mContext).load(specialist.image).into(holder.itemView.ivDoctor)
     }
 }

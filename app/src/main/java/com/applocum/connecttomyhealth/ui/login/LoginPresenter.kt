@@ -24,6 +24,7 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
 
     @Inject
     lateinit var userHolder: UserHolder
+
     fun injectview(view: View) {
         this.view = view
     }
@@ -46,6 +47,8 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                         Success -> {
                             val userObject: UserResponse =
                                 Gson().fromJson(it.data, UserResponse::class.java)
+                            val user=userObject.user
+                            userHolder.saveUser(user.id.toString(),user.firstName,user.lastName,user.email,user.gender,user.profile.dateOfBirth,user.authToken)
                             view.displaymessage(it.message)
                             view.senduserdata(userObject.user)
                         }

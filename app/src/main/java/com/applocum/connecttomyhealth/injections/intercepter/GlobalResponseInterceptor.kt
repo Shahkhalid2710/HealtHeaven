@@ -50,7 +50,7 @@ class GlobalResponseInterceptor : BaseActivity(), Interceptor {
                 SessionInvalid -> {
                     runOnUiThread {
                         val email = userHolder.userEmail
-                        userHolder.clearUserData("", "", "", "", "", "")
+                        userHolder.clearUserData("", "", "", "", "", "","")
                     }
                 }
             }

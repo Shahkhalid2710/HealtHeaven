@@ -39,10 +39,13 @@ class InvestigationAdapter(context: Context,list: ArrayList<Investigation>):Recy
         holder.itemView.ivList.setOnClickListener {
             if (holder.itemView.llDes.visibility == View.GONE) {
                 holder.itemView.llDes.visibility = View.VISIBLE
-                holder.itemView.ivList.setImageResource(R.drawable.ic_drop_list_top)
+             //   holder.itemView.ivList.setImageResource(R.drawable.ic_drop_list_top)
+                holder.itemView.ivList.animate().rotation(180f).start()
+
             } else {
                 holder.itemView.llDes.visibility = View.GONE
-                holder.itemView.ivList.setImageResource(R.drawable.ic_drop_list)
+             //   holder.itemView.ivList.setImageResource(R.drawable.ic_drop_list)
+                holder.itemView.ivList.animate().rotation(360f).start()
             }
 
             val animation =

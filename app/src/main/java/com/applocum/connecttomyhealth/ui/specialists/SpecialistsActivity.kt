@@ -1,37 +1,40 @@
 package com.applocum.connecttomyhealth.ui.specialists
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.specialists.models.Specialists
+import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import kotlinx.android.synthetic.main.activity_specialists.*
+import javax.inject.Inject
 
-class SpecialistsActivity : BaseActivity() {
-    private val mList:ArrayList<Specialists> = ArrayList()
+class SpecialistsActivity : BaseActivity() ,SpecilistPresenter.View {
+    @Inject
+    lateinit var presenter: SpecilistPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        (application as  MyApplication).component.inject(this)
+        presenter.injectview(this)
+
         ivBack.setOnClickListener { finish() }
 
-        val specialists1=Specialists(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
-        val specialists2=Specialists(R.drawable.drpaulina,"Dr. Gatsharan Sangrota","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
-        val specialists3=Specialists(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
-        val specialists4=Specialists(R.drawable.drpaulina,"Dr. Gatsharan Sangrota","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
-        val specialists5=Specialists(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
-        val specialists6=Specialists(R.drawable.drpaulina,"Dr. Gatsharan Sangrota","Prescription, Sick Notes","It was popularised in the 1960s with the release of Letraset sheets containing Lorem ")
-
-        mList.add(specialists1)
-        mList.add(specialists2)
-        mList.add(specialists3)
-        mList.add(specialists4)
-        mList.add(specialists5)
-        mList.add(specialists6)
-
-        rvSpecialists.layoutManager=LinearLayoutManager(this)
-        rvSpecialists.adapter=SpecialistsAdapter(this,mList)
-
+        presenter.getlist()
     }
 
     override fun getLayoutResourceId(): Int= R.layout.activity_specialists
+    override fun displaymessage(message: String) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun getdoctorlist(list: ArrayList<Specialist>) {
+        rvSpecialists.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        val specialistsAdapter=SpecialistsAdapter(this,list)
+        rvSpecialists.adapter=specialistsAdapter
+        Log.d("doctorlisttttt","-->"+list)
+    }
 }
