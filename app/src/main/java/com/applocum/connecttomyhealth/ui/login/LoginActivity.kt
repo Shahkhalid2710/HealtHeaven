@@ -51,8 +51,7 @@ class LoginActivity : BaseActivity(), LoginPresenter.View {
     }
 
     override fun senduserdata(user: User) {
-        //userHolder.userid = "" + user.id
-        val intent = Intent(this, BottomNavigationViewActivity::class.java)
+        val intent = Intent(this,BottomNavigationViewActivity::class.java)
         startActivity(intent)
     }
 

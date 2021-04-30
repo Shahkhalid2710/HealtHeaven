@@ -1,15 +1,17 @@
 package com.applocum.connecttomyhealth.ui.booksession.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
+import com.applocum.connecttomyhealth.convertAvailableTimeSlots
+import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import kotlinx.android.synthetic.main.raw_session_booking.view.*
 
-class AvailableTimeAdapter(context: Context, list: ArrayList<SessionType>) :
+class AvailableTimeAdapter(context: Context, list: ArrayList<Time>) :
     RecyclerView.Adapter<AvailableTimeAdapter.SessionTypeHolder>() {
     var mContext = context
     var mList = list
@@ -26,8 +28,7 @@ class AvailableTimeAdapter(context: Context, list: ArrayList<SessionType>) :
     }
 
     override fun onBindViewHolder(holder: SessionTypeHolder, position: Int) {
-        val sessionType = mList[position]
-
-        holder.itemView.tvName.text = sessionType.sName
+        val time = mList[position]
+        holder.itemView.tvName.text = convertAvailableTimeSlots(time.start_time)
     }
 }

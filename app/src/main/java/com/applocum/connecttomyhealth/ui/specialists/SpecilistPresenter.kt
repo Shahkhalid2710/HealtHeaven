@@ -1,28 +1,26 @@
 package com.applocum.connecttomyhealth.ui.specialists
 
-import com.applocum.connecttomyhealth.commons.globals.ErrorCodes
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
-import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import javax.inject.Inject
 
+
 class SpecilistPresenter@Inject constructor(private val api:AppEndPoint)  {
-    val disposables=CompositeDisposable()
+    private val disposables=CompositeDisposable()
     lateinit var view:View
-    var CORPORATE_ID="83"
+  //  var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0aW1lc3RhbXAiOiIyMDIxLTA0LTI2VDEwOjM2OjMyLjE1NCswMDowMCIsImVtYWlsIjoic2FoaWxzQHlvcG1haWwuY29tIn0.zxN3RluOJwc9-e2dp0_RxlcIhyw741NB7LV7ySErnGM"
 
 
     @Inject
     lateinit var userHolder:UserHolder
+
     fun injectview(view: View)
     {
         this.view=view
@@ -30,35 +28,29 @@ class SpecilistPresenter@Inject constructor(private val api:AppEndPoint)  {
 
     fun getlist()
     {
-        val requestBody: RequestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart("AUTH_TOKEN",userHolder.userToken!!)
-            .addFormDataPart("corporate_organization_id", CORPORATE_ID)
-            .build()
-        api.getdoctors()
+        view.viewProgress(true)
+        api.getdoctors(userHolder.userToken!!,66)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
-             when(it.status)
-             {
-                 Success->{
-                    // val doctorobject:Specialist=Gson().fromJson(it.data,Specialist::class.java)
-                     view.getdoctorlist(it.data)
-                     view.displaymessage(it.message)
-                 }
-                 InvalidCredentials,InternalServer -> {
-                     view.displaymessage(it.message)
-                 }
-
-             }
+                when (it.status) {
+                    Success -> {
+                        view.viewProgress(false)
+                        view.getdoctorlist(it.data)
+                    }
+                    InvalidCredentials, InternalServer -> {
+                        view.displaymessage(it.message)
+                    }
+                }
             }, onError = {
+                view.viewProgress(false)
                 it.printStackTrace()
-            }).let { disposables.addAll(it) }
+            }).let { disposables.add(it) }
     }
-
 
     interface View
     {
         fun displaymessage(message:String)
         fun getdoctorlist(list:ArrayList<Specialist>)
+        fun viewProgress(isShow: Boolean)
     }
 }

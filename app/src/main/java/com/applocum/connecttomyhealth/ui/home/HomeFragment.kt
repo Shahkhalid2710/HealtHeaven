@@ -8,22 +8,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.home.adapters.CategoryAdapter
 import com.applocum.connecttomyhealth.ui.home.adapters.DoctorAdapter
 import com.applocum.connecttomyhealth.ui.home.model.Category
 import com.applocum.connecttomyhealth.ui.home.model.Doctor
 import com.applocum.connecttomyhealth.ui.specialists.SpecialistsActivity
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
      private var mListCategory:ArrayList<Category> = ArrayList()
      private var mListDoctor:ArrayList<Doctor> = ArrayList()
+
+    @Inject
+    lateinit var userHolder: UserHolder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v= inflater.inflate(R.layout.fragment_home, container, false)
+
        val category1=Category(R.drawable.ic_heart,"Heart")
        val category2=Category(R.drawable.ic_brain,"Brain")
        val category3=Category(R.drawable.ic_teeth,"Teeth")
@@ -63,6 +69,7 @@ class HomeFragment : Fragment() {
         v.btnBookAppointment.setOnClickListener {
             startActivity(Intent(requireActivity(),SpecialistsActivity::class.java))
         }
+
         return v
     }
 

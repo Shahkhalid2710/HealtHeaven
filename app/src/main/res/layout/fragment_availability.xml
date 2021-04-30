@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/llAvailability"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -73,209 +74,30 @@
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_14" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAvailableTime"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_5"
-            android:layout_marginEnd="@dimen/spacing_24" />
+            android:layout_marginBottom="40dp">
 
-      <!--  <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchMultiSessions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:checked="false"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/book_multiple_sessions"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_14"
-            android:theme="@style/SwitchStyle" />
-
-        <LinearLayout
-            android:id="@+id/llMultiSessions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/tell_us_how_many_session_you_want_to_book"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-
-            <RelativeLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAvailableTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_10"
-                android:layout_marginEnd="@dimen/spacing_24">
+                android:layout_marginTop="@dimen/spacing_5"
+                android:layout_marginEnd="@dimen/spacing_24"/>
 
-                <ImageView
-                    android:id="@+id/ivMinus"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_minuss" />
-
-                <EditText
-                    android:id="@+id/etSessions"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_10"
-                    android:layout_toEndOf="@+id/ivMinus"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/white"
-                    android:focusable="false"
-                    android:fontFamily="@font/poppins_medium"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:padding="@dimen/spacing_5"
-                    android:text="@string/_0"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/font_11"
-                    tools:ignore="LabelFor" />
-
-                <ImageView
-                    android:id="@+id/ivPlus"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/etSessions"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_add" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="110dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:background="@color/textcolorgrey" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="13dp"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="7dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/you_have_only_10_free_sessions_available"
-                android:textColor="@color/yellow"
-                android:textSize="@dimen/font_10" />
-
-            <CheckBox
-                android:id="@+id/cbDaily"
-                android:layout_width="wrap_content"
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="26dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/daily"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-
-            <CheckBox
-                android:id="@+id/cbWeeklyonthursday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/weekly_on_thursday"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-
-            <CheckBox
-                android:id="@+id/cbMonthly1stThursday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/monthly_on_1st_thursday"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-
-            <CheckBox
-                android:id="@+id/cbAnuallyonApril13th"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/anually_on_april_13th"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-
-            <CheckBox
-                android:id="@+id/cbEveryWeekday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/every_weekday"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-
-            <CheckBox
-                android:id="@+id/cbCustom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/custom"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnContinue"
-            android:layout_width="168dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="72dp"
-            android:layout_marginBottom="@dimen/spacing_48"
-            android:background="@drawable/custom_btn"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/_continue"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_12" />-->
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:visibility="gone"
+                android:focusableInTouchMode="true"
+                android:indeterminateTint="@color/green"
+                android:progressTint="@color/green" />
+        </FrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,12 +1,19 @@
 package com.applocum.connecttomyhealth.injections.components
 
 import com.applocum.connecttomyhealth.injections.modules.UserHolderModule
+import com.applocum.connecttomyhealth.ui.addcard.AddCardActivity
+import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomsActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.ActiveAllergyFragment
 import com.applocum.connecttomyhealth.ui.allergyhistory.AddAllergyActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.AllergyHistoryActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.PastAllergyFragment
 import com.applocum.connecttomyhealth.ui.appointment.AppointmentFragment
+import com.applocum.connecttomyhealth.ui.booksession.AboutSpecialistFragment
+import com.applocum.connecttomyhealth.ui.booksession.AvailabilityFragment
+import com.applocum.connecttomyhealth.ui.booksession.BookSessionActivity
+import com.applocum.connecttomyhealth.ui.booksession.SessionBookActivity
 import com.applocum.connecttomyhealth.ui.clinicalrecords.ClinicalRecordsActivity
+import com.applocum.connecttomyhealth.ui.confirmbooking.ConfirmBookingActivity
 import com.applocum.connecttomyhealth.ui.familyhistory.FamilyHistoryActivity
 import com.applocum.connecttomyhealth.ui.forgotpassword.ForgotPasswordActivity
 import com.applocum.connecttomyhealth.ui.home.HomeFragment
@@ -16,13 +23,18 @@ import com.applocum.connecttomyhealth.ui.login.LoginActivity
 import com.applocum.connecttomyhealth.ui.medicalhistory.AddMedicalHistoryActivity
 import com.applocum.connecttomyhealth.ui.mydownloads.MyDownloadsActivity
 import com.applocum.connecttomyhealth.ui.notification.NotificationFragment
+import com.applocum.connecttomyhealth.ui.payment.AddCodeActivity
+import com.applocum.connecttomyhealth.ui.payment.PaymentActivity
+import com.applocum.connecttomyhealth.ui.payment.PaymentShowActivity
 import com.applocum.connecttomyhealth.ui.personaldetails.PersonalDetailsActivity
 import com.applocum.connecttomyhealth.ui.profile.ProfileFragment
 import com.applocum.connecttomyhealth.ui.profiledetails.ProfileDetailsActivity
 import com.applocum.connecttomyhealth.ui.settings.SettingActivity
 import com.applocum.connecttomyhealth.ui.signup.SignupActivity
 import com.applocum.connecttomyhealth.ui.specialists.SpecialistsActivity
+import com.applocum.connecttomyhealth.ui.splashscreen.SplashScreenActivity
 import com.applocum.connecttomyhealth.ui.verification.VerificationActivity
+import com.applocum.connecttomyhealth.ui.verificationdocument.activities.*
 import com.connectmyhealth.patient.injections.modules.RetrofitModule
 import com.connectmyhealth.patient.shareddata.interceptors.GlobalResponseInterceptor
 import dagger.Component
@@ -63,6 +75,36 @@ interface NetworkComponent {
 
     fun inject(activity:SpecialistsActivity)
 
+    fun inject(activity:BookSessionActivity)
+
+    fun inject(activity:SessionBookActivity)
+
+    fun inject(activity:AddSymptomsActivity)
+
+    fun inject(activity:AddCardActivity)
+
+    fun inject(activity:ConfirmBookingActivity)
+
+    fun inject(activity:PaymentActivity)
+
+    fun inject(activity:VerifyIdentityActivity)
+
+    fun inject(activity:ValidPassportActivity)
+
+    fun inject(activity:ValidationValidPassportActivity)
+
+    fun inject(activity:UkDrivingLicenseActivity)
+
+    fun inject(activity:ValidationValidUKDrivingLicenseActivity)
+
+    fun inject(activity:VerifiedActivity)
+
+    fun inject(activity:AddCodeActivity)
+
+    fun inject(activity:PaymentShowActivity)
+
+    fun inject(activity:SplashScreenActivity)
+
     fun inject(fragment:HomeFragment)
 
     fun inject(fragment:ProfileFragment)
@@ -70,6 +112,10 @@ interface NetworkComponent {
     fun inject(fragment:NotificationFragment)
 
     fun inject(fragment:AppointmentFragment)
+
+    fun inject(fragment:AboutSpecialistFragment)
+
+    fun inject(fragment:AvailabilityFragment)
 
     fun inject(fragment:ActiveAllergyFragment)
 

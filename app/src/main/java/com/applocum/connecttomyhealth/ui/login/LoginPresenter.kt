@@ -49,8 +49,8 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                                 Gson().fromJson(it.data, UserResponse::class.java)
                             val user=userObject.user
                             userHolder.saveUser(user.id.toString(),user.firstName,user.lastName,user.email,user.gender,user.profile.dateOfBirth,user.authToken)
-                            view.displaymessage(it.message)
                             view.senduserdata(userObject.user)
+                            view.displaymessage(it.message)
                         }
 
                         InvalidCredentials, InternalServer -> {
@@ -74,7 +74,6 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                     "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                     ")+"
         )
-        //val PASSWORD_PATTERN=Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\\\S+\$).{4,}\$")
 
         if (email.isEmpty()) {
             view.displaymessage("Please Enter Email")
@@ -88,10 +87,6 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
             view.displaymessage("Please Enter Password")
             return false
         }
-        /* if (!PASSWORD_PATTERN.matcher(password).matches()) {
-             view.displaymessage("Password Pattern Invalid")
-             return false
-         }*/
         return true
     }
 

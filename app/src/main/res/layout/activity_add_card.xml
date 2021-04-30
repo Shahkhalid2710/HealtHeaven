@@ -1,322 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".ui.addcard.AddCardActivity">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent">
-
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="8dp"
-            android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/spacing_25"
-            android:contentDescription="@string/todo"
-            android:focusable="true"
-            android:src="@drawable/ic_back" />
-
-        <TextView
-            android:id="@+id/tvAddCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/add_card"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_20" />
-    </RelativeLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/llAddCard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/spacing_16"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.addcard.AddCardActivity">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_25"
+                android:contentDescription="@string/todo"
+                android:focusable="true"
+                android:src="@drawable/ic_back" />
 
             <TextView
+                android:id="@+id/tvAddCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="@dimen/spacing_24"
+                android:layout_centerInParent="true"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="@string/add_card_details"
+                android:text="@string/add_card"
                 android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_16" />
+                android:textSize="@dimen/font_20" />
+        </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/card_number"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/etCardNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/white"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/enter_card_number"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_16"
-                    tools:ignore="LabelFor,RelativeOverlap" />
-
-                <ImageView
-                    android:id="@+id/ivSuccessCardNumber"
-                    android:layout_width="18dp"
-                    android:layout_height="14dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/spacing_25"
-                    android:layout_marginEnd="@dimen/spacing_15"
-                    android:contentDescription="@string/todo"
-                    android:focusable="true"
-                    android:src="@drawable/ic_sucess"
-                    android:visibility="gone" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:background="@color/textcolorgrey" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/name_on_card"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/etNameOnCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/white"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/enter_name"
-                    android:imeOptions="actionNext"
-                    android:inputType="textCapSentences"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_16"
-                    tools:ignore="LabelFor,RelativeOverlap" />
-
-                <ImageView
-                    android:id="@+id/ivSuccessNameonCard"
-                    android:layout_width="18dp"
-                    android:layout_height="14dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/spacing_25"
-                    android:layout_marginEnd="@dimen/spacing_15"
-                    android:contentDescription="@string/todo"
-                    android:focusable="true"
-                    android:src="@drawable/ic_sucess"
-                    android:visibility="gone" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:background="@color/textcolorgrey" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:background="@color/white"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/add_card_details"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/card_number"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etCardNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="0"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="@string/enter_card_number"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="16"
+                        android:textColor="@color/aapBlack"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_16"
+                        tools:ignore="LabelFor,RelativeOverlap" />
+
+                    <ImageView
+                        android:id="@+id/ivSuccessCardNumber"
+                        android:layout_width="18dp"
+                        android:layout_height="14dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/spacing_25"
+                        android:layout_marginEnd="@dimen/spacing_15"
+                        android:contentDescription="@string/todo"
+                        android:focusable="true"
+                        android:src="@drawable/ic_sucess"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:background="@color/textcolorgrey" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/name_on_card"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etNameOnCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="0"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="@string/enter_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapSentences"
+                        android:textColor="@color/aapBlack"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_16"
+                        tools:ignore="LabelFor,RelativeOverlap" />
+
+                    <ImageView
+                        android:id="@+id/ivSuccessNameonCard"
+                        android:layout_width="18dp"
+                        android:layout_height="14dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/spacing_25"
+                        android:layout_marginEnd="@dimen/spacing_15"
+                        android:contentDescription="@string/todo"
+                        android:focusable="true"
+                        android:src="@drawable/ic_sucess"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:background="@color/textcolorgrey" />
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    tools:ignore="UselessParent">
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="@string/expiry_date"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/font_12" />
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        tools:ignore="UselessParent">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/expiry_date"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/font_12" />
 
-                        <EditText
-                            android:id="@+id/etExpiryDate"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:autofillHints="0"
-                            android:backgroundTint="@color/white"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:hint="@string/enter_date"
-                            android:imeOptions="actionNext"
-                            android:inputType="date"
-                            android:maxLength="5"
-                            android:textColor="@color/aapBlack"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/font_16"
-                            tools:ignore="LabelFor,RelativeOverlap" />
+                            android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/ivSuccessExpiryDate"
-                            android:layout_width="18dp"
-                            android:layout_height="14dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/spacing_25"
-                            android:layout_marginEnd="@dimen/spacing_15"
-                            android:contentDescription="@string/todo"
-                            android:focusable="true"
-                            android:src="@drawable/ic_sucess"
-                            android:visibility="gone" />
-                    </RelativeLayout>
+                            <EditText
+                                android:id="@+id/etExpiryDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autofillHints="0"
+                                android:backgroundTint="@color/white"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:hint="@string/enter_date"
+                                android:imeOptions="actionNext"
+                                android:inputType="date"
+                                android:maxLength="4"
+                                android:textColor="@color/aapBlack"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/font_16"
+                                tools:ignore="LabelFor,RelativeOverlap" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/textcolorgrey" />
-                </LinearLayout>
+                            <ImageView
+                                android:id="@+id/ivSuccessExpiryDate"
+                                android:layout_width="18dp"
+                                android:layout_height="14dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/spacing_25"
+                                android:layout_marginEnd="@dimen/spacing_15"
+                                android:contentDescription="@string/todo"
+                                android:focusable="true"
+                                android:src="@drawable/ic_sucess"
+                                android:visibility="gone" />
+                        </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    tools:ignore="UselessParent">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/textcolorgrey" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="@string/cvv"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/font_12" />
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        tools:ignore="UselessParent">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/cvv"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/font_12" />
 
-                        <EditText
-                            android:id="@+id/etCVV"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:autofillHints="0"
-                            android:backgroundTint="@color/white"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:hint="@string/enter_cvv"
-                            android:imeOptions="actionNext"
-                            android:inputType="textPassword"
-                            android:maxLength="4"
-                            android:textColor="@color/aapBlack"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/font_16"
-                            tools:ignore="LabelFor,RelativeOverlap" />
+                            android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/ivCrossCVV"
-                            android:layout_width="23dp"
-                            android:layout_height="23dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/spacing_25"
-                            android:layout_marginEnd="@dimen/spacing_15"
-                            android:contentDescription="@string/todo"
-                            android:focusable="true"
-                            android:src="@drawable/ic_cross" />
-                    </RelativeLayout>
+                            <EditText
+                                android:id="@+id/etCVV"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autofillHints="0"
+                                android:backgroundTint="@color/white"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:hint="@string/enter_cvv"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:maxLength="4"
+                                android:textColor="@color/aapBlack"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/font_16"
+                                tools:ignore="LabelFor,RelativeOverlap" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/textcolorgrey" />
+                            <ImageView
+                                android:id="@+id/ivCrossCVV"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/spacing_25"
+                                android:layout_marginEnd="@dimen/spacing_15"
+                                android:contentDescription="@string/todo"
+                                android:focusable="true"
+                                android:src="@drawable/ic_cross"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/textcolorgrey" />
+                    </LinearLayout>
                 </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cbSaveCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:button="@drawable/checkbox"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/save_card_for_other_payments"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+
+                <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="168dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="148dp"
+                    android:layout_marginBottom="@dimen/spacing_40"
+                    android:background="@drawable/custom_btn"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/add"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_12" />
             </LinearLayout>
-
-            <CheckBox
-                android:id="@+id/cbSaveCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:fontFamily="@font/montserrat_semibold"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/save_card_for_other_payments"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <Button
-                android:id="@+id/btnAdd"
-                android:layout_width="168dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="148dp"
-                android:layout_marginBottom="@dimen/spacing_40"
-                android:background="@drawable/custom_btn"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/add"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+    <include layout="@layout/custom_progress"/>
+</FrameLayout>

@@ -69,7 +69,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuIte
     }
 
     override fun sendUserData(user: User) {
-        startActivity(Intent(this, BottomNavigationViewActivity::class.java))
+        startActivity(Intent(this,BottomNavigationViewActivity::class.java))
     }
 
     override fun viewProgress(isShow: Boolean) {

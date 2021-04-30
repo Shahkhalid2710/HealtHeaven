@@ -1,6 +1,7 @@
 package com.applocum.connecttomyhealth.shareddata.endpoints
 
 import android.content.SharedPreferences
+import android.media.Image
 import com.applocum.connecttomyhealth.extensions.prefString
 
 class UserHolder(pref: SharedPreferences) {
@@ -24,6 +25,28 @@ class UserHolder(pref: SharedPreferences) {
 
     var userToken by pref.prefString()
         private set
+
+
+    var doctorId by pref.prefString()
+        private set
+
+    var doctorFirstname by pref.prefString()
+       private set
+
+    var doctorLastname by pref.prefString()
+        private set
+
+    var doctorDesignation by pref.prefString()
+        private set
+
+    var doctorBio by pref.prefString()
+        private set
+
+    var doctorImage by pref.prefString()
+        private set
+
+
+
 
     fun saveUser(
         id: String,

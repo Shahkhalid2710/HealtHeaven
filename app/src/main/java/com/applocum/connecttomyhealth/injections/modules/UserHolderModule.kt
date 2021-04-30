@@ -10,7 +10,6 @@ import javax.inject.Singleton
 
 @Module
 class UserHolderModule {
-
     @Provides
     @Singleton
     fun provideTokenHolder(): UserHolder =

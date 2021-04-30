@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
+        android:id="@+id/llSessionbook"
         tools:context=".ui.booksession.SessionBookActivity">
 
         <RelativeLayout
@@ -91,14 +92,31 @@
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_14" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAvailableTime"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_5"
-            android:layout_marginEnd="@dimen/spacing_24" />
+            android:layout_height="wrap_content">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAvailableTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_5"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:layout_marginBottom="40dp" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:visibility="gone"
+                android:focusableInTouchMode="true"
+                android:indeterminateTint="@color/green"
+                android:progressTint="@color/green" />
+        </FrameLayout>
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchMultiSessions"
             android:layout_width="match_parent"

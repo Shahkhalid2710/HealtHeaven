@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.ui.specialists
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,7 @@ import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.raw_doctor_xml.view.*
 
-class SpecialistsAdapter(context: Context, list: ArrayList<Specialist>) :
-    RecyclerView.Adapter<SpecialistsAdapter.SpecialistHolder>() {
+class SpecialistsAdapter(context: Context,list: ArrayList<Specialist>,private val onitemclick:ItemClickListner) : RecyclerView.Adapter<SpecialistsAdapter.SpecialistHolder>() {
     private var mContext = context
     private var mList = list
 
@@ -36,14 +36,16 @@ class SpecialistsAdapter(context: Context, list: ArrayList<Specialist>) :
         holder.itemView.tvDes.text = specialist.bio
 
         holder.itemView.btnViewProfile.setOnClickListener {
-            val intent = Intent(mContext, BookSessionActivity::class.java)
-            mContext.startActivity(intent)
+            onitemclick.onItemClick(specialist,position)
         }
         holder.itemView.btnBookSession.setOnClickListener {
-            val intent = Intent(mContext, BookSessionActivity::class.java)
-            mContext.startActivity(intent)
+           onitemclick.onItemClick(specialist, position)
         }
 
         Glide.with(mContext).load(specialist.image).into(holder.itemView.ivDoctor)
+    }
+    interface ItemClickListner
+    {
+        fun onItemClick(specialist: Specialist,position: Int)
     }
 }

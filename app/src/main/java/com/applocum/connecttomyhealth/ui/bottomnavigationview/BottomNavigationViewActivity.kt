@@ -19,6 +19,8 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
     @Inject
     lateinit var userHolder: UserHolder
 
+    override fun getLayoutResourceId(): Int=R.layout.activity_bottomnavigationview
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,7 +31,6 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
 
     }
 
-    override fun getLayoutResourceId(): Int=R.layout.activity_bottomnavigationview
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id=item.itemId

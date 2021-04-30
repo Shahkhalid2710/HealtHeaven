@@ -1,7 +1,9 @@
 package com.applocum.connecttomyhealth.ui.signup
 
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.AlreadyExist
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.MissingParameter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -21,6 +23,8 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
     private val disposables = CompositeDisposable()
     lateinit var view: View
     private var devicetype = "android"
+    private var corporateId="66"
+    private var playerId="temp"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -53,6 +57,8 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                 .addFormDataPart("user[password]", password)
                 .addFormDataPart("profile[date_of_birth]", date_of_birth)
                 .addFormDataPart("device_detail[device_type]", devicetype)
+                .addFormDataPart("user[corporate_organization_id]",corporateId)
+                .addFormDataPart("device_detail[player_id]", playerId)
                 .build()
 
             api.signUp(requestBody)
@@ -61,7 +67,7 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
-                            val userObject = Gson().fromJson(it.data, UserResponse::class.java)
+                            val userObject = Gson().fromJson(it.data,UserResponse::class.java)
                             val user = userObject.user
                             user.profile.dateOfBirth.let { it1 ->
                                 userHolder.saveUser(
@@ -78,7 +84,14 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                             println("MessageSignup:: ${it.message}")
                             view.displaymessage(it.message)
                         }
-                        InvalidCredentials, InternalServer -> {
+                        InvalidCredentials,InternalServer -> {
+                            view.displaymessage(it.message)
+                        }
+                        AlreadyExist -> {
+                            view.displaymessage(it.message)
+                        }
+                        MissingParameter->
+                        {
                             view.displaymessage(it.message)
                         }
                     }
@@ -89,7 +102,7 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
         }
     }
 
-    fun validateSignup(
+  private fun validateSignup(
         firstname: String,
         lastname: String,
         email: String,
@@ -108,8 +121,6 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                     "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
                     ")+"
         )
-
-       // val PASSWORD_PATTERN=Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\\\S+\$).{4,}\$")
 
         if (firstname.isEmpty()) {
             view.displaymessage("Please Enter First name")

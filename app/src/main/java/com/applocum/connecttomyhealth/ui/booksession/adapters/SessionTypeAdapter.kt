@@ -10,10 +10,10 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import kotlinx.android.synthetic.main.raw_session_booking.view.*
 
-class SessionTypeAdapter(context: Context,list:ArrayList<SessionType>) :RecyclerView.Adapter<SessionTypeAdapter.SessionTypeHolder>(){
+class SessionTypeAdapter(context: Context,list:ArrayList<SessionType>,private var itemClickListner: ItemClickListner) :RecyclerView.Adapter<SessionTypeAdapter.SessionTypeHolder>(){
     var mContext=context
     var mList=list
-    private var selectedItem:Int=-1
+    private var selectedItem:Int=0
 
 
     inner class SessionTypeHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
@@ -32,9 +32,9 @@ class SessionTypeAdapter(context: Context,list:ArrayList<SessionType>) :Recycler
 
         holder.itemView.tvName.text=sessionType.sName
         holder.itemView.setOnClickListener {
-            selectedItem =position
+            itemClickListner.onItemClick(sessionType, position)
+            selectedItem=position
             notifyDataSetChanged()
-
         }
         if (selectedItem == holder.adapterPosition) {
             holder.itemView.rl.setBackgroundResource(R.drawable.custom_btn)
@@ -44,5 +44,9 @@ class SessionTypeAdapter(context: Context,list:ArrayList<SessionType>) :Recycler
             holder.itemView.rl.setBackgroundResource(R.drawable.default_button)
             holder.itemView.tvName.setTextColor(Color.parseColor("#008976"))
         }
+    }
+    interface ItemClickListner
+    {
+        fun onItemClick(sessionType: SessionType, position: Int)
     }
 }

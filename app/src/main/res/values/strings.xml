@@ -286,7 +286,6 @@
     <string name="don_t_have_a_code">Don’t have a code?</string>
     <string name="add_payment_method">Add payment method</string>
     <string name="confirm_session_booking">Confirm Session Booking</string>
-    <string name="add_code">Add Code</string>
     <string name="add_your_employee_insurance_or_promo_membership_code">Add your employee, insurance or promo membership code</string>
     <string name="enter_code">Enter Code</string>
     <string name="dentist_dt130">Dentist - DT130</string>
@@ -344,4 +343,17 @@
     <string name="enter_new_password">Enter New Password</string>
     <string name="dr_paullina">Dr.Paullina</string>
     <string name="gayoso">Gayoso</string>
+    <string name="memberships">Memberships</string>
+    <string name="add_code">Add Code</string>
+    <string name="dentist">Dentist</string>
+    <string name="desh">-</string>
+    <string name="dt130">DT130</string>
+    <string name="_10_free_appointments_available">10 Free Appointments available</string>
+    <string name="other_payment_methods">Other Payment Methods</string>
+    <string name="add_new_code">Add New Code</string>
+    <string name="icici_bank_credit_card">ICICI Bank Credit Card</string>
+    <string name="_5698">****5698</string>
+    <string name="john_martin">John Martin</string>
+    <string name="expires_18_10">Expires 18/10</string>
+    <string name="save">Save</string>
 </resources>
