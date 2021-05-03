@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.signup.models
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class User (
 
@@ -46,5 +47,4 @@ data class User (
 	@SerializedName("is_reset_password_locked") val isResetPasswordLocked : Boolean,
 	@SerializedName("all_roles") val allRoles : List<String>,
 	@SerializedName("child") val child : List<String>,
-	@SerializedName("corporate_session") val corporateSession : String
-)
+):Serializable

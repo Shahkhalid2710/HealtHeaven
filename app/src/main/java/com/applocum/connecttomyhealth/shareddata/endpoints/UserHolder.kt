@@ -1,7 +1,6 @@
 package com.applocum.connecttomyhealth.shareddata.endpoints
 
 import android.content.SharedPreferences
-import android.media.Image
 import com.applocum.connecttomyhealth.extensions.prefString
 
 class UserHolder(pref: SharedPreferences) {

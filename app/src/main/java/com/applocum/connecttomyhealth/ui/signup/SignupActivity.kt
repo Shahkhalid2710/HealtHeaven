@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.DatePicker
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
@@ -68,8 +69,14 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuIte
         snackbar.show()
     }
 
+    override fun displaySuccessMessage(message: String?) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
+
     override fun sendUserData(user: User) {
-        startActivity(Intent(this,BottomNavigationViewActivity::class.java))
+        val intent=Intent(this,BottomNavigationViewActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun viewProgress(isShow: Boolean) {

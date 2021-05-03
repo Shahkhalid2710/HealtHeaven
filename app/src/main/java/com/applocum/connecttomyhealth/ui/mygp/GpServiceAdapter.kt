@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.raw_gp_service.view.*
 import kotlinx.android.synthetic.main.raw_gp_service.view.tvArea
 
 
-class GpServiceAdapter(context: Context, list: ArrayList<GpService>) :
+class GpServiceAdapter(context: Context, list: ArrayList<GpService>,private val itemclick:ItemClickListner) :
     RecyclerView.Adapter<GpServiceAdapter.GpServiceHolder>() {
     private var mContext = context
     private var mList = list
@@ -32,30 +32,15 @@ class GpServiceAdapter(context: Context, list: ArrayList<GpService>) :
 
     override fun onBindViewHolder(holder: GpServiceHolder, position: Int) {
         val gpService = mList[position]
-        holder.itemView.tvName.text = gpService.gName
-        holder.itemView.tvArea.text = gpService.gArea
-        holder.itemView.tvCity.text = gpService.gCity
+        holder.itemView.tvName.text = gpService.practice_name
+        holder.itemView.tvArea.text = gpService.address
+        holder.itemView.tvCity.text = gpService.city
 
         holder.itemView.setOnClickListener {
-            val showDialogView=LayoutInflater.from(mContext).inflate(R.layout.custom_gp_service_dialog,null,false)
-            val dialog = AlertDialog.Builder(mContext).create()
-            dialog.setView(showDialogView)
-            dialog.setCanceledOnTouchOutside(false)
-
-            showDialogView.btnSubmit.setOnClickListener {
-                dialog.dismiss()
-                val intent= Intent(mContext,GpServiceActivity::class.java)
-                mContext.startActivity(intent)
-            }
-            showDialogView.btnCancel.setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.show()
+            itemclick.onItemClick(gpService, position)
         }
     }
-
-    fun filterList(filteredList: ArrayList<GpService>) {
-        mList = filteredList
-        notifyDataSetChanged()
+    interface ItemClickListner{
+        fun onItemClick(gpService: GpService,position: Int)
     }
 }

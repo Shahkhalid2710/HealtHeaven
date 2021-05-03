@@ -1,14 +1,16 @@
-package com.applocum.connecttomyhealth.ui.payment
+package com.applocum.connecttomyhealth.ui.payment.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
+import kotlinx.android.synthetic.main.raw_other_payment.view.*
 
-class PaymentAdapter(context: Context,list:ArrayList<Card>):RecyclerView.Adapter<PaymentAdapter.PaymentHolder>() {
+class PaymentCardAdapter(context: Context, list:ArrayList<Card>):RecyclerView.Adapter<PaymentCardAdapter.PaymentHolder>() {
     var mContext=context
     var mList=list
 
@@ -25,5 +27,10 @@ class PaymentAdapter(context: Context,list:ArrayList<Card>):RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: PaymentHolder, position: Int) {
         val card=mList[position]
+        val expires="Expires"
+        holder.itemView.tvCardName.text=card.card_type
+        holder.itemView.tvCardNumber.text=card.card_number
+        holder.itemView.tvHolderName.text=card.card_holder_name
+        holder.itemView.tvDate.text = expires+" "+card.expiry_date.toString()
     }
 }

@@ -1,6 +1,5 @@
 package com.applocum.connecttomyhealth.ui.addcard
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -13,20 +12,19 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
-import com.applocum.connecttomyhealth.ui.payment.PaymentShowActivity
+import com.applocum.connecttomyhealth.ui.payment.PaymentMethodActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_card.*
-import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import javax.inject.Inject
 
-
-class AddCardActivity : BaseActivity(), TextWatcher,AddCardPresenter.View {
+class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
     var count = 0
 
     @Inject
     lateinit var presenter: AddCardPresenter
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_add_card
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,10 +34,10 @@ class AddCardActivity : BaseActivity(), TextWatcher,AddCardPresenter.View {
         ivBack.setOnClickListener { finish() }
         etCardNumber.addTextChangedListener(this)
 
-        etNameOnCard.addTextChangedListener {
-            if (etNameOnCard.text.length > 10) ivSuccessNameonCard.visibility =
+      /*  etHolderName.addTextChangedListener {
+            if (etHolderName.text.length > 5) ivSuccessNameonCard.visibility =
                 View.VISIBLE else ivSuccessNameonCard.visibility = View.GONE
-        }
+        }*/
 
         etExpiryDate.addTextChangedListener {
             if (etExpiryDate.text.length == 4) ivSuccessExpiryDate.visibility =
@@ -47,7 +45,8 @@ class AddCardActivity : BaseActivity(), TextWatcher,AddCardPresenter.View {
         }
 
         etCVV.addTextChangedListener {
-            if (etCVV.text.length >= 1) ivCrossCVV.visibility = View.VISIBLE else ivCrossCVV.visibility = View.GONE
+            if (etCVV.text.length >= 1) ivCrossCVV.visibility =
+                View.VISIBLE else ivCrossCVV.visibility = View.GONE
 
             etCardNumber.filters = arrayOf(InputFilter.LengthFilter(20))
             ivCrossCVV.setOnClickListener {
@@ -56,39 +55,42 @@ class AddCardActivity : BaseActivity(), TextWatcher,AddCardPresenter.View {
             }
         }
 
-        if (etCardNumber.text.toString().contains("\\s"))
-        {
-            etCardNumber.text.toString().replace("\\s","")
+        if (etCardNumber.text.toString().contains("\\s")) {
+            etCardNumber.text.toString().replace("\\s", "")
         }
+
         btnAdd.setOnClickListener {
-            presenter.addCard(etCardNumber.text.toString(),etNameOnCard.text.toString(),etExpiryDate.text.toString(),etCVV.text.toString())
+            presenter.addCard(
+                etCardNumber.text.toString(),
+                etHolderName.text.toString(),
+                etExpiryDate.text.toString(),
+                etCVV.text.toString()
+            )
         }
 
     }
 
-        override fun getLayoutResourceId(): Int = R.layout.activity_add_card
+    override fun afterTextChanged(s: Editable?) {
+        /* if (count == 4) {
+             var str = s.toString()
+             str += " "
+             etCardNumber.setText(str)
+             etCardNumber.setSelection(str.length)*/
+        count = 0
+        // }
+    }
 
-        override fun afterTextChanged(s: Editable?) {
-           /* if (count == 4) {
-                var str = s.toString()
-                str += " "
-                etCardNumber.setText(str)
-                etCardNumber.setSelection(str.length)*/
-                count = 0
-           // }
-        }
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
 
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    override fun onTextChanged(s: CharSequence, start: Int, before: Int, a: Int) {
+        count++
+        if (s.length == 16) {
+            ivSuccessCardNumber.visibility = View.VISIBLE
+        } else {
+            ivSuccessCardNumber.visibility = View.GONE
         }
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, a: Int) {
-            count++
-            if (s.length == 16) {
-                ivSuccessCardNumber.visibility = View.VISIBLE
-            } else {
-                ivSuccessCardNumber.visibility = View.GONE
-            }
-        }
+    }
 
     override fun displaymessage(message: String?) {
         val snackbar = Snackbar.make(llAddCard, message.toString(), Snackbar.LENGTH_LONG)
@@ -98,11 +100,12 @@ class AddCardActivity : BaseActivity(), TextWatcher,AddCardPresenter.View {
     }
 
     override fun addcard(card: Card) {
-        startActivity(Intent(this,PaymentShowActivity::class.java))
+        startActivity(Intent(this, PaymentMethodActivity::class.java))
+        finish()
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun showcard(list: ArrayList<Card>) {

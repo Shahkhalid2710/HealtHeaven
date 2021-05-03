@@ -1,54 +1,50 @@
-package com.applocum.connecttomyhealth.ui.specialists
+package com.applocum.connecttomyhealth.ui.mygp
 
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
-import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
-import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
+import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-
-class SpecilistPresenter@Inject constructor(private val api:AppEndPoint)  {
-    private val disposables=CompositeDisposable()
-    lateinit var view:View
-
-    @Inject
-    lateinit var userHolder:UserHolder
+class GpservicePresenter@Inject constructor(private val api:AppEndPoint) {
+    public var disposables=CompositeDisposable()
+    lateinit var view: View
 
     fun injectview(view: View)
     {
         this.view=view
     }
 
-    fun getlist()
+    fun getgpList(search:String)
     {
         view.viewProgress(true)
-        api.getdoctors(userHolder.userToken!!,66)
+        api.getGpList(search)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
+            .subscribeBy(onNext={
                 when (it.status) {
                     Success -> {
                         view.viewProgress(false)
-                        view.getdoctorlist(it.data)
+                        view.getGpList(it.data)
                     }
-                    InvalidCredentials, InternalServer -> {
-                        view.displaymessage(it.message)
+                    InvalidCredentials,InternalServer -> {
+                        view.displayMessage(it.message)
                     }
                 }
-            }, onError = {
+            },onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
-            }).let { disposables.add(it) }
+            }).let { disposables.addAll(it) }
     }
+
 
     interface View
     {
-        fun displaymessage(message:String)
-        fun getdoctorlist(list:ArrayList<Specialist>)
+        fun displayMessage(message:String)
+        fun getGpList(list:ArrayList<GpService>)
         fun viewProgress(isShow: Boolean)
     }
 }

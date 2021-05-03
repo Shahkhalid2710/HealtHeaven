@@ -47,7 +47,10 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
             presenter.updatProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString())
             finish()
         }
+
         editTextClicks()
+        dataUpdateFocus()
+
     }
 
     override fun showProfile(patient: Patient) {
@@ -117,11 +120,28 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         myMonth = month
         myDay = dayOfMonth
         val date = "" + myDay + "/" + (myMonth + 1) + "/" + myYear
-        /*var spf = SimpleDateFormat("dd/MM/yy")
-        val newDate = spf.parse(date)
-        spf = SimpleDateFormat("dd/MM/yyyy")
-        val newDateString = spf.format(newDate)
-        println(newDateString)*/
         etDOB.setText(date)
+    }
+
+    fun dataUpdateFocus()
+    {
+        tvFirstNameEdit.setOnClickListener {
+            etFirstName.isFocusableInTouchMode=true
+            etFirstName.isFocusable=true
+        }
+
+        tvLastNameEdit.setOnClickListener {
+            etLastName.isFocusableInTouchMode=true
+            etLastName.isFocusable=true
+        }
+
+        tvEmailEdit.setOnClickListener {
+            etEmail.isFocusableInTouchMode=true
+            etEmail.isFocusable=true
+        }
+        tvPhoneNoEdit.setOnClickListener {
+            etPhoneNo.isFocusableInTouchMode=true
+            etPhoneNo.isFocusable=true
+        }
     }
 }

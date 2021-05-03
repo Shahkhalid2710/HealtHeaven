@@ -1,7 +1,6 @@
 package com.applocum.connecttomyhealth.ui.addcard.models
 import com.google.gson.annotations.SerializedName
 
-
 data class Common (
 
 	@SerializedName("delivery") val delivery : Int,

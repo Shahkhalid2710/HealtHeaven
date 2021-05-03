@@ -7,28 +7,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.home.adapters.CategoryAdapter
 import com.applocum.connecttomyhealth.ui.home.adapters.DoctorAdapter
 import com.applocum.connecttomyhealth.ui.home.model.Category
 import com.applocum.connecttomyhealth.ui.home.model.Doctor
+import com.applocum.connecttomyhealth.ui.profiledetails.ProfileDetailsPresenter
+import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.specialists.SpecialistsActivity
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import javax.inject.Inject
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),ProfileDetailsPresenter.View {
      private var mListCategory:ArrayList<Category> = ArrayList()
      private var mListDoctor:ArrayList<Doctor> = ArrayList()
 
     @Inject
     lateinit var userHolder: UserHolder
 
+    @Inject
+    lateinit var presenter:ProfileDetailsPresenter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val v= inflater.inflate(R.layout.fragment_home, container, false)
+
+        MyApplication.getAppContext().component.inject(this)
+        presenter.injectview(this)
+
 
        val category1=Category(R.drawable.ic_heart,"Heart")
        val category2=Category(R.drawable.ic_brain,"Brain")
@@ -70,7 +81,18 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireActivity(),SpecialistsActivity::class.java))
         }
 
+        presenter.showProfile()
         return v
+    }
+
+    override fun showProfile(patient: Patient) {
+        tvName.text=patient.first_name
+    }
+
+    override fun displaymessage(message: String) {
+    }
+
+    override fun viewProgress(isShow: Boolean) {
     }
 
 }

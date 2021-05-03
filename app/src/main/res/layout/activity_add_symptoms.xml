@@ -81,7 +81,6 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="top|start"
                 android:hint="@string/type_here"
-                android:imeOptions="actionDone"
                 android:inputType="textMultiLine"
                 android:lines="7"
                 android:maxLines="10"
@@ -145,7 +144,6 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:text="@string/i_allow_alldaydr_to_access_my_geo_location_this_will_only_be_used_in_an_emergency"
                 android:textColor="@color/aapBlack"
                 android:textSize="@dimen/font_12" />
 
@@ -160,7 +158,6 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:text="@string/i_give_consult_to_alldaydr_to_share_my_records_with_my_nhs_gp"
                 android:textColor="@color/aapBlack"
                 android:textSize="@dimen/font_12" />
 

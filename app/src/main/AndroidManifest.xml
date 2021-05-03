@@ -20,8 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.payment.PaymentShowActivity"></activity>
-        <activity android:name=".ui.walkthrough.WalkThroughActivity"></activity>
+        <activity android:name=".ui.payment.MemberShipActivity"></activity>
+        <activity android:name=".ui.payment.PaymentMethodActivity" />
+        <activity android:name=".ui.payment.PaymentShowActivity" />
+        <activity android:name=".ui.walkthrough.WalkThroughActivity" />
         <activity android:name=".ui.exemptions.UploadCertificateActivity" />
 
         <meta-data
@@ -54,7 +56,7 @@
         <activity android:name=".ui.addcard.AddCardActivity" />
         <activity android:name=".ui.confirmbooking.ConfirmBookingActivity" />
         <activity android:name=".ui.sessiondetails.SessionDetailsActivity" />
-        <activity android:name=".ui.booksession.BookSessionActivity"></activity>
+        <activity android:name=".ui.booksession.BookSessionActivity" />
         <activity android:name=".ui.medicalhistory.AddMedicalHistoryActivity" />
         <activity android:name=".ui.medicalhistory.MedicalHistoryActivity" />
         <activity android:name=".ui.BaseActivity" />
@@ -77,12 +79,14 @@
         <activity android:name=".ui.personaldetails.PersonalDetailsActivity" />
         <activity
             android:name=".ui.bottomnavigationview.BottomNavigationViewActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".ui.signup.SignupActivity"></activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.signup.SignupActivity" />
         <activity android:name=".ui.createnewpassword.CreateNewPasswordActivity" />
         <activity android:name=".ui.verification.VerificationActivity" />
         <activity android:name=".ui.forgotpassword.ForgotPasswordActivity" />
-        <activity android:name=".ui.login.LoginActivity"></activity>
+        <activity android:name=".ui.login.LoginActivity" >
+
+        </activity>
     </application>
 
 </manifest>

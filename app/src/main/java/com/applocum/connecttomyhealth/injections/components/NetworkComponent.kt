@@ -2,7 +2,6 @@ package com.applocum.connecttomyhealth.injections.components
 
 import com.applocum.connecttomyhealth.injections.modules.UserHolderModule
 import com.applocum.connecttomyhealth.ui.addcard.AddCardActivity
-import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomsActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.ActiveAllergyFragment
 import com.applocum.connecttomyhealth.ui.allergyhistory.AddAllergyActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.AllergyHistoryActivity
@@ -22,9 +21,13 @@ import com.applocum.connecttomyhealth.ui.investigation.InvestigationActivity
 import com.applocum.connecttomyhealth.ui.login.LoginActivity
 import com.applocum.connecttomyhealth.ui.medicalhistory.AddMedicalHistoryActivity
 import com.applocum.connecttomyhealth.ui.mydownloads.MyDownloadsActivity
+import com.applocum.connecttomyhealth.ui.mygp.AddGPServiceActivity
+import com.applocum.connecttomyhealth.ui.mygp.GpServiceActivity
+import com.applocum.connecttomyhealth.ui.mygp.MyGPActivity
 import com.applocum.connecttomyhealth.ui.notification.NotificationFragment
 import com.applocum.connecttomyhealth.ui.payment.AddCodeActivity
 import com.applocum.connecttomyhealth.ui.payment.PaymentActivity
+import com.applocum.connecttomyhealth.ui.payment.PaymentMethodActivity
 import com.applocum.connecttomyhealth.ui.payment.PaymentShowActivity
 import com.applocum.connecttomyhealth.ui.personaldetails.PersonalDetailsActivity
 import com.applocum.connecttomyhealth.ui.profile.ProfileFragment
@@ -79,8 +82,6 @@ interface NetworkComponent {
 
     fun inject(activity:SessionBookActivity)
 
-    fun inject(activity:AddSymptomsActivity)
-
     fun inject(activity:AddCardActivity)
 
     fun inject(activity:ConfirmBookingActivity)
@@ -104,6 +105,14 @@ interface NetworkComponent {
     fun inject(activity:PaymentShowActivity)
 
     fun inject(activity:SplashScreenActivity)
+
+    fun inject(activity:GpServiceActivity)
+
+    fun inject(activity:AddGPServiceActivity)
+
+    fun inject(activity:MyGPActivity)
+
+    fun inject(activity:PaymentMethodActivity)
 
     fun inject(fragment:HomeFragment)
 

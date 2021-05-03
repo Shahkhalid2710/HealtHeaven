@@ -18,8 +18,6 @@ import javax.inject.Inject
 class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
     private val disposables=CompositeDisposable()
     lateinit var view: View
-    private var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0aW1lc3RhbXAiOiIyMDIxLTA0LTMwVDA1OjQxOjU2LjkwMiswMDowMCIsImVtYWlsIjoic2hhaGtoYWxpZHNzQHlvcG1haWwuY29tIn0.trzdPcdFfyUbDN1LPnKVzcVDifb_KLByGlbLotB0w7o"
-    private var id=3751
     @Inject
     lateinit var userHolder: UserHolder
 
@@ -31,7 +29,7 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
     fun showProfile()
     {
         view.viewProgress(true)
-        api.showProfile(token,id)
+        api.showProfile(userHolder.userToken,userHolder.userid)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
                 view.viewProgress(false)
@@ -63,7 +61,7 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
             .addFormDataPart("patient[date_of_birth]",dob)
             .build()
 
-        api.updateProfile(token,id,requestBody)
+        api.updateProfile(userHolder.userToken,userHolder.userid,requestBody)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext={
                 when (it.status) {

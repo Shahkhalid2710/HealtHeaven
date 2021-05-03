@@ -23,9 +23,6 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View {
             startActivity(Intent(this,VerifyIdentityActivity::class.java))
         }
 
-
-
-
     }
 
     override fun displaymessage(message: String?) {}

@@ -14,12 +14,12 @@
         tools:ignore="UselessParent">
 
         <TextView
-            android:id="@+id/tvNoMedicalHistory"
+            android:id="@+id/tvNoSavedCardsFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
-            android:text="@string/no_medical_history"
+            android:text="@string/no_saved_cards_found"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_18" />
 
@@ -29,23 +29,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="@dimen/spacing_24"
+            android:gravity="center"
             android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginStart="@dimen/spacing_24"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/to_add_medical_records_tap_on_button"
+            android:text="@string/you_have_not_added_any_saved_cards_yet_to_add_tap_on_button"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_14" />
 
         <Button
-            android:id="@+id/btnAddMedicalHistory"
+            android:id="@+id/btnAddCard"
             android:layout_width="168dp"
-            android:layout_height="36dp"
+            android:layout_height="34dp"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
             android:textAllCaps="false"
             android:background="@drawable/custom_btn"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/add_medical_history"
+            android:text="@string/add_card"
             android:textColor="@color/white"
             android:textSize="@dimen/font_12" />
     </LinearLayout>

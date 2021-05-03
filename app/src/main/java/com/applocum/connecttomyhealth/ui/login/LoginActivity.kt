@@ -3,6 +3,7 @@ package com.applocum.connecttomyhealth.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
@@ -50,9 +51,14 @@ class LoginActivity : BaseActivity(), LoginPresenter.View {
         snackbar.show()
     }
 
+    override fun displaySuccessMessage(message: String?) {
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
+    }
+
     override fun senduserdata(user: User) {
         val intent = Intent(this,BottomNavigationViewActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun viewProgress(isShow: Boolean) {

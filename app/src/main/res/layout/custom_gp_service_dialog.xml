@@ -16,7 +16,7 @@
         android:textColor="@color/aapBlack"
         android:textSize="@dimen/font_16" />
     <TextView
-        android:id="@+id/tvArea"
+        android:id="@+id/tvGpName"
         android:layout_width="wrap_content"
         android:layout_height="15dp"
         android:layout_marginTop="8dp"
@@ -26,8 +26,20 @@
         android:textColor="@color/aapBlack"
         android:textSize="@dimen/font_12" />
     <TextView
-        android:layout_width="143dp"
-        android:layout_height="26dp"
+        android:id="@+id/tvGpArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/lido_m_c_st_saviours_road_st_saviours_jersey"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/font_10" />
+    <TextView
+        android:id="@+id/tvGpCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/montserrat_medium"

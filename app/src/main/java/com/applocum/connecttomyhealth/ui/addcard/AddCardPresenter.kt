@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.ui.addcard
 
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.MissingParameter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -26,16 +27,16 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
         this.view=view
     }
 
-    fun addCard(cardnumber: String,holdername:String,expirydate:String,cvv: String)
+    fun addCard(cardNumber:String,holderName:String,expiryDate:String,cvv: String)
     {
-        if (validateCard(cardnumber,holdername,expirydate,cvv))
+        if (validateCard(cardNumber,holderName,expiryDate,cvv))
         {
             view.viewProgress(true)
             val requestBody:RequestBody=MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("card[cardNumber]",cardnumber)
-                .addFormDataPart("card[cardHolderName]",holdername)
-                .addFormDataPart("card[expiryDate]",expirydate)
+                .addFormDataPart("card[cardNumber]",cardNumber)
+                .addFormDataPart("card[cardHolderName]",holderName)
+                .addFormDataPart("card[expiryDate]",expiryDate)
                 .addFormDataPart("card[securityCode]",cvv)
                 .build()
 
@@ -45,12 +46,11 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
-                            val cardobject = Gson().fromJson(it.data, Card::class.java)
+                            val cardobject = Gson().fromJson(it.data,Card::class.java)
                             view.addcard(cardobject)
-                            println("MessageSignup:: ${it.message}")
                             view.displaymessage(it.message)
                         }
-                        InvalidCredentials, InternalServer -> {
+                        InvalidCredentials, InternalServer, MissingParameter -> {
                             view.displaymessage(it.message)
                         }
                     }
@@ -61,11 +61,13 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
         }
     }
 
-    fun showCardDetails()
+    fun showSavedCards()
     {
+        view.viewProgress(true)
         api.showCard(userHolder.userToken!!)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext={
+                view.viewProgress(false)
                 when(it.status)
                 {
                     Success->{
@@ -75,8 +77,8 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
                         view.displaymessage(it.message)
                     }
                 }
-
             },onError = {
+                view.viewProgress(false)
                 it.printStackTrace()
             }).let { disposables.addAll(it) }
     }
@@ -89,18 +91,18 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
         }
         if (cardnumber.length!=16)
         {
-            view.displaymessage("Minimum 16 characters allowed")
+            view.displaymessage("Minimum 16 characters allowed in card number")
             return false
         }
         if (cardholder.isEmpty()) {
             view.displaymessage("Please enter name")
             return false
         }
-        if (cardholder.length!=10)
+       /* if (cardholder.length>5)
         {
-            view.displaymessage("Minimum 10 characters allowed")
+            view.displaymessage("Minimum 5 characters allowed")
             return false
-        }
+        }*/
         if (date.isEmpty()) {
             view.displaymessage("Please enter date")
             return false

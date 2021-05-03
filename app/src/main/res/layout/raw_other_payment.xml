@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="@dimen/spacing_10"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -29,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/checkbox"
-                    android:checked="true"
+                    android:checked="false"
                     android:fontFamily="@font/montserrat_semibold"
                     android:padding="2dp"
                     android:textColor="@color/grey"
@@ -46,7 +47,7 @@
                     android:textSize="@dimen/font_14" />
 
                 <TextView
-                    android:id="@+id/tvcardnumber"
+                    android:id="@+id/tvCardNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"

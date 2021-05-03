@@ -135,7 +135,7 @@
                     android:orientation="horizontal">
 
                     <EditText
-                        android:id="@+id/etNameOnCard"
+                        android:id="@+id/etHolderName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autofillHints="0"
@@ -148,7 +148,6 @@
                         android:textColorHint="@color/grey"
                         android:textSize="@dimen/font_16"
                         tools:ignore="LabelFor,RelativeOverlap" />
-
                     <ImageView
                         android:id="@+id/ivSuccessNameonCard"
                         android:layout_width="18dp"

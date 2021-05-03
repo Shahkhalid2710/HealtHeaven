@@ -34,7 +34,6 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
     private var sType=""
     private var sSlot=""
     private var seleteddate = ""
-    private var doctorid=""
 
     @Inject
     lateinit var presenter: BookSessionPresenter

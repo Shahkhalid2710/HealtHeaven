@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="@string/karolina"
+                android:text=""
                 android:textColor="@color/green"
                 android:textSize="@dimen/font_22"
                 tools:ignore="RelativeOverlap" />
@@ -46,7 +46,7 @@
                 android:layout_height="31dp"
                 android:layout_alignParentEnd="true"
                 android:contentDescription="@string/todo"
-                android:src="@drawable/profile_image" />
+                android:src="@drawable/drpaulina" />
         </RelativeLayout>
 
         <FrameLayout

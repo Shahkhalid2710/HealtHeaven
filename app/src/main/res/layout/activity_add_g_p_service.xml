@@ -40,8 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,11 +91,29 @@
                 </RelativeLayout>
             </RelativeLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAddGp"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_24" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_24">
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:indeterminateTint="@color/green"
+                    android:progressTint="@color/green"
+                    android:visibility="gone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAddGp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_24" />
+            </FrameLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -45,12 +45,11 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
-                            val userObject: UserResponse =
-                                Gson().fromJson(it.data, UserResponse::class.java)
+                            val userObject: UserResponse = Gson().fromJson(it.data, UserResponse::class.java)
                             val user=userObject.user
                             userHolder.saveUser(user.id.toString(),user.firstName,user.lastName,user.email,user.gender,user.profile.dateOfBirth,user.authToken)
                             view.senduserdata(userObject.user)
-                            view.displaymessage(it.message)
+                            view.displaySuccessMessage(it.message)
                         }
 
                         InvalidCredentials, InternalServer -> {
@@ -92,9 +91,8 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
 
     interface View {
         fun displaymessage(message: String?)
-
-        fun senduserdata(user: User)
-
+        fun displaySuccessMessage(message: String?)
+        fun senduserdata(user:User)
         fun viewProgress(isShow: Boolean)
     }
 }

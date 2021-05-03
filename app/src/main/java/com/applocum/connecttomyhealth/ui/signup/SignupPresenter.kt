@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.signup
 
+import android.util.Log
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.AlreadyExist
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
@@ -170,9 +171,8 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
 
     interface View {
         fun displaymessage(message: String?)
-
-        fun sendUserData(user: User)
-
+        fun displaySuccessMessage(message: String?)
+        fun sendUserData(user:User)
         fun viewProgress(isShow: Boolean)
     }
 }

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,26 +52,12 @@
             android:layout_gravity="bottom"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnGetStarted"
-                android:layout_width="138dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="60dp"
-                android:background="@drawable/custom_btn"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/get_started"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_12"
-                android:visibility="gone" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="33dp"
                 android:layout_marginEnd="33dp"
-                android:layout_marginBottom="59dp"
+                android:layout_marginBottom="60dp"
                 tools:ignore="UselessParent">
 
                 <com.google.android.material.tabs.TabLayout
@@ -85,39 +71,78 @@
                     app:tabGravity="start"
                     app:tabIndicatorHeight="0dp" />
 
-                <LinearLayout
-                    android:id="@+id/llNext"
-                    android:layout_width="101dp"
-                    android:layout_height="36dp"
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/custom_btn">
+                    android:layout_centerVertical="true">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        tools:ignore="UseCompoundDrawables,UselessParent">
+                        android:id="@+id/llNext"
+                        android:layout_width="101dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/custom_btn"
+                        android:visibility="visible">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:text="@string/next"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_12"
-                            tools:ignore="RelativeOverlap" />
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            tools:ignore="UseCompoundDrawables,UselessParent">
 
-                        <ImageView
-                            android:layout_width="7dp"
-                            android:layout_height="14dp"
-                            android:layout_marginStart="@dimen/spacing_20"
-                            android:contentDescription="@string/todo"
-                            android:src="@drawable/ic_white_next_arrow" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:text="@string/next"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font_12"
+                                tools:ignore="RelativeOverlap" />
+
+                            <ImageView
+                                android:layout_width="7dp"
+                                android:layout_height="14dp"
+                                android:layout_marginStart="@dimen/spacing_20"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/ic_white_next_arrow" />
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnGetStarted"
+                        android:layout_width="122dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/custom_btn"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            tools:ignore="UseCompoundDrawables,UselessParent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:text="@string/get_started"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font_12"
+                                tools:ignore="RelativeOverlap" />
+
+                            <ImageView
+                                android:layout_width="7dp"
+                                android:layout_height="14dp"
+                                android:layout_marginStart="@dimen/spacing_20"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/ic_white_next_arrow" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </FrameLayout>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

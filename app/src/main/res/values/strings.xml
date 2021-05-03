@@ -73,7 +73,6 @@
     <string name="personal_details">Personal Details</string>
     <string name="clinical_records">Clinical Records</string>
     <string name="my_downloads">My Downloads</string>
-    <string name="payment_method">Payment Method</string>
     <string name="membership">Membership</string>
     <string name="settings">Settings</string>
     <string name="help">Help</string>
@@ -246,7 +245,6 @@
     <string name="amount_to_be_paid">Amount to be paid</string>
     <string name="_500_00">€500.00</string>
     <string name="confirm">Confirm</string>
-    <string name="add_card">Add Card</string>
     <string name="add_card_details">Add Card Details</string>
     <string name="card_number">Card Number</string>
     <string name="enter_card_number">Enter Card Number</string>
@@ -356,4 +354,12 @@
     <string name="john_martin">John Martin</string>
     <string name="expires_18_10">Expires 18/10</string>
     <string name="save">Save</string>
+    <string name="no_saved_cards_found">No Saved Cards Found</string>
+    <string name="you_have_not_added_any_saved_cards_yet_to_add_tap_on_button">You have not added any Saved Cards yet to add Tap on button</string>
+    <string name="add_card">Add Card</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="saved_cards">Saved Cards</string>
+    <string name="saved_codes">Saved Codes</string>
+    <string name="no_saved_code_found">No Saved Code Found</string>
+    <string name="you_have_not_added_any_saved_codes_yet_to_add_tap_on_button">You have not added any Saved Codes yet to add Tap on button</string>
 </resources>

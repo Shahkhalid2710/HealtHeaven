@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.payment.MemberShipActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_25"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/memberships"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_20" />
+
+        <TextView
+            android:id="@+id/tvAddMembership"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/add"
+            android:textColor="@color/green"
+            android:textSize="@dimen/font_16"
+            android:visibility="gone"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llSavedCodes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/saved_codes"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_11" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSavedCodes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <include
+            android:id="@+id/layoutnotfoundcode"
+            layout="@layout/custom_membership"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+</LinearLayout>
