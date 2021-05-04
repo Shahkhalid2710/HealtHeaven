@@ -40,10 +40,9 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
             finish()
         }
 
-
         val selectItem1 = SelectItem(R.drawable.image_book_appointment, "Book Appointment", "Book Appointment and get consult to our great doctors via Call, Video and Face to Face")
         val selectItem2 = SelectItem(R.drawable.image_doctor, "Doctor", "Recover from Top doctors selected from your location preferences via different session option such as video, audio and face to face.")
-        val selectItem3 = SelectItem(R.drawable.image_book_appointment, "Sessions", "Don’t wait just select the session option get appoint to our great doctors via Audio and Video Call also")
+        val selectItem3 = SelectItem(R.drawable.image_sessions, "Sessions", "Don’t wait just select the session option get appoint to our great doctors via Audio and Video Call also")
 
         mList.add(selectItem1)
         mList.add(selectItem2)

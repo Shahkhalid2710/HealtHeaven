@@ -9,12 +9,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeClickAdapter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.applocum.connecttomyhealth.ui.confirmbooking.ConfirmBookingActivity
+import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.prolificinteractive.materialcalendarview.*
 import kotlinx.android.synthetic.main.activity_session_book.*
@@ -41,9 +43,14 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
     private var sType=""
     private var sSlot=""
     private var seleteddate = ""
+    private var sTime=""
+    lateinit var specialist: Specialist
 
     @Inject
     lateinit var presenter: BookSessionPresenter
+
+    @Inject
+    lateinit var userHolder: UserHolder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +59,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
+        specialist=intent.getSerializableExtra("specialist") as Specialist
 
         val sessionType1 = SessionType("Phone")
         val sessionType2 = SessionType("Video")
@@ -69,7 +77,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
                     1-> sType="online_appointment"
                     2-> sType="offline_appointment"
                 }
-                presenter.getTimeSlots(3260,seleteddate,sType,sSlot)
+                presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
             }
         })
 
@@ -89,7 +97,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
                     1-> sSlot="20"
                     2-> sSlot="30"
                 }
-                presenter.getTimeSlots(3260,seleteddate,sType,sSlot)
+                presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
             }
         })
 
@@ -165,7 +173,16 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         }
 
         btnContinue.setOnClickListener {
-            startActivity(Intent(this, ConfirmBookingActivity::class.java))
+            if (validateBookSession(seleteddate,sType, sSlot, sTime)) {
+                val intent = Intent(this, ConfirmBookingActivity::class.java)
+                val appointment = userHolder.getBookAppointmentData()
+                appointment.appointmentStartTime = selectSession
+                appointment.appointmentType = sType
+                appointment.appointmentSlot = sSlot
+                appointment.appointmentDate = seleteddate
+                userHolder.saveBookAppointmentData(appointment)
+                startActivity(intent)
+            }
         }
 
         calendarView.setOnDateChangedListener(this)
@@ -198,6 +215,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         rvAvailableTime.layoutManager = GridLayoutManager(this, 4)
         rvAvailableTime.adapter = AvailableTimeClickAdapter(this, list,object :AvailableTimeClickAdapter.ItemClickListner{
             override fun onItemClick(time: Time, position: Int) {
+                sTime=time.start_time
             }
         })
     }
@@ -231,7 +249,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
         val formateDate = SimpleDateFormat("yyyy-MM-dd").format(date)
         seleteddate=formateDate
-        presenter.getTimeSlots(3260,seleteddate,sType,sSlot)
+        presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
     }
 
     private class PrimeDayDisableDecorator : DayViewDecorator {
@@ -243,5 +261,42 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         override fun decorate(view: DayViewFacade) {
             view.setDaysDisabled(true)
         }
+    }
+
+    fun validateBookSession(date:String,sessionType:String,slot:String,time:String):Boolean
+    {
+        if (date.isEmpty())
+        {
+            val snackbar = Snackbar.make(llSessionbook,"Please select date", Snackbar.LENGTH_LONG)
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackbar.show()
+            return false
+        }
+        if (sessionType.isEmpty())
+        {
+            val snackbar = Snackbar.make(llSessionbook,"Please select session type", Snackbar.LENGTH_LONG)
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackbar.show()
+            return false
+        }
+        if (slot.isEmpty())
+        {
+            val snackbar = Snackbar.make(llSessionbook,"Please select slot", Snackbar.LENGTH_LONG)
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackbar.show()
+            return false
+        }
+        if (time.isEmpty())
+        {
+            val snackbar = Snackbar.make(llSessionbook,"Please select time", Snackbar.LENGTH_LONG)
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackbar.show()
+            return false
+        }
+        return true
     }
 }

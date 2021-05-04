@@ -122,7 +122,7 @@
                     android:src="@drawable/drpaulina" />
 
                 <ImageView
-                    android:id="@+id/ivSymptoms"
+                    android:id="@+id/ivAddSymptomImage"
                     android:layout_width="68dp"
                     android:layout_height="68dp"
                     android:layout_marginStart="@dimen/spacing_10"

@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.injections.components
 
 import com.applocum.connecttomyhealth.injections.modules.UserHolderModule
 import com.applocum.connecttomyhealth.ui.addcard.AddCardActivity
+import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.ActiveAllergyFragment
 import com.applocum.connecttomyhealth.ui.allergyhistory.AddAllergyActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.AllergyHistoryActivity
@@ -101,6 +102,8 @@ interface NetworkComponent {
     fun inject(activity:VerifiedActivity)
 
     fun inject(activity:AddCodeActivity)
+
+    fun inject(activity:AddSymptomActivity)
 
     fun inject(activity:PaymentShowActivity)
 

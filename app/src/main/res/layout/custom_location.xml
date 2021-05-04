@@ -18,12 +18,13 @@
         android:gravity="center"/>
     <TextView
         android:id="@+id/tvAddress"
-        android:layout_width="166dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lido_m_c_st_saviours_road_st_saviours_jersey"
         android:textColor="@color/grey"
         android:textSize="@dimen/font_12"
         android:layout_marginTop="6dp"
+        android:gravity="center"
         android:fontFamily="@font/montserrat_medium"
         android:layout_gravity="center"/>
     <Button

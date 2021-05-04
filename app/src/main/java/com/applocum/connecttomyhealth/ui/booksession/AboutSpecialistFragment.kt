@@ -19,6 +19,19 @@ class AboutSpecialistFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_about_specialist, container, false)
+
+        val specialist=arguments?.getSerializable("specialist") as Specialist
+        v.tvDoctorBio.text=specialist.bio
+
+        Log.d("Checkkkk","-"+specialist.bio)
         return v
+    }
+
+    fun newInstance(specialist: Specialist):AboutSpecialistFragment {
+        val args = Bundle()
+        args.putSerializable("specialist", specialist)
+        val fragment = AboutSpecialistFragment()
+        fragment.arguments = args
+        return fragment
     }
 }

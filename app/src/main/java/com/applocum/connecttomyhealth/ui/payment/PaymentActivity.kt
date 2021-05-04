@@ -20,7 +20,7 @@ class PaymentActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         tvAddPaymentMethod.setOnClickListener {
-            startActivity(Intent(this,AddCardActivity::class.java))
+            startActivity(Intent(this,PaymentShowActivity::class.java))
         }
 
         btnConfirmSessionBooking.setOnClickListener {

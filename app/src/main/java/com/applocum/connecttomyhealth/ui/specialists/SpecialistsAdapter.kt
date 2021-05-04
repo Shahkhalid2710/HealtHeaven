@@ -39,7 +39,7 @@ class SpecialistsAdapter(context: Context,list: ArrayList<Specialist>,private va
             onitemclick.onItemClick(specialist,position)
         }
         holder.itemView.btnBookSession.setOnClickListener {
-           onitemclick.onItemClick(specialist, position)
+            onitemclick.onbookSession(specialist,position)
         }
 
         Glide.with(mContext).load(specialist.image).into(holder.itemView.ivDoctor)
@@ -47,5 +47,6 @@ class SpecialistsAdapter(context: Context,list: ArrayList<Specialist>,private va
     interface ItemClickListner
     {
         fun onItemClick(specialist: Specialist,position: Int)
+        fun onbookSession(specialist: Specialist,position: Int)
     }
 }

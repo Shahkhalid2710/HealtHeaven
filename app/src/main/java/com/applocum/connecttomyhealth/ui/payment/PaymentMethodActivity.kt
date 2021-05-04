@@ -43,6 +43,7 @@ class PaymentMethodActivity : BaseActivity(),AddCardPresenter.View {
     }
 
     override fun getLayoutResourceId(): Int=R.layout.activity_payment_method
+
     override fun displaymessage(message: String?) {
     }
 
@@ -65,6 +66,6 @@ class PaymentMethodActivity : BaseActivity(),AddCardPresenter.View {
             llSavedCards.visibility=View.VISIBLE
         }
         rvSavedCards.layoutManager=LinearLayoutManager(this)
-        rvSavedCards.adapter=PaymentCardAdapter(this,list)
+        rvSavedCards.adapter=PaymentCardAdapter(this,list,false)
     }
 }

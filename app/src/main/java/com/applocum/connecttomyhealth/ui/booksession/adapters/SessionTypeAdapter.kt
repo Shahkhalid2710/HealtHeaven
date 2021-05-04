@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.raw_session_booking.view.*
 class SessionTypeAdapter(context: Context,list:ArrayList<SessionType>,private var itemClickListner: ItemClickListner) :RecyclerView.Adapter<SessionTypeAdapter.SessionTypeHolder>(){
     var mContext=context
     var mList=list
-    private var selectedItem:Int=0
+    private var selectedItem:Int=-1
 
 
     inner class SessionTypeHolder(itemView:View):RecyclerView.ViewHolder(itemView){}

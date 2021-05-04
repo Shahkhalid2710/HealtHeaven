@@ -17,6 +17,7 @@ import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeAdapt
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
+import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.prolificinteractive.materialcalendarview.*
 import kotlinx.android.synthetic.main.fragment_availability.*
@@ -34,6 +35,7 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
     private var sType=""
     private var sSlot=""
     private var seleteddate = ""
+    lateinit var specialist: Specialist
 
     @Inject
     lateinit var presenter: BookSessionPresenter
@@ -46,10 +48,10 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_availability, container, false)
 
-       // val date=Calendar.getInstance()
         MyApplication.getAppContext().component.inject(this)
         presenter.injectview(this)
 
+        specialist=arguments?.getSerializable("specialist") as Specialist
 
         val sessionType1 = SessionType("Phone")
         val sessionType2 = SessionType("Video")
@@ -67,7 +69,7 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
                     1-> sType="online_appointment"
                     2-> sType="offline_appointment"
                 }
-                presenter.getTimeSlots(3260,seleteddate,sType,sSlot)
+                presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
             }
         })
 
@@ -86,11 +88,10 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
                     1 -> sSlot = "20"
                     2 -> sSlot = "30"
                 }
-               presenter.getTimeSlots(3260,seleteddate,sType,sSlot)
+               presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
             }
         })
 
-      //  v.calendarView.setSelectedDate(date)
         v.calendarView.setOnDateChangedListener(this)
         v.calendarView.addDecorator(PrimeDayDisableDecorator())
         return v
@@ -114,7 +115,7 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
 
         val formateDate = SimpleDateFormat("yyyy-MM-dd").format(date)
         seleteddate=formateDate
-        presenter.getTimeSlots(3260,seleteddate,sType,sSlot)
+        presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
     }
 
     override fun getTimeSlot(list: ArrayList<Time>) {
@@ -142,6 +143,14 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
         override fun decorate(view: DayViewFacade) {
             view.setDaysDisabled(true)
         }
+    }
+
+    fun newInstance(specialist: Specialist):AvailabilityFragment {
+        val args = Bundle()
+        args.putSerializable("specialist", specialist)
+        val fragment = AvailabilityFragment()
+        fragment.arguments = args
+        return fragment
     }
 }
 

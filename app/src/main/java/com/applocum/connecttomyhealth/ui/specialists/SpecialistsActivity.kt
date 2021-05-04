@@ -7,7 +7,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.shareddata.endpoints.BookAppointment
+import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
+import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomActivity
 import com.applocum.connecttomyhealth.ui.booksession.BookSessionActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import kotlinx.android.synthetic.main.activity_specialists.*
@@ -18,6 +21,9 @@ class SpecialistsActivity : BaseActivity() ,SpecilistPresenter.View {
     @Inject
     lateinit var presenter: SpecilistPresenter
 
+    @Inject
+    lateinit var userHolder: UserHolder
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ivBack.setOnClickListener { finish() }
@@ -26,6 +32,10 @@ class SpecialistsActivity : BaseActivity() ,SpecilistPresenter.View {
         presenter.injectview(this)
 
         presenter.getlist()
+
+        val appointment = BookAppointment()
+        appointment.corporateId = 66
+        userHolder.saveBookAppointmentData(appointment)
 
     }
 
@@ -40,16 +50,21 @@ class SpecialistsActivity : BaseActivity() ,SpecilistPresenter.View {
         val specialistsAdapter=SpecialistsAdapter(this,list,object :SpecialistsAdapter.ItemClickListner{
             override fun onItemClick(specialist: Specialist, position: Int) {
                val intent=Intent(this@SpecialistsActivity,BookSessionActivity::class.java)
-                val bundle=Bundle()
-                bundle.putString("firstname",specialist.first_name)
-                bundle.putString("lastname",specialist.last_name)
-                bundle.putString("bio",specialist.bio)
-                bundle.putString("designation",specialist.designation)
-                bundle.putString("doctorid",specialist.id.toString())
-                bundle.putString("image",specialist.image)
-                intent.putExtras(bundle)
+                intent.putExtra("specialist",specialist)
                 startActivity(intent)
+            }
 
+            override fun onbookSession(specialist: Specialist, position: Int) {
+                val intent=Intent(this@SpecialistsActivity,AddSymptomActivity::class.java)
+                intent.putExtra("specialist",specialist)
+                val appointment = userHolder.getBookAppointmentData()
+                appointment.therapistId = specialist.id
+                appointment.therapistName = "${specialist.first_name} ${specialist.last_name}"
+                specialist.usual_address.apply {
+                    appointment.therapistAddress = "$line1, $line2,$line3, $town, $pincode"
+                }
+                userHolder.saveBookAppointmentData(appointment)
+                startActivity(intent)
             }
         })
         rvDoctors.adapter=specialistsAdapter

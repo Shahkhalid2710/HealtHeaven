@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.shareddata.endpoints
 
 import android.content.SharedPreferences
 import com.applocum.connecttomyhealth.extensions.prefString
+import com.google.gson.Gson
 
 class UserHolder(pref: SharedPreferences) {
     var userid by pref.prefString()
@@ -25,26 +26,8 @@ class UserHolder(pref: SharedPreferences) {
     var userToken by pref.prefString()
         private set
 
-
-    var doctorId by pref.prefString()
+    var bookAppointmentData by pref.prefString()
         private set
-
-    var doctorFirstname by pref.prefString()
-       private set
-
-    var doctorLastname by pref.prefString()
-        private set
-
-    var doctorDesignation by pref.prefString()
-        private set
-
-    var doctorBio by pref.prefString()
-        private set
-
-    var doctorImage by pref.prefString()
-        private set
-
-
 
 
     fun saveUser(
@@ -82,4 +65,15 @@ class UserHolder(pref: SharedPreferences) {
         userDOB = dob
         userToken = token
     }
+
+    fun saveBookAppointmentData(appointment: BookAppointment?) {
+        appointment?.let {
+            this.bookAppointmentData = Gson().toJson(appointment)
+        }
+    }
+
+    fun getBookAppointmentData(): BookAppointment {
+        return Gson().fromJson(bookAppointmentData, BookAppointment::class.java)
+    }
+
 }

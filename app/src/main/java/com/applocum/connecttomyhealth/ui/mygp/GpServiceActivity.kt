@@ -1,16 +1,23 @@
 package com.applocum.connecttomyhealth.ui.mygp
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
+import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_gp_service.*
@@ -21,34 +28,30 @@ import kotlinx.android.synthetic.main.custom_location.view.*
 class GpServiceActivity : BaseActivity(){
     private lateinit var map: GoogleMap
     private lateinit var supportMapFragment: SupportMapFragment
+    private lateinit var gpService: GpService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         ivBack.setOnClickListener { finish() }
+        tvChangeGpService.setOnClickListener { finish() }
+        locationPermission()
 
-       supportMapFragment =
-            supportFragmentManager.findFragmentById(R.id.mapwhere) as SupportMapFragment
-
+        gpService=intent.getSerializableExtra("gpService") as GpService
+        supportMapFragment = supportFragmentManager.findFragmentById(R.id.mapwhere) as SupportMapFragment
 
         supportMapFragment.getMapAsync { googleMap ->
             map = googleMap
 
             map.uiSettings.setAllGesturesEnabled(true)
             map.isMyLocationEnabled
-            val marker = LatLng(23.011360, 72.584310)
+            val marker = LatLng(gpService.lat,gpService.long)
             val cameraPosition = CameraPosition.Builder().target(marker).zoom(15.0f).build()
-            map.addMarker(MarkerOptions().position(marker).title("You are here!"))
+            map.addMarker(MarkerOptions().position(marker).title(gpService.practice_name))
             val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
             map.moveCamera(cameraUpdate)
 
-            map.setOnInfoWindowClickListener {
-                Toast.makeText(
-                    this,
-                    "Infowindow clicked",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+            map.setOnInfoWindowClickListener {}
             map.setOnMarkerClickListener {
                 openLocationDialog()
                 false
@@ -86,10 +89,24 @@ class GpServiceActivity : BaseActivity(){
         dialog.setCancelable(true)
         dialog.setContentView(v)
         BottomSheetBehavior.from(v.parent as View).state = BottomSheetBehavior.STATE_COLLAPSED
+        v.tvAddress.text=gpService.address
+        v.tvName.text=gpService.practice_name
 
         v.btnCallGPService.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE),1)
+            } else {
+                startActivity(Intent(Intent.ACTION_CALL, Uri.fromParts("tel",gpService.phone,null )))
+            }
             dialog.dismiss()
         }
         dialog.show()
+    }
+
+    fun locationPermission()
+    {
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
     }
 }

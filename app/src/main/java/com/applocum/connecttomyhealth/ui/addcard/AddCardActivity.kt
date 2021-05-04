@@ -34,10 +34,10 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
         ivBack.setOnClickListener { finish() }
         etCardNumber.addTextChangedListener(this)
 
-      /*  etHolderName.addTextChangedListener {
+        etHolderName.addTextChangedListener {
             if (etHolderName.text.length > 5) ivSuccessNameonCard.visibility =
                 View.VISIBLE else ivSuccessNameonCard.visibility = View.GONE
-        }*/
+        }
 
         etExpiryDate.addTextChangedListener {
             if (etExpiryDate.text.length == 4) ivSuccessExpiryDate.visibility =
@@ -60,14 +60,8 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
         }
 
         btnAdd.setOnClickListener {
-            presenter.addCard(
-                etCardNumber.text.toString(),
-                etHolderName.text.toString(),
-                etExpiryDate.text.toString(),
-                etCVV.text.toString()
-            )
+            presenter.addCard(etCardNumber.text.toString(),etHolderName.text.toString(),etExpiryDate.text.toString(),etCVV.text.toString())
         }
-
     }
 
     override fun afterTextChanged(s: Editable?) {
@@ -100,7 +94,7 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
     }
 
     override fun addcard(card: Card) {
-        startActivity(Intent(this, PaymentMethodActivity::class.java))
+        startActivity(Intent(this,PaymentMethodActivity::class.java))
         finish()
     }
 

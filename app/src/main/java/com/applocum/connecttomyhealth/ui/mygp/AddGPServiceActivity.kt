@@ -71,6 +71,7 @@ class AddGPServiceActivity : BaseActivity() ,GpservicePresenter.View{
                 showDialogView.btnSubmit.setOnClickListener {
                     dialog.dismiss()
                     val intent= Intent(this@AddGPServiceActivity,GpServiceActivity::class.java)
+                    intent.putExtra("gpService",gpService)
                     startActivity(intent)
                 }
                 showDialogView.btnCancel.setOnClickListener {

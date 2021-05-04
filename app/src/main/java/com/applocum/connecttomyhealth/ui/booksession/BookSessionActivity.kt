@@ -2,12 +2,14 @@ package com.applocum.connecttomyhealth.ui.booksession
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomsActivity
+import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.ViewPagerFragmentAdapter
+import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_book_session.*
 import javax.inject.Inject
@@ -24,30 +26,26 @@ class BookSessionActivity : BaseActivity() {
         ivBack.setOnClickListener { finish() }
 
       (application as MyApplication).component.inject(this)
+        val specialist=intent.getSerializableExtra("specialist") as Specialist
 
         val viewPagerFragmentAdapter= ViewPagerFragmentAdapter(this,supportFragmentManager)
-        viewPagerFragmentAdapter.addfragment(AboutSpecialistFragment(),"About Specialists")
-        viewPagerFragmentAdapter.addfragment(AvailabilityFragment(),"Availability")
+        viewPagerFragmentAdapter.addfragment(AboutSpecialistFragment().newInstance(specialist),"About Specialists")
+        viewPagerFragmentAdapter.addfragment(AvailabilityFragment().newInstance(specialist),"Availability")
         viewPager.adapter=viewPagerFragmentAdapter
         tablayout.setupWithViewPager(viewPager)
 
         btnBookSession.setOnClickListener {
-            startActivity(Intent(this,AddSymptomsActivity::class.java))
+            val intent=Intent(this,AddSymptomActivity::class.java)
+            intent.putExtra("specialist",specialist)
+            startActivity(intent)
         }
 
-       val firstname=intent.extras?.getString("firstname")
-       val lastname=intent.extras?.getString("lastname")
-       val image=intent.extras?.getString("image")
-       val designation=intent.extras?.getString("designation")
-       val bio=intent.extras?.getString("bio")
-       val id=intent.extras?.getString("doctorid")
-        tvDoctorFirstName.text=firstname
-        tvDoctorLastName.text=lastname
-        tvDoctorProf.text=designation
-        Glide.with(this).load(image).into(ivDoctor)
-
+        tvDoctorFirstName.text=specialist.first_name
+        tvDoctorLastName.text=specialist.last_name
+        tvDoctorProf.text=specialist.designation
+        Glide.with(this).load(specialist.image).into(ivDoctor)
 
     }
-    override fun getLayoutResourceId(): Int = R.layout.activity_book_session
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_book_session
 }
