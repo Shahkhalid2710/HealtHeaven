@@ -4,22 +4,31 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
+import kotlinx.android.synthetic.main.activity_add_symptom.*
 import kotlinx.android.synthetic.main.activity_valid_passport.*
 import kotlinx.android.synthetic.main.activity_valid_passport.ivBack
 import java.io.ByteArrayOutputStream
+import java.io.InputStream
 
 
 class ValidPassportActivity : BaseActivity() {
     private val RequestPermissionCode = 1
+    private val requestCodeGallery= 999
+    private var selectedImagePath:String=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ivBack.setOnClickListener { finish() }
@@ -63,6 +72,7 @@ class ValidPassportActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 7 && resultCode == Activity.RESULT_OK) {
             val bitmap=data?.extras?.get("data") as Bitmap
@@ -76,5 +86,12 @@ class ValidPassportActivity : BaseActivity() {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         return stream.toByteArray()
+    }
+    private fun getRealPathFromURI(uri: Uri?): String {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor: Cursor = managedQuery(uri, projection, null, null, null)
+        val columnIndex: Int = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor.moveToFirst()
+        return cursor.getString(columnIndex)
     }
 }

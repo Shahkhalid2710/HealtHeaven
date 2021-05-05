@@ -23,6 +23,8 @@
             android:layout_marginStart="@dimen/spacing_25"
             android:contentDescription="@string/todo"
             android:focusable="true"
+            android:clickable="true"
+            android:foreground="@drawable/effect_button"
             android:src="@drawable/ic_back" />
 
         <TextView
@@ -129,6 +131,9 @@
                     android:layout_marginEnd="@dimen/spacing_24"
                     android:contentDescription="@string/todo"
                     android:scaleType="centerCrop"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
                     android:src="@drawable/image_blank" />
             </LinearLayout>
 
@@ -141,6 +146,9 @@
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
                 android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
+                android:focusable="true"
+                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:textColor="@color/aapBlack"
@@ -155,6 +163,9 @@
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
                 android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
+                android:focusable="true"
+                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:textColor="@color/aapBlack"

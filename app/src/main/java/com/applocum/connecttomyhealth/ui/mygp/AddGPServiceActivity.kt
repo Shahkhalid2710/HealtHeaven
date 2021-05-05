@@ -24,7 +24,7 @@ class AddGPServiceActivity : BaseActivity() ,GpservicePresenter.View{
     @Inject
     lateinit var presenter: GpservicePresenter
 
-    lateinit var gpServiceAdapter:GpServiceAdapter
+    private lateinit var gpServiceAdapter:GpServiceAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

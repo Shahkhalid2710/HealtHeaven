@@ -21,6 +21,8 @@ class BookSessionActivity : BaseActivity() {
     @Inject
     lateinit var userHolder: UserHolder
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_book_session
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ivBack.setOnClickListener { finish() }
@@ -56,5 +58,4 @@ class BookSessionActivity : BaseActivity() {
 
     }
 
-    override fun getLayoutResourceId(): Int = R.layout.activity_book_session
 }

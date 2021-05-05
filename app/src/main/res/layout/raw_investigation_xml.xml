@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="@drawable/effect_button"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -38,6 +35,9 @@
                 android:id="@+id/ivList"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:focusable="true"
+                android:clickable="true"
+                android:foreground="@drawable/effect_button"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/todo"

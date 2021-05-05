@@ -21,8 +21,10 @@
             android:layout_height="15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/spacing_25"
+            android:clickable="true"
             android:contentDescription="@string/todo"
             android:focusable="true"
+            android:foreground="@drawable/effect_button"
             android:src="@drawable/ic_back" />
 
         <TextView
@@ -54,8 +56,12 @@
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="27dp"
                 android:layout_marginEnd="@dimen/spacing_24"
+                android:focusable="true"
+                android:clickable="true"
+                android:foreground="@drawable/effect_button"
                 android:background="@drawable/search_customlayout"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
 
                 <EditText
                     android:id="@+id/etGpSearch"
@@ -69,6 +75,9 @@
                     android:inputType="text"
                     android:paddingStart="@dimen/spacing_16"
                     android:paddingEnd="0dp"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:foreground="@drawable/effect_button"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"
@@ -80,6 +89,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
                     android:layout_marginEnd="4dp"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:foreground="@drawable/effect_button"
                     android:background="@drawable/custom_btn">
 
                     <ImageView
@@ -112,6 +124,7 @@
                     android:id="@+id/rvAddGp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
                     android:layout_marginTop="@dimen/spacing_24" />
             </FrameLayout>
         </LinearLayout>

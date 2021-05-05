@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:focusable="true"
     android:clickable="true"
-    android:foreground="@drawable/effect_button"
+    android:foreground="@drawable/effect"
     android:background="@drawable/custom_exemption_layout"
     tools:ignore="UselessParent">
 

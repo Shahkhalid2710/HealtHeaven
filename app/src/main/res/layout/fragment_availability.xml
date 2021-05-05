@@ -40,6 +40,7 @@
             android:id="@+id/rvSessionType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_5"
             android:layout_marginEnd="@dimen/spacing_24" />
@@ -59,6 +60,7 @@
             android:id="@+id/rvSelectSlot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_5"
             android:layout_marginEnd="@dimen/spacing_24" />
@@ -83,6 +85,7 @@
                 android:id="@+id/rvAvailableTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="@dimen/spacing_5"
                 android:layout_marginEnd="@dimen/spacing_24"/>

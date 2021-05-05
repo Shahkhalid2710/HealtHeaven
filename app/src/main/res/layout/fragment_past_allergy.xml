@@ -16,6 +16,7 @@
             android:id="@+id/rvPastAllergy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
             android:layout_marginTop="@dimen/spacing_16" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

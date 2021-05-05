@@ -23,6 +23,8 @@
             android:layout_marginStart="@dimen/spacing_25"
             android:contentDescription="@string/todo"
             android:focusable="true"
+            android:clickable="true"
+            android:foreground="@drawable/effect_button"
             android:src="@drawable/ic_back" />
 
         <TextView
@@ -52,6 +54,7 @@
                 android:id="@+id/rvExemptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="@dimen/spacing_24" />
