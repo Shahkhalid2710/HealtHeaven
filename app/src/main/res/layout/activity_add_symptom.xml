@@ -118,8 +118,7 @@
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="@dimen/spacing_16"
                     android:contentDescription="@string/todo"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/drpaulina" />
+                    android:scaleType="centerCrop"/>
 
                 <ImageView
                     android:id="@+id/ivAddSymptomImage"
@@ -168,6 +167,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/spacing_24"
                 android:layout_marginBottom="83dp"
+                android:foreground="@drawable/effect_button"
                 android:background="@drawable/custom_btn"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="@string/_continue"

@@ -176,7 +176,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
             if (validateBookSession(seleteddate,sType, sSlot, sTime)) {
                 val intent = Intent(this, ConfirmBookingActivity::class.java)
                 val appointment = userHolder.getBookAppointmentData()
-                appointment.appointmentStartTime = selectSession
+                appointment.appointmentTime = sTime
                 appointment.appointmentType = sType
                 appointment.appointmentSlot = sSlot
                 appointment.appointmentDate = seleteddate

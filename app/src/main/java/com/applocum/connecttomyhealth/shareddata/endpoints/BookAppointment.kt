@@ -16,6 +16,8 @@ class BookAppointment {
     var therapistId: Int = -1
     var therapistName: String = ""
     var therapistAddress: String? = ""
+    var therapistImage:String?=""
+    var threapistBio:String?=""
     var corporateId: Int = -1
     var isRecurring: Boolean = false
     var recurringType: String? = null

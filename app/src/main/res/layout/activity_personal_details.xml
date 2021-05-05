@@ -39,108 +39,138 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/rlProfileddetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_42"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:layout_marginBottom="@dimen/spacing_16">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/effect"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvProfileDetails"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="@string/profile_details"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_14"
-                    tools:ignore="RelativeOverlap" />
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_42"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:layout_marginBottom="@dimen/spacing_16"
+                    tools:ignore="UselessParent">
 
-                <ImageView
-                    android:id="@+id/ivProfileDetailsNext"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_next" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tvProfileDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/profile_details"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_14"
+                        tools:ignore="RelativeOverlap" />
+
+                    <ImageView
+                        android:id="@+id/ivProfileDetailsNext"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_next" />
+                </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/textcolorgrey" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/rlMyGp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:layout_marginBottom="@dimen/spacing_16">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/effect"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvMyGp"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="@string/my_gp"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_14"
-                    tools:ignore="RelativeOverlap" />
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:layout_marginBottom="@dimen/spacing_16"
+                    tools:ignore="UselessParent">
 
-                <ImageView
-                    android:id="@+id/ivMyGpNext"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_next" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tvMyGp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/my_gp"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_14"
+                        tools:ignore="RelativeOverlap" />
+
+                    <ImageView
+                        android:id="@+id/ivMyGpNext"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_next" />
+                </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/textcolorgrey" />
 
-
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/rlExemptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:layout_marginBottom="@dimen/spacing_16">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/effect"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvExemptions"
-                    android:layout_width="wrap_content"
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="@string/exemptions"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_14"
-                    tools:ignore="RelativeOverlap" />
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:layout_marginBottom="@dimen/spacing_16"
+                    tools:ignore="UselessParent">
 
-                <ImageView
-                    android:id="@+id/ivExemptionsNext"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_next" />
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tvExemptions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/exemptions"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_14"
+                        tools:ignore="RelativeOverlap" />
+
+                    <ImageView
+                        android:id="@+id/ivExemptionsNext"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_next" />
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.applocum.connecttomyhealth.ui.payment.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,11 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import kotlinx.android.synthetic.main.raw_other_payment.view.*
 
-class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boolean):RecyclerView.Adapter<PaymentCardAdapter.PaymentHolder>() {
+class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boolean,private val cardClick:CardClickListener):RecyclerView.Adapter<PaymentCardAdapter.PaymentHolder>() {
     var mContext=context
     var mList=list
     var isShow=isshow
+    var selectCard=-1
 
     inner class PaymentHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
 
@@ -37,5 +37,22 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
         if (isShow) holder.itemView.cbotherPayment.visibility=View.VISIBLE
         else holder.itemView.cbotherPayment.visibility=View.GONE
 
+        holder.itemView.llPaymentCard.setOnClickListener {
+            selectCard=position
+            cardClick.cardClick(card, position)
+            notifyDataSetChanged()
+        }
+
+        if (selectCard == position)
+        {
+            holder.itemView.cbotherPayment.isChecked=true
+        }
+        else
+        {
+            holder.itemView.cbotherPayment.isChecked=false
+        }
+    }
+    interface CardClickListener{
+        fun cardClick(card: Card,position: Int)
     }
 }

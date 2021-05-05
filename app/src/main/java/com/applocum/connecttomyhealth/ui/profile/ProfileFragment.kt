@@ -2,10 +2,11 @@ package com.applocum.connecttomyhealth.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.changepassword.ChangePasswordActivity
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import javax.inject.Inject
 
+
 class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
 
      @Inject
@@ -37,32 +39,41 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
         MyApplication.getAppContext().component.inject(this)
         presenter.injectview(this)
 
-        v.rlPersonalDetails.setOnClickListener {
+        v.llPersonalDetails.setOnClickListener {
             startActivity(Intent(requireActivity(),PersonalDetailsActivity::class.java))
         }
-        v.rlClinicalRecords.setOnClickListener {
+        v.llClinicalRecords.setOnClickListener {
             startActivity(Intent(requireActivity(),ClinicalRecordsActivity::class.java))
         }
-        v.rlMyDownloads.setOnClickListener {
+        v.llMyDownloads.setOnClickListener {
             startActivity(Intent(requireActivity(),MyDownloadsActivity::class.java))
         }
-        v.rlPaymentMethods.setOnClickListener {
+        v.llPaymentMethods.setOnClickListener {
             startActivity(Intent(requireActivity(),PaymentMethodActivity::class.java))
         }
 
-        v.rlMemberships.setOnClickListener {
+        v.llMemberships.setOnClickListener {
             startActivity(Intent(requireActivity(),MemberShipActivity::class.java))
         }
 
-        v.rlChangePassword.setOnClickListener {
+        v.llChangePassword.setOnClickListener {
             startActivity(Intent(requireActivity(),ChangePasswordActivity::class.java))
         }
-        v.rlSetting.setOnClickListener {
+        v.llSetting.setOnClickListener {
             startActivity(Intent(requireActivity(),SettingActivity::class.java))
         }
         v.btnSignOut.setOnClickListener {
+
             startActivity(Intent(requireActivity(),SignupActivity::class.java))
+
         }
+
+        /*RxView.clicks(v.btnSignOut).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe { empty: Any? ->
+                startActivity(Intent(requireActivity(), SignupActivity::class.java))
+
+            }*/
+
         presenter.showProfile()
 
         return v

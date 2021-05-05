@@ -39,8 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,6 +72,7 @@
                     android:layout_height="56dp"
                     android:contentDescription="@string/todo"
                     android:scaleType="centerCrop"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/drpaulina" />
 
                 <LinearLayout
@@ -82,17 +83,16 @@
                     android:layout_toEndOf="@+id/ivDoctor"
                     android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/tvDoctorName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/dr_paulina_gayoso"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14" />
                     <TextView
-                        android:id="@+id/tvDoctorName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:text="@string/dr_paulina_gayoso"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14" />
-
-                    <TextView
-                        android:id="@+id/tvDoctorDes"
+                        android:id="@+id/tvDoctorBio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -135,7 +135,7 @@
                         android:textSize="@dimen/font_12" />
 
                     <TextView
-                        android:id="@+id/tvDate"
+                        android:id="@+id/tvAppointmentDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -161,7 +161,7 @@
                         android:textSize="@dimen/font_12" />
 
                     <TextView
-                        android:id="@+id/tvAmount"
+                        android:id="@+id/tvSessionType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -449,6 +449,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="@dimen/spacing_40"
+                android:foreground="@drawable/effect_button"
                 android:background="@drawable/custom_btn"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="@string/confirm"

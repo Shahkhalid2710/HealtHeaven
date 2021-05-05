@@ -41,6 +41,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
             android:textAllCaps="false"
+            android:foreground="@drawable/effect_button"
             android:background="@drawable/custom_btn"
             android:fontFamily="@font/montserrat_semibold"
             android:text="@string/add_allergy"

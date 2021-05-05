@@ -4,6 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="@dimen/spacing_10"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="@drawable/effect"
     android:background="@color/white">
 
     <RelativeLayout

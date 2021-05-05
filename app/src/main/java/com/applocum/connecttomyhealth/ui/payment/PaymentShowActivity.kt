@@ -12,11 +12,9 @@ import com.applocum.connecttomyhealth.ui.addcard.AddCardPresenter
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import com.applocum.connecttomyhealth.ui.payment.adapters.PaymentCardAdapter
 import com.applocum.connecttomyhealth.ui.verificationdocument.activities.VerifyIdentityActivity
-import kotlinx.android.synthetic.main.activity_payment_method.*
 import kotlinx.android.synthetic.main.activity_payment_show.*
 import kotlinx.android.synthetic.main.activity_payment_show.progress
 import kotlinx.android.synthetic.main.activity_payment_show.rvSavedCards
-import kotlinx.android.synthetic.main.custom_loader_progress.*
 import javax.inject.Inject
 
 class PaymentShowActivity : BaseActivity(),AddCardPresenter.View {
@@ -48,6 +46,10 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View {
 
     override fun showcard(list: ArrayList<Card>) {
         rvSavedCards.layoutManager= LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-        rvSavedCards.adapter= PaymentCardAdapter(this,list,true)
+        rvSavedCards.adapter= PaymentCardAdapter(this,list,true,object:PaymentCardAdapter.CardClickListener{
+            override fun cardClick(card: Card, position: Int) {
+
+            }
+        })
     }
 }

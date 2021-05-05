@@ -6,6 +6,9 @@
     android:layout_height="62dp"
     android:layout_margin="@dimen/spacing_10"
     android:orientation="horizontal"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="@drawable/effect_button"
     android:background="@drawable/custom_exemption_layout"
     tools:ignore="UselessParent">
 

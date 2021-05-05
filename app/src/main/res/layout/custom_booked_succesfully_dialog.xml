@@ -57,6 +57,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="126dp"
         android:layout_marginBottom="103dp"
+        android:foreground="@drawable/effect_button"
         android:background="@drawable/default_button"
         android:fontFamily="@font/montserrat_semibold"
         android:textSize="@dimen/font_12"/>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fillViewport="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,6 +63,8 @@
                 android:layout_marginTop="@dimen/spacing_10"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/custom_btn"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="vertical"
                 tools:ignore="UselessParent">
 
@@ -83,6 +85,7 @@
                     android:layout_height="33dp"
                     android:layout_marginStart="@dimen/spacing_16"
                     android:layout_marginTop="@dimen/spacing_16"
+                    android:foreground="@drawable/effect_button"
                     android:background="@drawable/custombtn_xml"
                     android:fontFamily="@font/poppins_semibold"
                     android:padding="8dp"
@@ -131,6 +134,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="0.6"
+                android:focusable="true"
+                android:clickable="true"
+                android:foreground="@drawable/effect"
                 android:orientation="vertical">
 
                 <LinearLayout

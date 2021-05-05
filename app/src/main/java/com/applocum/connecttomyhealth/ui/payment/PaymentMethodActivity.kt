@@ -66,6 +66,10 @@ class PaymentMethodActivity : BaseActivity(),AddCardPresenter.View {
             llSavedCards.visibility=View.VISIBLE
         }
         rvSavedCards.layoutManager=LinearLayoutManager(this)
-        rvSavedCards.adapter=PaymentCardAdapter(this,list,false)
+        rvSavedCards.adapter=PaymentCardAdapter(this,list,false,object :PaymentCardAdapter.CardClickListener{
+            override fun cardClick(card: Card, position: Int) {
+
+            }
+        })
     }
 }

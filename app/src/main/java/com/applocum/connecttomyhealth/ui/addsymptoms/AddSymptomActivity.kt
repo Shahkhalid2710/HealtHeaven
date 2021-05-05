@@ -27,10 +27,12 @@ import javax.inject.Inject
 
 class AddSymptomActivity : BaseActivity() {
     private val requestCodeGallery= 999
-    private var selectedImagePath:String?=null
+    private var selectedImagePath:String=""
 
     @Inject
     lateinit var userHolder: UserHolder
+
+    override fun getLayoutResourceId(): Int=R.layout.activity_add_symptom
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,11 +61,11 @@ class AddSymptomActivity : BaseActivity() {
         }
 
         btnContinue.setOnClickListener {
-            if (cbGeoLocation.isChecked && cbRecords.isChecked && checkSymptoms(etAddSymptoms.text.toString(),selectedImagePath!!)) {
+            if (cbGeoLocation.isChecked && cbRecords.isChecked && checkSymptoms(etAddSymptoms.text.toString(),selectedImagePath)) {
                 val intent = Intent(this, SessionBookActivity::class.java)
                 intent.putExtra("specialist",specialist)
                 val appointment = userHolder.getBookAppointmentData()
-                appointment.pickedFilePath = selectedImagePath.toString()
+                appointment.pickedFilePath = selectedImagePath
                 appointment.appointmentReason = etAddSymptoms.text.toString()
                 userHolder.saveBookAppointmentData(appointment)
                 startActivity(intent)
@@ -99,7 +101,11 @@ class AddSymptomActivity : BaseActivity() {
         if (requestCode==requestCodeGallery && resultCode == Activity.RESULT_OK && data !=null)
         {
             val uri=data.data
-            val inputStream : InputStream = uri?.let { contentResolver.openInputStream(it) }!!
+            val inputStream : InputStream = uri.let { it?.let { it1 ->
+                contentResolver.openInputStream(
+                    it1
+                )
+            } }!!
             val bitmap=BitmapFactory.decodeStream(inputStream)
             ivSymptom.setImageBitmap(bitmap)
             selectedImagePath = getRealPathFromURI(uri)
@@ -107,14 +113,13 @@ class AddSymptomActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun getRealPathFromURI(uri: Uri?): String? {
+    private fun getRealPathFromURI(uri: Uri?): String {
         val projection = arrayOf(MediaStore.Images.Media.DATA)
         val cursor: Cursor = managedQuery(uri, projection, null, null, null)
         val columnIndex: Int = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         cursor.moveToFirst()
         return cursor.getString(columnIndex)
     }
-    override fun getLayoutResourceId(): Int=R.layout.activity_add_symptom
 
     private fun checkSymptoms(reason:String,image:String):Boolean
     {
