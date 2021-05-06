@@ -13,6 +13,7 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeClickAdapter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
+import com.applocum.connecttomyhealth.ui.booksession.models.Common
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.applocum.connecttomyhealth.ui.confirmbooking.ConfirmBookingActivity
@@ -45,6 +46,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
     private var seleteddate = ""
     private var sTime=""
     lateinit var specialist: Specialist
+    lateinit var commonData: Common
 
     @Inject
     lateinit var presenter: BookSessionPresenter
@@ -181,6 +183,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
                 appointment.appointmentSlot = sSlot
                 appointment.appointmentDate = seleteddate
                 userHolder.saveBookAppointmentData(appointment)
+                intent.putExtra("commonData",commonData)
                 startActivity(intent)
             }
         }
@@ -193,7 +196,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
     override fun getLayoutResourceId(): Int =R.layout.activity_session_book
 
     override fun onClick(v: View?) {
-        if (switchMultiSessions.isChecked()) {
+        if (switchMultiSessions.isChecked) {
             llMultiSessions.visibility = View.VISIBLE
         } else {
             llMultiSessions.visibility = View.GONE
@@ -231,6 +234,10 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
+    override fun getPrice(common: Common) {
+      commonData=common
+    }
+
     @SuppressLint("SimpleDateFormat")
     override fun onDateSelected(
         widget: MaterialCalendarView,
@@ -263,7 +270,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         }
     }
 
-    fun validateBookSession(date:String,sessionType:String,slot:String,time:String):Boolean
+    private fun validateBookSession(date:String, sessionType:String, slot:String, time:String):Boolean
     {
         if (date.isEmpty())
         {

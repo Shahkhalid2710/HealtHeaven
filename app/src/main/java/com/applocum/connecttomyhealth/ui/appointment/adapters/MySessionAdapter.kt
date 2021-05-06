@@ -34,9 +34,9 @@ class MySessionAdapter(context: Context, list: ArrayList<Session>) :
 
     override fun onBindViewHolder(holder: SessionHolder, position: Int) {
         val session = mList[position]
-        holder.itemView.tvDoctorName.text = session.sName
-        holder.itemView.tvSessionName.text = session.sSessionType
-        holder.itemView.tvSessioonDate.text = session.sDate
+        holder.itemView.tvDoctorFName.text = session.sName
+        holder.itemView.tvSessionType.text = session.sSessionType
+        holder.itemView.tvSessionDate.text = session.sDate
 
         holder.itemView.btnCheckin.setOnClickListener {
             val intent = Intent(mContext, SessionDetailsActivity::class.java)

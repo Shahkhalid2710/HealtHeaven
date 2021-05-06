@@ -1,16 +1,15 @@
 package com.applocum.connecttomyhealth.ui.verificationdocument.activities
 
+import android.R.attr.path
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_validation_valid_passport.*
-import java.io.ByteArrayOutputStream
+
 
 class ValidationValidPassportActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +17,7 @@ class ValidationValidPassportActivity : BaseActivity() {
 
         ivBack.setOnClickListener { finish() }
 
-        val selectedImagePath=intent.getStringExtra("selectedImagePath")
+         val selectedImagePath=intent.getStringExtra("image")
 
         btnSubmit.setOnClickListener {
             startActivity(Intent(this,VerifyIdentityActivity::class.java))

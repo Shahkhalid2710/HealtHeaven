@@ -1,20 +1,22 @@
 package com.applocum.connecttomyhealth.ui.payment
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
+import com.applocum.connecttomyhealth.ui.addcard.AddCardActivity
 import com.applocum.connecttomyhealth.ui.addcard.AddCardPresenter
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import com.applocum.connecttomyhealth.ui.payment.adapters.PaymentCardAdapter
 import com.applocum.connecttomyhealth.ui.verificationdocument.activities.VerifyIdentityActivity
 import kotlinx.android.synthetic.main.activity_payment_show.*
+import kotlinx.android.synthetic.main.activity_payment_show.btnConfirmSessionBooking
 import kotlinx.android.synthetic.main.activity_payment_show.progress
 import kotlinx.android.synthetic.main.activity_payment_show.rvSavedCards
+import kotlinx.android.synthetic.main.custom_payment_add.*
 import javax.inject.Inject
 
 class PaymentShowActivity : BaseActivity(),AddCardPresenter.View {
@@ -32,11 +34,30 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View {
         btnConfirmSessionBooking.setOnClickListener {
             startActivity(Intent(this,VerifyIdentityActivity::class.java))
         }
+        tvAddNewCode.setOnClickListener {
+            startActivity(Intent(this,AddCardActivity::class.java))
+        }
+        tvAddmembershipcode.setOnClickListener {
+            startActivity(Intent(this,AddCodeActivity::class.java))
+        }
+        tvAddPaymentMethod.setOnClickListener {
+            startActivity(Intent(this,AddCardActivity::class.java))
+        }
+        btnConfirmSessionBook.setOnClickListener {
+            startActivity(Intent(this,VerifyIdentityActivity::class.java))
+        }
+
+        etAddCode.setOnClickListener {
+            startActivity(Intent(this,AddCodeActivity::class.java))
+        }
         presenter.showSavedCards()
+
 
     }
 
     override fun displaymessage(message: String?) {}
+
+    override fun displaySuccessmessage(message: String?) {}
 
     override fun addcard(card: Card) {}
 
@@ -45,6 +66,16 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View {
     }
 
     override fun showcard(list: ArrayList<Card>) {
+        if (list.isEmpty())
+        {
+            llPayment.visibility=View.VISIBLE
+            llPaymentShow.visibility=View.GONE
+        }
+        else
+        {
+            llPayment.visibility=View.GONE
+            llPaymentShow.visibility=View.VISIBLE
+        }
         rvSavedCards.layoutManager= LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         rvSavedCards.adapter= PaymentCardAdapter(this,list,true,object:PaymentCardAdapter.CardClickListener{
             override fun cardClick(card: Card, position: Int) {

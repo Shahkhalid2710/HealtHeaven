@@ -296,21 +296,31 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1.4"
+                    android:layout_weight="1"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/session_cost"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/font_12" />
-
+                <TextView
+                    android:id="@+id/tvTotalSession"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="end"
+                    android:text="@string/_12_x"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_16" />
                 <TextView
                     android:id="@+id/tvSessionCost"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="0.6"
+                    android:layout_weight="0.5"
                     android:fontFamily="@font/montserrat_semibold"
                     android:gravity="end"
-                    android:text="@string/_35_00"
+                    android:text="@string/_00_00"
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_16" />
             </LinearLayout>
@@ -342,7 +352,7 @@
                     android:layout_weight="0.6"
                     android:fontFamily="@font/montserrat_semibold"
                     android:gravity="end"
-                    android:text="@string/_55_00"
+                    android:text="@string/_00_00"
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_16" />
             </LinearLayout>
@@ -374,7 +384,7 @@
                     android:layout_weight="0.6"
                     android:fontFamily="@font/montserrat_semibold"
                     android:gravity="end"
-                    android:text="@string/_25_00"
+                    android:text="@string/_00_00"
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_16" />
             </LinearLayout>

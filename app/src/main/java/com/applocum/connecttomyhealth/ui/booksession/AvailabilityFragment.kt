@@ -15,6 +15,7 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
+import com.applocum.connecttomyhealth.ui.booksession.models.Common
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
@@ -132,6 +133,8 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
     override fun viewProgress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
+
+    override fun getPrice(common: Common) {}
 
 
     private class PrimeDayDisableDecorator : DayViewDecorator {

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/white"
     android:layout_gravity="center_horizontal"
     android:layout_margin="@dimen/spacing_10"
+    android:backgroundTint="@color/white"
     app:cardCornerRadius="6dp">
 
     <LinearLayout
@@ -39,33 +39,98 @@
                 android:layout_toEndOf="@+id/ivDoctor"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvDoctorName"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/dr_paulina_gayoso"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_16" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvSessionName"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/dr"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_16" />
+
+                    <TextView
+                        android:id="@+id/tvDoctorFName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/dr_paullina"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_16" />
+
+                    <TextView
+                        android:id="@+id/tvDoctorLName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/gayoso"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_16" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="@string/face_to_face_60_min"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_12" />
-                <TextView
-                    android:id="@+id/tvSessioonDate"
-                    android:layout_width="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvSessionType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/face_to_face"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:background="@color/grey" />
+
+                    <TextView
+                        android:id="@+id/tvSlot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/_60_min"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:text="@string/friday_14th_august_2020_1_00pm"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_12" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvSessionDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/_14th_august_2020"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
+
+                    <TextView
+                        android:id="@+id/tvSessionTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/_1_00_pm"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
 
@@ -83,9 +148,9 @@
                 android:id="@+id/btnCheckin"
                 android:layout_width="122dp"
                 android:layout_height="34dp"
-                android:foreground="@drawable/effect_button"
                 android:background="@drawable/custom_btn"
                 android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
                 android:text="@string/check_in"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -97,9 +162,9 @@
                 android:layout_width="122dp"
                 android:layout_height="34dp"
                 android:layout_marginStart="@dimen/spacing_16"
-                android:foreground="@drawable/effect_button"
                 android:background="@drawable/default_button"
                 android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
                 android:text="@string/cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/green"

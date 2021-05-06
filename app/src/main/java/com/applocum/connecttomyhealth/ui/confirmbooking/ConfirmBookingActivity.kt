@@ -8,7 +8,8 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertAvailableTimeSlots
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.payment.PaymentActivity
+import com.applocum.connecttomyhealth.ui.booksession.models.Common
+import com.applocum.connecttomyhealth.ui.payment.PaymentShowActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_confirm_booking.*
 import java.text.SimpleDateFormat
@@ -20,6 +21,8 @@ class ConfirmBookingActivity : BaseActivity() {
     @Inject
     lateinit var userHolder: UserHolder
 
+    lateinit var common: Common
+
     override fun getLayoutResourceId(): Int =R.layout.activity_confirm_booking
 
     @SuppressLint("SimpleDateFormat")
@@ -30,8 +33,12 @@ class ConfirmBookingActivity : BaseActivity() {
         (application as MyApplication).component.inject(this)
 
         btnConfirm.setOnClickListener {
-            startActivity(Intent(this,PaymentActivity::class.java))
+            startActivity(Intent(this,PaymentShowActivity::class.java))
         }
+        common=intent.getSerializableExtra("commonData") as Common
+        val appointmentBasicPrice=common.appointment_basic_price
+        tvBookingCost.text=("€$appointmentBasicPrice.00")
+        tvTotalCost.text=("€$appointmentBasicPrice.00")
 
         val bookAppointment=userHolder.getBookAppointmentData()
         tvTime.text= convertAvailableTimeSlots(bookAppointment.appointmentTime)

@@ -34,27 +34,4 @@ class PaymentActivity : BaseActivity() {
     }
 
     override fun getLayoutResourceId(): Int= R.layout.activity_payment
-
-    private fun openDialog()
-    {
-        val dialog = Dialog(this,android.R.style.Theme_Translucent_NoTitleBar)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.custom_booked_succesfully_dialog)
-        val window = dialog.window
-        val wlp: WindowManager.LayoutParams = window!!.getAttributes()
-        wlp.gravity = Gravity.CENTER
-        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
-        window.attributes = wlp
-        dialog.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
-
-        dialog.btnDone.setOnClickListener {
-            dialog.dismiss()
-            /*val apointmentFragment= AppointmentFragment()
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.llPayment, apointmentFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()*/
-        }
-        dialog.show()
-    }
 }

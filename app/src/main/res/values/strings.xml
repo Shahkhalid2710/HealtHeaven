@@ -362,4 +362,7 @@
     <string name="saved_codes">Saved Codes</string>
     <string name="no_saved_code_found">No Saved Code Found</string>
     <string name="you_have_not_added_any_saved_codes_yet_to_add_tap_on_button">You have not added any Saved Codes yet to add Tap on button</string>
+    <string name="dr">Dr.</string>
+    <string name="_00_00">€00.00</string>
+    <string name="_12_x">12 X</string>
 </resources>

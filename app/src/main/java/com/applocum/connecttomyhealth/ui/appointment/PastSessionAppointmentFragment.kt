@@ -22,13 +22,19 @@ class PastSessionAppointmentFragment : Fragment() {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_past_session_appointment, container, false)
 
-        val session1=Session(R.drawable.drpaulina,"Dr. Paulina Gayoso","Face To Face | 60 min","Friday, 14th August 2020, 1:00PM")
-        val session2=Session(R.drawable.ic_dr_1,"Dr. Paulina Gayoso","Video Call | 30 min","Friday, 14th August 2020, 1:00PM")
-        val session3=Session(R.drawable.drpaulina,"Dr. Paulina Gayoso","Face To Face | 60 min","Friday, 14th August 2020, 1:00PM")
+        val session1=Session(R.drawable.drpaulina,"Paulina","Face To Face","Friday, 14th August 2020,")
+        val session2=Session(R.drawable.ic_dr_1,"Paulina","Video Call","Friday, 14th August 2020,")
+        val session3=Session(R.drawable.drpaulina,"Paulina","Face To Face","Friday, 14th August 2020,")
+        val session4=Session(R.drawable.drpaulina,"Paulina","Face To Face","Friday, 14th August 2020,")
+        val session5=Session(R.drawable.ic_dr_1,"Paulina","Video Call","Friday, 14th August 2020,")
+        val session6=Session(R.drawable.drpaulina,"Paulina","Face To Face","Friday, 14th August 2020,")
 
         mListPastSession.add(session1)
         mListPastSession.add(session2)
         mListPastSession.add(session3)
+        mListPastSession.add(session4)
+        mListPastSession.add(session5)
+        mListPastSession.add(session6)
 
         v.rvPastSession.layoutManager=LinearLayoutManager(requireActivity())
         v.rvPastSession.adapter=PastSessionAdapter(requireActivity(),mListPastSession)

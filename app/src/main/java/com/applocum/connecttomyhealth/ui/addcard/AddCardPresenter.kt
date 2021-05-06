@@ -48,7 +48,7 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
                         Success -> {
                             val cardobject = Gson().fromJson(it.data,Card::class.java)
                             view.addcard(cardobject)
-                            view.displaymessage(it.message)
+                            view.displaySuccessmessage(it.message)
                         }
                         InvalidCredentials, InternalServer, MissingParameter -> {
                             view.displaymessage(it.message)
@@ -127,6 +127,7 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
 
     interface View {
         fun displaymessage(message: String?)
+        fun displaySuccessmessage(message: String?)
         fun addcard(card: Card)
         fun viewProgress(isShow: Boolean)
         fun showcard(list:ArrayList<Card>)

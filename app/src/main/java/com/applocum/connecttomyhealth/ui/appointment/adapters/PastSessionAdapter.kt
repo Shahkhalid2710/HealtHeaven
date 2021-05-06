@@ -30,9 +30,9 @@ class PastSessionAdapter(context: Context,list:ArrayList<Session>):RecyclerView.
     override fun onBindViewHolder(holder: PastSessionHolder, position: Int) {
         val session=mList[position]
 
-        holder.itemView.tvDoctorName.text=session.sName
-        holder.itemView.tvSessionName.text=session.sSessionType
-        holder.itemView.tvSessioonDate.text=session.sDate
+        holder.itemView.tvDoctorFName.text=session.sName
+        holder.itemView.tvSessionType.text=session.sSessionType
+        holder.itemView.tvSessionDate.text=session.sDate
 
         holder.itemView.btnViewDetails.setOnClickListener {
             val intent= Intent(mContext,BookSessionActivity::class.java)

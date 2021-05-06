@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.applocum.connecttomyhealth.MyApplication
@@ -93,8 +94,12 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
         snackbar.show()
     }
 
+    override fun displaySuccessmessage(message: String?) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
+
     override fun addcard(card: Card) {
-        startActivity(Intent(this,PaymentMethodActivity::class.java))
+        //startActivity(Intent(this,PaymentMethodActivity::class.java))
         finish()
     }
 

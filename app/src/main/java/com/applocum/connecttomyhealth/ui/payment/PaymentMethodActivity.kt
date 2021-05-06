@@ -47,6 +47,9 @@ class PaymentMethodActivity : BaseActivity(),AddCardPresenter.View {
     override fun displaymessage(message: String?) {
     }
 
+    override fun displaySuccessmessage(message: String?) {
+    }
+
     override fun addcard(card: Card) {
     }
 
