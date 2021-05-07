@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="@string/_1_00_pm"
+                        android:text=""
                         android:textColor="@color/grey"
                         android:textSize="@dimen/font_12" />
                 </LinearLayout>

@@ -44,7 +44,7 @@ class VerifiedActivity : BaseActivity() {
             transaction.replace(R.id.llPayment, apointmentFragment)
             transaction.addToBackStack(null)
             transaction.commit()*/
-            startActivity(Intent(this, BottomNavigationViewActivity::class.java))
+            startActivity(Intent(this,BottomNavigationViewActivity::class.java))
             this.finish()
 
         }

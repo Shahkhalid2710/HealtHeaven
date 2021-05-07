@@ -54,6 +54,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
     @Inject
     lateinit var userHolder: UserHolder
 
+    override fun getLayoutResourceId(): Int =R.layout.activity_session_book
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,9 +77,9 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
             override fun onItemClick(sessionType: SessionType, position: Int) {
                 when(position)
                 {
-                    0-> sType="phone_call_appointment"
-                    1-> sType="online_appointment"
-                    2-> sType="offline_appointment"
+                    0-> sType="phone_call"
+                    1-> sType="video"
+                    2-> sType="face_to_face"
                 }
                 presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
             }
@@ -193,7 +195,6 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
     }
 
-    override fun getLayoutResourceId(): Int =R.layout.activity_session_book
 
     override fun onClick(v: View?) {
         if (switchMultiSessions.isChecked) {

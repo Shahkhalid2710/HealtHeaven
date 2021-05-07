@@ -365,4 +365,6 @@
     <string name="dr">Dr.</string>
     <string name="_00_00">€00.00</string>
     <string name="_12_x">12 X</string>
+    <string name="_12">12</string>
+    <string name="x">X</string>
 </resources>

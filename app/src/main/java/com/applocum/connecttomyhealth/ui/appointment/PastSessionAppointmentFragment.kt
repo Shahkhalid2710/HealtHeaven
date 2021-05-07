@@ -5,16 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.appointment.adapters.PastSessionAdapter
+import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.applocum.connecttomyhealth.ui.appointment.models.Session
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_past_session_appointment.*
 import kotlinx.android.synthetic.main.fragment_past_session_appointment.view.*
+import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.*
+import javax.inject.Inject
 
 
-class PastSessionAppointmentFragment : Fragment() {
-    val mListPastSession:ArrayList<Session> = ArrayList()
+class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View {
 
+    @Inject
+    lateinit var presenter: BookAppointmentPresenter
+
+    @Inject
+    lateinit var userHolder: UserHolder
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,22 +34,28 @@ class PastSessionAppointmentFragment : Fragment() {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_past_session_appointment, container, false)
 
-        val session1=Session(R.drawable.drpaulina,"Paulina","Face To Face","Friday, 14th August 2020,")
-        val session2=Session(R.drawable.ic_dr_1,"Paulina","Video Call","Friday, 14th August 2020,")
-        val session3=Session(R.drawable.drpaulina,"Paulina","Face To Face","Friday, 14th August 2020,")
-        val session4=Session(R.drawable.drpaulina,"Paulina","Face To Face","Friday, 14th August 2020,")
-        val session5=Session(R.drawable.ic_dr_1,"Paulina","Video Call","Friday, 14th August 2020,")
-        val session6=Session(R.drawable.drpaulina,"Paulina","Face To Face","Friday, 14th August 2020,")
+        MyApplication.getAppContext().component.inject(this)
+        presenter.injectView(this)
 
-        mListPastSession.add(session1)
-        mListPastSession.add(session2)
-        mListPastSession.add(session3)
-        mListPastSession.add(session4)
-        mListPastSession.add(session5)
-        mListPastSession.add(session6)
+        presenter.showPastSession()
 
-        v.rvPastSession.layoutManager=LinearLayoutManager(requireActivity())
-        v.rvPastSession.adapter=PastSessionAdapter(requireActivity(),mListPastSession)
         return v
+    }
+
+    override fun displayMessage(mesage: String) {
+        val snackbar = Snackbar.make(llUpcomingSession,mesage, Snackbar.LENGTH_LONG)
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.green))
+        snackbar.show()
+
+    }
+
+    override fun getUpcomingSession(list: ArrayList<BookAppointmentResponse>) {
+        rvPastSession.layoutManager=LinearLayoutManager(requireActivity())
+        rvPastSession.adapter=PastSessionAdapter(requireActivity(),list)
+
+    }
+
+    override fun viewProgress(isShow: Boolean) {
     }
 }

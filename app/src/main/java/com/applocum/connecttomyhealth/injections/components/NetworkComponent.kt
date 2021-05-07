@@ -8,6 +8,8 @@ import com.applocum.connecttomyhealth.ui.allergyhistory.AddAllergyActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.AllergyHistoryActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.PastAllergyFragment
 import com.applocum.connecttomyhealth.ui.appointment.AppointmentFragment
+import com.applocum.connecttomyhealth.ui.appointment.PastSessionAppointmentFragment
+import com.applocum.connecttomyhealth.ui.appointment.UpcomingSessionApointmentFragment
 import com.applocum.connecttomyhealth.ui.booksession.AboutSpecialistFragment
 import com.applocum.connecttomyhealth.ui.booksession.AvailabilityFragment
 import com.applocum.connecttomyhealth.ui.booksession.BookSessionActivity
@@ -132,6 +134,10 @@ interface NetworkComponent {
     fun inject(fragment:ActiveAllergyFragment)
 
     fun inject(fragment:PastAllergyFragment)
+
+    fun inject(fragment:UpcomingSessionApointmentFragment)
+
+    fun inject(fragment:PastSessionAppointmentFragment)
 
     fun inject(intercepter:GlobalResponseInterceptor)
 }

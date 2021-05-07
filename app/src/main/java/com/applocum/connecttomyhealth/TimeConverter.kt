@@ -9,3 +9,10 @@ fun convertAvailableTimeSlots(time: String): String {
     val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
     return sdf.format(defaultSdf.parse(time))
 }
+
+fun convertTime(time: String): String {
+    val defaultSdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    defaultSdf.timeZone = TimeZone.getTimeZone("UTC")
+    val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+    return sdf.format(defaultSdf.parse(time))
+}
