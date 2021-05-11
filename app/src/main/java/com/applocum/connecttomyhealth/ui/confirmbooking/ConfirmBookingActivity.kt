@@ -35,14 +35,13 @@ class ConfirmBookingActivity : BaseActivity() {
         btnConfirm.setOnClickListener {
             startActivity(Intent(this,PaymentShowActivity::class.java))
         }
+
         common=intent.getSerializableExtra("commonData") as Common
         val appointmentBasicPrice=common.appointment_basic_price
         tvBookingCost.text=("€$appointmentBasicPrice.00")
         tvTotalCost.text=("€$appointmentBasicPrice.00")
-
         val bookAppointment=userHolder.getBookAppointmentData()
         tvTime.text= convertAvailableTimeSlots(bookAppointment.appointmentTime)
-        tvSessionType.text=bookAppointment.appointmentType
         tvDuration.text=(bookAppointment.appointmentSlot +" "+"min")
         tvDoctorName.text=bookAppointment.therapistName
         tvDoctorBio.text=bookAppointment.threapistBio
@@ -54,5 +53,16 @@ class ConfirmBookingActivity : BaseActivity() {
         val newDateString = spf.format(newDate)
         tvAppointmentDate.text = newDateString
 
+        when(bookAppointment.appointmentType)
+        {
+            "face_to_face"->{
+                tvSessionType.text=("Face to Face")
+            }
+            "phone_call"->{
+                tvSessionType.text=("Phone Call")
+            }
+            "video"->{ tvSessionType.text=("Video Call")
+            }
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.applocum.connecttomyhealth.ui.appointment.adapters
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,14 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.convertTime
+import com.applocum.connecttomyhealth.convertDateTime
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.applocum.connecttomyhealth.ui.sessiondetails.SessionDetailsActivity
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.custom_cancel_book_session_dialog.view.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.btnCancel
-import java.text.SimpleDateFormat
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentResponse>,private val itemCLick:ItemClickListner) :
@@ -42,17 +39,21 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
         holder.itemView.tvDoctorLName.text = bookAppointmentResponse.gp_details.last_name
         holder.itemView.tvSessionType.text = bookAppointmentResponse.appointment_type
         holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "min")
-        holder.itemView.tvSessionTime.text = convertTime(bookAppointmentResponse.start_time)
+        holder.itemView.tvSessionDateTime.text = bookAppointmentResponse.start_time?.let {
+            convertDateTime(
+                it
+            )
+        }
 
         Glide.with(mContext).load(bookAppointmentResponse.gp_details.image)
             .into(holder.itemView.ivDoctor)
 
-        val date = bookAppointmentResponse.address_info.created_at
+     /*   val date = bookAppointmentResponse.address_info.created_at
         var spf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         val newDate = spf.parse(date)
         spf = SimpleDateFormat("EEEE, dd MMMM yyyy")
         val newDateString = spf.format(newDate)
-        holder.itemView.tvSessionDate.text = ("$newDateString,")
+        holder.itemView.tvSessionDate.text = ("$newDateString,")*/
 
         when(bookAppointmentResponse.appointment_type)
         {
@@ -73,8 +74,7 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
         holder.itemView.btnCheckin.isEnabled = holder.itemView.btnCheckin.text != "Join"
 
         holder.itemView.btnCheckin.setOnClickListener {
-            val intent = Intent(mContext, SessionDetailsActivity::class.java)
-            mContext.startActivity(intent)
+            itemCLick.onButtonClick(bookAppointmentResponse, position)
         }
 
         holder.itemView.btnCancel.setOnClickListener {
@@ -83,5 +83,6 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
     }
     interface ItemClickListner{
         fun itemClick(bookAppointmentResponse: BookAppointmentResponse,position: Int)
+        fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse,position: Int)
     }
 }

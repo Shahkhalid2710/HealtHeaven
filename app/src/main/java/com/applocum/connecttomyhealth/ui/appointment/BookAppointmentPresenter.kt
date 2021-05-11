@@ -8,7 +8,6 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Succe
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
-import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -17,12 +16,11 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
-     val UPCOMING_APPOINTMENT = "upcoming"
-     val COMPLETED_APPOINTMENT = "past"
+    val UPCOMING_APPOINTMENT = "upcoming"
+    val COMPLETED_APPOINTMENT = "past"
+
     val disposables=CompositeDisposable()
     lateinit var view: View
-
-
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -32,12 +30,15 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
         this.view=view
     }
 
-    fun bookAppointment(time:String,duration: String,appointmentType:String,doctorId:Int,cardIdentifier:Int,organizationId:Int)
+    fun bookAppointment(time:String,duration: String,comment:String,allowGeoAccess:Boolean,sharedRecordsWithNhsGp:Boolean,appointmentType:String,doctorId:Int,cardIdentifier:Int,organizationId:Int)
     {
         val requestBody: RequestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
             .addFormDataPart("appointment[start_time]",time)
             .addFormDataPart("appointment[duration]",duration)
+            .addFormDataPart("appointment[comments]",comment)
+            .addFormDataPart("appointment_access[allow_geo_access]",allowGeoAccess.toString())
+            .addFormDataPart("appointment_access[consent_for_share_record_with_my_nhs_gp]",sharedRecordsWithNhsGp.toString())
             .addFormDataPart("appointment[appointment_type]",appointmentType)
             .addFormDataPart("appointment[doctor_id]",doctorId.toString())
             .addFormDataPart("cardIdentifier",cardIdentifier.toString())
@@ -79,7 +80,7 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
                 {Success->
                     {
                         view.viewProgress(false)
-                        view.getUpcomingSession(it.data)
+                        view.getSessions(it.data)
                     }
                     InternalServer, InvalidCredentials->
                     {
@@ -102,7 +103,7 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
                 {Success->
                 {
                     view.viewProgress(false)
-                    view.getUpcomingSession(it.data)
+                    view.getSessions(it.data)
                 }
                     InternalServer, InvalidCredentials->
                     {
@@ -138,7 +139,7 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
 
     interface View{
         fun displayMessage(mesage:String)
-        fun getUpcomingSession(list:ArrayList<BookAppointmentResponse>)
+        fun getSessions(list:ArrayList<BookAppointmentResponse>)
         fun viewProgress(isShow: Boolean)
     }
 }

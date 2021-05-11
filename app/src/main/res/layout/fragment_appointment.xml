@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llApointment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:id="@+id/llApointment"
     tools:context=".ui.appointment.AppointmentFragment">
 
     <TextView
@@ -36,11 +36,11 @@
             android:layout_height="30dp"
             android:layout_margin="3dp"
             app:tabBackground="@drawable/tab_selector"
-            app:tabIndicator="@null"
             app:tabGravity="fill"
-            app:tabMode="fixed"
-            app:tabMaxWidth="0dp"
+            app:tabIndicator="@null"
             app:tabIndicatorColor="@color/white"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@style/tab_text"
             app:tabTextColor="@color/green" />

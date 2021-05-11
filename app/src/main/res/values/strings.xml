@@ -367,4 +367,6 @@
     <string name="_12_x">12 X</string>
     <string name="_12">12</string>
     <string name="x">X</string>
+    <string name="not_available_time">Not Available Time</string>
+    <string name="not_save_codes">Not save codes</string>
 </resources>

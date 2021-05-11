@@ -8,6 +8,8 @@ class BookAppointment {
     var appointmentDateTime: String = ""
     var pickedFilePath: String = ""
     var appointmentReason: String = ""
+    var allowGeoAccess:Boolean=false
+    var sharedRecordWithNhs:Boolean=false
     var appointmentStartTime: String = ""
     var appointmentEndTime: String = ""
     var doctorId: String? = ""

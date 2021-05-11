@@ -11,8 +11,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.applocum.connecttomyhealth.MyApplication
-import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.*
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.addcard.AddCardActivity
@@ -70,11 +69,14 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
                     bookAppointmentPresenter.bookAppointment(
                         bookAppointment.appointmentTime,
                         bookAppointment.appointmentSlot,
+                        bookAppointment.appointmentReason,
+                        bookAppointment.allowGeoAccess,
+                        bookAppointment.sharedRecordWithNhs,
                         bookAppointment.appointmentType,
                         bookAppointment.therapistId,
                         selectCard,
-                        bookAppointment.corporateId
-                    )
+                        bookAppointment.corporateId)
+
                     openDialog()
                 }
             }
@@ -143,11 +145,6 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
 
         dialog.btnDone.setOnClickListener {
             dialog.dismiss()
-            /*val apointmentFragment= AppointmentFragment()
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.llPayment, apointmentFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()*/
             val intent=(Intent(this, BottomNavigationViewActivity::class.java))
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
@@ -157,24 +154,8 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
         dialog.show()
     }
 
-   /*fun validateCode(id:Int):Boolean
-   {
-       if (id==0)
-       {
-           val snackbar = Snackbar.make(llPaymentShow,"Please select card", Snackbar.LENGTH_LONG)
-           val snackview = snackbar.view
-           snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
-           snackbar.show()
-           return false
-       }
-       return true
-   }
-*/
     override fun displayMessage(mesage: String) {
         Toast.makeText(this,mesage,Toast.LENGTH_SHORT).show()
     }
-
-    override fun getUpcomingSession(list: ArrayList<BookAppointmentResponse>) {
-
-    }
+    override fun getSessions(list: ArrayList<BookAppointmentResponse>) {}
 }

@@ -1,6 +1,7 @@
 package com.applocum.connecttomyhealth.ui.appointment
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.appointment.adapters.UpcomingSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
+import com.applocum.connecttomyhealth.ui.sessiondetails.SessionDetailsActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.custom_cancel_book_session_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.*
@@ -52,11 +54,10 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
         snackbar.show()
     }
 
-    override fun getUpcomingSession(list: ArrayList<BookAppointmentResponse>) {
+    override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
         rvUpcomingSession.layoutManager=LinearLayoutManager(requireActivity())
         upcomingSessionAdapter= UpcomingSessionAdapter(requireActivity(),list,object:UpcomingSessionAdapter.ItemClickListner{
             override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
-
                 val showDialogView = LayoutInflater.from(requireActivity())
                     .inflate(R.layout.custom_cancel_book_session_dialog, null, false)
                 val dialog = AlertDialog.Builder(requireActivity()).create()
@@ -75,12 +76,18 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
                 }
                 dialog.show()
             }
+
+            override fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
+                val intent=Intent(requireActivity(),SessionDetailsActivity::class.java)
+                intent.putExtra("bookAppointmentResponse",bookAppointmentResponse)
+                startActivity(intent)
+            }
         })
         rvUpcomingSession.adapter=upcomingSessionAdapter
         upcomingSessionAdapter.notifyDataSetChanged()
     }
 
     override fun viewProgress(isShow: Boolean) {
-       // progress.visibility = if (isShow) View.VISIBLE else View.GONE
+      //  progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 }

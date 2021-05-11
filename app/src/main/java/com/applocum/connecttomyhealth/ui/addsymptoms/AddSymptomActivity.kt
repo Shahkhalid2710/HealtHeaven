@@ -66,6 +66,8 @@ class AddSymptomActivity : BaseActivity() {
                 val appointment = userHolder.getBookAppointmentData()
                 appointment.pickedFilePath = selectedImagePath
                 appointment.appointmentReason = etAddSymptoms.text.toString()
+                appointment.allowGeoAccess=cbGeoLocation.isChecked
+                appointment.sharedRecordWithNhs=cbRecords.isChecked
                 userHolder.saveBookAppointmentData(appointment)
                 startActivity(intent)
             } else {

@@ -2,23 +2,15 @@ package com.applocum.connecttomyhealth.ui.appointment.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.convertTime
+import com.applocum.connecttomyhealth.convertDateTime
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.raw_past_session_xml.view.ivDoctor
-import kotlinx.android.synthetic.main.raw_past_session_xml.view.tvDoctorFName
-import kotlinx.android.synthetic.main.raw_past_session_xml.view.tvDoctorLName
-import kotlinx.android.synthetic.main.raw_past_session_xml.view.tvSessionDate
-import kotlinx.android.synthetic.main.raw_past_session_xml.view.tvSessionTime
-import kotlinx.android.synthetic.main.raw_past_session_xml.view.tvSessionType
-import kotlinx.android.synthetic.main.raw_past_session_xml.view.tvSlot
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.raw_past_session_xml.view.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class PastSessionAdapter(context: Context, list:ArrayList<BookAppointmentResponse>):RecyclerView.Adapter<PastSessionAdapter.PastSessionHolder>() {
@@ -43,18 +35,22 @@ class PastSessionAdapter(context: Context, list:ArrayList<BookAppointmentRespons
         holder.itemView.tvDoctorLName.text = bookAppointmentResponse.gp_details.last_name
         holder.itemView.tvSessionType.text = bookAppointmentResponse.appointment_type
         holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "min")
-        holder.itemView.tvSessionTime.text = (bookAppointmentResponse.start_time)
+        holder.itemView.tvSessionDateTime.text = bookAppointmentResponse.actual_start_time?.let {
+            convertDateTime(
+                it
+            )
+        }
 
         Glide.with(mContext).load(bookAppointmentResponse.gp_details.image)
             .into(holder.itemView.ivDoctor)
 
-        val date = bookAppointmentResponse.address_info.created_at
+       /* val date = bookAppointmentResponse.address_info.created_at
         var spf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         val newDate = spf.parse(date)
         spf = SimpleDateFormat("EEEE, dd MMMM yyyy")
         val newDateString = spf.format(newDate)
         holder.itemView.tvSessionDate.text =newDateString
-
+*/
         when(bookAppointmentResponse.appointment_type)
         {
             "face_to_face"->{

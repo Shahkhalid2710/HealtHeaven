@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.dateTimeUTCFormat
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeClickAdapter
@@ -21,30 +22,22 @@ import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.prolificinteractive.materialcalendarview.*
 import kotlinx.android.synthetic.main.activity_session_book.*
-import kotlinx.android.synthetic.main.activity_session_book.cbAnuallyonApril13th
-import kotlinx.android.synthetic.main.activity_session_book.cbCustom
-import kotlinx.android.synthetic.main.activity_session_book.cbDaily
-import kotlinx.android.synthetic.main.activity_session_book.cbEveryWeekday
-import kotlinx.android.synthetic.main.activity_session_book.cbMonthly1stThursday
-import kotlinx.android.synthetic.main.activity_session_book.cbWeeklyonthursday
-import kotlinx.android.synthetic.main.activity_session_book.rvAvailableTime
-import kotlinx.android.synthetic.main.activity_session_book.rvSelectSlot
-import kotlinx.android.synthetic.main.activity_session_book.rvSessionType
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPresenter.View,
+class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPresenter.View,
     OnDateSelectedListener {
     private val mListSessionType: ArrayList<SessionType> = ArrayList()
     private val mListSelectSlot: ArrayList<SessionType> = ArrayList()
     private var selectSession = ""
 
-    private var sType=""
-    private var sSlot=""
+    private var sType = ""
+    private var sSlot = ""
     private var seleteddate = ""
-    private var sTime=""
+    private var sTime = ""
     lateinit var specialist: Specialist
     lateinit var commonData: Common
 
@@ -54,7 +47,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
     @Inject
     lateinit var userHolder: UserHolder
 
-    override fun getLayoutResourceId(): Int =R.layout.activity_session_book
+    override fun getLayoutResourceId(): Int = R.layout.activity_session_book
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +56,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
-        specialist=intent.getSerializableExtra("specialist") as Specialist
+
+        specialist = intent.getSerializableExtra("specialist") as Specialist
 
         val sessionType1 = SessionType("Phone")
         val sessionType2 = SessionType("Video")
@@ -72,18 +66,21 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         mListSessionType.add(sessionType2)
         mListSessionType.add(sessionType3)
 
-        rvSessionType.layoutManager = GridLayoutManager(this,3)
-        rvSessionType.adapter = SessionTypeAdapter(this, mListSessionType,object :SessionTypeAdapter.ItemClickListner{
-            override fun onItemClick(sessionType: SessionType, position: Int) {
-                when(position)
-                {
-                    0-> sType="phone_call"
-                    1-> sType="video"
-                    2-> sType="face_to_face"
+        rvSessionType.layoutManager = GridLayoutManager(this, 3)
+        rvSessionType.adapter = SessionTypeAdapter(
+            this,
+            mListSessionType,
+            object : SessionTypeAdapter.ItemClickListner {
+                override fun onItemClick(sessionType: SessionType, position: Int) {
+                    when(position)
+                    {
+                        0-> sType="phone_call"
+                        1-> sType="video"
+                        2-> sType="face_to_face"
+                    }
+                    //presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
                 }
-                presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
-            }
-        })
+            })
 
         val sessionType4 = SessionType("10 min")
         val sessionType5 = SessionType("20 min")
@@ -92,27 +89,27 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         mListSelectSlot.add(sessionType4)
         mListSelectSlot.add(sessionType5)
         mListSelectSlot.add(sessionType17)
-        rvSelectSlot.layoutManager =GridLayoutManager(this,4)
-        rvSelectSlot.adapter = SessionTypeAdapter(this, mListSelectSlot,object :SessionTypeAdapter.ItemClickListner{
-            override fun onItemClick(sessionType: SessionType, position: Int) {
-                when(position)
-                {
-                    0-> sSlot="10"
-                    1-> sSlot="20"
-                    2-> sSlot="30"
+        rvSelectSlot.layoutManager = GridLayoutManager(this, 4)
+        rvSelectSlot.adapter =
+            SessionTypeAdapter(this, mListSelectSlot, object : SessionTypeAdapter.ItemClickListner {
+                override fun onItemClick(sessionType: SessionType, position: Int) {
+                    when(position) {
+                        0 -> sSlot = "10"
+                        1 -> sSlot = "20"
+                        2 -> sSlot = "30"
+                    }
+                    presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
                 }
-                presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
-            }
-        })
+            })
 
         switchMultiSessions.setOnClickListener(this)
-        
+
         ivMinus.setOnClickListener { decreaseInteger() }
         ivPlus.setOnClickListener { increaseInteger() }
 
         cbDaily.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession="1"
+                selectSession = "1"
                 cbWeeklyonthursday.isChecked = false
                 cbMonthly1stThursday.isChecked = false
                 cbAnuallyonApril13th.isChecked = false
@@ -123,7 +120,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
         cbWeeklyonthursday.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession="2"
+                selectSession = "2"
                 cbDaily.isChecked = false
                 cbMonthly1stThursday.isChecked = false
                 cbAnuallyonApril13th.isChecked = false
@@ -134,7 +131,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
         cbMonthly1stThursday.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession="3"
+                selectSession = "3"
                 cbDaily.isChecked = false
                 cbWeeklyonthursday.isChecked = false
                 cbAnuallyonApril13th.isChecked = false
@@ -145,7 +142,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
         cbAnuallyonApril13th.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession="4"
+                selectSession = "4"
                 cbDaily.isChecked = false
                 cbWeeklyonthursday.isChecked = false
                 cbMonthly1stThursday.isChecked = false
@@ -156,7 +153,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
         cbEveryWeekday.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession="5"
+                selectSession = "5"
                 cbDaily.isChecked = false
                 cbWeeklyonthursday.isChecked = false
                 cbMonthly1stThursday.isChecked = false
@@ -167,7 +164,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
         cbCustom.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession="6"
+                selectSession = "6"
                 cbDaily.isChecked = false
                 cbWeeklyonthursday.isChecked = false
                 cbMonthly1stThursday.isChecked = false
@@ -177,19 +174,19 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         }
 
         btnContinue.setOnClickListener {
-            if (validateBookSession(seleteddate,sType, sSlot, sTime)) {
+            if (validateBookSession(seleteddate, sType, sSlot, sTime)) {
                 val intent = Intent(this, ConfirmBookingActivity::class.java)
                 val appointment = userHolder.getBookAppointmentData()
-                appointment.appointmentTime = sTime
+                appointment.appointmentDateTime= dateTimeUTCFormat(sTime)
+                appointment.appointmentTime =sTime
                 appointment.appointmentType = sType
                 appointment.appointmentSlot = sSlot
                 appointment.appointmentDate = seleteddate
                 userHolder.saveBookAppointmentData(appointment)
-                intent.putExtra("commonData",commonData)
+                intent.putExtra("commonData", commonData)
                 startActivity(intent)
             }
         }
-
         calendarView.setOnDateChangedListener(this)
         calendarView.addDecorator(PrimeDayDisableDecorator())
 
@@ -203,6 +200,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
             llMultiSessions.visibility = View.GONE
         }
     }
+
     private fun increaseInteger() {
         display(etSessions.text.toString().toInt() + 1)
     }
@@ -217,11 +215,14 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
 
     override fun getTimeSlot(list: ArrayList<Time>) {
         rvAvailableTime.layoutManager = GridLayoutManager(this, 4)
-        rvAvailableTime.adapter = AvailableTimeClickAdapter(this, list,object :AvailableTimeClickAdapter.ItemClickListner{
-            override fun onItemClick(time: Time, position: Int) {
-                sTime=time.start_time
-            }
-        })
+        rvAvailableTime.adapter = AvailableTimeClickAdapter(
+            this,
+            list,
+            object : AvailableTimeClickAdapter.ItemClickListner {
+                override fun onItemClick(time: Time, position: Int) {
+                    sTime = time.start_time
+                }
+            })
     }
 
     override fun displaymessage(message: String) {
@@ -236,7 +237,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
     }
 
     override fun getPrice(common: Common) {
-      commonData=common
+        commonData = common
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -245,15 +246,15 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         date1: CalendarDay,
         selected: Boolean
     ) {
-        var date=date1.date
-        val formatter = SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy")
-        val temp:String =date.date.toString()
-        try {
-            date = formatter.parse(temp)
-            Log.e("dateeeeeee", date.toString() + "")
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
+        var date = date1.date
+          val formatter = SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy")
+          val temp:String =date.date.toString()
+          try {
+              date = formatter.parse(temp)
+              Log.e("dateeeeeee", date.toString() + "")
+          } catch (e: ParseException) {
+              e.printStackTrace()
+          }
 
         val formateDate = SimpleDateFormat("yyyy-MM-dd").format(date)
         seleteddate=formateDate
@@ -271,35 +272,36 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,BookSessionPres
         }
     }
 
-    private fun validateBookSession(date:String, sessionType:String, slot:String, time:String):Boolean
-    {
-        if (date.isEmpty())
-        {
-            val snackbar = Snackbar.make(llSessionbook,"Please select date", Snackbar.LENGTH_LONG)
+    private fun validateBookSession(
+        date: String,
+        sessionType: String,
+        slot: String,
+        time: String
+    ): Boolean {
+        if (date.isEmpty()) {
+            val snackbar = Snackbar.make(llSessionbook, "Please select date", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
             snackbar.show()
             return false
         }
-        if (sessionType.isEmpty())
-        {
-            val snackbar = Snackbar.make(llSessionbook,"Please select session type", Snackbar.LENGTH_LONG)
+        if (sessionType.isEmpty()) {
+            val snackbar =
+                Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
             snackbar.show()
             return false
         }
-        if (slot.isEmpty())
-        {
-            val snackbar = Snackbar.make(llSessionbook,"Please select slot", Snackbar.LENGTH_LONG)
+        if (slot.isEmpty()) {
+            val snackbar = Snackbar.make(llSessionbook, "Please select slot", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
             snackbar.show()
             return false
         }
-        if (time.isEmpty())
-        {
-            val snackbar = Snackbar.make(llSessionbook,"Please select time", Snackbar.LENGTH_LONG)
+        if (time.isEmpty()) {
+            val snackbar = Snackbar.make(llSessionbook, "Please select time", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
             snackbar.show()

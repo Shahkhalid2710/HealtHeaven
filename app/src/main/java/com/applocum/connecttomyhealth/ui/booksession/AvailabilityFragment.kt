@@ -66,11 +66,11 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
             override fun onItemClick(sessionType: SessionType, position: Int) {
                 when(position)
                 {
-                    0-> sType="phone_call_appointment"
-                    1-> sType="online_appointment"
-                    2-> sType="offline_appointment"
+                    0-> sType="phone_call"
+                    1-> sType="video"
+                    2-> sType="face_to_face"
                 }
-                presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+              //  presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
             }
         })
 

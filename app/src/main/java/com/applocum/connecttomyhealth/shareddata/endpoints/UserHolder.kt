@@ -73,6 +73,6 @@ class UserHolder(pref: SharedPreferences) {
     }
 
     fun getBookAppointmentData(): BookAppointment {
-        return Gson().fromJson(bookAppointmentData, BookAppointment::class.java)
+        return Gson().fromJson(bookAppointmentData,BookAppointment::class.java)
     }
 }

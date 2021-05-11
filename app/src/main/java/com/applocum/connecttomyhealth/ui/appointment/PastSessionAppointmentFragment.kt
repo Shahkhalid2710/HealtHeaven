@@ -12,10 +12,8 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.appointment.adapters.PastSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
-import com.applocum.connecttomyhealth.ui.appointment.models.Session
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_past_session_appointment.*
-import kotlinx.android.synthetic.main.fragment_past_session_appointment.view.*
 import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.*
 import javax.inject.Inject
 
@@ -50,10 +48,9 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
 
     }
 
-    override fun getUpcomingSession(list: ArrayList<BookAppointmentResponse>) {
+    override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
         rvPastSession.layoutManager=LinearLayoutManager(requireActivity())
         rvPastSession.adapter=PastSessionAdapter(requireActivity(),list)
-
     }
 
     override fun viewProgress(isShow: Boolean) {
