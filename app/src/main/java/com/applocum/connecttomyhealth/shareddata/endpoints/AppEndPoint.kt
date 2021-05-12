@@ -4,6 +4,7 @@ import com.applocum.connecttomyhealth.ui.addcard.models.CardGlobalResponse
 import com.applocum.connecttomyhealth.ui.addcard.models.CardResponse
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentGlobalResponse
 import com.applocum.connecttomyhealth.ui.booksession.models.TimeResponse
+import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
 import com.applocum.connecttomyhealth.ui.mygp.models.GpServiceGlobalResponse
 import com.applocum.connecttomyhealth.ui.signup.models.GlobalResponse
 import com.applocum.connecttomyhealth.ui.specialists.models.DoctorResponse
@@ -49,4 +50,12 @@ interface AppEndPoint {
 
     @DELETE("/api/priory/patient/appointments/{id}.json")
     fun deleteAppointment(@Header("AUTH_TOKEN")authtoken: String?,@Path("id")appointmentId:Int ):Observable<BookAppointmentGlobalResponse>
+
+    @POST("/api/priory/users/password/change.json")
+    fun changePassword(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<PasswordGlobalResponse>
+
+    @POST("/api/priory/users/forgot_password.json")
+    fun forgetPassword(@Body requestBody: RequestBody):Observable<PasswordGlobalResponse>
+
 }
+

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.raw_past_session_xml.view.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class PastSessionAdapter(context: Context, list:ArrayList<BookAppointmentResponse>):RecyclerView.Adapter<PastSessionAdapter.PastSessionHolder>() {
+class PastSessionAdapter(context: Context,list:ArrayList<BookAppointmentResponse>,private val onItemClick:ItemClickListner):RecyclerView.Adapter<PastSessionAdapter.PastSessionHolder>() {
     var mContext=context
     var mList=list
 
@@ -35,22 +35,11 @@ class PastSessionAdapter(context: Context, list:ArrayList<BookAppointmentRespons
         holder.itemView.tvDoctorLName.text = bookAppointmentResponse.gp_details.last_name
         holder.itemView.tvSessionType.text = bookAppointmentResponse.appointment_type
         holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "min")
-        holder.itemView.tvSessionDateTime.text = bookAppointmentResponse.actual_start_time?.let {
-            convertDateTime(
-                it
-            )
-        }
+        holder.itemView.tvSessionDateTime.text = convertDateTime(bookAppointmentResponse.actual_start_time)
 
         Glide.with(mContext).load(bookAppointmentResponse.gp_details.image)
             .into(holder.itemView.ivDoctor)
 
-       /* val date = bookAppointmentResponse.address_info.created_at
-        var spf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-        val newDate = spf.parse(date)
-        spf = SimpleDateFormat("EEEE, dd MMMM yyyy")
-        val newDateString = spf.format(newDate)
-        holder.itemView.tvSessionDate.text =newDateString
-*/
         when(bookAppointmentResponse.appointment_type)
         {
             "face_to_face"->{
@@ -63,7 +52,16 @@ class PastSessionAdapter(context: Context, list:ArrayList<BookAppointmentRespons
                 holder.itemView.tvSessionType.text=("Video Call")
             }
         }
+        holder.itemView.btnViewDetails.setOnClickListener {
+            onItemClick.itemClick(bookAppointmentResponse, position)
+        }
+        holder.itemView.btnBookAgain.setOnClickListener {
+            onItemClick.onButtonClick(bookAppointmentResponse, position)
+        }
+    }
 
-
+    interface ItemClickListner{
+        fun itemClick(bookAppointmentResponse: BookAppointmentResponse,position: Int)
+        fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse,position: Int)
     }
 }

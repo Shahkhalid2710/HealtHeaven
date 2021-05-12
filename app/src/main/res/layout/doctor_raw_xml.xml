@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvDoctor"
     android:layout_width="match_parent"
-    android:layout_height="76dp"
+    android:layout_height="80dp"
+    android:layout_margin="@dimen/spacing_10"
     android:backgroundTint="@color/white"
-    android:foreground="@drawable/effect"
+    android:background="@color/green"
     android:clickable="true"
     android:focusable="true"
-    android:layout_margin="@dimen/spacing_10"
+    android:foreground="@drawable/effect"
     app:cardCornerRadius="6dp">
 
     <RelativeLayout
@@ -20,6 +23,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="8dp"
+            android:layout_centerVertical="true"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_dr_1" />
@@ -30,43 +34,64 @@
             android:layout_toEndOf="@+id/ivDoctor"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvDoctorName"
-                android:layout_width="156dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="@string/dr_jessica_fernandez"
-                android:textSize="@dimen/font_14" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvDoctorFName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/dr_paullina"
+                    android:textSize="@dimen/font_14" />
+
+                <TextView
+                    android:id="@+id/tvDoctorLName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/gayoso"
+                    android:textSize="@dimen/font_14" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvProfession"
-                android:layout_width="156dp"
-                android:layout_height="20dp"
+                android:id="@+id/tvDoctorDesignation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/neurosurgeon"
                 android:textSize="@dimen/font_11" />
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="156dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="3dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="@string/_10_am_4_pm"
-                android:textSize="@dimen/font_10" />
-               <ImageView
-                   android:id="@+id/ivSave"
-                   android:layout_width="24dp"
-                   android:layout_height="24dp"
-                   android:layout_alignParentEnd="true"
-                   android:layout_marginEnd="@dimen/spacing_10"
-                   android:layout_marginBottom="@dimen/spacing_10"
-                   android:src="@drawable/ic_save"/>
-           </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp">
+
+                <TextView
+                    android:id="@+id/tvDoctorEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/_10_am_4_pm"
+                    android:textSize="@dimen/font_10"
+                    tools:ignore="RelativeOverlap" />
+
+                <ImageView
+                    android:id="@+id/ivSave"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/spacing_10"
+                    android:layout_marginBottom="@dimen/spacing_10"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_save" />
+            </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
 

@@ -8,8 +8,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/llSignup"
@@ -131,11 +131,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:weightSum="3"
                     android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -147,17 +147,17 @@
                         <View
                             android:layout_width="0dp"
                             android:layout_height="1dp"
-                            android:layout_weight="1"
                             android:layout_gravity="center"
                             android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
                             android:background="@color/textcolorgrey" />
 
                         <TextView
                             android:id="@+id/tvSignupUsing"
                             android:layout_width="0dp"
                             android:layout_height="18dp"
-                            android:layout_weight="1"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
                             android:gravity="center"
                             android:text="@string/or_sign_up_using"
                             android:textColor="@color/grey"
@@ -166,9 +166,9 @@
                         <View
                             android:layout_width="0dp"
                             android:layout_height="1dp"
-                            android:layout_weight="1"
                             android:layout_gravity="center"
                             android:layout_marginStart="8dp"
+                            android:layout_weight="1"
                             android:background="@color/textcolorgrey" />
                     </LinearLayout>
                 </LinearLayout>
@@ -443,9 +443,9 @@
                     android:layout_height="36dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/spacing_40"
-                    android:foreground="@drawable/effect_button"
                     android:background="@drawable/custom_btn"
                     android:fontFamily="@font/montserrat_semibold"
+                    android:foreground="@drawable/effect_button"
                     android:text="@string/register"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -473,10 +473,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_5"
-                        android:focusable="true"
                         android:clickable="true"
-                        android:foreground="@drawable/effect_button"
+                        android:focusable="true"
                         android:fontFamily="@font/montserrat_semibold"
+                        android:foreground="@drawable/effect_button"
                         android:text="@string/sign_in"
                         android:textColor="@color/green"
                         android:textSize="@dimen/font_12" />

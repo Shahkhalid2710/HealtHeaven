@@ -172,7 +172,7 @@
                 android:weightSum="2">
 
                 <EditText
-                    android:id="@+id/etEndDateMonth"
+                    android:id="@+id/etSelectEndDateMonth"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"

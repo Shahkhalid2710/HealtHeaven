@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.ui.home.model.Doctor
+import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.doctor_raw_xml.view.*
 
-class DoctorAdapter(context: Context,list:ArrayList<Doctor>):RecyclerView.Adapter<DoctorAdapter.DoctorHolder>(){
+class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doctorClick:DoctorClickListner):RecyclerView.Adapter<DoctorAdapter.DoctorHolder>(){
     var mContext=context
     var mList=list
 
@@ -22,14 +22,23 @@ class DoctorAdapter(context: Context,list:ArrayList<Doctor>):RecyclerView.Adapte
     }
 
     override fun getItemCount(): Int {
-        return mList.size
+        return 3
     }
 
     override fun onBindViewHolder(holder: DoctorHolder, position: Int) {
-        val doctor=mList[position]
-        holder.itemView.tvDoctorName.text=doctor.dName
-        holder.itemView.tvProfession.text=doctor.dProfession
-        holder.itemView.tvTime.text=doctor.dTime
-        Glide.with(mContext).load(doctor.dImage).into(holder.itemView.ivDoctor)
+        val specialist = mList[position]
+        holder.itemView.tvDoctorFName.text=specialist.first_name
+        holder.itemView.tvDoctorLName.text=specialist.last_name
+        holder.itemView.tvDoctorDesignation.text=specialist.designation
+        holder.itemView.tvDoctorEmail.text=specialist.email
+        Glide.with(mContext).load(specialist.image).into(holder.itemView.ivDoctor)
+
+        holder.itemView.cvDoctor.setOnClickListener {
+            doctorClick.onDoctorClick(specialist, position)
+        }
+
+    }
+    interface DoctorClickListner{
+        fun onDoctorClick(specialist: Specialist,position: Int)
     }
 }

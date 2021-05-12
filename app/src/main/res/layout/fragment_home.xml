@@ -85,9 +85,9 @@
                     android:layout_height="33dp"
                     android:layout_marginStart="@dimen/spacing_16"
                     android:layout_marginTop="@dimen/spacing_16"
-                    android:foreground="@drawable/effect_button"
                     android:background="@drawable/custombtn_xml"
                     android:fontFamily="@font/poppins_semibold"
+                    android:foreground="@drawable/effect_button"
                     android:padding="8dp"
                     android:text="@string/book_appointment"
                     android:textAllCaps="false"
@@ -104,112 +104,112 @@
                 android:src="@drawable/ic_dr" />
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/tvCategories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="@string/categories"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_16" />
+        <!-- <TextView
+             android:id="@+id/tvCategories"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="@dimen/spacing_24"
+             android:layout_marginTop="@dimen/spacing_16"
+             android:fontFamily="@font/poppins_semibold"
+             android:text="@string/categories"
+             android:textColor="@color/aapBlack"
+             android:textSize="@dimen/font_16" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:orientation="horizontal"
-            android:weightSum="2">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="@dimen/spacing_16"
+             android:orientation="horizontal"
+             android:weightSum="2">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCategories"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:layout_marginStart="14dp"
-                android:layout_weight="1.4" />
+             <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/rvCategories"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:nestedScrollingEnabled="false"
+                 android:layout_marginStart="14dp"
+                 android:layout_weight="1.4" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.6"
-                android:focusable="true"
-                android:clickable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+             <LinearLayout
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:layout_weight="0.6"
+                 android:focusable="true"
+                 android:clickable="true"
+                 android:foreground="@drawable/effect"
+                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/custom_more_layout">
+                 <LinearLayout
+                     android:layout_width="64dp"
+                     android:layout_height="64dp"
+                     android:layout_gravity="center"
+                     android:background="@drawable/custom_more_layout">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        tools:ignore="UselessParent">
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center"
+                         android:orientation="vertical"
+                         tools:ignore="UselessParent">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            tools:ignore="UselessParent">
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center"
+                             android:gravity="center"
+                             android:orientation="horizontal"
+                             tools:ignore="UselessParent">
 
-                            <LinearLayout
-                                android:layout_width="12dp"
-                                android:layout_height="12dp"
-                                android:background="@drawable/custom_gray_layout" />
+                             <LinearLayout
+                                 android:layout_width="12dp"
+                                 android:layout_height="12dp"
+                                 android:background="@drawable/custom_gray_layout" />
 
-                            <LinearLayout
-                                android:layout_width="12dp"
-                                android:layout_height="12dp"
-                                android:layout_marginStart="3dp"
-                                android:background="@drawable/custom_gray_layout" />
-                        </LinearLayout>
+                             <LinearLayout
+                                 android:layout_width="12dp"
+                                 android:layout_height="12dp"
+                                 android:layout_marginStart="3dp"
+                                 android:background="@drawable/custom_gray_layout" />
+                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            tools:ignore="UselessParent">
+                         <LinearLayout
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center"
+                             android:layout_marginTop="3dp"
+                             android:gravity="center"
+                             android:orientation="horizontal"
+                             tools:ignore="UselessParent">
 
-                            <LinearLayout
-                                android:layout_width="12dp"
-                                android:layout_height="12dp"
-                                android:background="@drawable/custom_gray_layout" />
+                             <LinearLayout
+                                 android:layout_width="12dp"
+                                 android:layout_height="12dp"
+                                 android:background="@drawable/custom_gray_layout" />
 
-                            <LinearLayout
-                                android:layout_width="12dp"
-                                android:layout_height="12dp"
-                                android:layout_marginStart="3dp"
-                                android:background="@drawable/custom_gray_layout" />
-                        </LinearLayout>
-                    </LinearLayout>
+                             <LinearLayout
+                                 android:layout_width="12dp"
+                                 android:layout_height="12dp"
+                                 android:layout_marginStart="3dp"
+                                 android:background="@drawable/custom_gray_layout" />
+                         </LinearLayout>
+                     </LinearLayout>
 
-                </LinearLayout>
+                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvMore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/more"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_12" />
-            </LinearLayout>
-        </LinearLayout>
-
+                 <TextView
+                     android:id="@+id/tvMore"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:layout_marginTop="4dp"
+                     android:fontFamily="@font/poppins_medium"
+                     android:text="@string/more"
+                     android:textColor="@color/aapBlack"
+                     android:textSize="@dimen/font_12" />
+             </LinearLayout>
+         </LinearLayout>
+ -->
         <TextView
             android:id="@+id/tvTopDoctors"
             android:layout_width="wrap_content"
@@ -221,14 +221,31 @@
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_16" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDoctors"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:layout_marginBottom="60dp" />
+            android:layout_marginBottom="60dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTopDoctors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="14dp"
+                android:nestedScrollingEnabled="false" />
+
+            <ProgressBar
+                android:id="@+id/progressTopDoctors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:indeterminateTint="@color/green"
+                android:progressTint="@color/green"
+                android:visibility="gone" />
+        </FrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

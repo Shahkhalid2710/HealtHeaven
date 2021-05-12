@@ -50,7 +50,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuIte
                 etFirstName.text.toString(),
                 etLastName.text.toString(),
                 etEmail.text.toString(),
-                "+" + countrycode,etPhoneNumber.text.toString(),
+                "+$countrycode",etPhoneNumber.text.toString(),
                 etPassword.text.toString(),
                 etConfirmPassword.text.toString(),
                 etGender.text.toString().toLowerCase(Locale.ROOT),

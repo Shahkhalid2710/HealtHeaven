@@ -8,8 +8,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/llLogin"
@@ -132,26 +132,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:weightSum="3"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
                         android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
                         android:background="@color/textcolorgrey" />
 
                     <TextView
                         android:id="@+id/tvSigninUsing"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/or_sign_in_using"
                         android:textColor="@color/grey"
@@ -160,9 +160,9 @@
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
+                        android:layout_weight="1"
                         android:background="@color/textcolorgrey" />
                 </LinearLayout>
 
@@ -239,9 +239,9 @@
                     android:layout_height="36dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/spacing_40"
-                    android:foreground="@drawable/effect_button"
                     android:background="@drawable/custom_btn"
                     android:fontFamily="@font/montserrat_semibold"
+                    android:foreground="@drawable/effect_button"
                     android:text="@string/login"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -253,10 +253,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/spacing_16"
-                    android:focusable="true"
                     android:clickable="true"
-                    android:foreground="@drawable/effect_button"
+                    android:focusable="true"
                     android:fontFamily="@font/montserrat_medium"
+                    android:foreground="@drawable/effect_button"
                     android:text="@string/forgot_password"
                     android:textColor="@color/green"
                     android:textSize="@dimen/font_12" />
@@ -283,10 +283,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_5"
-                        android:focusable="true"
                         android:clickable="true"
-                        android:foreground="@drawable/effect_button"
+                        android:focusable="true"
                         android:fontFamily="@font/montserrat_semibold"
+                        android:foreground="@drawable/effect_button"
                         android:text="@string/sign_up"
                         android:textColor="@color/green"
                         android:textSize="@dimen/font_12" />
@@ -295,5 +295,5 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-<include layout="@layout/custom_progress"/>
+    <include layout="@layout/custom_progress" />
 </FrameLayout>

@@ -24,7 +24,7 @@ class SpecilistPresenter@Inject constructor(private val api:AppEndPoint)  {
         this.view=view
     }
 
-    fun getlist()
+    fun getDoctorlist()
     {
         view.viewProgress(true)
         api.getdoctors(userHolder.userToken!!,66)

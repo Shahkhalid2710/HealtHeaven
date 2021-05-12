@@ -17,6 +17,7 @@ import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentRespo
 import com.applocum.connecttomyhealth.ui.sessiondetails.SessionDetailsActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.custom_cancel_book_session_dialog.view.*
+import kotlinx.android.synthetic.main.custom_loader_progress.view.*
 import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.btnCancel
 import javax.inject.Inject
@@ -32,12 +33,14 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
     @Inject
     lateinit var userHolder: UserHolder
 
+    lateinit var v: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val  v=inflater.inflate(R.layout.fragment_upcoming_session_apointment, container, false)
+        v=inflater.inflate(R.layout.fragment_upcoming_session_apointment, container, false)
 
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
@@ -78,9 +81,7 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
             }
 
             override fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
-                val intent=Intent(requireActivity(),SessionDetailsActivity::class.java)
-                intent.putExtra("bookAppointmentResponse",bookAppointmentResponse)
-                startActivity(intent)
+
             }
         })
         rvUpcomingSession.adapter=upcomingSessionAdapter
@@ -88,6 +89,6 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
     }
 
     override fun viewProgress(isShow: Boolean) {
-      //  progress.visibility = if (isShow) View.VISIBLE else View.GONE
+       v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 }

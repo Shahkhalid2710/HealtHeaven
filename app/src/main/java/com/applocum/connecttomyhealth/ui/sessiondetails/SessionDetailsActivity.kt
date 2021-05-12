@@ -21,12 +21,12 @@ class SessionDetailsActivity : BaseActivity() {
 
         bookAppointmentResponse= intent.getSerializableExtra("bookAppointmentResponse") as BookAppointmentResponse
 
-        val startTime= bookAppointmentResponse.start_time?.let { convertTime(it) }
-        val endTime= bookAppointmentResponse.end_time?.let { convertTime(it) }
+        val startTime= convertTime(bookAppointmentResponse.actual_start_time)
+        val endTime= convertTime(bookAppointmentResponse.actual_end_time)
 
         tvDoctorFName.text=bookAppointmentResponse.gp_details.first_name
         tvDoctorLName.text=bookAppointmentResponse.gp_details.last_name
-        tvDate.text= bookAppointmentResponse.start_time?.let { convertDate(it)}
+        tvDate.text= convertDate(bookAppointmentResponse.actual_start_time)
         tvAmount.text=("€"+bookAppointmentResponse.appointment_price.toString()+".00")
         tvTime.text=("$startTime - $endTime")
         tvDoctorGmcno.text=("GMC NO."+" "+bookAppointmentResponse.gp_details.gmc)

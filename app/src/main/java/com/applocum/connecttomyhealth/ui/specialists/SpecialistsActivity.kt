@@ -31,7 +31,7 @@ class SpecialistsActivity : BaseActivity() ,SpecilistPresenter.View {
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
 
-        presenter.getlist()
+        presenter.getDoctorlist()
 
         val appointment = BookAppointment()
         appointment.corporateId = 66

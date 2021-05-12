@@ -27,24 +27,27 @@ class BookSessionPresenter@Inject constructor(private val api:AppEndPoint) {
     fun getTimeSlots(doctorid:Int,date:String,sesionType:String?=null,sessionSlot:String?=null)
     {
         view.viewProgress(true)
-        api.getTimeSlots(userHolder.userToken!!,date,doctorid,sesionType!!,sessionSlot!!)
-                  .observeOn(AndroidSchedulers.mainThread())
-                  .subscribeBy(onNext={
-                      when(it.status)
-                      {
-                          Success-> {
-                              view.viewProgress(false)
-                              view.getTimeSlot(it.data)
-                              view.getPrice(it.common)
-                          }
-                          InvalidCredentials,InternalServer -> {
-                              view.displaymessage(it.message)
-                          }
-                      }
-                  },onError = {
-                      view.viewProgress(false)
-                      it.printStackTrace()
-                  }).let { disposables.addAll(it) }
+        sesionType?.let {
+            sessionSlot?.let { it1 ->
+                api.getTimeSlots(userHolder.userToken!!,date,doctorid, it, it1)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext={
+                        when(it.status) {
+                            Success-> {
+                                view.viewProgress(false)
+                                view.getTimeSlot(it.data)
+                                view.getPrice(it.common)
+                            }
+                            InvalidCredentials,InternalServer -> {
+                                view.displaymessage(it.message)
+                            }
+                        }
+                    },onError = {
+                        view.viewProgress(false)
+                        it.printStackTrace()
+                    }).let { disposables.addAll(it) }
+            }
+        }
     }
 
     interface View{

@@ -2,7 +2,6 @@ package com.applocum.connecttomyhealth.ui.appointment.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertDateTime
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
-import com.applocum.connecttomyhealth.ui.sessiondetails.SessionDetailsActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.raw_session_xml.view.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.btnCancel
@@ -39,14 +37,9 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
         holder.itemView.tvDoctorLName.text = bookAppointmentResponse.gp_details.last_name
         holder.itemView.tvSessionType.text = bookAppointmentResponse.appointment_type
         holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "min")
-        holder.itemView.tvSessionDateTime.text = bookAppointmentResponse.start_time?.let {
-            convertDateTime(
-                it
-            )
-        }
+        holder.itemView.tvSessionDateTime.text = bookAppointmentResponse.start_time?.let { convertDateTime(it) }
 
-        Glide.with(mContext).load(bookAppointmentResponse.gp_details.image)
-            .into(holder.itemView.ivDoctor)
+        Glide.with(mContext).load(bookAppointmentResponse.gp_details.image).into(holder.itemView.ivDoctor)
 
      /*   val date = bookAppointmentResponse.address_info.created_at
         var spf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
@@ -71,7 +64,9 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
             }
         }
 
+/*
         holder.itemView.btnCheckin.isEnabled = holder.itemView.btnCheckin.text != "Join"
+*/
 
         holder.itemView.btnCheckin.setOnClickListener {
             itemCLick.onButtonClick(bookAppointmentResponse, position)
