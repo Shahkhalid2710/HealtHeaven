@@ -17,17 +17,15 @@ import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.specialists.SpecialistsActivity
 import com.applocum.connecttomyhealth.ui.specialists.SpecilistPresenter
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
+import kotlinx.android.synthetic.main.custom_progress.*
+import kotlinx.android.synthetic.main.custom_progress.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import javax.inject.Inject
 
-class HomeFragment : Fragment(),ProfileDetailsPresenter.View,SpecilistPresenter.View {
+class HomeFragment : Fragment(),SpecilistPresenter.View {
     @Inject
     lateinit var userHolder: UserHolder
-
-    @Inject
-    lateinit var presenter: ProfileDetailsPresenter
-
     @Inject
     lateinit var specilistPresenter: SpecilistPresenter
 
@@ -40,24 +38,21 @@ class HomeFragment : Fragment(),ProfileDetailsPresenter.View,SpecilistPresenter.
         v = inflater.inflate(R.layout.fragment_home, container, false)
 
         MyApplication.getAppContext().component.inject(this)
-        presenter.injectview(this)
         specilistPresenter.injectview(this)
 
         v.btnBookAppointment.setOnClickListener {
             startActivity(Intent(requireActivity(), SpecialistsActivity::class.java))
         }
 
-        presenter.showProfile()
+        v.tvName.text=userHolder.userFirstName
+
         specilistPresenter.getDoctorlist()
 
         return v
     }
 
-    override fun showProfile(patient: Patient) {
-        tvName.text = patient.first_name
-    }
-
     override fun displaymessage(message: String) {
+
     }
 
     override fun getdoctorlist(list: ArrayList<Specialist>) {

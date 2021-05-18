@@ -2,12 +2,19 @@ package com.applocum.connecttomyhealth.shareddata.endpoints
 
 import com.applocum.connecttomyhealth.ui.addcard.models.CardGlobalResponse
 import com.applocum.connecttomyhealth.ui.addcard.models.CardResponse
+import com.applocum.connecttomyhealth.ui.allergyhistory.models.AllergyGlobalResponse
+import com.applocum.connecttomyhealth.ui.allergyhistory.models.AllergyHistoryGlobalResponse
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentGlobalResponse
 import com.applocum.connecttomyhealth.ui.booksession.models.TimeResponse
 import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalGlobalResponse
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistoryGlobalResponse
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistoryTrueFalse
 import com.applocum.connecttomyhealth.ui.mygp.models.GpServiceGlobalResponse
+import com.applocum.connecttomyhealth.ui.securitycheck.models.SecurityGlobalResponse
 import com.applocum.connecttomyhealth.ui.signup.models.GlobalResponse
 import com.applocum.connecttomyhealth.ui.specialists.models.DoctorResponse
+import com.google.gson.JsonObject
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -44,7 +51,6 @@ interface AppEndPoint {
     @POST("/api/priory/patient/appointments.json")
     fun bookApoointment(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<BookAppointmentGlobalResponse>
 
-
     @GET("/api/priory/doctors/appointments.json")
     fun upcomingSession(@Header("AUTH_TOKEN")authtoken: String?,@Query("appointments_type")appointmentType:String,@Query("appointment_corporate_id")corporateId:Int):Observable<BookAppointmentGlobalResponse>
 
@@ -57,5 +63,23 @@ interface AppEndPoint {
     @POST("/api/priory/users/forgot_password.json")
     fun forgetPassword(@Body requestBody: RequestBody):Observable<PasswordGlobalResponse>
 
+    @POST("/api/users/security_check.json")
+    fun securityCheck(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<SecurityGlobalResponse>
+
+    @GET("/api/consultations/search_snomed_code.json")
+    fun getDiseaseList(@Query ("search") search:String?):Observable<MedicalGlobalResponse>
+
+    @POST("/api/medical_histories.json")
+    fun addMedicalHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Body requestBody: RequestBody):Observable<MedicalHistoryGlobalResponse>
+
+    @GET("/api/medical_histories.json")
+    fun showMedicalHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("user_id")userId:Int,@Query("type")historyType:String,@Query("status")status:String,@Query("corporate_id")corporateId: Int):Observable<MedicalHistoryGlobalResponse>
+
+    @POST("/api/user_allergies.json")
+    fun addAllergyHistory(@Header("AUTH_TOKEN")authtoken: String?, @Header("clinical_token")clinicalToken:String?, @Body requestBody: RequestBody):Observable<AllergyGlobalResponse>
+
+    @GET("/api/user_allergies.json")
+    fun showAllergyHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("user_id")userId:Int,@Query("type")historyType:String,@Query("status")status:String,@Query("corporate_id")corporateId: Int):Observable<AllergyHistoryGlobalResponse>
 }
+
 

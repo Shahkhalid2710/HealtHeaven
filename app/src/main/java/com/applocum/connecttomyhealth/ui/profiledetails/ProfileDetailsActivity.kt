@@ -44,7 +44,7 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         presenter.showProfile()
 
         tvSave.setOnClickListener {
-            presenter.updatProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString())
+            presenter.updateProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString())
             finish()
         }
 
@@ -71,17 +71,16 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         etDOB.setText(newDateString)
     }
 
-    override fun displaymessage(message: String) {
+    override fun displayMessage(message: String) {
       Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 
-    override fun viewProgress(isShow: Boolean) {
+    override fun viewprogress(isShow: Boolean) {
         progress.visibility = if(isShow) View.VISIBLE else View.GONE
     }
 
     private fun editTextClicks()
     {
-
         etGender.setOnClickListener {
             val ctw = ContextThemeWrapper(this, R.style.CustomPopupTheme)
             val popupMenu = PopupMenu(ctw, etGender)

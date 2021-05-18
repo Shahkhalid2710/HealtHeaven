@@ -36,7 +36,7 @@ class ForgotPasswordActivity : BaseActivity(),ForgotPasswordPresenter.View, Text
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llForgotPassword, message, Snackbar.LENGTH_LONG)
         val snackView = snackBar.view
-        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackBar.show()
     }
 

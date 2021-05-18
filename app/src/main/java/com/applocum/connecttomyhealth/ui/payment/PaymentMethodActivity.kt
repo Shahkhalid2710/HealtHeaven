@@ -62,11 +62,13 @@ class PaymentMethodActivity : BaseActivity(),AddCardPresenter.View {
         {
             layoutnotfoundcard.visibility=View.VISIBLE
             llSavedCards.visibility=View.GONE
+            tvAddPaymentMethod.visibility=View.GONE
         }
         else
         {
             layoutnotfoundcard.visibility=View.GONE
             llSavedCards.visibility=View.VISIBLE
+            tvAddPaymentMethod.visibility=View.VISIBLE
         }
         rvSavedCards.layoutManager=LinearLayoutManager(this)
         rvSavedCards.adapter=PaymentCardAdapter(this,list,false,object :PaymentCardAdapter.CardClickListener{

@@ -23,7 +23,10 @@ import com.applocum.connecttomyhealth.ui.home.HomeFragment
 import com.applocum.connecttomyhealth.ui.investigation.AddInvestigationActivity
 import com.applocum.connecttomyhealth.ui.investigation.InvestigationActivity
 import com.applocum.connecttomyhealth.ui.login.LoginActivity
+import com.applocum.connecttomyhealth.ui.medicalhistory.ActiveMedicalHistoryFragment
 import com.applocum.connecttomyhealth.ui.medicalhistory.AddMedicalHistoryActivity
+import com.applocum.connecttomyhealth.ui.medicalhistory.MedicalHistoryActivity
+import com.applocum.connecttomyhealth.ui.medicalhistory.PastMedicalHistoryFragment
 import com.applocum.connecttomyhealth.ui.mydownloads.MyDownloadsActivity
 import com.applocum.connecttomyhealth.ui.mygp.AddGPServiceActivity
 import com.applocum.connecttomyhealth.ui.mygp.GpServiceActivity
@@ -36,6 +39,7 @@ import com.applocum.connecttomyhealth.ui.payment.PaymentShowActivity
 import com.applocum.connecttomyhealth.ui.personaldetails.PersonalDetailsActivity
 import com.applocum.connecttomyhealth.ui.profile.ProfileFragment
 import com.applocum.connecttomyhealth.ui.profiledetails.ProfileDetailsActivity
+import com.applocum.connecttomyhealth.ui.securitycheck.SecurityActivity
 import com.applocum.connecttomyhealth.ui.settings.SettingActivity
 import com.applocum.connecttomyhealth.ui.signup.SignupActivity
 import com.applocum.connecttomyhealth.ui.specialists.SpecialistsActivity
@@ -122,6 +126,10 @@ interface NetworkComponent {
 
     fun inject(activity:PaymentMethodActivity)
 
+    fun inject(activity:SecurityActivity)
+
+    fun inject(activity:MedicalHistoryActivity)
+
     fun inject(fragment:HomeFragment)
 
     fun inject(fragment:ProfileFragment)
@@ -138,9 +146,14 @@ interface NetworkComponent {
 
     fun inject(fragment:PastAllergyFragment)
 
+    fun inject(fragment:ActiveMedicalHistoryFragment)
+
+    fun inject(fragment:PastMedicalHistoryFragment)
+
     fun inject(fragment:UpcomingSessionApointmentFragment)
 
     fun inject(fragment:PastSessionAppointmentFragment)
 
     fun inject(intercepter:GlobalResponseInterceptor)
+
 }

@@ -37,6 +37,7 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         tvSkip.setOnClickListener {
             val intent=Intent(this,LoginActivity::class.java)
             startActivity(intent)
+            saveprefdata()
             finish()
         }
 

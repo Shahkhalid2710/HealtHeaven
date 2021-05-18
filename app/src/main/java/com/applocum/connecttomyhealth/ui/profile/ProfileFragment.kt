@@ -1,76 +1,90 @@
 package com.applocum.connecttomyhealth.ui.profile
 
+import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.changepassword.ChangePasswordActivity
-import com.applocum.connecttomyhealth.ui.clinicalrecords.ClinicalRecordsActivity
 import com.applocum.connecttomyhealth.ui.login.LoginActivity
 import com.applocum.connecttomyhealth.ui.mydownloads.MyDownloadsActivity
 import com.applocum.connecttomyhealth.ui.payment.MemberShipActivity
 import com.applocum.connecttomyhealth.ui.payment.PaymentMethodActivity
 import com.applocum.connecttomyhealth.ui.personaldetails.PersonalDetailsActivity
-import com.applocum.connecttomyhealth.ui.profiledetails.ProfileDetailsPresenter
-import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
+import com.applocum.connecttomyhealth.ui.securitycheck.SecurityActivity
 import com.applocum.connecttomyhealth.ui.settings.SettingActivity
-import kotlinx.android.synthetic.main.activity_profile_details.tvFName
-import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.custom_signout_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.fragment_profile.view.btnSignOut
 import javax.inject.Inject
 
 
-class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
+class ProfileFragment : Fragment() {
+    lateinit var v: View
 
-     @Inject
-     lateinit var presenter:ProfileDetailsPresenter
+    @Inject
+    lateinit var userHolder: UserHolder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v= inflater.inflate(R.layout.fragment_profile, container, false)
+        v = inflater.inflate(R.layout.fragment_profile, container, false)
         MyApplication.getAppContext().component.inject(this)
-        presenter.injectview(this)
+
+        v.tvFName.text=userHolder.userFirstName
+        v.tvLName.text=userHolder.userLastName
 
         v.llPersonalDetails.setOnClickListener {
-            startActivity(Intent(requireActivity(),PersonalDetailsActivity::class.java))
+            startActivity(Intent(requireActivity(), PersonalDetailsActivity::class.java))
         }
         v.llClinicalRecords.setOnClickListener {
-            startActivity(Intent(requireActivity(),ClinicalRecordsActivity::class.java))
+            startActivity(Intent(requireActivity(), SecurityActivity::class.java))
         }
         v.llMyDownloads.setOnClickListener {
-            startActivity(Intent(requireActivity(),MyDownloadsActivity::class.java))
+            startActivity(Intent(requireActivity(), MyDownloadsActivity::class.java))
         }
         v.llPaymentMethods.setOnClickListener {
-            startActivity(Intent(requireActivity(),PaymentMethodActivity::class.java))
+            startActivity(Intent(requireActivity(), PaymentMethodActivity::class.java))
         }
 
         v.llMemberships.setOnClickListener {
-            startActivity(Intent(requireActivity(),MemberShipActivity::class.java))
+            startActivity(Intent(requireActivity(), MemberShipActivity::class.java))
         }
 
         v.llChangePassword.setOnClickListener {
-            startActivity(Intent(requireActivity(),ChangePasswordActivity::class.java))
+            startActivity(Intent(requireActivity(), ChangePasswordActivity::class.java))
         }
         v.llSetting.setOnClickListener {
-            startActivity(Intent(requireActivity(),SettingActivity::class.java))
+            startActivity(Intent(requireActivity(), SettingActivity::class.java))
         }
         v.llHelp.setOnClickListener {
 
         }
 
         v.btnSignOut.setOnClickListener {
-            val intent=Intent(requireActivity(),LoginActivity::class.java)
-            startActivity(intent)
+            val showDialogView = LayoutInflater.from(requireActivity())
+                .inflate(R.layout.custom_signout_dialog, null, false)
+            val dialog = AlertDialog.Builder(requireActivity()).create()
+            dialog.setView(showDialogView)
+            dialog.setCanceledOnTouchOutside(false)
+
+            showDialogView.btnSignOut.setOnClickListener {
+                val intent=Intent(requireActivity(),LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+            showDialogView.btnNo.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
         }
 
         /*RxView.clicks(v.btnSignOut).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -79,19 +93,6 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
 
             }*/
 
-        presenter.showProfile()
-
         return v
-    }
-
-    override fun showProfile(patient: Patient) {
-        tvFName.text=patient.first_name
-        tvLName.text=patient.last_name
-    }
-
-    override fun displaymessage(message: String) {
-    }
-
-    override fun viewProgress(isShow: Boolean) {
     }
 }

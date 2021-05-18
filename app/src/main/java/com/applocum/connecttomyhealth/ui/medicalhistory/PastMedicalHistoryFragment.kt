@@ -6,14 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.MedicalHistoryAdapter
+import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.PastMedicalHistoryAdapter
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.FalseMedicalHistory
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
-import kotlinx.android.synthetic.main.fragment_active_medical_history.view.*
-import kotlinx.android.synthetic.main.fragment_past_medical_history.view.*
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
+import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
+import kotlinx.android.synthetic.main.fragment_past_medical_history.*
+import javax.inject.Inject
 
-class PastMedicalHistoryFragment : Fragment() {
-    var mListPastMedicalHistory:ArrayList<MedicalHistory> = ArrayList()
+class PastMedicalHistoryFragment : Fragment(),MedicalPresenter.View {
+
+    @Inject
+    lateinit var presenter: MedicalPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,17 +28,31 @@ class PastMedicalHistoryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_past_medical_history, container, false)
+        MyApplication.getAppContext().component.inject(this)
+        presenter.injectView(this)
 
-        val medicalHistory1=MedicalHistory("Neoplasm of abducens nerve","January 2020")
-        val medicalHistory2=MedicalHistory("Neoplasm of junctional region of epiglottis","March 2020")
-        val medicalHistory3=MedicalHistory("Jugular lymphadenopathy","January 2020")
-
-        mListPastMedicalHistory.add(medicalHistory1)
-        mListPastMedicalHistory.add(medicalHistory2)
-        mListPastMedicalHistory.add(medicalHistory3)
-        v.rvPastMedicalHistory.layoutManager= LinearLayoutManager(requireActivity())
-        v.rvPastMedicalHistory.adapter=
-            MedicalHistoryAdapter(requireActivity(),mListPastMedicalHistory)
+        presenter.pastMedicalHistory()
         return v
+    }
+
+    override fun displayMessage(message: String) {
+
+    }
+
+    override fun getDiseaseList(list: ArrayList<Medical>) {
+    }
+
+    override fun viewProgress(isShow: Boolean) {
+    }
+
+    override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {
+    }
+
+    override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {
+    }
+
+    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {
+        rvPastMedicalHistory.layoutManager=LinearLayoutManager(requireActivity())
+        rvPastMedicalHistory.adapter=PastMedicalHistoryAdapter(requireActivity(),falseMedicalHistory)
     }
 }

@@ -65,7 +65,7 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
 
                 }
             },onError = {
-
+              it.printStackTrace()
             }) .let { disposables.addAll(it) }
     }
 

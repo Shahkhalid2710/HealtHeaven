@@ -126,7 +126,7 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
     override fun displaymessage(message: String) {
         val snackBar = Snackbar.make(llAvailability, message, Snackbar.LENGTH_LONG)
         val snackView = snackBar.view
-        snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.green))
+        snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
         snackBar.show()
     }
 

@@ -8,6 +8,7 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -40,6 +41,13 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
                 .addFormDataPart("card[securityCode]",cvv)
                 .build()
 
+           /* val jsonObject=JsonObject()
+            jsonObject.addProperty("card[cardNumber]",cardNumber)
+            jsonObject.addProperty("card[cardHolderName]",holderName)
+            jsonObject.addProperty("card[expiryDate]",expiryDate)
+            jsonObject.addProperty("card[securityCode]",cvv)
+            jsonObject.addProperty("patient_id",userHolder.userid)
+*/
             api.addCard(userHolder.userToken!!,requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onNext = {

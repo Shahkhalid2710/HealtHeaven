@@ -75,8 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
-                    android:layout_marginTop="28dp" />
-
+                    android:layout_marginTop="@dimen/spacing_20" />
                 <include
                     android:id="@+id/investigation"
                     layout="@layout/custom_investigation_xml"

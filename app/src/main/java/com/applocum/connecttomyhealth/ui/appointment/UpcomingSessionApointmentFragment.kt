@@ -1,7 +1,6 @@
 package com.applocum.connecttomyhealth.ui.appointment
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.appointment.adapters.UpcomingSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
-import com.applocum.connecttomyhealth.ui.sessiondetails.SessionDetailsActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.custom_cancel_book_session_dialog.view.*
 import kotlinx.android.synthetic.main.custom_loader_progress.view.*
@@ -53,7 +51,7 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
     override fun displayMessage(mesage: String) {
         val snackbar = Snackbar.make(llUpcomingSession,mesage, Snackbar.LENGTH_LONG)
         val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.green))
+        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
         snackbar.show()
     }
 

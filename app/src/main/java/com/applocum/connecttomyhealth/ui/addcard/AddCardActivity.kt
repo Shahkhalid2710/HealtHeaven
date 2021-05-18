@@ -1,6 +1,5 @@
 package com.applocum.connecttomyhealth.ui.addcard
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -13,14 +12,13 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
-import com.applocum.connecttomyhealth.ui.payment.PaymentMethodActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_card.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import javax.inject.Inject
 
 class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
-    var count = 0
+    private var count = 0
 
     @Inject
     lateinit var presenter: AddCardPresenter
@@ -90,7 +88,7 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
     override fun displaymessage(message: String?) {
         val snackbar = Snackbar.make(llAddCard, message.toString(), Snackbar.LENGTH_LONG)
         val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()
     }
 

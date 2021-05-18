@@ -47,7 +47,7 @@ class LoginActivity : BaseActivity(), LoginPresenter.View {
     override fun displaymessage(message: String?) {
         val snackbar = Snackbar.make(llLogin, message.toString(), Snackbar.LENGTH_LONG)
         val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()
     }
 

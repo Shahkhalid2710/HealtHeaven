@@ -39,16 +39,22 @@ class InvestigationAdapter(context: Context,list: ArrayList<Investigation>):Recy
         holder.itemView.llInvestigation.setOnClickListener {
             if (holder.itemView.llDes.visibility == View.GONE) {
                 holder.itemView.llDes.visibility = View.VISIBLE
-                holder.itemView.ivList.animate().rotation(180f).start()
+                holder.itemView.ivList.setImageResource(R.drawable.ic_drop_list_top)
 
             } else {
                 holder.itemView.llDes.visibility = View.GONE
-                holder.itemView.ivList.animate().rotation(360f).start()
+                holder.itemView.ivList.setImageResource(R.drawable.ic_drop_list)
             }
+        }
+        holder.itemView.ivList.setOnClickListener {
+            if (holder.itemView.llDes.visibility == View.GONE) {
+                holder.itemView.llDes.visibility = View.VISIBLE
+                holder.itemView.ivList.setImageResource(R.drawable.ic_drop_list_top)
 
-            val animation =
-                ObjectAnimator.ofInt(holder.itemView.llDes, "maxLines", holder.itemView.tvInvestigationDescription.maxLines)
-            animation.setDuration(200).start()
+            } else {
+                holder.itemView.llDes.visibility = View.GONE
+                holder.itemView.ivList.setImageResource(R.drawable.ic_drop_list)
+            }
         }
     }
 }

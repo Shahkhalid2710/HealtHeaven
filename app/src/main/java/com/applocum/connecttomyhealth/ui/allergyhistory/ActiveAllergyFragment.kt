@@ -5,31 +5,60 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.ui.allergyhistory.adapters.AllergyHistoryAdapter
-import com.applocum.connecttomyhealth.ui.allergyhistory.models.AllergyHistory
-import kotlinx.android.synthetic.main.fragment_active_allergy.view.*
+import com.applocum.connecttomyhealth.ui.allergyhistory.adapters.ActiveAllergyHistoryAdapter
+import com.applocum.connecttomyhealth.ui.allergyhistory.models.FalseAllergy
+import com.applocum.connecttomyhealth.ui.allergyhistory.models.TrueAllergy
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.custom_loader_progress.view.*
+import kotlinx.android.synthetic.main.fragment_active_allergy.*
+import javax.inject.Inject
 
-class ActiveAllergyFragment : Fragment() {
-      var mListActiveAllergy:ArrayList<AllergyHistory> = ArrayList()
+class ActiveAllergyFragment : Fragment(),AllergyHistoryPresenter.View {
+
+    @Inject
+    lateinit var presenter: AllergyHistoryPresenter
+
+    lateinit var v: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v= inflater.inflate(R.layout.fragment_active_allergy, container, false)
+        v=inflater.inflate(R.layout.fragment_active_allergy, container, false)
+        MyApplication.getAppContext().component.inject(this)
+        presenter.injectView(this)
 
-        val allergyHistory1=AllergyHistory("Oncogene Protine V-ABC")
-        val allergyHistory2=AllergyHistory("Food allerdy diet")
-        val allergyHistory3=AllergyHistory("Quilonia Ethiopica")
+        presenter.activeAllergy()
 
-        mListActiveAllergy.add(allergyHistory1)
-        mListActiveAllergy.add(allergyHistory2)
-        mListActiveAllergy.add(allergyHistory3)
-
-        v.rvActiveAllergy.layoutManager=LinearLayoutManager(requireActivity())
-        v.rvActiveAllergy.adapter=AllergyHistoryAdapter(requireActivity(),mListActiveAllergy)
         return v
     }
-  }
+
+    override fun displaySuccessMessage(message: String) {
+
+    }
+
+    override fun displayErrorMessage(message: String) {
+        val snackbar = Snackbar.make(llActiveAllergy, message, Snackbar.LENGTH_LONG)
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+        snackbar.show()
+    }
+
+    override fun showActiveAllergy(activeAllergy: ArrayList<TrueAllergy>) {
+        rvActiveAllergy.layoutManager=LinearLayoutManager(requireActivity())
+        rvActiveAllergy.adapter=ActiveAllergyHistoryAdapter(requireActivity(),activeAllergy)
+    }
+
+    override fun showPastAllergy(pastAllergy: ArrayList<FalseAllergy>) {
+
+    }
+
+    override fun viewProgress(isShow: Boolean) {
+        v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+}

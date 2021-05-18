@@ -38,3 +38,10 @@ fun convertDate(date: String): String {
     return sdf.format(defaultSdf.parse(date))
 }
 
+
+fun convertSimpleFormat(date: String): String {
+    val defaultSdf = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+    defaultSdf.timeZone = TimeZone.getTimeZone("UTC")
+    val sdf = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+    return sdf.format(defaultSdf.parse(date))
+}

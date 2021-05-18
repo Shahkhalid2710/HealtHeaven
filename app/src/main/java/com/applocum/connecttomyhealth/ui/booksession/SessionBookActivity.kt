@@ -39,7 +39,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     private var seleteddate = ""
     private var sTime = ""
     lateinit var specialist: Specialist
-    lateinit var commonData: Common
+    private lateinit var commonData: Common
 
     @Inject
     lateinit var presenter: BookSessionPresenter
@@ -228,7 +228,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     override fun displaymessage(message: String) {
         val snackbar = Snackbar.make(llSessionbook, message, Snackbar.LENGTH_LONG)
         val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()
     }
 
@@ -281,7 +281,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         if (date.isEmpty()) {
             val snackbar = Snackbar.make(llSessionbook, "Please select date", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
             return false
         }
@@ -289,21 +289,21 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             val snackbar =
                 Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
             return false
         }
         if (slot.isEmpty()) {
             val snackbar = Snackbar.make(llSessionbook, "Please select slot", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
             return false
         }
         if (time.isEmpty()) {
             val snackbar = Snackbar.make(llSessionbook, "Please select time", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
             return false
         }

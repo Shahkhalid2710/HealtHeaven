@@ -28,11 +28,11 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
 
     fun showProfile()
     {
-        view.viewProgress(true)
+        view.viewprogress(true)
         api.showProfile(userHolder.userToken,userHolder.userid)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
-                view.viewProgress(false)
+                view.viewprogress(false)
                 when (it.status) {
                     Success -> {
                         val patientObject = Gson().fromJson(it.data,PatientResponse::class.java)
@@ -40,16 +40,16 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
                         view.showProfile(patient)
                     }
                     InvalidCredentials,InternalServer -> {
-                        view.displaymessage(it.message)
+                        view.displayMessage(it.message)
                     }
                 }
             }, onError = {
-                view.viewProgress(false)
+                view.viewprogress(false)
                 it.printStackTrace()
             }).let { disposables.add(it) }
     }
 
-    fun updatProfile(firstname:String,lastname:String,email:String,phoneno:String,gender:String,dob:String)
+    fun updateProfile(firstname:String, lastname:String, email:String, phoneno:String, gender:String, dob:String)
     {
         val requestBody: RequestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
@@ -66,13 +66,13 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
             .subscribeBy(onNext={
                 when (it.status) {
                     Success -> {
-                        view.displaymessage(it.message)
+                        view.displayMessage(it.message)
                         val patientObject = Gson().fromJson(it.data,PatientResponse::class.java)
                         val patient = patientObject.patient
                         view.showProfile(patient)
                     }
                     InvalidCredentials,InternalServer -> {
-                        view.displaymessage(it.message)
+                        view.displayMessage(it.message)
                     }
                 }
             },onError = {
@@ -83,7 +83,7 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
     interface View
     {
         fun showProfile(patient: Patient)
-        fun displaymessage(message:String)
-        fun viewProgress(isShow: Boolean)
+        fun displayMessage(message:String)
+        fun viewprogress(isShow: Boolean)
     }
 }

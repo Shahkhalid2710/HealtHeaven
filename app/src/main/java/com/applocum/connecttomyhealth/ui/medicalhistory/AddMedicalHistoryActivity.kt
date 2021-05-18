@@ -1,91 +1,198 @@
 package com.applocum.connecttomyhealth.ui.medicalhistory
 
+import android.app.AlertDialog
 import android.os.Bundle
-import android.view.ContextThemeWrapper
-import android.view.MenuItem
-import android.widget.PopupMenu
+import android.view.View
+import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
+import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.MedicalDiseaseAdapter
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.FalseMedicalHistory
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
+import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.widget.RxTextView
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_medical_history.*
+import java.util.*
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
-class AddMedicalHistoryActivity : BaseActivity(), PopupMenu.OnMenuItemClickListener {
+class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
+
+    var mListMedical: ArrayList<Medical> = ArrayList()
+    var diseaseid=0
+    private var selectedString=""
+    private var isMatched =false
+    private var isActivePast =false
+
+
+    @Inject
+    lateinit var presenter: MedicalPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_medical_history
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         ivBack.setOnClickListener { finish() }
+        (application as MyApplication).component.inject(this)
+        presenter.injectView(this)
 
-        etDiseaseName.setOnClickListener {
-            val ctw = ContextThemeWrapper(this, R.style.CustomPopupTheme)
-            val popupMenu = PopupMenu(ctw, etDiseaseName)
-            popupMenu.menuInflater.inflate(R.menu.menu_medical_history, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener(this)
-            popupMenu.show()
+        etStartMonth.setOnClickListener { selectStartMonth() }
+        etStartYear.setOnClickListener { selectStartYear() }
+        etEndMonth.setOnClickListener { selectEndMonth() }
+        etEndYear.setOnClickListener { selectEndYear() }
+
+
+        RxTextView.textChanges(etDiseaseName)
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnEach {
+               if (selectedString!=null && selectedString == etDiseaseName.text.toString())
+               {
+                   isMatched=true
+               }
+                else
+               {
+                   isMatched=false
+                   selectedString=""
+               }
+
+            }
+            .observeOn(Schedulers.computation())
+            .filter { s -> s.length >= 2}
+            .observeOn(AndroidSchedulers.mainThread())
+            .map {
+                if (!isMatched)
+                {
+                    presenter.getDiseaseList(etDiseaseName.text.toString())
+                }
+            }.subscribe().let { presenter.disposables.add(it) }
+
+
+        cbActiveCurrently.setOnCheckedChangeListener { _, b ->
+            if (b) {
+                llEndDate.visibility=View.GONE
+                isActivePast=true
+            }
+            else
+            {
+                llEndDate.visibility=View.VISIBLE
+                isActivePast=false
+            }
         }
 
-        etSelectStartDateMonth.setOnClickListener {
-            val ctw = ContextThemeWrapper(this, R.style.CustomPopupTheme)
-            val popupMenu = PopupMenu(ctw, etSelectStartDateMonth)
-            popupMenu.menuInflater.inflate(R.menu.menu_month, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener(this)
-            popupMenu.show()
-        }
-
-        etSelectEndDateMonth.setOnClickListener {
-            val ctw = ContextThemeWrapper(this, R.style.CustomPopupTheme)
-            val popupMenu = PopupMenu(ctw, etSelectEndDateMonth)
-            popupMenu.menuInflater.inflate(R.menu.menu_month, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener(this)
-            popupMenu.show()
+        btnSaveDiseases.setOnClickListener {
+             presenter.addMedicalHistory(diseaseid.toString(),etStartMonth.text.toString(),etStartYear.text.toString(),isActivePast,etEndMonth.text.toString(),etEndYear.text.toString())
         }
     }
 
+    override fun displayMessage(message: String) {
+        val snackBar = Snackbar.make(llMedicalHistory, message, Snackbar.LENGTH_LONG)
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
+    }
 
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.neoplasm_of_abducens_nerve -> etDiseaseName.setText(R.string.neoplasm_of_abducens_nerve)
-            R.id.neoplasm_of_junctional_region_of_epiglottis -> etDiseaseName.setText(R.string.neoplasm_of_junctional_region_of_epiglottis)
-            R.id.jugular_lymphadenopathy -> etDiseaseName.setText(R.string.jugular_lymphadenopathy)
-            R.id.oncogene_protine_v_abc -> etDiseaseName.setText(R.string.oncogene_protine_v_abc)
+    override fun getDiseaseList(list: ArrayList<Medical>) {
+        mListMedical=list
+        rvMedicalDisease.visibility=View.VISIBLE
+        rvMedicalDisease.layoutManager= LinearLayoutManager(this)
+        rvMedicalDisease.adapter=MedicalDiseaseAdapter(this,mListMedical,object :MedicalDiseaseAdapter.ItemClickListnter{
+           override fun onItemClick(medical: Medical, position: Int) {
+               diseaseid=medical.id
+               if(!etDiseaseName.text.isNullOrBlank())
+               {
+                   mListMedical.clear()
+               }
+               selectedString=medical.description
+               etDiseaseName.setText(medical.description)
+               rvMedicalDisease.visibility=View.GONE
+           }
+       })
+    }
+    override fun viewProgress(isShow: Boolean) {
+         progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {
+          finish()
+    }
+
+    override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {
+
+    }
+
+    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {
+    }
+
+    private fun selectStartMonth()
+    {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Select month")
+        val startMonth=resources.getStringArray(R.array.Months)
+        val dataAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,startMonth)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etStartMonth.setText(startMonth[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun selectStartYear()
+    {
+        val years = ArrayList<String>()
+        val thisYear: Int = Calendar.getInstance().get(Calendar.YEAR)
+        for (i in thisYear downTo 1991) {
+            years.add(i.toString())
+        }
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Select year")
+        val dataAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,years)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etStartYear.setText(years[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
+
+    }
+    private fun selectEndMonth()
+    {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Select month")
+        val endMonth=resources.getStringArray(R.array.Months)
+        val dataAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,endMonth)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etEndMonth.setText(endMonth[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun selectEndYear()
+    {
+        val years = ArrayList<String>()
+        val thisYear: Int = Calendar.getInstance().get(Calendar.YEAR)
+        for (i in thisYear downTo 1991) {
+            years.add(i.toString())
         }
 
-       /* when(item?.itemId)
-        {
-            R.id.january->etSelectStartDateMonth.setText(R.string.january)
-            R.id.february->etSelectStartDateMonth.setText(R.string.february)
-            R.id.march->etSelectStartDateMonth.setText(R.string.march)
-            R.id.april->etSelectStartDateMonth.setText(R.string.april)
-            R.id.may->etSelectStartDateMonth.setText(R.string.may)
-            R.id.june->etSelectStartDateMonth.setText(R.string.june)
-            R.id.july->etSelectStartDateMonth.setText(R.string.july)
-            R.id.auguest->etSelectStartDateMonth.setText(R.string.auguest)
-            R.id.september->etSelectStartDateMonth.setText(R.string.september)
-            R.id.october->etSelectStartDateMonth.setText(R.string.october)
-            R.id.november->etSelectStartDateMonth.setText(R.string.november)
-            R.id.december->etSelectStartDateMonth.setText(R.string.december)
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Select year")
+        val dataAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,years)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etEndYear.setText(years[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
 
-        }*/
-
-       /* when(item?.itemId)
-        {
-            R.id.january->etSelectEndDateMonth.setText(R.string.january)
-            R.id.february->etSelectEndDateMonth.setText(R.string.february)
-            R.id.march->etSelectEndDateMonth.setText(R.string.march)
-            R.id.april->etSelectEndDateMonth.setText(R.string.april)
-            R.id.may->etSelectEndDateMonth.setText(R.string.may)
-            R.id.june->etSelectEndDateMonth.setText(R.string.june)
-            R.id.july->etSelectEndDateMonth.setText(R.string.july)
-            R.id.auguest->etSelectEndDateMonth.setText(R.string.auguest)
-            R.id.september->etSelectEndDateMonth.setText(R.string.september)
-            R.id.october->etSelectEndDateMonth.setText(R.string.october)
-            R.id.november->etSelectEndDateMonth.setText(R.string.november)
-            R.id.december->etSelectEndDateMonth.setText(R.string.december)
-
-        }*/
-        return true
     }
 }

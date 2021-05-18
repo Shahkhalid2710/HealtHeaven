@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.AllergyHistory
+import com.applocum.connecttomyhealth.ui.allergyhistory.models.TrueAllergy
 import kotlinx.android.synthetic.main.raw_allergy_history.view.*
 
-class AllergyHistoryAdapter(context: Context, list: ArrayList<AllergyHistory>) :
-    RecyclerView.Adapter<AllergyHistoryAdapter.AllergyHistoryHolder>() {
+class ActiveAllergyHistoryAdapter(context: Context, list: ArrayList<TrueAllergy>) :
+    RecyclerView.Adapter<ActiveAllergyHistoryAdapter.AllergyHistoryHolder>() {
     var mContext = context
     var mList = list
 
@@ -26,20 +27,9 @@ class AllergyHistoryAdapter(context: Context, list: ArrayList<AllergyHistory>) :
     }
 
     override fun onBindViewHolder(holder: AllergyHistoryHolder, position: Int) {
-        val allergyHistory = mList[position]
-        holder.itemView.tvName.text = allergyHistory.aName
-        holder.itemView.tvName.setOnClickListener {
-            holder.itemView.flNotVerified.visibility = View.VISIBLE
-        }
-        holder.itemView.setOnClickListener {
-            if (holder.itemView.rlDeletedby.visibility == View.GONE) {
-                holder.itemView.rlDeletedby.visibility = View.VISIBLE
-                holder.itemView.rlNotVerified.visibility = View.GONE
-            } else {
-                holder.itemView.rlDeletedby.visibility = View.GONE
-                holder.itemView.rlNotVerified.visibility = View.VISIBLE
-            }
-        }
+        val trueAllergy = mList[position]
+        holder.itemView.tvName.text =trueAllergy.allergy.name
+
 
     }
 }

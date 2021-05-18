@@ -21,9 +21,9 @@
             android:layout_height="15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/spacing_25"
+            android:clickable="true"
             android:contentDescription="@string/todo"
             android:focusable="true"
-            android:clickable="true"
             android:foreground="@drawable/effect_button"
             android:src="@drawable/ic_back" />
 
@@ -42,8 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 android:autofillHints="0"
                 android:backgroundTint="@color/textcolorgrey"
                 android:drawableEnd="@drawable/ic_dropdown_list"
-                android:focusable="false"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="@string/add_allergy"
                 android:inputType="text"
@@ -70,6 +70,35 @@
                 android:textSize="@dimen/font_12"
                 tools:ignore="LabelFor" />
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:background="@color/white">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAllergy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_10"
+                    android:layout_marginEnd="@dimen/spacing_10"
+                    android:background="@color/white" />
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:indeterminateTint="@color/green"
+                    android:progressTint="@color/green"
+                    android:visibility="gone" />
+            </FrameLayout>
+
             <CheckBox
                 android:id="@+id/cbActiveCurrently"
                 android:layout_width="wrap_content"
@@ -78,10 +107,10 @@
                 android:layout_marginTop="@dimen/spacing_24"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_semibold"
                 android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/active_currently"
@@ -95,9 +124,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="51dp"
                 android:layout_marginBottom="60dp"
-                android:foreground="@drawable/effect_button"
                 android:background="@drawable/custom_btn"
                 android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
                 android:text="@string/save_allergy"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

@@ -29,6 +29,9 @@ class UserHolder(pref: SharedPreferences) {
     var bookAppointmentData by pref.prefString()
         private set
 
+    var clinicalToken by pref.prefString()
+        private set
+
 
     fun saveUser(
         id: String,
@@ -64,6 +67,11 @@ class UserHolder(pref: SharedPreferences) {
         userGender = gender
         userDOB = dob
         userToken = token
+    }
+
+    fun saveClinicalToken(token:String)
+    {
+        clinicalToken=token
     }
 
     fun saveBookAppointmentData(appointment: BookAppointment?) {

@@ -49,7 +49,7 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
     override fun displayMessage(mesage: String) {
         val snackbar = Snackbar.make(llUpcomingSession,mesage, Snackbar.LENGTH_LONG)
         val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.green))
+        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
         snackbar.show()
 
     }

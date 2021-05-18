@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.MedicalHistoryAdapter
-import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
-import kotlinx.android.synthetic.main.fragment_active_medical_history.view.*
+import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.ActiveMedicalHistoryAdapter
+import com.applocum.connecttomyhealth.ui.medicalhistory.models.*
+import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
+import kotlinx.android.synthetic.main.fragment_active_medical_history.*
+import javax.inject.Inject
 
-class ActiveMedicalHistoryFragment : Fragment() {
-    var mListActiveMedicalHistory:ArrayList<MedicalHistory> = ArrayList()
+class ActiveMedicalHistoryFragment : Fragment(),
+    MedicalPresenter.View {
+
+    @Inject
+    lateinit var presenter: MedicalPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,18 +26,34 @@ class ActiveMedicalHistoryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_active_medical_history, container, false)
+        MyApplication.getAppContext().component.inject(this)
+        presenter.injectView(this)
 
-        val medicalHistory1=MedicalHistory("Neoplasm of abducens nerve","January 2020")
-        val medicalHistory2=MedicalHistory("Neoplasm of junctional region of epiglottis","March 2020")
-        val medicalHistory3=MedicalHistory("Jugular lymphadenopathy","January 2020")
-
-        mListActiveMedicalHistory.add(medicalHistory1)
-        mListActiveMedicalHistory.add(medicalHistory2)
-        mListActiveMedicalHistory.add(medicalHistory3)
-        v.rvActiveMedicalHistory.layoutManager=LinearLayoutManager(requireActivity())
-        v.rvActiveMedicalHistory.adapter=MedicalHistoryAdapter(requireActivity(),mListActiveMedicalHistory)
+        presenter.activeMedicalHistory()
 
         return v
+    }
+
+    override fun displayMessage(message: String) {
+
+    }
+
+    override fun getDiseaseList(list: ArrayList<Medical>) {
+    }
+
+    override fun viewProgress(isShow: Boolean) {
+    }
+
+    override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {
+    }
+
+    override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {
+        rvActiveMedicalHistory.layoutManager=LinearLayoutManager(requireActivity())
+        rvActiveMedicalHistory.adapter=ActiveMedicalHistoryAdapter(requireActivity(),trueMedicalHistory)
+
+    }
+
+    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {
     }
 
 }

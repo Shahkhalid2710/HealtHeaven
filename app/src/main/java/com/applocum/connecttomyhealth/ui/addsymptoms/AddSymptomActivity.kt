@@ -71,9 +71,9 @@ class AddSymptomActivity : BaseActivity() {
                 userHolder.saveBookAppointmentData(appointment)
                 startActivity(intent)
             } else {
-                val snackbar = Snackbar.make(lladdsymptoms, "Please fill all data", Snackbar.LENGTH_LONG)
+                val snackbar = Snackbar.make(lladdsymptoms, "Please fill all the credentials", Snackbar.LENGTH_LONG)
                 val snackview = snackbar.view
-                snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+                snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
                 snackbar.show()
             }
         }
@@ -128,7 +128,7 @@ class AddSymptomActivity : BaseActivity() {
         {
             val snackbar = Snackbar.make(lladdsymptoms,"Please enter symptoms", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
             return false
         }
@@ -136,7 +136,7 @@ class AddSymptomActivity : BaseActivity() {
         {
             val snackbar = Snackbar.make(lladdsymptoms,"Please add image", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
             return false
         }

@@ -65,7 +65,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuIte
     override fun displaymessage(message: String?) {
         val snackbar = Snackbar.make(llSignup, message.toString(), Snackbar.LENGTH_LONG)
         val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()
     }
 

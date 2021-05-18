@@ -62,7 +62,7 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
                     val snackbar =
                         Snackbar.make(llPaymentShow, "Please select card", Snackbar.LENGTH_LONG)
                     val snackview = snackbar.view
-                    snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+                    snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
                     snackbar.show()
                 }
                 else -> {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="263dp"
+    android:layout_height="180dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/sign_out"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/spacing_16"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/are_you_sure_you_want_to_signout_from_healtheaven"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="@dimen/spacing_16"
+        android:layout_marginBottom="27dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSignOut"
+            android:layout_width="95dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_red_btn"
+            android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
+            android:text="@string/sign_out"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btnNo"
+            android:layout_width="95dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:background="@drawable/default_red_btn"
+            android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
+            android:text="@string/no"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

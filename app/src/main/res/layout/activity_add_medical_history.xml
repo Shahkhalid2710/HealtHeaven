@@ -22,9 +22,9 @@
             android:layout_height="15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/spacing_25"
+            android:clickable="true"
             android:contentDescription="@string/todo"
             android:focusable="true"
-            android:clickable="true"
             android:foreground="@drawable/effect_button"
             android:src="@drawable/ic_back" />
 
@@ -43,8 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                 android:autofillHints="0"
                 android:backgroundTint="@color/textcolorgrey"
                 android:drawableEnd="@drawable/ic_dropdown_list"
-                android:focusable="false"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="@string/select_disease_name"
                 android:inputType="textCapSentences"
@@ -80,150 +80,200 @@
                 android:textSize="@dimen/font_12"
                 tools:ignore="LabelFor" />
 
-            <TextView
-                android:id="@+id/tvStartDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/start_date"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <EditText
-                    android:id="@+id/etSelectStartDateMonth"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginEnd="32dp"
-                    android:layout_weight="1"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_dropdown_list"
-                    android:focusable="false"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/select_month"
-                    android:inputType="date"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor" />
-
-                <EditText
-                    android:id="@+id/etSelectStartDateYear"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_weight="1"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_dropdown_list"
-                    android:focusable="false"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/select_year"
-                    android:inputType="date"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor" />
-            </LinearLayout>
-
-            <CheckBox
-                android:id="@+id/cbActiveCurrently"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_24"
                 android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:fontFamily="@font/montserrat_semibold"
-                android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/active_currently"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_10" />
+                android:background="@color/white">
 
-            <TextView
-                android:id="@+id/tvEndDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/end_date"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMedicalDisease"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_10"
+                    android:layout_marginEnd="@dimen/spacing_10"
+                    android:background="@color/white" />
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:indeterminateTint="@color/green"
+                    android:progressTint="@color/green"
+                    android:visibility="gone" />
+            </FrameLayout>
 
             <LinearLayout
+                android:id="@+id/llDates"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible"
+                tools:ignore="UselessParent">
 
-                <EditText
-                    android:id="@+id/etSelectEndDateMonth"
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tvStartDate"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginEnd="32dp"
-                    android:layout_weight="1"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_dropdown_list"
-                    android:focusable="false"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/select_month"
-                    android:inputType="date"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor" />
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/start_date"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
 
-                <EditText
-                    android:id="@+id/etSelectEndDateYear"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_weight="1"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_dropdown_list"
-                    android:focusable="false"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/select_year"
-                    android:inputType="date"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor" />
-            </LinearLayout>
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-            <Button
-                android:id="@+id/btnSaveDiseases"
-                android:layout_width="168dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="51dp"
-                android:layout_marginBottom="@dimen/spacing_40"
-                android:foreground="@drawable/effect_button"
-                android:background="@drawable/custom_btn"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/save_diseases"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_12" />
+                    <EditText
+                        android:id="@+id/etStartMonth"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="32dp"
+                        android:layout_weight="1"
+                        android:autofillHints="0"
+                        android:backgroundTint="@color/textcolorgrey"
+                        android:drawableEnd="@drawable/ic_dropdown_list"
+                        android:focusable="false"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="@string/select_month"
+                        android:inputType="textCapSentences"
+                        android:textColor="@color/aapBlack"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_12"
+                        tools:ignore="LabelFor" />
+
+                    <EditText
+                        android:id="@+id/etStartYear"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_weight="1"
+                        android:autofillHints="0"
+                        android:backgroundTint="@color/textcolorgrey"
+                        android:drawableEnd="@drawable/ic_dropdown_list"
+                        android:focusable="false"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="@string/select_year"
+                        android:inputType="textCapSentences"
+                        android:textColor="@color/aapBlack"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_12"
+                        tools:ignore="LabelFor" />
+
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cbActiveCurrently"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:button="@drawable/checkbox"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:foreground="@drawable/effect_button"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/active_currently"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_10" />
+
+                <LinearLayout
+                    android:id="@+id/llEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@string/end_date"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <EditText
+                            android:id="@+id/etEndMonth"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="32dp"
+                            android:layout_weight="1"
+                            android:autofillHints="0"
+                            android:backgroundTint="@color/textcolorgrey"
+                            android:drawableEnd="@drawable/ic_dropdown_list"
+                            android:focusable="false"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:hint="@string/select_month"
+                            android:inputType="textCapSentences"
+                            android:textColor="@color/aapBlack"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/font_12"
+                            tools:ignore="LabelFor" />
+
+                        <EditText
+                            android:id="@+id/etEndYear"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_weight="1"
+                            android:autofillHints="0"
+                            android:backgroundTint="@color/textcolorgrey"
+                            android:drawableEnd="@drawable/ic_dropdown_list"
+                            android:focusable="false"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:hint="@string/select_year"
+                            android:inputType="textCapSentences"
+                            android:textColor="@color/aapBlack"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/font_12"
+                            tools:ignore="LabelFor" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnSaveDiseases"
+                    android:layout_width="168dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="51dp"
+                    android:layout_marginBottom="@dimen/spacing_40"
+                    android:background="@drawable/custom_btn"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:foreground="@drawable/effect_button"
+                    android:text="@string/save_diseases"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>
