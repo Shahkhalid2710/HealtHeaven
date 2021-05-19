@@ -20,6 +20,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_medical_history.*
+import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -29,7 +30,7 @@ import kotlin.collections.ArrayList
 class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
 
     var mListMedical: ArrayList<Medical> = ArrayList()
-    var diseaseid=0
+    var diseaseid=""
     private var selectedString=""
     private var isMatched =false
     private var isActivePast =false
@@ -90,8 +91,10 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
             }
         }
 
+        diseaseid=etDiseaseName.text.toString()
+
         btnSaveDiseases.setOnClickListener {
-             presenter.addMedicalHistory(diseaseid.toString(),etStartMonth.text.toString(),etStartYear.text.toString(),isActivePast,etEndMonth.text.toString(),etEndYear.text.toString())
+             presenter.addMedicalHistory(diseaseid,etStartMonth.text.toString(),etStartYear.text.toString(),isActivePast,etEndMonth.text.toString(),etEndYear.text.toString())
         }
     }
 
@@ -108,7 +111,7 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
         rvMedicalDisease.layoutManager= LinearLayoutManager(this)
         rvMedicalDisease.adapter=MedicalDiseaseAdapter(this,mListMedical,object :MedicalDiseaseAdapter.ItemClickListnter{
            override fun onItemClick(medical: Medical, position: Int) {
-               diseaseid=medical.id
+               diseaseid=medical.id.toString()
                if(!etDiseaseName.text.isNullOrBlank())
                {
                    mListMedical.clear()
@@ -120,7 +123,11 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
        })
     }
     override fun viewProgress(isShow: Boolean) {
-         progress.visibility=if (isShow) View.VISIBLE else View.GONE
+         progressMedical.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewMedicalProgress(isShow: Boolean) {
+        progress.visibility=if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {

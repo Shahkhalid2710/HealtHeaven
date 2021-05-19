@@ -70,20 +70,22 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                 endYear
             )
         ) {
+            view.viewMedicalProgress(true)
             val startDate= "01/$startMonth/$startYear"
             val endDate= "01/$endMonth/$endYear"
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("medical_history[user_id]", userHolder.userid!!)
                 .addFormDataPart("medical_history[start_date]", startDate)
-                .addFormDataPart("medical_history[end_date]", endDate)
-                .addFormDataPart("medical_history[is_active]", activePast.toString())
+                .addFormDataPart("medical_history[is_active]",activePast.toString())
+                .addFormDataPart("medical_history[end_date]",endDate)
                 .addFormDataPart("medical_history[snomed_code_id]", diseaseName)
                 .build()
 
             api.addMedicalHistory(userHolder.userToken!!, userHolder.clinicalToken, requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onNext = {
+                    view.viewMedicalProgress(false)
                     when (it.status) {
                         Success -> {
                             val medicalObject = Gson().fromJson(it.data,MedicalHistoryResponse::class.java)
@@ -96,6 +98,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                     }
 
                 }, onError = {
+                    view.viewMedicalProgress(false)
                     it.printStackTrace()
                 }).let { disposables.addAll(it) }
         }
@@ -103,11 +106,13 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
 
     fun activeMedicalHistory()
     {
+        view.viewProgress(true)
         api.showMedicalHistory(userHolder.userToken,userHolder.clinicalToken,userHolder.userid!!.toInt(),
             activeMedicalHistory,
             statusUnverified,66)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
+                view.viewProgress(false)
                 when (it.status) {
                     Success -> {
                         val medicalHistoryTrueFalseResponse = Gson().fromJson(it.data,MedicalHistoryTrueFalseResponse::class.java)
@@ -118,16 +123,19 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                     }
                 }
             }, onError = {
+                view.viewProgress(false)
                 it.printStackTrace()
             }).let { disposables.add(it) }
     }
 
     fun pastMedicalHistory()
     {
+        view.viewProgress(true)
         api.showMedicalHistory(userHolder.userToken,userHolder.clinicalToken,userHolder.userid!!.toInt(),
             pastMedicalHistory,statusUnverified,66)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
+                view.viewProgress(false)
                 when (it.status) {
                     Success -> {
                         val medicalHistoryTrueFalseResponse = Gson().fromJson(it.data,MedicalHistoryTrueFalseResponse::class.java)
@@ -138,6 +146,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                     }
                 }
             }, onError = {
+                view.viewProgress(false)
                 it.printStackTrace()
             }).let { disposables.add(it) }
     }
@@ -181,6 +190,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
         fun displayMessage(message: String)
         fun getDiseaseList(list: ArrayList<Medical>)
         fun viewProgress(isShow: Boolean)
+        fun viewMedicalProgress(isShow: Boolean)
         fun sendMedicalHistoryData(medicalHistory: MedicalHistory)
         fun showActiveMedicalHistory(trueMedicalHistory:ArrayList<TrueMedicalHistory>)
         fun showPastMedicalHistory(falseMedicalHistory:ArrayList<FalseMedicalHistory>)

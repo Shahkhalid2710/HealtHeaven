@@ -7,6 +7,10 @@ import com.applocum.connecttomyhealth.ui.allergyhistory.models.AllergyHistoryGlo
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentGlobalResponse
 import com.applocum.connecttomyhealth.ui.booksession.models.TimeResponse
 import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
+import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistoryGlobalResponse
+import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistoryResponse
+import com.applocum.connecttomyhealth.ui.investigation.models.InvestigationGlobalResponse
+import com.applocum.connecttomyhealth.ui.investigation.models.InvestigationResponse
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalGlobalResponse
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistoryGlobalResponse
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistoryTrueFalse
@@ -80,6 +84,18 @@ interface AppEndPoint {
 
     @GET("/api/user_allergies.json")
     fun showAllergyHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("user_id")userId:Int,@Query("type")historyType:String,@Query("status")status:String,@Query("corporate_id")corporateId: Int):Observable<AllergyHistoryGlobalResponse>
+
+    @POST("/api/investigations.json")
+    fun addInvestigation(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Body requestBody: RequestBody):Observable<InvestigationGlobalResponse>
+
+    @GET("/api/investigations.json")
+    fun showInvestigation(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("corporate_id")corporateId: Int):Observable<InvestigationResponse>
+
+    @POST("/api/family_histories.json")
+    fun addFamilyHistory(@Header("AUTH_TOKEN")authtoken: String?, @Header("clinical_token")clinicalToken:String?, @Body requestBody: RequestBody):Observable<FamilyHistoryGlobalResponse>
+
+    @GET("/api/family_histories.json")
+    fun showFamilyHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("corporate_id")corporateId: Int):Observable<FamilyHistoryResponse>
 }
 
 

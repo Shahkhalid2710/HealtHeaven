@@ -55,6 +55,16 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
     }
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
+        if (list.isEmpty())
+        {
+            layoutNotFoundPastSession.visibility=View.VISIBLE
+            rvPastSession.visibility=View.GONE
+        }
+        else
+        {
+            layoutNotFoundPastSession.visibility=View.GONE
+            rvPastSession.visibility=View.VISIBLE
+        }
         rvPastSession.layoutManager=LinearLayoutManager(requireActivity())
         rvPastSession.adapter=PastSessionAdapter(requireActivity(),list,object :PastSessionAdapter.ItemClickListner{
             override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {

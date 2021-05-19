@@ -26,7 +26,7 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
 
         bottomnavigationView.setOnNavigationItemSelectedListener(this)
 
-        loadfragment(HomeFragment())
+        loadFragment(HomeFragment())
         bottomnavigationView.setBackgroundColor(Color.WHITE)
 
     }
@@ -36,31 +36,30 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
         val id=item.itemId
        if (id==R.id.nav_home)
        {
-           loadfragment(HomeFragment())
+           loadFragment(HomeFragment())
            return true
        }
         else if (id==R.id.nav_notification)
        {
-           loadfragment(NotificationFragment())
+           loadFragment(NotificationFragment())
            return true
        }
         else if (id==R.id.nav_appointment)
        {
-           loadfragment(AppointmentFragment())
+           loadFragment(AppointmentFragment())
            return true
        }
         else if (id==R.id.nav_profile)
        {
-           loadfragment(ProfileFragment())
+           loadFragment(ProfileFragment())
            return true
        }
         return true
     }
 
-    private fun loadfragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.rlbottomnavigation, fragment)
         transaction.commit()
-
     }
 }

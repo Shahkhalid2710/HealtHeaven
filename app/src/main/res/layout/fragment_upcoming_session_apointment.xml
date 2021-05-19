@@ -14,22 +14,32 @@
         android:orientation="vertical"
         tools:context=".ui.appointment.UpcomingSessionApointmentFragment">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="UselessParent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvUpcomingSession"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:nestedScrollingEnabled="false" />
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
 
-            <include layout="@layout/custom_loader_progress" />
-        </FrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvUpcomingSession"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:nestedScrollingEnabled="false" />
 
+                <include layout="@layout/custom_loader_progress" />
+            </FrameLayout>
+
+            <include
+                android:id="@+id/layoutNotFoundUpcomingSession"
+                layout="@layout/custom_upcoming_session"
+                android:visibility="gone" />
+        </RelativeLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

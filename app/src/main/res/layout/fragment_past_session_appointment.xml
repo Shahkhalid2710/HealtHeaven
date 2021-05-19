@@ -13,21 +13,31 @@
         android:orientation="vertical"
         tools:context=".ui.appointment.PastSessionAppointmentFragment">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="UselessParent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPastSession"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:nestedScrollingEnabled="false" />
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
 
-            <include layout="@layout/custom_loader_progress" />
-        </FrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPastSession"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:nestedScrollingEnabled="false" />
+                <include layout="@layout/custom_loader_progress" />
+            </FrameLayout>
+
+            <include
+                android:id="@+id/layoutNotFoundPastSession"
+                layout="@layout/custom_past_session"
+                android:visibility="gone" />
+        </RelativeLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

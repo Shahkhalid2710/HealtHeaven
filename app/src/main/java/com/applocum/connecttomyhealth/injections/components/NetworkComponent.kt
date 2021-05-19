@@ -17,6 +17,7 @@ import com.applocum.connecttomyhealth.ui.booksession.SessionBookActivity
 import com.applocum.connecttomyhealth.ui.changepassword.ChangePasswordActivity
 import com.applocum.connecttomyhealth.ui.clinicalrecords.ClinicalRecordsActivity
 import com.applocum.connecttomyhealth.ui.confirmbooking.ConfirmBookingActivity
+import com.applocum.connecttomyhealth.ui.familyhistory.AddFamilyHistoryActivity
 import com.applocum.connecttomyhealth.ui.familyhistory.FamilyHistoryActivity
 import com.applocum.connecttomyhealth.ui.forgotpassword.ForgotPasswordActivity
 import com.applocum.connecttomyhealth.ui.home.HomeFragment
@@ -91,6 +92,8 @@ interface NetworkComponent {
     fun inject(activity:SessionBookActivity)
 
     fun inject(activity:AddCardActivity)
+
+    fun inject(activity:AddFamilyHistoryActivity)
 
     fun inject(activity:ConfirmBookingActivity)
 

@@ -79,19 +79,12 @@ class ProfileFragment : Fragment() {
                 val intent=Intent(requireActivity(),LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-                requireActivity().finish()
             }
             showDialogView.btnNo.setOnClickListener {
                 dialog.dismiss()
             }
             dialog.show()
         }
-
-        /*RxView.clicks(v.btnSignOut).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe { empty: Any? ->
-                startActivity(Intent(requireActivity(), SignupActivity::class.java))
-
-            }*/
 
         return v
     }

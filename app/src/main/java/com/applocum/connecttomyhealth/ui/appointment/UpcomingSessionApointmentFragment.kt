@@ -14,6 +14,7 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.appointment.adapters.UpcomingSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_investigation.*
 import kotlinx.android.synthetic.main.custom_cancel_book_session_dialog.view.*
 import kotlinx.android.synthetic.main.custom_loader_progress.view.*
 import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.*
@@ -56,6 +57,18 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
     }
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
+
+        if (list.isEmpty())
+        {
+            layoutNotFoundUpcomingSession.visibility=View.VISIBLE
+            rvUpcomingSession.visibility=View.GONE
+        }
+        else
+        {
+            layoutNotFoundUpcomingSession.visibility=View.GONE
+            rvUpcomingSession.visibility=View.VISIBLE
+        }
+
         rvUpcomingSession.layoutManager=LinearLayoutManager(requireActivity())
         upcomingSessionAdapter= UpcomingSessionAdapter(requireActivity(),list,object:UpcomingSessionAdapter.ItemClickListner{
             override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {

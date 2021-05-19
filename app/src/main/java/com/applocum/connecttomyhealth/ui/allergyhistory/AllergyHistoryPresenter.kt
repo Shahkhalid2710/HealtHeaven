@@ -41,18 +41,20 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
 
     fun addAllergy(allergyName: String,activePast: Boolean)
     {
-        if (validateAllergy(allergyName, activePast))
+        if (validateAllergy(allergyName))
         {
+            view.viewAllergyProgress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("user_allergy[snomed_code_id]",allergyName)
                 .addFormDataPart("user_allergy[user_id]",userHolder.userid.toString())
-                .addFormDataPart("user_allergy[is_active]", activePast.toString())
+                .addFormDataPart("user_allergy[is_active]",activePast.toString())
                 .build()
 
             api.addAllergyHistory(userHolder.userToken,userHolder.clinicalToken,requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onNext={
+                    view.viewAllergyProgress(false)
                     when(it.status)
                     {
                         Success->
@@ -65,9 +67,9 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
                     }
 
                 },onError = {
+                    view.viewAllergyProgress(false)
                     it.printStackTrace()
                 }).let { disposables.addAll(it) }
-
         }
     }
 
@@ -119,13 +121,10 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
     }
 
 
-    private fun validateAllergy(allergyName:String,activePast:Boolean):Boolean
+    private fun validateAllergy(allergyName:String):Boolean
   {
       if (allergyName.isEmpty()) {
-          view.displayErrorMessage("Please select allergy")
-          return false
-      }
-      if (!activePast) {
+          view.displayErrorMessage("Please select allergy from the list")
           return false
       }
       return true
@@ -138,5 +137,6 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
      fun showActiveAllergy(activeAllergy:ArrayList<TrueAllergy>)
      fun showPastAllergy(pastAllergy:ArrayList<FalseAllergy>)
      fun viewProgress(isShow: Boolean)
+     fun viewAllergyProgress(isShow: Boolean)
  }
 }

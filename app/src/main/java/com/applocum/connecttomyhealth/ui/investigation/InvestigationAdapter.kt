@@ -1,12 +1,12 @@
 package com.applocum.connecttomyhealth.ui.investigation
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.convertInvestigationDate
 import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
 import kotlinx.android.synthetic.main.raw_investigation_xml.view.*
 
@@ -15,7 +15,6 @@ class InvestigationAdapter(context: Context,list: ArrayList<Investigation>):Recy
 
     var mContext=context
     var mList=list
-
 
 
     inner class InvestigationHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
@@ -32,9 +31,9 @@ class InvestigationAdapter(context: Context,list: ArrayList<Investigation>):Recy
     override fun onBindViewHolder(holder: InvestigationHolder, position: Int) {
         val investigation=mList[position]
 
-        holder.itemView.tvInvestigationName.text=investigation.iName
-        holder.itemView.tvInvestigationDate.text=investigation.iDate
-        holder.itemView.tvInvestigationDescription.text=investigation.iDes
+        holder.itemView.tvInvestigationName.text=investigation.snomed_code
+        holder.itemView.tvInvestigationDate.text= convertInvestigationDate(investigation.taken_on)
+        holder.itemView.tvInvestigationDescription.text=investigation.description
 
         holder.itemView.llInvestigation.setOnClickListener {
             if (holder.itemView.llDes.visibility == View.GONE) {

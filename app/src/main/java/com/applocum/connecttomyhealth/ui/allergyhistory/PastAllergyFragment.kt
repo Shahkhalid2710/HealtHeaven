@@ -59,4 +59,8 @@ class PastAllergyFragment : Fragment(),AllergyHistoryPresenter.View {
     override fun viewProgress(isShow: Boolean) {
         v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
+
+    override fun viewAllergyProgress(isShow: Boolean) {
+
+    }
 }

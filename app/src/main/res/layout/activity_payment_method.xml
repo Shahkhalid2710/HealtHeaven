@@ -98,6 +98,6 @@
         <include
             android:id="@+id/layoutnotfoundcard"
             layout="@layout/custom_payment"
-            android:visibility="gone" />
+            android:visibility="gone"/>
     </RelativeLayout>
 </LinearLayout>

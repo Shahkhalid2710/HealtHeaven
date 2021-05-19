@@ -20,9 +20,9 @@
             android:layout_height="15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/spacing_25"
+            android:clickable="true"
             android:contentDescription="@string/todo"
             android:focusable="true"
-            android:clickable="true"
             android:foreground="@drawable/effect_button"
             android:src="@drawable/ic_back" />
 
@@ -43,13 +43,14 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/spacing_24"
-            android:focusable="true"
             android:clickable="true"
-            android:foreground="@drawable/effect_button"
+            android:focusable="true"
             android:fontFamily="@font/montserrat_bold"
+            android:foreground="@drawable/effect_button"
             android:text="@string/add"
             android:textColor="@color/green"
             android:textSize="@dimen/font_16"
+            android:visibility="gone"
             tools:ignore="RelativeOverlap" />
     </RelativeLayout>
 
@@ -57,30 +58,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:ignore="UselessParent">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvInvestigation"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:layout_marginTop="@dimen/spacing_20" />
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvInvestigation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_20"
+                        android:nestedScrollingEnabled="false" />
+
+                    <include
+                        layout="@layout/custom_loader_progress"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
                 <include
-                    android:id="@+id/investigation"
+                    android:id="@+id/layoutNotFoundInvestigation"
                     layout="@layout/custom_investigation_xml"
-                    android:visibility="visible" />
-            </FrameLayout>
+                    android:visibility="gone" />
+            </RelativeLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -26,6 +26,6 @@ class FamilyHistoryAdapter(context: Context,list: ArrayList<FamilyHistory>):Recy
 
     override fun onBindViewHolder(holder: FamilyHolder, position: Int) {
         val familyHistory=mList[position]
-        holder.itemView.tvFamilyHistoryName.text= familyHistory.fName
+        holder.itemView.tvFamilyHistoryName.text= familyHistory.disorder
     }
 }

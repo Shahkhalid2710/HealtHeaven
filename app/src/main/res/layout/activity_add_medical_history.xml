@@ -1,212 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/llMedicalHistory"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".ui.medicalhistory.AddMedicalHistoryActivity">
+    android:layout_height="match_parent">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent">
-
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="8dp"
-            android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/spacing_25"
-            android:clickable="true"
-            android:contentDescription="@string/todo"
-            android:focusable="true"
-            android:foreground="@drawable/effect_button"
-            android:src="@drawable/ic_back" />
-
-        <TextView
-            android:id="@+id/tvAddMedicalHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/add_medical_history"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_20" />
-    </RelativeLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/llMedicalHistory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/spacing_16"
         android:background="@color/white"
-        android:fillViewport="true">
+        android:orientation="vertical"
+        tools:context=".ui.medicalhistory.AddMedicalHistoryActivity"
+        tools:ignore="UselessParent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_25"
+                android:clickable="true"
+                android:contentDescription="@string/todo"
+                android:focusable="true"
+                android:foreground="@drawable/effect_button"
+                android:src="@drawable/ic_back" />
 
             <TextView
-                android:id="@+id/tvDiseaseName"
+                android:id="@+id/tvAddMedicalHistory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/add_disease_name"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-
-            <EditText
-                android:id="@+id/etDiseaseName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:autofillHints="0"
-                android:backgroundTint="@color/textcolorgrey"
-                android:drawableEnd="@drawable/ic_dropdown_list"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_medium"
-                android:hint="@string/select_disease_name"
-                android:inputType="textCapSentences"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/add_medical_history"
                 android:textColor="@color/aapBlack"
-                android:textColorHint="@color/grey"
-                android:textSize="@dimen/font_12"
-                tools:ignore="LabelFor" />
+                android:textSize="@dimen/font_20" />
+        </RelativeLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:background="@color/white">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvMedicalDisease"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_10"
-                    android:layout_marginEnd="@dimen/spacing_10"
-                    android:background="@color/white" />
-
-                <ProgressBar
-                    android:id="@+id/progress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|top"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:indeterminateTint="@color/green"
-                    android:progressTint="@color/green"
-                    android:visibility="gone" />
-            </FrameLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:background="@color/white"
+            android:fillViewport="true">
 
             <LinearLayout
-                android:id="@+id/llDates"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="visible"
-                tools:ignore="UselessParent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvStartDate"
+                    android:id="@+id/tvDiseaseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="40dp"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/start_date"
+                    android:text="@string/add_disease_name"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/font_12" />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/etDiseaseName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <EditText
-                        android:id="@+id/etStartMonth"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="32dp"
-                        android:layout_weight="1"
-                        android:autofillHints="0"
-                        android:backgroundTint="@color/textcolorgrey"
-                        android:drawableEnd="@drawable/ic_dropdown_list"
-                        android:focusable="false"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:hint="@string/select_month"
-                        android:inputType="textCapSentences"
-                        android:textColor="@color/aapBlack"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/font_12"
-                        tools:ignore="LabelFor" />
-
-                    <EditText
-                        android:id="@+id/etStartYear"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_weight="1"
-                        android:autofillHints="0"
-                        android:backgroundTint="@color/textcolorgrey"
-                        android:drawableEnd="@drawable/ic_dropdown_list"
-                        android:focusable="false"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:hint="@string/select_year"
-                        android:inputType="textCapSentences"
-                        android:textColor="@color/aapBlack"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/font_12"
-                        tools:ignore="LabelFor" />
-
-                </LinearLayout>
-
-                <CheckBox
-                    android:id="@+id/cbActiveCurrently"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_24"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:button="@drawable/checkbox"
-                    android:clickable="true"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:drawableEnd="@drawable/ic_dropdown_list"
                     android:focusable="true"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:foreground="@drawable/effect_button"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="@string/active_currently"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_10" />
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/select_disease_name"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor" />
 
-                <LinearLayout
-                    android:id="@+id/llEndDate"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:background="@color/white">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMedicalDisease"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_10"
+                        android:layout_marginEnd="@dimen/spacing_10"
+                        android:background="@color/white" />
+
+                    <ProgressBar
+                        android:id="@+id/progressMedical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|top"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:indeterminateTint="@color/green"
+                        android:progressTint="@color/green"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/llDates"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    tools:ignore="UselessParent">
 
                     <TextView
-                        android:id="@+id/tvEndDate"
+                        android:id="@+id/tvStartDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_24"
                         android:layout_marginTop="24dp"
                         android:fontFamily="@font/montserrat_semibold"
-                        android:text="@string/end_date"
+                        android:text="@string/start_date"
                         android:textColor="@color/grey"
                         android:textSize="@dimen/font_12" />
 
@@ -221,7 +142,7 @@
                         android:weightSum="2">
 
                         <EditText
-                            android:id="@+id/etEndMonth"
+                            android:id="@+id/etStartMonth"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="32dp"
@@ -239,7 +160,7 @@
                             tools:ignore="LabelFor" />
 
                         <EditText
-                            android:id="@+id/etEndYear"
+                            android:id="@+id/etStartYear"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="32dp"
@@ -255,25 +176,110 @@
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/font_12"
                             tools:ignore="LabelFor" />
+
                     </LinearLayout>
 
-                </LinearLayout>
+                    <CheckBox
+                        android:id="@+id/cbActiveCurrently"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_24"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:button="@drawable/checkbox"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:foreground="@drawable/effect_button"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="@string/active_currently"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_10" />
 
-                <Button
-                    android:id="@+id/btnSaveDiseases"
-                    android:layout_width="168dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="51dp"
-                    android:layout_marginBottom="@dimen/spacing_40"
-                    android:background="@drawable/custom_btn"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:foreground="@drawable/effect_button"
-                    android:text="@string/save_diseases"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_12" />
+                    <LinearLayout
+                        android:id="@+id/llEndDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvEndDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_24"
+                            android:layout_marginTop="24dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/end_date"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/font_12" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_24"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="@dimen/spacing_24"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <EditText
+                                android:id="@+id/etEndMonth"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="32dp"
+                                android:layout_weight="1"
+                                android:autofillHints="0"
+                                android:backgroundTint="@color/textcolorgrey"
+                                android:drawableEnd="@drawable/ic_dropdown_list"
+                                android:focusable="false"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:hint="@string/select_month"
+                                android:inputType="textCapSentences"
+                                android:textColor="@color/aapBlack"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/font_12"
+                                tools:ignore="LabelFor" />
+
+                            <EditText
+                                android:id="@+id/etEndYear"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="32dp"
+                                android:layout_weight="1"
+                                android:autofillHints="0"
+                                android:backgroundTint="@color/textcolorgrey"
+                                android:drawableEnd="@drawable/ic_dropdown_list"
+                                android:focusable="false"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:hint="@string/select_year"
+                                android:inputType="textCapSentences"
+                                android:textColor="@color/aapBlack"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/font_12"
+                                tools:ignore="LabelFor" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnSaveDiseases"
+                        android:layout_width="168dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="51dp"
+                        android:layout_marginBottom="@dimen/spacing_40"
+                        android:background="@drawable/custom_btn"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:foreground="@drawable/effect_button"
+                        android:text="@string/save_diseases"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+    <include layout="@layout/custom_progress"/>
+</FrameLayout>

@@ -381,6 +381,10 @@
     <string name="use_face_id">Use Face ID</string>
     <string name="sadness">Sadness</string>
     <string name="are_you_sure_you_want_to_signout_from_healtheaven">Are you sure you want to signout from Healtheaven?</string>
+    <string name="lgn_lateral_geniculate_nucleus">LGN - Lateral geniculate nucleus</string>
+    <string name="no_upcoming_session_yet">No Upcoming Session Yet</string>
+    <string name="no_session_right_now_go_to_homepage_and_click_book_appointment_to_apply_for_the_session">No session right now, Go to Homepage and click Book Appointment to apply for the session</string>
+    <string name="no_past_session_yet">No Past Session Yet</string>
 
 
     <string-array name="Months">

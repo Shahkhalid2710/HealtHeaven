@@ -1,6 +1,7 @@
 package com.applocum.connecttomyhealth.ui.allergyhistory
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -23,8 +24,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_allergy.*
 import kotlinx.android.synthetic.main.activity_add_allergy.cbActiveCurrently
 import kotlinx.android.synthetic.main.activity_add_allergy.ivBack
-import kotlinx.android.synthetic.main.activity_add_allergy.progress
-import kotlinx.android.synthetic.main.activity_add_medical_history.*
+import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -33,7 +33,7 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
     private var selectedString=""
     private var isMatched =false
     private var isActivePast =false
-    private var allergyName=0
+    private var allergyName=""
 
 
     @Inject
@@ -84,9 +84,11 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
             }
         }
 
+        allergyName=etAddAllergy.text.toString()
 
         btnSaveAllergy.setOnClickListener {
-            allergyHistoryPresenter.addAllergy(allergyName.toString(),isActivePast)
+            allergyHistoryPresenter.addAllergy(allergyName,isActivePast)
+            Log.d("checkdataaaaa","-->"+isActivePast)
         }
     }
 
@@ -107,7 +109,7 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
         rvAllergy.adapter=
             MedicalDiseaseAdapter(this,mListMedical,object : MedicalDiseaseAdapter.ItemClickListnter{
             override fun onItemClick(medical: Medical, position: Int) {
-                allergyName=medical.id
+                allergyName=medical.id.toString()
                 if(!etAddAllergy.text.isNullOrBlank())
                 {
                     mListMedical.clear()
@@ -122,7 +124,15 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
 
 
     override fun viewProgress(isShow: Boolean) {
+        progressAllergy.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewAllergyProgress(isShow: Boolean) {
         progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewMedicalProgress(isShow: Boolean) {
+
     }
 
     override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {

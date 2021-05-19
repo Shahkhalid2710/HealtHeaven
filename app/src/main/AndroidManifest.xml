@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -80,7 +79,9 @@
         <activity android:name=".ui.BaseActivity" />
         <activity android:name=".ui.specialists.SpecialistsActivity" />
         <activity android:name=".ui.medication.MedicationActivity" />
-        <activity android:name=".ui.familyhistory.AddFamilyHistoryActivity" />
+        <activity android:name=".ui.familyhistory.AddFamilyHistoryActivity">
+
+        </activity>
         <activity android:name=".ui.exemptions.ExemptionsActivity" />
         <activity android:name=".ui.mygp.AddGPServiceActivity" />
         <activity android:name=".ui.mygp.MyGPActivity" />
@@ -97,7 +98,7 @@
         <activity android:name=".ui.personaldetails.PersonalDetailsActivity" />
         <activity
             android:name=".ui.bottomnavigationview.BottomNavigationViewActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ui.signup.SignupActivity" />
         <activity android:name=".ui.createnewpassword.CreateNewPasswordActivity" />
         <activity android:name=".ui.verification.VerificationActivity" />

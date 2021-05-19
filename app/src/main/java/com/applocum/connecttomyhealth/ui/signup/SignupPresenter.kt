@@ -124,46 +124,46 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
         )
 
         if (firstname.isEmpty()) {
-            view.displaymessage("Please Enter First name")
+            view.displaymessage("Please enter first name")
             return false
         }
         if (lastname.isEmpty()) {
-            view.displaymessage("Please Enter Last name")
+            view.displaymessage("Please enter last name")
             return false
         }
         if (email.isEmpty()) {
-            view.displaymessage("Please Enter Email")
+            view.displaymessage("Please enter email")
             return false
         }
         if (!EMAIL_PATTERN.matcher(email).matches()) {
-            view.displaymessage("Invalid Email")
+            view.displaymessage("Invalid email")
             return false
         }
         if (mobileno.isEmpty()) {
-            view.displaymessage("Please Enter Mobile Number")
+            view.displaymessage("Please enter mobile number")
             return false
         }
         if (password.isEmpty()) {
-            view.displaymessage("Please Enter Password")
+            view.displaymessage("Please enter password")
             return false
         }
 
         if (confirmPassword.isEmpty()) {
-            view.displaymessage("Please Enter Confirm Password")
+            view.displaymessage("Please enter confirm password")
             return false
         }
 
         if (!confirmPassword.matches(password.toRegex()))
         {
-            view.displaymessage("Password Not matching")
+            view.displaymessage("Password not matching")
             return false
         }
         if (gender.isEmpty()) {
-            view.displaymessage("Please Select Gender")
+            view.displaymessage("Please select gender")
             return false
         }
         if (date_of_birth.isEmpty()) {
-            view.displaymessage("Please Select Date of Birth")
+            view.displaymessage("Please select date of birth")
             return false
         }
         return true

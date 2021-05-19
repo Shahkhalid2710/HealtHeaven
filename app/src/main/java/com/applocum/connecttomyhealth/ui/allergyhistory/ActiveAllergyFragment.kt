@@ -13,7 +13,9 @@ import com.applocum.connecttomyhealth.ui.allergyhistory.adapters.ActiveAllergyHi
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.FalseAllergy
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.TrueAllergy
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.custom_loader_progress.view.*
+import kotlinx.android.synthetic.main.activity_add_allergy.view.*
+import kotlinx.android.synthetic.main.custom_loader_progress.view.progress
+import kotlinx.android.synthetic.main.custom_progress.view.*
 import kotlinx.android.synthetic.main.fragment_active_allergy.*
 import javax.inject.Inject
 
@@ -60,5 +62,8 @@ class ActiveAllergyFragment : Fragment(),AllergyHistoryPresenter.View {
 
     override fun viewProgress(isShow: Boolean) {
         v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewAllergyProgress(isShow: Boolean) {
     }
 }

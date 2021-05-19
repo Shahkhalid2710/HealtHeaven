@@ -45,3 +45,11 @@ fun convertSimpleFormat(date: String): String {
     val sdf = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
     return sdf.format(defaultSdf.parse(date))
 }
+
+
+fun convertInvestigationDate(date: String): String {
+    val defaultSdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    defaultSdf.timeZone = TimeZone.getTimeZone("UTC")
+    val sdf = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+    return sdf.format(defaultSdf.parse(date))
+}

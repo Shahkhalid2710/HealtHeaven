@@ -11,6 +11,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.ActiveMedicalHistoryAdapter
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.*
 import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
+import kotlinx.android.synthetic.main.custom_loader_progress.view.*
 import kotlinx.android.synthetic.main.fragment_active_medical_history.*
 import javax.inject.Inject
 
@@ -20,12 +21,14 @@ class ActiveMedicalHistoryFragment : Fragment(),
     @Inject
     lateinit var presenter: MedicalPresenter
 
+    lateinit var v:View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v= inflater.inflate(R.layout.fragment_active_medical_history, container, false)
+        v= inflater.inflate(R.layout.fragment_active_medical_history, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
 
@@ -42,6 +45,11 @@ class ActiveMedicalHistoryFragment : Fragment(),
     }
 
     override fun viewProgress(isShow: Boolean) {
+        v.progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewMedicalProgress(isShow: Boolean) {
+
     }
 
     override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {
