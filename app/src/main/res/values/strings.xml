@@ -385,6 +385,26 @@
     <string name="no_upcoming_session_yet">No Upcoming Session Yet</string>
     <string name="no_session_right_now_go_to_homepage_and_click_book_appointment_to_apply_for_the_session">No session right now, Go to Homepage and click Book Appointment to apply for the session</string>
     <string name="no_past_session_yet">No Past Session Yet</string>
+    <string name="bio">Bio</string>
+    <string name="bio_">Bio:</string>
+    <string name="specialities">Specialities:</string>
+    <string name="xyz">Xyz</string>
+    <string name="languages">Languages:</string>
+    <string name="location_">Location:</string>
+    <string name="prescription_1">Prescription 1</string>
+    <string name="_07_sep_2020">07 Sep. 2020</string>
+    <string name="by_dr_david_martin">By Dr. David Martin</string>
+    <string name="no_prescription">No Prescription</string>
+    <string name="prescription_has_not_updated_from_doctor_side">Prescription has not updated from doctor side</string>
+    <string name="no_fit_note">No Fit Note</string>
+    <string name="fit_note_has_not_updated_from_doctor_side">Fit Note has not updated from doctor side</string>
+    <string name="no_referral">No Referral</string>
+    <string name="referral_has_not_updated_from_doctor_side">Referral has not updated from doctor side</string>
+    <string name="no_other_notes">No Other Notes</string>
+    <string name="other_notes_has_not_updated_from_doctor_side">Other Notes has not updated from doctor side</string>
+    <string name="remove_saved_cards">Remove Saved Cards</string>
+    <string name="are_you_sure_you_want_to_remove_this_card">Are you sure you want to remove this card?</string>
+    <string name="remove">Remove</string>
 
 
     <string-array name="Months">

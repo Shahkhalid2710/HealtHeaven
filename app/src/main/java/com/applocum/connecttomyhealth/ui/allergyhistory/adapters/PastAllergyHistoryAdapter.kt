@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.FalseAllergy
-import com.applocum.connecttomyhealth.ui.allergyhistory.models.TrueAllergy
-import kotlinx.android.synthetic.main.raw_allergy_history.view.*
+import kotlinx.android.synthetic.main.raw_allergy_history.view.tvName
 
 class PastAllergyHistoryAdapter(context: Context, list: ArrayList<FalseAllergy>) :
     RecyclerView.Adapter<PastAllergyHistoryAdapter.AllergyHistoryHolder>() {
@@ -18,7 +17,7 @@ class PastAllergyHistoryAdapter(context: Context, list: ArrayList<FalseAllergy>)
     inner class AllergyHistoryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllergyHistoryHolder {
-        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_allergy_history, parent, false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_past_allergy, parent, false)
         return AllergyHistoryHolder(v)
     }
 

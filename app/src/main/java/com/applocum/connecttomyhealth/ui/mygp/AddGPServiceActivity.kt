@@ -10,10 +10,12 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
+import com.applocum.connecttomyhealth.ui.mygp.models.Surgery
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_g_p_service.*
+import kotlinx.android.synthetic.main.activity_add_g_p_service.progress
 import kotlinx.android.synthetic.main.custom_gp_service_dialog.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -70,9 +72,11 @@ class AddGPServiceActivity : BaseActivity() ,GpservicePresenter.View{
 
                 showDialogView.btnSubmit.setOnClickListener {
                     dialog.dismiss()
+                    presenter.addGpService(gpService.id)
                     val intent= Intent(this@AddGPServiceActivity,GpServiceActivity::class.java)
                     intent.putExtra("gpService",gpService)
                     startActivity(intent)
+                    this@AddGPServiceActivity.finish()
                 }
                 showDialogView.btnCancel.setOnClickListener {
                     dialog.dismiss()
@@ -86,5 +90,13 @@ class AddGPServiceActivity : BaseActivity() ,GpservicePresenter.View{
 
     override fun viewProgress(isShow: Boolean) {
         progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewFullProgress(isShow: Boolean) {
+        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun showSurgery(surgery: Surgery) {
+
     }
 }

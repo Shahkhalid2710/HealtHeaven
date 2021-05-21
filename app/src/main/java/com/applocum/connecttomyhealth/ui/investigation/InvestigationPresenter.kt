@@ -80,9 +80,6 @@ class InvestigationPresenter@Inject constructor(private val api:AppEndPoint) {
 
     }
 
-
-
-
     private fun validateInvestigation(name:String, date:String, description:String):Boolean
     {
         if (name.isEmpty())

@@ -101,14 +101,18 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
 
     }
 
-    override fun displaymessage(message: String?) {}
+    override fun displaymessage(message: String) {}
 
-    override fun displaySuccessmessage(message: String?) {}
+    override fun displaySuccessmessage(message: String) {}
 
     override fun addcard(card: Card) {}
 
     override fun viewProgress(isShow: Boolean) {
         progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewFullProgress(isShow: Boolean) {
+
     }
 
     override fun showcard(list: ArrayList<Card>) {
@@ -123,9 +127,13 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
             llPaymentShow.visibility=View.VISIBLE
         }
         rvSavedCards.layoutManager= LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-        rvSavedCards.adapter= PaymentCardAdapter(this,list,true,object:PaymentCardAdapter.CardClickListener{
+        rvSavedCards.adapter= PaymentCardAdapter(this,list,true,false,object:PaymentCardAdapter.CardClickListener{
             override fun cardClick(card: Card, position: Int) {
                 selectCard=card.id
+            }
+
+            override fun deleteCardClick(card: Card, position: Int) {
+
             }
         })
     }
@@ -157,5 +165,10 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
     override fun displayMessage(mesage: String) {
         Toast.makeText(this,mesage,Toast.LENGTH_SHORT).show()
     }
+
+    override fun displaySuccessMessage(message: String) {
+
+    }
+
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {}
 }

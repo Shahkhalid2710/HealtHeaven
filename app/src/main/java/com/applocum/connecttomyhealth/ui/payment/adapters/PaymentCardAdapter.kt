@@ -9,10 +9,11 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import kotlinx.android.synthetic.main.raw_other_payment.view.*
 
-class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boolean,private val cardClick:CardClickListener):RecyclerView.Adapter<PaymentCardAdapter.PaymentHolder>() {
+class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boolean,isDeleteShow:Boolean,private val cardClick:CardClickListener):RecyclerView.Adapter<PaymentCardAdapter.PaymentHolder>() {
     var mContext=context
     var mList=list
     var isShow=isshow
+    var isDeleteShow=isDeleteShow
     var selectCard=-1
 
     inner class PaymentHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
@@ -29,17 +30,24 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
     override fun onBindViewHolder(holder: PaymentHolder, position: Int) {
         val card=mList[position]
         val expires="Expires"
-        holder.itemView.tvCardName.text=card.card_type
-        holder.itemView.tvCardNumber.text=card.card_number
+        holder.itemView.tvCard.text=(card.card_type+" "+card.card_number)
         holder.itemView.tvHolderName.text=card.card_holder_name
         holder.itemView.tvDate.text = (expires+" "+card.expiry_date.toString())
 
         if (isShow) holder.itemView.cbotherPayment.visibility=View.VISIBLE
         else holder.itemView.cbotherPayment.visibility=View.GONE
 
+        if (isDeleteShow) holder.itemView.ivDelete.visibility=View.VISIBLE
+        else holder.itemView.ivDelete.visibility=View.GONE
+
         holder.itemView.llPaymentCard.setOnClickListener {
             selectCard=position
             cardClick.cardClick(card, position)
+            notifyDataSetChanged()
+        }
+
+        holder.itemView.ivDelete.setOnClickListener {
+            cardClick.deleteCardClick(card, position)
             notifyDataSetChanged()
         }
 
@@ -54,5 +62,6 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
     }
     interface CardClickListener{
         fun cardClick(card: Card,position: Int)
+        fun deleteCardClick(card: Card,position: Int)
     }
 }

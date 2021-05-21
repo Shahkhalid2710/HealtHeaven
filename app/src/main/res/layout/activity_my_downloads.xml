@@ -20,9 +20,9 @@
             android:layout_height="15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/spacing_25"
+            android:clickable="true"
             android:contentDescription="@string/todo"
             android:focusable="true"
-            android:clickable="true"
             android:foreground="@drawable/effect_button"
             android:src="@drawable/ic_back" />
 
@@ -47,9 +47,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_25"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/llPrescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -61,8 +63,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_42"
                     android:layout_marginEnd="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_16"
                     android:layout_marginBottom="@dimen/spacing_16"
                     tools:ignore="UselessParent">
 
@@ -92,6 +94,7 @@
                 android:background="@color/textcolorgrey" />
 
             <LinearLayout
+                android:id="@+id/llFitNote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -134,6 +137,7 @@
                 android:background="@color/textcolorgrey" />
 
             <LinearLayout
+                android:id="@+id/llReferral"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -176,6 +180,7 @@
                 android:background="@color/textcolorgrey" />
 
             <LinearLayout
+                android:id="@+id/llotherNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -189,7 +194,7 @@
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="@dimen/spacing_16"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="60dp"
+                    android:layout_marginBottom="@dimen/spacing_16"
                     tools:ignore="UselessParent">
 
                     <TextView

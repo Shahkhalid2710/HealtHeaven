@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="@drawable/effect"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:layout_marginTop="@dimen/spacing_16"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvDocType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/prescription_1"
+                android:layout_centerVertical="true"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_14"
+                tools:ignore="RelativeOverlap" />
+
+            <ImageView
+                android:id="@+id/ivDownload"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:scaleType="centerCrop"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_download"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/todo" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/_07_sep_2020"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_12"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
+            android:id="@+id/tvDoctorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/by_dr_david_martin"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_12"
+            tools:ignore="RelativeOverlap" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:background="@color/textcolorgrey"/>
+</LinearLayout>

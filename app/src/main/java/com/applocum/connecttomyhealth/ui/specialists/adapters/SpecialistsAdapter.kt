@@ -1,19 +1,16 @@
-package com.applocum.connecttomyhealth.ui.specialists
+package com.applocum.connecttomyhealth.ui.specialists.adapters
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.ui.booksession.BookSessionActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.raw_doctor_xml.view.*
 
-class SpecialistsAdapter(context: Context,list: ArrayList<Specialist>,private val onitemclick:ItemClickListner) : RecyclerView.Adapter<SpecialistsAdapter.SpecialistHolder>() {
+class SpecialistsAdapter(context: Context,list: ArrayList<Specialist>,private val onitemclick: ItemClickListner) : RecyclerView.Adapter<SpecialistsAdapter.SpecialistHolder>() {
     private var mContext = context
     private var mList = list
 

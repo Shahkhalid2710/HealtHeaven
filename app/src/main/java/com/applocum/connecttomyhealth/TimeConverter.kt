@@ -53,3 +53,11 @@ fun convertInvestigationDate(date: String): String {
     val sdf = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
     return sdf.format(defaultSdf.parse(date))
 }
+
+
+fun convertDocumentTime(time: String): String {
+    val defaultSdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    defaultSdf.timeZone = TimeZone.getTimeZone("UTC")
+    val sdf = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
+    return sdf.format(defaultSdf.parse(time))
+}

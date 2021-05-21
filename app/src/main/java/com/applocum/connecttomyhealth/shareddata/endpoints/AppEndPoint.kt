@@ -13,12 +13,13 @@ import com.applocum.connecttomyhealth.ui.investigation.models.InvestigationGloba
 import com.applocum.connecttomyhealth.ui.investigation.models.InvestigationResponse
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalGlobalResponse
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistoryGlobalResponse
-import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistoryTrueFalse
+import com.applocum.connecttomyhealth.ui.mygp.models.GpResponse
 import com.applocum.connecttomyhealth.ui.mygp.models.GpServiceGlobalResponse
+import com.applocum.connecttomyhealth.ui.mygp.models.SurgeryGlobaResponse
+import com.applocum.connecttomyhealth.ui.prescription.models.DocumentGlobalResponse
 import com.applocum.connecttomyhealth.ui.securitycheck.models.SecurityGlobalResponse
 import com.applocum.connecttomyhealth.ui.signup.models.GlobalResponse
 import com.applocum.connecttomyhealth.ui.specialists.models.DoctorResponse
-import com.google.gson.JsonObject
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -37,11 +38,14 @@ interface AppEndPoint {
     @GET("/api/patients/time_slots.json")
     fun getTimeSlots(@Header("AUTH_TOKEN") authtoken: String?,@Query("date") date:String,@Query("doctor_id") doctorid:Int,@Query("session_type") sessiontype:String,@Query("session_slot") sessionslot:String):Observable<TimeResponse>
 
-    @POST("/api/priory/cards.json")
+    @POST("/api/cards.json")
     fun addCard(@Header("AUTH_TOKEN") authtoken: String?,@Body requestBody: RequestBody):Observable<CardGlobalResponse>
 
     @GET("/api/cards.json")
     fun showCard(@Header("AUTH_TOKEN") authtoken: String?):Observable<CardResponse>
+
+    @DELETE("/api/cards/{id}.json")
+    fun deleteCard(@Header("AUTH_TOKEN")authtoken: String?,@Path("id")cardId:Int ):Observable<CardGlobalResponse>
 
     @GET("/api/priory/patients/{id}.json")
     fun showProfile(@Header("AUTH_TOKEN") authtoken: String?, @Path("id") userid: String?):Observable<GlobalResponse>
@@ -51,6 +55,12 @@ interface AppEndPoint {
 
     @GET("/api/priory/surgeries/search.json")
     fun getGpList(@Query("search")search:String?):Observable<GpServiceGlobalResponse>
+
+    @POST("/api/priory/user_surgeries.json")
+    fun addGpService(@Header("AUTH_TOKEN") authtoken: String?,@Body requestBody: RequestBody):Observable<GpResponse>
+
+    @GET("/api/priory/user_surgeries.json")
+    fun getGpService(@Header("AUTH_TOKEN") authtoken: String?,@Query("user_id")userId: Int):Observable<SurgeryGlobaResponse>
 
     @POST("/api/priory/patient/appointments.json")
     fun bookApoointment(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<BookAppointmentGlobalResponse>
@@ -96,6 +106,9 @@ interface AppEndPoint {
 
     @GET("/api/family_histories.json")
     fun showFamilyHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("corporate_id")corporateId: Int):Observable<FamilyHistoryResponse>
+
+    @GET("/api/documents/list_for_downloads.json")
+    fun getDocuments(@Header("AUTH_TOKEN")authtoken: String?,@Query("document_type")documentType:String):Observable<DocumentGlobalResponse>
 }
 
 

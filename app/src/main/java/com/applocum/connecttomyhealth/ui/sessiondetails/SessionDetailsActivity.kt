@@ -27,7 +27,7 @@ class SessionDetailsActivity : BaseActivity() {
         tvDoctorFName.text=bookAppointmentResponse.gp_details.first_name
         tvDoctorLName.text=bookAppointmentResponse.gp_details.last_name
         tvDate.text= convertDate(bookAppointmentResponse.actual_start_time)
-        tvAmount.text=("€"+bookAppointmentResponse.appointment_price.toString()+".00")
+        tvAmount.text=("€"+bookAppointmentResponse.appointment_price.toString()+"0")
         tvTime.text=("$startTime - $endTime")
         tvDoctorGmcno.text=("GMC NO."+" "+bookAppointmentResponse.gp_details.gmc)
         Glide.with(this).load(bookAppointmentResponse.gp_details.image).into(ivDoctor)

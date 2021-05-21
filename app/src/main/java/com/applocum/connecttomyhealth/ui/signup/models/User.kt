@@ -14,7 +14,7 @@ data class User (
 	@SerializedName("role") val role : String,
 	@SerializedName("auth_token") val authToken : String,
 	@SerializedName("address") val address : String,
-	@SerializedName("address_detail") val addressDetail : String,
+	@SerializedName("address_detail") val addressDetail :AddressDetail,
 	@SerializedName("status") val status : String,
 	@SerializedName("image") val image : String,
 	@SerializedName("gender") val gender : String,

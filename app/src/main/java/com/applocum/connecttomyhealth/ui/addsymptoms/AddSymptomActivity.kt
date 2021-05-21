@@ -51,7 +51,7 @@ class AddSymptomActivity : BaseActivity() {
         )
 
 
-        ivAddSymptomImage.setOnClickListener {
+        ivSymptom.setOnClickListener {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),

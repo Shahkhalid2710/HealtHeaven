@@ -119,13 +119,15 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
 
     fun deleteSession(id:Int)
     {
-      api.deleteAppointment(userHolder.userToken!!,id)
+        view.viewFullProgress(true)
+        api.deleteAppointment(userHolder.userToken!!,id)
           .observeOn(AndroidSchedulers.mainThread())
           .subscribeBy(onNext={
+              view.viewFullProgress(false)
               when(it.status)
               {
                   Success->{
-                      view.displayMessage(it.message)
+                      view.displaySuccessMessage(it.message)
                   }
                   InvalidCredentials, InternalServer->
                   {
@@ -133,13 +135,16 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
                   }
               }
           },onError = {
+              view.viewFullProgress(false)
               it.printStackTrace()
           }).let { disposables.addAll(it) }
     }
 
     interface View{
         fun displayMessage(mesage:String)
+        fun displaySuccessMessage(message:String)
         fun getSessions(list:ArrayList<BookAppointmentResponse>)
         fun viewProgress(isShow: Boolean)
+        fun viewFullProgress(isShow: Boolean)
     }
 }

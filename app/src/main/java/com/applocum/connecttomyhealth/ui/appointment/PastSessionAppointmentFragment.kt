@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.ui.appointment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -54,6 +55,10 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
 
     }
 
+    override fun displaySuccessMessage(message: String) {
+
+    }
+
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
         if (list.isEmpty())
         {
@@ -65,6 +70,7 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
             layoutNotFoundPastSession.visibility=View.GONE
             rvPastSession.visibility=View.VISIBLE
         }
+        Log.d("Checkdataaalistt","-->"+list)
         rvPastSession.layoutManager=LinearLayoutManager(requireActivity())
         rvPastSession.adapter=PastSessionAdapter(requireActivity(),list,object :PastSessionAdapter.ItemClickListner{
             override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
@@ -81,5 +87,9 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
 
     override fun viewProgress(isShow: Boolean) {
         v.progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewFullProgress(isShow: Boolean) {
+
     }
 }

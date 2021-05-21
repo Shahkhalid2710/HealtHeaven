@@ -85,14 +85,14 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
         }
     }
 
-    override fun displaymessage(message: String?) {
-        val snackbar = Snackbar.make(llAddCard, message.toString(), Snackbar.LENGTH_LONG)
+    override fun displaymessage(message: String) {
+        val snackbar = Snackbar.make(llAddCard, message, Snackbar.LENGTH_LONG)
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()
     }
 
-    override fun displaySuccessmessage(message: String?) {
+    override fun displaySuccessmessage(message: String) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 
@@ -103,6 +103,10 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
 
     override fun viewProgress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewFullProgress(isShow: Boolean) {
+
     }
 
     override fun showcard(list: ArrayList<Card>) {

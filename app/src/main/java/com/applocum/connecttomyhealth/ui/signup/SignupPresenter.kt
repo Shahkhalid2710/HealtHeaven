@@ -26,6 +26,8 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
     private var devicetype = "android"
     private var corporateId="66"
     private var playerId="temp"
+    private var role="patient"
+    private var referenceform="priory"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -53,6 +55,8 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                 .addFormDataPart("user[first_name]", firstname)
                 .addFormDataPart("user[last_name]", lastname)
                 .addFormDataPart("user[email]", email)
+                .addFormDataPart("user[role]", role)
+                .addFormDataPart("patient[referenced_form]", referenceform)
                 .addFormDataPart("user[phone]", countrycode+""+mobileno)
                 .addFormDataPart("user[gender]", gender)
                 .addFormDataPart("user[password]", password)

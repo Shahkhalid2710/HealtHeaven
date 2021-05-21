@@ -119,22 +119,14 @@
                     android:layout_height="68dp"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="@dimen/spacing_16"
-                    android:contentDescription="@string/todo"
-                    android:scaleType="centerCrop"/>
-
-                <ImageView
-                    android:id="@+id/ivAddSymptomImage"
-                    android:layout_width="68dp"
-                    android:layout_height="68dp"
-                    android:layout_marginStart="@dimen/spacing_10"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:contentDescription="@string/todo"
-                    android:scaleType="centerCrop"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="@drawable/effect"
-                    android:src="@drawable/image_blank" />
+                    android:src="@drawable/image_blank"
+                    android:contentDescription="@string/todo"
+                    android:scaleType="centerCrop"/>
+
+
             </LinearLayout>
 
             <CheckBox

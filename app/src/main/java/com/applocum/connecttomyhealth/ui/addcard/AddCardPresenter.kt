@@ -8,7 +8,6 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -41,13 +40,6 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
                 .addFormDataPart("card[securityCode]",cvv)
                 .build()
 
-           /* val jsonObject=JsonObject()
-            jsonObject.addProperty("card[cardNumber]",cardNumber)
-            jsonObject.addProperty("card[cardHolderName]",holderName)
-            jsonObject.addProperty("card[expiryDate]",expiryDate)
-            jsonObject.addProperty("card[securityCode]",cvv)
-            jsonObject.addProperty("patient_id",userHolder.userid)
-*/
             api.addCard(userHolder.userToken!!,requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onNext = {
@@ -89,6 +81,29 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
                 view.viewProgress(false)
                 it.printStackTrace()
             }).let { disposables.addAll(it) }
+    }
+
+    fun deleteCard(id:Int)
+    {
+        view.viewFullProgress(true)
+        api.deleteCard(userHolder.userToken,id)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(onNext = {
+                view.viewFullProgress(false)
+                when(it.status)
+                {
+                    Success->{
+                    }
+                    InvalidCredentials,InternalServer,MissingParameter->
+                    {
+                        view.displaymessage(it.message)
+                    }
+                }
+            },onError = {
+                view.viewFullProgress(false)
+                it.printStackTrace()
+            }).let { disposables.addAll(it) }
+
     }
 
     private fun validateCard(cardnumber:String,cardholder:String,date:String,cvv:String):Boolean
@@ -134,10 +149,11 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
     }
 
     interface View {
-        fun displaymessage(message: String?)
-        fun displaySuccessmessage(message: String?)
+        fun displaymessage(message: String)
+        fun displaySuccessmessage(message: String)
         fun addcard(card: Card)
         fun viewProgress(isShow: Boolean)
+        fun viewFullProgress(isShow: Boolean)
         fun showcard(list:ArrayList<Card>)
     }
 }

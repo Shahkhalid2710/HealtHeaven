@@ -19,6 +19,7 @@ import com.applocum.connecttomyhealth.ui.clinicalrecords.ClinicalRecordsActivity
 import com.applocum.connecttomyhealth.ui.confirmbooking.ConfirmBookingActivity
 import com.applocum.connecttomyhealth.ui.familyhistory.AddFamilyHistoryActivity
 import com.applocum.connecttomyhealth.ui.familyhistory.FamilyHistoryActivity
+import com.applocum.connecttomyhealth.ui.fitnote.FitNoteActivity
 import com.applocum.connecttomyhealth.ui.forgotpassword.ForgotPasswordActivity
 import com.applocum.connecttomyhealth.ui.home.HomeFragment
 import com.applocum.connecttomyhealth.ui.investigation.AddInvestigationActivity
@@ -33,13 +34,16 @@ import com.applocum.connecttomyhealth.ui.mygp.AddGPServiceActivity
 import com.applocum.connecttomyhealth.ui.mygp.GpServiceActivity
 import com.applocum.connecttomyhealth.ui.mygp.MyGPActivity
 import com.applocum.connecttomyhealth.ui.notification.NotificationFragment
+import com.applocum.connecttomyhealth.ui.othernotes.OtherNoteActivity
 import com.applocum.connecttomyhealth.ui.payment.AddCodeActivity
 import com.applocum.connecttomyhealth.ui.payment.PaymentActivity
 import com.applocum.connecttomyhealth.ui.payment.PaymentMethodActivity
 import com.applocum.connecttomyhealth.ui.payment.PaymentShowActivity
 import com.applocum.connecttomyhealth.ui.personaldetails.PersonalDetailsActivity
+import com.applocum.connecttomyhealth.ui.prescription.models.PrescriptionActivity
 import com.applocum.connecttomyhealth.ui.profile.ProfileFragment
 import com.applocum.connecttomyhealth.ui.profiledetails.ProfileDetailsActivity
+import com.applocum.connecttomyhealth.ui.referral.ReferralActivity
 import com.applocum.connecttomyhealth.ui.securitycheck.SecurityActivity
 import com.applocum.connecttomyhealth.ui.settings.SettingActivity
 import com.applocum.connecttomyhealth.ui.signup.SignupActivity
@@ -64,6 +68,14 @@ interface NetworkComponent {
     fun inject(activity:ForgotPasswordActivity)
 
     fun inject(activity:MyDownloadsActivity)
+
+    fun inject(activity:PrescriptionActivity)
+
+    fun inject(activity:FitNoteActivity)
+
+    fun inject(activity:ReferralActivity)
+
+    fun inject(activity:OtherNoteActivity)
 
     fun inject(activity:PersonalDetailsActivity)
 

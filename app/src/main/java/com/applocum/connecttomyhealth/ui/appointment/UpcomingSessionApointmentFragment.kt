@@ -14,10 +14,10 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.appointment.adapters.UpcomingSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_investigation.*
 import kotlinx.android.synthetic.main.custom_cancel_book_session_dialog.view.*
-import kotlinx.android.synthetic.main.custom_loader_progress.view.*
+import kotlinx.android.synthetic.main.custom_loader_progress.view.progress
 import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.*
+import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.view.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.btnCancel
 import javax.inject.Inject
 
@@ -53,6 +53,13 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
         val snackbar = Snackbar.make(llUpcomingSession,mesage, Snackbar.LENGTH_LONG)
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+        snackbar.show()
+    }
+
+    override fun displaySuccessMessage(message: String) {
+        val snackbar = Snackbar.make(llUpcomingSession,message, Snackbar.LENGTH_LONG)
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.blue))
         snackbar.show()
     }
 
@@ -101,5 +108,9 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
 
     override fun viewProgress(isShow: Boolean) {
        v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun viewFullProgress(isShow: Boolean) {
+        v.upcomingProgress.visibility=if (isShow)View.VISIBLE else View.GONE
     }
 }

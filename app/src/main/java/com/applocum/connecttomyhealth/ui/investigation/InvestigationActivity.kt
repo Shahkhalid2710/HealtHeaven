@@ -9,6 +9,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
 import kotlinx.android.synthetic.main.activity_investigation.*
+import kotlinx.android.synthetic.main.custom_investigation_xml.*
 import kotlinx.android.synthetic.main.custom_loader_progress.*
 import javax.inject.Inject
 
@@ -25,6 +26,9 @@ class InvestigationActivity : BaseActivity(),InvestigationPresenter.View {
         ivBack.setOnClickListener { finish() }
 
         tvAddInvestigation.setOnClickListener {
+            startActivity(Intent(this,AddInvestigationActivity::class.java))
+        }
+        btnAddInvestigation.setOnClickListener {
             startActivity(Intent(this,AddInvestigationActivity::class.java))
         }
 

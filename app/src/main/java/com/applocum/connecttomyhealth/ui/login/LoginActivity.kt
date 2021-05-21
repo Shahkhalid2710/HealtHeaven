@@ -38,7 +38,7 @@ class LoginActivity : BaseActivity(), LoginPresenter.View {
         }
 
         btnLogin.setOnClickListener {
-            presenter.getLogin(etEmail.text.toString(), etPassword.text.toString())
+            presenter.getLogin(etEmail.text.toString(),etPassword.text.toString())
         }
     }
 

@@ -8,7 +8,7 @@ data class BookAppointmentResponse (
 	@SerializedName("start_time") val start_time : String?="",
 	@SerializedName("end_time") val end_time : String?="",
 	@SerializedName("status") val status : String="",
-	@SerializedName("appointment_price") val appointment_price : Int=0,
+	@SerializedName("appointment_price") val appointment_price :Double=0.0,
 	@SerializedName("duration") val duration : Int=0,
 	@SerializedName("activate_waiting_room") val activate_waiting_room : Boolean=false,
 	@SerializedName("is_unpaid") val is_unpaid : Boolean=false,

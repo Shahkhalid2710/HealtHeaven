@@ -21,6 +21,8 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
     lateinit var view: View
     private var devicetype = "android"
     private var role = "patient"
+    private var corporateId="83"
+    private var playerId="temp"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -37,6 +39,8 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                 .addFormDataPart("user[email]", email)
                 .addFormDataPart("user[password]", password)
                 .addFormDataPart("device_detail[device_type]", devicetype)
+                .addFormDataPart("device_detail[player_id]", playerId)
+                .addFormDataPart("device_detail[corporate_organization_id]",corporateId)
                 .addFormDataPart("role", role)
                 .build()
             api.signin(requestBody)
