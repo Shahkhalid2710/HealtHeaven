@@ -60,7 +60,7 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
             when (selectCard) {
                 0 -> {
                     val snackbar =
-                        Snackbar.make(llPaymentShow, "Please select card", Snackbar.LENGTH_LONG)
+                        Snackbar.make(llPaymentShow, "Please select at least one method ", Snackbar.LENGTH_LONG)
                     val snackview = snackbar.view
                     snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
                     snackbar.show()
@@ -126,7 +126,7 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
             llPayment.visibility=View.GONE
             llPaymentShow.visibility=View.VISIBLE
         }
-        rvSavedCards.layoutManager= LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        rvSavedCards.layoutManager= LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         rvSavedCards.adapter= PaymentCardAdapter(this,list,true,false,object:PaymentCardAdapter.CardClickListener{
             override fun cardClick(card: Card, position: Int) {
                 selectCard=card.id

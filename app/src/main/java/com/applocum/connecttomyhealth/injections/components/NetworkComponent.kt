@@ -35,10 +35,7 @@ import com.applocum.connecttomyhealth.ui.mygp.GpServiceActivity
 import com.applocum.connecttomyhealth.ui.mygp.MyGPActivity
 import com.applocum.connecttomyhealth.ui.notification.NotificationFragment
 import com.applocum.connecttomyhealth.ui.othernotes.OtherNoteActivity
-import com.applocum.connecttomyhealth.ui.payment.AddCodeActivity
-import com.applocum.connecttomyhealth.ui.payment.PaymentActivity
-import com.applocum.connecttomyhealth.ui.payment.PaymentMethodActivity
-import com.applocum.connecttomyhealth.ui.payment.PaymentShowActivity
+import com.applocum.connecttomyhealth.ui.payment.*
 import com.applocum.connecttomyhealth.ui.personaldetails.PersonalDetailsActivity
 import com.applocum.connecttomyhealth.ui.prescription.models.PrescriptionActivity
 import com.applocum.connecttomyhealth.ui.profile.ProfileFragment
@@ -68,6 +65,8 @@ interface NetworkComponent {
     fun inject(activity:ForgotPasswordActivity)
 
     fun inject(activity:MyDownloadsActivity)
+
+    fun inject(activity:MemberShipActivity)
 
     fun inject(activity:PrescriptionActivity)
 

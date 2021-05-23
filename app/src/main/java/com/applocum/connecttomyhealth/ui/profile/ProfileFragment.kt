@@ -77,8 +77,28 @@ class ProfileFragment : Fragment() {
 
             showDialogView.btnSignOut.setOnClickListener {
                 val intent=Intent(requireActivity(),LoginActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                userHolder.userToken?.let { it1 ->
+                    userHolder.userGender?.let { it2 ->
+                        userHolder.userLastName?.let { it3 ->
+                            userHolder.userFirstName?.let { it4 ->
+                                userHolder.userEmail?.let { it5 ->
+                                    userHolder.userDOB?.let { it6 ->
+                                        userHolder.clearUserData(userHolder.userid!!, it4,
+                                            it3, it5,
+                                            it2, it6,
+                                            it1
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 startActivity(intent)
+                requireActivity().finish()
             }
             showDialogView.btnNo.setOnClickListener {
                 dialog.dismiss()

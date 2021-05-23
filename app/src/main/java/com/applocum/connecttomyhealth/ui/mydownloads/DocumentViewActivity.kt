@@ -2,6 +2,9 @@ package com.applocum.connecttomyhealth.ui.mydownloads
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.applocum.connecttomyhealth.R
@@ -22,34 +25,29 @@ class DocumentViewActivity : BaseActivity() {
 
         document= intent.getSerializableExtra("document") as Document
 
+        progressWeb.visibility=View.VISIBLE
 
-      /*  val settings: WebSettings = webView.settings
-        settings.javaScriptEnabled=true
-        settings.loadsImagesAutomatically=true
-        settings.useWideViewPort=true
-        settings.loadWithOverviewMode=true
-        settings.mediaPlaybackRequiresUserGesture=true
-        webView.scrollBarStyle= View.SCROLLBARS_OUTSIDE_OVERLAY
-*/
+        val mWebSettings: WebSettings = webView.settings
 
+        mWebSettings.javaScriptCanOpenWindowsAutomatically = true
+        mWebSettings.javaScriptEnabled = true
+        mWebSettings.setSupportZoom(true)
+        mWebSettings.loadsImagesAutomatically=true
 
-
-        webView.settings.javaScriptEnabled = true
-        webView.settings.loadWithOverviewMode = true
-        webView.settings.useWideViewPort = true
         webView.webViewClient = object : WebViewClient() {
+
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
                 return true
             }
 
             override fun onPageFinished(view: WebView, url: String) {
+                progressWeb.visibility=View.GONE
+
             }
         }
         webView.loadUrl(document.file)
-
-        //Log.d("fileee","->"+document.file)
-
+        Log.d("Fileee","->"+document.file)
 
     }
     override fun getLayoutResourceId(): Int=R.layout.activity_document_view

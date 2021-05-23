@@ -1,6 +1,8 @@
 package com.applocum.connecttomyhealth.ui.changepassword
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -10,9 +12,11 @@ import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_change_password.*
-import kotlinx.android.synthetic.main.activity_change_password.etConfirmPassword
+import kotlinx.android.synthetic.main.activity_change_password.ivBack
+import kotlinx.android.synthetic.main.activity_create_new_password.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import javax.inject.Inject
+
 
 class ChangePasswordActivity : BaseActivity(),ChangePasswordPresenter.View {
 
@@ -28,6 +32,10 @@ class ChangePasswordActivity : BaseActivity(),ChangePasswordPresenter.View {
         presenter.injectView(this)
 
         ivBack.setOnClickListener { finish() }
+
+        //etCurrentPassword.addTextChangedListener(loginTextWatcher)
+       // etNewPassword.addTextChangedListener(loginTextWatcher)
+        //etConfirmPassword.addTextChangedListener(loginTextWatcher)
 
         btnUpdate.setOnClickListener {
             presenter.changePassword(etCurrentPassword.text.toString(),etNewPassword.text.toString(),etConfirmPassword.text.toString())
@@ -53,4 +61,28 @@ class ChangePasswordActivity : BaseActivity(),ChangePasswordPresenter.View {
     override fun viewProgress(isShow: Boolean) {
         progress.visibility=if (isShow) View.VISIBLE else View.GONE
     }
+
+   /* private val loginTextWatcher: TextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(
+            s: CharSequence,
+            start: Int,
+            count: Int,
+            after: Int
+        ) {
+        }
+
+        override fun onTextChanged(
+            s: CharSequence,
+            start: Int,
+            before: Int,
+            count: Int
+        ) {
+            val cp: String = etCurrentPassword.getText().toString().trim()
+            val np: String = etNewPassword.getText().toString().trim()
+            val rp: String = etConfirmPassword.getText().toString().trim()
+            btnUpdate.isEnabled = cp.isNotEmpty() && np.isNotEmpty() && rp.isNotEmpty()
+        }
+
+        override fun afterTextChanged(s: Editable) {}
+    }*/
 }

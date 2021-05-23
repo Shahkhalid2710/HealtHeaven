@@ -243,6 +243,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:foreground="@drawable/effect_button"
                     android:text="@string/login"
+                    android:enabled="true"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_12" />

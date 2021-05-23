@@ -16,8 +16,11 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistoryGlo
 import com.applocum.connecttomyhealth.ui.mygp.models.GpResponse
 import com.applocum.connecttomyhealth.ui.mygp.models.GpServiceGlobalResponse
 import com.applocum.connecttomyhealth.ui.mygp.models.SurgeryGlobaResponse
+import com.applocum.connecttomyhealth.ui.payment.models.MembershipGlobalResponse
 import com.applocum.connecttomyhealth.ui.prescription.models.DocumentGlobalResponse
 import com.applocum.connecttomyhealth.ui.securitycheck.models.SecurityGlobalResponse
+import com.applocum.connecttomyhealth.ui.settings.models.SettingNotificationGlobalResponse
+import com.applocum.connecttomyhealth.ui.settings.models.SettingNotificationResponse
 import com.applocum.connecttomyhealth.ui.signup.models.GlobalResponse
 import com.applocum.connecttomyhealth.ui.specialists.models.DoctorResponse
 import io.reactivex.Observable
@@ -109,6 +112,16 @@ interface AppEndPoint {
 
     @GET("/api/documents/list_for_downloads.json")
     fun getDocuments(@Header("AUTH_TOKEN")authtoken: String?,@Query("document_type")documentType:String):Observable<DocumentGlobalResponse>
+
+    @PUT("/api/users/notification_setting.json")
+    fun notificationSetting(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<SettingNotificationGlobalResponse>
+
+    @GET("/api/priory/users/utils/show_notification_setting.json")
+    fun showNotification(@Header("AUTH_TOKEN")authtoken: String?):Observable<SettingNotificationResponse>
+
+    @GET("/api/customer_support/memberships.json")
+    fun getMembershipList(@Header("AUTH_TOKEN")authtoken: String?,@Query("corporate_organization_id")corporateId: Int):Observable<MembershipGlobalResponse>
+
 }
 
 

@@ -402,7 +402,7 @@
     <string name="referral_has_not_updated_from_doctor_side">Referral has not updated from doctor side</string>
     <string name="no_other_notes">No Other Notes</string>
     <string name="other_notes_has_not_updated_from_doctor_side">Other Notes has not updated from doctor side</string>
-    <string name="remove_saved_cards">Remove Saved Cards</string>
+    <string name="remove_saved_cards">Remove Saved Card</string>
     <string name="are_you_sure_you_want_to_remove_this_card">Are you sure you want to remove this card?</string>
     <string name="remove">Remove</string>
 
