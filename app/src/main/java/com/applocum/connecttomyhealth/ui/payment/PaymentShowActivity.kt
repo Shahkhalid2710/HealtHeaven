@@ -76,7 +76,6 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
                         bookAppointment.therapistId,
                         selectCard,
                         bookAppointment.corporateId)
-
                     openDialog()
                 }
             }

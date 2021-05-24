@@ -21,22 +21,24 @@ import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.prolificinteractive.materialcalendarview.*
+import kotlinx.android.synthetic.main.custom_small_progress.view.*
 import kotlinx.android.synthetic.main.fragment_availability.*
 import kotlinx.android.synthetic.main.fragment_availability.view.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPresenter.View {
     private val mListSessionType: ArrayList<SessionType> = ArrayList()
     private val mListSelectSlot: ArrayList<SessionType> = ArrayList()
-
     private var sType=""
     private var sSlot=""
     private var seleteddate = ""
     lateinit var specialist: Specialist
+    lateinit var v:View
 
     @Inject
     lateinit var presenter: BookSessionPresenter
@@ -47,7 +49,7 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v = inflater.inflate(R.layout.fragment_availability, container, false)
+         v = inflater.inflate(R.layout.fragment_availability, container, false)
 
         MyApplication.getAppContext().component.inject(this)
         presenter.injectview(this)
@@ -63,14 +65,16 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
 
         v.rvSessionType.layoutManager = GridLayoutManager(requireActivity(),3)
         v.rvSessionType.adapter = SessionTypeAdapter(requireActivity(), mListSessionType,object :SessionTypeAdapter.ItemClickListner{
-            override fun onItemClick(sessionType: SessionType, position: Int) {
-                when(position)
-                {
-                    0-> sType="phone_call"
+            override fun onItemClick(sessionType: SessionType,position: Int) {
+                when(position) {
+                   /* 0-> sType="phone_call"
                     1-> sType="video"
-                    2-> sType="face_to_face"
+                    2-> sType="face_to_face"*/
+                    0-> sType="phone_call_appointment"
+                    1-> sType="online_appointment"
+                    2-> sType="offline_appointment"
                 }
-              //  presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
             }
         })
 
@@ -120,8 +124,19 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
     }
 
     override fun getTimeSlot(list: ArrayList<Time>) {
+                  if (list.isEmpty()) {
+                      v.rvAvailableTime.visibility = View.GONE
+                      v.NotAvailabeTime.visibility = View.VISIBLE
+                  } else {
+                      v.rvAvailableTime.visibility = View.VISIBLE
+                      v.NotAvailabeTime.visibility = View.GONE
+                  }
+           if(list.size == 0)
+           {
+               list.clear()
+           }
             rvAvailableTime.layoutManager = GridLayoutManager(requireActivity(), 4)
-            rvAvailableTime.adapter = AvailableTimeAdapter(requireActivity(), list)
+            rvAvailableTime.adapter = AvailableTimeAdapter(requireActivity(),list)
     }
     override fun displaymessage(message: String) {
         val snackBar = Snackbar.make(llAvailability, message, Snackbar.LENGTH_LONG)
@@ -131,7 +146,7 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility = if (isShow) View.VISIBLE else View.GONE
+        v.progressSmall.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun getPrice(common: Common) {}

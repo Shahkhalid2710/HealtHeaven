@@ -1,7 +1,9 @@
 package com.applocum.connecttomyhealth.ui.booksession
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -32,6 +34,12 @@ class AboutSpecialistFragment : Fragment() {
         v.tvDoctorBio.text=specialist.bio
         v.tvDoctorLocation.text=(specialist.usual_address.line1+""+","+specialist.usual_address.line2+""+","+specialist.usual_address.town+""+","+specialist.usual_address.pincode)
 
+        v.btnDirection.setOnClickListener {
+            val navigation = Uri.parse("google.navigation:q=" + specialist.usual_address.latitude + "," + specialist.usual_address.longitude + "")
+            val navigationIntent = Intent(Intent.ACTION_VIEW, navigation)
+            navigationIntent.setPackage("com.google.android.apps.maps")
+            startActivity(navigationIntent)
+        }
 
         doctorSpecialities()
         doctorLanguages()

@@ -405,6 +405,8 @@
     <string name="remove_saved_cards">Remove Saved Card</string>
     <string name="are_you_sure_you_want_to_remove_this_card">Are you sure you want to remove this card?</string>
     <string name="remove">Remove</string>
+    <string name="directions">Directions</string>
+    <string name="no_time_slot_available">No time slot available</string>
 
 
     <string-array name="Months">

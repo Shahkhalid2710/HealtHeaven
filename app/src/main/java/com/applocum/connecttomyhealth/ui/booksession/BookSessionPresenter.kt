@@ -32,9 +32,9 @@ class BookSessionPresenter@Inject constructor(private val api:AppEndPoint) {
                 api.getTimeSlots(userHolder.userToken!!,date,doctorid, it, it1)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(onNext={
+                        view.viewProgress(false)
                         when(it.status) {
                             Success-> {
-                                view.viewProgress(false)
                                 view.getTimeSlot(it.data)
                                 view.getPrice(it.common)
                             }

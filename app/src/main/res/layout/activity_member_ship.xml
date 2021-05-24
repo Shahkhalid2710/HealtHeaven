@@ -59,15 +59,15 @@
                 tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_20">
 
             <LinearLayout
                 android:id="@+id/llSavedCodes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/spacing_20"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:visibility="visible">
@@ -93,17 +93,12 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvSavedCodes"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:nestedScrollingEnabled="false" />
-
                     <include layout="@layout/custom_loader_progress" />
                 </FrameLayout>
             </LinearLayout>
-
-            <include
-                android:id="@+id/layoutnotfoundcode"
-                layout="@layout/custom_membership"
-                android:visibility="gone" />
-        </RelativeLayout>
+            <include layout="@layout/custom_membership"/>
+        </FrameLayout>
     </LinearLayout>
 </FrameLayout>

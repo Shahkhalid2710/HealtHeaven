@@ -33,7 +33,6 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     private val mListSessionType: ArrayList<SessionType> = ArrayList()
     private val mListSelectSlot: ArrayList<SessionType> = ArrayList()
     private var selectSession = ""
-
     private var sType = ""
     private var sSlot = ""
     private var seleteddate = ""
@@ -78,7 +77,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                         1-> sType="video"
                         2-> sType="face_to_face"
                     }
-                    //presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                    presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
                 }
             })
 
@@ -173,9 +172,11 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             }
         }
 
+
         btnContinue.setOnClickListener {
             if (validateBookSession(seleteddate, sType, sSlot, sTime)) {
                 val intent = Intent(this, ConfirmBookingActivity::class.java)
+
                 val appointment = userHolder.getBookAppointmentData()
                 appointment.appointmentDateTime= dateTimeUTCFormat(sTime)
                 appointment.appointmentTime =sTime

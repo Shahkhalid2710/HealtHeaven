@@ -26,15 +26,15 @@ class SettingNotificationPresenter@Inject constructor(private val api:AppEndPoin
     @Inject
     lateinit var userHolder: UserHolder
 
-    fun notificationSetting(textMessage:Boolean?=false,email:Boolean?=false,phone:Boolean?=false,pushNotification:Boolean?=false)
+    fun notificationSetting(textMessage:String,email:String,phone:String,pushNotification:String)
     {
         view.viewFullProgress(true)
         val requestBody: RequestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
-            .addFormDataPart("is_notify_by_sms",textMessage.toString())
-            .addFormDataPart("is_notify_by_email",email.toString())
-            .addFormDataPart("is_notify_by_phone",phone.toString())
-            .addFormDataPart("is_notify_by_push_notification",pushNotification.toString())
+            .addFormDataPart("is_notify_by_sms",textMessage)
+            .addFormDataPart("is_notify_by_email",email)
+            .addFormDataPart("is_notify_by_phone",phone)
+            .addFormDataPart("is_notify_by_push_notification",pushNotification)
             .build()
 
         api.notificationSetting(userHolder.userToken,requestBody)

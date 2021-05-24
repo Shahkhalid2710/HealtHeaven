@@ -2,7 +2,6 @@ package com.applocum.connecttomyhealth.ui.settings
 
 import android.os.Bundle
 import android.view.View
-import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
@@ -19,6 +18,11 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
     @Inject
     lateinit var presenter: SettingNotificationPresenter
 
+    private var switchText=""
+    private var switchEmail=""
+    private var switchphone=""
+    private var switchpuchNotification=""
+
     override fun getLayoutResourceId(): Int=R.layout.activity_setting
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,20 +34,25 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
         presenter.showNotification()
 
 
-        /*switchtextmessage.setOnCheckedChangeListener { _, isChecked ->
-            presenter.notificationSetting(isChecked)
+        switchtextmessage.setOnCheckedChangeListener { _, isChecked ->
+            switchText = if (isChecked) { "true" } else { "false" }
+            presenter.notificationSetting(switchText,switchEmail,switchphone,switchpuchNotification)
         }
 
         switchemail.setOnCheckedChangeListener { _, isChecked ->
+            switchEmail = if (isChecked) { "true" } else { "false" }
+            presenter.notificationSetting(switchText,switchEmail,switchphone,switchpuchNotification)
         }
 
         switchPhone.setOnCheckedChangeListener { _, isChecked ->
+            switchphone = if (isChecked) { "true" } else { "false" }
+            presenter.notificationSetting(switchText,switchEmail,switchphone,switchpuchNotification)
         }
 
         switchPuchNotification.setOnCheckedChangeListener { _, isChecked ->
-
+            switchpuchNotification = if (isChecked) { "true" } else { "false" }
+            presenter.notificationSetting(switchText,switchEmail,switchphone,switchpuchNotification)
         }
-*/
     }
 
     override fun displayMessage(message: String) {

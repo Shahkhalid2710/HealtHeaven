@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/progressSmall"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/progressback"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:visibility="gone">
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="@dimen/spacing_20"
+        android:indeterminateTint="@color/green"
+        android:progressTint="@color/green" />
+</LinearLayout>

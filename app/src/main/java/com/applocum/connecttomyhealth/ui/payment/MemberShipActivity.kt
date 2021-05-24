@@ -40,7 +40,6 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
 
         membershipPresenter.showSavedCodes()
 
-
     }
 
     override fun getLayoutResourceId(): Int = R.layout.activity_member_ship
@@ -58,14 +57,17 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
 
     override fun showMembershipList(membershipResponse: ArrayList<MembershipResponse>) {
         if (membershipResponse.isEmpty()) {
-            layoutnotfoundcode.visibility = View.VISIBLE
+            layoutMemberShip.visibility = View.VISIBLE
             llSavedCodes.visibility = View.GONE
             tvAddMembershipCode.visibility = View.GONE
-        } else {
-            layoutnotfoundcode.visibility = View.GONE
+        }
+        else
+        {
+            layoutMemberShip.visibility = View.GONE
             llSavedCodes.visibility = View.VISIBLE
             tvAddMembershipCode.visibility = View.VISIBLE
         }
+
         rvSavedCodes.layoutManager = LinearLayoutManager(this)
         membershipAdapter = MembershipAdapter(
             this,

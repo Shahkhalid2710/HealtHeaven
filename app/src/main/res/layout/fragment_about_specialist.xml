@@ -10,9 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/spacing_20"
         android:background="@color/white"
         android:orientation="vertical"
-        android:layout_marginBottom="@dimen/spacing_20"
         tools:context=".ui.booksession.AboutSpecialistFragment">
 
         <TextView
@@ -107,5 +107,38 @@
             android:textColor="@color/grey"
             android:textSize="@dimen/font_13" />
 
+        <LinearLayout
+            android:id="@+id/btnDirection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginBottom="@dimen/spacing_20"
+            android:background="@drawable/custom_btn"
+            android:orientation="horizontal"
+            android:padding="7dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:foreground="@drawable/effect_button"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_direction_arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_5"
+                android:fontFamily="@font/montserrat_medium"
+                android:layout_gravity="center"
+                android:text="@string/directions"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_10" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
