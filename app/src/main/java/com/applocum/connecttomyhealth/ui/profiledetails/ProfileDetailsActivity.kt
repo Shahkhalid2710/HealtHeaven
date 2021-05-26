@@ -13,6 +13,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
+import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_profile_details.*
 import kotlinx.android.synthetic.main.custom_progress.*
@@ -43,13 +44,12 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         presenter.injectview(this)
         presenter.showProfile()
 
-        tvSave.setOnClickListener {
+        /*tvSave.setOnClickListener {
             presenter.updateProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString())
             finish()
         }
-
+*/
         editTextClicks()
-        dataUpdateFocus()
 
     }
 
@@ -73,6 +73,10 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
 
     override fun displayMessage(message: String) {
       Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+    }
+
+    override fun userData(user: User) {
+
     }
 
     override fun viewprogress(isShow: Boolean) {
@@ -122,25 +126,4 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         etDOB.setText(date)
     }
 
-    fun dataUpdateFocus()
-    {
-        tvFirstNameEdit.setOnClickListener {
-            etFirstName.isFocusableInTouchMode=true
-            etFirstName.isFocusable=true
-        }
-
-        tvLastNameEdit.setOnClickListener {
-            etLastName.isFocusableInTouchMode=true
-            etLastName.isFocusable=true
-        }
-
-        tvEmailEdit.setOnClickListener {
-            etEmail.isFocusableInTouchMode=true
-            etEmail.isFocusable=true
-        }
-        tvPhoneNoEdit.setOnClickListener {
-            etPhoneNo.isFocusableInTouchMode=true
-            etPhoneNo.isFocusable=true
-        }
-    }
 }

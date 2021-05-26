@@ -31,10 +31,7 @@ class ValidPassportActivity : BaseActivity() {
         rlCamera.setOnClickListener {
             val values = ContentValues()
             values.put(MediaStore.Images.Media.TITLE, "MyPicture")
-            values.put(
-                MediaStore.Images.Media.DESCRIPTION,
-                "Photo taken on " + System.currentTimeMillis()
-            )
+            values.put(MediaStore.Images.Media.DESCRIPTION, "Photo taken on " + System.currentTimeMillis())
             imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)

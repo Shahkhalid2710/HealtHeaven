@@ -56,6 +56,9 @@ interface AppEndPoint {
     @PATCH("/api/priory/patients/{id}.json")
     fun updateProfile(@Header("AUTH_TOKEN") authtoken: String?, @Path("id") userid: String?, @Body body:RequestBody?):Observable<GlobalResponse>
 
+    @PATCH(" /api/users/{id}.json")
+    fun updateUser(@Header("AUTH_TOKEN") authtoken: String?, @Path("id") userid: String?,@Body body: RequestBody?):Observable<GlobalResponse>
+
     @GET("/api/priory/surgeries/search.json")
     fun getGpList(@Query("search")search:String?):Observable<GpServiceGlobalResponse>
 
@@ -84,7 +87,7 @@ interface AppEndPoint {
     fun securityCheck(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<SecurityGlobalResponse>
 
     @GET("/api/consultations/search_snomed_code.json")
-    fun getDiseaseList(@Query ("search") search:String?):Observable<MedicalGlobalResponse>
+    fun getDiseaseList(@Query("search") search:String?):Observable<MedicalGlobalResponse>
 
     @POST("/api/medical_histories.json")
     fun addMedicalHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Body requestBody: RequestBody):Observable<MedicalHistoryGlobalResponse>

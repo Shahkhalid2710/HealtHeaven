@@ -17,8 +17,6 @@ class DocumentViewActivity : BaseActivity() {
 
     lateinit var document: Document
 
-
-    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ivBack.setOnClickListener { finish() }
@@ -47,7 +45,6 @@ class DocumentViewActivity : BaseActivity() {
             }
         }
         webView.loadUrl(document.file)
-        Log.d("Fileee","->"+document.file)
 
     }
     override fun getLayoutResourceId(): Int=R.layout.activity_document_view

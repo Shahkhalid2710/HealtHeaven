@@ -24,6 +24,9 @@
         android:layout_marginTop="@dimen/spacing_20"
         android:background="@color/textcolorgrey" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,14 +37,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <FrameLayout
+                    android:id="@+id/flProfile"
                     android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
@@ -52,7 +54,7 @@
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:contentDescription="@string/todo"
-                        android:src="@drawable/drpaulina" />
+                        android:src="@drawable/ic_baseline_person_24" />
 
                     <ImageView
                         android:id="@+id/ivEdit"
@@ -523,4 +525,7 @@
                 android:textSize="@dimen/font_12" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+        <include layout="@layout/custom_progress"
+            android:visibility="gone"/>
+    </FrameLayout>
 </LinearLayout>

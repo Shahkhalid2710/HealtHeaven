@@ -14,7 +14,6 @@
 
     <application
         android:name=".MyApplication"
-        android:allowBackup="true"
         android:icon="@drawable/ic_app_icon"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -22,8 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".ui.mydownloads.DocumentViewActivity"/>
+        <activity android:name=".ui.mydownloads.DocumentViewActivity" />
         <activity android:name=".ui.othernotes.OtherNoteActivity" />
         <activity android:name=".ui.referral.ReferralActivity" />
         <activity android:name=".ui.fitnote.FitNoteActivity" />

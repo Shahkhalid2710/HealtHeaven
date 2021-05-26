@@ -76,7 +76,7 @@
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_14" />
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp">
@@ -87,16 +87,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="@dimen/spacing_5"
-                android:visibility="gone"
                 android:layout_marginEnd="@dimen/spacing_24"
-                android:nestedScrollingEnabled="false" />
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone" />
 
             <include layout="@layout/custom_small_progress" />
 
             <include
                 android:id="@+id/NotAvailabeTime"
-                layout="@layout/not_available_time"
-                android:visibility="gone" />
-        </RelativeLayout>
+                layout="@layout/not_available_time" />
+        </FrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,8 +1,9 @@
 package com.applocum.connecttomyhealth.ui.bottomnavigationview
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -26,8 +27,14 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
 
         bottomnavigationView.setOnNavigationItemSelectedListener(this)
 
+        bottomnavigationView.menu.forEach {
+            val view = bottomnavigationView.findViewById<View>(it.itemId)
+            view.setOnLongClickListener {
+                true
+            }
+        }
+
         loadFragment(HomeFragment())
-        bottomnavigationView.setBackgroundColor(Color.WHITE)
 
     }
 

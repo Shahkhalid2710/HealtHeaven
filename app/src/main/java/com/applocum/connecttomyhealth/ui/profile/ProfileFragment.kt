@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
@@ -16,19 +17,27 @@ import com.applocum.connecttomyhealth.ui.mydownloads.MyDownloadsActivity
 import com.applocum.connecttomyhealth.ui.payment.MemberShipActivity
 import com.applocum.connecttomyhealth.ui.payment.PaymentMethodActivity
 import com.applocum.connecttomyhealth.ui.personaldetails.PersonalDetailsActivity
+import com.applocum.connecttomyhealth.ui.profiledetails.ProfileDetailsPresenter
+import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.securitycheck.SecurityActivity
 import com.applocum.connecttomyhealth.ui.settings.SettingActivity
-import kotlinx.android.synthetic.main.custom_signout_dialog.view.*
+import com.applocum.connecttomyhealth.ui.signup.models.User
+import kotlinx.android.synthetic.main.custom_profile_dialog.view.*
+import kotlinx.android.synthetic.main.custom_progress.view.*
+import kotlinx.android.synthetic.main.custom_signout_dialog.view.btnNo
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.fragment_profile.view.btnSignOut
 import javax.inject.Inject
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
     lateinit var v: View
 
     @Inject
     lateinit var userHolder: UserHolder
+
+    @Inject
+    lateinit var presenter: ProfileDetailsPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +46,30 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_profile, container, false)
         MyApplication.getAppContext().component.inject(this)
+        presenter.injectview(this)
 
         v.tvFName.text=userHolder.userFirstName
         v.tvLName.text=userHolder.userLastName
+
+
+        v.flProfile.setOnClickListener {
+            val showDialogView = LayoutInflater.from(requireActivity())
+                .inflate(R.layout.custom_profile_dialog, null, false)
+            val dialog = androidx.appcompat.app.AlertDialog.Builder(requireActivity()).create()
+            dialog.setView(showDialogView)
+            dialog.setCanceledOnTouchOutside(false)
+
+            showDialogView.tvGallery.setOnClickListener {
+                dialog.dismiss()
+            }
+            showDialogView.tvCamera.setOnClickListener {
+                dialog.dismiss()
+            }
+            showDialogView.tvCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
 
         v.llPersonalDetails.setOnClickListener {
             startActivity(Intent(requireActivity(), PersonalDetailsActivity::class.java))
@@ -67,6 +97,7 @@ class ProfileFragment : Fragment() {
         v.llHelp.setOnClickListener {
 
         }
+
 
         v.btnSignOut.setOnClickListener {
             val showDialogView = LayoutInflater.from(requireActivity())
@@ -105,7 +136,22 @@ class ProfileFragment : Fragment() {
             }
             dialog.show()
         }
-
         return v
+    }
+
+    override fun showProfile(patient: Patient) {
+
+    }
+
+    override fun displayMessage(message: String) {
+        Toast.makeText(requireActivity(),message,Toast.LENGTH_LONG).show()
+    }
+
+    override fun userData(user: User) {
+
+    }
+
+    override fun viewprogress(isShow: Boolean) {
+        v.progress.visibility=if (isShow) View.VISIBLE else View.GONE
     }
 }

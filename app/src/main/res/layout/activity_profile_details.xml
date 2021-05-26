@@ -83,7 +83,7 @@
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:contentDescription="@string/todo"
-                        android:src="@drawable/drpaulina" />
+                        android:src="@drawable/ic_baseline_person_24" />
 
                     <ImageView
                         android:id="@+id/ivEdit"
@@ -107,7 +107,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/montserrat_semibold"
-                        android:text="@string/arkell"
                         android:textColor="@color/aapBlack"
                         android:textSize="@dimen/font_16" />
 
@@ -118,7 +117,6 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/montserrat_semibold"
-                        android:text="@string/charles"
                         android:textColor="@color/aapBlack"
                         android:textSize="@dimen/font_16" />
                 </LinearLayout>
@@ -134,10 +132,6 @@
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_14" />
 
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
                     <EditText
                         android:id="@+id/etFirstName"
                         android:layout_width="match_parent"
@@ -145,33 +139,15 @@
                         android:layout_marginStart="@dimen/spacing_24"
                         android:layout_marginEnd="@dimen/spacing_24"
                         android:autofillHints="0"
+                        android:imeOptions="actionNext"
                         android:backgroundTint="@color/textcolorgrey"
-                        android:focusable="false"
+                        android:focusable="true"
                         android:fontFamily="@font/montserrat_medium"
                         android:inputType="textCapSentences"
                         android:textColor="@color/aapBlack"
                         android:textColorHint="@color/grey"
                         android:textSize="@dimen/font_12"
                         tools:ignore="LabelFor" />
-
-                    <TextView
-                        android:id="@+id/tvFirstNameEdit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="28dp"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:foreground="@drawable/effect_button"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:paddingBottom="8dp"
-                        android:text="@string/edit"
-                        android:textColor="@color/green"
-                        android:textSize="12sp"
-                        android:visibility="visible"
-                        tools:ignore="RelativeOverlap" />
-                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/tvLastName"
@@ -184,19 +160,16 @@
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_14" />
 
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
                     <EditText
                         android:id="@+id/etLastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_24"
                         android:layout_marginEnd="@dimen/spacing_24"
+                        android:imeOptions="actionNext"
                         android:autofillHints="0"
                         android:backgroundTint="@color/textcolorgrey"
-                        android:focusable="false"
+                        android:focusable="true"
                         android:fontFamily="@font/montserrat_medium"
                         android:inputType="textCapSentences"
                         android:textColor="@color/aapBlack"
@@ -204,24 +177,6 @@
                         android:textSize="@dimen/font_12"
                         tools:ignore="LabelFor" />
 
-                    <TextView
-                        android:id="@+id/tvLastNameEdit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="28dp"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:foreground="@drawable/effect_button"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:paddingBottom="8dp"
-                        android:text="@string/edit"
-                        android:textColor="@color/green"
-                        android:textSize="12sp"
-                        android:visibility="visible"
-                        tools:ignore="RelativeOverlap" />
-                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/tvEmailAddress"
@@ -234,10 +189,6 @@
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_14" />
 
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
                     <EditText
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
@@ -249,29 +200,11 @@
                         android:focusable="false"
                         android:fontFamily="@font/montserrat_medium"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/aapBlack"
+                        android:textColor="@color/textcolorgrey"
                         android:textColorHint="@color/grey"
                         android:textSize="@dimen/font_12"
                         tools:ignore="LabelFor" />
 
-                    <TextView
-                        android:id="@+id/tvEmailEdit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="28dp"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:foreground="@drawable/effect_button"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:paddingBottom="8dp"
-                        android:text="@string/edit"
-                        android:textColor="@color/green"
-                        android:textSize="12sp"
-                        android:visibility="visible"
-                        tools:ignore="RelativeOverlap" />
-                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/tvMobileNumber"
@@ -297,6 +230,7 @@
                         android:autofillHints="0"
                         android:backgroundTint="@color/textcolorgrey"
                         android:focusable="false"
+                        android:imeOptions="actionNext"
                         android:fontFamily="@font/montserrat_medium"
                         android:inputType="number"
                         android:textColor="@color/aapBlack"
@@ -307,7 +241,7 @@
                     <TextView
                         android:id="@+id/tvPhoneNoEdit"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="28dp"
@@ -344,6 +278,7 @@
                     android:backgroundTint="@color/textcolorgrey"
                     android:drawableEnd="@drawable/ic_dropdown_list"
                     android:focusable="false"
+                    android:imeOptions="actionDone"
                     android:fontFamily="@font/montserrat_medium"
                     android:inputType="text"
                     android:textColor="@color/aapBlack"
@@ -368,7 +303,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="69dp"
                     android:autofillHints="0"
                     android:backgroundTint="@color/textcolorgrey"
                     android:drawableEnd="@drawable/ic_calendar"
@@ -380,7 +314,7 @@
                     android:textSize="@dimen/font_12"
                     tools:ignore="LabelFor" />
 
-                <!-- <TextView
+                 <TextView
                      android:id="@+id/tvHeight"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
@@ -402,9 +336,8 @@
                      android:drawableEnd="@drawable/ic_dropdown_list"
                      android:focusable="false"
                      android:fontFamily="@font/montserrat_medium"
-                     android:hint="@string/select"
+                     android:hint="@string/select_height"
                      android:inputType="text"
-                     android:text="@string/_5_ft_8_in"
                      android:textColor="@color/aapBlack"
                      android:textColorHint="@color/grey"
                      android:textSize="@dimen/font_12"
@@ -432,9 +365,8 @@
                      android:drawableEnd="@drawable/ic_dropdown_list"
                      android:focusable="false"
                      android:fontFamily="@font/montserrat_medium"
-                     android:hint="@string/select"
+                     android:hint="@string/select_weight"
                      android:inputType="text"
-                     android:text="@string/_64kg"
                      android:textColor="@color/aapBlack"
                      android:textColorHint="@color/grey"
                      android:textSize="@dimen/font_12"
@@ -459,12 +391,10 @@
                      android:layout_marginEnd="@dimen/spacing_24"
                      android:autofillHints="0"
                      android:backgroundTint="@color/textcolorgrey"
-                     android:drawableEnd="@drawable/ic_dropdown_list"
                      android:focusable="false"
                      android:fontFamily="@font/montserrat_medium"
-                     android:hint="@string/select"
+                     android:hint="@string/select_bmi"
                      android:inputType="text"
-                     android:text="@string/_20_78_normal_healthy_weight"
                      android:textColor="@color/aapBlack"
                      android:textColorHint="@color/grey"
                      android:textSize="@dimen/font_12"
@@ -493,13 +423,12 @@
                      android:drawableEnd="@drawable/ic_dropdown_list"
                      android:focusable="false"
                      android:fontFamily="@font/montserrat_medium"
-                     android:hint="@string/select"
+                     android:hint="@string/select_blood_pressure"
                      android:inputType="text"
-                     android:text="@string/low_90_60_or_below"
                      android:textColor="@color/aapBlack"
                      android:textColorHint="@color/grey"
                      android:textSize="@dimen/font_12"
-                     tools:ignore="LabelFor,TextFields" />-->
+                     tools:ignore="LabelFor,TextFields" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

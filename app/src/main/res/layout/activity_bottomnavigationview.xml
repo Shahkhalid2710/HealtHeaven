@@ -18,6 +18,11 @@
      app:itemIconTint="@drawable/tab_color"
      app:itemTextColor="@drawable/tab_color"
      app:itemIconSize="30dp"
+     app:elevation="@dimen/spacing_5"
+     android:background="@color/white"
+     android:foreground="@drawable/effect"
+     android:focusable="true"
+     android:clickable="true"
      app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
      app:labelVisibilityMode="unlabeled"
      app:menu="@menu/bottom_navigation"/>

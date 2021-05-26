@@ -7,6 +7,8 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.profiledetails.models.PatientResponse
+import com.applocum.connecttomyhealth.ui.signup.models.User
+import com.applocum.connecttomyhealth.ui.signup.models.UserResponse
 import com.google.gson.Gson
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -49,7 +51,7 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
             }).let { disposables.add(it) }
     }
 
-    fun updateProfile(firstname:String, lastname:String, email:String, phoneno:String, gender:String, dob:String)
+   /* fun updateProfile(firstname:String, lastname:String,email:String, phoneno:String, gender:String, dob:String)
     {
         val requestBody: RequestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
@@ -79,11 +81,43 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
                 it.printStackTrace()
             }).let { disposables.addAll(it) }
     }
+*/
+   fun updateUser(image:String)
+   {
+       view.viewprogress(true)
+       val requestBody: RequestBody = MultipartBody.Builder()
+           .setType(MultipartBody.FORM)
+           .addFormDataPart("user[image]",image)
+           .build()
 
+       api.updateUser(userHolder.userToken,userHolder.userid,requestBody)
+           .observeOn(AndroidSchedulers.mainThread())
+           .subscribeBy(onNext ={
+               view.viewprogress(false)
+               when(it.status)
+               {
+                   Success->
+                   {
+                       val userObject = Gson().fromJson(it.data, UserResponse::class.java)
+                       val user = userObject.user
+                       view.userData(user)
+                       view.displayMessage("Profile picture uploaded successfully")
+                   }
+                   InvalidCredentials,InternalServer -> {
+                       view.displayMessage(it.message)
+                   }
+               }
+
+           },onError = {
+               view.viewprogress(false)
+               it.printStackTrace()
+           }).let { disposables.addAll(it) }
+   }
     interface View
     {
         fun showProfile(patient: Patient)
         fun displayMessage(message:String)
+        fun userData(user: User)
         fun viewprogress(isShow: Boolean)
     }
 }

@@ -1,6 +1,11 @@
 package com.applocum.connecttomyhealth.ui.settings
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
@@ -22,6 +27,7 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
     private var switchEmail=""
     private var switchphone=""
     private var switchpuchNotification=""
+    private var Gpsstatus:Boolean=false
 
     override fun getLayoutResourceId(): Int=R.layout.activity_setting
 
@@ -32,8 +38,17 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
         presenter.injectView(this)
 
         presenter.showNotification()
+        checkGpsStatus()
+       /* switchlocatinservices.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                turnOffGps()
+            }
+            else
+            {
+                turnOnGps()
+            }
 
-
+        }*/
         switchtextmessage.setOnCheckedChangeListener { _, isChecked ->
             switchText = if (isChecked) { "true" } else { "false" }
             presenter.notificationSetting(switchText,switchEmail,switchphone,switchpuchNotification)
@@ -75,5 +90,38 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
         switchemail.isChecked = settingNotification.is_notify_by_email == true
         switchPhone.isChecked = settingNotification.is_notify_by_phone == true
         switchPuchNotification.isChecked = settingNotification.is_notify_by_push_notification == true
+    }
+
+    private fun checkGpsStatus() {
+        val manager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        Gpsstatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+        switchlocatinservices.isChecked = Gpsstatus == true
+    }
+
+    private fun turnOffGps() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this,R.style.MyAlertDialogStyle)
+        builder.setMessage("To continue let your device turn on location.")
+            .setCancelable(false)
+            .setPositiveButton("OPEN"
+            ) { _, _ ->
+                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) }
+            .setNegativeButton("CANCEL"
+            ) { dialog, _ -> dialog.cancel() }
+        val alert: AlertDialog = builder.create()
+        alert.show()
+    }
+
+    private fun turnOnGps() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this,R.style.MyAlertDialogStyle)
+        builder.setMessage("To continue let your device turn off location.")
+            .setCancelable(false)
+            .setPositiveButton("OPEN"
+            ) { _, _ ->
+                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) }
+            .setNegativeButton("CANCEL"
+            ) { dialog, _ -> dialog.cancel() }
+        val alert: AlertDialog = builder.create()
+        alert.show()
     }
 }

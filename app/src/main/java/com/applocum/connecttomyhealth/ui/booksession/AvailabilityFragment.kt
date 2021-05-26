@@ -123,20 +123,18 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
         presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
     }
 
-    override fun getTimeSlot(list: ArrayList<Time>) {
+    override fun getTimeSlot(list:ArrayList<Time>) {
                   if (list.isEmpty()) {
                       v.rvAvailableTime.visibility = View.GONE
                       v.NotAvailabeTime.visibility = View.VISIBLE
                   } else {
-                      v.rvAvailableTime.visibility = View.VISIBLE
+                      val availableTimeAdapter=AvailableTimeAdapter(requireActivity(),list)
                       v.NotAvailabeTime.visibility = View.GONE
+                      v.rvAvailableTime.visibility=View.VISIBLE
+                      rvAvailableTime.layoutManager = GridLayoutManager(requireActivity(),4)
+                      rvAvailableTime.adapter = availableTimeAdapter
+                      availableTimeAdapter.notifyDataSetChanged()
                   }
-           if(list.size == 0)
-           {
-               list.clear()
-           }
-            rvAvailableTime.layoutManager = GridLayoutManager(requireActivity(), 4)
-            rvAvailableTime.adapter = AvailableTimeAdapter(requireActivity(),list)
     }
     override fun displaymessage(message: String) {
         val snackBar = Snackbar.make(llAvailability, message, Snackbar.LENGTH_LONG)

@@ -17,4 +17,5 @@
     <color name="red">#ff5656</color>
     <color name="yellow">#eaa100</color>
     <color name="blue">#018ce7</color>
+    <color name="colorripple">#c0c0c0</color>
 </resources>
