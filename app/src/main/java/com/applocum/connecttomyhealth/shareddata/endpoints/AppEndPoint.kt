@@ -36,94 +36,139 @@ interface AppEndPoint {
     fun signin(@Body requestBody: RequestBody): Observable<GlobalResponse>
 
     @GET("/api/profiles/search.json")
-    fun getdoctors(@Header("AUTH_TOKEN") authtoken:String?,@Query("corporate_organization_id") corporateId:Int):Observable<DoctorResponse>
+    fun getdoctors(@Header("AUTH_TOKEN") authtoken:String?,
+                   @Query("corporate_organization_id") corporateId:Int):Observable<DoctorResponse>
 
     @GET("/api/patients/time_slots.json")
-    fun getTimeSlots(@Header("AUTH_TOKEN") authtoken: String?,@Query("date") date:String,@Query("doctor_id") doctorid:Int,@Query("session_type") sessiontype:String,@Query("session_slot") sessionslot:String):Observable<TimeResponse>
+    fun getTimeSlots(@Header("AUTH_TOKEN") authtoken: String?,
+                     @Query("date") date:String,
+                     @Query("doctor_id") doctorid:Int,
+                     @Query("session_type") sessiontype:String,
+                     @Query("session_slot") sessionslot:String):Observable<TimeResponse>
 
     @POST("/api/cards.json")
-    fun addCard(@Header("AUTH_TOKEN") authtoken: String?,@Body requestBody: RequestBody):Observable<CardGlobalResponse>
+    fun addCard(@Header("AUTH_TOKEN") authtoken: String?,
+                @Body requestBody: RequestBody):Observable<CardGlobalResponse>
 
     @GET("/api/cards.json")
     fun showCard(@Header("AUTH_TOKEN") authtoken: String?):Observable<CardResponse>
 
     @DELETE("/api/cards/{id}.json")
-    fun deleteCard(@Header("AUTH_TOKEN")authtoken: String?,@Path("id")cardId:Int ):Observable<CardGlobalResponse>
+    fun deleteCard(@Header("AUTH_TOKEN")authtoken: String?,
+                   @Path("id")cardId:Int ):Observable<CardGlobalResponse>
 
     @GET("/api/priory/patients/{id}.json")
-    fun showProfile(@Header("AUTH_TOKEN") authtoken: String?, @Path("id") userid: String?):Observable<GlobalResponse>
+    fun showProfile(@Header("AUTH_TOKEN") authtoken: String?,
+                    @Path("id") userid: String?):Observable<GlobalResponse>
 
     @PATCH("/api/priory/patients/{id}.json")
-    fun updateProfile(@Header("AUTH_TOKEN") authtoken: String?, @Path("id") userid: String?, @Body body:RequestBody?):Observable<GlobalResponse>
+    fun updateProfile(@Header("AUTH_TOKEN") authtoken: String?,
+                      @Path("id") userid: String?,
+                      @Body body:RequestBody?):Observable<GlobalResponse>
 
     @PATCH(" /api/users/{id}.json")
-    fun updateUser(@Header("AUTH_TOKEN") authtoken: String?, @Path("id") userid: String?,@Body body: RequestBody?):Observable<GlobalResponse>
+    fun updateUser(@Header("AUTH_TOKEN") authtoken: String?,
+                   @Path("id") userid: String?,
+                   @Body body: RequestBody?):Observable<GlobalResponse>
 
     @GET("/api/priory/surgeries/search.json")
     fun getGpList(@Query("search")search:String?):Observable<GpServiceGlobalResponse>
 
     @POST("/api/priory/user_surgeries.json")
-    fun addGpService(@Header("AUTH_TOKEN") authtoken: String?,@Body requestBody: RequestBody):Observable<GpResponse>
+    fun addGpService(@Header("AUTH_TOKEN") authtoken: String?,
+                     @Body requestBody: RequestBody):Observable<GpResponse>
 
     @GET("/api/priory/user_surgeries.json")
-    fun getGpService(@Header("AUTH_TOKEN") authtoken: String?,@Query("user_id")userId: Int):Observable<SurgeryGlobaResponse>
+    fun getGpService(@Header("AUTH_TOKEN") authtoken: String?,
+                     @Query("user_id")userId: Int):Observable<SurgeryGlobaResponse>
 
     @POST("/api/priory/patient/appointments.json")
-    fun bookApoointment(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<BookAppointmentGlobalResponse>
+    fun bookAppointment(@Header("AUTH_TOKEN")authtoken: String?,
+                        @Body requestBody: RequestBody):Observable<BookAppointmentGlobalResponse>
 
     @GET("/api/priory/doctors/appointments.json")
-    fun upcomingSession(@Header("AUTH_TOKEN")authtoken: String?,@Query("appointments_type")appointmentType:String,@Query("appointment_corporate_id")corporateId:Int):Observable<BookAppointmentGlobalResponse>
+    fun upcomingSession(@Header("AUTH_TOKEN")authtoken: String?,
+                        @Query("appointments_type")appointmentType:String,
+                        @Query("appointment_corporate_id")corporateId:Int):Observable<BookAppointmentGlobalResponse>
 
     @DELETE("/api/priory/patient/appointments/{id}.json")
-    fun deleteAppointment(@Header("AUTH_TOKEN")authtoken: String?,@Path("id")appointmentId:Int ):Observable<BookAppointmentGlobalResponse>
+    fun deleteAppointment(@Header("AUTH_TOKEN")authtoken: String?,
+                          @Path("id")appointmentId:Int ):Observable<BookAppointmentGlobalResponse>
 
     @POST("/api/priory/users/password/change.json")
-    fun changePassword(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<PasswordGlobalResponse>
+    fun changePassword(@Header("AUTH_TOKEN")authtoken: String?,
+                       @Body requestBody: RequestBody):Observable<PasswordGlobalResponse>
 
     @POST("/api/priory/users/forgot_password.json")
     fun forgetPassword(@Body requestBody: RequestBody):Observable<PasswordGlobalResponse>
 
     @POST("/api/users/security_check.json")
-    fun securityCheck(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<SecurityGlobalResponse>
+    fun securityCheck(@Header("AUTH_TOKEN")authtoken: String?,
+                      @Body requestBody: RequestBody):Observable<SecurityGlobalResponse>
 
     @GET("/api/consultations/search_snomed_code.json")
     fun getDiseaseList(@Query("search") search:String?):Observable<MedicalGlobalResponse>
 
     @POST("/api/medical_histories.json")
-    fun addMedicalHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Body requestBody: RequestBody):Observable<MedicalHistoryGlobalResponse>
+    fun addMedicalHistory(@Header("AUTH_TOKEN")authtoken: String?,
+                          @Header("clinical_token")clinicalToken:String?,
+                          @Body requestBody: RequestBody):Observable<MedicalHistoryGlobalResponse>
 
     @GET("/api/medical_histories.json")
-    fun showMedicalHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("user_id")userId:Int,@Query("type")historyType:String,@Query("status")status:String,@Query("corporate_id")corporateId: Int):Observable<MedicalHistoryGlobalResponse>
+    fun showMedicalHistory(@Header("AUTH_TOKEN")authtoken: String?,
+                           @Header("clinical_token")clinicalToken:String?,
+                           @Query("user_id")userId:Int,
+                           @Query("type")historyType:String,
+                           @Query("status")status:String,
+                           @Query("corporate_id")corporateId: Int):Observable<MedicalHistoryGlobalResponse>
 
     @POST("/api/user_allergies.json")
-    fun addAllergyHistory(@Header("AUTH_TOKEN")authtoken: String?, @Header("clinical_token")clinicalToken:String?, @Body requestBody: RequestBody):Observable<AllergyGlobalResponse>
+    fun addAllergyHistory(@Header("AUTH_TOKEN")authtoken: String?,
+                          @Header("clinical_token")clinicalToken:String?,
+                          @Body requestBody: RequestBody):Observable<AllergyGlobalResponse>
 
     @GET("/api/user_allergies.json")
-    fun showAllergyHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("user_id")userId:Int,@Query("type")historyType:String,@Query("status")status:String,@Query("corporate_id")corporateId: Int):Observable<AllergyHistoryGlobalResponse>
+    fun showAllergyHistory(@Header("AUTH_TOKEN")authtoken: String?,
+                           @Header("clinical_token")clinicalToken:String?,
+                           @Query("user_id")userId:Int,
+                           @Query("type")historyType:String,
+                           @Query("status")status:String,
+                           @Query("corporate_id")corporateId: Int):Observable<AllergyHistoryGlobalResponse>
 
     @POST("/api/investigations.json")
-    fun addInvestigation(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Body requestBody: RequestBody):Observable<InvestigationGlobalResponse>
+    fun addInvestigation(@Header("AUTH_TOKEN")authtoken: String?,
+                         @Header("clinical_token")clinicalToken:String?,
+                         @Body requestBody: RequestBody):Observable<InvestigationGlobalResponse>
 
     @GET("/api/investigations.json")
-    fun showInvestigation(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("corporate_id")corporateId: Int):Observable<InvestigationResponse>
+    fun showInvestigation(@Header("AUTH_TOKEN")authtoken: String?,
+                          @Header("clinical_token")clinicalToken:String?,
+                          @Query("corporate_id")corporateId: Int):Observable<InvestigationResponse>
 
     @POST("/api/family_histories.json")
-    fun addFamilyHistory(@Header("AUTH_TOKEN")authtoken: String?, @Header("clinical_token")clinicalToken:String?, @Body requestBody: RequestBody):Observable<FamilyHistoryGlobalResponse>
+    fun addFamilyHistory(@Header("AUTH_TOKEN")authtoken: String?,
+                         @Header("clinical_token")clinicalToken:String?,
+                         @Body requestBody: RequestBody):Observable<FamilyHistoryGlobalResponse>
 
     @GET("/api/family_histories.json")
-    fun showFamilyHistory(@Header("AUTH_TOKEN")authtoken: String?,@Header("clinical_token")clinicalToken:String?,@Query("corporate_id")corporateId: Int):Observable<FamilyHistoryResponse>
+    fun showFamilyHistory(@Header("AUTH_TOKEN")authtoken: String?,
+                          @Header("clinical_token")clinicalToken:String?,
+                          @Query("corporate_id")corporateId: Int):Observable<FamilyHistoryResponse>
 
     @GET("/api/documents/list_for_downloads.json")
-    fun getDocuments(@Header("AUTH_TOKEN")authtoken: String?,@Query("document_type")documentType:String):Observable<DocumentGlobalResponse>
+    fun getDocuments(@Header("AUTH_TOKEN")authtoken: String?,
+                     @Query("document_type")documentType:String):Observable<DocumentGlobalResponse>
 
     @PUT("/api/users/notification_setting.json")
-    fun notificationSetting(@Header("AUTH_TOKEN")authtoken: String?,@Body requestBody: RequestBody):Observable<SettingNotificationGlobalResponse>
+    fun notificationSetting(@Header("AUTH_TOKEN")authtoken: String?,
+                            @Body requestBody: RequestBody):Observable<SettingNotificationGlobalResponse>
 
     @GET("/api/priory/users/utils/show_notification_setting.json")
     fun showNotification(@Header("AUTH_TOKEN")authtoken: String?):Observable<SettingNotificationResponse>
 
     @GET("/api/customer_support/memberships.json")
-    fun getMembershipList(@Header("AUTH_TOKEN")authtoken: String?,@Query("corporate_organization_id")corporateId: Int):Observable<MembershipGlobalResponse>
+    fun getMembershipList(@Header("AUTH_TOKEN")authtoken: String?,
+                          @Query("corporate_organization_id")corporateId: Int):Observable<MembershipGlobalResponse>
 
 }
 

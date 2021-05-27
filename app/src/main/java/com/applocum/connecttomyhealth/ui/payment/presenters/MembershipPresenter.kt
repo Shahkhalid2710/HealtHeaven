@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.ui.payment.presenters
 
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.NotFound
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -42,6 +43,10 @@ class MembershipPresenter@Inject constructor(private val api:AppEndPoint) {
                     }
                     InvalidCredentials,InternalServer ->{
                         view.displayMessage(it.message)
+                    }
+                    NotFound->
+                    {
+                        view.showMembershipList(it.data)
                     }
                 }
             },onError = {

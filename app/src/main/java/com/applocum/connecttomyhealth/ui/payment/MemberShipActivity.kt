@@ -31,7 +31,7 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
         membershipPresenter.injectView(this)
 
         ivBack.setOnClickListener { finish() }
-        tvAddMembershipCode.setOnClickListener {
+        tvAddmembershipcode.setOnClickListener {
             startActivity(Intent(this, AddCodeActivity::class.java))
         }
         btnAddCode.setOnClickListener {
@@ -45,27 +45,27 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
     override fun getLayoutResourceId(): Int = R.layout.activity_member_ship
 
     override fun displayMessage(message: String) {
-        val snackbar = Snackbar.make(flMemberShip, message, Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(flMembership, message, Snackbar.LENGTH_LONG)
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility = if (isShow) View.VISIBLE else View.GONE
+        membershipProgress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun showMembershipList(membershipResponse: ArrayList<MembershipResponse>) {
         if (membershipResponse.isEmpty()) {
-            layoutMemberShip.visibility = View.VISIBLE
+            layoutnotfoundcode.visibility = View.VISIBLE
             llSavedCodes.visibility = View.GONE
-            tvAddMembershipCode.visibility = View.GONE
+            tvAddmembershipcode.visibility = View.GONE
         }
         else
         {
-            layoutMemberShip.visibility = View.GONE
+            layoutnotfoundcode.visibility = View.GONE
             llSavedCodes.visibility = View.VISIBLE
-            tvAddMembershipCode.visibility = View.VISIBLE
+            tvAddmembershipcode.visibility = View.VISIBLE
         }
 
         rvSavedCodes.layoutManager = LinearLayoutManager(this)

@@ -113,4 +113,14 @@
         <item name="android:textSize">@dimen/font_13</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
+
+    <style name="CustomAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/grey</item>
+        <item name="textColorAlertDialogListItem">@color/aapBlack</item>
+        <item name="android:background">@drawable/custom_solid_white</item>
+        <item name="android:colorControlActivated">@color/grey</item>
+        <item name="colorSecondary">@color/black</item>
+        <item name="android:textSize">@dimen/font_17</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
 </resources>

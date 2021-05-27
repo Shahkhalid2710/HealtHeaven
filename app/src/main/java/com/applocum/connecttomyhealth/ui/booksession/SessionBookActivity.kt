@@ -22,6 +22,11 @@ import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.prolificinteractive.materialcalendarview.*
 import kotlinx.android.synthetic.main.activity_session_book.*
+import kotlinx.android.synthetic.main.activity_session_book.calendarView
+import kotlinx.android.synthetic.main.activity_session_book.rvAvailableTime
+import kotlinx.android.synthetic.main.activity_session_book.rvSelectSlot
+import kotlinx.android.synthetic.main.activity_session_book.rvSessionType
+import kotlinx.android.synthetic.main.custom_small_progress.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import javax.inject.Inject
@@ -215,15 +220,26 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     }
 
     override fun getTimeSlot(list: ArrayList<Time>) {
-        rvAvailableTime.layoutManager = GridLayoutManager(this, 4)
-        rvAvailableTime.adapter = AvailableTimeClickAdapter(
-            this,
-            list,
-            object : AvailableTimeClickAdapter.ItemClickListner {
-                override fun onItemClick(time: Time, position: Int) {
-                    sTime = time.start_time
-                }
-            })
+
+        if (list.isEmpty()) {
+            rvAvailableTime.visibility = View.GONE
+            NotAvailabeTime.visibility = View.VISIBLE
+        } else {
+            NotAvailabeTime.visibility = View.GONE
+            rvAvailableTime.visibility=View.VISIBLE
+            rvAvailableTime.layoutManager = GridLayoutManager(this, 4)
+            val availableTimeClickAdapter = AvailableTimeClickAdapter(
+                this,
+                list,
+                object : AvailableTimeClickAdapter.ItemClickListner {
+                    override fun onItemClick(time: Time, position: Int) {
+                        sTime = time.start_time
+                    }
+                })
+            rvAvailableTime.adapter=availableTimeClickAdapter
+            availableTimeClickAdapter.notifyDataSetChanged()
+        }
+
     }
 
     override fun displaymessage(message: String) {
@@ -234,7 +250,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility = if (isShow) View.VISIBLE else View.GONE
+        progressSmall.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun getPrice(common: Common) {

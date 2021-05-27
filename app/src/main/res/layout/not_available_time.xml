@@ -3,18 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/llNotAvailableTime"
-    android:background="@color/white"
-    android:visibility="gone"
+    android:visibility="visible"
+    android:focusable="true"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/no_time_slot_available"
         android:textColor="@color/aapBlack"
         android:fontFamily="@font/montserrat_semibold"
         android:layout_gravity="center"
+        android:gravity="center"
         android:padding="@dimen/spacing_20"
-        android:textSize="@dimen/font_15"/>
+        android:textSize="@dimen/font_16"/>
 </LinearLayout>

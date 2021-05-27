@@ -1,8 +1,6 @@
 package com.applocum.connecttomyhealth.ui.mydownloads
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -11,6 +9,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.prescription.models.Document
 import kotlinx.android.synthetic.main.activity_document_view.*
+import java.net.URLEncoder
 
 
 class DocumentViewActivity : BaseActivity() {
@@ -30,7 +29,8 @@ class DocumentViewActivity : BaseActivity() {
         mWebSettings.javaScriptCanOpenWindowsAutomatically = true
         mWebSettings.javaScriptEnabled = true
         mWebSettings.setSupportZoom(true)
-        mWebSettings.loadsImagesAutomatically=true
+        mWebSettings.builtInZoomControls = true
+        mWebSettings.displayZoomControls = false
 
         webView.webViewClient = object : WebViewClient() {
 
@@ -44,7 +44,8 @@ class DocumentViewActivity : BaseActivity() {
 
             }
         }
-        webView.loadUrl(document.file)
+
+        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+ URLEncoder.encode(document.file, "ISO-8859-1"))
 
     }
     override fun getLayoutResourceId(): Int=R.layout.activity_document_view

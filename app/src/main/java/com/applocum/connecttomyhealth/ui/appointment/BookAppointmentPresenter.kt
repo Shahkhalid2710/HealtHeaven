@@ -44,7 +44,7 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
             .addFormDataPart("cardIdentifier",cardIdentifier.toString())
             .addFormDataPart("organization_id",organizationId.toString())
             .build()
-        api.bookApoointment(userHolder.userToken!!,requestBody)
+        api.bookAppointment(userHolder.userToken!!,requestBody)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext={
                 when(it.status)

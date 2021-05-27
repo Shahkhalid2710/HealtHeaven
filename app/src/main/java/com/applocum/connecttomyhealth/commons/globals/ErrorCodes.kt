@@ -8,6 +8,7 @@ class ErrorCodes {
         const val InvalidCredentials = 808
         const val InternalServer = 500
         const val AlreadyExist=805
+        const val NotFound=404
         const val MissingParameter=801
     }
 }

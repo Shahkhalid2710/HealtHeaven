@@ -1,10 +1,13 @@
 package com.applocum.connecttomyhealth.ui.profiledetails
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -16,11 +19,13 @@ import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_profile_details.*
+import kotlinx.android.synthetic.main.activity_profile_details.ivBack
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
     PopupMenu.OnMenuItemClickListener, DatePickerDialog.OnDateSetListener {
     private var day: Int = 0
@@ -44,15 +49,23 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         presenter.injectview(this)
         presenter.showProfile()
 
-        /*tvSave.setOnClickListener {
+        tvSave.setOnClickListener {
             presenter.updateProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString())
             finish()
         }
-*/
         editTextClicks()
+        etWeight.setOnClickListener {
+            selectWeight()
+            calculateBMI()
+        }
+        etHeight.setOnClickListener {
+            selectHeight()
+            calculateBMI()
+        }
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun showProfile(patient: Patient) {
         tvFName.text=patient.first_name
         tvLName.text=patient.last_name
@@ -103,6 +116,8 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
             datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
             datePickerDialog.show()
         }
+
+        etBP.setOnClickListener { selectBloodPressure()}
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -124,6 +139,102 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         myDay = dayOfMonth
         val date = "" + myDay + "/" + (myMonth + 1) + "/" + myYear
         etDOB.setText(date)
+    }
+
+    private fun selectBloodPressure()
+    {
+            val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
+            builder.setTitle("Select blood pressure")
+            val bloodPressure=resources.getStringArray(R.array.BloodPressure)
+            val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,bloodPressure)
+            builder.setAdapter(dataAdapter) { _, which ->
+                etBP.setText(bloodPressure[which]).toString()
+            }
+            val dialog = builder.create()
+            dialog.show()
+
+    }
+
+
+
+    private fun selectHeight()
+    {
+        val centiMeter = ArrayList<String>()
+        for (i in 99..200) {
+            centiMeter.add("$i")
+        }
+
+        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
+        builder.setTitle("Select height")
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,centiMeter)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etHeight.setText(centiMeter[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun selectWeight()
+    {
+        val weight = ArrayList<String>()
+        for (i in 40..120) {
+            weight.add("$i")
+        }
+
+        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
+        builder.setTitle("Select weight")
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,weight)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etWeight.setText(weight[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun calculateBMI() {
+        val height = etHeight.text.toString()
+        val weight = etWeight.text.toString()
+
+        if ("" != height && "" != weight) {
+            val heightValue = height.toFloat() / 100
+            val weightValue = weight.toFloat()
+            val bmi = weightValue / (heightValue * heightValue)
+            displayBMI(bmi)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun displayBMI(bmi: Float) {
+        val bmiLabel = if (bmi.compareTo(15f) <= 0) {
+            getString(R.string.very_severely_underweight)
+        } else if (bmi.compareTo(15f) > 0 && bmi.compareTo(16f) <= 0
+        ) {
+            getString(R.string.severely_underweight)
+
+        } else if (bmi.compareTo(16f) > 0 && bmi.compareTo(18.5f) <= 0
+        ) {
+            getString(R.string.underweight)
+
+        } else if (bmi.compareTo(18.5f) > 0 && bmi.compareTo(25f) <= 0
+        ) {
+            getString(R.string.normal)
+
+        } else if (bmi.compareTo(25f) > 0 && bmi.compareTo(30f) <= 0
+        ) {
+            getString(R.string._overweight)
+
+        } else if (bmi.compareTo(30f) > 0 && bmi.compareTo(35f) <= 0
+        ) {
+            getString(R.string.obese_class_i)
+
+        } else if (bmi.compareTo(35f) > 0 && bmi.compareTo(40f) <= 0
+        ) {
+            getString(R.string.obese_class_ii)
+
+        } else {
+            getString(R.string.obese_class_iii)
+        }
+        etBMI.setText("$bmi $bmiLabel")
     }
 
 }

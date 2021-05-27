@@ -91,11 +91,18 @@
                 android:nestedScrollingEnabled="false"
                 android:visibility="gone" />
 
-            <include layout="@layout/custom_small_progress" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/NotAvailabeTime"
-                layout="@layout/not_available_time" />
+                <include
+                    android:id="@+id/NotAvailabeTime"
+                    layout="@layout/not_available_time"
+                    android:visibility="gone" />
+                <include
+                    layout="@layout/custom_small_progress"
+                    android:visibility="gone" />
+            </RelativeLayout>
         </FrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

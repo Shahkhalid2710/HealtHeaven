@@ -143,10 +143,10 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
 
     private fun selectStartMonth()
     {
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
         builder.setTitle("Select month")
         val startMonth=resources.getStringArray(R.array.Months)
-        val dataAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,startMonth)
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,startMonth)
         builder.setAdapter(dataAdapter) { _, which ->
             etStartMonth.setText(startMonth[which]).toString()
         }
@@ -161,9 +161,9 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
         for (i in thisYear downTo 1991) {
             years.add(i.toString())
         }
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
         builder.setTitle("Select year")
-        val dataAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,years)
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,years)
         builder.setAdapter(dataAdapter) { _, which ->
             etStartYear.setText(years[which]).toString()
         }
@@ -173,10 +173,10 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
     }
     private fun selectEndMonth()
     {
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
         builder.setTitle("Select month")
         val endMonth=resources.getStringArray(R.array.Months)
-        val dataAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,endMonth)
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,endMonth)
         builder.setAdapter(dataAdapter) { _, which ->
             etEndMonth.setText(endMonth[which]).toString()
         }
@@ -192,9 +192,9 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
             years.add(i.toString())
         }
 
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
         builder.setTitle("Select year")
-        val dataAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,years)
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,years)
         builder.setAdapter(dataAdapter) { _, which ->
             etEndYear.setText(years[which]).toString()
         }

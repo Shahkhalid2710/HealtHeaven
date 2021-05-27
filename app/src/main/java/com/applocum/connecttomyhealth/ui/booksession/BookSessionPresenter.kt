@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.ui.booksession
 
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.NotFound
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -40,6 +41,10 @@ class BookSessionPresenter@Inject constructor(private val api:AppEndPoint) {
                             }
                             InvalidCredentials,InternalServer -> {
                                 view.displaymessage(it.message)
+                            }
+                            NotFound->
+                            {
+                                view.getTimeSlot(it.data)
                             }
                         }
                     },onError = {

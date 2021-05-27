@@ -98,44 +98,30 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvAvailableTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="@dimen/spacing_5"
                 android:layout_marginEnd="@dimen/spacing_24"
-                android:layout_marginBottom="40dp" />
-
-            <ProgressBar
-                android:id="@+id/progress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:clickable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:indeterminateTint="@color/green"
-                android:progressTint="@color/green"
-                android:visibility="gone" />
+                android:nestedScrollingEnabled="false"
+                android:visibility="visible" />
 
             <RelativeLayout
-                android:id="@+id/rlNotAvailableTime"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:visibility="gone">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/not_available_time"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_12" />
+                <include
+                    android:id="@+id/NotAvailabeTime"
+                    layout="@layout/not_available_time"
+                    android:visibility="gone" />
+                <include
+                    layout="@layout/custom_small_progress"
+                    android:visibility="gone" />
             </RelativeLayout>
         </FrameLayout>
         <androidx.appcompat.widget.SwitchCompat

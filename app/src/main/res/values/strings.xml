@@ -410,6 +410,14 @@
     <string name="add_photo">Add Photo</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="obese_class_i">Obese class i</string>
+    <string name="obese_class_ii">Obese class ii</string>
+    <string name="obese_class_iii">Obese class iii</string>
+    <string name="_overweight">Overweight</string>
+    <string name="normal">Normal</string>
+    <string name="underweight">Underweight</string>
+    <string name="severely_underweight">Severely Underweight</string>
+    <string name="very_severely_underweight">Very Severely Underweight</string>
 
 
     <string-array name="Months">
@@ -502,6 +510,34 @@
         <item>1950</item>
     </string-array>
 
+   <string-array name="BloodPressure">
+       <item>Normal - Between 90/60 &amp; 139/89</item>
+       <item>High - 140/90 or above</item>
+       <item>Low - 90/60 or below</item>
+   </string-array>
+
+    <string-array name="Meter">
+        <item>1 m</item>
+        <item>2 m</item>
+    </string-array>
+
+    <string-array name="Pound">
+        <item>1 lbs</item>
+        <item>2 lbs</item>
+        <item>3 lbs</item>
+        <item>4 lbs</item>
+        <item>5 lbs</item>
+        <item>6 lbs</item>
+        <item>7 lbs</item>
+        <item>8 lbs</item>
+        <item>9 lbs</item>
+        <item>10 lbs</item>
+        <item>11 lbs</item>
+        <item>12 lbs</item>
+        <item>13 lbs</item>
+    </string-array>
+
+
 
 
 
@@ -533,4 +569,11 @@
     <string name="select_weight">Select weight</string>
     <string name="select_bmi">Select bmi</string>
     <string name="select_blood_pressure">Select blood pressure</string>
+    <string name="select_meter">Select meter</string>
+    <string name="select_cm">Select cm</string>
+    <string name="select_st">Select st</string>
+    <string name="select_lbs">Select lbs</string>
+    <string name="select_weight_kg">Select weight(kg)</string>
+    <string name="select_height_cm">Select height(cm)</string>
+    <string name="bmi_">Bmi</string>
 </resources>
