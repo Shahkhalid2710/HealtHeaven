@@ -82,7 +82,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                         1-> sType="video"
                         2-> sType="face_to_face"
                     }
-                    presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                   // presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
                 }
             })
 
@@ -220,7 +220,6 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     }
 
     override fun getTimeSlot(list: ArrayList<Time>) {
-
         if (list.isEmpty()) {
             rvAvailableTime.visibility = View.GONE
             NotAvailabeTime.visibility = View.VISIBLE

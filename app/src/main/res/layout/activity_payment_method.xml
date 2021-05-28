@@ -70,7 +70,7 @@
                 android:layout_marginTop="@dimen/spacing_20"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -106,7 +106,9 @@
                 android:visibility="gone" />
         </RelativeLayout>
     </LinearLayout>
-    <include layout="@layout/custom_progress"
-        android:visibility="gone"
-        android:id="@+id/paymentmethodprogress"/>
+
+    <include
+        android:id="@+id/paymentmethodprogress"
+        layout="@layout/custom_progress"
+        android:visibility="gone" />
 </FrameLayout>

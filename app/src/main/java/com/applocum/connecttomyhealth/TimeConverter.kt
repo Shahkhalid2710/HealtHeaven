@@ -1,7 +1,11 @@
+@file:Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package com.applocum.connecttomyhealth
 
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 fun convertAvailableTimeSlots(time: String): String {
     val defaultSdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+00:00", Locale.getDefault())
@@ -60,4 +64,20 @@ fun convertDocumentTime(time: String): String {
     defaultSdf.timeZone = TimeZone.getTimeZone("UTC")
     val sdf = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
     return sdf.format(defaultSdf.parse(time))
+}
+
+
+fun capitalize(capString: String): String? {
+    val capBuffer = StringBuffer()
+    val capMatcher: Matcher =
+        Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString)
+    while (capMatcher.find()) {
+        capMatcher.appendReplacement(
+            capBuffer,
+            capMatcher.group(1).toUpperCase(Locale.ROOT) + capMatcher.group(2).toLowerCase(
+                Locale.ROOT
+            )
+        )
+    }
+    return capMatcher.appendTail(capBuffer).toString()
 }

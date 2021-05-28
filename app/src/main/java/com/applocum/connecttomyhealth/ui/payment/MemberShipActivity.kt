@@ -52,7 +52,7 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
     }
 
     override fun viewProgress(isShow: Boolean) {
-        membershipProgress.visibility = if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun showMembershipList(membershipResponse: ArrayList<MembershipResponse>) {

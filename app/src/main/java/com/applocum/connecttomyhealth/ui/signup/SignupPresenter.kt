@@ -1,6 +1,5 @@
 package com.applocum.connecttomyhealth.ui.signup
 
-import android.util.Log
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.AlreadyExist
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
@@ -47,7 +46,7 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
         gender: String,
         date_of_birth: String
     ) {
-        if (validateSignup(firstname, lastname, email, mobileno, password, confirmPassword, gender, date_of_birth)
+        if (validateSignup(firstname, lastname, email,mobileno, password, confirmPassword, gender, date_of_birth)
         ) {
             view.viewProgress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
@@ -57,7 +56,7 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                 .addFormDataPart("user[email]", email)
                 .addFormDataPart("user[role]", role)
                 .addFormDataPart("patient[referenced_form]", referenceform)
-                .addFormDataPart("user[phone]", countrycode+""+mobileno)
+                .addFormDataPart("user[phone]",countrycode+mobileno)
                 .addFormDataPart("user[gender]", gender)
                 .addFormDataPart("user[password]", password)
                 .addFormDataPart("profile[date_of_birth]", date_of_birth)

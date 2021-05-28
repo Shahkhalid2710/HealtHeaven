@@ -9,16 +9,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         tools:ignore="UselessParent">
+
+        <ImageView
+            android:layout_width="144dp"
+            android:layout_height="174dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/todo"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_no_payment_card" />
 
         <TextView
             android:id="@+id/tvNoSavedCardsFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/spacing_35"
+            android:fontFamily="@font/montserrat_bold"
             android:text="@string/no_saved_cards_found"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_18" />
@@ -28,11 +37,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:layout_marginEnd="@dimen/spacing_24"
             android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/spacing_24"
             android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
             android:text="@string/you_have_not_added_any_saved_cards_yet_to_add_tap_on_button"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_14" />
@@ -42,12 +51,12 @@
             android:layout_width="168dp"
             android:layout_height="34dp"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
-            android:textAllCaps="false"
-            android:foreground="@drawable/effect_button"
+            android:layout_marginTop="@dimen/spacing_40"
             android:background="@drawable/custom_btn"
             android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
             android:text="@string/add_card"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/font_12" />
     </LinearLayout>

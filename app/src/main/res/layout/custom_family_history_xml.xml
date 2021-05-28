@@ -13,12 +13,21 @@
         android:gravity="center"
         tools:ignore="UselessParent">
 
+        <ImageView
+            android:layout_width="162dp"
+            android:layout_height="174dp"
+            android:contentDescription="@string/todo"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_no_family_history" />
+
         <TextView
             android:id="@+id/tvNoFamilyHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/spacing_35"
             android:text="@string/no_family_history_added"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_18" />
@@ -39,7 +48,7 @@
             android:layout_width="168dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="66dp"
             android:textAllCaps="false"
             android:foreground="@drawable/effect_button"
             android:background="@drawable/custom_btn"

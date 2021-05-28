@@ -9,42 +9,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         tools:ignore="UselessParent">
-    <ImageView
-        android:id="@+id/ivOnBoardScreen"
-        android:layout_width="264dp"
-        android:layout_height="174dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="86dp"
-        android:contentDescription="@string/todo"
-        android:src="@drawable/image_book_appointment" />
 
-    <TextView
-        android:id="@+id/tvOnBoardName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="53dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="@string/book_appointment"
-        android:textColor="@color/green"
-        android:textSize="@dimen/font_20" />
+        <ImageView
+            android:id="@+id/ivOnBoardScreen"
+            android:layout_width="264dp"
+            android:layout_height="174dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="86dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/image_book_appointment" />
 
-    <TextView
-        android:id="@+id/tvOnBoardDes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="32dp"
-        android:textAlignment="center"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="@string/book_appointment_and_get_consult_to_our_great_doctors_via_call_video_and_face_to_face"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/font_12" />
+        <TextView
+            android:id="@+id/tvOnBoardName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="53dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/book_appointment"
+            android:textColor="@color/green"
+            android:textSize="@dimen/font_20" />
+
+        <TextView
+            android:id="@+id/tvOnBoardDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/book_appointment_and_get_consult_to_our_great_doctors_via_call_video_and_face_to_face"
+            android:textAlignment="center"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_12" />
 
     </LinearLayout>
 </LinearLayout>

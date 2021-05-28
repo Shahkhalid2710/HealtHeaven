@@ -15,6 +15,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_g_p_service.*
+import kotlinx.android.synthetic.main.activity_add_g_p_service.ivBack
 import kotlinx.android.synthetic.main.activity_add_g_p_service.progress
 import kotlinx.android.synthetic.main.custom_gp_service_dialog.view.*
 import java.util.concurrent.TimeUnit
@@ -31,7 +32,10 @@ class AddGPServiceActivity : BaseActivity() ,GpservicePresenter.View{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ivBack.setOnClickListener { finish() }
+        ivBack.setOnClickListener {
+            startActivity(Intent(this,GpServiceActivity::class.java))
+            finish()
+        }
 
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
@@ -59,6 +63,17 @@ class AddGPServiceActivity : BaseActivity() ,GpservicePresenter.View{
     }
 
     override fun getGpList(list: ArrayList<GpService>) {
+        if (list.isEmpty())
+        {
+            NoGpService.visibility=View.VISIBLE
+            rvAddGp.visibility=View.GONE
+        }
+        else
+        {
+            NoGpService.visibility=View.GONE
+            rvAddGp.visibility=View.VISIBLE
+        }
+
         gpServiceAdapter= GpServiceAdapter(this,list,object :GpServiceAdapter.ItemClickListner{
             override fun onItemClick(gpService: GpService, position: Int) {
                 val showDialogView= LayoutInflater.from(this@AddGPServiceActivity).inflate(R.layout.custom_gp_service_dialog,null,false)

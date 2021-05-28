@@ -22,7 +22,7 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return 5
     }
 
     override fun onBindViewHolder(holder: DoctorHolder, position: Int) {

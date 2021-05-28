@@ -38,6 +38,7 @@ class AddSymptomActivity : BaseActivity() {
 
         (application as MyApplication).component.inject(this)
         val specialist=intent.getSerializableExtra("specialist") as Specialist
+        ivBack.setOnClickListener { finish() }
 
         val alldayDr = "<font color='#008976'>alldayDr</font>"
         val nhsGP = "<font color='#008976'>NHS GP.</font>"

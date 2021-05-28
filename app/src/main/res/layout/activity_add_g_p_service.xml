@@ -75,6 +75,7 @@
                         android:backgroundTint="@color/layoutbackground"
                         android:clickable="true"
                         android:focusable="true"
+                        android:imeOptions="actionDone"
                         android:fontFamily="@font/poppins_regular"
                         android:foreground="@drawable/effect_button"
                         android:hint="@string/search_gp"
@@ -129,6 +130,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_24"
                         android:nestedScrollingEnabled="false" />
+
+                    <include
+                        android:id="@+id/NoGpService"
+                        layout="@layout/custom_no_gp_service_area"
+                        android:visibility="gone"/>
                 </FrameLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

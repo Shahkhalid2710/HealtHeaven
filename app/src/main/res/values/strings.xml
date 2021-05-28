@@ -419,6 +419,29 @@
     <string name="severely_underweight">Severely Underweight</string>
     <string name="very_severely_underweight">Very Severely Underweight</string>
 
+    <string-array name="custom_months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    <string-array name="custom_weekdays">
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+    </string-array>
 
     <string-array name="Months">
         <item>January</item>
@@ -576,4 +599,5 @@
     <string name="select_weight_kg">Select weight(kg)</string>
     <string name="select_height_cm">Select height(cm)</string>
     <string name="bmi_">Bmi</string>
+    <string name="try_another_text_to_find_gp_service_in_your_area">Try another text to find GP service in your area</string>
 </resources>

@@ -73,6 +73,7 @@
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginEnd="@dimen/spacing_24"
                     android:autofillHints="0"
+                    android:imeOptions="actionDone"
                     android:backgroundTint="@color/textcolorgrey"
                     android:drawableEnd="@drawable/ic_dropdown_list"
                     android:focusable="true"
@@ -151,6 +152,7 @@
                             android:backgroundTint="@color/textcolorgrey"
                             android:drawableEnd="@drawable/ic_dropdown_list"
                             android:focusable="false"
+                            android:imeOptions="actionDone"
                             android:fontFamily="@font/montserrat_medium"
                             android:hint="@string/select_month"
                             android:inputType="textCapSentences"
@@ -171,6 +173,7 @@
                             android:focusable="false"
                             android:fontFamily="@font/montserrat_medium"
                             android:hint="@string/select_year"
+                            android:imeOptions="actionDone"
                             android:inputType="textCapSentences"
                             android:textColor="@color/aapBlack"
                             android:textColorHint="@color/grey"
@@ -238,6 +241,7 @@
                                 android:hint="@string/select_month"
                                 android:inputType="textCapSentences"
                                 android:textColor="@color/aapBlack"
+                                android:imeOptions="actionDone"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/font_12"
                                 tools:ignore="LabelFor" />
@@ -258,6 +262,7 @@
                                 android:textColor="@color/aapBlack"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/font_12"
+                                android:imeOptions="actionDone"
                                 tools:ignore="LabelFor" />
                         </LinearLayout>
 

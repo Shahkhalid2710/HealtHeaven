@@ -13,12 +13,21 @@
         android:gravity="center"
         tools:ignore="UselessParent">
 
+        <ImageView
+            android:layout_width="183dp"
+            android:layout_height="174dp"
+            android:contentDescription="@string/todo"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_no_investigation" />
+
         <TextView
             android:id="@+id/tvNoInvestigation"
             android:layout_width="166dp"
             android:layout_height="22dp"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/spacing_35"
             android:text="@string/no_investigation_added"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_18" />
@@ -39,7 +48,7 @@
             android:layout_width="168dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="66dp"
             android:textAllCaps="false"
             android:foreground="@drawable/effect_button"
             android:background="@drawable/custom_btn"

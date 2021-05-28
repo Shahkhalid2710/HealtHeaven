@@ -7,8 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -26,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_availability.*
 import kotlinx.android.synthetic.main.fragment_availability.view.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 

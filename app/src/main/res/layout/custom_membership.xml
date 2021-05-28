@@ -15,11 +15,21 @@
         android:gravity="center"
         tools:ignore="UselessParent">
 
+        <ImageView
+            android:layout_width="225dp"
+            android:layout_height="174dp"
+            android:contentDescription="@string/todo"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_no_membership" />
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_bold"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/spacing_35"
             android:text="@string/no_saved_code_found"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_18" />
@@ -43,7 +53,7 @@
             android:layout_width="168dp"
             android:layout_height="34dp"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/spacing_40"
             android:textAllCaps="false"
             android:foreground="@drawable/effect_button"
             android:background="@drawable/custom_btn"

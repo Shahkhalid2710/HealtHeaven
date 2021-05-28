@@ -14,11 +14,11 @@
         tools:ignore="UselessParent">
 
         <ImageView
-            android:layout_width="190dp"
-            android:layout_height="174dp"
+            android:layout_width="157dp"
+            android:layout_height="143dp"
+            android:layout_gravity="center"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
-            android:layout_gravity="center"
             android:src="@drawable/ic_no_gp_service" />
 
         <TextView
@@ -33,7 +33,6 @@
             android:textSize="@dimen/font_18" />
 
         <TextView
-            android:id="@+id/tvNoAdded"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_24"
@@ -41,22 +40,9 @@
             android:layout_marginEnd="@dimen/spacing_24"
             android:fontFamily="@font/montserrat_medium"
             android:gravity="center"
-            android:text="@string/you_have_not_added_any_gp_service_yet_to_add_tap_on_button"
+            android:text="@string/try_another_text_to_find_gp_service_in_your_area"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_14" />
 
-        <Button
-            android:id="@+id/btnAddGpService"
-            android:layout_width="168dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/spacing_40"
-            android:background="@drawable/custom_btn"
-            android:fontFamily="@font/montserrat_semibold"
-            android:foreground="@drawable/effect_button"
-            android:text="@string/add_gp_service"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_12" />
     </LinearLayout>
 </LinearLayout>

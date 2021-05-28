@@ -13,7 +13,7 @@ import com.applocum.connecttomyhealth.ui.walkthrough.WalkThroughActivity
 import javax.inject.Inject
 
 class SplashScreenActivity : BaseActivity() {
-    override fun getLayoutResourceId(): Int= R.layout.activity_splash_screen
+    override fun getLayoutResourceId():Int = R.layout.activity_splash_screen
 
     @Inject
     lateinit var userHolder: UserHolder

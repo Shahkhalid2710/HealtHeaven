@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.capitalize
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import com.applocum.connecttomyhealth.ui.mygp.models.Surgery
@@ -77,8 +78,16 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
     }
 
     override fun showSurgery(surgery: Surgery) {
-        llMyGp.visibility=View.GONE
-        llGpService.visibility=View.VISIBLE
+        if (surgery.equals(""))
+        {
+            llMyGp.visibility=View.VISIBLE
+            llGpService.visibility=View.GONE
+        }
+        else
+        {
+            llMyGp.visibility=View.GONE
+            llGpService.visibility=View.VISIBLE
+        }
 
         supportMapFragment = supportFragmentManager.findFragmentById(R.id.mapwhere) as SupportMapFragment
 
@@ -95,7 +104,7 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
             map.isMyLocationEnabled
             val marker = LatLng(surgery.lat,surgery.long)
             val cameraPosition = CameraPosition.Builder().target(marker).zoom(15.0f).build()
-            map.addMarker(MarkerOptions().position(marker).title(surgery.practice_name)).setIcon(smallMarkerIcon)
+            map.addMarker(MarkerOptions().position(marker).title(capitalize(surgery.practice_name))).setIcon(smallMarkerIcon)
             val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
             map.moveCamera(cameraUpdate)
 
@@ -106,8 +115,8 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
 
         }
 
-        tvAddress.text=surgery.address
-        tvName.text=surgery.practice_name
+        tvAddress.text= capitalize(surgery.address)
+        tvName.text= capitalize(surgery.practice_name)
 
         btnCallGPService.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)

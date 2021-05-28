@@ -14,8 +14,8 @@
         tools:ignore="UselessParent">
 
         <ImageView
-            android:layout_width="285dp"
-            android:layout_height="285dp"
+            android:layout_width="149dp"
+            android:layout_height="174dp"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
             android:layout_gravity="center"
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="@dimen/spacing_35"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/no_exemptions_certificate_found"
             android:textColor="@color/aapBlack"
@@ -50,7 +50,7 @@
             android:layout_width="168dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
-            android:layout_marginTop="78dp"
+            android:layout_marginTop="@dimen/spacing_40"
             android:foreground="@drawable/effect_button"
             android:background="@drawable/custom_btn"
             android:fontFamily="@font/montserrat_semibold"
