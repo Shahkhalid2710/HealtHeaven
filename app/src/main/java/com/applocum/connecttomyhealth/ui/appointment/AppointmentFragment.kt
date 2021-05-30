@@ -24,6 +24,7 @@ class AppointmentFragment : Fragment() {
         v.viewPager.adapter = viewPagerFragmentAdapter
         v.tablayout.setupWithViewPager(v.viewPager)
 
+
         return v
     }
 }

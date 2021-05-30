@@ -32,6 +32,7 @@ class SpecialistsAdapter(context: Context,list: ArrayList<Specialist>,private va
         holder.itemView.tvProf.text = specialist.designation
         holder.itemView.tvDes.text = specialist.bio
 
+
         holder.itemView.btnViewProfile.setOnClickListener {
             onitemclick.onItemClick(specialist,position)
         }

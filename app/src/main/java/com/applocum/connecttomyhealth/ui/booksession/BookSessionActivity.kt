@@ -36,6 +36,7 @@ class BookSessionActivity : BaseActivity() {
         viewPager.adapter=viewPagerFragmentAdapter
         tablayout.setupWithViewPager(viewPager)
 
+
         btnBookSession.setOnClickListener {
             val intent=Intent(this,AddSymptomActivity::class.java)
             intent.putExtra("specialist",specialist)

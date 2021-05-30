@@ -18,7 +18,7 @@
     <string name="please_enter_the_verification_code_we_sent_to_your_mobile_number">Please enter the verification code we sent to your mobile number</string>
     <string name="_9054216535">9054216535</string>
     <string name="_4">4</string>
-    <string name="not_recieved_code">Not recieved code?</string>
+    <string name="not_recieved_code">Not received code?</string>
     <string name="resend">Resend</string>
     <string name="verify">Verify</string>
     <string name="create_new_password">Create New password</string>
@@ -48,7 +48,6 @@
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="appointment">Appointment</string>
-    <string name="notification">Notification</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="good_morning">Good Morning,</string>
@@ -128,7 +127,7 @@
     <string name="charles">Charles</string>
     <string name="abc123_gmail_com">abc123@gmail.com</string>
     <string name="phone_no">Phone No.</string>
-    <string name="_64_389_4321_333">+ 64 389-4321-333</string>
+    <string name="_64_389_4321_333">+ 64 389–4321–333</string>
     <string name="_26_03_1983">26 / 03 / 1983</string>
     <string name="height">Height</string>
     <string name="_5_ft_8_in">5 ft 8 in</string>
@@ -533,11 +532,11 @@
         <item>1950</item>
     </string-array>
 
-   <string-array name="BloodPressure">
-       <item>Normal - Between 90/60 &amp; 139/89</item>
-       <item>High - 140/90 or above</item>
-       <item>Low - 90/60 or below</item>
-   </string-array>
+    <string-array name="BloodPressure">
+        <item>Normal - Between 90/60 &amp; 139/89</item>
+        <item>High - 140/90 or above</item>
+        <item>Low - 90/60 or below</item>
+    </string-array>
 
     <string-array name="Meter">
         <item>1 m</item>
@@ -559,11 +558,6 @@
         <item>12 lbs</item>
         <item>13 lbs</item>
     </string-array>
-
-
-
-
-
 
 
     <string name="action_settings">Settings</string>
@@ -600,4 +594,8 @@
     <string name="select_height_cm">Select height(cm)</string>
     <string name="bmi_">Bmi</string>
     <string name="try_another_text_to_find_gp_service_in_your_area">Try another text to find GP service in your area</string>
+    <string name="notification">Notification</string>
+    <string name="retry"><u>Retry</u></string>
+    <string name="oops_connection_lost">Oops ! Connection lost</string>
+    <string name="__">-</string>
 </resources>

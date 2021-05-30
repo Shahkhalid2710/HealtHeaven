@@ -87,7 +87,6 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="14dp"
                     android:layout_marginEnd="14dp"
-                    android:layout_marginBottom="@dimen/spacing_40"
                     tools:ignore="UselessParent">
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -96,9 +95,10 @@
                         android:layout_height="match_parent"
                         android:nestedScrollingEnabled="false" />
 
-                    <include layout="@layout/custom_loader_progress" />
                 </FrameLayout>
             </LinearLayout>
+
+            <include layout="@layout/custom_loader_progress" />
 
             <include
                 android:id="@+id/layoutnotfoundcode"

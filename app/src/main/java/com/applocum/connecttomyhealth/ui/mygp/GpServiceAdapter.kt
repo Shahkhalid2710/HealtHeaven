@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.capitalize
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import kotlinx.android.synthetic.main.raw_gp_service.view.*
+import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
 
@@ -38,6 +40,16 @@ class GpServiceAdapter(context: Context, list: ArrayList<GpService>, private val
             itemclick.onItemClick(gpService, position)
         }
     }
+
+    private fun capitalize(capString: String): String {
+        val capBuffer = StringBuffer()
+        val capMatcher: Matcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString)
+        while (capMatcher.find()) {
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase(Locale.ROOT) + capMatcher.group(2).toLowerCase(Locale.ROOT))
+        }
+        return capMatcher.appendTail(capBuffer).toString()
+    }
+
     interface ItemClickListner{
         fun onItemClick(gpService: GpService,position: Int)
     }

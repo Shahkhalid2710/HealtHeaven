@@ -7,12 +7,14 @@ import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.dateTimeUTCFormat
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeClickAdapter
+import com.applocum.connecttomyhealth.ui.booksession.adapters.SelectSlotAdapter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
@@ -63,8 +65,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
         specialist = intent.getSerializableExtra("specialist") as Specialist
 
-        val sessionType1 = SessionType("Phone")
-        val sessionType2 = SessionType("Video")
+        val sessionType1 = SessionType("Phone Call")
+        val sessionType2 = SessionType("Video Call")
         val sessionType3 = SessionType("Face to Face")
         mListSessionType.add(sessionType1)
         mListSessionType.add(sessionType2)
@@ -86,16 +88,15 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 }
             })
 
-        val sessionType4 = SessionType("10 min")
-        val sessionType5 = SessionType("20 min")
-        val sessionType17 = SessionType("30 min")
+        val sessionType4 = SessionType("10 mins")
+        val sessionType5 = SessionType("20 mins")
+        val sessionType17 = SessionType("30 mins")
 
         mListSelectSlot.add(sessionType4)
         mListSelectSlot.add(sessionType5)
         mListSelectSlot.add(sessionType17)
-        rvSelectSlot.layoutManager = GridLayoutManager(this, 4)
-        rvSelectSlot.adapter =
-            SessionTypeAdapter(this, mListSelectSlot, object : SessionTypeAdapter.ItemClickListner {
+        rvSelectSlot.layoutManager =LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        rvSelectSlot.adapter = SelectSlotAdapter(this, mListSelectSlot, object : SelectSlotAdapter.ItemClickListner {
                 override fun onItemClick(sessionType: SessionType, position: Int) {
                     when(position) {
                         0 -> sSlot = "10"
@@ -227,9 +228,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             NotAvailabeTime.visibility = View.GONE
             rvAvailableTime.visibility=View.VISIBLE
             rvAvailableTime.layoutManager = GridLayoutManager(this, 4)
-            val availableTimeClickAdapter = AvailableTimeClickAdapter(
-                this,
-                list,
+            val availableTimeClickAdapter = AvailableTimeClickAdapter(this, list,
                 object : AvailableTimeClickAdapter.ItemClickListner {
                     override fun onItemClick(time: Time, position: Int) {
                         sTime = time.start_time
@@ -238,7 +237,6 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             rvAvailableTime.adapter=availableTimeClickAdapter
             availableTimeClickAdapter.notifyDataSetChanged()
         }
-
     }
 
     override fun displaymessage(message: String) {

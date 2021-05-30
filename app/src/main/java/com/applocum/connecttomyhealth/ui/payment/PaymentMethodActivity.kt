@@ -37,14 +37,8 @@ class PaymentMethodActivity : BaseActivity(),AddCardPresenter.View {
 
         presenter.showSavedCards()
 
-
-        tvAddPaymentMethod.setOnClickListener {
-            startActivity(Intent(this,AddCardActivity::class.java))
-        }
-        btnAddCard.setOnClickListener {
-            startActivity(Intent(this,AddCardActivity::class.java))
-        }
-
+        tvAddPaymentMethod.setOnClickListener { startActivity(Intent(this,AddCardActivity::class.java)) }
+        btnAddCard.setOnClickListener { startActivity(Intent(this,AddCardActivity::class.java)) }
 
     }
 

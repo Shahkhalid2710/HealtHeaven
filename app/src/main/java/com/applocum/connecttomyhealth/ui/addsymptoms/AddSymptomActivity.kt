@@ -61,7 +61,7 @@ class AddSymptomActivity : BaseActivity() {
         }
 
         btnContinue.setOnClickListener {
-            if (cbGeoLocation.isChecked && cbRecords.isChecked && checkSymptoms(etAddSymptoms.text.toString(),selectedImagePath)) {
+            if (checkCondition(cbGeoLocation.isChecked,cbRecords.isChecked)){
                 val intent = Intent(this, SessionBookActivity::class.java)
                 intent.putExtra("specialist",specialist)
                 val appointment = userHolder.getBookAppointmentData()
@@ -71,11 +71,6 @@ class AddSymptomActivity : BaseActivity() {
                 appointment.sharedRecordWithNhs=cbRecords.isChecked
                 userHolder.saveBookAppointmentData(appointment)
                 startActivity(intent)
-            } else {
-                val snackbar = Snackbar.make(lladdsymptoms, "Please fill all the credentials", Snackbar.LENGTH_LONG)
-                val snackview = snackbar.view
-                snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-                snackbar.show()
             }
         }
     }
@@ -123,19 +118,19 @@ class AddSymptomActivity : BaseActivity() {
         return cursor.getString(columnIndex)
     }
 
-    private fun checkSymptoms(reason:String,image:String):Boolean
+    private fun checkCondition(geolocation:Boolean,records:Boolean):Boolean
     {
-        if (reason.isEmpty())
+        if (!geolocation)
         {
-            val snackbar = Snackbar.make(lladdsymptoms,"Please enter symptoms", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(lladdsymptoms,"Please agree to share your geo location", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
             return false
         }
-        if (image.isEmpty())
+        if (!records)
         {
-            val snackbar = Snackbar.make(lladdsymptoms,"Please add image", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(lladdsymptoms,"Please agree to share your records with NHS GP.", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()

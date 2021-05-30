@@ -2,7 +2,6 @@ package com.applocum.connecttomyhealth.ui.appointment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
+import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomActivity
 import com.applocum.connecttomyhealth.ui.appointment.adapters.PastSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.applocum.connecttomyhealth.ui.sessiondetails.SessionDetailsActivity
@@ -70,7 +70,6 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
             layoutNotFoundPastSession.visibility=View.GONE
             rvPastSession.visibility=View.VISIBLE
         }
-        Log.d("Checkdataaalistt","-->"+list)
         rvPastSession.layoutManager=LinearLayoutManager(requireActivity())
         rvPastSession.adapter=PastSessionAdapter(requireActivity(),list,object :PastSessionAdapter.ItemClickListner{
             override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {

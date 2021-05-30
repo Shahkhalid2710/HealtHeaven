@@ -7,15 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeAdapter
+import com.applocum.connecttomyhealth.ui.booksession.adapters.SelectSlotAdapter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
@@ -28,7 +28,6 @@ import kotlinx.android.synthetic.main.fragment_availability.*
 import kotlinx.android.synthetic.main.fragment_availability.view.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -59,8 +58,8 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
 
         specialist=arguments?.getSerializable("specialist") as Specialist
 
-        val sessionType1 = SessionType("Phone")
-        val sessionType2 = SessionType("Video")
+        val sessionType1 = SessionType("Phone Call")
+        val sessionType2 = SessionType("Video Call")
         val sessionType3 = SessionType("Face to Face")
         mListSessionType.add(sessionType1)
         mListSessionType.add(sessionType2)
@@ -81,15 +80,15 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
             }
         })
 
-        val sessionType4 = SessionType("10 min")
-        val sessionType5 = SessionType("20 min")
-        val sessionType11 = SessionType("30 min")
+        val sessionType4 = SessionType("10 mins")
+        val sessionType5 = SessionType("20 mins")
+        val sessionType11 = SessionType("30 mins")
 
         mListSelectSlot.add(sessionType4)
         mListSelectSlot.add(sessionType5)
         mListSelectSlot.add(sessionType11)
-        v.rvSelectSlot.layoutManager =GridLayoutManager(requireActivity(),4)
-        v.rvSelectSlot.adapter = SessionTypeAdapter(requireActivity(), mListSelectSlot,object :SessionTypeAdapter.ItemClickListner{
+        v.rvSelectSlot.layoutManager =LinearLayoutManager(requireActivity(),LinearLayoutManager.HORIZONTAL,false)
+        v.rvSelectSlot.adapter = SelectSlotAdapter(requireActivity(), mListSelectSlot,object :SelectSlotAdapter.ItemClickListner{
             override fun onItemClick(sessionType: SessionType, position: Int) {
                 when(position) {
                     0 -> sSlot = "10"

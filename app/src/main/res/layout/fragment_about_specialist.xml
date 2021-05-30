@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/spacing_20"
         android:background="@color/white"
         android:orientation="vertical"
         tools:context=".ui.booksession.AboutSpecialistFragment">
@@ -35,7 +34,7 @@
             android:layout_marginEnd="@dimen/spacing_24"
             android:fontFamily="@font/montserrat_medium"
             android:gravity="start"
-            android:text="@string/it_is_a_long_established_fact_that_a_reader_will_be_distracted_by_the_readable_content_of_a_page_when_looking_at_its_layout_the_point_of_using_lorem_ipsum_is_that_it_has_a_more_or_less_normal_distribution_of_letters_as_opposed_to_using_content"
+            android:text="@string/__"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_13" />
 
@@ -103,7 +102,7 @@
             android:layout_marginEnd="@dimen/spacing_24"
             android:fontFamily="@font/montserrat_medium"
             android:gravity="start"
-            android:text="@string/it_is_a_long_established_fact_that_a_reader_will_be_distracted_by_the_readable_content_of_a_page_when_looking_at_its_layout_the_point_of_using_lorem_ipsum_is_that_it_has_a_more_or_less_normal_distribution_of_letters_as_opposed_to_using_content"
+            android:text="@string/__"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_13" />
 
@@ -114,18 +113,18 @@
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_20"
             android:layout_marginEnd="@dimen/spacing_24"
-            android:layout_marginBottom="@dimen/spacing_20"
+            android:layout_marginBottom="@dimen/spacing_30"
             android:background="@drawable/custom_btn"
-            android:orientation="horizontal"
-            android:padding="7dp"
-            android:focusable="true"
             android:clickable="true"
+            android:focusable="true"
             android:foreground="@drawable/effect_button"
+            android:orientation="horizontal"
+            android:padding="11dp"
             tools:ignore="UseCompoundDrawables">
 
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/todo"
                 android:src="@drawable/ic_direction_arrow" />
@@ -133,9 +132,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_5"
                 android:fontFamily="@font/montserrat_medium"
-                android:layout_gravity="center"
                 android:text="@string/directions"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_10" />

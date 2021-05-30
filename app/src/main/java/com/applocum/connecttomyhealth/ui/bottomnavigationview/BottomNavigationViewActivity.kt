@@ -16,7 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_bottomnavigationview.*
 import javax.inject.Inject
 
-class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
+    BottomNavigationView.OnNavigationItemReselectedListener {
     @Inject
     lateinit var userHolder: UserHolder
 
@@ -26,6 +27,7 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
         super.onCreate(savedInstanceState)
 
         bottomnavigationView.setOnNavigationItemSelectedListener(this)
+        bottomnavigationView.setOnNavigationItemReselectedListener(this)
 
         bottomnavigationView.menu.forEach {
             val view = bottomnavigationView.findViewById<View>(it.itemId)
@@ -68,5 +70,9 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.rlbottomnavigation, fragment)
         transaction.commit()
+    }
+
+    override fun onNavigationItemReselected(item: MenuItem) {
+
     }
 }

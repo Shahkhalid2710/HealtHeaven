@@ -11,11 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="2">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1.6"
             android:background="@color/white"
             android:orientation="vertical"
             tools:context=".ui.walkthrough.WalkThroughActivity">
@@ -39,10 +41,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:focusable="true"
                     android:clickable="true"
-                    android:foreground="@drawable/effect_button"
+                    android:focusable="true"
                     android:fontFamily="@font/montserrat_bold"
+                    android:foreground="@drawable/effect_button"
                     android:text="@string/skip"
                     android:textColor="@color/green"
                     android:textSize="@dimen/font_16" />
@@ -51,8 +53,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="bottom"
+            android:layout_weight="0.4"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -82,12 +85,12 @@
 
                     <LinearLayout
                         android:id="@+id/llNext"
-                        android:layout_width="101dp"
-                        android:layout_height="36dp"
-                        android:foreground="@drawable/effect_button"
-                        android:focusable="true"
-                        android:clickable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/custom_btn"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="@drawable/effect_button"
                         android:visibility="visible">
 
                         <LinearLayout
@@ -95,6 +98,10 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:paddingTop="@dimen/spacing_10"
+                            android:paddingBottom="@dimen/spacing_10"
+                            android:paddingStart="@dimen/spacing_20"
+                            android:paddingEnd="@dimen/spacing_20"
                             android:orientation="horizontal"
                             tools:ignore="UseCompoundDrawables,UselessParent">
 
@@ -118,12 +125,12 @@
 
                     <LinearLayout
                         android:id="@+id/btnGetStarted"
-                        android:layout_width="122dp"
-                        android:layout_height="36dp"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:foreground="@drawable/effect_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/custom_btn"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="@drawable/effect_button"
                         android:visibility="gone">
 
                         <LinearLayout
@@ -131,6 +138,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:padding="@dimen/spacing_10"
                             android:orientation="horizontal"
                             tools:ignore="UseCompoundDrawables,UselessParent">
 

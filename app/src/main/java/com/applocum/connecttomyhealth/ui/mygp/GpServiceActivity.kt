@@ -11,7 +11,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.capitalize
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import com.applocum.connecttomyhealth.ui.mygp.models.Surgery
@@ -22,7 +21,11 @@ import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.activity_gp_service.*
 import kotlinx.android.synthetic.main.custom_mygp_xml.*
 import kotlinx.android.synthetic.main.custom_progress.*
+import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
 @Suppress("DEPRECATION", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -128,5 +131,18 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
         }
 
     }
-
+    private fun capitalize(capString: String): String? {
+        val capBuffer = StringBuffer()
+        val capMatcher: Matcher =
+            Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString)
+        while (capMatcher.find()) {
+            capMatcher.appendReplacement(
+                capBuffer,
+                capMatcher.group(1).toUpperCase(Locale.ROOT) + capMatcher.group(2).toLowerCase(
+                    Locale.ROOT
+                )
+            )
+        }
+        return capMatcher.appendTail(capBuffer).toString()
+    }
 }

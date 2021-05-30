@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.ConnectToMyHealth" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/green</item>
         <item name="colorPrimaryVariant">@android:color/transparent</item>
 <!--
         <item name="colorOnPrimary">@color/white</item>
@@ -90,11 +90,11 @@
 
     <style name="WeekdayHeader">
         <item name="android:textColor">@color/aapBlack</item>
-        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
     </style>
     <style name="MonthdayHeader">
         <item name="android:textColor">@color/aapBlack</item>
-        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
     </style>
 
     <style name="DatedayHeader">
