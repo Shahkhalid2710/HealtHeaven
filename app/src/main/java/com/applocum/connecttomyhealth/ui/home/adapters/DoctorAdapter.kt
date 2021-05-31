@@ -1,22 +1,16 @@
 package com.applocum.connecttomyhealth.ui.home.adapters
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.Typeface
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.doctor_raw_xml.view.*
-import kotlinx.android.synthetic.main.fragment_about_specialist.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -51,6 +45,8 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
         }
         setAnimation(holder.itemView,position)
     }
+
+
    /* private fun setAnimation(viewToAnimate: View, position: Int) {
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {

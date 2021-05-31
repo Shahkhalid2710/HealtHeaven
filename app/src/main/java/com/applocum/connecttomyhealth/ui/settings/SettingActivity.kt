@@ -38,6 +38,7 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
         presenter.injectView(this)
 
         presenter.showNotification()
+
         checkGpsStatus()
        /* switchlocatinservices.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -123,5 +124,10 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
             ) { dialog, _ -> dialog.cancel() }
         val alert: AlertDialog = builder.create()
         alert.show()
+    }
+
+    override fun onResume() {
+        //presenter.showNotification()
+        super.onResume()
     }
 }

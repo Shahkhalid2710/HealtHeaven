@@ -63,4 +63,9 @@ class PastMedicalHistoryFragment : Fragment(),MedicalPresenter.View {
         rvPastMedicalHistory.layoutManager=LinearLayoutManager(requireActivity())
         rvPastMedicalHistory.adapter=PastMedicalHistoryAdapter(requireActivity(),falseMedicalHistory)
     }
+
+    override fun onResume() {
+        presenter.pastMedicalHistory()
+        super.onResume()
+    }
 }

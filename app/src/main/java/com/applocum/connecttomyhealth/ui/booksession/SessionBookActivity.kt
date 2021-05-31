@@ -80,11 +80,19 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 override fun onItemClick(sessionType: SessionType, position: Int) {
                     when(position)
                     {
-                        0-> sType="phone_call"
-                        1-> sType="video"
-                        2-> sType="face_to_face"
+                        0-> {
+                            sType = "phone_call_appointment"
+                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                        }
+                        1-> {
+                            sType="online_appointment"
+                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                        }
+                        2-> {
+                            sType = "offline_appointment"
+                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                        }
                     }
-                   // presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
                 }
             })
 
@@ -99,11 +107,16 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         rvSelectSlot.adapter = SelectSlotAdapter(this, mListSelectSlot, object : SelectSlotAdapter.ItemClickListner {
                 override fun onItemClick(sessionType: SessionType, position: Int) {
                     when(position) {
-                        0 -> sSlot = "10"
-                        1 -> sSlot = "20"
-                        2 -> sSlot = "30"
+                        0 -> {sSlot = "10"
+                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                             }
+                        1 -> {sSlot = "20"
+                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                        }
+                        2 -> {sSlot = "30"
+                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                        }
                     }
-                    presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
                 }
             })
 
@@ -248,6 +261,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
     override fun viewProgress(isShow: Boolean) {
         progressSmall.visibility = if (isShow) View.VISIBLE else View.GONE
+        rvAvailableTime.visibility = if (isShow) View.GONE else View.VISIBLE
     }
 
     override fun getPrice(common: Common) {
@@ -315,7 +329,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             return false
         }
         if (time.isEmpty()) {
-            val snackbar = Snackbar.make(llSessionbook, "Please select time", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(llSessionbook, "Please select proper time slot", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()

@@ -27,7 +27,7 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
         super.onCreate(savedInstanceState)
 
         bottomnavigationView.setOnNavigationItemSelectedListener(this)
-        bottomnavigationView.setOnNavigationItemReselectedListener(this)
+       // bottomnavigationView.setOnNavigationItemReselectedListener(this)
 
         bottomnavigationView.menu.forEach {
             val view = bottomnavigationView.findViewById<View>(it.itemId)

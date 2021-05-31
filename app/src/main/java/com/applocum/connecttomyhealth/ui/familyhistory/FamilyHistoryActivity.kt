@@ -65,4 +65,9 @@ class FamilyHistoryActivity : BaseActivity(),FamilyHistoryPresenter.View {
         rvFamilyHistory.layoutManager=LinearLayoutManager(this)
         rvFamilyHistory.adapter=FamilyHistoryAdapter(this,list)
     }
+
+    override fun onResume() {
+        presenter.showFamilyHistoryList()
+        super.onResume()
+    }
 }

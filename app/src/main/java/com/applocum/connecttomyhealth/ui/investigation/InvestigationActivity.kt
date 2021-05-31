@@ -46,7 +46,8 @@ class InvestigationActivity : BaseActivity(),InvestigationPresenter.View {
         progress.visibility=if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun investigationList(list: ArrayList<Investigation>) {
+    override fun investigationList(list: ArrayList
+    <Investigation>) {
         if (list.isEmpty())
         {
             layoutNotFoundInvestigation.visibility=View.VISIBLE
@@ -61,5 +62,10 @@ class InvestigationActivity : BaseActivity(),InvestigationPresenter.View {
         }
         rvInvestigation.layoutManager=LinearLayoutManager(this)
         rvInvestigation.adapter=InvestigationAdapter(this,list)
+    }
+
+    override fun onResume() {
+        investigationPresenter.showInvestigationList()
+        super.onResume()
     }
 }

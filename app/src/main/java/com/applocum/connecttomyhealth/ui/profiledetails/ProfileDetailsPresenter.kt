@@ -39,6 +39,7 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
                     Success -> {
                         val patientObject = Gson().fromJson(it.data,PatientResponse::class.java)
                         val patient = patientObject.patient
+
                         view.showProfile(patient)
                     }
                     InvalidCredentials,InternalServer -> {
@@ -71,6 +72,7 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
                         view.displayMessage(it.message)
                         val patientObject = Gson().fromJson(it.data,PatientResponse::class.java)
                         val patient = patientObject.patient
+
                         view.showProfile(patient)
                     }
                     InvalidCredentials,InternalServer -> {

@@ -221,42 +221,35 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvSavedCodes"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_marginTop="@dimen/spacing_16"
-                            android:layout_marginEnd="14dp"
-                            android:nestedScrollingEnabled="false" />
+                            android:layout_height="wrap_content">
 
-                        <ProgressBar
-                            android:id="@+id/progressSaveCode"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:indeterminateTint="@color/green"
-                            android:progressTint="@color/green"
-                            android:visibility="gone" />
-
-                        <RelativeLayout
-                            android:id="@+id/rlNotSaveCodes"
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:visibility="visible">
-
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvSavedCodes"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:fontFamily="@font/montserrat_semibold"
-                                android:text="@string/not_save_codes"
-                                android:textColor="@color/grey"
-                                android:textSize="@dimen/font_12" />
-                        </RelativeLayout>
+                                android:layout_marginStart="14dp"
+                                android:layout_marginTop="@dimen/spacing_16"
+                                android:layout_marginEnd="14dp"
+                                android:nestedScrollingEnabled="false" />
+
+                            <ProgressBar
+                                android:id="@+id/progressSaveCode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:indeterminateTint="@color/green"
+                                android:progressTint="@color/green"
+                                android:visibility="gone" />
+                        </FrameLayout>
+
+                        <include
+                            android:id="@+id/noCodes"
+                            layout="@layout/no_saved_code"/>
                     </FrameLayout>
                 </LinearLayout>
 

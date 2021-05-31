@@ -30,7 +30,6 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
         const val statusUnverified="unverified"
     }
 
-
     fun injectView(view: View)
     {
         this.view=view

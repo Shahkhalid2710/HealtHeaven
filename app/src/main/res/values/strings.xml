@@ -598,4 +598,6 @@
     <string name="retry"><u>Retry</u></string>
     <string name="oops_connection_lost">Oops ! Connection lost</string>
     <string name="__">-</string>
+    <string name="no_session_yet">No Session Yet</string>
+    <string name="not_available_code">Not available code</string>
 </resources>

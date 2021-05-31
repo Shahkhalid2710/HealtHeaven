@@ -103,4 +103,9 @@ class PaymentMethodActivity : BaseActivity(),AddCardPresenter.View {
         rvSavedCards.adapter=paymentCardAdapter
         paymentCardAdapter.notifyDataSetChanged()
     }
+
+    override fun onResume() {
+        presenter.showSavedCards()
+        super.onResume()
+    }
 }

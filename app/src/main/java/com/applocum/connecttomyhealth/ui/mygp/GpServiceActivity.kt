@@ -81,14 +81,14 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
     }
 
     override fun showSurgery(surgery: Surgery) {
-        if (surgery.equals(""))
+        if (surgery == null)
         {
-            llMyGp.visibility=View.VISIBLE
+            mygp.visibility=View.VISIBLE
             llGpService.visibility=View.GONE
         }
         else
         {
-            llMyGp.visibility=View.GONE
+            mygp.visibility=View.GONE
             llGpService.visibility=View.VISIBLE
         }
 
@@ -106,7 +106,7 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
             map.uiSettings.setAllGesturesEnabled(true)
             map.isMyLocationEnabled
             val marker = LatLng(surgery.lat,surgery.long)
-            val cameraPosition = CameraPosition.Builder().target(marker).zoom(15.0f).build()
+            val cameraPosition = CameraPosition.Builder().target(marker).zoom(16.0f).build()
             map.addMarker(MarkerOptions().position(marker).title(capitalize(surgery.practice_name))).setIcon(smallMarkerIcon)
             val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
             map.moveCamera(cameraUpdate)
@@ -144,5 +144,10 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
             )
         }
         return capMatcher.appendTail(capBuffer).toString()
+    }
+
+    override fun onResume() {
+        presenter.getGpService()
+        super.onResume()
     }
 }

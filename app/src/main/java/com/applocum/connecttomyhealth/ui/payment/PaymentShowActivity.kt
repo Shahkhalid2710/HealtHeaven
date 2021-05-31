@@ -43,6 +43,7 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
     lateinit var userHolder: UserHolder
 
     private var selectCard = 0
+    private var appointmentType=""
 
     override fun getLayoutResourceId(): Int=R.layout.activity_payment_show
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +58,7 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
         userHolder.saveBookAppointmentData(bookAppointment)
 
         btnConfirmSessionBooking.setOnClickListener {
-            when (selectCard) {
+            when (selectCard ) {
                 0 -> {
                     val snackbar =
                         Snackbar.make(llPaymentShow, "Please select at least one method ", Snackbar.LENGTH_LONG)
@@ -66,13 +67,20 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
                     snackbar.show()
                 }
                 else -> {
+                    when(bookAppointment.appointmentType)
+                    {
+                        "phone_call_appointment"->{ appointmentType="phone_call"}
+                        "online_appointment"->{appointmentType="video"}
+                        "offline_appointment"->{appointmentType="face_to_face"}
+                    }
+
                     bookAppointmentPresenter.bookAppointment(
                         bookAppointment.appointmentTime,
                         bookAppointment.appointmentSlot,
                         bookAppointment.appointmentReason,
                         bookAppointment.allowGeoAccess,
                         bookAppointment.sharedRecordWithNhs,
-                        bookAppointment.appointmentType,
+                        appointmentType,
                         bookAppointment.therapistId,
                         selectCard,
                         bookAppointment.corporateId)
@@ -153,10 +161,10 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
         dialog.btnDone.setOnClickListener {
             dialog.dismiss()
             val intent=(Intent(this, BottomNavigationViewActivity::class.java))
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             this.finish()
-
         }
         dialog.show()
     }
@@ -170,4 +178,9 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
     }
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {}
+
+    override fun onResume() {
+        presenter.showSavedCards()
+        super.onResume()
+    }
 }

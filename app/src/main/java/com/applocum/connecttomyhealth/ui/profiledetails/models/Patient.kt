@@ -1,4 +1,5 @@
 package com.applocum.connecttomyhealth.ui.profiledetails.models
+import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import com.applocum.connecttomyhealth.ui.signup.models.Organization
 import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.google.gson.annotations.SerializedName
@@ -11,7 +12,7 @@ data class Patient (
 	@SerializedName("nhs_number") val nhs_number : String,
 	@SerializedName("last_name") val last_name : String,
 	@SerializedName("email") val email : String,
-	@SerializedName("phone") val phone : String,
+	@SerializedName("phone") val phone :String,
 	@SerializedName("image") val image : String,
 	@SerializedName("gender") val gender : String,
 	@SerializedName("date_of_birth") val date_of_birth : String,
@@ -23,7 +24,7 @@ data class Patient (
 	@SerializedName("weight_category") val weight_category : String,
 	@SerializedName("weight_value1") val weight_value1 : String,
 	@SerializedName("weight_value2") val weight_value2 : String,
-	@SerializedName("gp_service") val gp_service : String,
+	@SerializedName("gp_service") val gp_service : GpService,
 	@SerializedName("addresses") val addresses : Addresses,
 	@SerializedName("documents") val documents : List<String>,
 	@SerializedName("smoke") val smoke : String,
@@ -45,5 +46,5 @@ data class Patient (
 	@SerializedName("user") val user : User,
 	@SerializedName("corporate_id") val corporate_id : Int,
 	@SerializedName("corporate_name") val corporate_name : String,
-	@SerializedName("phone_detail") val phone_detail : String
+	@SerializedName("phone_detail") val phone_detail : PhoneDetail
 )

@@ -88,7 +88,6 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
 
         btnSaveAllergy.setOnClickListener {
             allergyHistoryPresenter.addAllergy(allergyName,isActivePast)
-            Log.d("checkdataaaaa","-->"+isActivePast)
         }
     }
 
@@ -145,7 +144,8 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
     }
 
     override fun displaySuccessMessage(message: String) {
-       Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+       // Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        this.finish()
     }
 
     override fun displayErrorMessage(message: String) {

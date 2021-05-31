@@ -50,7 +50,7 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
                 when(it.status)
                 {
                     Success->{
-                        view.displayMessage(it.message)
+                       // view.displayMessage(it.message)
                     }
                     InvalidCredentials,InternalServer -> {
                         view.displayMessage(it.message)

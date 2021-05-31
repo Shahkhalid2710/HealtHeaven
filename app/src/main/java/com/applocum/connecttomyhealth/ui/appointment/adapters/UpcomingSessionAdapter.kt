@@ -66,7 +66,7 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
 
         if (holder.itemView.btnCheckin.text == "Join")
         {
-            holder.itemView.btnCheckin.alpha=0.5f
+            holder.itemView.btnCheckin.isEnabled=false
         }
 
         holder.itemView.btnCheckin.setOnClickListener {

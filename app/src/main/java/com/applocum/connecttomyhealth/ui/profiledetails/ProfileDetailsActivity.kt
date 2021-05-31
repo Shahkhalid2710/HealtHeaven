@@ -17,6 +17,7 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.signup.models.User
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_profile_details.*
 import kotlinx.android.synthetic.main.activity_profile_details.ivBack
@@ -67,21 +68,23 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
 
     @SuppressLint("SimpleDateFormat")
     override fun showProfile(patient: Patient) {
-        tvFName.text=patient.first_name
-        tvLName.text=patient.last_name
-        etFirstName.setText(patient.first_name)
-        etLastName.setText(patient.last_name)
-        etEmail.setText(patient.email)
-        etPhoneNo.setText(patient.phone)
-        etGender.setText(patient.gender)
+        tvFName.text=patient.user.firstName
+        tvLName.text=patient.user.lastName
+        etFirstName.setText(patient.user.firstName)
+        etLastName.setText(patient.user.lastName)
+        etEmail.setText(patient.user.email)
+        etPhoneNo.setText(patient.user.phone)
+        etGender.setText(patient.user.gender)
 
-        val date = patient.date_of_birth
+        val date = patient.user.profile.dateOfBirth
         var spf = SimpleDateFormat("yyyy-MM-dd")
         val newDate = spf.parse(date)
         spf = SimpleDateFormat("dd/MM/yyyy")
         val newDateString = spf.format(newDate)
         println(newDateString)
         etDOB.setText(newDateString)
+
+        Glide.with(this).load(patient.user.image).into(ivProfile)
     }
 
     override fun displayMessage(message: String) {

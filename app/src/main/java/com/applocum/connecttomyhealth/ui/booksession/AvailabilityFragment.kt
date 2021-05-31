@@ -69,14 +69,16 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
         v.rvSessionType.adapter = SessionTypeAdapter(requireActivity(), mListSessionType,object :SessionTypeAdapter.ItemClickListner{
             override fun onItemClick(sessionType: SessionType,position: Int) {
                 when(position) {
-                   /* 0-> sType="phone_call"
-                    1-> sType="video"
-                    2-> sType="face_to_face"*/
-                    0-> sType="phone_call_appointment"
-                    1-> sType="online_appointment"
-                    2-> sType="offline_appointment"
+                    0-> {sType="phone_call_appointment"
+                        presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                    }
+                    1-> {sType="online_appointment"
+                        presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                    }
+                    2-> {sType="offline_appointment"
+                        presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                    }
                 }
-                presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
             }
         })
 
@@ -91,11 +93,16 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
         v.rvSelectSlot.adapter = SelectSlotAdapter(requireActivity(), mListSelectSlot,object :SelectSlotAdapter.ItemClickListner{
             override fun onItemClick(sessionType: SessionType, position: Int) {
                 when(position) {
-                    0 -> sSlot = "10"
-                    1 -> sSlot = "20"
-                    2 -> sSlot = "30"
+                    0 ->{ sSlot = "10"
+                        presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                    }
+                    1 -> {sSlot = "20"
+                        presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                    }
+                    2 ->{ sSlot = "30"
+                        presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                    }
                 }
-               presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
             }
         })
 

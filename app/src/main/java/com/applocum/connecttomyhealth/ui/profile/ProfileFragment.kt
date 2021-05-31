@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.profile
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -22,6 +23,8 @@ import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.securitycheck.SecurityActivity
 import com.applocum.connecttomyhealth.ui.settings.SettingActivity
 import com.applocum.connecttomyhealth.ui.signup.models.User
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.custom_profile_dialog.view.*
 import kotlinx.android.synthetic.main.custom_progress.view.*
 import kotlinx.android.synthetic.main.custom_signout_dialog.view.btnNo
@@ -32,6 +35,7 @@ import javax.inject.Inject
 
 class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
     lateinit var v: View
+    private var profileImage=""
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -57,9 +61,18 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
                 .inflate(R.layout.custom_profile_dialog, null, false)
             val dialog = androidx.appcompat.app.AlertDialog.Builder(requireActivity()).create()
             dialog.setView(showDialogView)
-            dialog.setCanceledOnTouchOutside(false)
 
             showDialogView.tvGallery.setOnClickListener {
+                context?.let { it1 ->
+                    CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .setActivityTitle("My Crop")
+                        .setCropShape(CropImageView.CropShape.OVAL)
+                        .setCropMenuCropButtonTitle("Done")
+                        .setRequestedSize(400, 400)
+                        .start(it1,this)
+
+                }
                 dialog.dismiss()
             }
             showDialogView.tvCamera.setOnClickListener {
@@ -70,6 +83,7 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
             }
             dialog.show()
         }
+
 
         v.llPersonalDetails.setOnClickListener {
             startActivity(Intent(requireActivity(), PersonalDetailsActivity::class.java))
@@ -99,35 +113,18 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
         }
 
 
+
+
         v.btnSignOut.setOnClickListener {
             val showDialogView = LayoutInflater.from(requireActivity())
                 .inflate(R.layout.custom_signout_dialog, null, false)
             val dialog = AlertDialog.Builder(requireActivity()).create()
             dialog.setView(showDialogView)
-            dialog.setCanceledOnTouchOutside(false)
 
             showDialogView.btnSignOut.setOnClickListener {
                 val intent=Intent(requireActivity(),LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                userHolder.userToken?.let { it1 ->
-                    userHolder.userGender?.let { it2 ->
-                        userHolder.userLastName?.let { it3 ->
-                            userHolder.userFirstName?.let { it4 ->
-                                userHolder.userEmail?.let { it5 ->
-                                    userHolder.userDOB?.let { it6 ->
-                                        userHolder.clearUserData(userHolder.userid!!, it4,
-                                            it3, it5,
-                                            it2, it6,
-                                            it1
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
                 startActivity(intent)
                 requireActivity().finish()
             }
@@ -153,5 +150,19 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
 
     override fun viewprogress(isShow: Boolean) {
         v.progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        // handle result of CropImageActivity
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode == Activity.RESULT_OK) {
+                v.ivProfile.setImageURI(result.uri)
+                profileImage=(result.uri.path).toString()
+                presenter.updateUser(profileImage)
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

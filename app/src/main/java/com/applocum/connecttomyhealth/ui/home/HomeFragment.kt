@@ -1,16 +1,12 @@
 package com.applocum.connecttomyhealth.ui.home
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -44,6 +40,8 @@ class HomeFragment : Fragment(),SpecilistPresenter.View {
         v.btnBookAppointment.setOnClickListener {
             startActivity(Intent(requireActivity(), SpecialistsActivity::class.java))
         }
+
+
 
         v.tvName.text=userHolder.userFirstName
 

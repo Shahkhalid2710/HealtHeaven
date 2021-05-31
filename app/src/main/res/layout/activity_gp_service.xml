@@ -194,6 +194,7 @@
 
             <include
                 android:id="@+id/mygp"
+                android:visibility="gone"
                 layout="@layout/custom_mygp_xml" />
         </LinearLayout>
     </RelativeLayout>

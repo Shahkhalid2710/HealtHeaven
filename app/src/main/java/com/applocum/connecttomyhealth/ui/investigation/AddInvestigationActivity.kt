@@ -121,7 +121,8 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     }
 
     override fun displaySuccessMessage(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+       // Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        this.finish()
     }
 
     override fun displayMessage(message: String) {

@@ -64,4 +64,8 @@ class ActiveMedicalHistoryFragment : Fragment(),
     override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {
     }
 
+    override fun onResume() {
+        presenter.activeMedicalHistory()
+        super.onResume()
+    }
 }

@@ -135,7 +135,8 @@ class AddFamilyHistoryActivity : BaseActivity(),MedicalPresenter.View,FamilyHist
     }
 
     override fun displaySuccessMessage(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        this.finish()
     }
 
     override fun viewFamilyHistoryProgress(isShow: Boolean) {

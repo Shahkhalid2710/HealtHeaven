@@ -80,4 +80,9 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
             })
         rvSavedCodes.adapter = membershipAdapter
     }
+
+    override fun onResume() {
+        membershipPresenter.showSavedCodes()
+        super.onResume()
+    }
 }
