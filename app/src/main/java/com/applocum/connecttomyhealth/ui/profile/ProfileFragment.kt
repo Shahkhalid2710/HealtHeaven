@@ -65,13 +65,10 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
             showDialogView.tvGallery.setOnClickListener {
                 context?.let { it1 ->
                     CropImage.activity()
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .setActivityTitle("My Crop")
                         .setCropShape(CropImageView.CropShape.OVAL)
                         .setCropMenuCropButtonTitle("Done")
                         .setRequestedSize(400, 400)
                         .start(it1,this)
-
                 }
                 dialog.dismiss()
             }
@@ -153,8 +150,6 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        // handle result of CropImageActivity
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {

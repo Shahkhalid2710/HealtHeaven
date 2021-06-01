@@ -37,7 +37,7 @@
                         android:layout_marginEnd="@dimen/spacing_24"
                         android:nestedScrollingEnabled="false" />
 
-                    <include layout="@layout/custom_loader_progress" />
+                    <include layout="@layout/custom_loader_progress"/>
                 </FrameLayout>
 
                 <include

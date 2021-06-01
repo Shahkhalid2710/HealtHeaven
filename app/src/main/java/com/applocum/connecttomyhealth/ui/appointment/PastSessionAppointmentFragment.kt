@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomActivity
 import com.applocum.connecttomyhealth.ui.appointment.adapters.PastSessionAdapter
@@ -49,6 +50,7 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
 
     override fun displayMessage(mesage: String) {
         val snackbar = Snackbar.make(llUpcomingSession,mesage, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
         snackbar.show()

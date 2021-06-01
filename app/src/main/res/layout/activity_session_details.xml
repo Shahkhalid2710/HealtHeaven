@@ -161,7 +161,7 @@
                         android:fontFamily="@font/montserrat_bold"
                         android:text="@string/_14th_august_2020"
                         android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_12"/>
+                        android:textSize="@dimen/font_12" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -431,15 +431,25 @@
                     android:textColor="@color/grey"
                     android:textSize="@dimen/font_12" />
 
-                <TextView
-                    android:id="@+id/tvVideoHistory"
-                    android:layout_width="wrap_content"
+                <FrameLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/yes"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_12" />
+                    android:layout_marginTop="@dimen/spacing_10">
+
+                    <VideoView
+                        android:id="@+id/videoView"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/no_video_history_available"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
+                </FrameLayout>
             </LinearLayout>
 
             <LinearLayout

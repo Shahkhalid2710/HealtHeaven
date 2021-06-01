@@ -21,15 +21,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_10"
             app:mcv_calendarMode="week"
-            app:mcv_firstDayOfWeek="monday"
+            app:mcv_firstDayOfWeek="sunday"
+            app:mcv_headerTextAppearance="@style/MonthdayHeader"
+            app:mcv_leftArrowMask="@drawable/ic_back_arrow"
             app:mcv_monthLabels="@array/custom_months"
+            app:mcv_rightArrowMask="@drawable/ic_forward_arrow"
+            app:mcv_selectionColor="@color/green"
+            app:mcv_showOtherDates="all"
             app:mcv_titleAnimationOrientation="vertical"
             app:mcv_weekDayLabels="@array/custom_weekdays"
-            app:mcv_leftArrowMask="@drawable/ic_arrow_back"
-            app:mcv_showOtherDates="all"
-            app:mcv_rightArrowMask="@drawable/ic_arrow_forward"
-            app:mcv_headerTextAppearance="@style/MonthdayHeader"
-            app:mcv_selectionColor="@color/green"
             app:mcv_weekDayTextAppearance="@style/WeekdayHeader" />
 
         <TextView
@@ -106,6 +106,7 @@
                     android:id="@+id/NotAvailabeTime"
                     layout="@layout/not_available_time"
                     android:visibility="gone" />
+
                 <include
                     layout="@layout/custom_small_progress"
                     android:visibility="gone" />

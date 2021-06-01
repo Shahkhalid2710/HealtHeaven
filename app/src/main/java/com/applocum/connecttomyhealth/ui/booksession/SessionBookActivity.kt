@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.dateTimeUTCFormat
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
@@ -193,7 +194,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
 
         btnContinue.setOnClickListener {
-            if (validateBookSession(seleteddate, sType, sSlot, sTime)) {
+            if (validateBookSession(seleteddate, sType, sSlot,sTime)) {
                 val intent = Intent(this, ConfirmBookingActivity::class.java)
 
                 val appointment = userHolder.getBookAppointmentData()
@@ -244,7 +245,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             val availableTimeClickAdapter = AvailableTimeClickAdapter(this, list,
                 object : AvailableTimeClickAdapter.ItemClickListner {
                     override fun onItemClick(time: Time, position: Int) {
-                        sTime = time.start_time
+                            sTime = time.start_time
                     }
                 })
             rvAvailableTime.adapter=availableTimeClickAdapter
@@ -254,6 +255,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
     override fun displaymessage(message: String) {
         val snackbar = Snackbar.make(llSessionbook, message, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()
@@ -308,6 +310,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     ): Boolean {
         if (date.isEmpty()) {
             val snackbar = Snackbar.make(llSessionbook, "Please select date", Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
@@ -316,6 +319,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         if (sessionType.isEmpty()) {
             val snackbar =
                 Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
@@ -323,6 +327,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         }
         if (slot.isEmpty()) {
             val snackbar = Snackbar.make(llSessionbook, "Please select slot", Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
@@ -330,6 +335,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         }
         if (time.isEmpty()) {
             val snackbar = Snackbar.make(llSessionbook, "Please select proper time slot", Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()

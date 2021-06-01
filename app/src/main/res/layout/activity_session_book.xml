@@ -2,16 +2,16 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fillViewport="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/llSessionbook"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        android:id="@+id/llSessionbook"
         tools:context=".ui.booksession.SessionBookActivity">
 
         <RelativeLayout
@@ -27,9 +27,9 @@
                 android:layout_height="15dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/spacing_25"
+                android:clickable="true"
                 android:contentDescription="@string/todo"
                 android:focusable="true"
-                android:clickable="true"
                 android:foreground="@drawable/effect_button"
                 android:src="@drawable/ic_back" />
         </RelativeLayout>
@@ -41,15 +41,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_10"
             app:mcv_calendarMode="week"
-            app:mcv_firstDayOfWeek="monday"
+            app:mcv_firstDayOfWeek="sunday"
+            app:mcv_headerTextAppearance="@style/MonthdayHeader"
+            app:mcv_leftArrowMask="@drawable/ic_back_arrow"
             app:mcv_monthLabels="@array/custom_months"
+            app:mcv_rightArrowMask="@drawable/ic_forward_arrow"
+            app:mcv_selectionColor="@color/green"
+            app:mcv_showOtherDates="all"
             app:mcv_titleAnimationOrientation="vertical"
             app:mcv_weekDayLabels="@array/custom_weekdays"
-            app:mcv_leftArrowMask="@drawable/ic_arrow_back"
-            app:mcv_showOtherDates="all"
-            app:mcv_rightArrowMask="@drawable/ic_arrow_forward"
-            app:mcv_headerTextAppearance="@style/MonthdayHeader"
-            app:mcv_selectionColor="@color/green"
             app:mcv_weekDayTextAppearance="@style/WeekdayHeader" />
 
 
@@ -68,10 +68,10 @@
             android:id="@+id/rvSessionType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
             android:layout_marginStart="19dp"
             android:layout_marginTop="@dimen/spacing_5"
-            android:layout_marginEnd="19dp" />
+            android:layout_marginEnd="19dp"
+            android:nestedScrollingEnabled="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,10 +88,10 @@
             android:id="@+id/rvSelectSlot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
             android:layout_marginStart="19dp"
             android:layout_marginTop="@dimen/spacing_5"
-            android:layout_marginEnd="19dp" />
+            android:layout_marginEnd="19dp"
+            android:nestedScrollingEnabled="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,11 +127,13 @@
                     android:id="@+id/NotAvailabeTime"
                     layout="@layout/not_available_time"
                     android:visibility="gone" />
+
                 <include
                     layout="@layout/custom_small_progress"
                     android:visibility="gone" />
             </RelativeLayout>
         </FrameLayout>
+
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchMultiSessions"
             android:layout_width="match_parent"
@@ -140,10 +142,10 @@
             android:layout_marginTop="13dp"
             android:layout_marginEnd="@dimen/spacing_24"
             android:checked="false"
-            android:foreground="@drawable/effect_button"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
             android:text="@string/book_multiple_sessions"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_14"
@@ -178,7 +180,10 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
+                    android:clickable="true"
                     android:contentDescription="@string/todo"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect_button"
                     android:src="@drawable/ic_minuss" />
 
                 <EditText
@@ -206,7 +211,10 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/etSessions"
+                    android:clickable="true"
                     android:contentDescription="@string/todo"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect_button"
                     android:src="@drawable/ic_add" />
 
             </RelativeLayout>
@@ -235,10 +243,10 @@
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
                 android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/daily"
@@ -253,10 +261,10 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
                 android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/weekly_on_thursday"
@@ -271,10 +279,10 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
                 android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/monthly_on_1st_thursday"
@@ -289,10 +297,10 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
                 android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/anually_on_april_13th"
@@ -307,10 +315,10 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
                 android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/every_weekday"
@@ -325,10 +333,10 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
                 android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/custom"
@@ -343,9 +351,9 @@
             android:layout_gravity="center"
             android:layout_marginTop="72dp"
             android:layout_marginBottom="@dimen/spacing_48"
-            android:foreground="@drawable/effect_button"
             android:background="@drawable/custom_btn"
             android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
             android:text="@string/_continue"
             android:textAllCaps="false"
             android:textColor="@color/white"

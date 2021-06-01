@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
 import com.google.android.material.snackbar.Snackbar
@@ -45,6 +46,7 @@ class ChangePasswordActivity : BaseActivity(),ChangePasswordPresenter.View {
 
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llChangePassword, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
         val snackView = snackBar.view
         snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackBar.show()

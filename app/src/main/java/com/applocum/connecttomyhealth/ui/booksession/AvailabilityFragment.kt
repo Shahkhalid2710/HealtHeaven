@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SelectSlotAdapter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
@@ -147,6 +148,7 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener,BookSessionPrese
     }
     override fun displaymessage(message: String) {
         val snackBar = Snackbar.make(llAvailability, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
         val snackView = snackBar.view
         snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
         snackBar.show()

@@ -1,7 +1,6 @@
 package com.applocum.connecttomyhealth.ui.booksession.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ class AvailableTimeAdapter(context: Context, list: ArrayList<Time>) :
     inner class SessionTypeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionTypeHolder {
-        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_session_booking, parent, false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_available_time, parent, false)
         return SessionTypeHolder(v)
     }
 

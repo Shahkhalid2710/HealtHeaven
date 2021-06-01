@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_5"
+    android:foreground="@drawable/effect_button"
+    android:background="@drawable/default_time_background"
+    tools:ignore="UselessParent">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/phone"
+        android:gravity="center"
+        android:padding="@dimen/spacing_10"
+        android:textColor="@color/green"
+        android:textSize="@dimen/font_11" />
+</RelativeLayout>
+

@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import com.applocum.connecttomyhealth.ui.payment.PaymentMethodActivity
@@ -89,6 +90,7 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
 
     override fun displaymessage(message: String) {
         val snackbar = Snackbar.make(llAddCard, message, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()

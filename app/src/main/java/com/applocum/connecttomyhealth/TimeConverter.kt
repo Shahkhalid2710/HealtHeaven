@@ -2,6 +2,9 @@
 
 package com.applocum.connecttomyhealth
 
+import android.graphics.Typeface
+import android.widget.TextView
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Matcher
@@ -80,4 +83,11 @@ fun capitalize(capString: String): String? {
         )
     }
     return capMatcher.appendTail(capBuffer).toString()
+}
+
+fun Snackbar.changeFont()
+{
+    val tv = view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+    val font = Typeface.createFromAsset(context.assets, "fonts/montserrat_regular.ttf")
+    tv.typeface = font
 }

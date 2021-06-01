@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.SessionBookActivity
@@ -123,6 +124,7 @@ class AddSymptomActivity : BaseActivity() {
         if (!geolocation)
         {
             val snackbar = Snackbar.make(lladdsymptoms,"Please agree to share your geo location", Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
@@ -131,6 +133,7 @@ class AddSymptomActivity : BaseActivity() {
         if (!records)
         {
             val snackbar = Snackbar.make(lladdsymptoms,"Please agree to share your records with NHS GP.", Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()

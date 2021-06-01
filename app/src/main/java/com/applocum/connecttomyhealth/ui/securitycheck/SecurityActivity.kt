@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.clinicalrecords.ClinicalRecordsActivity
 import com.applocum.connecttomyhealth.ui.securitycheck.models.Security
@@ -42,6 +43,7 @@ class SecurityActivity : BaseActivity(),SecurityPresenter.View {
 
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(rlSecurity, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
         val snackView = snackBar.view
         snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackBar.show()

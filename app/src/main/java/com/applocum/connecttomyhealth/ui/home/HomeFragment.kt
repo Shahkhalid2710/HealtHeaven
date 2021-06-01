@@ -25,7 +25,6 @@ class HomeFragment : Fragment(),SpecilistPresenter.View {
     lateinit var userHolder: UserHolder
     @Inject
     lateinit var specilistPresenter: SpecilistPresenter
-
     lateinit var v:View
 
     override fun onCreateView(

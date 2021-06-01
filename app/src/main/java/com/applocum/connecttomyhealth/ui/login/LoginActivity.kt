@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.BottomNavigationViewActivity
@@ -46,6 +47,7 @@ class LoginActivity : BaseActivity(), LoginPresenter.View {
 
     override fun displaymessage(message: String?) {
         val snackbar = Snackbar.make(llLogin, message.toString(), Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()

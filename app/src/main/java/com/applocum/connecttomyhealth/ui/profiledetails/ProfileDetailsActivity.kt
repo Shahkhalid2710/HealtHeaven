@@ -13,6 +13,7 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
@@ -55,16 +56,7 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
             finish()
         }
         editTextClicks()
-        etWeight.setOnClickListener {
-            selectWeight()
-            calculateBMI()
-        }
-        etHeight.setOnClickListener {
-            selectHeight()
-            calculateBMI()
-        }
-
-    }
+   }
 
     @SuppressLint("SimpleDateFormat")
     override fun showProfile(patient: Patient) {
@@ -74,8 +66,6 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         etLastName.setText(patient.user.lastName)
         etEmail.setText(patient.user.email)
         etPhoneNo.setText(patient.user.phone)
-        etGender.setText(patient.user.gender)
-
         val date = patient.user.profile.dateOfBirth
         var spf = SimpleDateFormat("yyyy-MM-dd")
         val newDate = spf.parse(date)
@@ -85,6 +75,13 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         etDOB.setText(newDateString)
 
         Glide.with(this).load(patient.user.image).into(ivProfile)
+
+        when(patient.user.gender)
+        {
+            "male"->{etGender.setText(R.string.male)}
+            "female"->{etGender.setText(R.string.female)}
+            "others"->{etGender.setText(R.string.others)}
+        }
     }
 
     override fun displayMessage(message: String) {
@@ -121,6 +118,10 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         }
 
         etBP.setOnClickListener { selectBloodPressure()}
+        etMeter.setOnClickListener { selectMeter() }
+        etCentimeter.setOnClickListener { selectCentimeter() }
+        etStone.setOnClickListener { selectStone() }
+        etLbs.setOnClickListener { selectPound() }
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -130,6 +131,7 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
             R.id.others -> etGender.setText(R.string.others)
             else -> {
                 val snackbar = Snackbar.make(llProfileDetails, "Please Select Gender", Snackbar.LENGTH_LONG)
+                snackbar.changeFont()
                 snackbar.show()
             }
         }
@@ -158,53 +160,83 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
 
     }
 
-
-
-    private fun selectHeight()
+    private fun selectMeter()
     {
-        val centiMeter = ArrayList<String>()
-        for (i in 99..200) {
-            centiMeter.add("$i")
-        }
-
+        val meter=resources.getStringArray(R.array.Meter)
         val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
-        builder.setTitle("Select height")
-        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,centiMeter)
+        builder.setTitle("Select meter")
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,meter)
         builder.setAdapter(dataAdapter) { _, which ->
-            etHeight.setText(centiMeter[which]).toString()
+            etMeter.setText(meter[which]).toString()
         }
         val dialog = builder.create()
         dialog.show()
     }
 
-    private fun selectWeight()
+    private fun selectCentimeter()
     {
-        val weight = ArrayList<String>()
-        for (i in 40..120) {
-            weight.add("$i")
+        val centimeter = ArrayList<String>()
+        for (i in 1..51) {
+            centimeter.add("$i cm")
         }
-
         val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
-        builder.setTitle("Select weight")
-        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,weight)
+        builder.setTitle("Select centimeter")
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
-            etWeight.setText(weight[which]).toString()
+            etCentimeter.setText(centimeter[which]).toString()
         }
         val dialog = builder.create()
         dialog.show()
     }
 
-    private fun calculateBMI() {
-        val height = etHeight.text.toString()
-        val weight = etWeight.text.toString()
-
-        if ("" != height && "" != weight) {
-            val heightValue = height.toFloat() / 100
-            val weightValue = weight.toFloat()
-            val bmi = weightValue / (heightValue * heightValue)
-            displayBMI(bmi)
+    private fun selectStone()
+    {
+        val centimeter = ArrayList<String>()
+        for (i in 6..40) {
+            centimeter.add("$i st")
         }
+        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
+        builder.setTitle("Select stone")
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,centimeter)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etStone.setText(centimeter[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
+
+    private fun selectPound()
+    {
+        val centimeter = ArrayList<String>()
+        for (i in 1..13) {
+            centimeter.add("$i lbs")
+        }
+        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
+        builder.setTitle("Select pound")
+        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,centimeter)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etLbs.setText(centimeter[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+
+
+
+
+
+    /*private fun calculateBMI() {
+       val height = etHeight.text.toString()
+       val weight = etWeight.text.toString()
+
+       if ("" != height && "" != weight) {
+           val heightValue = height.toFloat() / 100
+           val weightValue = weight.toFloat()
+           val bmi = weightValue / (heightValue * heightValue)
+           displayBMI(bmi)
+       }
+   }*/
 
     @SuppressLint("SetTextI18n")
     private fun displayBMI(bmi: Float) {

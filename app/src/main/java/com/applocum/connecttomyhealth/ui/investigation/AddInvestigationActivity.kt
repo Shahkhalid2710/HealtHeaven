@@ -5,11 +5,11 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
 import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.MedicalDiseaseAdapter
@@ -127,6 +127,7 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
 
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llAddInvesigation, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
         val snackView = snackBar.view
         snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackBar.show()

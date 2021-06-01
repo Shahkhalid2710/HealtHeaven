@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.sessiondetails
 
+import android.net.Uri
 import android.os.Bundle
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertDate
@@ -8,9 +9,6 @@ import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_session_details.*
-import kotlinx.android.synthetic.main.activity_session_details.ivBack
-import kotlinx.android.synthetic.main.activity_session_details.ivDoctor
-import kotlinx.android.synthetic.main.activity_session_details.tvTime
 
 class SessionDetailsActivity : BaseActivity() {
     lateinit var bookAppointmentResponse:BookAppointmentResponse

@@ -325,23 +325,50 @@
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_14" />
 
-                <EditText
-                    android:id="@+id/etHeight"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_dropdown_list"
-                    android:focusable="false"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/select_height_cm"
-                    android:inputType="text"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor,TextFields" />
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <EditText
+                        android:id="@+id/etMeter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_5"
+                        android:layout_weight="1"
+                        android:autofillHints="0"
+                        android:backgroundTint="@color/textcolorgrey"
+                        android:drawableEnd="@drawable/ic_dropdown_list"
+                        android:focusable="false"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="@string/meter"
+                        android:inputType="text"
+                        android:textColor="@color/aapBlack"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_12"
+                        tools:ignore="LabelFor,TextFields" />
+
+                    <EditText
+                        android:id="@+id/etCentimeter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_5"
+                        android:layout_weight="1"
+                        android:autofillHints="0"
+                        android:backgroundTint="@color/textcolorgrey"
+                        android:drawableEnd="@drawable/ic_dropdown_list"
+                        android:focusable="false"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="@string/centimeter"
+                        android:inputType="text"
+                        android:textColor="@color/aapBlack"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_12"
+                        tools:ignore="LabelFor,TextFields" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvWeight"
@@ -355,23 +382,51 @@
                     android:textSize="@dimen/font_14" />
 
 
-                <EditText
-                    android:id="@+id/etWeight"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_dropdown_list"
-                    android:focusable="false"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/select_weight_kg"
-                    android:inputType="text"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor,TextFields" />
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <EditText
+                        android:id="@+id/etStone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_5"
+                        android:layout_weight="1"
+                        android:autofillHints="0"
+                        android:backgroundTint="@color/textcolorgrey"
+                        android:drawableEnd="@drawable/ic_dropdown_list"
+                        android:focusable="false"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="@string/stone"
+                        android:inputType="text"
+                        android:textColor="@color/aapBlack"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_12"
+                        tools:ignore="LabelFor,TextFields" />
+
+                    <EditText
+                        android:id="@+id/etLbs"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_5"
+                        android:layout_weight="1"
+                        android:autofillHints="0"
+                        android:backgroundTint="@color/textcolorgrey"
+                        android:drawableEnd="@drawable/ic_dropdown_list"
+                        android:focusable="false"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="@string/pound"
+                        android:inputType="text"
+                        android:textColor="@color/aapBlack"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/font_12"
+                        tools:ignore="LabelFor,TextFields" />
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tvBMI"
@@ -394,8 +449,8 @@
                     android:backgroundTint="@color/textcolorgrey"
                     android:focusable="false"
                     android:fontFamily="@font/poppins_regular"
+                    android:hint="@string/select_proper_height_and_weight_for_bmi"
                     android:inputType="text"
-                    android:hint="@string/bmi_"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"

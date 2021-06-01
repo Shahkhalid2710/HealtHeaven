@@ -106,7 +106,7 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
             map.uiSettings.setAllGesturesEnabled(true)
             map.isMyLocationEnabled
             val marker = LatLng(surgery.lat,surgery.long)
-            val cameraPosition = CameraPosition.Builder().target(marker).zoom(16.0f).build()
+            val cameraPosition = CameraPosition.Builder().target(marker).zoom(15.0f).build()
             map.addMarker(MarkerOptions().position(marker).title(capitalize(surgery.practice_name))).setIcon(smallMarkerIcon)
             val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
             map.moveCamera(cameraUpdate)

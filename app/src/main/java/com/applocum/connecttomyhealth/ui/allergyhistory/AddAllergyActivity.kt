@@ -1,13 +1,12 @@
 package com.applocum.connecttomyhealth.ui.allergyhistory
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.FalseAllergy
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.TrueAllergy
@@ -96,6 +95,7 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
 
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llAddAllergy, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
         val snackView = snackBar.view
         snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackBar.show()
@@ -150,6 +150,7 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
 
     override fun displayErrorMessage(message: String) {
         val snackBar = Snackbar.make(llAddAllergy, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
         val snackView = snackBar.view
         snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackBar.show()

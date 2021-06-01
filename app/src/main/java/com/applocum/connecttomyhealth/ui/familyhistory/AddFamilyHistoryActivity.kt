@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.MedicalDiseaseAdapter
@@ -129,6 +130,7 @@ class AddFamilyHistoryActivity : BaseActivity(),MedicalPresenter.View,FamilyHist
 
     override fun displayErrorMessage(message: String) {
         val snackbar = Snackbar.make(lladdfamilyhistory, message, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackbar.show()
