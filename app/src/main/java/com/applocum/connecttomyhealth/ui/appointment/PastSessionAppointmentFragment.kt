@@ -12,14 +12,12 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
-import com.applocum.connecttomyhealth.ui.addsymptoms.AddSymptomActivity
 import com.applocum.connecttomyhealth.ui.appointment.adapters.PastSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.applocum.connecttomyhealth.ui.sessiondetails.SessionDetailsActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.custom_loader_progress.view.*
 import kotlinx.android.synthetic.main.fragment_past_session_appointment.*
-import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.*
 import javax.inject.Inject
 
 
@@ -49,7 +47,7 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
     }
 
     override fun displayMessage(mesage: String) {
-        val snackbar = Snackbar.make(llUpcomingSession,mesage, Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(llPastSession,mesage, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
@@ -91,6 +89,10 @@ class PastSessionAppointmentFragment : Fragment(),BookAppointmentPresenter.View 
     }
 
     override fun viewFullProgress(isShow: Boolean) {
+    }
 
+    override fun onResume() {
+        presenter.showPastSession()
+        super.onResume()
     }
 }

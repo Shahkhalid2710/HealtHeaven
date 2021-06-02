@@ -1,43 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:orientation="vertical"
-        tools:context=".ui.appointment.PastSessionAppointmentFragment">
+        android:fillViewport="true">
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/llPastSession"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:ignore="UselessParent">
+            android:background="@color/white"
+            android:orientation="vertical"
+            tools:context=".ui.appointment.PastSessionApointmentFragment">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:ignore="UselessParent">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvPastSession"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:nestedScrollingEnabled="false" />
-                <include layout="@layout/custom_loader_progress" />
-            </FrameLayout>
+                    android:layout_height="match_parent"
+                    tools:ignore="UselessParent">
 
-            <include
-                android:id="@+id/layoutNotFoundPastSession"
-                layout="@layout/custom_past_session"
-                android:visibility="gone" />
-        </RelativeLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPastSession"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:nestedScrollingEnabled="false" />
+
+                </FrameLayout>
+
+                <include
+                    android:id="@+id/layoutNotFoundPastSession"
+                    layout="@layout/custom_past_session"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        layout="@layout/custom_loader_progress"
+        android:visibility="gone" />
+    <!--  <include
+          android:id="@+id/pastProgress"
+          layout="@layout/custom_progress"
+          android:visibility="gone" />-->
+</FrameLayout>

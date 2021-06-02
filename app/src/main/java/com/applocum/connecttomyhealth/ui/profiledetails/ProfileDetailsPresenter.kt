@@ -20,6 +20,8 @@ import javax.inject.Inject
 class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
     private val disposables=CompositeDisposable()
     lateinit var view: View
+    private var heightCategory="metric"
+    private var weightCategory="imperial"
     @Inject
     lateinit var userHolder: UserHolder
 
@@ -43,7 +45,7 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
                         view.showProfile(patient)
                     }
                     InvalidCredentials,InternalServer -> {
-                        view.displayMessage(it.message)
+                        view.displayErrorMessage(it.message)
                     }
                 }
             }, onError = {
@@ -52,36 +54,48 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
             }).let { disposables.add(it) }
     }
 
-    fun updateProfile(firstname:String, lastname:String,email:String, phoneno:String,gender:String,dob:String)
-    {
-        val requestBody: RequestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart("user[first_name]", firstname)
-            .addFormDataPart("user[last_name]", lastname)
-            .addFormDataPart("user[email]", email)
-            .addFormDataPart("user[phone]", phoneno)
-            .addFormDataPart("user[gender]", gender)
-            .addFormDataPart("patient[date_of_birth]",dob)
-            .build()
+    fun updateProfile(firstname:String,lastname:String,email:String,phoneno:String,gender:String,dob:String,heightValue1: String,heightValue2: String,weightValue1: String,weightValue2: String,bloodPressure: String) {
+        if (validateProfile(heightValue1, heightValue2, weightValue1, weightValue2, bloodPressure))
+        {
+            view.viewprogress(true)
+            val requestBody: RequestBody = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("user[first_name]", firstname)
+                .addFormDataPart("user[last_name]", lastname)
+                .addFormDataPart("user[email]", email)
+                .addFormDataPart("user[phone]", phoneno)
+                .addFormDataPart("user[gender]", gender)
+                .addFormDataPart("patient[date_of_birth]", dob)
+                .addFormDataPart("patient[height_category]", heightCategory)
+                .addFormDataPart("patient[height_value1]", heightValue1)
+                .addFormDataPart("patient[height_value2]", heightValue2)
+                .addFormDataPart("patient[weight_category]", weightCategory)
+                .addFormDataPart("patient[weight_value1]", weightValue1)
+                .addFormDataPart("patient[weight_value2]", weightValue2)
+                .addFormDataPart("patient[blood_pressure]", bloodPressure)
+                .build()
 
-        api.updateProfile(userHolder.userToken,userHolder.userid,requestBody)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext={
-                when (it.status) {
-                    Success -> {
-                        view.displayMessage(it.message)
-                        val patientObject = Gson().fromJson(it.data,PatientResponse::class.java)
-                        val patient = patientObject.patient
-
-                        view.showProfile(patient)
+            api.updateProfile(userHolder.userToken, userHolder.userid, requestBody)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(onNext = {
+                    view.viewprogress(false)
+                    when (it.status) {
+                        Success -> {
+                            view.displayMessage("Profile updated successfully")
+                            val patientObject =
+                                Gson().fromJson(it.data, PatientResponse::class.java)
+                            val patient = patientObject.patient
+                            view.showProfile(patient)
+                        }
+                        InvalidCredentials, InternalServer -> {
+                            view.displayErrorMessage(it.message)
+                        }
                     }
-                    InvalidCredentials,InternalServer -> {
-                        view.displayMessage(it.message)
-                    }
-                }
-            },onError = {
-                it.printStackTrace()
-            }).let { disposables.addAll(it) }
+                }, onError = {
+                    view.viewprogress(false)
+                    it.printStackTrace()
+                }).let { disposables.addAll(it) }
+        }
     }
 
    fun updateUser(image:String)
@@ -106,19 +120,46 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
                        view.displayMessage("Profile picture uploaded successfully")
                    }
                    InvalidCredentials,InternalServer -> {
-                       view.displayMessage(it.message)
+                       view.displayErrorMessage(it.message)
                    }
                }
-
            },onError = {
                view.viewprogress(false)
                it.printStackTrace()
            }).let { disposables.addAll(it) }
    }
+
+    private fun validateProfile(heightValue1:String,heightValue2: String,weightValue1:String,weightValue2: String,bloodPressure:String):Boolean
+    {
+        if (heightValue1.isEmpty()) {
+            view.displayErrorMessage("Please fill all the credentials")
+            return false
+        }
+        if (heightValue2.isEmpty()) {
+            view.displayErrorMessage("Please fill all the credentials")
+            return false
+        }
+        if (weightValue1.isEmpty()) {
+            view.displayErrorMessage("Please fill all the credentials")
+            return false
+        }
+        if (weightValue2.isEmpty()) {
+            view.displayErrorMessage("Please fill all the credentials")
+            return false
+        }
+        if (bloodPressure.isEmpty()) {
+            view.displayErrorMessage("Please fill all the credentials")
+            return false
+        }
+        return true
+    }
+
+
     interface View
     {
         fun showProfile(patient: Patient)
         fun displayMessage(message:String)
+        fun displayErrorMessage(message:String)
         fun userData(user: User)
         fun viewprogress(isShow: Boolean)
     }

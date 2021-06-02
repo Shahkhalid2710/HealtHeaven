@@ -34,7 +34,6 @@
     <string name="enter_your_full_name">Enter Your Full Name</string>
     <string name="email_address">Email Address</string>
     <string name="enter_your_email_address">Enter Your Email Address</string>
-    <string name="phone_number">Phone Number</string>
     <string name="_44">+44</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
     <string name="enter_password">Enter Password</string>
@@ -606,4 +605,13 @@
     <string name="centimeter">Centimeter</string>
     <string name="stone">Stone</string>
     <string name="pound">Pound</string>
+    <string name="select_gender">Select Gender</string>
+    <string name="transgender">Transgender</string>
+    <string name="gender_neutral">Gender Neutral</string>
+    <string name="gender_fluid">Gender Fluid</string>
+    <string name="prefer_not_to_say">Prefer not to say</string>
+    <string name="other">Other</string>
+    <string name="update_phone_number">Update Phone Number</string>
+    <string name="please_enter_your_phone_number_we_ll_send_you_an_otp_to_confirm_your_phone_number">Please enter your phone number.We\'ll send you an OTP to confirm your phone number.</string>
+    <string name="phone_number">Phone Number</string>
 </resources>

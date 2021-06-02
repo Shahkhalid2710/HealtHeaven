@@ -1,6 +1,5 @@
 package com.applocum.connecttomyhealth.ui.addcard
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -14,7 +13,6 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
-import com.applocum.connecttomyhealth.ui.payment.PaymentMethodActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_card.*
 import kotlinx.android.synthetic.main.custom_progress.*
@@ -22,6 +20,7 @@ import javax.inject.Inject
 
 class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
     private var count = 0
+    lateinit var v: View
 
     @Inject
     lateinit var presenter: AddCardPresenter
@@ -37,7 +36,7 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
         etCardNumber.addTextChangedListener(this)
 
         etHolderName.addTextChangedListener {
-            if (etHolderName.text.length > 5) ivSuccessNameonCard.visibility =
+            if (etHolderName.text.length >= 5) ivSuccessNameonCard.visibility =
                 View.VISIBLE else ivSuccessNameonCard.visibility = View.GONE
         }
 
@@ -51,29 +50,26 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
                 View.VISIBLE else ivCrossCVV.visibility = View.GONE
 
             etCardNumber.filters = arrayOf(InputFilter.LengthFilter(20))
+
             ivCrossCVV.setOnClickListener {
                 etCVV.text.clear()
                 ivCrossCVV.visibility = View.GONE
             }
         }
 
-        if (etCardNumber.text.toString().contains("\\s")) {
-            etCardNumber.text.toString().replace("\\s", "")
-        }
-
         btnAdd.setOnClickListener {
-            presenter.addCard(etCardNumber.text.toString(),etHolderName.text.toString(),etExpiryDate.text.toString(),etCVV.text.toString())
+            presenter.addCard(etCardNumber.text.toString().trim(),etHolderName.text.toString(),etExpiryDate.text.toString(),etCVV.text.toString())
         }
     }
 
     override fun afterTextChanged(s: Editable?) {
-        /* if (count == 4) {
+/*         if (count == 4) {
              var str = s.toString()
              str += " "
              etCardNumber.setText(str)
-             etCardNumber.setSelection(str.length)*/
-        count = 0
-        // }
+             etCardNumber.setSelection(str.length)
+             count = 0
+         }*/
     }
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -81,11 +77,12 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
 
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, a: Int) {
         count++
-        if (s.length == 16) {
+        if (s.length >= 16) {
             ivSuccessCardNumber.visibility = View.VISIBLE
         } else {
             ivSuccessCardNumber.visibility = View.GONE
         }
+
     }
 
     override fun displaymessage(message: String) {

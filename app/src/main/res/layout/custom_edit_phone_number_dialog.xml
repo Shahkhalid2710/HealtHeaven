@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_solid_white"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/update_phone_number"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacing_48"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/spacing_48"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/please_enter_your_phone_number_we_ll_send_you_an_otp_to_confirm_your_phone_number"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:orientation="horizontal">
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            style="@style/codepickerdialog"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:focusable="false"
+            android:keepScreenOn="false"
+            app:ccp_showFlag="false"
+            app:ccp_rememberLastSelection="true"
+            android:layout_gravity="center"
+            app:ccpDialog_background="@color/green"
+            app:ccpDialog_textColor="@color/white"
+            app:ccp_arrowColor="@color/aapBlack"
+            app:ccp_showFullName="false"
+            app:ccp_textSize="12sp" />
+
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_15"
+            android:autofillHints="0"
+            android:backgroundTint="@color/textcolorgrey"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="@string/phone_number"
+            android:inputType="number"
+            android:imeOptions="actionNext"
+            android:textColor="@color/aapBlack"
+            android:textColorHint="@color/grey"
+            android:textSize="@dimen/font_12"
+            tools:ignore="LabelFor,TextFields" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginTop="@dimen/spacing_30"
+        android:layout_marginEnd="@dimen/spacing_16"
+        android:layout_marginBottom="27dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnDonePhoneNumber"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_btn"
+            android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
+            android:text="@string/done"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btnCancelPhoneNumber"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:background="@drawable/default_button"
+            android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/green"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

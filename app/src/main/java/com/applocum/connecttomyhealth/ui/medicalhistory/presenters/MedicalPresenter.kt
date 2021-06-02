@@ -181,8 +181,9 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                 view.displayMessage("Please select end year")
                 return false
             }
-            return false
+            return true
         }
+
         return true
     }
 

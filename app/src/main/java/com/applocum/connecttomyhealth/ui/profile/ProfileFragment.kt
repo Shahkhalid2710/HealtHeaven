@@ -3,10 +3,13 @@ package com.applocum.connecttomyhealth.ui.profile
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.applocum.connecttomyhealth.MyApplication
@@ -51,14 +54,11 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
         v = inflater.inflate(R.layout.fragment_profile, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectview(this)
-
-        v.tvFName.text=userHolder.userFirstName
-        v.tvLName.text=userHolder.userLastName
+        presenter.showProfile()
 
 
         v.flProfile.setOnClickListener {
-            val showDialogView = LayoutInflater.from(requireActivity())
-                .inflate(R.layout.custom_profile_dialog, null, false)
+            val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_profile_dialog, null, false)
             val dialog = androidx.appcompat.app.AlertDialog.Builder(requireActivity()).create()
             dialog.setView(showDialogView)
 
@@ -78,6 +78,8 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
             showDialogView.tvCancel.setOnClickListener {
                 dialog.dismiss()
             }
+            dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
         }
 
@@ -109,9 +111,6 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
 
         }
 
-
-
-
         v.btnSignOut.setOnClickListener {
             val showDialogView = LayoutInflater.from(requireActivity())
                 .inflate(R.layout.custom_signout_dialog, null, false)
@@ -134,11 +133,17 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
     }
 
     override fun showProfile(patient: Patient) {
+        v.tvFName.text=patient.user.firstName
+        v.tvLName.text=patient.user.lastName
 
     }
 
     override fun displayMessage(message: String) {
         Toast.makeText(requireActivity(),message,Toast.LENGTH_LONG).show()
+    }
+
+    override fun displayErrorMessage(message: String) {
+
     }
 
     override fun userData(user: User) {
@@ -159,5 +164,10 @@ class ProfileFragment : Fragment(),ProfileDetailsPresenter.View {
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onResume() {
+        presenter.showProfile()
+        super.onResume()
     }
 }

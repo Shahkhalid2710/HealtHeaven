@@ -90,9 +90,10 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
 
                 showDialogView.btnCancel.setOnClickListener {
                      presenter.deleteSession(bookAppointmentResponse.id)
-                     list.removeAt(position)
+                    /* list.removeAt(position)
                      upcomingSessionAdapter.notifyItemRemoved(position)
-                     upcomingSessionAdapter.notifyItemRangeChanged(position,list.size)
+                     upcomingSessionAdapter.notifyItemRangeChanged(position,list.size)*/
+                     upcomingSessionAdapter.notifyDataSetChanged()
                      dialog.dismiss()
                 }
                 showDialogView.btnNo.setOnClickListener {
@@ -115,5 +116,10 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
 
     override fun viewFullProgress(isShow: Boolean) {
         v.upcomingProgress.visibility=if (isShow)View.VISIBLE else View.GONE
+    }
+
+    override fun onResume() {
+        presenter.showUpcomingSession()
+        super.onResume()
     }
 }

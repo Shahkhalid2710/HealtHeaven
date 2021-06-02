@@ -4,13 +4,12 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.ContextThemeWrapper
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
-import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
@@ -21,15 +20,16 @@ import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_profile_details.*
-import kotlinx.android.synthetic.main.activity_profile_details.ivBack
+import kotlinx.android.synthetic.main.custom_edit_phone_number_dialog.view.*
+import kotlinx.android.synthetic.main.custom_gender_dialog.view.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
+
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
-    PopupMenu.OnMenuItemClickListener, DatePickerDialog.OnDateSetListener {
+class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View, DatePickerDialog.OnDateSetListener {
     private var day: Int = 0
     private var month: Int = 0
     private var year: Int = 0
@@ -52,10 +52,10 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         presenter.showProfile()
 
         tvSave.setOnClickListener {
-            presenter.updateProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString())
-            finish()
+            presenter.updateProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString(),etMeter.text.toString(),etCentimeter.text.toString(),etStone.text.toString(),etLbs.text.toString(),etBP.text.toString())
         }
         editTextClicks()
+
    }
 
     @SuppressLint("SimpleDateFormat")
@@ -66,6 +66,11 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         etLastName.setText(patient.user.lastName)
         etEmail.setText(patient.user.email)
         etPhoneNo.setText(patient.user.phone)
+        etMeter.setText(patient.user.profile.heightValue1)
+        etCentimeter.setText(patient.user.profile.heightValue2)
+        etStone.setText(patient.user.profile.weightValue1)
+        etLbs.setText(patient.user.profile.weightValue2)
+        etBP.setText(patient.blood_pressure)
         val date = patient.user.profile.dateOfBirth
         var spf = SimpleDateFormat("yyyy-MM-dd")
         val newDate = spf.parse(date)
@@ -80,12 +85,30 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         {
             "male"->{etGender.setText(R.string.male)}
             "female"->{etGender.setText(R.string.female)}
-            "others"->{etGender.setText(R.string.others)}
+            "transgender"->{etGender.setText(R.string.transgender)}
+            "gender neutral"->{etGender.setText(R.string.gender_neutral)}
+            "gender fluid"->{etGender.setText(R.string.gender_fluid)}
+            "prefer not to say"->{etGender.setText(R.string.prefer_not_to_say)}
+            "other"->{etGender.setText(R.string.other)}
         }
     }
 
     override fun displayMessage(message: String) {
-      Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+        /*val snackbar = Snackbar.make(llProfileDetails, message, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.blue))
+        snackbar.show()*/
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        this.finish()
+    }
+
+    override fun displayErrorMessage(message: String) {
+        val snackbar = Snackbar.make(llProfileDetails, message, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackbar.show()
     }
 
     override fun userData(user: User) {
@@ -96,15 +119,52 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         progress.visibility = if(isShow) View.VISIBLE else View.GONE
     }
 
+    override fun onResume() {
+        presenter.showProfile()
+        super.onResume()
+    }
     private fun editTextClicks()
     {
         etGender.setOnClickListener {
-            val ctw = ContextThemeWrapper(this, R.style.CustomPopupTheme)
-            val popupMenu = PopupMenu(ctw, etGender)
-            popupMenu.menuInflater.inflate(R.menu.menu_gender, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener(this)
-            popupMenu.show()
+            val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_gender_dialog, null, false)
+            val dialog = AlertDialog.Builder(this).create()
+            dialog.setView(showDialogView)
+
+            showDialogView.btnDone.setOnClickListener  {
+                var selectedGender=""
+                when {
+                    showDialogView.rbMale.isChecked -> {
+                        selectedGender = showDialogView.rbMale.text.toString()
+                    }
+                    showDialogView.rbFemale.isChecked -> {
+                        selectedGender = showDialogView.rbFemale.text.toString()
+                    }
+                    showDialogView.rbTransgender.isChecked -> {
+                        selectedGender =showDialogView.rbTransgender.text.toString()
+                    }
+                    showDialogView.rbGenderNeutral.isChecked -> {
+                        selectedGender = showDialogView.rbGenderNeutral.text.toString()
+                    }
+                    showDialogView.rbGenderFluid.isChecked -> {
+                        selectedGender =showDialogView.rbGenderFluid.text.toString()
+                    }
+                    showDialogView.rbPreferNotToSay.isChecked -> {
+                        selectedGender = showDialogView.rbPreferNotToSay.text.toString()
+                    }
+                    showDialogView.rbOther.isChecked -> {
+                        selectedGender =showDialogView.rbOther.text.toString()
+                    }
+                }
+                etGender.setText(selectedGender)
+                dialog.dismiss()
+            }
+            showDialogView.btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            dialog.show()
         }
+
         etDOB.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
             this.day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -122,21 +182,23 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         etCentimeter.setOnClickListener { selectCentimeter() }
         etStone.setOnClickListener { selectStone() }
         etLbs.setOnClickListener { selectPound() }
+
+        tvPhoneNoEdit.setOnClickListener {
+            val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_edit_phone_number_dialog, null, false)
+            val dialog = AlertDialog.Builder(this).create()
+            dialog.setView(showDialogView)
+
+            showDialogView.btnDonePhoneNumber.setOnClickListener {
+
+            }
+            showDialogView.btnCancelPhoneNumber.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            dialog.show()
+        }
     }
 
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.male -> etGender.setText(R.string.male)
-            R.id.female -> etGender.setText(R.string.female)
-            R.id.others -> etGender.setText(R.string.others)
-            else -> {
-                val snackbar = Snackbar.make(llProfileDetails, "Please Select Gender", Snackbar.LENGTH_LONG)
-                snackbar.changeFont()
-                snackbar.show()
-            }
-        }
-        return true
-    }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         myYear = year
@@ -221,11 +283,6 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         dialog.show()
     }
 
-
-
-
-
-
     /*private fun calculateBMI() {
        val height = etHeight.text.toString()
        val weight = etWeight.text.toString()
@@ -238,7 +295,7 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
        }
    }*/
 
-    @SuppressLint("SetTextI18n")
+/*
     private fun displayBMI(bmi: Float) {
         val bmiLabel = if (bmi.compareTo(15f) <= 0) {
             getString(R.string.very_severely_underweight)
@@ -271,5 +328,6 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View,
         }
         etBMI.setText("$bmi $bmiLabel")
     }
+*/
 
 }

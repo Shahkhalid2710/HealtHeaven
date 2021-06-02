@@ -14,6 +14,7 @@ import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
 
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class GpServiceAdapter(context: Context, list: ArrayList<GpService>, private val itemclick:ItemClickListner) :
     RecyclerView.Adapter<GpServiceAdapter.GpServiceHolder>() {
     private var mContext = context

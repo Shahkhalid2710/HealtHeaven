@@ -8,7 +8,6 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import com.applocum.connecttomyhealth.ui.mygp.models.Surgery
 import com.applocum.connecttomyhealth.ui.mygp.models.SurgeryResponse
-import com.applocum.connecttomyhealth.ui.profiledetails.models.PatientResponse
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -18,7 +17,7 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 class GpservicePresenter@Inject constructor(private val api:AppEndPoint) {
-    public var disposables=CompositeDisposable()
+    var disposables=CompositeDisposable()
     lateinit var view: View
 
     fun injectview(view: View)

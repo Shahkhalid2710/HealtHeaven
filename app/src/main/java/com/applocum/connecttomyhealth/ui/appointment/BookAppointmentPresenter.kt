@@ -76,10 +76,10 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
         api.upcomingSession(userHolder.userToken!!,UPCOMING_APPOINTMENT,66)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy (onNext={
+                view.viewProgress(false)
                 when(it.status)
                 {Success->
                     {
-                        view.viewProgress(false)
                         view.getSessions(it.data)
                     }
                     InternalServer, InvalidCredentials->
@@ -99,10 +99,10 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
         api.upcomingSession(userHolder.userToken!!,COMPLETED_APPOINTMENT,66)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy (onNext={
+                view.viewProgress(false)
                 when(it.status)
                 {Success->
                 {
-                    view.viewProgress(false)
                     view.getSessions(it.data)
                 }
                     InternalServer, InvalidCredentials->
@@ -129,7 +129,7 @@ class BookAppointmentPresenter@Inject constructor(private val api:AppEndPoint) {
                   Success->{
                       view.displaySuccessMessage(it.message)
                   }
-                  InvalidCredentials, InternalServer->
+                  InvalidCredentials, InternalServer,MissingParameter->
                   {
                       view.displayMessage(it.message)
                   }

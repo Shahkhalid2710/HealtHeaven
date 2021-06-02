@@ -112,20 +112,11 @@ class AddCardPresenter@Inject constructor(val api:AppEndPoint) {
             view.displaymessage("Please enter card number")
             return false
         }
-        if (cardnumber.length!=16)
-        {
-            view.displaymessage("Minimum 16 characters allowed in card number")
-            return false
-        }
+
         if (cardholder.isEmpty()) {
             view.displaymessage("Please enter name")
             return false
         }
-       /* if (cardholder.length>5)
-        {
-            view.displaymessage("Minimum 5 characters allowed")
-            return false
-        }*/
         if (date.isEmpty()) {
             view.displaymessage("Please enter date")
             return false

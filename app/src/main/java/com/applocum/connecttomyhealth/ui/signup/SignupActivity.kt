@@ -1,14 +1,16 @@
 package com.applocum.connecttomyhealth.ui.signup
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.ContextThemeWrapper
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.DatePicker
-import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
@@ -20,6 +22,12 @@ import com.applocum.connecttomyhealth.ui.login.LoginActivity
 import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.activity_signup.etDOB
+import kotlinx.android.synthetic.main.activity_signup.etEmail
+import kotlinx.android.synthetic.main.activity_signup.etFirstName
+import kotlinx.android.synthetic.main.activity_signup.etGender
+import kotlinx.android.synthetic.main.activity_signup.etLastName
+import kotlinx.android.synthetic.main.custom_gender_dialog.view.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,7 +35,7 @@ import javax.inject.Inject
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuItemClickListener,
+class SignupActivity : BaseActivity(), SignupPresenter.View,
     DatePickerDialog.OnDateSetListener {
 
     @Inject
@@ -85,19 +93,6 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuIte
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.male -> etGender.setText(R.string.male)
-            R.id.female -> etGender.setText(R.string.female)
-            R.id.others -> etGender.setText(R.string.others)
-            else -> {
-                val snackbar = Snackbar.make(llSignup, "Please Select Gender", Snackbar.LENGTH_LONG)
-                snackbar.show()
-            }
-        }
-        return true
-    }
-
     @SuppressLint("SimpleDateFormat")
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         myYear = year
@@ -121,12 +116,46 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, PopupMenu.OnMenuIte
         tvSignin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+
         etGender.setOnClickListener {
-            val ctw = ContextThemeWrapper(this, R.style.CustomPopupTheme)
-            val popupMenu = PopupMenu(ctw, etGender)
-            popupMenu.menuInflater.inflate(R.menu.menu_gender, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener(this)
-            popupMenu.show()
+            val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_gender_dialog, null, false)
+            val dialog = AlertDialog.Builder(this).create()
+            dialog.setView(showDialogView)
+
+            showDialogView.btnDone.setOnClickListener  {
+                var selectedGender=""
+                when {
+                    showDialogView.rbMale.isChecked -> {
+                        selectedGender = showDialogView.rbMale.text.toString()
+                    }
+                    showDialogView.rbFemale.isChecked -> {
+                        selectedGender = showDialogView.rbFemale.text.toString()
+                    }
+                    showDialogView.rbTransgender.isChecked -> {
+                        selectedGender =showDialogView.rbTransgender.text.toString()
+                    }
+                    showDialogView.rbGenderNeutral.isChecked -> {
+                        selectedGender = showDialogView.rbGenderNeutral.text.toString()
+                    }
+                    showDialogView.rbGenderFluid.isChecked -> {
+                        selectedGender =showDialogView.rbGenderFluid.text.toString()
+                    }
+                    showDialogView.rbPreferNotToSay.isChecked -> {
+                        selectedGender = showDialogView.rbPreferNotToSay.text.toString()
+                    }
+                    showDialogView.rbOther.isChecked -> {
+                        selectedGender =showDialogView.rbOther.text.toString()
+                    }
+                }
+                etGender.setText(selectedGender)
+                dialog.dismiss()
+            }
+            showDialogView.btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
         }
         etDOB.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()

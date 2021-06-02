@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/llGender"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/white"
+    android:background="@drawable/custom_solid_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/select_gender"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_16" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_20">
+
+        <RadioButton
+            android:id="@+id/rbMale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radiobutton"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/male"
+            android:foreground="@drawable/effect_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/spacing_10"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <RadioButton
+            android:id="@+id/rbFemale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/female"
+            android:foreground="@drawable/effect_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/spacing_10"
+            android:button="@drawable/radiobutton"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <RadioButton
+            android:id="@+id/rbTransgender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:button="@drawable/radiobutton"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/transgender"
+            android:padding="@dimen/spacing_10"
+            android:foreground="@drawable/effect_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <RadioButton
+            android:id="@+id/rbGenderNeutral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/gender_neutral"
+            android:padding="@dimen/spacing_10"
+            android:foreground="@drawable/effect_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:button="@drawable/radiobutton"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <RadioButton
+            android:id="@+id/rbGenderFluid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:padding="@dimen/spacing_10"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/gender_fluid"
+            android:foreground="@drawable/effect_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:button="@drawable/radiobutton"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <RadioButton
+            android:id="@+id/rbPreferNotToSay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:foreground="@drawable/effect_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/spacing_10"
+            android:button="@drawable/radiobutton"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/prefer_not_to_say"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+
+        <RadioButton
+            android:id="@+id/rbOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/other"
+            android:foreground="@drawable/effect_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/spacing_10"
+            android:button="@drawable/radiobutton"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_14" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:layout_marginEnd="@dimen/spacing_16"
+        android:layout_marginBottom="27dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_btn"
+            android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
+            android:text="@string/done"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:background="@drawable/default_button"
+            android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/green"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

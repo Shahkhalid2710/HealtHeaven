@@ -25,9 +25,9 @@
                 android:layout_height="15dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/spacing_25"
+                android:clickable="true"
                 android:contentDescription="@string/todo"
                 android:focusable="true"
-                android:clickable="true"
                 android:foreground="@drawable/effect_button"
                 android:src="@drawable/ic_back" />
 
@@ -150,6 +150,7 @@
                         android:textColorHint="@color/grey"
                         android:textSize="@dimen/font_16"
                         tools:ignore="LabelFor,RelativeOverlap" />
+
                     <ImageView
                         android:id="@+id/ivSuccessNameonCard"
                         android:layout_width="18dp"
@@ -270,7 +271,7 @@
                                 android:hint="@string/enter_cvv"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
-                                android:maxLength="4"
+                                android:maxLength="3"
                                 android:textColor="@color/aapBlack"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/font_16"
@@ -297,34 +298,16 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/cbSaveCard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_24"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:button="@drawable/checkbox"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:foreground="@drawable/effect_button"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="@string/save_card_for_other_payments"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_12" />
-
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="168dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="148dp"
+                    android:layout_marginTop="100dp"
                     android:layout_marginBottom="@dimen/spacing_40"
-                    android:foreground="@drawable/effect_button"
                     android:background="@drawable/custom_btn"
                     android:fontFamily="@font/montserrat_semibold"
+                    android:foreground="@drawable/effect_button"
                     android:text="@string/add"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -332,5 +315,6 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-    <include layout="@layout/custom_progress"/>
+
+    <include layout="@layout/custom_progress" />
 </FrameLayout>

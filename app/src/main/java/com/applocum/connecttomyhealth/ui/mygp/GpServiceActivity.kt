@@ -81,14 +81,14 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
     }
 
     override fun showSurgery(surgery: Surgery) {
-        if (surgery == null)
+        if (surgery.city.isEmpty())
         {
-            mygp.visibility=View.VISIBLE
+            llMyGp.visibility=View.VISIBLE
             llGpService.visibility=View.GONE
         }
         else
         {
-            mygp.visibility=View.GONE
+            llMyGp.visibility=View.GONE
             llGpService.visibility=View.VISIBLE
         }
 
