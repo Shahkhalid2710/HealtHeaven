@@ -1,20 +1,28 @@
 package com.applocum.connecttomyhealth.ui.exemptions
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.exemptions.models.Exemption
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_choose_exemption.*
+import kotlinx.android.synthetic.main.activity_choose_exemption.ivBack
+import java.util.concurrent.TimeUnit
 
 class ChooseExemptionActivity : BaseActivity() {
     private var mListExemption:ArrayList<Exemption> = ArrayList()
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ivBack.setOnClickListener { finish() }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
 
         val exemption1=Exemption("A","I am under 16 years of age")
         val exemption2=Exemption("B","I am 16,17 or 18 years of age and in full-time education")
@@ -45,9 +53,11 @@ class ChooseExemptionActivity : BaseActivity() {
         rvExemptions.layoutManager= LinearLayoutManager(this)
         rvExemptions.adapter=ExemptionAdapter(this,mListExemption)
 
-        btnAddCertificate.setOnClickListener {
-            startActivity(Intent(this,UploadCertificateActivity::class.java))
-        }
+        RxView.clicks(btnAddCertificate).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,UploadCertificateActivity::class.java))
+            }
+
     }
 
     override fun getLayoutResourceId(): Int = R.layout.activity_choose_exemption

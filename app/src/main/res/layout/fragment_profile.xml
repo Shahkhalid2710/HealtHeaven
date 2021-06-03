@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llProfile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -27,505 +28,510 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fillViewport="true">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:fillViewport="true">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <FrameLayout
-                    android:id="@+id/flProfile"
-                    android:layout_width="65dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_20">
-
-                    <ImageView
-                        android:id="@+id/ivProfile"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_baseline_person_24" />
-
-                    <ImageView
-                        android:id="@+id/ivEdit"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="bottom|end"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_edit" />
-                </FrameLayout>
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="39dp"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tvFName"
-                        android:layout_width="wrap_content"
+                    <FrameLayout
+                        android:id="@+id/flProfile"
+                        android:layout_width="65dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_16"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:text=""
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_16" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_20">
 
-                    <TextView
-                        android:id="@+id/tvLName"
+
+                        <ImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_baseline_person_24" />
+
+                        <ImageView
+                            android:id="@+id/ivEdit"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="bottom|end"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_edit" />
+                    </FrameLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:text=""
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_16" />
+                        android:layout_marginTop="39dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvFName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_16"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text=""
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_16" />
+
+                        <TextView
+                            android:id="@+id/tvLName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text=""
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_16" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginTop="@dimen/spacing_35"
-                android:background="@color/textcolorgrey" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="@dimen/spacing_35"
+                    android:background="@color/textcolorgrey" />
 
-            <LinearLayout
-                android:id="@+id/llPersonalDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
-
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/llPersonalDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/ivPersonalDetails"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_profile_icon" />
-
-                    <TextView
-                        android:id="@+id/tvPersonalDetails"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/personal_details"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivPersonalDetailsNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivPersonalDetails"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_profile_icon" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/textcolorgrey" />
+                        <TextView
+                            android:id="@+id/tvPersonalDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="36dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/personal_details"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <LinearLayout
-                android:id="@+id/llClinicalRecords"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivPersonalDetailsNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/textcolorgrey" />
+
+                <LinearLayout
+                    android:id="@+id/llClinicalRecords"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/ivClinicRecords"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_records" />
-
-                    <TextView
-                        android:id="@+id/tvClinicRecords"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/clinical_records"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivClinicRecordsNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivClinicRecords"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_records" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/textcolorgrey" />
+                        <TextView
+                            android:id="@+id/tvClinicRecords"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="36dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/clinical_records"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <LinearLayout
-                android:id="@+id/llMyDownloads"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivClinicRecordsNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/textcolorgrey" />
+
+                <LinearLayout
+                    android:id="@+id/llMyDownloads"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/ivMyDownload"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_my_download" />
-
-                    <TextView
-                        android:id="@+id/tvMyDwonload"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/my_downloads"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivMyDownloadNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivMyDownload"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_my_download" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/textcolorgrey" />
+                        <TextView
+                            android:id="@+id/tvMyDwonload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="36dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/my_downloads"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <LinearLayout
-                android:id="@+id/llPaymentMethods"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivMyDownloadNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/textcolorgrey" />
+
+                <LinearLayout
+                    android:id="@+id/llPaymentMethods"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/ivPaymentMethod"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_payment" />
-
-                    <TextView
-                        android:id="@+id/tvPaymentMethod"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/payment_method"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivPaymentMethodNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivPaymentMethod"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_payment" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/textcolorgrey" />
+                        <TextView
+                            android:id="@+id/tvPaymentMethod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="36dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/payment_method"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <LinearLayout
-                android:id="@+id/llMemberships"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivPaymentMethodNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/textcolorgrey" />
+
+                <LinearLayout
+                    android:id="@+id/llMemberships"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/ivMembership"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_membership" />
-
-                    <TextView
-                        android:id="@+id/tvMembership"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/membership"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivMembershipNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivMembership"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_membership" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/textcolorgrey" />
+                        <TextView
+                            android:id="@+id/tvMembership"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="36dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/membership"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <LinearLayout
-                android:id="@+id/llChangePassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivMembershipNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/textcolorgrey" />
+
+                <LinearLayout
+                    android:id="@+id/llChangePassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/ivChangePassword"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_changepassword" />
-
-                    <TextView
-                        android:id="@+id/tvChangePassword"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/change_password"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivChangePasswordNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivChangePassword"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_changepassword" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/textcolorgrey" />
+                        <TextView
+                            android:id="@+id/tvChangePassword"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="36dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/change_password"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <LinearLayout
-                android:id="@+id/llSetting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivChangePasswordNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/textcolorgrey" />
+
+                <LinearLayout
+                    android:id="@+id/llSetting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/ivSetting"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_settings" />
-
-                    <TextView
-                        android:id="@+id/tvSetting"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/settings"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivSettingNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivSetting"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_settings" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/textcolorgrey" />
+                        <TextView
+                            android:id="@+id/tvSetting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="36dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/settings"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <LinearLayout
-                android:id="@+id/llHelp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivSettingNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/textcolorgrey" />
+
+                <LinearLayout
+                    android:id="@+id/llHelp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/ivHelp"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_help" />
-
-                    <TextView
-                        android:id="@+id/tvHelp"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/help"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivHelpNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/ivHelp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_help" />
+
+                        <TextView
+                            android:id="@+id/tvHelp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="36dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/help"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
+
+                        <ImageView
+                            android:id="@+id/ivHelpNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/textcolorgrey" />
+
+                <Button
+                    android:id="@+id/btnSignOut"
+                    android:layout_width="168dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="37dp"
+                    android:layout_marginBottom="88dp"
+                    android:background="@drawable/custom_btn"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:foreground="@drawable/effect_button"
+                    android:text="@string/sign_out"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_12" />
             </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/textcolorgrey" />
-
-            <Button
-                android:id="@+id/btnSignOut"
-                android:layout_width="168dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="37dp"
-                android:layout_marginBottom="88dp"
-                android:background="@drawable/custom_btn"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_semibold"
-                android:foreground="@drawable/effect_button"
-                android:text="@string/sign_out"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-        <include layout="@layout/custom_progress"
-            android:visibility="gone"/>
+        <include
+            layout="@layout/custom_progress"
+            android:visibility="gone" />
     </FrameLayout>
 </LinearLayout>

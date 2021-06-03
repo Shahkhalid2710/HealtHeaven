@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.othernotes.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertDocumentTime
 import com.applocum.connecttomyhealth.ui.prescription.models.Document
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_download.view.*
+import java.util.concurrent.TimeUnit
 
 class OtherNoteAdapter(context: Context, list:ArrayList<Document>,private val onNoteClick:NoteClickListner): RecyclerView.Adapter<OtherNoteAdapter.OtherNoteHolder>() {
     var mContext=context
@@ -25,16 +28,18 @@ class OtherNoteAdapter(context: Context, list:ArrayList<Document>,private val on
         return mList.size
     }
 
+    @SuppressLint("CheckResult")
     override fun onBindViewHolder(holder: OtherNoteHolder, position: Int) {
         val document=mList[position]
         holder.itemView.tvDocType.text = mContext.resources.getString(R.string.others_notes)
         holder.itemView.tvDate.text= convertDocumentTime(document.created_at)
         holder.itemView.tvDoctorName.text=("By"+" "+document.by)
 
+        RxView.clicks(holder.itemView).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                onNoteClick.onNoteClick(document, position)
+            }
 
-        holder.itemView.setOnClickListener {
-            onNoteClick.onNoteClick(document, position)
-        }
     }
 
     interface NoteClickListner{

@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.bottomnavigationview.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.login.LoginActivity
 import com.applocum.connecttomyhealth.ui.walkthrough.models.SelectItem
 import com.google.android.material.tabs.TabLayout
@@ -20,10 +19,9 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         if (restoreprefdata())
         {
-            startActivity(Intent(this,BottomNavigationViewActivity::class.java))
+            startActivity(Intent(this,LoginActivity::class.java))
             finish()
         }
 
@@ -53,7 +51,6 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         viewPagerWalkThrough.adapter = walkThroughAdapter
         tablayoutWalkThrough.setupWithViewPager(viewPagerWalkThrough)
 
-
         llNext.setOnClickListener {
             position = viewPagerWalkThrough.currentItem
 
@@ -64,7 +61,6 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
             if (position == mList.size-1) loadedLastScreen() else unloadedLastScreen()
         }
-
         tablayoutWalkThrough.addOnTabSelectedListener(this)
     }
 

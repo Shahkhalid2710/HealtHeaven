@@ -1,11 +1,16 @@
 package com.applocum.connecttomyhealth.ui.profiledetails
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Toast
@@ -19,12 +24,20 @@ import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_profile_details.*
+import kotlinx.android.synthetic.main.activity_profile_details.ivBack
 import kotlinx.android.synthetic.main.custom_edit_phone_number_dialog.view.*
 import kotlinx.android.synthetic.main.custom_gender_dialog.view.*
+import kotlinx.android.synthetic.main.custom_profile_dialog.view.*
 import kotlinx.android.synthetic.main.custom_progress.*
+import java.io.File
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -44,16 +57,49 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View, Date
     lateinit var userHolder: UserHolder
     override fun getLayoutResourceId(): Int =R.layout.activity_profile_details
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ivBack.setOnClickListener { finish() }
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
         presenter.showProfile()
 
-        tvSave.setOnClickListener {
-            presenter.updateProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString(),etMeter.text.toString(),etCentimeter.text.toString(),etStone.text.toString(),etLbs.text.toString(),etBP.text.toString())
-        }
+
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
+
+        RxView.clicks(tvSave).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                presenter.updateProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString(),etMeter.text.toString(),etCentimeter.text.toString(),etStone.text.toString(),etLbs.text.toString(),etBP.text.toString())
+            }
+
+        RxView.clicks(flPic).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_profile_dialog, null, false)
+                val dialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
+                dialog.setView(showDialogView)
+
+                showDialogView.tvChooseImage.setOnClickListener {
+                        CropImage.activity()
+                            .setGuidelines(CropImageView.Guidelines.ON)
+                            .setCropShape(CropImageView.CropShape.OVAL)
+                            .setCropMenuCropButtonIcon(R.drawable.ic_yes)
+                            .setRequestedSize(400, 400)
+                            .start(this)
+                    dialog.dismiss()
+                }
+
+                showDialogView.tvCancel.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+
+            }
+
         editTextClicks()
 
    }
@@ -94,11 +140,6 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View, Date
     }
 
     override fun displayMessage(message: String) {
-        /*val snackbar = Snackbar.make(llProfileDetails, message, Snackbar.LENGTH_LONG)
-        snackbar.changeFont()
-        val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.blue))
-        snackbar.show()*/
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         this.finish()
     }
@@ -123,80 +164,117 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View, Date
         presenter.showProfile()
         super.onResume()
     }
+
+    @SuppressLint("CheckResult")
     private fun editTextClicks()
     {
-        etGender.setOnClickListener {
-            val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_gender_dialog, null, false)
-            val dialog = AlertDialog.Builder(this).create()
-            dialog.setView(showDialogView)
 
-            showDialogView.btnDone.setOnClickListener  {
-                var selectedGender=""
-                when {
-                    showDialogView.rbMale.isChecked -> {
-                        selectedGender = showDialogView.rbMale.text.toString()
-                    }
-                    showDialogView.rbFemale.isChecked -> {
-                        selectedGender = showDialogView.rbFemale.text.toString()
-                    }
-                    showDialogView.rbTransgender.isChecked -> {
-                        selectedGender =showDialogView.rbTransgender.text.toString()
-                    }
-                    showDialogView.rbGenderNeutral.isChecked -> {
-                        selectedGender = showDialogView.rbGenderNeutral.text.toString()
-                    }
-                    showDialogView.rbGenderFluid.isChecked -> {
-                        selectedGender =showDialogView.rbGenderFluid.text.toString()
-                    }
-                    showDialogView.rbPreferNotToSay.isChecked -> {
-                        selectedGender = showDialogView.rbPreferNotToSay.text.toString()
-                    }
-                    showDialogView.rbOther.isChecked -> {
-                        selectedGender =showDialogView.rbOther.text.toString()
-                    }
+         RxView.clicks(etGender).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_gender_dialog, null, false)
+                val dialog = AlertDialog.Builder(this).create()
+                dialog.setView(showDialogView)
+
+                when(etGender.text.toString())
+                {
+                    "Male" -> showDialogView.rbMale.isChecked = true
+                    "Female" -> showDialogView.rbFemale.isChecked = true
+                    "Transgender" -> showDialogView.rbTransgender.isChecked = true
+                    "Gender Neutral" -> showDialogView.rbGenderNeutral.isChecked = true
+                    "Gender Fluid" -> showDialogView.rbGenderFluid.isChecked = true
+                    "Prefer not to say" -> showDialogView.rbPreferNotToSay.isChecked = true
+                    "Other" -> showDialogView.rbOther.isChecked = true
                 }
-                etGender.setText(selectedGender)
-                dialog.dismiss()
+
+                showDialogView.btnDone.setOnClickListener  {
+                    var selectedGender=""
+                    when {
+                        showDialogView.rbMale.isChecked -> {
+                            selectedGender = showDialogView.rbMale.text.toString()
+                        }
+                        showDialogView.rbFemale.isChecked -> {
+                            selectedGender = showDialogView.rbFemale.text.toString()
+                        }
+                        showDialogView.rbTransgender.isChecked -> {
+                            selectedGender =showDialogView.rbTransgender.text.toString()
+                        }
+                        showDialogView.rbGenderNeutral.isChecked -> {
+                            selectedGender = showDialogView.rbGenderNeutral.text.toString()
+                        }
+                        showDialogView.rbGenderFluid.isChecked -> {
+                            selectedGender =showDialogView.rbGenderFluid.text.toString()
+                        }
+                        showDialogView.rbPreferNotToSay.isChecked -> {
+                            selectedGender = showDialogView.rbPreferNotToSay.text.toString()
+                        }
+                        showDialogView.rbOther.isChecked -> {
+                            selectedGender =showDialogView.rbOther.text.toString()
+                        }
+                    }
+                    etGender.setText(selectedGender)
+                    dialog.dismiss()
+                }
+                showDialogView.btnCancel.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                dialog.show()
             }
-            showDialogView.btnCancel.setOnClickListener {
-                dialog.dismiss()
+
+
+        RxView.clicks(etDOB).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                val calendar: Calendar = Calendar.getInstance()
+                this.day = calendar.get(Calendar.DAY_OF_MONTH)
+                this.month = calendar.get(Calendar.MONTH)
+                this.year = calendar.get(Calendar.YEAR)
+
+                val datePickerDialog =
+                    DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
+                datePickerDialog.datePicker.maxDate =(System.currentTimeMillis() - 568025136000L)
+                datePickerDialog.show()
             }
-            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-            dialog.show()
-        }
 
-        etDOB.setOnClickListener {
-            val calendar: Calendar = Calendar.getInstance()
-            this.day = calendar.get(Calendar.DAY_OF_MONTH)
-            this.month = calendar.get(Calendar.MONTH)
-            this.year = calendar.get(Calendar.YEAR)
-
-            val datePickerDialog =
-                DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
-            datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
-            datePickerDialog.show()
-        }
-
-        etBP.setOnClickListener { selectBloodPressure()}
-        etMeter.setOnClickListener { selectMeter() }
-        etCentimeter.setOnClickListener { selectCentimeter() }
-        etStone.setOnClickListener { selectStone() }
-        etLbs.setOnClickListener { selectPound() }
-
-        tvPhoneNoEdit.setOnClickListener {
-            val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_edit_phone_number_dialog, null, false)
-            val dialog = AlertDialog.Builder(this).create()
-            dialog.setView(showDialogView)
-
-            showDialogView.btnDonePhoneNumber.setOnClickListener {
-
+        RxView.clicks(etBP).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectBloodPressure()
             }
-            showDialogView.btnCancelPhoneNumber.setOnClickListener {
-                dialog.dismiss()
+
+        RxView.clicks(etMeter).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectMeter()
             }
-            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-            dialog.show()
-        }
+
+        RxView.clicks(etCentimeter).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectCentimeter()
+            }
+
+        RxView.clicks(etStone).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectStone()
+            }
+
+        RxView.clicks(etLbs).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectPound()
+            }
+
+         RxView.clicks(tvPhoneNoEdit).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_edit_phone_number_dialog, null, false)
+                val dialog = AlertDialog.Builder(this).create()
+                dialog.setView(showDialogView)
+
+                showDialogView.btnDonePhoneNumber.setOnClickListener {
+
+                }
+                showDialogView.btnCancelPhoneNumber.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                dialog.show()
+            }
     }
 
 
@@ -281,6 +359,18 @@ class ProfileDetailsActivity : BaseActivity(),ProfileDetailsPresenter.View, Date
         }
         val dialog = builder.create()
         dialog.show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode == Activity.RESULT_OK) {
+                ivProfile.setImageURI(result.uri)
+                val fileOfPic = File(URI(result.uri.toString()))
+                presenter.updateUser(fileOfPic)
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     /*private fun calculateBMI() {

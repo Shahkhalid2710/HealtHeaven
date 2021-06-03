@@ -1,0 +1,21 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/badge_frame_layout"
+    android:layout_width="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/badge_text_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:textSize="@dimen/font_11"
+        android:textColor="@android:color/white"
+        android:background="@drawable/notification_badge"
+        android:layout_gravity="center|top"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:padding="3dp"
+        tools:text="1" />
+</FrameLayout>

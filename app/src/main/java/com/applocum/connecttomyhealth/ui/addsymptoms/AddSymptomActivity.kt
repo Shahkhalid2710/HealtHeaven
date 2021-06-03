@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.addsymptoms
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -20,8 +21,10 @@ import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.SessionBookActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_add_symptom.*
 import java.io.InputStream
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -34,12 +37,17 @@ class AddSymptomActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int=R.layout.activity_add_symptom
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         (application as MyApplication).component.inject(this)
         val specialist=intent.getSerializableExtra("specialist") as Specialist
-        ivBack.setOnClickListener { finish() }
+
+        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
 
         val alldayDr = "<font color='#008976'>alldayDr</font>"
         val nhsGP = "<font color='#008976'>NHS GP.</font>"
@@ -61,19 +69,20 @@ class AddSymptomActivity : BaseActivity() {
             )
         }
 
-        btnContinue.setOnClickListener {
-            if (checkCondition(cbGeoLocation.isChecked,cbRecords.isChecked)){
-                val intent = Intent(this, SessionBookActivity::class.java)
-                intent.putExtra("specialist",specialist)
-                val appointment = userHolder.getBookAppointmentData()
-                appointment.pickedFilePath = selectedImagePath
-                appointment.appointmentReason = etAddSymptoms.text.toString()
-                appointment.allowGeoAccess=cbGeoLocation.isChecked
-                appointment.sharedRecordWithNhs=cbRecords.isChecked
-                userHolder.saveBookAppointmentData(appointment)
-                startActivity(intent)
+        RxView.clicks(btnContinue).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                if (checkCondition(cbGeoLocation.isChecked,cbRecords.isChecked)){
+                    val intent = Intent(this, SessionBookActivity::class.java)
+                    intent.putExtra("specialist",specialist)
+                    val appointment = userHolder.getBookAppointmentData()
+                    appointment.pickedFilePath = selectedImagePath
+                    appointment.appointmentReason = etAddSymptoms.text.toString()
+                    appointment.allowGeoAccess=cbGeoLocation.isChecked
+                    appointment.sharedRecordWithNhs=cbRecords.isChecked
+                    userHolder.saveBookAppointmentData(appointment)
+                    startActivity(intent)
+                }
             }
-        }
     }
 
 

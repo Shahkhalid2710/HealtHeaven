@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,21 +13,32 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.booksession.BookSessionActivity
 import com.applocum.connecttomyhealth.ui.home.adapters.DoctorAdapter
+import com.applocum.connecttomyhealth.ui.profiledetails.ProfileDetailsPresenter
+import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
+import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.applocum.connecttomyhealth.ui.specialists.SpecialistsActivity
 import com.applocum.connecttomyhealth.ui.specialists.SpecilistPresenter
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
+import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
-class HomeFragment : Fragment(),SpecilistPresenter.View {
+class HomeFragment : Fragment(),SpecilistPresenter.View,ProfileDetailsPresenter.View {
     @Inject
     lateinit var userHolder: UserHolder
     @Inject
     lateinit var specilistPresenter: SpecilistPresenter
+
+    @Inject
+    lateinit var profileDetailsPresenter: ProfileDetailsPresenter
+
     lateinit var v:View
 
+    @SuppressLint("CheckResult")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,16 +47,15 @@ class HomeFragment : Fragment(),SpecilistPresenter.View {
 
         MyApplication.getAppContext().component.inject(this)
         specilistPresenter.injectview(this)
+        profileDetailsPresenter.injectview(this)
 
-        v.btnBookAppointment.setOnClickListener {
-            startActivity(Intent(requireActivity(), SpecialistsActivity::class.java))
-        }
-
-
-
-        v.tvName.text=userHolder.userFirstName
+        RxView.clicks(v.btnBookAppointment).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(requireActivity(), SpecialistsActivity::class.java))
+            }
 
         specilistPresenter.getDoctorlist()
+        profileDetailsPresenter.showProfile()
 
         return v
     }
@@ -67,5 +78,22 @@ class HomeFragment : Fragment(),SpecilistPresenter.View {
 
     override fun viewProgress(isShow: Boolean) {
        v.progressTopDoctors.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun showProfile(patient: Patient) {
+        v.tvName.text=patient.user.firstName
+        Glide.with(requireActivity()).load(patient.image).into(v.ivUser)
+    }
+
+    override fun displayMessage(message: String) {
+    }
+
+    override fun displayErrorMessage(message: String) {
+    }
+
+    override fun userData(user: User) {
+    }
+
+    override fun viewprogress(isShow: Boolean) {
     }
 }

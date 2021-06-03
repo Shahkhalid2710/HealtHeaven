@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.booksession.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -10,7 +11,9 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertAvailableTimeSlots
 import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_session_booking.view.*
+import java.util.concurrent.TimeUnit
 
 class AvailableTimeClickAdapter(context: Context, list:ArrayList<Time>, private var itemClickListner: ItemClickListner) :
     RecyclerView.Adapter<AvailableTimeClickAdapter.SessionTypeHolder>(){
@@ -30,15 +33,19 @@ class AvailableTimeClickAdapter(context: Context, list:ArrayList<Time>, private 
         return mList.size
     }
 
+    @SuppressLint("CheckResult")
     override fun onBindViewHolder(holder: SessionTypeHolder, position: Int) {
         val time=mList[position]
 
         holder.itemView.tvName.text= convertAvailableTimeSlots(time.start_time)
-        holder.itemView.setOnClickListener {
-            itemClickListner.onItemClick(time, position)
-            selectedItem =position
-            notifyDataSetChanged()
-        }
+
+        RxView.clicks(holder.itemView).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                itemClickListner.onItemClick(time, position)
+                selectedItem =position
+                notifyDataSetChanged()
+            }
+
         if (selectedItem == holder.adapterPosition) {
             holder.itemView.rl.setBackgroundResource(R.drawable.custom_btn)
             holder.itemView.tvName.setTextColor(Color.parseColor("#FFFFFF"))

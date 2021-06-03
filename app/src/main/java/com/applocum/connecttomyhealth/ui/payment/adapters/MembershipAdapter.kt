@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.payment.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.payment.models.MembershipResponse
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_code_membership.view.*
+import java.util.concurrent.TimeUnit
 
 class MembershipAdapter(context: Context, list:ArrayList<MembershipResponse>,val isshow:Boolean,private val codeClick:CodeClickListener):RecyclerView.Adapter<MembershipAdapter.PaymentHolder>() {
     var mContext=context
@@ -26,6 +29,7 @@ class MembershipAdapter(context: Context, list:ArrayList<MembershipResponse>,val
         return mList.size
     }
 
+    @SuppressLint("CheckResult")
     override fun onBindViewHolder(holder: PaymentHolder, position: Int) {
         val membershipResponse=mList[position]
 
@@ -35,11 +39,12 @@ class MembershipAdapter(context: Context, list:ArrayList<MembershipResponse>,val
         if (isShow) holder.itemView.cbMemberships.visibility=View.VISIBLE
         else holder.itemView.cbMemberships.visibility=View.GONE
 
-        holder.itemView.llPaymentCode.setOnClickListener {
-            selectCode=position
-            codeClick.codeClick(membershipResponse, position)
-            notifyDataSetChanged()
-        }
+        RxView.clicks(holder.itemView.llPaymentCode).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe{
+                selectCode=position
+                codeClick.codeClick(membershipResponse, position)
+                notifyDataSetChanged()
+            }
 
         if (selectCode == position)
         {

@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.payment
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -15,10 +16,14 @@ import com.applocum.connecttomyhealth.ui.addcard.AddCardPresenter
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import com.applocum.connecttomyhealth.ui.payment.adapters.PaymentCardAdapter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
+import kotlinx.android.synthetic.main.activity_fit_note.*
 import kotlinx.android.synthetic.main.activity_payment_method.*
+import kotlinx.android.synthetic.main.activity_payment_method.ivBack
 import kotlinx.android.synthetic.main.custom_cancel_saved_card_dialog.view.*
 import kotlinx.android.synthetic.main.custom_loader_progress.*
 import kotlinx.android.synthetic.main.custom_payment.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class PaymentMethodActivity : BaseActivity(),AddCardPresenter.View {
@@ -28,17 +33,28 @@ class PaymentMethodActivity : BaseActivity(),AddCardPresenter.View {
     @Inject
     lateinit var presenter: AddCardPresenter
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ivBack.setOnClickListener { finish() }
-
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
 
-        presenter.showSavedCards()
 
-        tvAddPaymentMethod.setOnClickListener { startActivity(Intent(this,AddCardActivity::class.java)) }
-        btnAddCard.setOnClickListener { startActivity(Intent(this,AddCardActivity::class.java)) }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe{
+                finish()
+            }
+
+        RxView.clicks(tvAddPaymentMethod).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe{
+                startActivity(Intent(this,AddCardActivity::class.java))            }
+
+        RxView.clicks(btnAddCard).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe{
+                startActivity(Intent(this,AddCardActivity::class.java))
+            }
+
+        presenter.showSavedCards()
 
     }
 

@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.allergyhistory
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -17,6 +18,7 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -41,12 +43,17 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
     @Inject
     lateinit var allergyHistoryPresenter: AllergyHistoryPresenter
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
         allergyHistoryPresenter.injectView(this)
-        ivBack.setOnClickListener { finish() }
+
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
 
         RxTextView.textChanges(etAddAllergy)
             .debounce(500, TimeUnit.MILLISECONDS)
@@ -85,9 +92,11 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,AllergyHistoryP
 
         allergyName=etAddAllergy.text.toString()
 
-        btnSaveAllergy.setOnClickListener {
-            allergyHistoryPresenter.addAllergy(allergyName,isActivePast)
-        }
+        RxView.clicks(btnSaveAllergy).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                allergyHistoryPresenter.addAllergy(allergyName,isActivePast)
+            }
+
     }
 
     override fun getLayoutResourceId(): Int =R.layout.activity_add_allergy

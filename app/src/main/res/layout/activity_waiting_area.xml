@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.waitingarea.WaitingAreaActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="8dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_25"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            android:foreground="@drawable/effect_button"
+            android:src="@drawable/ic_back" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,34 +36,35 @@
         tools:ignore="UselessParent">
 
         <ImageView
-            android:layout_width="167dp"
+            android:layout_width="263dp"
             android:layout_height="174dp"
             android:layout_gravity="center"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_no_medication" />
+            android:src="@drawable/ic_waiting_area" />
 
         <TextView
-            android:id="@+id/tvNoMedicationIssue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/spacing_35"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/no_medication_issued"
+            android:text="@string/waiting_area"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_18" />
 
         <TextView
-            android:id="@+id/tvNoAdded"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_20"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/spacing_20"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/issued_medication_will_appear_here"
+            android:gravity="center"
+            android:text="@string/please_wait_we_are_connecting_you_with_your_clinician_please_stay_on_this_screen_our_doctor_will_connect_with_you_shortly"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_14" />
-
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>
+

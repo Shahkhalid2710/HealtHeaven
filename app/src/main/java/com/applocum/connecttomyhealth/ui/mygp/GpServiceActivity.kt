@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.mygp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -18,17 +19,22 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_gp_service.*
+import kotlinx.android.synthetic.main.activity_gp_service.ivBack
 import kotlinx.android.synthetic.main.custom_mygp_xml.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.*
+import java.util.concurrent.TimeUnit
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 
-@Suppress("DEPRECATION", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+@Suppress("DEPRECATION", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
+    "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS"
+)
 class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
 
     @Inject
@@ -38,21 +44,31 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
     private lateinit var supportMapFragment: SupportMapFragment
 
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
 
-        ivBack.setOnClickListener { finish() }
-        ivBackMyGp.setOnClickListener { finish() }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
+        RxView.clicks(ivBackMyGp).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
 
-        tvChangeGpService.setOnClickListener {
-            startActivity(Intent(this,AddGPServiceActivity::class.java))
-            this.finish()
-        }
-         btnAddGpService.setOnClickListener {
-             startActivity(Intent(this,AddGPServiceActivity::class.java))
-         }
+        RxView.clicks(tvChangeGpService).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,AddGPServiceActivity::class.java))
+                this.finish()
+            }
+
+        RxView.clicks(btnAddGpService).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,AddGPServiceActivity::class.java))
+            }
 
         locationPermission()
         presenter.getGpService()
@@ -80,6 +96,7 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
         progress.visibility=if (isShow)View.VISIBLE else View.GONE
     }
 
+    @SuppressLint("CheckResult")
     override fun showSurgery(surgery: Surgery) {
         if (surgery.city.isEmpty())
         {
@@ -121,15 +138,15 @@ class GpServiceActivity : BaseActivity(),GpservicePresenter.View{
         tvAddress.text= capitalize(surgery.address)
         tvName.text= capitalize(surgery.practice_name)
 
-        btnCallGPService.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
-            {
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE), 1)
-            } else {
-                startActivity(Intent(Intent.ACTION_CALL, Uri.fromParts("tel",surgery.phone, null)))
+        RxView.clicks(btnCallGPService).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+                {
+                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE), 1)
+                } else {
+                    startActivity(Intent(Intent.ACTION_CALL, Uri.fromParts("tel",surgery.phone, null)))
+                }
             }
-        }
-
     }
     private fun capitalize(capString: String): String? {
         val capBuffer = StringBuffer()

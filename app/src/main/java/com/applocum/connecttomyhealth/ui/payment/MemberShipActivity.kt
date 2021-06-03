@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.payment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,10 +13,12 @@ import com.applocum.connecttomyhealth.ui.payment.adapters.MembershipAdapter
 import com.applocum.connecttomyhealth.ui.payment.models.MembershipResponse
 import com.applocum.connecttomyhealth.ui.payment.presenters.MembershipPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_member_ship.*
 import kotlinx.android.synthetic.main.activity_member_ship.ivBack
 import kotlinx.android.synthetic.main.custom_loader_progress.*
 import kotlinx.android.synthetic.main.custom_membership.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
@@ -25,18 +28,25 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
     @Inject
     lateinit var membershipPresenter: MembershipPresenter
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         membershipPresenter.injectView(this)
 
-        ivBack.setOnClickListener { finish() }
-        tvAddmembershipcode.setOnClickListener {
-            startActivity(Intent(this, AddCodeActivity::class.java))
-        }
-        btnAddCode.setOnClickListener {
-            startActivity(Intent(this, AddCodeActivity::class.java))
-        }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe{
+                finish()
+            }
+
+        RxView.clicks(tvAddmembershipcode).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe{
+                startActivity(Intent(this, AddCodeActivity::class.java))
+            }
+        RxView.clicks(btnAddCode).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe{
+                startActivity(Intent(this, AddCodeActivity::class.java))
+            }
 
         membershipPresenter.showSavedCodes()
 

@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.medicalhistory
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
@@ -17,10 +18,13 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_medical_history.*
+import kotlinx.android.synthetic.main.activity_add_medical_history.ivBack
+import kotlinx.android.synthetic.main.activity_add_medical_history.llMedicalHistory
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -41,18 +45,33 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
     lateinit var presenter: MedicalPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_medical_history
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        ivBack.setOnClickListener { finish() }
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
 
-        etStartMonth.setOnClickListener { selectStartMonth() }
-        etStartYear.setOnClickListener { selectStartYear() }
-        etEndMonth.setOnClickListener { selectEndMonth() }
-        etEndYear.setOnClickListener { selectEndYear() }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
 
+        RxView.clicks(etStartMonth).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectStartMonth()
+            }
+        RxView.clicks(etStartYear).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectStartYear()
+            }
+        RxView.clicks(etEndMonth).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectEndMonth()
+            }
+        RxView.clicks(etEndYear).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectEndYear()
+            }
 
         RxTextView.textChanges(etDiseaseName)
             .debounce(500, TimeUnit.MILLISECONDS)
@@ -94,9 +113,10 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
 
         diseaseid=etDiseaseName.text.toString()
 
-        btnSaveDiseases.setOnClickListener {
-             presenter.addMedicalHistory(diseaseid,etStartMonth.text.toString(),etStartYear.text.toString(),isActivePast,etEndMonth.text.toString(),etEndYear.text.toString())
-        }
+        RxView.clicks(btnSaveDiseases).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                presenter.addMedicalHistory(diseaseid,etStartMonth.text.toString(),etStartYear.text.toString(),isActivePast,etEndMonth.text.toString(),etEndYear.text.toString())
+            }
     }
 
     override fun displayMessage(message: String) {
@@ -202,6 +222,5 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
         }
         val dialog = builder.create()
         dialog.show()
-
     }
 }

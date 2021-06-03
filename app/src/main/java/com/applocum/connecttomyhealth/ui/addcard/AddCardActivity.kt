@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.addcard
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -14,8 +15,11 @@ import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_add_card.*
+import kotlinx.android.synthetic.main.activity_add_card.ivBack
 import kotlinx.android.synthetic.main.custom_progress.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
@@ -26,13 +30,17 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
     lateinit var presenter: AddCardPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_card
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
 
-        ivBack.setOnClickListener { finish() }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe{
+                finish()
+            }
         etCardNumber.addTextChangedListener(this)
 
         etHolderName.addTextChangedListener {
@@ -57,9 +65,10 @@ class AddCardActivity : BaseActivity(), TextWatcher, AddCardPresenter.View {
             }
         }
 
-        btnAdd.setOnClickListener {
-            presenter.addCard(etCardNumber.text.toString().trim(),etHolderName.text.toString(),etExpiryDate.text.toString(),etCVV.text.toString())
-        }
+        RxView.clicks(btnAdd).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe{
+                presenter.addCard(etCardNumber.text.toString().trim(),etHolderName.text.toString(),etExpiryDate.text.toString(),etCVV.text.toString())
+            }
     }
 
     override fun afterTextChanged(s: Editable?) {

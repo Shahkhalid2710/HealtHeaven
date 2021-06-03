@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.settings
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -13,8 +14,11 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotification
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_setting.*
+import kotlinx.android.synthetic.main.activity_setting.ivBack
 import kotlinx.android.synthetic.main.custom_progress.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -31,16 +35,22 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
 
     override fun getLayoutResourceId(): Int=R.layout.activity_setting
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ivBack.setOnClickListener { finish() }
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
+
+        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe{
+                finish()
+            }
 
         presenter.showNotification()
 
         checkGpsStatus()
-       /* switchlocatinservices.setOnCheckedChangeListener { _, isChecked ->
+
+        switchlocatinservices.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 turnOffGps()
             }
@@ -49,7 +59,7 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
                 turnOnGps()
             }
 
-        }*/
+        }
         switchtextmessage.setOnCheckedChangeListener { _, isChecked ->
             switchText = if (isChecked) { "true" } else { "false" }
             presenter.notificationSetting(switchText,switchEmail,switchphone,switchpuchNotification)
@@ -96,7 +106,6 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
     private fun checkGpsStatus() {
         val manager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         Gpsstatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-
         switchlocatinservices.isChecked = Gpsstatus == true
     }
 
@@ -126,8 +135,4 @@ class SettingActivity : BaseActivity(),SettingNotificationPresenter.View {
         alert.show()
     }
 
-    override fun onResume() {
-        //presenter.showNotification()
-        super.onResume()
-    }
 }

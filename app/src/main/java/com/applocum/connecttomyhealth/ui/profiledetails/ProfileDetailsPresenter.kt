@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.profiledetails
 
+import android.graphics.Bitmap
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
@@ -13,8 +14,10 @@ import com.google.gson.Gson
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.io.File
 import javax.inject.Inject
 
 class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
@@ -98,15 +101,14 @@ class ProfileDetailsPresenter@Inject constructor(private val api:AppEndPoint) {
         }
     }
 
-   fun updateUser(image:String)
+   fun updateUser(image:File)
    {
        view.viewprogress(true)
-       val requestBody: RequestBody = MultipartBody.Builder()
-           .setType(MultipartBody.FORM)
-           .addFormDataPart("user[image]",image)
-           .build()
+       val multiPartBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
+       val fileBody = RequestBody.create("image/png".toMediaTypeOrNull(), image)
+       multiPartBuilder.addFormDataPart("user[image]", image.nameWithoutExtension, fileBody)
 
-       api.updateUser(userHolder.userToken,userHolder.userid,requestBody)
+       api.updateUser(userHolder.userToken,userHolder.userid,multiPartBuilder.build())
            .observeOn(AndroidSchedulers.mainThread())
            .subscribeBy(onNext ={
                view.viewprogress(false)

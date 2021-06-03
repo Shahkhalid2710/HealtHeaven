@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.othernotes
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,9 +13,11 @@ import com.applocum.connecttomyhealth.ui.mydownloads.DocumentViewActivity
 import com.applocum.connecttomyhealth.ui.othernotes.adapters.OtherNoteAdapter
 import com.applocum.connecttomyhealth.ui.prescription.models.Document
 import com.applocum.connecttomyhealth.ui.prescription.models.DocumentPresenter
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_other_note.*
 import kotlinx.android.synthetic.main.activity_other_note.ivBack
 import kotlinx.android.synthetic.main.custom_loader_progress.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class OtherNoteActivity : BaseActivity(),DocumentPresenter.View {
@@ -22,12 +25,16 @@ class OtherNoteActivity : BaseActivity(),DocumentPresenter.View {
     @Inject
     lateinit var presenter: DocumentPresenter
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ivBack.setOnClickListener { finish() }
         (application as MyApplication).component.inject(this)
-
         presenter.injectView(this)
+
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe{
+                finish()
+            }
 
         presenter.getOtherNote()
     }

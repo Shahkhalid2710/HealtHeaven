@@ -1,8 +1,12 @@
 package com.applocum.connecttomyhealth.ui.bottomnavigationview
 
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
+import androidx.annotation.IdRes
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import com.applocum.connecttomyhealth.R
@@ -12,9 +16,11 @@ import com.applocum.connecttomyhealth.ui.appointment.AppointmentFragment
 import com.applocum.connecttomyhealth.ui.home.HomeFragment
 import com.applocum.connecttomyhealth.ui.notification.NotificationFragment
 import com.applocum.connecttomyhealth.ui.profile.ProfileFragment
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_bottomnavigationview.*
 import javax.inject.Inject
+
 
 class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
     BottomNavigationView.OnNavigationItemReselectedListener {
@@ -35,6 +41,9 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
                 true
             }
         }
+
+        showBadge(this,bottomnavigationView,R.id.nav_notification,"1")
+        removeBadge(bottomnavigationView,R.id.nav_notification)
 
         loadFragment(HomeFragment())
 
@@ -74,5 +83,29 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
 
     override fun onNavigationItemReselected(item: MenuItem) {
 
+    }
+    fun showBadge(
+        context: Context?,
+        bottomNavigationView: BottomNavigationView,
+        @IdRes itemId: Int,
+        value: String?
+    ) {
+        removeBadge(bottomNavigationView, itemId)
+        val itemView: BottomNavigationItemView = bottomNavigationView.findViewById(itemId)
+        val badge: View = LayoutInflater.from(context)
+            .inflate(R.layout.custom_notification_badge, bottomNavigationView, false)
+        val text = badge.findViewById<TextView>(R.id.badge_text_view)
+        text.text = value
+        itemView.addView(badge)
+    }
+
+    fun removeBadge(
+        bottomNavigationView: BottomNavigationView,
+        @IdRes itemId: Int
+    ) {
+        val itemView: BottomNavigationItemView = bottomNavigationView.findViewById(itemId)
+        if (itemView.childCount == 3) {
+            itemView.removeViewAt(2)
+        }
     }
 }

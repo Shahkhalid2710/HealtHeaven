@@ -1,8 +1,7 @@
 package com.applocum.connecttomyhealth.ui.changepassword
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -12,10 +11,11 @@ import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_change_password.*
 import kotlinx.android.synthetic.main.activity_change_password.ivBack
-import kotlinx.android.synthetic.main.activity_create_new_password.*
 import kotlinx.android.synthetic.main.custom_progress.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -26,22 +26,26 @@ class ChangePasswordActivity : BaseActivity(),ChangePasswordPresenter.View {
 
     override fun getLayoutResourceId(): Int=R.layout.activity_change_password
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
 
-        ivBack.setOnClickListener { finish() }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe{
+                finish()
+            }
 
         //etCurrentPassword.addTextChangedListener(loginTextWatcher)
        // etNewPassword.addTextChangedListener(loginTextWatcher)
         //etConfirmPassword.addTextChangedListener(loginTextWatcher)
 
-        btnUpdate.setOnClickListener {
-            presenter.changePassword(etCurrentPassword.text.toString(),etNewPassword.text.toString(),etConfirmPassword.text.toString())
-        }
-
+        RxView.clicks(btnUpdate).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe{
+                presenter.changePassword(etCurrentPassword.text.toString(),etNewPassword.text.toString(),etConfirmPassword.text.toString())
+            }
     }
 
     override fun displayMessage(message: String) {

@@ -23,15 +23,18 @@ import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.applocum.connecttomyhealth.ui.confirmbooking.ConfirmBookingActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import com.prolificinteractive.materialcalendarview.*
 import kotlinx.android.synthetic.main.activity_session_book.*
 import kotlinx.android.synthetic.main.activity_session_book.calendarView
+import kotlinx.android.synthetic.main.activity_session_book.ivBack
 import kotlinx.android.synthetic.main.activity_session_book.rvAvailableTime
 import kotlinx.android.synthetic.main.activity_session_book.rvSelectSlot
 import kotlinx.android.synthetic.main.activity_session_book.rvSessionType
 import kotlinx.android.synthetic.main.custom_small_progress.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -56,13 +59,17 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
     override fun getLayoutResourceId(): Int = R.layout.activity_session_book
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ivBack.setOnClickListener { finish() }
-
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
+
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
 
         specialist = intent.getSerializableExtra("specialist") as Specialist
 
@@ -192,22 +199,23 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             }
         }
 
+        RxView.clicks(btnContinue).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                if (validateBookSession(seleteddate, sType, sSlot,sTime)) {
+                    val intent = Intent(this, ConfirmBookingActivity::class.java)
 
-        btnContinue.setOnClickListener {
-            if (validateBookSession(seleteddate, sType, sSlot,sTime)) {
-                val intent = Intent(this, ConfirmBookingActivity::class.java)
-
-                val appointment = userHolder.getBookAppointmentData()
-                appointment.appointmentDateTime= dateTimeUTCFormat(sTime)
-                appointment.appointmentTime =sTime
-                appointment.appointmentType = sType
-                appointment.appointmentSlot = sSlot
-                appointment.appointmentDate = seleteddate
-                userHolder.saveBookAppointmentData(appointment)
-                intent.putExtra("commonData", commonData)
-                startActivity(intent)
+                    val appointment = userHolder.getBookAppointmentData()
+                    appointment.appointmentDateTime= dateTimeUTCFormat(sTime)
+                    appointment.appointmentTime =sTime
+                    appointment.appointmentType = sType
+                    appointment.appointmentSlot = sSlot
+                    appointment.appointmentDate = seleteddate
+                    userHolder.saveBookAppointmentData(appointment)
+                    intent.putExtra("commonData", commonData)
+                    startActivity(intent)
+                }
             }
-        }
+
         calendarView.setOnDateChangedListener(this)
         calendarView.addDecorator(PrimeDayDisableDecorator())
 

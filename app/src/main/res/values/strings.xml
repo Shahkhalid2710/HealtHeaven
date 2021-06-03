@@ -614,4 +614,8 @@
     <string name="update_phone_number">Update Phone Number</string>
     <string name="please_enter_your_phone_number_we_ll_send_you_an_otp_to_confirm_your_phone_number">Please enter your phone number.We\'ll send you an OTP to confirm your phone number.</string>
     <string name="phone_number">Phone Number</string>
+    <string name="_9">9+</string>
+    <string name="waiting_area">Waiting Area</string>
+    <string name="please_wait_we_are_connecting_you_with_your_clinician_please_stay_on_this_screen_our_doctor_will_connect_with_you_shortly">Please wait, we are connecting you with your Clinician. Please stay on this screen. Our Doctor will connect with you shortly.</string>
+    <string name="choose_image">Choose image</string>
 </resources>

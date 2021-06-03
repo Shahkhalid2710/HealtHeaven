@@ -17,25 +17,12 @@
         android:textSize="@dimen/font_13" />
 
     <TextView
-        android:id="@+id/tvCamera"
+        android:id="@+id/tvChooseImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_16"
         android:fontFamily="@font/montserrat_medium"
-        android:text="@string/camera"
-        android:focusable="true"
-        android:clickable="true"
-        android:foreground="@drawable/effect"
-        android:textColor="@color/aapBlack"
-        android:textSize="@dimen/font_15" />
-
-    <TextView
-        android:id="@+id/tvGallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_16"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="@string/gallery"
+        android:text="@string/choose_image"
         android:focusable="true"
         android:clickable="true"
         android:foreground="@drawable/effect"

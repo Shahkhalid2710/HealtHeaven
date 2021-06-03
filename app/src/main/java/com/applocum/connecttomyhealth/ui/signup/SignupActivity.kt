@@ -122,6 +122,18 @@ class SignupActivity : BaseActivity(), SignupPresenter.View,
             val dialog = AlertDialog.Builder(this).create()
             dialog.setView(showDialogView)
 
+            when(etGender.text.toString())
+            {
+                "Male" -> showDialogView.rbMale.isChecked = true
+                "Female" -> showDialogView.rbFemale.isChecked = true
+                "Transgender" -> showDialogView.rbTransgender.isChecked = true
+                "Gender Neutral" -> showDialogView.rbGenderNeutral.isChecked = true
+                "Gender Fluid" -> showDialogView.rbGenderFluid.isChecked = true
+                "Prefer not to say" -> showDialogView.rbPreferNotToSay.isChecked = true
+                "Other" -> showDialogView.rbOther.isChecked = true
+            }
+
+
             showDialogView.btnDone.setOnClickListener  {
                 var selectedGender=""
                 when {
@@ -157,6 +169,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View,
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
         }
+
         etDOB.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
             this.day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -165,7 +178,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View,
 
             val datePickerDialog =
                 DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
-            datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+            datePickerDialog.datePicker.maxDate = (System.currentTimeMillis() - 568025136000L)
             datePickerDialog.show()
         }
     }

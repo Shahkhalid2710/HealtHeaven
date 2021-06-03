@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.payment
 
+import android.annotation.SuppressLint
 import android.app.ActionBar
 import android.app.Dialog
 import android.content.Intent
@@ -23,12 +24,14 @@ import com.applocum.connecttomyhealth.ui.bottomnavigationview.BottomNavigationVi
 import com.applocum.connecttomyhealth.ui.payment.adapters.PaymentCardAdapter
 import com.applocum.connecttomyhealth.ui.verificationdocument.activities.VerifyIdentityActivity
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_payment_show.*
 import kotlinx.android.synthetic.main.activity_payment_show.btnConfirmSessionBooking
 import kotlinx.android.synthetic.main.activity_payment_show.progress
 import kotlinx.android.synthetic.main.activity_payment_show.rvSavedCards
 import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 import kotlinx.android.synthetic.main.custom_payment_add.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointmentPresenter.View {
@@ -46,6 +49,7 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
     private var appointmentType=""
 
     override fun getLayoutResourceId(): Int=R.layout.activity_payment_show
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,54 +61,63 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
         bookAppointment.corporateId = 66
         userHolder.saveBookAppointmentData(bookAppointment)
 
-        btnConfirmSessionBooking.setOnClickListener {
-            when (selectCard ) {
-                0 -> {
-                    val snackbar =
-                        Snackbar.make(llPaymentShow, "Please select at least one method ", Snackbar.LENGTH_LONG)
-                    snackbar.changeFont()
-                    val snackview = snackbar.view
-                    snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-                    snackbar.show()
-                }
-                else -> {
-                    when(bookAppointment.appointmentType)
-                    {
-                        "phone_call_appointment"->{ appointmentType="phone_call"}
-                        "online_appointment"->{appointmentType="video"}
-                        "offline_appointment"->{appointmentType="face_to_face"}
+          RxView.clicks(btnConfirmSessionBooking).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                when (selectCard ) {
+                    0 -> {
+                        val snackbar =
+                            Snackbar.make(llPaymentShow, "Please select at least one method ", Snackbar.LENGTH_LONG)
+                        snackbar.changeFont()
+                        val snackview = snackbar.view
+                        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                        snackbar.show()
                     }
+                    else -> {
+                        when(bookAppointment.appointmentType)
+                        {
+                            "phone_call_appointment"->{ appointmentType="phone_call"}
+                            "online_appointment"->{appointmentType="video"}
+                            "offline_appointment"->{appointmentType="face_to_face"}
+                        }
 
-                    bookAppointmentPresenter.bookAppointment(
-                        bookAppointment.appointmentTime,
-                        bookAppointment.appointmentSlot,
-                        bookAppointment.appointmentReason,
-                        bookAppointment.allowGeoAccess,
-                        bookAppointment.sharedRecordWithNhs,
-                        appointmentType,
-                        bookAppointment.therapistId,
-                        selectCard,
-                        bookAppointment.corporateId)
-                    openDialog()
+                        bookAppointmentPresenter.bookAppointment(
+                            bookAppointment.appointmentTime,
+                            bookAppointment.appointmentSlot,
+                            bookAppointment.appointmentReason,
+                            bookAppointment.allowGeoAccess,
+                            bookAppointment.sharedRecordWithNhs,
+                            appointmentType,
+                            bookAppointment.therapistId,
+                            selectCard,
+                            bookAppointment.corporateId)
+                        openDialog()
+                    }
                 }
             }
-        }
-        tvAddNewCode.setOnClickListener {
-            startActivity(Intent(this,AddCardActivity::class.java))
-        }
-        tvAddmembershipcode.setOnClickListener {
-            startActivity(Intent(this,AddCodeActivity::class.java))
-        }
-        tvAddPaymentMethod.setOnClickListener {
-            startActivity(Intent(this,AddCardActivity::class.java))
-        }
-        btnConfirmSessionBook.setOnClickListener {
-            startActivity(Intent(this,VerifyIdentityActivity::class.java))
-        }
 
-        etAddCode.setOnClickListener {
-            startActivity(Intent(this,AddCodeActivity::class.java))
-        }
+
+        RxView.clicks(tvAddNewCode).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,AddCardActivity::class.java))
+            }
+        RxView.clicks(tvAddmembershipcode).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,AddCodeActivity::class.java))
+            }
+        RxView.clicks(tvAddPaymentMethod).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,AddCardActivity::class.java))
+            }
+        RxView.clicks(btnConfirmSessionBook).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,VerifyIdentityActivity::class.java))
+            }
+
+        RxView.clicks(etAddCode).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,AddCodeActivity::class.java))
+            }
+
         presenter.showSavedCards()
 
     }
@@ -117,6 +130,7 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
 
     override fun viewProgress(isShow: Boolean) {
         progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        rvSavedCards.visibility=if (isShow) View.GONE else View.VISIBLE
     }
 
     override fun viewFullProgress(isShow: Boolean) {
@@ -165,7 +179,8 @@ class PaymentShowActivity : BaseActivity(),AddCardPresenter.View,BookAppointment
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
-            this.finish()
+            finishAffinity()
+           // this.finish()
         }
         dialog.show()
     }

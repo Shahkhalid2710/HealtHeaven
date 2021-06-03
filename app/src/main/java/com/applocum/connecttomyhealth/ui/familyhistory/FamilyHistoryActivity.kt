@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.familyhistory
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -8,10 +9,12 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistory
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_family_history.*
 import kotlinx.android.synthetic.main.activity_family_history.ivBack
 import kotlinx.android.synthetic.main.custom_family_history_xml.*
 import kotlinx.android.synthetic.main.custom_loader_progress.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class FamilyHistoryActivity : BaseActivity(),FamilyHistoryPresenter.View {
@@ -19,19 +22,26 @@ class FamilyHistoryActivity : BaseActivity(),FamilyHistoryPresenter.View {
     @Inject
     lateinit var presenter: FamilyHistoryPresenter
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        ivBack.setOnClickListener { finish() }
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
 
-        tvAddFamilyHistory.setOnClickListener {
-            startActivity(Intent(this,AddFamilyHistoryActivity::class.java))
-        }
-        btnAddFamilyHistory.setOnClickListener {
-            startActivity(Intent(this,AddFamilyHistoryActivity::class.java))
-        }
+        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
+
+        RxView.clicks(tvAddFamilyHistory).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,AddFamilyHistoryActivity::class.java))
+            }
+
+        RxView.clicks(btnAddFamilyHistory).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,AddFamilyHistoryActivity::class.java))
+            }
 
         presenter.showFamilyHistoryList()
 

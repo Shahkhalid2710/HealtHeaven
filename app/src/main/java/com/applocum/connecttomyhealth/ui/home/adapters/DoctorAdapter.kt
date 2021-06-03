@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.home.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.doctor_raw_xml.view.*
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
@@ -32,6 +35,7 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
         return 5
     }
 
+    @SuppressLint("CheckResult")
     override fun onBindViewHolder(holder: DoctorHolder, position: Int) {
         val specialist = mList[position]
         holder.itemView.tvDoctorFName.text=specialist.first_name
@@ -40,9 +44,11 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
         holder.itemView.tvDoctorEmail.text=specialist.email
         Glide.with(mContext).load(specialist.image).into(holder.itemView.ivDoctor)
 
-        holder.itemView.cvDoctor.setOnClickListener {
-            doctorClick.onDoctorClick(specialist, position)
-        }
+        RxView.clicks(holder.itemView.cvDoctor).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                doctorClick.onDoctorClick(specialist, position)
+            }
+
         setAnimation(holder.itemView,position)
     }
 
@@ -69,11 +75,12 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
                 Animation.RELATIVE_TO_SELF,
                 0.5f
             )
-            anim.duration = Random().nextInt(501).toLong()
+            anim.duration = Random().nextInt(301).toLong()
             viewToAnimate.startAnimation(anim)
             lastPosition = position
         }
     }
+
     interface DoctorClickListner{
         fun onDoctorClick(specialist: Specialist,position: Int)
     }

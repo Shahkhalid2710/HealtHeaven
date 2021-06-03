@@ -11,8 +11,11 @@ import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
 import com.applocum.connecttomyhealth.ui.payment.PaymentShowActivity
 import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_confirm_booking.*
+import kotlinx.android.synthetic.main.activity_confirm_booking.ivBack
 import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -25,16 +28,22 @@ class ConfirmBookingActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int =R.layout.activity_confirm_booking
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ivBack.setOnClickListener { finish() }
 
         (application as MyApplication).component.inject(this)
 
-        btnConfirm.setOnClickListener {
-            startActivity(Intent(this,PaymentShowActivity::class.java))
-        }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
+
+        RxView.clicks(btnConfirm).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,PaymentShowActivity::class.java))
+            }
+
 
         common=intent.getSerializableExtra("commonData") as Common
         val appointmentBasicPrice=common.appointment_basic_price

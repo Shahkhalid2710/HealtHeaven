@@ -45,7 +45,6 @@ class GlobalResponseInterceptor : BaseActivity(), Interceptor {
             val globalResponse: GlobalResponse? =
                 Gson().fromJson(globJson, GlobalResponse::class.java)
 
-
             when (globalResponse?.status) {
                 SessionInvalid -> {
                     runOnUiThread {

@@ -10,7 +10,9 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertDateTime
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_past_session_xml.view.*
+import java.util.concurrent.TimeUnit
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class PastSessionAdapter(context: Context,list:ArrayList<BookAppointmentResponse>,private val onItemClick:ItemClickListner):RecyclerView.Adapter<PastSessionAdapter.PastSessionHolder>() {
@@ -28,7 +30,7 @@ class PastSessionAdapter(context: Context,list:ArrayList<BookAppointmentResponse
         return mList.size
     }
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "CheckResult")
     override fun onBindViewHolder(holder: PastSessionHolder, position: Int) {
         val bookAppointmentResponse=mList[position]
         holder.itemView.tvDoctorFName.text = bookAppointmentResponse.gp_details.first_name
@@ -52,12 +54,16 @@ class PastSessionAdapter(context: Context,list:ArrayList<BookAppointmentResponse
                 holder.itemView.tvSessionType.text=("Video Call")
             }
         }
-        holder.itemView.btnViewDetails.setOnClickListener {
-            onItemClick.itemClick(bookAppointmentResponse, position)
-        }
-        holder.itemView.btnBookAgain.setOnClickListener {
-            onItemClick.onButtonClick(bookAppointmentResponse, position)
-        }
+
+        RxView.clicks(holder.itemView.btnViewDetails).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                onItemClick.itemClick(bookAppointmentResponse, position)
+            }
+
+        RxView.clicks(holder.itemView.btnBookAgain).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                onItemClick.onButtonClick(bookAppointmentResponse, position)
+            }
     }
 
     interface ItemClickListner{

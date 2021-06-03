@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.waitingarea.WaitingAreaActivity"/>
         <activity android:name=".ui.mydownloads.DocumentViewActivity" />
         <activity android:name=".ui.othernotes.OtherNoteActivity" />
         <activity android:name=".ui.referral.ReferralActivity" />
@@ -36,8 +37,8 @@
         <activity android:name=".ui.payment.PaymentShowActivity" />
         <activity android:name=".ui.walkthrough.WalkThroughActivity" />
         <activity android:name=".ui.exemptions.UploadCertificateActivity" />
-
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
 
         <meta-data

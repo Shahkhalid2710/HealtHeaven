@@ -73,6 +73,7 @@
                 android:orientation="vertical">
 
                 <FrameLayout
+                    android:id="@+id/flPic"
                     android:layout_width="65dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

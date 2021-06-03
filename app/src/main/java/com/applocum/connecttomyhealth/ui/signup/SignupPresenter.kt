@@ -85,8 +85,6 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                                 )
                             }
                             view.sendUserData(userObject.user)
-                            println("MessageSignup:: ${it.message}")
-                            view.displaymessage(it.message)
                         }
                         InvalidCredentials,InternalServer -> {
                             view.displaymessage(it.message)

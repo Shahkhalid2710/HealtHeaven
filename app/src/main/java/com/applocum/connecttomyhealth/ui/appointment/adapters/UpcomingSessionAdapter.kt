@@ -10,8 +10,10 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertDateTime
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_session_xml.view.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.btnCancel
+import java.util.concurrent.TimeUnit
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentResponse>,private val itemCLick:ItemClickListner) :
@@ -30,7 +32,7 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
         return mList.size
     }
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "CheckResult")
     override fun onBindViewHolder(holder: SessionHolder, position: Int) {
         val bookAppointmentResponse = mList[position]
         holder.itemView.tvDoctorFName.text = bookAppointmentResponse.gp_details.first_name
@@ -40,13 +42,6 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
         holder.itemView.tvSessionDateTime.text = bookAppointmentResponse.start_time?.let { convertDateTime(it) }
 
         Glide.with(mContext).load(bookAppointmentResponse.gp_details.image).into(holder.itemView.ivDoctor)
-
-     /*   val date = bookAppointmentResponse.address_info.created_at
-        var spf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-        val newDate = spf.parse(date)
-        spf = SimpleDateFormat("EEEE, dd MMMM yyyy")
-        val newDateString = spf.format(newDate)
-        holder.itemView.tvSessionDate.text = ("$newDateString,")*/
 
         when(bookAppointmentResponse.appointment_type)
         {
@@ -69,13 +64,16 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
             holder.itemView.btnCheckin.isEnabled=false
         }
 
-        holder.itemView.btnCheckin.setOnClickListener {
-            itemCLick.onButtonClick(bookAppointmentResponse, position)
-        }
+        RxView.clicks(holder.itemView.btnCheckin).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                itemCLick.onButtonClick(bookAppointmentResponse, position)
+            }
 
-        holder.itemView.btnCancel.setOnClickListener {
-          itemCLick.itemClick(bookAppointmentResponse, position)
-        }
+        RxView.clicks(holder.itemView.btnCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                itemCLick.itemClick(bookAppointmentResponse, position)
+            }
+
     }
     interface ItemClickListner{
         fun itemClick(bookAppointmentResponse: BookAppointmentResponse,position: Int)

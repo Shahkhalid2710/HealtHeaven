@@ -1,8 +1,8 @@
 package com.applocum.connecttomyhealth.ui.familyhistory
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -17,6 +17,7 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -39,18 +40,25 @@ class AddFamilyHistoryActivity : BaseActivity(),MedicalPresenter.View,FamilyHist
     @Inject
     lateinit var familyHistoryPresenter: FamilyHistoryPresenter
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
         familyHistoryPresenter.injectView(this)
 
-        ivBack.setOnClickListener { finish() }
 
-        ivCancel.setOnClickListener {
-            etAddFamilyHistory.text.clear()
-            rlDisease.visibility=View.GONE
-        }
+        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
+
+        RxView.clicks(ivCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                etAddFamilyHistory.text.clear()
+                rlDisease.visibility=View.GONE
+            }
+
 
         RxTextView.textChanges(etAddFamilyHistory)
             .debounce(500, TimeUnit.MILLISECONDS)
@@ -79,9 +87,10 @@ class AddFamilyHistoryActivity : BaseActivity(),MedicalPresenter.View,FamilyHist
 
         familyHistoryName=etAddFamilyHistory.text.toString()
 
-        btnSaveFamilyHistory.setOnClickListener {
-             familyHistoryPresenter.addFamilyHistory(familyHistoryName)
-        }
+        RxView.clicks(btnSaveFamilyHistory).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                familyHistoryPresenter.addFamilyHistory(familyHistoryName)
+            }
     }
 
     override fun getLayoutResourceId(): Int =R.layout.activity_add_family_history
@@ -137,7 +146,6 @@ class AddFamilyHistoryActivity : BaseActivity(),MedicalPresenter.View,FamilyHist
     }
 
     override fun displaySuccessMessage(message: String) {
-        //Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         this.finish()
     }
 

@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.mygp
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import com.applocum.connecttomyhealth.ui.mygp.models.Surgery
+import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -29,17 +31,19 @@ class AddGPServiceActivity : BaseActivity() ,GpservicePresenter.View{
 
     private lateinit var gpServiceAdapter:GpServiceAdapter
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        ivBack.setOnClickListener {
-            startActivity(Intent(this,GpServiceActivity::class.java))
-            finish()
-        }
 
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
         presenter.getgpList("")
+
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,GpServiceActivity::class.java))
+                finish()
+            }
 
         RxTextView.textChanges(etGpSearch)
             .debounce(500, TimeUnit.MILLISECONDS)
@@ -113,5 +117,11 @@ class AddGPServiceActivity : BaseActivity() ,GpservicePresenter.View{
 
     override fun showSurgery(surgery: Surgery) {
 
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this,GpServiceActivity::class.java))
+        finish()
+        super.onBackPressed()
     }
 }

@@ -34,6 +34,7 @@
             android:layout_marginEnd="@dimen/spacing_24"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/male"
+            android:checked="true"
             android:foreground="@drawable/effect_button"
             android:clickable="true"
             android:focusable="true"

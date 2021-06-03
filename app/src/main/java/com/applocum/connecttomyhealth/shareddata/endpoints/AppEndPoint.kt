@@ -24,6 +24,7 @@ import com.applocum.connecttomyhealth.ui.settings.models.SettingNotificationResp
 import com.applocum.connecttomyhealth.ui.signup.models.GlobalResponse
 import com.applocum.connecttomyhealth.ui.specialists.models.DoctorResponse
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
 
@@ -69,7 +70,7 @@ interface AppEndPoint {
     @PATCH(" /api/users/{id}.json")
     fun updateUser(@Header("AUTH_TOKEN") authtoken: String?,
                    @Path("id") userid: String?,
-                   @Body body: RequestBody?):Observable<GlobalResponse>
+                   @Body body: MultipartBody):Observable<GlobalResponse>
 
     @GET("/api/priory/surgeries/search.json")
     fun getGpList(@Query("search")search:String?):Observable<GpServiceGlobalResponse>
