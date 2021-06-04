@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.medicalhistory.MedicalHistoryActivity"
+    tools:context=".ui.medicalhistory.activities.MedicalHistoryActivity"
     tools:ignore="UselessParent">
 
     <RelativeLayout
@@ -64,8 +64,8 @@
             android:id="@+id/llMedicalHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"

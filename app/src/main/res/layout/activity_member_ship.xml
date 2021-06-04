@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.payment.PaymentMethodActivity"
+        tools:context=".ui.payment.activities.PaymentMethodActivity"
         tools:ignore="UselessParent">
 
         <RelativeLayout
@@ -106,7 +106,4 @@
                 android:visibility="gone" />
         </RelativeLayout>
     </LinearLayout>
-    <!--<include layout="@layout/custom_progress"
-        android:visibility="gone"
-        android:id="@+id/membershipProgress"/>-->
 </FrameLayout>

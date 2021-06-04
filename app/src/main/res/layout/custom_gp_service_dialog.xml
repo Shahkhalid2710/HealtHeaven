@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="270dp"
     android:layout_height="190dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,16 +15,18 @@
         android:text="@string/confirm_your_gp_service"
         android:textColor="@color/aapBlack"
         android:textSize="@dimen/font_16" />
+
     <TextView
         android:id="@+id/tvGpName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_gravity="center"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="@string/route_du_fort_surgery"
         android:textColor="@color/aapBlack"
         android:textSize="@dimen/font_12" />
+
     <TextView
         android:id="@+id/tvGpArea"
         android:layout_width="wrap_content"
@@ -36,6 +38,7 @@
         android:text="@string/lido_m_c_st_saviours_road_st_saviours_jersey"
         android:textColor="@color/grey"
         android:textSize="@dimen/font_10" />
+
     <TextView
         android:id="@+id/tvGpCity"
         android:layout_width="wrap_content"
@@ -47,14 +50,15 @@
         android:text="@string/lido_m_c_st_saviours_road_st_saviours_jersey"
         android:textColor="@color/grey"
         android:textSize="@dimen/font_10" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_16"
         android:layout_marginTop="16dp"
-        android:gravity="center"
         android:layout_marginEnd="@dimen/spacing_16"
         android:layout_marginBottom="27dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
@@ -62,9 +66,9 @@
             android:layout_width="88dp"
             android:layout_height="34dp"
             android:layout_gravity="center"
-            android:foreground="@drawable/effect_button"
             android:background="@drawable/custom_btn"
             android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
             android:text="@string/submit"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -77,9 +81,9 @@
             android:layout_height="34dp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/spacing_16"
-            android:foreground="@drawable/effect_button"
             android:background="@drawable/default_button"
             android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
             android:text="@string/cancel"
             android:textAllCaps="false"
             android:textColor="@color/green"

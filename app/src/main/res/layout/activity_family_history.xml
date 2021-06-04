@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.familyhistory.FamilyHistoryActivity">
-
+    tools:context=".ui.familyhistory.activities.FamilyHistoryActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -84,9 +83,7 @@
                         android:layout_marginTop="28dp"
                         android:nestedScrollingEnabled="false" />
 
-                    <include
-                        layout="@layout/custom_loader_progress"
-                        android:visibility="gone" />
+                    <include layout="@layout/custom_loader_progress" />
 
                 </FrameLayout>
 
@@ -94,6 +91,7 @@
                     android:id="@+id/layoutNotFoundFamilyHistory"
                     layout="@layout/custom_family_history_xml"
                     android:visibility="gone" />
+
             </RelativeLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

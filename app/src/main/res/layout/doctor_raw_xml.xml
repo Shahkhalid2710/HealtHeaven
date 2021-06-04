@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_margin="@dimen/spacing_10"
-    android:backgroundTint="@color/white"
     android:background="@color/green"
+    android:backgroundTint="@color/white"
     android:clickable="true"
     android:focusable="true"
     android:foreground="@drawable/effect"
@@ -22,8 +22,8 @@
             android:id="@+id/ivDoctor"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="8dp"
             android:layout_centerVertical="true"
+            android:layout_margin="8dp"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_dr_1" />
@@ -94,7 +94,6 @@
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
-
 </androidx.cardview.widget.CardView>
 
 

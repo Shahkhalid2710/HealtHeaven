@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:background="@color/green"
             android:orientation="vertical"
-            tools:context=".ui.login.LoginActivity">
+            tools:context=".ui.login.activities.LoginActivity">
 
             <TextView
                 android:id="@+id/tvLogin"
@@ -184,10 +184,10 @@
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginEnd="@dimen/spacing_24"
                     android:autofillHints="0"
-                    android:imeOptions="actionNext"
                     android:backgroundTint="@color/textcolorgrey"
                     android:fontFamily="@font/montserrat_medium"
                     android:hint="@string/enter_your_email_address"
+                    android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
@@ -222,12 +222,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_24"
                         android:layout_marginEnd="@dimen/spacing_24"
-                        android:imeOptions="actionDone"
                         android:autofillHints="0"
                         android:backgroundTint="@color/textcolorgrey"
                         android:drawableEnd="@drawable/ic_eye"
                         android:fontFamily="@font/montserrat_medium"
                         android:hint="@string/enter_your_password"
+                        android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:textColor="@color/aapBlack"
                         android:textColorHint="@color/grey"
@@ -242,10 +242,10 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/spacing_40"
                     android:background="@drawable/custom_btn"
+                    android:enabled="true"
                     android:fontFamily="@font/montserrat_semibold"
                     android:foreground="@drawable/effect_button"
                     android:text="@string/login"
-                    android:enabled="true"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_12" />

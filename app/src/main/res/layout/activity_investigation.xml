@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.investigation.InvestigationActivity">
+    tools:context=".ui.investigation.activities.InvestigationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -83,9 +83,7 @@
                         android:layout_marginTop="@dimen/spacing_20"
                         android:nestedScrollingEnabled="false" />
 
-                    <include
-                        layout="@layout/custom_loader_progress"
-                        android:visibility="gone" />
+                    <include layout="@layout/custom_loader_progress"/>
 
                 </FrameLayout>
 

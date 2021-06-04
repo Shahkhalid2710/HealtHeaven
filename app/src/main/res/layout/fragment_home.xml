@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.home.HomeFragment">
+        tools:context=".ui.home.fragments.HomeFragment">
 
         <TextView
             android:id="@+id/tvWish"
@@ -104,112 +104,6 @@
                 android:src="@drawable/ic_dr" />
         </FrameLayout>
 
-        <!-- <TextView
-             android:id="@+id/tvCategories"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="@dimen/spacing_24"
-             android:layout_marginTop="@dimen/spacing_16"
-             android:fontFamily="@font/poppins_semibold"
-             android:text="@string/categories"
-             android:textColor="@color/aapBlack"
-             android:textSize="@dimen/font_16" />
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="@dimen/spacing_16"
-             android:orientation="horizontal"
-             android:weightSum="2">
-
-             <androidx.recyclerview.widget.RecyclerView
-                 android:id="@+id/rvCategories"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:nestedScrollingEnabled="false"
-                 android:layout_marginStart="14dp"
-                 android:layout_weight="1.4" />
-
-             <LinearLayout
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:layout_gravity="center"
-                 android:layout_weight="0.6"
-                 android:focusable="true"
-                 android:clickable="true"
-                 android:foreground="@drawable/effect"
-                 android:orientation="vertical">
-
-                 <LinearLayout
-                     android:layout_width="64dp"
-                     android:layout_height="64dp"
-                     android:layout_gravity="center"
-                     android:background="@drawable/custom_more_layout">
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_gravity="center"
-                         android:orientation="vertical"
-                         tools:ignore="UselessParent">
-
-                         <LinearLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:layout_gravity="center"
-                             android:gravity="center"
-                             android:orientation="horizontal"
-                             tools:ignore="UselessParent">
-
-                             <LinearLayout
-                                 android:layout_width="12dp"
-                                 android:layout_height="12dp"
-                                 android:background="@drawable/custom_gray_layout" />
-
-                             <LinearLayout
-                                 android:layout_width="12dp"
-                                 android:layout_height="12dp"
-                                 android:layout_marginStart="3dp"
-                                 android:background="@drawable/custom_gray_layout" />
-                         </LinearLayout>
-
-                         <LinearLayout
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:layout_gravity="center"
-                             android:layout_marginTop="3dp"
-                             android:gravity="center"
-                             android:orientation="horizontal"
-                             tools:ignore="UselessParent">
-
-                             <LinearLayout
-                                 android:layout_width="12dp"
-                                 android:layout_height="12dp"
-                                 android:background="@drawable/custom_gray_layout" />
-
-                             <LinearLayout
-                                 android:layout_width="12dp"
-                                 android:layout_height="12dp"
-                                 android:layout_marginStart="3dp"
-                                 android:background="@drawable/custom_gray_layout" />
-                         </LinearLayout>
-                     </LinearLayout>
-
-                 </LinearLayout>
-
-                 <TextView
-                     android:id="@+id/tvMore"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_gravity="center"
-                     android:layout_marginTop="4dp"
-                     android:fontFamily="@font/poppins_medium"
-                     android:text="@string/more"
-                     android:textColor="@color/aapBlack"
-                     android:textSize="@dimen/font_12" />
-             </LinearLayout>
-         </LinearLayout>
- -->
         <TextView
             android:id="@+id/tvTopDoctors"
             android:layout_width="wrap_content"

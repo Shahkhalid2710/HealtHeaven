@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.referral.ReferralActivity">
-
+    tools:context=".ui.referral.activities.ReferralActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -62,8 +61,8 @@
                         android:id="@+id/rvReferral"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
                         android:layout_marginBottom="@dimen/spacing_16"
+                        android:nestedScrollingEnabled="false"
                         android:scrollbars="vertical" />
 
                     <include layout="@layout/custom_loader_progress" />
@@ -76,6 +75,4 @@
             </RelativeLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 </LinearLayout>

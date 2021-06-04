@@ -95,10 +95,9 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_gravity="center"
-                android:visibility="visible"
                 android:contentDescription="@string/todo"
-                android:src="@drawable/ic_delete" />
+                android:src="@drawable/ic_delete"
+                android:visibility="visible" />
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

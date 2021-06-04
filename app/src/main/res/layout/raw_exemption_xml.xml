@@ -5,32 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="62dp"
     android:layout_margin="@dimen/spacing_10"
-    android:orientation="horizontal"
-    android:focusable="true"
-    android:clickable="true"
-    android:foreground="@drawable/effect"
     android:background="@drawable/custom_exemption_layout"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="@drawable/effect"
+    android:orientation="horizontal"
     tools:ignore="UselessParent">
 
-        <TextView
-            android:id="@+id/tvLetter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_16"
-            android:fontFamily="@font/montserrat_bold"
-            android:layout_gravity="center"
-            android:text="@string/a"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_20" />
+    <TextView
+        android:id="@+id/tvLetter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/a"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_20" />
 
-        <TextView
-            android:id="@+id/tvDes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_16"
-            android:fontFamily="@font/montserrat_medium"
-            android:layout_gravity="center"
-            android:text="@string/i_am_under_16_years_of_age"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_12" />
+    <TextView
+        android:id="@+id/tvDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/i_am_under_16_years_of_age"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_12" />
 </LinearLayout>

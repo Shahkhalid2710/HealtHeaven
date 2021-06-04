@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.booksession.SessionBookActivity">
+        tools:context=".ui.booksession.activities.SessionBookActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -33,7 +33,6 @@
                 android:foreground="@drawable/effect_button"
                 android:src="@drawable/ic_back" />
         </RelativeLayout>
-
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"

@@ -16,15 +16,15 @@
         <ImageView
             android:layout_width="190dp"
             android:layout_height="174dp"
+            android:layout_gravity="center"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
-            android:layout_gravity="center"
             android:src="@drawable/ic_no_gp_service" />
 
         <TextView
             android:id="@+id/tvNoGP"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/spacing_35"
             android:fontFamily="@font/montserrat_bold"

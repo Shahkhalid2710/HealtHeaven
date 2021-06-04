@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.mygp.AddGPServiceActivity">
+        tools:context=".ui.mygp.activities.AddGPServiceActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -75,9 +75,9 @@
                         android:backgroundTint="@color/layoutbackground"
                         android:clickable="true"
                         android:focusable="true"
-                        android:imeOptions="actionDone"
                         android:fontFamily="@font/poppins_regular"
                         android:hint="@string/search_gp"
+                        android:imeOptions="actionDone"
                         android:inputType="text"
                         android:paddingStart="@dimen/spacing_16"
                         android:paddingEnd="0dp"
@@ -132,11 +132,12 @@
                     <include
                         android:id="@+id/NoGpService"
                         layout="@layout/custom_no_gp_service_area"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
                 </FrameLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
     <include layout="@layout/custom_progress" />
+
 </FrameLayout>

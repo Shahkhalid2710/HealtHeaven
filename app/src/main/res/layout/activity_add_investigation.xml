@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.investigation.AddInvestigationActivity"
+        tools:context=".ui.investigation.activities.AddInvestigationActivity"
         tools:ignore="UselessParent">
 
         <RelativeLayout
@@ -63,10 +63,10 @@
                     android:layout_marginTop="28dp"
                     android:layout_marginEnd="@dimen/spacing_24"
                     android:autofillHints="0"
-                    android:imeOptions="actionNext"
                     android:background="@drawable/custom_edittext"
                     android:fontFamily="@font/montserrat_medium"
                     android:hint="@string/investigation_name"
+                    android:imeOptions="actionNext"
                     android:inputType="text"
                     android:paddingStart="@dimen/spacing_16"
                     android:paddingTop="12dp"
@@ -118,9 +118,9 @@
                     android:background="@drawable/custom_edittext"
                     android:drawableEnd="@drawable/ic_calendar"
                     android:focusable="false"
-                    android:imeOptions="actionNext"
                     android:fontFamily="@font/montserrat_medium"
                     android:hint="@string/date"
+                    android:imeOptions="actionNext"
                     android:inputType="text"
                     android:paddingStart="@dimen/spacing_16"
                     android:paddingTop="12dp"
@@ -175,6 +175,7 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-    <include layout="@layout/custom_progress"
-        android:visibility="gone"/>
+
+    <include layout="@layout/custom_progress"/>
+
 </FrameLayout>

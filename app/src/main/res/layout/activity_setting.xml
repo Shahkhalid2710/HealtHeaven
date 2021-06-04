@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.settings.SettingActivity">
+    tools:context=".ui.settings.activities.SettingActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -324,8 +324,6 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <include
-            layout="@layout/custom_progress"
-            android:visibility="gone" />
+        <include layout="@layout/custom_progress"/>
     </FrameLayout>
 </LinearLayout>

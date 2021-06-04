@@ -6,7 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +21,6 @@
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_no_other_notes" />
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,5 +46,4 @@
             android:textSize="@dimen/font_14" />
 
     </LinearLayout>
-
 </LinearLayout>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lladdsymptoms"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:id="@+id/lladdsymptoms"
-    tools:context=".ui.addsymptoms.AddSymptomsActivity">
+    tools:context=".ui.addsymptoms.activities.AddSymptomActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,9 +21,9 @@
             android:layout_height="15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/spacing_25"
+            android:clickable="true"
             android:contentDescription="@string/todo"
             android:focusable="true"
-            android:clickable="true"
             android:foreground="@drawable/effect_button"
             android:src="@drawable/ic_back" />
 
@@ -40,9 +40,9 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_16"
         android:background="@color/white"
-        android:fillViewport="true"
-        android:layout_marginTop="@dimen/spacing_16">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,13 +120,11 @@
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="@dimen/spacing_16"
                     android:clickable="true"
+                    android:contentDescription="@string/todo"
                     android:focusable="true"
                     android:foreground="@drawable/effect"
-                    android:src="@drawable/image_blank"
-                    android:contentDescription="@string/todo"
-                    android:scaleType="centerCrop"/>
-
-
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image_blank" />
             </LinearLayout>
 
             <CheckBox
@@ -137,10 +135,10 @@
                 android:layout_marginTop="@dimen/spacing_24"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_semibold"
                 android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:textColor="@color/aapBlack"
@@ -154,10 +152,10 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/montserrat_semibold"
                 android:foreground="@drawable/effect_button"
-                android:focusable="true"
-                android:clickable="true"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:textColor="@color/aapBlack"
@@ -170,9 +168,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/spacing_24"
                 android:layout_marginBottom="83dp"
-                android:foreground="@drawable/effect_button"
                 android:background="@drawable/custom_btn"
                 android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
                 android:text="@string/_continue"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

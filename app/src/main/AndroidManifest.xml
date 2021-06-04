@@ -22,21 +22,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.waitingarea.WaitingAreaActivity"/>
-        <activity android:name=".ui.mydownloads.DocumentViewActivity" />
-        <activity android:name=".ui.othernotes.OtherNoteActivity" />
-        <activity android:name=".ui.referral.ReferralActivity" />
-        <activity android:name=".ui.fitnote.FitNoteActivity" />
-        <activity android:name=".ui.prescription.models.PrescriptionActivity" />
+        <activity android:name=".ui.waitingarea.activities.WaitingAreaActivity"/>
+        <activity android:name=".ui.mydownloads.activities.DocumentViewActivity" />
+        <activity android:name=".ui.othernotes.activities.OtherNoteActivity" />
+        <activity android:name=".ui.referral.activities.ReferralActivity" />
+        <activity android:name=".ui.fitnote.activities.FitNoteActivity" />
+        <activity android:name=".ui.prescription.activities.PrescriptionActivity" />
         <activity
-            android:name=".ui.securitycheck.SecurityActivity"
+            android:name=".ui.securitycheck.activities.SecurityActivity"
             android:label="@string/title_activity_security" />
-        <activity android:name=".ui.addsymptoms.AddSymptomActivity" />
-        <activity android:name=".ui.payment.MemberShipActivity" />
-        <activity android:name=".ui.payment.PaymentMethodActivity" />
-        <activity android:name=".ui.payment.PaymentShowActivity" />
-        <activity android:name=".ui.walkthrough.WalkThroughActivity" />
-        <activity android:name=".ui.exemptions.UploadCertificateActivity" />
+        <activity android:name=".ui.addsymptoms.activities.AddSymptomActivity" />
+        <activity android:name=".ui.payment.activities.MemberShipActivity" />
+        <activity android:name=".ui.payment.activities.PaymentMethodActivity" />
+        <activity android:name=".ui.payment.activities.PaymentShowActivity" />
+        <activity android:name=".ui.walkthrough.activities.WalkThroughActivity" />
+        <activity android:name=".ui.exemptions.activities.UploadCertificateActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
@@ -59,56 +59,56 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
-        <activity android:name=".ui.mygp.GpServiceActivity" />
+        <activity android:name=".ui.mygp.activities.GpServiceActivity" />
         <activity android:name=".ui.verificationdocument.activities.VerifiedActivity" />
         <activity android:name=".ui.verificationdocument.activities.ValidationValidUKDrivingLicenseActivity" />
         <activity android:name=".ui.verificationdocument.activities.ValidationValidPassportActivity" />
         <activity android:name=".ui.verificationdocument.activities.UkDrivingLicenseActivity" />
         <activity android:name=".ui.verificationdocument.activities.ValidPassportActivity" />
         <activity android:name=".ui.verificationdocument.activities.VerifyIdentityActivity" />
-        <activity android:name=".ui.splashscreen.SplashScreenActivity">
+        <activity android:name=".ui.splashscreen.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.booksession.SessionBookActivity" />
-        <activity android:name=".ui.exemptions.ChooseExemptionActivity" />
-        <activity android:name=".ui.payment.AddCodeActivity" />
-        <activity android:name=".ui.payment.PaymentActivity" />
-        <activity android:name=".ui.addcard.AddCardActivity" />
-        <activity android:name=".ui.confirmbooking.ConfirmBookingActivity" />
-        <activity android:name=".ui.sessiondetails.SessionDetailsActivity" />
-        <activity android:name=".ui.booksession.BookSessionActivity" />
-        <activity android:name=".ui.medicalhistory.AddMedicalHistoryActivity" />
-        <activity android:name=".ui.medicalhistory.MedicalHistoryActivity" />
+        <activity android:name=".ui.booksession.activities.SessionBookActivity" />
+        <activity android:name=".ui.exemptions.activities.ChooseExemptionActivity" />
+        <activity android:name=".ui.payment.activities.AddCodeActivity" />
+        <activity android:name=".ui.payment.activities.PaymentActivity" />
+        <activity android:name=".ui.addcard.activities.AddCardActivity" />
+        <activity android:name=".ui.confirmbooking.activities.ConfirmBookingActivity" />
+        <activity android:name=".ui.sessiondetails.activities.SessionDetailsActivity" />
+        <activity android:name=".ui.booksession.activities.BookSessionActivity" />
+        <activity android:name=".ui.medicalhistory.activities.AddMedicalHistoryActivity" />
+        <activity android:name=".ui.medicalhistory.activities.MedicalHistoryActivity" />
         <activity android:name=".ui.BaseActivity" />
-        <activity android:name=".ui.specialists.SpecialistsActivity" />
-        <activity android:name=".ui.medication.MedicationActivity" />
-        <activity android:name=".ui.familyhistory.AddFamilyHistoryActivity" />
-        <activity android:name=".ui.exemptions.ExemptionsActivity" />
-        <activity android:name=".ui.mygp.AddGPServiceActivity" />
+        <activity android:name=".ui.specialists.activities.SpecialistsActivity" />
+        <activity android:name=".ui.medication.activities.MedicationActivity" />
+        <activity android:name=".ui.familyhistory.activities.AddFamilyHistoryActivity" />
+        <activity android:name=".ui.exemptions.activities.ExemptionsActivity" />
+        <activity android:name=".ui.mygp.activities.AddGPServiceActivity" />
         <activity android:name=".ui.mygp.MyGPActivity" />
-        <activity android:name=".ui.profiledetails.ProfileDetailsActivity" />
-        <activity android:name=".ui.investigation.AddInvestigationActivity" />
-        <activity android:name=".ui.allergyhistory.AddAllergyActivity" />
-        <activity android:name=".ui.investigation.InvestigationActivity" />
-        <activity android:name=".ui.allergyhistory.AllergyHistoryActivity" />
-        <activity android:name=".ui.familyhistory.FamilyHistoryActivity" />
-        <activity android:name=".ui.settings.SettingActivity" />
-        <activity android:name=".ui.changepassword.ChangePasswordActivity" />
-        <activity android:name=".ui.mydownloads.MyDownloadsActivity" />
-        <activity android:name=".ui.clinicalrecords.ClinicalRecordsActivity" />
-        <activity android:name=".ui.personaldetails.PersonalDetailsActivity" />
+        <activity android:name=".ui.profiledetails.activities.ProfileDetailsActivity" />
+        <activity android:name=".ui.investigation.activities.AddInvestigationActivity" />
+        <activity android:name=".ui.allergyhistory.activities.AddAllergyActivity" />
+        <activity android:name=".ui.investigation.activities.InvestigationActivity" />
+        <activity android:name=".ui.allergyhistory.activities.AllergyHistoryActivity" />
+        <activity android:name=".ui.familyhistory.activities.FamilyHistoryActivity" />
+        <activity android:name=".ui.settings.activities.SettingActivity" />
+        <activity android:name=".ui.changepassword.activities.ChangePasswordActivity" />
+        <activity android:name=".ui.mydownloads.activities.MyDownloadsActivity" />
+        <activity android:name=".ui.clinicalrecords.activities.ClinicalRecordsActivity" />
+        <activity android:name=".ui.personaldetails.activities.PersonalDetailsActivity" />
         <activity
-            android:name=".ui.bottomnavigationview.BottomNavigationViewActivity"
+            android:name=".ui.bottomnavigationview.activities.BottomNavigationViewActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.signup.SignupActivity" />
-        <activity android:name=".ui.createnewpassword.CreateNewPasswordActivity" />
-        <activity android:name=".ui.verification.VerificationActivity" />
-        <activity android:name=".ui.forgotpassword.ForgotPasswordActivity" />
-        <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.signup.activities.SignupActivity" />
+        <activity android:name=".ui.createnewpassword.activities.CreateNewPasswordActivity" />
+        <activity android:name=".ui.verification.activities.VerificationActivity" />
+        <activity android:name=".ui.forgotpassword.activities.ForgotPasswordActivity" />
+        <activity android:name=".ui.login.activities.LoginActivity" />
     </application>
 
 </manifest>

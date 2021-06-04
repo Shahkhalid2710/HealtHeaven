@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical"
-            tools:context=".ui.appointment.UpcomingSessionApointmentFragment">
+            tools:context=".ui.appointment.fragments.UpcomingSessionApointmentFragment">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -46,10 +46,9 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <include layout="@layout/custom_loader_progress"/>
+    <include layout="@layout/custom_loader_progress" />
 
     <include
         android:id="@+id/upcomingProgress"
-        layout="@layout/custom_progress"
-        android:visibility="gone" />
+        layout="@layout/custom_progress"/>
 </FrameLayout>

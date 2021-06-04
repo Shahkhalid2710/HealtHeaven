@@ -20,7 +20,7 @@
             android:layout_weight="1.6"
             android:background="@color/white"
             android:orientation="vertical"
-            tools:context=".ui.walkthrough.WalkThroughActivity">
+            tools:context=".ui.walkthrough.activities.WalkThroughActivity">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPagerWalkThrough"
@@ -98,11 +98,11 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:paddingTop="@dimen/spacing_10"
-                            android:paddingBottom="@dimen/spacing_10"
-                            android:paddingStart="@dimen/spacing_20"
-                            android:paddingEnd="@dimen/spacing_20"
                             android:orientation="horizontal"
+                            android:paddingStart="@dimen/spacing_20"
+                            android:paddingTop="@dimen/spacing_10"
+                            android:paddingEnd="@dimen/spacing_20"
+                            android:paddingBottom="@dimen/spacing_10"
                             tools:ignore="UseCompoundDrawables,UselessParent">
 
                             <TextView
@@ -138,8 +138,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:padding="@dimen/spacing_10"
                             android:orientation="horizontal"
+                            android:padding="@dimen/spacing_10"
                             tools:ignore="UseCompoundDrawables,UselessParent">
 
                             <TextView

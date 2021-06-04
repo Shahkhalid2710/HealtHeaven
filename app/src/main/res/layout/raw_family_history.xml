@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:clickable="true"
     android:focusable="true"
     android:foreground="@drawable/effect_button"
-    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginEnd="@dimen/spacing_24"
         android:layout_marginTop="@dimen/spacing_16"
+        android:layout_marginEnd="@dimen/spacing_24"
         tools:ignore="UselessParent">
 
         <TextView
@@ -26,9 +26,10 @@
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_12" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/textcolorgrey"
-        android:layout_marginTop="@dimen/spacing_16"/>
+        android:layout_marginTop="@dimen/spacing_16"
+        android:background="@color/textcolorgrey" />
 </LinearLayout>

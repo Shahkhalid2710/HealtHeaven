@@ -72,14 +72,13 @@
                 android:text="@string/john_martin"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/font_11" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            android:layout_weight="0.3">
+            android:layout_weight="0.3"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/ivDelete"
@@ -90,6 +89,5 @@
                 android:src="@drawable/ic_delete"
                 android:visibility="visible" />
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

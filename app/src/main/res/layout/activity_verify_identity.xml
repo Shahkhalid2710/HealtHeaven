@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,7 +57,6 @@
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_16" />
 
-
         <RelativeLayout
             android:id="@+id/rlValidPassport"
             android:layout_width="match_parent"
@@ -65,10 +64,10 @@
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_24"
             android:layout_marginEnd="@dimen/spacing_24"
-            android:foreground="@drawable/effect"
-            android:focusable="true"
+            android:background="@drawable/default_button"
             android:clickable="true"
-            android:background="@drawable/default_button">
+            android:focusable="true"
+            android:foreground="@drawable/effect">
 
             <TextView
                 android:id="@+id/tvValidPassport"
@@ -100,12 +99,12 @@
             android:layout_height="48dp"
             android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginBottom="60dp"
             android:layout_marginEnd="@dimen/spacing_24"
-            android:focusable="true"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/default_button"
             android:clickable="true"
-            android:foreground="@drawable/effect"
-            android:background="@drawable/default_button">
+            android:focusable="true"
+            android:foreground="@drawable/effect">
 
             <TextView
                 android:id="@+id/tvUKDrivingLicense"

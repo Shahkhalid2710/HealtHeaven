@@ -618,4 +618,5 @@
     <string name="waiting_area">Waiting Area</string>
     <string name="please_wait_we_are_connecting_you_with_your_clinician_please_stay_on_this_screen_our_doctor_will_connect_with_you_shortly">Please wait, we are connecting you with your Clinician. Please stay on this screen. Our Doctor will connect with you shortly.</string>
     <string name="choose_image">Choose image</string>
+    <string name="__0">-</string>
 </resources>

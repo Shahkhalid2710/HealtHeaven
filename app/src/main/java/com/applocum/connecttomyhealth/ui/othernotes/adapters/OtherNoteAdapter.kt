@@ -13,7 +13,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_download.view.*
 import java.util.concurrent.TimeUnit
 
-class OtherNoteAdapter(context: Context, list:ArrayList<Document>,private val onNoteClick:NoteClickListner): RecyclerView.Adapter<OtherNoteAdapter.OtherNoteHolder>() {
+class OtherNoteAdapter(context: Context, list:ArrayList<Document>, private val onNoteClick:NoteClickListner): RecyclerView.Adapter<OtherNoteAdapter.OtherNoteHolder>() {
     var mContext=context
     var mList=list
 
@@ -43,6 +43,6 @@ class OtherNoteAdapter(context: Context, list:ArrayList<Document>,private val on
     }
 
     interface NoteClickListner{
-        fun onNoteClick(document: Document,position: Int)
+        fun onNoteClick(document: Document, position: Int)
     }
 }

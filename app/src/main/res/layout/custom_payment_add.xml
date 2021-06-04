@@ -29,8 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/montserrat_bold"
                         android:gravity="center"
-                        android:text="@string/_500_00"
+                        android:text="@string/_25_00"
                         android:textColor="@color/aapBlack"
                         android:textSize="@dimen/font_20" />
                 </LinearLayout>
@@ -145,10 +145,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_5"
-                    android:focusable="true"
                     android:clickable="true"
-                    android:foreground="@drawable/effect_button"
+                    android:focusable="true"
                     android:fontFamily="@font/montserrat_semibold"
+                    android:foreground="@drawable/effect_button"
                     android:text="@string/add_payment_method"
                     android:textColor="@color/green"
                     android:textSize="@dimen/font_12" />
@@ -161,9 +161,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="60dp"
-                android:foreground="@drawable/effect_button"
                 android:background="@drawable/custom_btn"
                 android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
                 android:text="@string/confirm_session_booking"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

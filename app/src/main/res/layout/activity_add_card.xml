@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.addcard.AddCardActivity">
+        tools:context=".ui.addcard.activities.AddCardActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -317,4 +317,5 @@
     </LinearLayout>
 
     <include layout="@layout/custom_progress" />
+
 </FrameLayout>

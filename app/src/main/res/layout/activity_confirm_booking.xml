@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.confirmbooking.ConfirmBookingActivity">
+    tools:context=".ui.confirmbooking.activities.ConfirmBookingActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -204,9 +204,11 @@
                         android:id="@+id/tvSession"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_20"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/montserrat_semibold"
-                        android:text="@string/_12_sessions"
+                        android:gravity="center"
+                        android:text="@string/__0"
                         android:textColor="@color/green"
                         android:textSize="@dimen/font_14" />
                 </LinearLayout>
@@ -467,7 +469,6 @@
                 </RelativeLayout>
             </LinearLayout>
 
-
             <Button
                 android:id="@+id/btnConfirm"
                 android:layout_width="168dp"
@@ -482,6 +483,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_12" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:focusable="true"
-    android:clickable="true"
-    android:foreground="@drawable/effect_button"
     android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="@drawable/effect_button"
     android:orientation="vertical">
 
     <LinearLayout
@@ -69,8 +69,8 @@
                     android:layout_width="48dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"
-                    android:visibility="gone"
-                    android:background="@drawable/default_button">
+                    android:background="@drawable/default_button"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"

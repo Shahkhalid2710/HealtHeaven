@@ -16,9 +16,9 @@
         <ImageView
             android:layout_width="149dp"
             android:layout_height="174dp"
+            android:layout_gravity="center"
             android:contentDescription="@string/todo"
             android:scaleType="centerCrop"
-            android:layout_gravity="center"
             android:src="@drawable/ic_no_exemption" />
 
         <TextView
@@ -51,9 +51,9 @@
             android:layout_height="36dp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/spacing_40"
-            android:foreground="@drawable/effect_button"
             android:background="@drawable/custom_btn"
             android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
             android:text="@string/add_certificate"
             android:textAllCaps="false"
             android:textColor="@color/white"

@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.profiledetails.ProfileDetailsActivity"
+        tools:context=".ui.profiledetails.activities.ProfileDetailsActivity"
         tools:ignore="UselessParent">
 
         <RelativeLayout
@@ -177,7 +177,6 @@
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"
                     tools:ignore="LabelFor" />
-
 
                 <TextView
                     android:id="@+id/tvEmailAddress"

@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.exemptions.ChooseExemptionActivity">
-
+    tools:context=".ui.exemptions.activities.ChooseExemptionActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,9 +20,9 @@
             android:layout_height="15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/spacing_25"
+            android:clickable="true"
             android:contentDescription="@string/todo"
             android:focusable="true"
-            android:clickable="true"
             android:foreground="@drawable/effect_button"
             android:src="@drawable/ic_back" />
 
@@ -42,8 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_16"
-        android:fillViewport="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,10 +53,10 @@
                 android:id="@+id/rvExemptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="36dp"
-                android:layout_marginEnd="@dimen/spacing_24" />
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:nestedScrollingEnabled="false" />
 
             <Button
                 android:id="@+id/btnAddCertificate"
@@ -66,9 +65,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/spacing_40"
                 android:layout_marginBottom="57dp"
-                android:foreground="@drawable/effect_button"
                 android:background="@drawable/custom_btn"
                 android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
                 android:text="@string/add_certificate"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

@@ -21,11 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_16"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="@string/choose_image"
-        android:focusable="true"
         android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat_medium"
         android:foreground="@drawable/effect"
+        android:text="@string/choose_image"
         android:textColor="@color/aapBlack"
         android:textSize="@dimen/font_15" />
 
@@ -34,11 +34,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_16"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="@string/cancel"
-        android:focusable="true"
         android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat_medium"
         android:foreground="@drawable/effect"
+        android:text="@string/cancel"
         android:textColor="@color/aapBlack"
         android:textSize="@dimen/font_15" />
 </LinearLayout>

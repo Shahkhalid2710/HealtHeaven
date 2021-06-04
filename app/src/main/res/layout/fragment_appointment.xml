@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.appointment.AppointmentFragment">
+    tools:context=".ui.appointment.fragments.AppointmentFragment">
 
     <TextView
         android:id="@+id/tvMySession"
@@ -19,7 +19,6 @@
         android:text="@string/my_session"
         android:textColor="@color/aapBlack"
         android:textSize="@dimen/font_20" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,13 +34,13 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_margin="3dp"
+            android:contextClickable="false"
             app:tabBackground="@drawable/tab_selector"
             app:tabGravity="fill"
             app:tabIndicator="@null"
             app:tabIndicatorColor="@color/white"
             app:tabMaxWidth="0dp"
             app:tabMode="fixed"
-            android:contextClickable="false"
             app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@style/tab_text"
             app:tabTextColor="@color/green" />

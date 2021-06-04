@@ -9,8 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.appointment.AppointmentFragment
-import com.applocum.connecttomyhealth.ui.bottomnavigationview.BottomNavigationViewActivity
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import kotlinx.android.synthetic.main.activity_verified.*
 import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 
@@ -44,7 +43,8 @@ class VerifiedActivity : BaseActivity() {
             transaction.replace(R.id.llPayment, apointmentFragment)
             transaction.addToBackStack(null)
             transaction.commit()*/
-            startActivity(Intent(this,BottomNavigationViewActivity::class.java))
+            startActivity(Intent(this,
+                BottomNavigationViewActivity::class.java))
             this.finish()
 
         }

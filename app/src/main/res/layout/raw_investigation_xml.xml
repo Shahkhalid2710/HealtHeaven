@@ -78,7 +78,6 @@
                 tools:ignore="RelativeOverlap" />
 
         </LinearLayout>
-
     </LinearLayout>
 
     <View

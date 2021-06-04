@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.sessiondetails.SessionDetailsActivity">
+    tools:context=".ui.sessiondetails.activities.SessionDetailsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -108,7 +108,6 @@
                             android:textColor="@color/aapBlack"
                             android:textSize="@dimen/font_16" />
                     </LinearLayout>
-
 
                     <TextView
                         android:id="@+id/tvDoctorGmcno"

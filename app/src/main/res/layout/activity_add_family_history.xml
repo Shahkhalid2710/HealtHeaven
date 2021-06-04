@@ -10,9 +10,8 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".ui.familyhistory.AddFamilyHistoryActivity"
+        tools:context=".ui.familyhistory.activities.AddFamilyHistoryActivity"
         tools:ignore="UselessParent">
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -64,12 +63,12 @@
                     android:layout_marginTop="@dimen/spacing_40"
                     android:layout_marginEnd="@dimen/spacing_24"
                     android:autofillHints="0"
-                    android:imeOptions="actionDone"
                     android:backgroundTint="@color/textcolorgrey"
                     android:drawableEnd="@drawable/ic_dropdown_list"
                     android:focusable="true"
                     android:fontFamily="@font/montserrat_medium"
                     android:hint="@string/add_family_history"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
                     android:paddingBottom="@dimen/spacing_10"
                     android:textColor="@color/aapBlack"
@@ -166,6 +165,7 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-    <include layout="@layout/custom_progress"
-        android:visibility="gone"/>
+
+    <include layout="@layout/custom_progress" />
+
 </FrameLayout>

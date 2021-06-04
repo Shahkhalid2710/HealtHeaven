@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.payment.PaymentMethodActivity"
+        tools:context=".ui.payment.activities.PaymentMethodActivity"
         tools:ignore="UselessParent">
 
         <RelativeLayout
@@ -98,14 +98,13 @@
                 </FrameLayout>
             </LinearLayout>
 
-            <include
-                layout="@layout/custom_loader_progress"
-                android:visibility="gone" />
+            <include layout="@layout/custom_loader_progress"/>
 
             <include
                 android:id="@+id/layoutnotfoundcard"
                 layout="@layout/custom_payment"
-                android:visibility="gone" />
+                android:visibility="gone"/>
+
         </RelativeLayout>
     </LinearLayout>
 

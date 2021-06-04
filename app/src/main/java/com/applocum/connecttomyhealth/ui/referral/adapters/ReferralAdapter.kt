@@ -13,7 +13,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_download.view.*
 import java.util.concurrent.TimeUnit
 
-class ReferralAdapter(context: Context, list:ArrayList<Document>,private val onReferralClick:ReferralClickListner): RecyclerView.Adapter<ReferralAdapter.ReferralHolder>() {
+class ReferralAdapter(context: Context, list:ArrayList<Document>, private val onReferralClick:ReferralClickListner): RecyclerView.Adapter<ReferralAdapter.ReferralHolder>() {
     var mContext=context
     var mList=list
 
@@ -41,6 +41,6 @@ class ReferralAdapter(context: Context, list:ArrayList<Document>,private val onR
             }
     }
     interface ReferralClickListner{
-        fun onReferralClick(document: Document,position: Int)
+        fun onReferralClick(document: Document, position: Int)
     }
 }

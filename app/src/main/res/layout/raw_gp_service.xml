@@ -3,19 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:focusable="true"
     android:clickable="true"
+    android:focusable="true"
     android:foreground="@drawable/effect_button"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginEnd="@dimen/spacing_24"
         android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:background="@color/white"
         tools:ignore="UselessParent">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,6 +63,7 @@
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_next" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

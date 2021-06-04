@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlbottomnavigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
-    android:id="@+id/rlbottomnavigation"
-    tools:context=".ui.bottomnavigationview.BottomNavigationViewActivity">
+    tools:context=".ui.bottomnavigationview.activities.BottomNavigationViewActivity">
 
- <com.google.android.material.bottomnavigation.BottomNavigationView
-     android:id="@+id/bottomnavigationView"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:layout_alignParentBottom="true"
-     android:fitsSystemWindows="true"
-     app:itemIconTint="@drawable/tab_color"
-     app:itemTextColor="@drawable/tab_color"
-     app:itemIconSize="30dp"
-     app:elevation="@dimen/spacing_5"
-     android:background="@color/white"
-     android:foreground="@drawable/effect"
-     android:focusable="true"
-     android:clickable="true"
-     app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-     app:labelVisibilityMode="unlabeled"
-     app:menu="@menu/bottom_navigation"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:clickable="true"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:foreground="@drawable/effect"
+        app:elevation="@dimen/spacing_5"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/tab_color"
+        app:itemTextColor="@drawable/tab_color"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:menu="@menu/bottom_navigation" />
 
 </RelativeLayout>
