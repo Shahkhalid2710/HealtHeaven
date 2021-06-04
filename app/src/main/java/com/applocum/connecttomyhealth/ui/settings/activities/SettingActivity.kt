@@ -131,4 +131,9 @@ class SettingActivity : BaseActivity(),
         val alert: AlertDialog = builder.create()
         alert.show()
     }
+
+    override fun onResume() {
+        checkGpsStatus()
+        super.onResume()
+    }
 }

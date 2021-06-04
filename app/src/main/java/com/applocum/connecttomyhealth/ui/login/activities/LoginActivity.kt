@@ -70,7 +70,7 @@ class LoginActivity : BaseActivity(),
     override fun senduserdata(user: User) {
         val intent = Intent(this, BottomNavigationViewActivity::class.java)
         startActivity(intent)
-        finish()
+        this.finish()
     }
 
     override fun viewProgress(isShow: Boolean) {

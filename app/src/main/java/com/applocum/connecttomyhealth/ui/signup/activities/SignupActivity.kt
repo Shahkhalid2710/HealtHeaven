@@ -60,11 +60,12 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
                 etFirstName.text.toString(),
                 etLastName.text.toString(),
                 etEmail.text.toString(),
-                "+$countrycode", countrycode + "" + etPhoneNumber.text.toString(),
-                etPassword.text.toString(),
-                etConfirmPassword.text.toString(),
-                etGender.text.toString().toLowerCase(Locale.ROOT),
-                etDOB.text.toString()
+                "+$countrycode",
+                 etPhoneNumber.text.toString(),
+                 etPassword.text.toString(),
+                 etConfirmPassword.text.toString(),
+                 etGender.text.toString().toLowerCase(Locale.ROOT),
+                 etDOB.text.toString()
             )
         }
         clickHandler()

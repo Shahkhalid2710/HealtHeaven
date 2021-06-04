@@ -13,19 +13,30 @@
         android:orientation="vertical"
         tools:context=".ui.medicalhistory.fragments.ActiveMedicalHistoryFragment">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="UselessParent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvActiveMedicalHistory"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:nestedScrollingEnabled="false" />
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
 
-            <include layout="@layout/custom_loader_progress" />
-        </FrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvActiveMedicalHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:nestedScrollingEnabled="false" />
+
+                <include layout="@layout/custom_loader_progress" />
+            </FrameLayout>
+
+            <include
+                android:id="@+id/layoutNotfoundActiveMedicalHistory"
+                layout="@layout/custom_medical_history"
+                android:visibility="gone" />
+        </RelativeLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

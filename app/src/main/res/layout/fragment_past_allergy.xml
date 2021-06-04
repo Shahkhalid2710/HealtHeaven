@@ -13,19 +13,30 @@
         android:background="@color/white"
         tools:context=".ui.allergyhistory.fragments.PastAllergyFragment">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="UselessParent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPastAllergy"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:nestedScrollingEnabled="false" />
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
 
-            <include layout="@layout/custom_loader_progress" />
-        </FrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPastAllergy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:nestedScrollingEnabled="false" />
+
+                <include layout="@layout/custom_loader_progress" />
+
+                <include
+                    android:id="@+id/layoutNotfoundPastAllergy"
+                    layout="@layout/custom_allergy_xml"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </RelativeLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

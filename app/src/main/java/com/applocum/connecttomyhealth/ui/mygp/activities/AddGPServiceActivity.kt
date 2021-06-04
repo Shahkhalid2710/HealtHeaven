@@ -22,10 +22,14 @@ import kotlinx.android.synthetic.main.activity_add_g_p_service.*
 import kotlinx.android.synthetic.main.activity_add_g_p_service.ivBack
 import kotlinx.android.synthetic.main.activity_add_g_p_service.progress
 import kotlinx.android.synthetic.main.custom_gp_service_dialog.view.*
+import java.util.*
 import java.util.concurrent.TimeUnit
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     @Inject
@@ -83,17 +87,15 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
                         val showDialogView = LayoutInflater.from(this@AddGPServiceActivity).inflate(R.layout.custom_gp_service_dialog, null, false)
                         val dialog = AlertDialog.Builder(this@AddGPServiceActivity).create()
                         dialog.setView(showDialogView)
-                        dialog.setCanceledOnTouchOutside(false)
 
-                        showDialogView.tvGpName.text = gpService.practice_name
-                        showDialogView.tvGpArea.text = gpService.address
-                        showDialogView.tvGpCity.text = gpService.city
+                        showDialogView.tvGpName.text = gpService.practice_name?.let { capitalize(it) }
+                        showDialogView.tvGpArea.text = gpService.address?.let { capitalize(it) }
+                        showDialogView.tvGpCity.text = gpService.city?.let { capitalize(it) }
 
                         showDialogView.btnSubmit.setOnClickListener {
                             dialog.dismiss()
-                            presenter.addGpService(gpService.id)
-                            val intent =
-                                Intent(this@AddGPServiceActivity, GpServiceActivity::class.java)
+                            gpService.id?.let { it1 -> presenter.addGpService(it1) }
+                            val intent = Intent(this@AddGPServiceActivity, GpServiceActivity::class.java)
                             intent.putExtra("gpService", gpService)
                             startActivity(intent)
                             this@AddGPServiceActivity.finish()
@@ -118,9 +120,19 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     override fun showSurgery(surgery: Surgery) {}
 
+    private fun capitalize(capString: String): String? {
+        val capBuffer = StringBuffer()
+        val capMatcher: Matcher =
+            Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString)
+        while (capMatcher.find()) {
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase(Locale.ROOT) + capMatcher.group(2).toLowerCase(
+                Locale.ROOT))
+        }
+        return capMatcher.appendTail(capBuffer).toString()
+    }
+
     override fun onBackPressed() {
         startActivity(Intent(this, GpServiceActivity::class.java))
-        finish()
         super.onBackPressed()
     }
 }

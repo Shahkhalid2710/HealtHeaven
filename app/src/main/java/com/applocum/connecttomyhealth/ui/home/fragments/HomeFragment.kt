@@ -80,7 +80,13 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
 
     override fun showProfile(patient: Patient) {
         v.tvName.text = patient.user.firstName
-        Glide.with(requireActivity()).load(patient.image).into(v.ivUser)
+        if (patient.image.isEmpty())
+        {
+            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).into(v.ivUser)
+        }
+        else {
+            Glide.with(requireActivity()).load(patient.image).into(v.ivUser)
+        }
     }
 
     override fun displayMessage(message: String) {}

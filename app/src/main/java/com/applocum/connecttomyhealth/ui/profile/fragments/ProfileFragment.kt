@@ -58,15 +58,12 @@ class ProfileFragment : Fragment(),
     lateinit var presenter: ProfileDetailsPresenter
 
     @SuppressLint("CheckResult")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_profile, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectview(this)
-        presenter.showProfile()
 
+        presenter.showProfile()
 
         RxView.clicks(v.flProfile).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -155,7 +152,6 @@ class ProfileFragment : Fragment(),
                 }
                 dialog.show()
             }
-
         return v
     }
 
@@ -163,8 +159,14 @@ class ProfileFragment : Fragment(),
         v.tvFName.text = patient.user.firstName
         v.tvLName.text = patient.user.lastName
         Glide.with(requireActivity()).clear(v.ivProfile)
-        Glide.with(requireActivity()).load(patient.image).into(v.ivProfile)
 
+        if (patient.image.isEmpty())
+        {
+            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).into(v.ivProfile)
+        }
+        else {
+            Glide.with(requireActivity()).load(patient.image).into(v.ivProfile)
+        }
     }
 
     override fun displayMessage(message: String) {
@@ -189,7 +191,6 @@ class ProfileFragment : Fragment(),
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
-                v.ivProfile.setImageURI(result.uri)
                 val fileOfPic = File(URI(result.uri.toString()))
                 presenter.updateUser(fileOfPic)
             }

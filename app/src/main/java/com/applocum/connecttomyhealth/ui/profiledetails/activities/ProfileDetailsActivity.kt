@@ -136,7 +136,13 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         println(newDateString)
         etDOB.setText(newDateString)
 
-        Glide.with(this).load(patient.user.image).into(ivProfile)
+        if (patient.image.isEmpty())
+        {
+            Glide.with(this).load(R.drawable.ic_blank_profile_pic).into(ivProfile)
+        }
+        else {
+            Glide.with(this).load(patient.image).into(ivProfile)
+        }
 
         when (patient.user.gender) {
             "male" -> {

@@ -84,7 +84,6 @@
                         android:nestedScrollingEnabled="false" />
 
                     <include layout="@layout/custom_loader_progress"/>
-
                 </FrameLayout>
 
                 <include

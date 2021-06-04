@@ -32,7 +32,6 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-
 @Suppress("DEPRECATION", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
 
@@ -72,15 +71,8 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
     }
 
     private fun locationPermission() {
-        ContextCompat.checkSelfPermission(
-            this,
-            android.Manifest.permission.ACCESS_FINE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-            1
-        )
+        ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
     }
 
     override fun displayMessage(message: String) {}
@@ -151,7 +143,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
     }
 
     override fun onResume() {
-        presenter.getGpService()
         super.onResume()
+        presenter.getGpService()
     }
 }

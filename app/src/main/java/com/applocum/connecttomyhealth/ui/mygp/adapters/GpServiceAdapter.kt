@@ -16,7 +16,6 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
-
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class GpServiceAdapter(context: Context, list: ArrayList<GpService>, private val itemclick: ItemClickListner) : RecyclerView.Adapter<GpServiceAdapter.GpServiceHolder>() {
     private var mContext = context
@@ -36,20 +35,18 @@ class GpServiceAdapter(context: Context, list: ArrayList<GpService>, private val
     @SuppressLint("CheckResult")
     override fun onBindViewHolder(holder: GpServiceHolder, position: Int) {
         val gpService = mList[position]
-        holder.itemView.tvName.text = capitalize(gpService.practice_name)
-        holder.itemView.tvArea.text = capitalize(gpService.address)
-        holder.itemView.tvCity.text = capitalize(gpService.city)
+        holder.itemView.tvName.text = gpService.practice_name?.let { capitalize(it) }
+        holder.itemView.tvArea.text = gpService.address?.let { capitalize(it) }
+        holder.itemView.tvCity.text = gpService.city?.let { capitalize (it) }
 
         RxView.clicks(holder.itemView).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 itemclick.onItemClick(gpService, position)
             }
-    }
-
+      }
     private fun capitalize(capString: String): String {
         val capBuffer = StringBuffer()
-        val capMatcher: Matcher =
-            Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString)
+        val capMatcher: Matcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString)
         while (capMatcher.find()) {
             capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase(Locale.ROOT) + capMatcher.group(2).toLowerCase(Locale.ROOT))
         }

@@ -55,10 +55,11 @@
 
                         <ImageView
                             android:id="@+id/ivProfile"
-                            android:layout_width="56dp"
+                            android:layout_width="49dp"
                             android:layout_height="56dp"
                             android:contentDescription="@string/todo"
-                            android:src="@drawable/ic_baseline_person_24" />
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_blank_profile_pic" />
 
                         <ImageView
                             android:id="@+id/ivEdit"

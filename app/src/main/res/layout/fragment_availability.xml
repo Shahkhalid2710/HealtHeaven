@@ -105,7 +105,7 @@
                 <include
                     android:id="@+id/NotAvailabeTime"
                     layout="@layout/not_available_time"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <include
                     layout="@layout/custom_small_progress"
