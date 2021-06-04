@@ -11,16 +11,15 @@ import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
 import kotlinx.android.synthetic.main.raw_investigation_xml.view.*
 
 
-class InvestigationAdapter(context: Context,list: ArrayList<Investigation>):RecyclerView.Adapter<InvestigationAdapter.InvestigationHolder>() {
+class InvestigationAdapter(context: Context, list: ArrayList<Investigation>) : RecyclerView.Adapter<InvestigationAdapter.InvestigationHolder>() {
 
-    var mContext=context
-    var mList=list
+    var mContext = context
+    var mList = list
 
-
-    inner class InvestigationHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
+    inner class InvestigationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InvestigationHolder {
-        val v=LayoutInflater.from(mContext).inflate(R.layout.raw_investigation_xml,parent,false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_investigation_xml, parent, false)
         return InvestigationHolder(v)
     }
 
@@ -29,11 +28,11 @@ class InvestigationAdapter(context: Context,list: ArrayList<Investigation>):Recy
     }
 
     override fun onBindViewHolder(holder: InvestigationHolder, position: Int) {
-        val investigation=mList[position]
+        val investigation = mList[position]
 
-        holder.itemView.tvInvestigationName.text=investigation.snomed_code
-        holder.itemView.tvInvestigationDate.text= convertInvestigationDate(investigation.taken_on)
-        holder.itemView.tvInvestigationDescription.text=investigation.description
+        holder.itemView.tvInvestigationName.text = investigation.snomed_code
+        holder.itemView.tvInvestigationDate.text = convertInvestigationDate(investigation.taken_on)
+        holder.itemView.tvInvestigationDescription.text = investigation.description
 
         holder.itemView.llInvestigation.setOnClickListener {
             if (holder.itemView.llDes.visibility == View.GONE) {

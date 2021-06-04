@@ -28,6 +28,8 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
     @Inject
     lateinit var membershipPresenter: MembershipPresenter
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_member_ship
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,24 +37,21 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
         membershipPresenter.injectView(this)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe{
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(tvAddmembershipcode).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe{
+            .subscribe {
                 startActivity(Intent(this, AddCodeActivity::class.java))
             }
+
         RxView.clicks(btnAddCode).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe{
+            .subscribe {
                 startActivity(Intent(this, AddCodeActivity::class.java))
             }
 
         membershipPresenter.showSavedCodes()
 
     }
-
-    override fun getLayoutResourceId(): Int = R.layout.activity_member_ship
 
     override fun displayMessage(message: String) {
         val snackbar = Snackbar.make(flMembership, message, Snackbar.LENGTH_LONG)
@@ -70,9 +69,7 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
             layoutnotfoundcode.visibility = View.VISIBLE
             llSavedCodes.visibility = View.GONE
             tvAddmembershipcode.visibility = View.GONE
-        }
-        else
-        {
+        } else {
             layoutnotfoundcode.visibility = View.GONE
             llSavedCodes.visibility = View.VISIBLE
             tvAddmembershipcode.visibility = View.VISIBLE

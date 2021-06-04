@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.booksession.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -16,23 +17,17 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import kotlinx.android.synthetic.main.fragment_about_specialist.view.*
 
-
 class AboutSpecialistFragment : Fragment() {
 
     lateinit var specialist: Specialist
+    lateinit var v: View
 
-    lateinit var v:View
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        v = inflater.inflate(R.layout.fragment_about_specialist, container, false)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        v= inflater.inflate(R.layout.fragment_about_specialist, container, false)
-
-        specialist=arguments?.getSerializable("specialist") as Specialist
-        v.tvDoctorBio.text=specialist.bio
-        v.tvDoctorLocation.text=(specialist.usual_address.line1+""+","+specialist.usual_address.line2+""+","+specialist.usual_address.town+""+","+specialist.usual_address.pincode)
+        specialist = arguments?.getSerializable("specialist") as Specialist
+        v.tvDoctorBio.text = specialist.bio
+        v.tvDoctorLocation.text = (specialist.usual_address.line1 + "" + "," + specialist.usual_address.line2 + "" + "," + specialist.usual_address.town + "" + "," + specialist.usual_address.pincode)
 
         v.btnDirection.setOnClickListener {
             val navigation = Uri.parse("google.navigation:q=" + specialist.usual_address.latitude + "," + specialist.usual_address.longitude + "")
@@ -47,12 +42,11 @@ class AboutSpecialistFragment : Fragment() {
         return v
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun doctorSpecialities() {
-        val buttonLayoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
+        val buttonLayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         buttonLayoutParams.setMargins(5, 10, 10, 5)
+
         for (i in 0 until specialist.doctor_specialities.size) {
             val tv = TextView(requireActivity())
             tv.text = specialist.doctor_specialities[i]
@@ -63,18 +57,17 @@ class AboutSpecialistFragment : Fragment() {
             tv.id = i + 1
             tv.layoutParams = buttonLayoutParams
             tv.tag = i
-            val font = Typeface.createFromAsset(requireActivity().assets, "fonts/montserrat_medium.ttf")
-            tv.typeface=font
+            val font =
+                Typeface.createFromAsset(requireActivity().assets, "fonts/montserrat_medium.ttf")
+            tv.typeface = font
             tv.setPadding(30, 30, 30, 30)
             v.flSpecialities.addView(tv)
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun doctorLanguages() {
-        val buttonLayoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
+        val buttonLayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         buttonLayoutParams.setMargins(5, 10, 10, 5)
         for (i in 0 until specialist.languages.size) {
             val tv = TextView(requireActivity())
@@ -87,18 +80,17 @@ class AboutSpecialistFragment : Fragment() {
             tv.layoutParams = buttonLayoutParams
             tv.tag = i
             val font = Typeface.createFromAsset(requireActivity().assets, "fonts/montserrat_medium.ttf")
-            tv.typeface=font
+            tv.typeface = font
             tv.setPadding(30, 30, 30, 30)
             v.flLanguages.addView(tv)
         }
     }
+
     fun newInstance(specialist: Specialist): AboutSpecialistFragment {
         val args = Bundle()
         args.putSerializable("specialist", specialist)
-        val fragment =
-            AboutSpecialistFragment()
+        val fragment = AboutSpecialistFragment()
         fragment.arguments = args
         return fragment
     }
-
 }

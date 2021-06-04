@@ -40,11 +40,11 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
     private var isMatched =false
     private var isActivePast =false
 
-
     @Inject
     lateinit var presenter: MedicalPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_medical_history
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,22 +52,23 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
         presenter.injectView(this)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(etStartMonth).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 selectStartMonth()
             }
+
         RxView.clicks(etStartYear).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 selectStartYear()
             }
+
         RxView.clicks(etEndMonth).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 selectEndMonth()
             }
+
         RxView.clicks(etEndYear).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 selectEndYear()
@@ -156,12 +157,9 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
           finish()
     }
 
-    override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {
+    override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {}
 
-    }
-
-    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {
-    }
+    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {}
 
     private fun selectStartMonth()
     {
@@ -191,8 +189,8 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
         }
         val dialog = builder.create()
         dialog.show()
-
     }
+
     private fun selectEndMonth()
     {
         val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)

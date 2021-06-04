@@ -84,5 +84,4 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
     interface DoctorClickListner{
         fun onDoctorClick(specialist: Specialist,position: Int)
     }
-
 }

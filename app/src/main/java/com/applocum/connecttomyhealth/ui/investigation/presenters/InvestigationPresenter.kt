@@ -13,55 +13,50 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
 
-class InvestigationPresenter@Inject constructor(private val api:AppEndPoint) {
-    var disposables=CompositeDisposable()
+class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
+    var disposables = CompositeDisposable()
     lateinit var view: View
 
-    fun injectView(view: View)
-    {
-        this.view=view
+    fun injectView(view: View) {
+        this.view = view
     }
 
     @Inject
     lateinit var userHolder: UserHolder
 
-    fun addInvestigation(name: String,date: String,description: String)
-    {
+    fun addInvestigation(name: String, date: String, description: String) {
         if (validateInvestigation(name, date, description)) {
             view.viewInvestigationProgress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("investigation[description]",description)
-                .addFormDataPart("investigation[taken_on]",date)
-                .addFormDataPart("investigation[snomed_code_id]",name)
+                .addFormDataPart("investigation[description]", description)
+                .addFormDataPart("investigation[taken_on]", date)
+                .addFormDataPart("investigation[snomed_code_id]", name)
                 .build()
 
-            api.addInvestigation(userHolder.userToken,userHolder.clinicalToken,requestBody)
+            api.addInvestigation(userHolder.userToken, userHolder.clinicalToken, requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(onNext={
+                .subscribeBy(onNext = {
                     view.viewInvestigationProgress(false)
-                    when(it.status)
-                    {
-                        Success->
-                        {
+                    when (it.status) {
+                        Success -> {
                             view.displaySuccessMessage(it.message)
                         }
-                        InvalidCredentials,InternalServer -> {
+                        InvalidCredentials, InternalServer -> {
                             view.displayMessage(it.message)
                         }
                     }
 
-                },onError = {
+                }, onError = {
                     view.viewInvestigationProgress(false)
                     it.printStackTrace()
                 }).let { disposables.addAll(it) }
         }
     }
 
-    fun showInvestigationList()
-    {
+    fun showInvestigationList() {
         view.viewInvestigationProgress(true)
-        api.showInvestigation(userHolder.userToken,userHolder.clinicalToken,66)
+        api.showInvestigation(userHolder.userToken, userHolder.clinicalToken, 66)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
                 when (it.status) {
@@ -80,31 +75,26 @@ class InvestigationPresenter@Inject constructor(private val api:AppEndPoint) {
 
     }
 
-    private fun validateInvestigation(name:String, date:String, description:String):Boolean
-    {
-        if (name.isEmpty())
-        {
+    private fun validateInvestigation(name: String, date: String, description: String): Boolean {
+        if (name.isEmpty()) {
             view.displayMessage("Please select investigation from the list")
             return false
         }
-        if (date.isEmpty())
-        {
+        if (date.isEmpty()) {
             view.displayMessage("Please select date")
             return false
         }
-        if (description.isEmpty())
-        {
+        if (description.isEmpty()) {
             view.displayMessage("Please enter investigation description")
             return false
         }
         return true
     }
 
-    interface View
-    {
-        fun displaySuccessMessage(message:String)
-        fun displayMessage(message:String)
-        fun viewInvestigationProgress(isShow:Boolean)
-        fun investigationList(list:ArrayList<Investigation>)
+    interface View {
+        fun displaySuccessMessage(message: String)
+        fun displayMessage(message: String)
+        fun viewInvestigationProgress(isShow: Boolean)
+        fun investigationList(list: ArrayList<Investigation>)
     }
 }

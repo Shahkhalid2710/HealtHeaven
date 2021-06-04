@@ -26,13 +26,14 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class AddGPServiceActivity : BaseActivity() ,
-    GpservicePresenter.View{
+class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     @Inject
     lateinit var presenter: GpservicePresenter
 
     private lateinit var gpServiceAdapter: GpServiceAdapter
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_add_g_p_service
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +45,7 @@ class AddGPServiceActivity : BaseActivity() ,
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    GpServiceActivity::class.java))
+                startActivity(Intent(this, GpServiceActivity::class.java))
                 finish()
             }
 
@@ -57,7 +57,7 @@ class AddGPServiceActivity : BaseActivity() ,
                 }
             }
             .observeOn(Schedulers.computation())
-            .filter { s -> s.length >= 2}
+            .filter { s -> s.length >= 2 }
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 presenter.getgpList(etGpSearch.text.toString())
@@ -65,32 +65,22 @@ class AddGPServiceActivity : BaseActivity() ,
 
     }
 
-    override fun getLayoutResourceId(): Int =R.layout.activity_add_g_p_service
-
-    override fun displayMessage(message: String) {
-    }
+    override fun displayMessage(message: String) {}
 
     override fun getGpList(list: ArrayList<GpService>) {
-        if (list.isEmpty())
-        {
-            NoGpService.visibility=View.VISIBLE
-            rvAddGp.visibility=View.GONE
-        }
-        else
-        {
-            NoGpService.visibility=View.GONE
-            rvAddGp.visibility=View.VISIBLE
+        if (list.isEmpty()) {
+            NoGpService.visibility = View.VISIBLE
+            rvAddGp.visibility = View.GONE
+        } else {
+            NoGpService.visibility = View.GONE
+            rvAddGp.visibility = View.VISIBLE
         }
 
-        gpServiceAdapter=
-            GpServiceAdapter(
-                this,
-                list,
-                object :
+        gpServiceAdapter =
+            GpServiceAdapter(this, list, object :
                     GpServiceAdapter.ItemClickListner {
                     override fun onItemClick(gpService: GpService, position: Int) {
-                        val showDialogView = LayoutInflater.from(this@AddGPServiceActivity)
-                            .inflate(R.layout.custom_gp_service_dialog, null, false)
+                        val showDialogView = LayoutInflater.from(this@AddGPServiceActivity).inflate(R.layout.custom_gp_service_dialog, null, false)
                         val dialog = AlertDialog.Builder(this@AddGPServiceActivity).create()
                         dialog.setView(showDialogView)
                         dialog.setCanceledOnTouchOutside(false)
@@ -114,25 +104,22 @@ class AddGPServiceActivity : BaseActivity() ,
                         dialog.show()
                     }
                 })
-        rvAddGp.layoutManager=LinearLayoutManager(this)
-        rvAddGp.adapter=gpServiceAdapter
+        rvAddGp.layoutManager = LinearLayoutManager(this)
+        rvAddGp.adapter = gpServiceAdapter
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun viewFullProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun showSurgery(surgery: Surgery) {
-
-    }
+    override fun showSurgery(surgery: Surgery) {}
 
     override fun onBackPressed() {
-        startActivity(Intent(this,
-            GpServiceActivity::class.java))
+        startActivity(Intent(this, GpServiceActivity::class.java))
         finish()
         super.onBackPressed()
     }

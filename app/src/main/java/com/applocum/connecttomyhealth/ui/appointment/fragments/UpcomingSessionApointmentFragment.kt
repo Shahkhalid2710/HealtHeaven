@@ -25,9 +25,7 @@ import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.view.
 import kotlinx.android.synthetic.main.raw_session_xml.view.btnCancel
 import javax.inject.Inject
 
-
-class UpcomingSessionApointmentFragment : Fragment(),
-    BookAppointmentPresenter.View {
+class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.View {
 
     lateinit var upcomingSessionAdapter: UpcomingSessionAdapter
 
@@ -43,8 +41,7 @@ class UpcomingSessionApointmentFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        v=inflater.inflate(R.layout.fragment_upcoming_session_apointment, container, false)
+        v = inflater.inflate(R.layout.fragment_upcoming_session_apointment, container, false)
 
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
@@ -55,7 +52,7 @@ class UpcomingSessionApointmentFragment : Fragment(),
     }
 
     override fun displayMessage(mesage: String) {
-        val snackbar = Snackbar.make(llUpcomingSession,mesage, Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(llUpcomingSession, mesage, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
@@ -63,7 +60,7 @@ class UpcomingSessionApointmentFragment : Fragment(),
     }
 
     override fun displaySuccessMessage(message: String) {
-        val snackbar = Snackbar.make(llUpcomingSession,message, Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(llUpcomingSession, message, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.blue))
@@ -72,56 +69,55 @@ class UpcomingSessionApointmentFragment : Fragment(),
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
 
-        if (list.isEmpty())
-        {
-            layoutNotFoundUpcomingSession.visibility=View.VISIBLE
-            rvUpcomingSession.visibility=View.GONE
-        }
-        else
-        {
-            layoutNotFoundUpcomingSession.visibility=View.GONE
-            rvUpcomingSession.visibility=View.VISIBLE
+        if (list.isEmpty()) {
+            layoutNotFoundUpcomingSession.visibility = View.VISIBLE
+            rvUpcomingSession.visibility = View.GONE
+        } else {
+            layoutNotFoundUpcomingSession.visibility = View.GONE
+            rvUpcomingSession.visibility = View.VISIBLE
         }
 
-        rvUpcomingSession.layoutManager=LinearLayoutManager(requireActivity())
-        upcomingSessionAdapter= UpcomingSessionAdapter(requireActivity(),list,object:UpcomingSessionAdapter.ItemClickListner{
-            override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
-                val showDialogView = LayoutInflater.from(requireActivity())
-                    .inflate(R.layout.custom_cancel_book_session_dialog, null, false)
-                val dialog = AlertDialog.Builder(requireActivity()).create()
-                dialog.setView(showDialogView)
-                dialog.setCanceledOnTouchOutside(false)
+        rvUpcomingSession.layoutManager = LinearLayoutManager(requireActivity())
+        upcomingSessionAdapter = UpcomingSessionAdapter(
+            requireActivity(),
+            list,
+            object : UpcomingSessionAdapter.ItemClickListner {
+                override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
+                    val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_cancel_book_session_dialog, null, false)
+                    val dialog = AlertDialog.Builder(requireActivity()).create()
+                    dialog.setView(showDialogView)
+                    dialog.setCanceledOnTouchOutside(false)
 
-                showDialogView.btnCancel.setOnClickListener {
-                     presenter.deleteSession(bookAppointmentResponse.id)
-                     list.removeAt(position)
-                     upcomingSessionAdapter.notifyItemRemoved(position)
-                     upcomingSessionAdapter.notifyItemRangeChanged(position,list.size)
-                     upcomingSessionAdapter.notifyDataSetChanged()
-                     dialog.dismiss()
+                    showDialogView.btnCancel.setOnClickListener {
+                        presenter.deleteSession(bookAppointmentResponse.id)
+                        list.removeAt(position)
+                        upcomingSessionAdapter.notifyItemRemoved(position)
+                        upcomingSessionAdapter.notifyItemRangeChanged(position, list.size)
+                        upcomingSessionAdapter.notifyDataSetChanged()
+                        dialog.dismiss()
+                    }
+                    showDialogView.btnNo.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                    dialog.show()
                 }
-                showDialogView.btnNo.setOnClickListener {
-                    dialog.dismiss()
-                }
-                dialog.show()
-            }
 
-            override fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
-                val intent=Intent(requireActivity(),
-                    WaitingAreaActivity::class.java)
-                startActivity(intent)
-            }
-        })
-        rvUpcomingSession.adapter=upcomingSessionAdapter
+                override fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
+                    val intent = Intent(requireActivity(), WaitingAreaActivity::class.java)
+                    startActivity(intent)
+                }
+            })
+
+        rvUpcomingSession.adapter = upcomingSessionAdapter
         upcomingSessionAdapter.notifyDataSetChanged()
     }
 
     override fun viewProgress(isShow: Boolean) {
-       v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
+        v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun viewFullProgress(isShow: Boolean) {
-        v.upcomingProgress.visibility=if (isShow)View.VISIBLE else View.GONE
+        v.upcomingProgress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun onResume() {

@@ -16,44 +16,39 @@ import kotlinx.android.synthetic.main.activity_clinical_records.ivBack
 import java.util.concurrent.TimeUnit
 
 class ClinicalRecordsActivity : BaseActivity() {
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_clinical_records
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(rlFamilyHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    FamilyHistoryActivity::class.java))
+                startActivity(Intent(this,FamilyHistoryActivity::class.java))
             }
 
         RxView.clicks(rlAllergyHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    AllergyHistoryActivity::class.java))
+                startActivity(Intent(this, AllergyHistoryActivity::class.java))
             }
 
         RxView.clicks(rlInvestigation).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    InvestigationActivity::class.java))
+                startActivity(Intent(this, InvestigationActivity::class.java))
             }
+
         RxView.clicks(rlMedicalBased).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    MedicationActivity::class.java))
+                startActivity(Intent(this, MedicationActivity::class.java))
             }
+
         RxView.clicks(rlMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    MedicalHistoryActivity::class.java))
+                startActivity(Intent(this, MedicalHistoryActivity::class.java))
             }
-
     }
-
-    override fun getLayoutResourceId(): Int=R.layout.activity_clinical_records
 }

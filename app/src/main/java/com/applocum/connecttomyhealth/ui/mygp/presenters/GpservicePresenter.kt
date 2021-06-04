@@ -16,82 +16,76 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
 
-class GpservicePresenter@Inject constructor(private val api:AppEndPoint) {
-    var disposables=CompositeDisposable()
+class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
+    var disposables = CompositeDisposable()
     lateinit var view: View
 
-    fun injectview(view: View)
-    {
-        this.view=view
+    fun injectview(view: View) {
+        this.view = view
     }
 
     @Inject
     lateinit var userHolder: UserHolder
 
-    fun getgpList(search:String)
-    {
+    fun getgpList(search: String) {
         view.viewProgress(true)
         api.getGpList(search)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext={
+            .subscribeBy(onNext = {
                 when (it.status) {
                     Success -> {
                         view.viewProgress(false)
                         view.getGpList(it.data)
                     }
-                    InvalidCredentials,InternalServer -> {
+                    InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)
                     }
                 }
-            },onError = {
+            }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
             }).let { disposables.addAll(it) }
     }
 
-    fun addGpService(surgeryId:Int)
-    {
+    fun addGpService(surgeryId: Int) {
         view.viewFullProgress(true)
         val requestBody: RequestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
-            .addFormDataPart("user_surgery[surgery_id]",surgeryId.toString())
+            .addFormDataPart("user_surgery[surgery_id]", surgeryId.toString())
             .build()
 
-        api.addGpService(userHolder.userToken,requestBody)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext={
-                view.viewFullProgress(false)
-                when(it.status)
-                {
-                    Success->
-                    {
-                        view.displayMessage(it.message)
-                    }
-                    InvalidCredentials,InternalServer -> {
-                        view.displayMessage(it.message)
-                    }
-                }
-
-            },onError = {
-                view.viewFullProgress(false)
-                it.printStackTrace()
-            }).let { disposables.addAll(it) }
-    }
-
-    fun getGpService()
-    {
-        view.viewFullProgress(true)
-        api.getGpService(userHolder.userToken,userHolder.userid!!.toInt())
+        api.addGpService(userHolder.userToken, requestBody)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
-                        val surgeryObject = Gson().fromJson(it.data,SurgeryResponse::class.java)
+                        view.displayMessage(it.message)
+                    }
+                    InvalidCredentials, InternalServer -> {
+                        view.displayMessage(it.message)
+                    }
+                }
+
+            }, onError = {
+                view.viewFullProgress(false)
+                it.printStackTrace()
+            }).let { disposables.addAll(it) }
+    }
+
+    fun getGpService() {
+        view.viewFullProgress(true)
+        api.getGpService(userHolder.userToken, userHolder.userid!!.toInt())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(onNext = {
+                view.viewFullProgress(false)
+                when (it.status) {
+                    Success -> {
+                        val surgeryObject = Gson().fromJson(it.data, SurgeryResponse::class.java)
                         val surgery = surgeryObject.surgery
                         view.showSurgery(surgery)
                     }
-                    InvalidCredentials,InternalServer -> {
+                    InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)
                     }
                 }
@@ -99,13 +93,11 @@ class GpservicePresenter@Inject constructor(private val api:AppEndPoint) {
                 view.viewFullProgress(false)
                 it.printStackTrace()
             }).let { disposables.add(it) }
-
     }
 
-    interface View
-    {
-        fun displayMessage(message:String)
-        fun getGpList(list:ArrayList<GpService>)
+    interface View {
+        fun displayMessage(message: String)
+        fun getGpList(list: ArrayList<GpService>)
         fun viewProgress(isShow: Boolean)
         fun viewFullProgress(isShow: Boolean)
         fun showSurgery(surgery: Surgery)

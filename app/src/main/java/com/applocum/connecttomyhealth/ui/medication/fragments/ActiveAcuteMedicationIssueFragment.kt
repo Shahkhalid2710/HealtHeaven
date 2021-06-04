@@ -15,10 +15,7 @@ import kotlinx.android.synthetic.main.fragment_active_acute_medication_issue.vie
 class ActiveAcuteMedicationIssueFragment : Fragment() {
     var mListActiveAcuteMedication:ArrayList<Medication> = ArrayList()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v= inflater.inflate(R.layout.fragment_active_acute_medication_issue, container, false)
 
         val medication1=Medication("Aciclovir 500mg/20ml solution for infusion vials","07 Jan 2020","10")

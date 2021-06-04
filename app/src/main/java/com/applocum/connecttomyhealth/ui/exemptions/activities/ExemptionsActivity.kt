@@ -12,20 +12,19 @@ import kotlinx.android.synthetic.main.custom_exemption_xml.view.*
 import java.util.concurrent.TimeUnit
 
 class ExemptionsActivity : BaseActivity() {
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_exemptions
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(exemptions.btnAddCertificate).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    ChooseExemptionActivity::class.java))
+                startActivity(Intent(this, ChooseExemptionActivity::class.java))
             }
-    }
-    override fun getLayoutResourceId(): Int =R.layout.activity_exemptions
+     }
 }

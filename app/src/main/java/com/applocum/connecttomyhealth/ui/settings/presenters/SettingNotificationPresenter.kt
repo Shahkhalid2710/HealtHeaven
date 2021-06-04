@@ -14,53 +14,53 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
 
-class SettingNotificationPresenter@Inject constructor(private val api:AppEndPoint) {
-    var disposables=CompositeDisposable()
+class SettingNotificationPresenter @Inject constructor(private val api: AppEndPoint) {
+    var disposables = CompositeDisposable()
     lateinit var view: View
 
-    fun injectView(view: View)
-    {
-        this.view=view
+    fun injectView(view: View) {
+        this.view = view
     }
 
     @Inject
     lateinit var userHolder: UserHolder
 
-    fun notificationSetting(textMessage:String,email:String,phone:String,pushNotification:String)
-    {
+    fun notificationSetting(
+        textMessage: String,
+        email: String,
+        phone: String,
+        pushNotification: String
+    ) {
         view.viewFullProgress(true)
         val requestBody: RequestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
-            .addFormDataPart("is_notify_by_sms",textMessage)
-            .addFormDataPart("is_notify_by_email",email)
-            .addFormDataPart("is_notify_by_phone",phone)
-            .addFormDataPart("is_notify_by_push_notification",pushNotification)
+            .addFormDataPart("is_notify_by_sms", textMessage)
+            .addFormDataPart("is_notify_by_email", email)
+            .addFormDataPart("is_notify_by_phone", phone)
+            .addFormDataPart("is_notify_by_push_notification", pushNotification)
             .build()
 
-        api.notificationSetting(userHolder.userToken,requestBody)
+        api.notificationSetting(userHolder.userToken, requestBody)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
                 view.viewFullProgress(false)
-                when(it.status)
-                {
-                    Success->
-                    {
+                when (it.status) {
+                    Success -> {
 
                     }
-                    InvalidCredentials,InternalServer -> {
+                    InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)
                     }
                 }
 
-            },onError = {
+            }, onError = {
                 view.viewFullProgress(false)
                 it.printStackTrace()
             }).let { disposables.addAll(it) }
     }
 
 
-    fun showNotification()
-    {
+    fun showNotification() {
         view.viewProgress(true)
         api.showNotification(userHolder.userToken)
             .observeOn(AndroidSchedulers.mainThread())
@@ -68,10 +68,11 @@ class SettingNotificationPresenter@Inject constructor(private val api:AppEndPoin
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
-                        val notificationObject = Gson().fromJson(it.data,SettingNotification::class.java)
+                        val notificationObject =
+                            Gson().fromJson(it.data, SettingNotification::class.java)
                         view.showNotification(notificationObject)
                     }
-                    InvalidCredentials,InternalServer -> {
+                    InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)
                     }
                 }
@@ -82,10 +83,10 @@ class SettingNotificationPresenter@Inject constructor(private val api:AppEndPoin
 
     }
 
-    interface View{
-        fun displayMessage(message:String)
-        fun viewFullProgress(isShow:Boolean)
-        fun viewProgress(isShow:Boolean)
+    interface View {
+        fun displayMessage(message: String)
+        fun viewFullProgress(isShow: Boolean)
+        fun viewProgress(isShow: Boolean)
         fun showNotification(settingNotification: SettingNotification)
     }
 }

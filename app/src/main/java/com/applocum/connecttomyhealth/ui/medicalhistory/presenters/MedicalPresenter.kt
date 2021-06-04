@@ -18,12 +18,11 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     var disposables = CompositeDisposable()
     lateinit var view: View
 
-    companion object
-    {
-        const val activeMedicalHistory="active"
-        const val pastMedicalHistory="past"
-        const val statusVerified="verified"
-        const val statusUnverified="unverified"
+    companion object {
+        const val activeMedicalHistory = "active"
+        const val pastMedicalHistory = "past"
+        const val statusVerified = "verified"
+        const val statusUnverified = "unverified"
     }
 
     @Inject
@@ -57,7 +56,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
         diseaseName: String,
         startMonth: String,
         startYear: String,
-        activePast:Boolean,
+        activePast: Boolean,
         endMonth: String,
         endYear: String
     ) {
@@ -71,14 +70,14 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
             )
         ) {
             view.viewMedicalProgress(true)
-            val startDate= "01/$startMonth/$startYear"
-            val endDate= "01/$endMonth/$endYear"
+            val startDate = "01/$startMonth/$startYear"
+            val endDate = "01/$endMonth/$endYear"
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("medical_history[user_id]", userHolder.userid!!)
                 .addFormDataPart("medical_history[start_date]", startDate)
-                .addFormDataPart("medical_history[is_active]",activePast.toString())
-                .addFormDataPart("medical_history[end_date]",endDate)
+                .addFormDataPart("medical_history[is_active]", activePast.toString())
+                .addFormDataPart("medical_history[end_date]", endDate)
                 .addFormDataPart("medical_history[snomed_code_id]", diseaseName)
                 .build()
 
@@ -88,7 +87,8 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewMedicalProgress(false)
                     when (it.status) {
                         Success -> {
-                            val medicalObject = Gson().fromJson(it.data,MedicalHistoryResponse::class.java)
+                            val medicalObject =
+                                Gson().fromJson(it.data, MedicalHistoryResponse::class.java)
                             val medicalHistory = medicalObject.medical_history
                             view.sendMedicalHistoryData(medicalHistory)
                         }
@@ -104,18 +104,20 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
         }
     }
 
-    fun activeMedicalHistory()
-    {
+    fun activeMedicalHistory() {
         view.viewProgress(true)
-        api.showMedicalHistory(userHolder.userToken,userHolder.clinicalToken,userHolder.userid!!.toInt(),
+        api.showMedicalHistory(
+            userHolder.userToken, userHolder.clinicalToken, userHolder.userid!!.toInt(),
             activeMedicalHistory,
-            statusUnverified,66)
+            statusUnverified, 66
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
-                        val medicalHistoryTrueFalseResponse = Gson().fromJson(it.data,MedicalHistoryTrueFalseResponse::class.java)
+                        val medicalHistoryTrueFalseResponse =
+                            Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
                         view.showActiveMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.trueMedicalHistory)
                     }
                     InvalidCredentials, InternalServer -> {
@@ -128,17 +130,19 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
             }).let { disposables.add(it) }
     }
 
-    fun pastMedicalHistory()
-    {
+    fun pastMedicalHistory() {
         view.viewProgress(true)
-        api.showMedicalHistory(userHolder.userToken,userHolder.clinicalToken,userHolder.userid!!.toInt(),
-            pastMedicalHistory,statusUnverified,66)
+        api.showMedicalHistory(
+            userHolder.userToken, userHolder.clinicalToken, userHolder.userid!!.toInt(),
+            pastMedicalHistory, statusUnverified, 66
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
-                        val medicalHistoryTrueFalseResponse = Gson().fromJson(it.data,MedicalHistoryTrueFalseResponse::class.java)
+                        val medicalHistoryTrueFalseResponse =
+                            Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
                         view.showPastMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.falseMedicalHistory)
                     }
                     InvalidCredentials, InternalServer -> {
@@ -151,7 +155,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
             }).let { disposables.add(it) }
     }
 
-   private fun validationMedicalHistory(
+    private fun validationMedicalHistory(
         diseaseName: String,
         startMonth: String,
         startYear: String,
@@ -183,7 +187,6 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
             }
             return true
         }
-
         return true
     }
 
@@ -193,8 +196,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
         fun viewProgress(isShow: Boolean)
         fun viewMedicalProgress(isShow: Boolean)
         fun sendMedicalHistoryData(medicalHistory: MedicalHistory)
-        fun showActiveMedicalHistory(trueMedicalHistory:ArrayList<TrueMedicalHistory>)
-        fun showPastMedicalHistory(falseMedicalHistory:ArrayList<FalseMedicalHistory>)
+        fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>)
+        fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>)
     }
-
 }

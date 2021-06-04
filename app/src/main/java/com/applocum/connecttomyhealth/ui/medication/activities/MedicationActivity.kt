@@ -14,25 +14,21 @@ import kotlinx.android.synthetic.main.activity_medication.viewPager
 import java.util.concurrent.TimeUnit
 
 class MedicationActivity : BaseActivity() {
-    override fun getLayoutResourceId(): Int =R.layout.activity_medication
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_medication
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
-        val viewPagerFragmentAdapter=
-            ViewPagerFragmentAdapter(
-                this,
-                supportFragmentManager
-            )
-        viewPagerFragmentAdapter.addfragment(ActiveAcuteMedicationIssueFragment(),"Active Acute")
-        viewPagerFragmentAdapter.addfragment(PastAcuteMedicationIssueFragment(),"Past Acute")
-        viewPager.adapter=viewPagerFragmentAdapter
+        val viewPagerFragmentAdapter =
+            ViewPagerFragmentAdapter(this, supportFragmentManager)
+        viewPagerFragmentAdapter.addfragment(ActiveAcuteMedicationIssueFragment(), "Active Acute")
+        viewPagerFragmentAdapter.addfragment(PastAcuteMedicationIssueFragment(), "Past Acute")
+        viewPager.adapter = viewPagerFragmentAdapter
         tablayout.setupWithViewPager(viewPager)
     }
-
 }

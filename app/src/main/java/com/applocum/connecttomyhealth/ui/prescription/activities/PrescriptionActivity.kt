@@ -25,55 +25,44 @@ class PrescriptionActivity : BaseActivity(),
     @Inject
     lateinit var presenter: DocumentPresenter
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_prescription
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
 
-        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe{
-                finish()
-            }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe { finish() }
 
         presenter.getPrescription()
     }
-
-    override fun getLayoutResourceId(): Int = R.layout.activity_prescription
 
     override fun displayErrorMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun getDocument(list: ArrayList<Document>) {
-        if (list.isEmpty())
-        {
-            layoutNotFoundPrescription.visibility=View.VISIBLE
-            rvPrescription.visibility=View.GONE
-        }
-        else
-        {
-            layoutNotFoundPrescription.visibility=View.GONE
-            rvPrescription.visibility=View.VISIBLE
+        if (list.isEmpty()) {
+            layoutNotFoundPrescription.visibility = View.VISIBLE
+            rvPrescription.visibility = View.GONE
+        } else {
+            layoutNotFoundPrescription.visibility = View.GONE
+            rvPrescription.visibility = View.VISIBLE
         }
 
-        rvPrescription.layoutManager=LinearLayoutManager(this)
-        rvPrescription.adapter=
-            PrescriptionAdapter(
-                this,
-                list,
-                object :
-                    PrescriptionAdapter.PrescriptionClickListner {
+        rvPrescription.layoutManager = LinearLayoutManager(this)
+        rvPrescription.adapter = PrescriptionAdapter(this, list, object : PrescriptionAdapter.PrescriptionClickListner {
                     override fun onPrescriptionClick(document: Document, position: Int) {
-                        val intent =
-                            Intent(this@PrescriptionActivity, DocumentViewActivity::class.java)
+                        val intent = Intent(this@PrescriptionActivity, DocumentViewActivity::class.java)
                         intent.putExtra("document", document)
                         startActivity(intent)
                     }
                 })
-    }
+        }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 }

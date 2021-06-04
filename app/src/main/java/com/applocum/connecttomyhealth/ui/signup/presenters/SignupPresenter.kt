@@ -23,10 +23,10 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
     private val disposables = CompositeDisposable()
     lateinit var view: View
     private var devicetype = "android"
-    private var corporateId="83"
-    private var playerId="temp"
-    private var role="patient"
-    private var referenceform="priory"
+    private var corporateId = "83"
+    private var playerId = "temp"
+    private var role = "patient"
+    private var referenceform = "priory"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -39,14 +39,23 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
         firstname: String,
         lastname: String,
         email: String,
-        countrycode:String,
+        countrycode: String,
         mobileno: String,
         password: String,
         confirmPassword: String,
         gender: String,
         date_of_birth: String
     ) {
-        if (validateSignup(firstname, lastname, email,mobileno, password, confirmPassword, gender, date_of_birth)
+        if (validateSignup(
+                firstname,
+                lastname,
+                email,
+                mobileno,
+                password,
+                confirmPassword,
+                gender,
+                date_of_birth
+            )
         ) {
             view.viewProgress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
@@ -56,12 +65,12 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                 .addFormDataPart("user[email]", email)
                 .addFormDataPart("user[role]", role)
                 .addFormDataPart("patient[referenced_form]", referenceform)
-                .addFormDataPart("user[phone]",countrycode+mobileno)
+                .addFormDataPart("user[phone]", countrycode + mobileno)
                 .addFormDataPart("user[gender]", gender)
                 .addFormDataPart("user[password]", password)
                 .addFormDataPart("profile[date_of_birth]", date_of_birth)
                 .addFormDataPart("device_detail[device_type]", devicetype)
-                .addFormDataPart("user[corporate_organization_id]",corporateId)
+                .addFormDataPart("user[corporate_organization_id]", corporateId)
                 .addFormDataPart("device_detail[player_id]", playerId)
                 .build()
 
@@ -71,7 +80,7 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
-                            val userObject = Gson().fromJson(it.data,UserResponse::class.java)
+                            val userObject = Gson().fromJson(it.data, UserResponse::class.java)
                             val user = userObject.user
                             user.profile.dateOfBirth.let { it1 ->
                                 userHolder.saveUser(
@@ -86,14 +95,13 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                             }
                             view.sendUserData(userObject.user)
                         }
-                        InvalidCredentials,InternalServer -> {
+                        InvalidCredentials, InternalServer -> {
                             view.displaymessage(it.message)
                         }
                         AlreadyExist -> {
                             view.displaymessage(it.message)
                         }
-                        MissingParameter->
-                        {
+                        MissingParameter -> {
                             view.displaymessage(it.message)
                         }
                     }
@@ -104,7 +112,7 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
         }
     }
 
-  private fun validateSignup(
+    private fun validateSignup(
         firstname: String,
         lastname: String,
         email: String,
@@ -154,8 +162,7 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
             return false
         }
 
-        if (!confirmPassword.matches(password.toRegex()))
-        {
+        if (!confirmPassword.matches(password.toRegex())) {
             view.displaymessage("Password not matching")
             return false
         }
@@ -173,7 +180,7 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
     interface View {
         fun displaymessage(message: String?)
         fun displaySuccessMessage(message: String?)
-        fun sendUserData(user:User)
+        fun sendUserData(user: User)
         fun viewProgress(isShow: Boolean)
     }
 }

@@ -10,8 +10,7 @@ import com.applocum.connecttomyhealth.convertAvailableTimeSlots
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import kotlinx.android.synthetic.main.raw_session_booking.view.*
 
-class AvailableTimeAdapter(context: Context, list: ArrayList<Time>) :
-    RecyclerView.Adapter<AvailableTimeAdapter.SessionTypeHolder>() {
+class AvailableTimeAdapter(context: Context, list: ArrayList<Time>) : RecyclerView.Adapter<AvailableTimeAdapter.SessionTypeHolder>() {
     var mContext = context
     var mList = list
 

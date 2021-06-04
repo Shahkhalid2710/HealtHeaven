@@ -9,14 +9,15 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
 import kotlinx.android.synthetic.main.raw_medical_list.view.*
 
-class MedicalDiseaseAdapter(context: Context, list:ArrayList<Medical>, private val onItemClick:ItemClickListnter):RecyclerView.Adapter<MedicalDiseaseAdapter.MedicalHolder>() {
-    var mContext=context
-    var mList=list
+class MedicalDiseaseAdapter(context: Context, list: ArrayList<Medical>, private val onItemClick: ItemClickListnter
+) : RecyclerView.Adapter<MedicalDiseaseAdapter.MedicalHolder>() {
+    var mContext = context
+    var mList = list
 
-    inner class MedicalHolder(itemView: View):RecyclerView.ViewHolder(itemView){}
+    inner class MedicalHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicalHolder {
-        val v=LayoutInflater.from(mContext).inflate(R.layout.raw_medical_list,parent,false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_medical_list, parent, false)
         return MedicalHolder(v)
     }
 
@@ -25,17 +26,17 @@ class MedicalDiseaseAdapter(context: Context, list:ArrayList<Medical>, private v
     }
 
     override fun onBindViewHolder(holder: MedicalHolder, position: Int) {
-        val medical=mList[position]
-        holder.itemView.tvDiseaseName.text=medical.description
+        val medical = mList[position]
+        holder.itemView.tvDiseaseName.text = medical.description
 
         holder.itemView.setOnClickListener {
             onItemClick.onItemClick(medical, position)
             notifyDataSetChanged()
             mList.clear()
         }
-
     }
-    interface ItemClickListnter{
+
+    interface ItemClickListnter {
         fun onItemClick(medical: Medical, position: Int)
     }
 }

@@ -62,7 +62,6 @@ class ProfileFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_profile, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectview(this)
@@ -71,7 +70,8 @@ class ProfileFragment : Fragment(),
 
         RxView.clicks(v.flProfile).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_profile_dialog, null, false)
+                val showDialogView = LayoutInflater.from(requireActivity())
+                    .inflate(R.layout.custom_profile_dialog, null, false)
                 val dialog = androidx.appcompat.app.AlertDialog.Builder(requireActivity()).create()
                 dialog.setView(showDialogView)
 
@@ -82,7 +82,7 @@ class ProfileFragment : Fragment(),
                             .setCropShape(CropImageView.CropShape.OVAL)
                             .setCropMenuCropButtonIcon(R.drawable.ic_yes)
                             .setRequestedSize(400, 400)
-                            .start(it1,this)
+                            .start(it1, this)
                     }
                     dialog.dismiss()
                 }
@@ -98,8 +98,7 @@ class ProfileFragment : Fragment(),
 
         RxView.clicks(v.llPersonalDetails).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(requireActivity(),
-                    PersonalDetailsActivity::class.java))
+                startActivity(Intent(requireActivity(), PersonalDetailsActivity::class.java))
             }
 
         RxView.clicks(v.llClinicalRecords).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -141,48 +140,49 @@ class ProfileFragment : Fragment(),
                 dialog.setView(showDialogView)
 
                 showDialogView.btnSignOut.setOnClickListener {
-                    val intent=Intent(requireActivity(),
-                        LoginActivity::class.java)
+                    val intent = Intent(
+                        requireActivity(),
+                        LoginActivity::class.java
+                    )
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     requireActivity().finish()
-                    userHolder.clearUserData("","","","","","","")
+                    userHolder.clearUserData("", "", "", "", "", "", "")
                 }
                 showDialogView.btnNo.setOnClickListener {
                     dialog.dismiss()
                 }
-                dialog.show()            }
+                dialog.show()
+            }
 
         return v
     }
 
     override fun showProfile(patient: Patient) {
-        v.tvFName.text=patient.user.firstName
-        v.tvLName.text=patient.user.lastName
+        v.tvFName.text = patient.user.firstName
+        v.tvLName.text = patient.user.lastName
         Glide.with(requireActivity()).clear(v.ivProfile)
         Glide.with(requireActivity()).load(patient.image).into(v.ivProfile)
 
     }
 
     override fun displayMessage(message: String) {
-        Toast.makeText(requireActivity(),message,Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun displayErrorMessage(message: String) {
-        val snackbar = Snackbar.make(llProfile,message, Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(llProfile, message, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
         snackbar.show()
     }
 
-    override fun userData(user: User) {
-
-    }
+    override fun userData(user: User) {}
 
     override fun viewprogress(isShow: Boolean) {
-        v.progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

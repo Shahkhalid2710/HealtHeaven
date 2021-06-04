@@ -29,7 +29,6 @@ class WalkThroughAdapter(context: Context,list:ArrayList<SelectItem>) :PagerAdap
 
         val layoutInflater:LayoutInflater= mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view=layoutInflater.inflate(R.layout.custom_onboarding_screen,null)
-
         val imageview:ImageView=view.findViewById(R.id.ivOnBoardScreen)
         val tvName:TextView=view.findViewById(R.id.tvOnBoardName)
         val tvDes:TextView=view.findViewById(R.id.tvOnBoardDes)

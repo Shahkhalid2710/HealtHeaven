@@ -33,8 +33,7 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListener,MedicalPresenter.View,
-    InvestigationPresenter.View {
+class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListener, MedicalPresenter.View, InvestigationPresenter.View {
 
     private var day: Int = 0
     private var month: Int = 0
@@ -43,15 +42,17 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     private var myMonth: Int = 0
     private var myYear: Int = 0
     var mListMedical: ArrayList<Medical> = ArrayList()
-    private var selectedString=""
-    private var isMatched =false
-    private var investigationName=""
+    private var selectedString = ""
+    private var isMatched = false
+    private var investigationName = ""
 
     @Inject
     lateinit var presenter: MedicalPresenter
 
     @Inject
     lateinit var investigationPresenter: InvestigationPresenter
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_add_investigation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,23 +66,19 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
             .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnEach {
-                if (selectedString!=null && selectedString == etInvestigationName.text.toString())
-                {
-                    isMatched=true
-                }
-                else
-                {
-                    isMatched=false
-                    selectedString=""
+                if (selectedString != null && selectedString == etInvestigationName.text.toString()) {
+                    isMatched = true
+                } else {
+                    isMatched = false
+                    selectedString = ""
                 }
 
             }
             .observeOn(Schedulers.computation())
-            .filter { s -> s.length >= 2}
+            .filter { s -> s.length >= 2 }
             .observeOn(AndroidSchedulers.mainThread())
             .map {
-                if (!isMatched)
-                {
+                if (!isMatched) {
                     presenter.getDiseaseList(etInvestigationName.text.toString())
                 }
             }.subscribe().let { presenter.disposables.add(it) }
@@ -92,20 +89,23 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
             this.month = calendar.get(Calendar.MONTH)
             this.year = calendar.get(Calendar.YEAR)
 
-            val datePickerDialog = DatePickerDialog(this,R.style.DialogTheme ,this, year, month, day)
+            val datePickerDialog =
+                DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
             datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
             datePickerDialog.show()
         }
 
 
-        investigationName=etInvestigationName.text.toString()
+        investigationName = etInvestigationName.text.toString()
 
         btnAddInvestigation.setOnClickListener {
-            investigationPresenter.addInvestigation(investigationName,etInvestigationdate.text.toString(),etInvestigationDescription.text.toString())
+            investigationPresenter.addInvestigation(
+                investigationName,
+                etInvestigationdate.text.toString(),
+                etInvestigationDescription.text.toString()
+            )
         }
     }
-
-    override fun getLayoutResourceId(): Int =R.layout.activity_add_investigation
 
     @SuppressLint("SimpleDateFormat")
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -123,7 +123,6 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     }
 
     override fun displaySuccessMessage(message: String) {
-       // Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         this.finish()
     }
 
@@ -136,45 +135,40 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     }
 
     override fun viewInvestigationProgress(isShow: Boolean) {
-         progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun getDiseaseList(list: ArrayList<Medical>) {
-        mListMedical=list
-        rvDisease.visibility= View.VISIBLE
-        rvDisease.layoutManager= LinearLayoutManager(this)
-        rvDisease.adapter=
-            MedicalDiseaseAdapter(this,mListMedical,object : MedicalDiseaseAdapter.ItemClickListnter{
-                override fun onItemClick(medical: Medical, position: Int) {
-                    investigationName=medical.id.toString()
-                    if(!etInvestigationName.text.isNullOrBlank())
-                    {
-                        mListMedical.clear()
+        mListMedical = list
+        rvDisease.visibility = View.VISIBLE
+        rvDisease.layoutManager = LinearLayoutManager(this)
+        rvDisease.adapter = MedicalDiseaseAdapter(this, mListMedical,
+                object : MedicalDiseaseAdapter.ItemClickListnter {
+                    override fun onItemClick(medical: Medical, position: Int) {
+                        investigationName = medical.id.toString()
+                        if (!etInvestigationName.text.isNullOrBlank()) {
+                            mListMedical.clear()
+                        }
+                        selectedString = medical.description
+                        etInvestigationName.setText(medical.description)
+                        rvDisease.visibility = View.GONE
                     }
-                    selectedString=medical.description
-                    etInvestigationName.setText(medical.description)
-                    rvDisease.visibility= View.GONE
-                }
-            })
-    }
+                })
+       }
 
     override fun viewProgress(isShow: Boolean) {
-        progressInvestigation.visibility=if (isShow) View.VISIBLE else View.GONE
+        progressInvestigation.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun viewMedicalProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun investigationList(list: ArrayList<Investigation>) {
-    }
+    override fun investigationList(list: ArrayList<Investigation>) {}
 
-    override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {
-    }
+    override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {}
 
-    override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {
-    }
+    override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {}
 
-    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {
-    }
+    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {}
 }

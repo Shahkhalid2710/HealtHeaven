@@ -13,15 +13,15 @@ import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_exemption_xml.view.*
 import java.util.concurrent.TimeUnit
 
-class ExemptionAdapter(context: Context,list:ArrayList<Exemption>):RecyclerView.Adapter<ExemptionAdapter.ExemptionHolder>() {
-    var mContext=context
-    var mList=list
-    private var selectedItem=-1
+class ExemptionAdapter(context: Context, list: ArrayList<Exemption>) : RecyclerView.Adapter<ExemptionAdapter.ExemptionHolder>() {
+    var mContext = context
+    var mList = list
+    private var selectedItem = -1
 
-    inner class ExemptionHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
+    inner class ExemptionHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExemptionHolder {
-        val v=LayoutInflater.from(mContext).inflate(R.layout.raw_exemption_xml,parent,false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_exemption_xml, parent, false)
         return ExemptionHolder(v)
     }
 
@@ -31,14 +31,13 @@ class ExemptionAdapter(context: Context,list:ArrayList<Exemption>):RecyclerView.
 
     @SuppressLint("CheckResult")
     override fun onBindViewHolder(holder: ExemptionHolder, position: Int) {
-        val exemption=mList[position]
+        val exemption = mList[position]
+        holder.itemView.tvLetter.text = exemption.eLetter
+        holder.itemView.tvDes.text = exemption.eDes
 
-        holder.itemView.tvLetter.text=exemption.eLetter
-        holder.itemView.tvDes.text=exemption.eDes
-
-        RxView.clicks(holder.itemView).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(holder.itemView).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                selectedItem =position
+                selectedItem = position
                 notifyDataSetChanged()
             }
 
@@ -46,8 +45,7 @@ class ExemptionAdapter(context: Context,list:ArrayList<Exemption>):RecyclerView.
             holder.itemView.llexemption.setBackgroundResource(R.drawable.custom_btn)
             holder.itemView.tvLetter.setTextColor(Color.parseColor("#FFFFFF"))
             holder.itemView.tvDes.setTextColor(Color.parseColor("#FFFFFF"))
-        }
-        else {
+        } else {
             holder.itemView.llexemption.setBackgroundResource(R.drawable.custom_edittext)
             holder.itemView.tvLetter.setTextColor(Color.parseColor("#3a3a3a"))
             holder.itemView.tvDes.setTextColor(Color.parseColor("#3a3a3a"))

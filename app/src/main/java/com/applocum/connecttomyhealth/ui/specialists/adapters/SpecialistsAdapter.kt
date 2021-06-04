@@ -45,7 +45,6 @@ class SpecialistsAdapter(context: Context,list: ArrayList<Specialist>,private va
             .subscribe {
                 onitemclick.onbookSession(specialist,position)
             }
-
         Glide.with(mContext).load(specialist.image).into(holder.itemView.ivDoctor)
     }
     interface ItemClickListner

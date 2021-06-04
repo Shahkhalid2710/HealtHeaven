@@ -20,11 +20,12 @@ import kotlinx.android.synthetic.main.custom_loader_progress.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class OtherNoteActivity : BaseActivity(),
-    DocumentPresenter.View {
+class OtherNoteActivity : BaseActivity(), DocumentPresenter.View {
 
     @Inject
     lateinit var presenter: DocumentPresenter
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_other_note
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,43 +34,39 @@ class OtherNoteActivity : BaseActivity(),
         presenter.injectView(this)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe{
-                finish()
-            }
+            .subscribe { finish() }
 
         presenter.getOtherNote()
     }
 
-    override fun getLayoutResourceId(): Int = R.layout.activity_other_note
-
     override fun displayErrorMessage(message: String) {
-       Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun getDocument(list: ArrayList<Document>) {
-        if (list.isEmpty())
-        {
-            layoutNotFoundOtherNotes.visibility= View.VISIBLE
-            rvOtherNotes.visibility= View.GONE
-        }
-        else
-        {
-            layoutNotFoundOtherNotes.visibility= View.GONE
-            rvOtherNotes.visibility= View.VISIBLE
+        if (list.isEmpty()) {
+            layoutNotFoundOtherNotes.visibility = View.VISIBLE
+            rvOtherNotes.visibility = View.GONE
+        } else {
+            layoutNotFoundOtherNotes.visibility = View.GONE
+            rvOtherNotes.visibility = View.VISIBLE
         }
 
-        rvOtherNotes.layoutManager= LinearLayoutManager(this)
-        rvOtherNotes.adapter= OtherNoteAdapter(this,list,object :OtherNoteAdapter.NoteClickListner{
-            override fun onNoteClick(document: Document, position: Int) {
-                val intent= Intent(this@OtherNoteActivity,
-                    DocumentViewActivity::class.java)
-                intent.putExtra("document",document)
-                startActivity(intent)
-            }
-        })
+        rvOtherNotes.layoutManager = LinearLayoutManager(this)
+        rvOtherNotes.adapter =
+            OtherNoteAdapter(this, list, object : OtherNoteAdapter.NoteClickListner {
+                override fun onNoteClick(document: Document, position: Int) {
+                    val intent = Intent(
+                        this@OtherNoteActivity,
+                        DocumentViewActivity::class.java
+                    )
+                    intent.putExtra("document", document)
+                    startActivity(intent)
+                }
+            })
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 }

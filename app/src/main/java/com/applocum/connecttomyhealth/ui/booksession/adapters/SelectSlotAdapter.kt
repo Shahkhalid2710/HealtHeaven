@@ -13,17 +13,15 @@ import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_session_booking.view.*
 import java.util.concurrent.TimeUnit
 
-class SelectSlotAdapter(context: Context, list:ArrayList<SessionType>, private var itemClickListner: ItemClickListner) :
-    RecyclerView.Adapter<SelectSlotAdapter.SessionTypeHolder>(){
-    var mContext=context
-    var mList=list
-    private var selectedItem:Int=0
+class SelectSlotAdapter(context: Context, list: ArrayList<SessionType>, private var itemClickListner: ItemClickListner) : RecyclerView.Adapter<SelectSlotAdapter.SessionTypeHolder>() {
+    var mContext = context
+    var mList = list
+    private var selectedItem: Int = 0
 
-
-    inner class SessionTypeHolder(itemView: View): RecyclerView.ViewHolder(itemView){}
+    inner class SessionTypeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionTypeHolder {
-        val v= LayoutInflater.from(mContext).inflate(R.layout.raw_slot,parent,false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_slot, parent, false)
         return SessionTypeHolder(v)
     }
 
@@ -33,27 +31,26 @@ class SelectSlotAdapter(context: Context, list:ArrayList<SessionType>, private v
 
     @SuppressLint("CheckResult")
     override fun onBindViewHolder(holder: SessionTypeHolder, position: Int) {
-        val sessionType=mList[position]
-        holder.itemView.tvName.text=sessionType.sName
+        val sessionType = mList[position]
+        holder.itemView.tvName.text = sessionType.sName
 
-        RxView.clicks(holder.itemView).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(holder.itemView).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 itemClickListner.onItemClick(sessionType, position)
-                selectedItem=position
+                selectedItem = position
                 notifyDataSetChanged()
             }
 
         if (selectedItem == holder.adapterPosition) {
             holder.itemView.rl.setBackgroundResource(R.drawable.custom_btn)
             holder.itemView.tvName.setTextColor(Color.parseColor("#FFFFFF"))
-        }
-        else {
+        } else {
             holder.itemView.rl.setBackgroundResource(R.drawable.default_button)
             holder.itemView.tvName.setTextColor(Color.parseColor("#008976"))
         }
     }
-    interface ItemClickListner
-    {
+
+    interface ItemClickListner {
         fun onItemClick(sessionType: SessionType, position: Int)
     }
 }

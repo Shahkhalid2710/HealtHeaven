@@ -10,9 +10,7 @@ import com.applocum.connecttomyhealth.convertSimpleFormat
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import kotlinx.android.synthetic.main.raw_medical_history.view.*
 
-class ActiveMedicalHistoryAdapter(context: Context, list: ArrayList<TrueMedicalHistory>) :
-    RecyclerView.Adapter<ActiveMedicalHistoryAdapter.MedicalHistoryHolder>() {
-
+class ActiveMedicalHistoryAdapter(context: Context, list: ArrayList<TrueMedicalHistory>) : RecyclerView.Adapter<ActiveMedicalHistoryAdapter.MedicalHistoryHolder>() {
     var mContext = context
     var mList = list
 
@@ -29,16 +27,13 @@ class ActiveMedicalHistoryAdapter(context: Context, list: ArrayList<TrueMedicalH
 
     override fun onBindViewHolder(holder: MedicalHistoryHolder, position: Int) {
         val medicalHistory = mList[position]
-        holder.itemView.tvName.text =medicalHistory.history_problem.description
+        holder.itemView.tvName.text = medicalHistory.history_problem.description
         holder.itemView.tvDate.text = convertSimpleFormat(medicalHistory.start_date)
 
-        if (medicalHistory.status == "verified")
-        {
-            holder.itemView.rlVerified.visibility=View.VISIBLE
-        }
-        else
-        {
-            holder.itemView.rlVerified.visibility=View.GONE
+        if (medicalHistory.status == "verified") {
+            holder.itemView.rlVerified.visibility = View.VISIBLE
+        } else {
+            holder.itemView.rlVerified.visibility = View.GONE
         }
     }
 }

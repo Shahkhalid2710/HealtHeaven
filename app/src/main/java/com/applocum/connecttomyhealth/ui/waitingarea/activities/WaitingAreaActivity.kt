@@ -18,10 +18,6 @@ class WaitingAreaActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
-
+            .subscribe { finish() }
     }
-
 }

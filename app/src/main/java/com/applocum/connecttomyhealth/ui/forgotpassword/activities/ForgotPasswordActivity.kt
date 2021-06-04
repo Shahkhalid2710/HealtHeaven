@@ -17,12 +17,12 @@ import kotlinx.android.synthetic.main.activity_forgot_password.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import javax.inject.Inject
 
-class ForgotPasswordActivity : BaseActivity(),
-    ForgotPasswordPresenter.View, TextWatcher {
+class ForgotPasswordActivity : BaseActivity(),ForgotPasswordPresenter.View, TextWatcher {
     @Inject
     lateinit var presenter: ForgotPasswordPresenter
 
-    override fun getLayoutResourceId(): Int =R.layout.activity_forgot_password
+    override fun getLayoutResourceId(): Int = R.layout.activity_forgot_password
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
@@ -33,7 +33,6 @@ class ForgotPasswordActivity : BaseActivity(),
         btnSend.setOnClickListener {
             presenter.forgotPassword(etEmailNumber.text.toString())
         }
-
     }
 
     override fun displayMessage(message: String) {
@@ -45,7 +44,7 @@ class ForgotPasswordActivity : BaseActivity(),
     }
 
     override fun displaySuccessMessage(message: String) {
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun storePassword(passwordGlobalResponse: PasswordGlobalResponse) {
@@ -53,20 +52,18 @@ class ForgotPasswordActivity : BaseActivity(),
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun afterTextChanged(s: Editable?) {
         val result: String = s.toString().replace(" ", "")
-        if (s.toString()!= result) {
+        if (s.toString() != result) {
             etEmailNumber.setText(result)
             etEmailNumber.setSelection(result.length)
         }
     }
 
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-    }
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-    }
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 }

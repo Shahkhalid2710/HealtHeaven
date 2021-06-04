@@ -19,13 +19,14 @@ import kotlinx.android.synthetic.main.activity_specialists.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import javax.inject.Inject
 
-class SpecialistsActivity : BaseActivity() ,
-    SpecilistPresenter.View {
+class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
     @Inject
     lateinit var presenter: SpecilistPresenter
 
     @Inject
     lateinit var userHolder: UserHolder
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_specialists
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,30 +43,22 @@ class SpecialistsActivity : BaseActivity() ,
 
     }
 
-    override fun getLayoutResourceId(): Int= R.layout.activity_specialists
-
     override fun displaymessage(message: String) {
-        Toast.makeText(this,"Success",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
     }
 
-    override fun getdoctorlist(list:ArrayList<Specialist>) {
-        rvDoctors.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-        val specialistsAdapter=
-            SpecialistsAdapter(
-                this,
-                list,
-                object :
-                    SpecialistsAdapter.ItemClickListner {
+    override fun getdoctorlist(list: ArrayList<Specialist>) {
+        rvDoctors.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val specialistsAdapter =
+            SpecialistsAdapter(this, list, object : SpecialistsAdapter.ItemClickListner {
                     override fun onItemClick(specialist: Specialist, position: Int) {
-                        val intent =
-                            Intent(this@SpecialistsActivity, BookSessionActivity::class.java)
+                        val intent = Intent(this@SpecialistsActivity, BookSessionActivity::class.java)
                         intent.putExtra("specialist", specialist)
                         startActivity(intent)
                     }
 
                     override fun onbookSession(specialist: Specialist, position: Int) {
-                        val intent =
-                            Intent(this@SpecialistsActivity, AddSymptomActivity::class.java)
+                        val intent = Intent(this@SpecialistsActivity, AddSymptomActivity::class.java)
                         intent.putExtra("specialist", specialist)
                         val appointment = userHolder.getBookAppointmentData()
                         appointment.therapistId = specialist.id
@@ -80,9 +73,8 @@ class SpecialistsActivity : BaseActivity() ,
                         startActivity(intent)
                     }
                 })
-        rvDoctors.adapter=specialistsAdapter
+        rvDoctors.adapter = specialistsAdapter
     }
-
     override fun viewProgress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }

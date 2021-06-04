@@ -15,36 +15,31 @@ import kotlinx.android.synthetic.main.custom_medical_history.*
 import java.util.concurrent.TimeUnit
 
 class MedicalHistoryActivity : BaseActivity() {
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_medical_history
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(btnAddMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    AddMedicalHistoryActivity::class.java))
+                startActivity(Intent(this, AddMedicalHistoryActivity::class.java))
             }
 
         RxView.clicks(tvAddMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    AddMedicalHistoryActivity::class.java))
+                startActivity(Intent(this, AddMedicalHistoryActivity::class.java))
             }
 
-        val viewPagerFragmentAdapter=
-            ViewPagerFragmentAdapter(
-                this,
-                supportFragmentManager
-            )
-        viewPagerFragmentAdapter.addfragment(ActiveMedicalHistoryFragment(),"Active")
-        viewPagerFragmentAdapter.addfragment(PastMedicalHistoryFragment(),"Past ")
-        viewPager.adapter=viewPagerFragmentAdapter
+        val viewPagerFragmentAdapter =
+            ViewPagerFragmentAdapter(this, supportFragmentManager)
+        viewPagerFragmentAdapter.addfragment(ActiveMedicalHistoryFragment(), "Active")
+        viewPagerFragmentAdapter.addfragment(PastMedicalHistoryFragment(), "Past ")
+        viewPager.adapter = viewPagerFragmentAdapter
         tablayout.setupWithViewPager(viewPager)
     }
-    override fun getLayoutResourceId(): Int =R.layout.activity_medical_history
 }

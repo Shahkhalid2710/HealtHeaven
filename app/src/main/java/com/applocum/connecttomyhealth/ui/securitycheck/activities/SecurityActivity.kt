@@ -26,8 +26,8 @@ class SecurityActivity : BaseActivity(),
     @Inject
     lateinit var presenter: SecurityPresenter
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_security
 
-    override fun getLayoutResourceId(): Int =R.layout.activity_security
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +35,7 @@ class SecurityActivity : BaseActivity(),
         presenter.injectView(this)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(btnDone).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -46,8 +44,10 @@ class SecurityActivity : BaseActivity(),
     }
 
     override fun security(security: Security) {
-        val intent=Intent(this,
-            ClinicalRecordsActivity::class.java)
+        val intent = Intent(
+            this,
+            ClinicalRecordsActivity::class.java
+        )
         startActivity(intent)
         finish()
     }

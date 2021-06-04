@@ -25,10 +25,8 @@ class SecurityPresenter @Inject constructor(private val api: AppEndPoint) {
         this.view = view
     }
 
-
     fun validateSecurity(password: String) {
         if (validation(password)) {
-
             view.viewProgress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -54,9 +52,7 @@ class SecurityPresenter @Inject constructor(private val api: AppEndPoint) {
                     it.printStackTrace()
                 }).let { disposables.addAll(it) }
         }
-
     }
-
 
     private fun validation(password: String): Boolean {
         if (password.isEmpty()) {
@@ -65,7 +61,6 @@ class SecurityPresenter @Inject constructor(private val api: AppEndPoint) {
         }
         return true
     }
-
 
     interface View {
         fun security(security: Security)

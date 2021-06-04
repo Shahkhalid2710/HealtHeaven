@@ -13,16 +13,17 @@ import java.net.URLEncoder
 
 
 class DocumentViewActivity : BaseActivity() {
-
     lateinit var document: Document
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_document_view
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ivBack.setOnClickListener { finish() }
 
-        document= intent.getSerializableExtra("document") as Document
+        document = intent.getSerializableExtra("document") as Document
 
-        progressWeb.visibility=View.VISIBLE
+        progressWeb.visibility = View.VISIBLE
 
         val mWebSettings: WebSettings = webView.settings
 
@@ -40,13 +41,9 @@ class DocumentViewActivity : BaseActivity() {
             }
 
             override fun onPageFinished(view: WebView, url: String) {
-                progressWeb.visibility=View.GONE
-
+                progressWeb.visibility = View.GONE
             }
         }
-
-        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+ URLEncoder.encode(document.file, "ISO-8859-1"))
-
+        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + URLEncoder.encode(document.file, "ISO-8859-1"))
     }
-    override fun getLayoutResourceId(): Int=R.layout.activity_document_view
 }

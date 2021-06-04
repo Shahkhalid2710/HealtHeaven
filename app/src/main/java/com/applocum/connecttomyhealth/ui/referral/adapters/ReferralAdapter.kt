@@ -40,6 +40,7 @@ class ReferralAdapter(context: Context, list:ArrayList<Document>, private val on
                 onReferralClick.onReferralClick(document, position)
             }
     }
+
     interface ReferralClickListner{
         fun onReferralClick(document: Document, position: Int)
     }

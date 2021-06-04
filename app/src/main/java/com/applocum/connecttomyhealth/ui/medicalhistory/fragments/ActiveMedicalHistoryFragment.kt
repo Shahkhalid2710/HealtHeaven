@@ -15,20 +15,15 @@ import kotlinx.android.synthetic.main.custom_loader_progress.view.*
 import kotlinx.android.synthetic.main.fragment_active_medical_history.*
 import javax.inject.Inject
 
-class ActiveMedicalHistoryFragment : Fragment(),
-    MedicalPresenter.View {
+class ActiveMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
 
     @Inject
     lateinit var presenter: MedicalPresenter
 
-    lateinit var v:View
+    lateinit var v: View
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        v= inflater.inflate(R.layout.fragment_active_medical_history, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        v = inflater.inflate(R.layout.fragment_active_medical_history, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
 
@@ -37,32 +32,24 @@ class ActiveMedicalHistoryFragment : Fragment(),
         return v
     }
 
-    override fun displayMessage(message: String) {
+    override fun displayMessage(message: String) {}
 
-    }
-
-    override fun getDiseaseList(list: ArrayList<Medical>) {
-    }
+    override fun getDiseaseList(list: ArrayList<Medical>) {}
 
     override fun viewProgress(isShow: Boolean) {
-        v.progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun viewMedicalProgress(isShow: Boolean) {
+    override fun viewMedicalProgress(isShow: Boolean) {}
 
-    }
-
-    override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {
-    }
+    override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {}
 
     override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {
-        rvActiveMedicalHistory.layoutManager=LinearLayoutManager(requireActivity())
-        rvActiveMedicalHistory.adapter=ActiveMedicalHistoryAdapter(requireActivity(),trueMedicalHistory)
-
+        rvActiveMedicalHistory.layoutManager = LinearLayoutManager(requireActivity())
+        rvActiveMedicalHistory.adapter = ActiveMedicalHistoryAdapter(requireActivity(), trueMedicalHistory)
     }
 
-    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {
-    }
+    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {}
 
     override fun onResume() {
         presenter.activeMedicalHistory()

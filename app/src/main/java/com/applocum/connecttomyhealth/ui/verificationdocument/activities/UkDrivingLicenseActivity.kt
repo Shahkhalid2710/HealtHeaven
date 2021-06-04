@@ -20,7 +20,9 @@ import java.io.IOException
 
 class UkDrivingLicenseActivity : BaseActivity() {
     private val requestCodee = 1
-    private var imageUri: Uri?=null
+    private var imageUri: Uri? = null
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_uk_driving_license
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,24 +32,19 @@ class UkDrivingLicenseActivity : BaseActivity() {
         rlDrivingLicense.setOnClickListener {
             val values = ContentValues()
             values.put(MediaStore.Images.Media.TITLE, "MyPicture")
-            values.put(
-                MediaStore.Images.Media.DESCRIPTION,
-                "Photo taken on " + System.currentTimeMillis()
-            )
+            values.put(MediaStore.Images.Media.DESCRIPTION, "Photo taken on " + System.currentTimeMillis())
             imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-            startActivityForResult(intent,0)
+            startActivityForResult(intent, 0)
         }
     }
-
-    override fun getLayoutResourceId(): Int=R.layout.activity_uk_driving_license
 
     private fun enableRuntimePermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             Toast.makeText(this, "CAMERA permission allows us to Access CAMERA app", Toast.LENGTH_LONG).show()
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),requestCodee)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), requestCodee)
         }
     }
 
@@ -61,20 +58,19 @@ class UkDrivingLicenseActivity : BaseActivity() {
         when (requestCode) {
             requestCodee -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //
-            }
-            else { Toast.makeText(this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show()
             }
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode ==0 && resultCode == Activity.RESULT_OK) {
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
             try {
-               val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
-                val imagepath=getRealPathFromURI(imageUri)
-                val intent=Intent(this,ValidationValidUKDrivingLicenseActivity::class.java)
-                intent.putExtra("image",imagepath)
+                val imagepath = getRealPathFromURI(imageUri)
+                val intent = Intent(this, ValidationValidUKDrivingLicenseActivity::class.java)
+                intent.putExtra("image", imagepath)
                 startActivity(intent)
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()

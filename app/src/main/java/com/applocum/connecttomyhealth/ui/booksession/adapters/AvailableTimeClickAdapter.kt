@@ -9,23 +9,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertAvailableTimeSlots
-import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_session_booking.view.*
 import java.util.concurrent.TimeUnit
 
-class AvailableTimeClickAdapter(context: Context, list:ArrayList<Time>, private var itemClickListner: ItemClickListner) :
-    RecyclerView.Adapter<AvailableTimeClickAdapter.SessionTypeHolder>(){
-    var mContext=context
-    var mList=list
-    private var selectedItem:Int=-1
+class AvailableTimeClickAdapter(context: Context, list: ArrayList<Time>, private var itemClickListner: ItemClickListner) : RecyclerView.Adapter<AvailableTimeClickAdapter.SessionTypeHolder>() {
+    var mContext = context
+    var mList = list
+    private var selectedItem: Int = -1
 
-
-    inner class SessionTypeHolder(itemView: View): RecyclerView.ViewHolder(itemView){}
+    inner class SessionTypeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionTypeHolder {
-        val v= LayoutInflater.from(mContext).inflate(R.layout.raw_session_booking,parent,false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_session_booking, parent, false)
         return SessionTypeHolder(v)
     }
 
@@ -35,28 +32,25 @@ class AvailableTimeClickAdapter(context: Context, list:ArrayList<Time>, private 
 
     @SuppressLint("CheckResult")
     override fun onBindViewHolder(holder: SessionTypeHolder, position: Int) {
-        val time=mList[position]
-
-        holder.itemView.tvName.text= convertAvailableTimeSlots(time.start_time)
-
-        RxView.clicks(holder.itemView).throttleFirst(500,TimeUnit.MILLISECONDS)
+        val time = mList[position]
+        holder.itemView.tvName.text = convertAvailableTimeSlots(time.start_time)
+        RxView.clicks(holder.itemView).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 itemClickListner.onItemClick(time, position)
-                selectedItem =position
+                selectedItem = position
                 notifyDataSetChanged()
             }
 
         if (selectedItem == holder.adapterPosition) {
             holder.itemView.rl.setBackgroundResource(R.drawable.custom_btn)
             holder.itemView.tvName.setTextColor(Color.parseColor("#FFFFFF"))
-        }
-        else {
+        } else {
             holder.itemView.rl.setBackgroundResource(R.drawable.default_button)
             holder.itemView.tvName.setTextColor(Color.parseColor("#008976"))
         }
     }
-    interface ItemClickListner
-    {
+
+    interface ItemClickListner {
         fun onItemClick(time: Time, position: Int)
     }
 }

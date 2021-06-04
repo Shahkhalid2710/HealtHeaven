@@ -43,8 +43,7 @@ import javax.inject.Inject
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class ProfileDetailsActivity : BaseActivity(),
-    ProfileDetailsPresenter.View, DatePickerDialog.OnDateSetListener {
+class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, DatePickerDialog.OnDateSetListener {
     private var day: Int = 0
     private var month: Int = 0
     private var year: Int = 0
@@ -57,7 +56,8 @@ class ProfileDetailsActivity : BaseActivity(),
 
     @Inject
     lateinit var userHolder: UserHolder
-    override fun getLayoutResourceId(): Int =R.layout.activity_profile_details
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_profile_details
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,28 +68,39 @@ class ProfileDetailsActivity : BaseActivity(),
 
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(tvSave).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                presenter.updateProfile(etFirstName.text.toString(),etLastName.text.toString(),etEmail.text.toString(),etPhoneNo.text.toString(),etGender.text.toString().toLowerCase(Locale.ROOT),etDOB.text.toString(),etMeter.text.toString(),etCentimeter.text.toString(),etStone.text.toString(),etLbs.text.toString(),etBP.text.toString())
+                presenter.updateProfile(
+                    etFirstName.text.toString(),
+                    etLastName.text.toString(),
+                    etEmail.text.toString(),
+                    etPhoneNo.text.toString(),
+                    etGender.text.toString().toLowerCase(Locale.ROOT),
+                    etDOB.text.toString(),
+                    etMeter.text.toString(),
+                    etCentimeter.text.toString(),
+                    etStone.text.toString(),
+                    etLbs.text.toString(),
+                    etBP.text.toString()
+                )
             }
 
         RxView.clicks(flPic).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_profile_dialog, null, false)
+                val showDialogView =
+                    LayoutInflater.from(this).inflate(R.layout.custom_profile_dialog, null, false)
                 val dialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
 
                 showDialogView.tvChooseImage.setOnClickListener {
-                        CropImage.activity()
-                            .setGuidelines(CropImageView.Guidelines.ON)
-                            .setCropShape(CropImageView.CropShape.OVAL)
-                            .setCropMenuCropButtonIcon(R.drawable.ic_yes)
-                            .setRequestedSize(400, 400)
-                            .start(this)
+                    CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .setCropShape(CropImageView.CropShape.OVAL)
+                        .setCropMenuCropButtonIcon(R.drawable.ic_yes)
+                        .setRequestedSize(400, 400)
+                        .start(this)
                     dialog.dismiss()
                 }
 
@@ -99,17 +110,15 @@ class ProfileDetailsActivity : BaseActivity(),
                 dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
-
             }
-
         editTextClicks()
 
-   }
+    }
 
     @SuppressLint("SimpleDateFormat")
     override fun showProfile(patient: Patient) {
-        tvFName.text=patient.user.firstName
-        tvLName.text=patient.user.lastName
+        tvFName.text = patient.user.firstName
+        tvLName.text = patient.user.lastName
         etFirstName.setText(patient.user.firstName)
         etLastName.setText(patient.user.lastName)
         etEmail.setText(patient.user.email)
@@ -129,20 +138,33 @@ class ProfileDetailsActivity : BaseActivity(),
 
         Glide.with(this).load(patient.user.image).into(ivProfile)
 
-        when(patient.user.gender)
-        {
-            "male"->{etGender.setText(R.string.male)}
-            "female"->{etGender.setText(R.string.female)}
-            "transgender"->{etGender.setText(R.string.transgender)}
-            "gender neutral"->{etGender.setText(R.string.gender_neutral)}
-            "gender fluid"->{etGender.setText(R.string.gender_fluid)}
-            "prefer not to say"->{etGender.setText(R.string.prefer_not_to_say)}
-            "other"->{etGender.setText(R.string.other)}
+        when (patient.user.gender) {
+            "male" -> {
+                etGender.setText(R.string.male)
+            }
+            "female" -> {
+                etGender.setText(R.string.female)
+            }
+            "transgender" -> {
+                etGender.setText(R.string.transgender)
+            }
+            "gender neutral" -> {
+                etGender.setText(R.string.gender_neutral)
+            }
+            "gender fluid" -> {
+                etGender.setText(R.string.gender_fluid)
+            }
+            "prefer not to say" -> {
+                etGender.setText(R.string.prefer_not_to_say)
+            }
+            "other" -> {
+                etGender.setText(R.string.other)
+            }
         }
     }
 
     override fun displayMessage(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         this.finish()
     }
 
@@ -154,12 +176,10 @@ class ProfileDetailsActivity : BaseActivity(),
         snackbar.show()
     }
 
-    override fun userData(user: User) {
-
-    }
+    override fun userData(user: User) {}
 
     override fun viewprogress(isShow: Boolean) {
-        progress.visibility = if(isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun onResume() {
@@ -168,17 +188,15 @@ class ProfileDetailsActivity : BaseActivity(),
     }
 
     @SuppressLint("CheckResult")
-    private fun editTextClicks()
-    {
+    private fun editTextClicks() {
 
-         RxView.clicks(etGender).throttleFirst(500, TimeUnit.MILLISECONDS)
+        RxView.clicks(etGender).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_gender_dialog, null, false)
                 val dialog = AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
 
-                when(etGender.text.toString())
-                {
+                when (etGender.text.toString()) {
                     "Male" -> showDialogView.rbMale.isChecked = true
                     "Female" -> showDialogView.rbFemale.isChecked = true
                     "Transgender" -> showDialogView.rbTransgender.isChecked = true
@@ -188,8 +206,8 @@ class ProfileDetailsActivity : BaseActivity(),
                     "Other" -> showDialogView.rbOther.isChecked = true
                 }
 
-                showDialogView.btnDone.setOnClickListener  {
-                    var selectedGender=""
+                showDialogView.btnDone.setOnClickListener {
+                    var selectedGender = ""
                     when {
                         showDialogView.rbMale.isChecked -> {
                             selectedGender = showDialogView.rbMale.text.toString()
@@ -198,19 +216,19 @@ class ProfileDetailsActivity : BaseActivity(),
                             selectedGender = showDialogView.rbFemale.text.toString()
                         }
                         showDialogView.rbTransgender.isChecked -> {
-                            selectedGender =showDialogView.rbTransgender.text.toString()
+                            selectedGender = showDialogView.rbTransgender.text.toString()
                         }
                         showDialogView.rbGenderNeutral.isChecked -> {
                             selectedGender = showDialogView.rbGenderNeutral.text.toString()
                         }
                         showDialogView.rbGenderFluid.isChecked -> {
-                            selectedGender =showDialogView.rbGenderFluid.text.toString()
+                            selectedGender = showDialogView.rbGenderFluid.text.toString()
                         }
                         showDialogView.rbPreferNotToSay.isChecked -> {
                             selectedGender = showDialogView.rbPreferNotToSay.text.toString()
                         }
                         showDialogView.rbOther.isChecked -> {
-                            selectedGender =showDialogView.rbOther.text.toString()
+                            selectedGender = showDialogView.rbOther.text.toString()
                         }
                     }
                     etGender.setText(selectedGender)
@@ -233,7 +251,7 @@ class ProfileDetailsActivity : BaseActivity(),
 
                 val datePickerDialog =
                     DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
-                datePickerDialog.datePicker.maxDate =(System.currentTimeMillis() - 568025136000L)
+                datePickerDialog.datePicker.maxDate = (System.currentTimeMillis() - 568025136000L)
                 datePickerDialog.show()
             }
 
@@ -262,9 +280,10 @@ class ProfileDetailsActivity : BaseActivity(),
                 selectPound()
             }
 
-         RxView.clicks(tvPhoneNoEdit).throttleFirst(500, TimeUnit.MILLISECONDS)
+        RxView.clicks(tvPhoneNoEdit).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_edit_phone_number_dialog, null, false)
+                val showDialogView = LayoutInflater.from(this)
+                    .inflate(R.layout.custom_edit_phone_number_dialog, null, false)
                 val dialog = AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
 
@@ -288,26 +307,24 @@ class ProfileDetailsActivity : BaseActivity(),
         etDOB.setText(date)
     }
 
-    private fun selectBloodPressure()
-    {
-            val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
-            builder.setTitle("Select blood pressure")
-            val bloodPressure=resources.getStringArray(R.array.BloodPressure)
-            val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,bloodPressure)
-            builder.setAdapter(dataAdapter) { _, which ->
-                etBP.setText(bloodPressure[which]).toString()
-            }
-            val dialog = builder.create()
-            dialog.show()
+    private fun selectBloodPressure() {
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
+        builder.setTitle("Select blood pressure")
+        val bloodPressure = resources.getStringArray(R.array.BloodPressure)
+        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, bloodPressure)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etBP.setText(bloodPressure[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
 
     }
 
-    private fun selectMeter()
-    {
-        val meter=resources.getStringArray(R.array.Meter)
-        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
+    private fun selectMeter() {
+        val meter = resources.getStringArray(R.array.Meter)
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
         builder.setTitle("Select meter")
-        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,meter)
+        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, meter)
         builder.setAdapter(dataAdapter) { _, which ->
             etMeter.setText(meter[which]).toString()
         }
@@ -315,15 +332,14 @@ class ProfileDetailsActivity : BaseActivity(),
         dialog.show()
     }
 
-    private fun selectCentimeter()
-    {
+    private fun selectCentimeter() {
         val centimeter = ArrayList<String>()
         for (i in 1..51) {
             centimeter.add("$i cm")
         }
-        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
         builder.setTitle("Select centimeter")
-        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,centimeter)
+        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
             etCentimeter.setText(centimeter[which]).toString()
         }
@@ -331,15 +347,14 @@ class ProfileDetailsActivity : BaseActivity(),
         dialog.show()
     }
 
-    private fun selectStone()
-    {
+    private fun selectStone() {
         val centimeter = ArrayList<String>()
         for (i in 6..40) {
             centimeter.add("$i st")
         }
-        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
         builder.setTitle("Select stone")
-        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,centimeter)
+        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
             etStone.setText(centimeter[which]).toString()
         }
@@ -347,15 +362,14 @@ class ProfileDetailsActivity : BaseActivity(),
         dialog.show()
     }
 
-    private fun selectPound()
-    {
+    private fun selectPound() {
         val centimeter = ArrayList<String>()
         for (i in 1..13) {
             centimeter.add("$i lbs")
         }
-        val builder = AlertDialog.Builder(this,R.style.CustomAlertDialogStyle)
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
         builder.setTitle("Select pound")
-        val dataAdapter = ArrayAdapter(this,R.layout.custom_drop_down_item,centimeter)
+        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
             etLbs.setText(centimeter[which]).toString()
         }

@@ -18,8 +18,7 @@ import kotlin.collections.ArrayList
 
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class GpServiceAdapter(context: Context, list: ArrayList<GpService>, private val itemclick: ItemClickListner) :
-    RecyclerView.Adapter<GpServiceAdapter.GpServiceHolder>() {
+class GpServiceAdapter(context: Context, list: ArrayList<GpService>, private val itemclick: ItemClickListner) : RecyclerView.Adapter<GpServiceAdapter.GpServiceHolder>() {
     private var mContext = context
     private var mList = list
 
@@ -41,7 +40,7 @@ class GpServiceAdapter(context: Context, list: ArrayList<GpService>, private val
         holder.itemView.tvArea.text = capitalize(gpService.address)
         holder.itemView.tvCity.text = capitalize(gpService.city)
 
-        RxView.clicks(holder.itemView).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(holder.itemView).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 itemclick.onItemClick(gpService, position)
             }
@@ -49,14 +48,15 @@ class GpServiceAdapter(context: Context, list: ArrayList<GpService>, private val
 
     private fun capitalize(capString: String): String {
         val capBuffer = StringBuffer()
-        val capMatcher: Matcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString)
+        val capMatcher: Matcher =
+            Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString)
         while (capMatcher.find()) {
             capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase(Locale.ROOT) + capMatcher.group(2).toLowerCase(Locale.ROOT))
         }
         return capMatcher.appendTail(capBuffer).toString()
     }
 
-    interface ItemClickListner{
-        fun onItemClick(gpService: GpService,position: Int)
+    interface ItemClickListner {
+        fun onItemClick(gpService: GpService, position: Int)
     }
 }

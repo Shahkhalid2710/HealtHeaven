@@ -11,23 +11,15 @@ import kotlinx.android.synthetic.main.fragment_appointment.view.*
 
 
 class AppointmentFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         val v = inflater.inflate(R.layout.fragment_appointment, container, false)
 
-        val viewPagerFragmentAdapter =
-            ViewPagerFragmentAdapter(
-                requireActivity(),
-                requireFragmentManager()
-            )
+        val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(requireActivity(),requireActivity().supportFragmentManager)
         viewPagerFragmentAdapter.addfragment(UpcomingSessionApointmentFragment(), "Upcoming Session")
         viewPagerFragmentAdapter.addfragment(PastSessionAppointmentFragment(), "Past Session")
         v.viewPager.adapter = viewPagerFragmentAdapter
         v.tablayout.setupWithViewPager(v.viewPager)
-
 
         return v
     }

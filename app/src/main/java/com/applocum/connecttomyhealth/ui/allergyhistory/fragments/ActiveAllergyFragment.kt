@@ -18,20 +18,16 @@ import kotlinx.android.synthetic.main.custom_loader_progress.view.progress
 import kotlinx.android.synthetic.main.fragment_active_allergy.*
 import javax.inject.Inject
 
-class ActiveAllergyFragment : Fragment(),
-    AllergyHistoryPresenter.View {
-
+class ActiveAllergyFragment : Fragment(),AllergyHistoryPresenter.View {
     @Inject
     lateinit var presenter: AllergyHistoryPresenter
-
     lateinit var v: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        v=inflater.inflate(R.layout.fragment_active_allergy, container, false)
+        v = inflater.inflate(R.layout.fragment_active_allergy, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
 
@@ -40,9 +36,7 @@ class ActiveAllergyFragment : Fragment(),
         return v
     }
 
-    override fun displaySuccessMessage(message: String) {
-
-    }
+    override fun displaySuccessMessage(message: String) {}
 
     override fun displayErrorMessage(message: String) {
         val snackbar = Snackbar.make(llActiveAllergy, message, Snackbar.LENGTH_LONG)
@@ -52,20 +46,17 @@ class ActiveAllergyFragment : Fragment(),
     }
 
     override fun showActiveAllergy(activeAllergy: ArrayList<TrueAllergy>) {
-        rvActiveAllergy.layoutManager=LinearLayoutManager(requireActivity())
-        rvActiveAllergy.adapter=ActiveAllergyHistoryAdapter(requireActivity(),activeAllergy)
+        rvActiveAllergy.layoutManager = LinearLayoutManager(requireActivity())
+        rvActiveAllergy.adapter = ActiveAllergyHistoryAdapter(requireActivity(), activeAllergy)
     }
 
-    override fun showPastAllergy(pastAllergy: ArrayList<FalseAllergy>) {
-
-    }
+    override fun showPastAllergy(pastAllergy: ArrayList<FalseAllergy>) {}
 
     override fun viewProgress(isShow: Boolean) {
         v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun viewAllergyProgress(isShow: Boolean) {
-    }
+    override fun viewAllergyProgress(isShow: Boolean) {}
 
     override fun onResume() {
         presenter.activeAllergy()

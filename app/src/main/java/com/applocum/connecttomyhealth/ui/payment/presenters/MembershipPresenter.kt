@@ -12,53 +12,47 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class MembershipPresenter@Inject constructor(private val api:AppEndPoint) {
-    var disposables=CompositeDisposable()
+class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
+    var disposables = CompositeDisposable()
     lateinit var view: View
 
-    fun injectView(view: View)
-    {
-        this.view=view
+    fun injectView(view: View) {
+        this.view = view
     }
 
-    companion object
-    {
-        const val corporateId=83
+    companion object {
+        const val corporateId = 83
     }
 
     @Inject
     lateinit var userHolder: UserHolder
 
-    fun showSavedCodes()
-    {
+    fun showSavedCodes() {
         view.viewProgress(true)
         api.getMembershipList(userHolder.userToken!!, corporateId)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext={
+            .subscribeBy(onNext = {
                 view.viewProgress(false)
-                when(it.status)
-                {
-                    Success ->{
+                when (it.status) {
+                    Success -> {
                         view.showMembershipList(it.data)
                     }
-                    InvalidCredentials,InternalServer ->{
+                    InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)
                     }
-                    NotFound->
-                    {
+                    NotFound -> {
                         view.showMembershipList(it.data)
                     }
                 }
-            },onError = {
+            }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
             }).let { disposables.addAll(it) }
     }
 
-
-    interface View{
-        fun displayMessage(message:String)
-        fun viewProgress(isShow:Boolean)
-        fun showMembershipList(membershipResponse:ArrayList<MembershipResponse>)
+    interface View {
+        fun displayMessage(message: String)
+        fun viewProgress(isShow: Boolean)
+        fun showMembershipList(membershipResponse: ArrayList<MembershipResponse>)
     }
 }

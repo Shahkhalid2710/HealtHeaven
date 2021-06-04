@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.login.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -16,8 +17,10 @@ import com.applocum.connecttomyhealth.ui.login.presenters.LoginPresenter
 import com.applocum.connecttomyhealth.ui.signup.activities.SignupActivity
 import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.custom_progress.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(),
@@ -28,24 +31,29 @@ class LoginActivity : BaseActivity(),
     @Inject
     lateinit var userHolder: UserHolder
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_login
+
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
 
-        tvForgotPasword.setOnClickListener {
-            startActivity(Intent(this, ForgotPasswordActivity::class.java))
-        }
-        tvSignup.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
-        }
+        RxView.clicks(tvForgotPasword).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this, ForgotPasswordActivity::class.java))
+            }
 
-        btnLogin.setOnClickListener {
-            presenter.getLogin(etEmail.text.toString(),etPassword.text.toString())
-        }
+        RxView.clicks(tvSignup).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this, SignupActivity::class.java))
+            }
+
+        RxView.clicks(btnLogin).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                presenter.getLogin(etEmail.text.toString(), etPassword.text.toString())
+            }
     }
-
-    override fun getLayoutResourceId(): Int = R.layout.activity_login
 
     override fun displaymessage(message: String?) {
         val snackbar = Snackbar.make(llLogin, message.toString(), Snackbar.LENGTH_LONG)
@@ -56,12 +64,11 @@ class LoginActivity : BaseActivity(),
     }
 
     override fun displaySuccessMessage(message: String?) {
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun senduserdata(user: User) {
-        val intent = Intent(this,
-            BottomNavigationViewActivity::class.java)
+        val intent = Intent(this, BottomNavigationViewActivity::class.java)
         startActivity(intent)
         finish()
     }

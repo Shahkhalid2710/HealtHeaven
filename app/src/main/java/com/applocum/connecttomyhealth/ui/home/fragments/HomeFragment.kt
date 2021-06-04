@@ -27,18 +27,17 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
-class HomeFragment : Fragment(),
-    SpecilistPresenter.View,
-    ProfileDetailsPresenter.View {
+class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresenter.View {
     @Inject
     lateinit var userHolder: UserHolder
+
     @Inject
     lateinit var specilistPresenter: SpecilistPresenter
 
     @Inject
     lateinit var profileDetailsPresenter: ProfileDetailsPresenter
 
-    lateinit var v:View
+    lateinit var v: View
 
     @SuppressLint("CheckResult")
     override fun onCreateView(
@@ -51,7 +50,7 @@ class HomeFragment : Fragment(),
         specilistPresenter.injectview(this)
         profileDetailsPresenter.injectview(this)
 
-        RxView.clicks(v.btnBookAppointment).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(v.btnBookAppointment).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), SpecialistsActivity::class.java))
             }
@@ -62,40 +61,33 @@ class HomeFragment : Fragment(),
         return v
     }
 
-    override fun displaymessage(message: String) {
-
-    }
+    override fun displaymessage(message: String) {}
 
     override fun getdoctorlist(list: ArrayList<Specialist>) {
-        rvTopDoctors.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        rvTopDoctors.adapter = DoctorAdapter(requireActivity(), list,object :DoctorAdapter.DoctorClickListner{
-            override fun onDoctorClick(specialist: Specialist, position: Int) {
-                val intent=Intent(requireActivity(), BookSessionActivity::class.java)
-                intent.putExtra("specialist",specialist)
-                startActivity(intent)
-            }
-        })
-    }
+        rvTopDoctors.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        rvTopDoctors.adapter = DoctorAdapter(requireActivity(), list, object : DoctorAdapter.DoctorClickListner {
+                override fun onDoctorClick(specialist: Specialist, position: Int) {
+                    val intent = Intent(requireActivity(), BookSessionActivity::class.java)
+                    intent.putExtra("specialist", specialist)
+                    startActivity(intent)
+                }
+            })
+     }
 
     override fun viewProgress(isShow: Boolean) {
-       v.progressTopDoctors.visibility = if (isShow) View.VISIBLE else View.GONE
+        v.progressTopDoctors.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun showProfile(patient: Patient) {
-        v.tvName.text=patient.user.firstName
+        v.tvName.text = patient.user.firstName
         Glide.with(requireActivity()).load(patient.image).into(v.ivUser)
     }
 
-    override fun displayMessage(message: String) {
-    }
+    override fun displayMessage(message: String) {}
 
-    override fun displayErrorMessage(message: String) {
-    }
+    override fun displayErrorMessage(message: String) {}
 
-    override fun userData(user: User) {
-    }
+    override fun userData(user: User) {}
 
-    override fun viewprogress(isShow: Boolean) {
-    }
+    override fun viewprogress(isShow: Boolean) {}
 }

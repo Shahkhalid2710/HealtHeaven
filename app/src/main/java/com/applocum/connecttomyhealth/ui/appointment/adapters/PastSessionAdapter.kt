@@ -15,14 +15,14 @@ import kotlinx.android.synthetic.main.raw_past_session_xml.view.*
 import java.util.concurrent.TimeUnit
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class PastSessionAdapter(context: Context,list:ArrayList<BookAppointmentResponse>,private val onItemClick:ItemClickListner):RecyclerView.Adapter<PastSessionAdapter.PastSessionHolder>() {
-    var mContext=context
-    var mList=list
+class PastSessionAdapter(context: Context, list: ArrayList<BookAppointmentResponse>,private val onItemClick: ItemClickListner) : RecyclerView.Adapter<PastSessionAdapter.PastSessionHolder>() {
+    var mContext = context
+    var mList = list
 
-    inner class PastSessionHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
+    inner class PastSessionHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PastSessionHolder {
-        val v=LayoutInflater.from(mContext).inflate(R.layout.raw_past_session_xml,parent,false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_past_session_xml, parent, false)
         return PastSessionHolder(v)
     }
 
@@ -32,42 +32,42 @@ class PastSessionAdapter(context: Context,list:ArrayList<BookAppointmentResponse
 
     @SuppressLint("SimpleDateFormat", "CheckResult")
     override fun onBindViewHolder(holder: PastSessionHolder, position: Int) {
-        val bookAppointmentResponse=mList[position]
+        val bookAppointmentResponse = mList[position]
         holder.itemView.tvDoctorFName.text = bookAppointmentResponse.gp_details.first_name
         holder.itemView.tvDoctorLName.text = bookAppointmentResponse.gp_details.last_name
         holder.itemView.tvSessionType.text = bookAppointmentResponse.appointment_type
         holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "min")
-        holder.itemView.tvSessionDateTime.text = convertDateTime(bookAppointmentResponse.actual_start_time)
+        holder.itemView.tvSessionDateTime.text =
+            convertDateTime(bookAppointmentResponse.actual_start_time)
 
         Glide.with(mContext).load(bookAppointmentResponse.gp_details.image)
             .into(holder.itemView.ivDoctor)
 
-        when(bookAppointmentResponse.appointment_type)
-        {
-            "face_to_face"->{
-                holder.itemView.tvSessionType.text=("Face to Face")
+        when (bookAppointmentResponse.appointment_type) {
+            "face_to_face" -> {
+                holder.itemView.tvSessionType.text = ("Face to Face")
             }
-            "phone_call"->{
-                holder.itemView.tvSessionType.text=("Phone Call")
+            "phone_call" -> {
+                holder.itemView.tvSessionType.text = ("Phone Call")
             }
-            "video"->{
-                holder.itemView.tvSessionType.text=("Video Call")
+            "video" -> {
+                holder.itemView.tvSessionType.text = ("Video Call")
             }
         }
 
-        RxView.clicks(holder.itemView.btnViewDetails).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(holder.itemView.btnViewDetails).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 onItemClick.itemClick(bookAppointmentResponse, position)
             }
 
-        RxView.clicks(holder.itemView.btnBookAgain).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(holder.itemView.btnBookAgain).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 onItemClick.onButtonClick(bookAppointmentResponse, position)
             }
     }
 
-    interface ItemClickListner{
-        fun itemClick(bookAppointmentResponse: BookAppointmentResponse,position: Int)
-        fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse,position: Int)
+    interface ItemClickListner {
+        fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int)
+        fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int)
     }
 }

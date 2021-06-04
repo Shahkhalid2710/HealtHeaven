@@ -13,55 +13,49 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
 
-class FamilyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
-    var disposables=CompositeDisposable()
+class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
+    var disposables = CompositeDisposable()
     lateinit var view: View
 
-    fun injectView(view: View)
-    {
-        this.view=view
+    fun injectView(view: View) {
+        this.view = view
     }
 
     @Inject
     lateinit var userHolder: UserHolder
 
-    fun addFamilyHistory(name: String)
-    {
-        if (validateFamilyHistory(name))
-        {
+    fun addFamilyHistory(name: String) {
+        if (validateFamilyHistory(name)) {
             view.viewFamilyHistoryProgress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("snomed_code_id",name)
-                .addFormDataPart("user_id",userHolder.userid.toString())
+                .addFormDataPart("snomed_code_id", name)
+                .addFormDataPart("user_id", userHolder.userid.toString())
                 .build()
 
-            api.addFamilyHistory(userHolder.userToken,userHolder.clinicalToken,requestBody)
+            api.addFamilyHistory(userHolder.userToken, userHolder.clinicalToken, requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(onNext={
+                .subscribeBy(onNext = {
                     view.viewFamilyHistoryProgress(false)
-                    when(it.status)
-                    {
-                        Success ->
-                        {
+                    when (it.status) {
+                        Success -> {
                             view.displaySuccessMessage(it.message)
                         }
-                        InvalidCredentials,InternalServer -> {
+                        InvalidCredentials, InternalServer -> {
                             view.displayErrorMessage(it.message)
                         }
                     }
 
-                },onError = {
+                }, onError = {
                     view.viewFamilyHistoryProgress(false)
                     it.printStackTrace()
                 }).let { disposables.addAll(it) }
         }
     }
 
-    fun showFamilyHistoryList()
-    {
+    fun showFamilyHistoryList() {
         view.viewFamilyHistoryProgress(true)
-        api.showFamilyHistory(userHolder.userToken,userHolder.clinicalToken,66)
+        api.showFamilyHistory(userHolder.userToken, userHolder.clinicalToken, 66)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
                 when (it.status) {
@@ -77,23 +71,20 @@ class FamilyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
                 view.viewFamilyHistoryProgress(false)
                 it.printStackTrace()
             }).let { disposables.add(it) }
-
     }
 
-    private fun validateFamilyHistory(name:String):Boolean
-    {
-      if (name.isEmpty())
-      {
-          view.displayErrorMessage("Please select disease from the list")
-          return false
-      }
+    private fun validateFamilyHistory(name: String): Boolean {
+        if (name.isEmpty()) {
+            view.displayErrorMessage("Please select disease from the list")
+            return false
+        }
         return true
     }
 
-    interface View{
-        fun displayErrorMessage(message:String)
-        fun displaySuccessMessage(message:String)
-        fun viewFamilyHistoryProgress(isShow:Boolean)
-        fun familyHistoryList(list:ArrayList<FamilyHistory>)
+    interface View {
+        fun displayErrorMessage(message: String)
+        fun displaySuccessMessage(message: String)
+        fun viewFamilyHistoryProgress(isShow: Boolean)
+        fun familyHistoryList(list: ArrayList<FamilyHistory>)
     }
 }

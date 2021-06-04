@@ -25,6 +25,9 @@ class ReferralActivity : BaseActivity(),
 
     @Inject
     lateinit var presenter: DocumentPresenter
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_referral
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,42 +36,36 @@ class ReferralActivity : BaseActivity(),
 
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe{
-                finish()
-            }
+            .subscribe { finish() }
 
         presenter.getReferral()
 
     }
 
-    override fun getLayoutResourceId(): Int= R.layout.activity_referral
     override fun displayErrorMessage(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun getDocument(list: ArrayList<Document>) {
-        if (list.isEmpty())
-        {
-            layoutNotFoundReferral.visibility= View.VISIBLE
-            rvReferral.visibility= View.GONE
-        }
-        else
-        {
-            layoutNotFoundReferral.visibility= View.GONE
-            rvReferral.visibility= View.VISIBLE
+        if (list.isEmpty()) {
+            layoutNotFoundReferral.visibility = View.VISIBLE
+            rvReferral.visibility = View.GONE
+        } else {
+            layoutNotFoundReferral.visibility = View.GONE
+            rvReferral.visibility = View.VISIBLE
         }
 
-        rvReferral.layoutManager= LinearLayoutManager(this)
-        rvReferral.adapter= ReferralAdapter(this,list,object:ReferralAdapter.ReferralClickListner{
-            override fun onReferralClick(document: Document, position: Int) {
-                val intent= Intent(this@ReferralActivity, DocumentViewActivity::class.java)
-                intent.putExtra("document",document)
-                startActivity(intent)
-            }
-        })
+        rvReferral.layoutManager = LinearLayoutManager(this)
+        rvReferral.adapter = ReferralAdapter(this, list, object : ReferralAdapter.ReferralClickListner {
+                override fun onReferralClick(document: Document, position: Int) {
+                    val intent = Intent(this@ReferralActivity, DocumentViewActivity::class.java)
+                    intent.putExtra("document", document)
+                    startActivity(intent)
+                }
+            })
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 }

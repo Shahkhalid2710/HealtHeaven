@@ -21,8 +21,8 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
     lateinit var view: View
     private var devicetype = "android"
     private var role = "patient"
-    private var corporateId="83"
-    private var playerId="temp"
+    private var corporateId = "83"
+    private var playerId = "temp"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -40,7 +40,7 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                 .addFormDataPart("user[password]", password)
                 .addFormDataPart("device_detail[device_type]", devicetype)
                 .addFormDataPart("device_detail[player_id]", playerId)
-                .addFormDataPart("device_detail[corporate_organization_id]",corporateId)
+                .addFormDataPart("device_detail[corporate_organization_id]", corporateId)
                 .addFormDataPart("role", role)
                 .build()
             api.signin(requestBody)
@@ -49,9 +49,18 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
-                            val userObject: UserResponse = Gson().fromJson(it.data, UserResponse::class.java)
-                            val user=userObject.user
-                            userHolder.saveUser(user.id.toString(),user.firstName,user.lastName,user.email,user.gender,user.profile.dateOfBirth,user.authToken)
+                            val userObject: UserResponse =
+                                Gson().fromJson(it.data, UserResponse::class.java)
+                            val user = userObject.user
+                            userHolder.saveUser(
+                                user.id.toString(),
+                                user.firstName,
+                                user.lastName,
+                                user.email,
+                                user.gender,
+                                user.profile.dateOfBirth,
+                                user.authToken
+                            )
                             view.senduserdata(userObject.user)
                         }
 
@@ -95,7 +104,7 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
     interface View {
         fun displaymessage(message: String?)
         fun displaySuccessMessage(message: String?)
-        fun senduserdata(user:User)
+        fun senduserdata(user: User)
         fun viewProgress(isShow: Boolean)
     }
 }

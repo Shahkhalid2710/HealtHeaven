@@ -14,36 +14,34 @@ import kotlinx.android.synthetic.main.activity_my_downloads.*
 import java.util.concurrent.TimeUnit
 
 class MyDownloadsActivity : BaseActivity() {
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_my_downloads
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe{
-                finish()
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe { finish() }
+
+        RxView.clicks(llPrescription).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,PrescriptionActivity::class.java))
             }
 
-        RxView.clicks(llPrescription).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe{
-                startActivity(Intent(this,
-                    PrescriptionActivity::class.java))
+        RxView.clicks(llFitNote).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this, FitNoteActivity::class.java))
             }
-        RxView.clicks(llFitNote).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe{
-                startActivity(Intent(this,
-                    FitNoteActivity::class.java))
-            }
-        RxView.clicks(llReferral).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe{
-                startActivity(Intent(this,
-                    ReferralActivity::class.java))
-            }
-        RxView.clicks(llotherNotes).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe{
-                startActivity(Intent(this,
-                    OtherNoteActivity::class.java))
-            }
-    }
 
-    override fun getLayoutResourceId(): Int =R.layout.activity_my_downloads
+        RxView.clicks(llReferral).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this, ReferralActivity::class.java))
+            }
+
+        RxView.clicks(llotherNotes).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this, OtherNoteActivity::class.java))
+            }
+     }
 }

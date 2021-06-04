@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.ui.allergyhistory.models.AllergyHistory
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.TrueAllergy
 import kotlinx.android.synthetic.main.raw_allergy_history.view.*
 
@@ -28,8 +27,6 @@ class ActiveAllergyHistoryAdapter(context: Context, list: ArrayList<TrueAllergy>
 
     override fun onBindViewHolder(holder: AllergyHistoryHolder, position: Int) {
         val trueAllergy = mList[position]
-        holder.itemView.tvName.text =trueAllergy.allergy.name
-
-
+        holder.itemView.tvName.text = trueAllergy.allergy.name
     }
 }

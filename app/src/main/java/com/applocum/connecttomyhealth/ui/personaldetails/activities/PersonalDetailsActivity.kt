@@ -13,33 +13,29 @@ import kotlinx.android.synthetic.main.activity_personal_details.*
 import java.util.concurrent.TimeUnit
 
 class PersonalDetailsActivity : BaseActivity() {
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_personal_details
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(rlProfileddetails).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    ProfileDetailsActivity::class.java))
+                startActivity(Intent(this, ProfileDetailsActivity::class.java))
             }
 
         RxView.clicks(rlMyGp).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    GpServiceActivity::class.java))
+                startActivity(Intent(this, GpServiceActivity::class.java))
             }
 
         RxView.clicks(rlExemptions).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    ExemptionsActivity::class.java))
+                startActivity(Intent(this, ExemptionsActivity::class.java))
             }
     }
-
-    override fun getLayoutResourceId(): Int =R.layout.activity_personal_details
 }

@@ -9,14 +9,14 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistory
 import kotlinx.android.synthetic.main.raw_family_history.view.*
 
-class FamilyHistoryAdapter(context: Context,list: ArrayList<FamilyHistory>):RecyclerView.Adapter<FamilyHistoryAdapter.FamilyHolder>() {
-    var mContext=context
-    var mList=list
+class FamilyHistoryAdapter(context: Context, list: ArrayList<FamilyHistory>) : RecyclerView.Adapter<FamilyHistoryAdapter.FamilyHolder>() {
+    var mContext = context
+    var mList = list
 
-    inner class FamilyHolder(itemView: View):RecyclerView.ViewHolder(itemView){}
+    inner class FamilyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FamilyHolder {
-        val v=LayoutInflater.from(mContext).inflate(R.layout.raw_family_history,parent,false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_family_history, parent, false)
         return FamilyHolder(v)
     }
 
@@ -25,7 +25,7 @@ class FamilyHistoryAdapter(context: Context,list: ArrayList<FamilyHistory>):Recy
     }
 
     override fun onBindViewHolder(holder: FamilyHolder, position: Int) {
-        val familyHistory=mList[position]
-        holder.itemView.tvFamilyHistoryName.text= familyHistory.disorder
+        val familyHistory = mList[position]
+        holder.itemView.tvFamilyHistoryName.text = familyHistory.disorder
     }
 }

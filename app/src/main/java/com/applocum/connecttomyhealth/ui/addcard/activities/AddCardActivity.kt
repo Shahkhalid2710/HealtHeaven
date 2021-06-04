@@ -32,6 +32,7 @@ class AddCardActivity : BaseActivity(), TextWatcher,
     lateinit var presenter: AddCardPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_card
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +41,10 @@ class AddCardActivity : BaseActivity(), TextWatcher,
         presenter.injectview(this)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe{
+            .subscribe {
                 finish()
             }
+
         etCardNumber.addTextChangedListener(this)
 
         etHolderName.addTextChangedListener {
@@ -68,8 +70,13 @@ class AddCardActivity : BaseActivity(), TextWatcher,
         }
 
         RxView.clicks(btnAdd).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe{
-                presenter.addCard(etCardNumber.text.toString().trim(),etHolderName.text.toString(),etExpiryDate.text.toString(),etCVV.text.toString())
+            .subscribe {
+                presenter.addCard(
+                    etCardNumber.text.toString().trim(),
+                    etHolderName.text.toString(),
+                    etExpiryDate.text.toString(),
+                    etCVV.text.toString()
+                )
             }
     }
 
@@ -97,15 +104,15 @@ class AddCardActivity : BaseActivity(), TextWatcher,
     }
 
     override fun displaymessage(message: String) {
-        val snackbar = Snackbar.make(llAddCard, message, Snackbar.LENGTH_LONG)
-        snackbar.changeFont()
-        val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-        snackbar.show()
+        val snackBar = Snackbar.make(llAddCard, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
     }
 
     override fun displaySuccessmessage(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun addcard(card: Card) {
@@ -116,10 +123,7 @@ class AddCardActivity : BaseActivity(), TextWatcher,
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun viewFullProgress(isShow: Boolean) {
+    override fun viewFullProgress(isShow: Boolean) {}
 
-    }
-
-    override fun showcard(list: ArrayList<Card>) {
-    }
+    override fun showcard(list: ArrayList<Card>) {}
 }

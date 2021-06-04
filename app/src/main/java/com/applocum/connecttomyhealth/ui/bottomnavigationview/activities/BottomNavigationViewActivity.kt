@@ -21,57 +21,45 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_bottomnavigationview.*
 import javax.inject.Inject
 
-
-class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
-    BottomNavigationView.OnNavigationItemReselectedListener {
+class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,BottomNavigationView.OnNavigationItemReselectedListener {
     @Inject
     lateinit var userHolder: UserHolder
 
-    override fun getLayoutResourceId(): Int=R.layout.activity_bottomnavigationview
+    override fun getLayoutResourceId(): Int = R.layout.activity_bottomnavigationview
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         bottomnavigationView.setOnNavigationItemSelectedListener(this)
-       // bottomnavigationView.setOnNavigationItemReselectedListener(this)
+        // bottomnavigationView.setOnNavigationItemReselectedListener(this)
 
         bottomnavigationView.menu.forEach {
             val view = bottomnavigationView.findViewById<View>(it.itemId)
-            view.setOnLongClickListener {
-                true
-            }
+            view.setOnLongClickListener { true }
         }
 
-        showBadge(this,bottomnavigationView,R.id.nav_notification,"1")
-        removeBadge(bottomnavigationView,R.id.nav_notification)
+        showBadge(this, bottomnavigationView, R.id.nav_notification, "1")
+        removeBadge(bottomnavigationView, R.id.nav_notification)
 
         loadFragment(HomeFragment())
 
     }
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val id=item.itemId
-       if (id==R.id.nav_home)
-       {
-           loadFragment(HomeFragment())
-           return true
-       }
-        else if (id==R.id.nav_notification)
-       {
-           loadFragment(NotificationFragment())
-           return true
-       }
-        else if (id==R.id.nav_appointment)
-       {
-           loadFragment(AppointmentFragment())
-           return true
-       }
-        else if (id==R.id.nav_profile)
-       {
-           loadFragment(ProfileFragment())
-           return true
-       }
+        val id = item.itemId
+        if (id == R.id.nav_home) {
+            loadFragment(HomeFragment())
+            return true
+        } else if (id == R.id.nav_notification) {
+            loadFragment(NotificationFragment())
+            return true
+        } else if (id == R.id.nav_appointment) {
+            loadFragment(AppointmentFragment())
+            return true
+        } else if (id == R.id.nav_profile) {
+            loadFragment(ProfileFragment())
+            return true
+        }
         return true
     }
 
@@ -81,28 +69,18 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
         transaction.commit()
     }
 
-    override fun onNavigationItemReselected(item: MenuItem) {
+    override fun onNavigationItemReselected(item: MenuItem) {}
 
-    }
-    fun showBadge(
-        context: Context?,
-        bottomNavigationView: BottomNavigationView,
-        @IdRes itemId: Int,
-        value: String?
-    ) {
+    private fun showBadge(context: Context?, bottomNavigationView: BottomNavigationView, @IdRes itemId: Int, value: String?) {
         removeBadge(bottomNavigationView, itemId)
         val itemView: BottomNavigationItemView = bottomNavigationView.findViewById(itemId)
-        val badge: View = LayoutInflater.from(context)
-            .inflate(R.layout.custom_notification_badge, bottomNavigationView, false)
+        val badge: View = LayoutInflater.from(context).inflate(R.layout.custom_notification_badge, bottomNavigationView, false)
         val text = badge.findViewById<TextView>(R.id.badge_text_view)
         text.text = value
         itemView.addView(badge)
     }
 
-    fun removeBadge(
-        bottomNavigationView: BottomNavigationView,
-        @IdRes itemId: Int
-    ) {
+    private fun removeBadge(bottomNavigationView: BottomNavigationView, @IdRes itemId: Int) {
         val itemView: BottomNavigationItemView = bottomNavigationView.findViewById(itemId)
         if (itemView.childCount == 3) {
             itemView.removeViewAt(2)

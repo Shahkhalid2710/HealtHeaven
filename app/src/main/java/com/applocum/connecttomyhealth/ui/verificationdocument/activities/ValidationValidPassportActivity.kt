@@ -1,10 +1,7 @@
 package com.applocum.connecttomyhealth.ui.verificationdocument.activities
 
-import android.R.attr.path
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.bumptech.glide.Glide
@@ -12,6 +9,9 @@ import kotlinx.android.synthetic.main.activity_validation_valid_passport.*
 
 
 class ValidationValidPassportActivity : BaseActivity() {
+
+    override fun getLayoutResourceId(): Int =R.layout.activity_validation_valid_passport
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,5 +28,4 @@ class ValidationValidPassportActivity : BaseActivity() {
         Glide.with(this).load(selectedImagePath).into(ivPassport)
     }
 
-    override fun getLayoutResourceId(): Int =R.layout.activity_validation_valid_passport
 }

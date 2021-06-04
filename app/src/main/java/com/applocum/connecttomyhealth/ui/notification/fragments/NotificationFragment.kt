@@ -20,7 +20,6 @@ class NotificationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_notification, container, false)
 
         if (!haveNetworkConnection()) {
@@ -38,24 +37,19 @@ class NotificationFragment : Fragment() {
         }
 
         v.tvRetry.setOnClickListener {
-            val notificationFragment =
-                NotificationFragment()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, notificationFragment, "notification_Fragment")
-                .commitAllowingStateLoss()
-            val frg: Fragment? =
-                requireActivity().supportFragmentManager.findFragmentByTag("notification_Fragment")
-            val ft: FragmentTransaction =
-                requireActivity().supportFragmentManager.beginTransaction()
+            val notificationFragment = NotificationFragment()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameLayout, notificationFragment, "notification_Fragment").commitAllowingStateLoss()
+            val frg: Fragment? = requireActivity().supportFragmentManager.findFragmentByTag("notification_Fragment")
+            val ft: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             frg?.let { it1 -> ft.detach(it1) }
             if (frg != null) {
                 ft.attach(frg)
             }
             ft.commit()
         }
-
         return v
     }
+
     private fun haveNetworkConnection(): Boolean {
         var haveConnectedWifi = false
         var haveConnectedMobile = false

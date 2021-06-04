@@ -33,17 +33,18 @@ import javax.inject.Inject
 class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
     AllergyHistoryPresenter.View {
     var mListMedical: ArrayList<Medical> = ArrayList()
-    private var selectedString=""
-    private var isMatched =false
-    private var isActivePast =false
-    private var allergyName=""
-
+    private var selectedString = ""
+    private var isMatched = false
+    private var isActivePast = false
+    private var allergyName = ""
 
     @Inject
     lateinit var presenter: MedicalPresenter
 
     @Inject
     lateinit var allergyHistoryPresenter: AllergyHistoryPresenter
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_add_allergy
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,56 +54,44 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
         allergyHistoryPresenter.injectView(this)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxTextView.textChanges(etAddAllergy)
             .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnEach {
-                if (selectedString!=null && selectedString == etAddAllergy.text.toString())
-                {
-                    isMatched=true
-                }
-                else
-                {
-                    isMatched=false
-                    selectedString=""
+                if (selectedString != null && selectedString == etAddAllergy.text.toString()) {
+                    isMatched = true
+                } else {
+                    isMatched = false
+                    selectedString = ""
                 }
 
             }
             .observeOn(Schedulers.computation())
-            .filter { s -> s.length >= 2}
+            .filter { s -> s.length >= 2 }
             .observeOn(AndroidSchedulers.mainThread())
             .map {
-                if (!isMatched)
-                {
+                if (!isMatched) {
                     presenter.getDiseaseList(etAddAllergy.text.toString())
                 }
             }.subscribe().let { presenter.disposables.add(it) }
 
         cbActiveCurrently.setOnCheckedChangeListener { _, b ->
             if (b) {
-                isActivePast=true
-            }
-            else
-            {
-                isActivePast=false
+                isActivePast = true
+            } else {
+                isActivePast = false
             }
         }
 
-        allergyName=etAddAllergy.text.toString()
+        allergyName = etAddAllergy.text.toString()
 
         RxView.clicks(btnSaveAllergy).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                allergyHistoryPresenter.addAllergy(allergyName,isActivePast)
+                allergyHistoryPresenter.addAllergy(allergyName, isActivePast)
             }
-
-    }
-
-    override fun getLayoutResourceId(): Int =R.layout.activity_add_allergy
-
+       }
 
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llAddAllergy, message, Snackbar.LENGTH_LONG)
@@ -113,51 +102,43 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
     }
 
     override fun getDiseaseList(list: ArrayList<Medical>) {
-        mListMedical=list
-        rvAllergy.visibility=View.VISIBLE
-        rvAllergy.layoutManager= LinearLayoutManager(this)
-        rvAllergy.adapter=
-            MedicalDiseaseAdapter(this,mListMedical,object : MedicalDiseaseAdapter.ItemClickListnter{
-            override fun onItemClick(medical: Medical, position: Int) {
-                allergyName=medical.id.toString()
-                if(!etAddAllergy.text.isNullOrBlank())
-                {
-                    mListMedical.clear()
-                }
-                selectedString=medical.description
-                etAddAllergy.setText(medical.description)
-                rvAllergy.visibility=View.GONE
-            }
-        })
-
+        mListMedical = list
+        rvAllergy.visibility = View.VISIBLE
+        rvAllergy.layoutManager = LinearLayoutManager(this)
+        rvAllergy.adapter =
+            MedicalDiseaseAdapter(
+                this,
+                mListMedical,
+                object : MedicalDiseaseAdapter.ItemClickListnter {
+                    override fun onItemClick(medical: Medical, position: Int) {
+                        allergyName = medical.id.toString()
+                        if (!etAddAllergy.text.isNullOrBlank()) {
+                            mListMedical.clear()
+                        }
+                        selectedString = medical.description
+                        etAddAllergy.setText(medical.description)
+                        rvAllergy.visibility = View.GONE
+                    }
+                })
     }
 
-
     override fun viewProgress(isShow: Boolean) {
-        progressAllergy.visibility=if (isShow) View.VISIBLE else View.GONE
+        progressAllergy.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun viewAllergyProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun viewMedicalProgress(isShow: Boolean) {
+    override fun viewMedicalProgress(isShow: Boolean) {}
 
-    }
+    override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {}
 
-    override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {
-    }
+    override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {}
 
-    override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {
-    }
+    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {}
 
-    override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {
-    }
-
-    override fun displaySuccessMessage(message: String) {
-       // Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
-        this.finish()
-    }
+    override fun displaySuccessMessage(message: String) { this.finish()}
 
     override fun displayErrorMessage(message: String) {
         val snackBar = Snackbar.make(llAddAllergy, message, Snackbar.LENGTH_LONG)
@@ -167,10 +148,7 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
         snackBar.show()
     }
 
-    override fun showActiveAllergy(activeAllergy: ArrayList<TrueAllergy>) {
-    }
+    override fun showActiveAllergy(activeAllergy: ArrayList<TrueAllergy>) {}
 
-    override fun showPastAllergy(pastAllergy: ArrayList<FalseAllergy>) {
-
-    }
+    override fun showPastAllergy(pastAllergy: ArrayList<FalseAllergy>) {}
 }

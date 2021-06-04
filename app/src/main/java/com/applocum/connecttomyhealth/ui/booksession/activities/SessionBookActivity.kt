@@ -40,9 +40,7 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class SessionBookActivity : BaseActivity(), View.OnClickListener,
-    BookSessionPresenter.View,
-    OnDateSelectedListener {
+class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPresenter.View, OnDateSelectedListener {
     private val mListSessionType: ArrayList<SessionType> = ArrayList()
     private val mListSelectSlot: ArrayList<SessionType> = ArrayList()
     private var selectSession = ""
@@ -69,9 +67,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,
         presenter.injectview(this)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         specialist = intent.getSerializableExtra("specialist") as Specialist
 
@@ -83,24 +79,20 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,
         mListSessionType.add(sessionType3)
 
         rvSessionType.layoutManager = GridLayoutManager(this, 3)
-        rvSessionType.adapter = SessionTypeAdapter(
-            this,
-            mListSessionType,
-            object : SessionTypeAdapter.ItemClickListner {
+        rvSessionType.adapter = SessionTypeAdapter(this, mListSessionType, object : SessionTypeAdapter.ItemClickListner {
                 override fun onItemClick(sessionType: SessionType, position: Int) {
-                    when(position)
-                    {
-                        0-> {
+                    when (position) {
+                        0 -> {
                             sType = "phone_call_appointment"
-                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
                         }
-                        1-> {
-                            sType="online_appointment"
-                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                        1 -> {
+                            sType = "online_appointment"
+                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
                         }
-                        2-> {
+                        2 -> {
                             sType = "offline_appointment"
-                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
                         }
                     }
                 }
@@ -113,18 +105,21 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,
         mListSelectSlot.add(sessionType4)
         mListSelectSlot.add(sessionType5)
         mListSelectSlot.add(sessionType17)
-        rvSelectSlot.layoutManager =LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        rvSelectSlot.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvSelectSlot.adapter = SelectSlotAdapter(this, mListSelectSlot, object : SelectSlotAdapter.ItemClickListner {
                 override fun onItemClick(sessionType: SessionType, position: Int) {
-                    when(position) {
-                        0 -> {sSlot = "10"
-                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
-                             }
-                        1 -> {sSlot = "20"
-                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                    when (position) {
+                        0 -> {
+                            sSlot = "10"
+                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
                         }
-                        2 -> {sSlot = "30"
-                            presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+                        1 -> {
+                            sSlot = "20"
+                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+                        }
+                        2 -> {
+                            sSlot = "30"
+                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
                         }
                     }
                 }
@@ -203,12 +198,11 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,
 
         RxView.clicks(btnContinue).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                if (validateBookSession(seleteddate, sType, sSlot,sTime)) {
+                if (validateBookSession(seleteddate, sType, sSlot, sTime)) {
                     val intent = Intent(this, ConfirmBookingActivity::class.java)
-
                     val appointment = userHolder.getBookAppointmentData()
-                    appointment.appointmentDateTime= dateTimeUTCFormat(sTime)
-                    appointment.appointmentTime =sTime
+                    appointment.appointmentDateTime = dateTimeUTCFormat(sTime)
+                    appointment.appointmentTime = sTime
                     appointment.appointmentType = sType
                     appointment.appointmentSlot = sSlot
                     appointment.appointmentDate = seleteddate
@@ -220,9 +214,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,
 
         calendarView.setOnDateChangedListener(this)
         calendarView.addDecorator(PrimeDayDisableDecorator())
-
     }
-
 
     override fun onClick(v: View?) {
         if (switchMultiSessions.isChecked) {
@@ -250,15 +242,15 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,
             NotAvailabeTime.visibility = View.VISIBLE
         } else {
             NotAvailabeTime.visibility = View.GONE
-            rvAvailableTime.visibility=View.VISIBLE
+            rvAvailableTime.visibility = View.VISIBLE
             rvAvailableTime.layoutManager = GridLayoutManager(this, 4)
             val availableTimeClickAdapter = AvailableTimeClickAdapter(this, list,
                 object : AvailableTimeClickAdapter.ItemClickListner {
                     override fun onItemClick(time: Time, position: Int) {
-                            sTime = time.start_time
+                        sTime = time.start_time
                     }
                 })
-            rvAvailableTime.adapter=availableTimeClickAdapter
+            rvAvailableTime.adapter = availableTimeClickAdapter
             availableTimeClickAdapter.notifyDataSetChanged()
         }
     }
@@ -287,18 +279,18 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,
         selected: Boolean
     ) {
         var date = date1.date
-          val formatter = SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy")
-          val temp:String =date.date.toString()
-          try {
-              date = formatter.parse(temp)
-              Log.e("dateeeeeee", date.toString() + "")
-          } catch (e: ParseException) {
-              e.printStackTrace()
-          }
+        val formatter = SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy")
+        val temp: String = date.date.toString()
+        try {
+            date = formatter.parse(temp)
+            Log.e("dateeeeeee", date.toString() + "")
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
 
         val formateDate = SimpleDateFormat("yyyy-MM-dd").format(date)
-        seleteddate=formateDate
-        presenter.getTimeSlots(specialist.id,seleteddate,sType,sSlot)
+        seleteddate = formateDate
+        presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
     }
 
     private class PrimeDayDisableDecorator : DayViewDecorator {
@@ -306,18 +298,12 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,
             val date = CalendarDay.today()
             return day.isBefore(date)
         }
-
         override fun decorate(view: DayViewFacade) {
             view.setDaysDisabled(true)
         }
     }
 
-    private fun validateBookSession(
-        date: String,
-        sessionType: String,
-        slot: String,
-        time: String
-    ): Boolean {
+    private fun validateBookSession(date: String, sessionType: String, slot: String, time: String): Boolean {
         if (date.isEmpty()) {
             val snackbar = Snackbar.make(llSessionbook, "Please select date", Snackbar.LENGTH_LONG)
             snackbar.changeFont()
@@ -327,8 +313,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener,
             return false
         }
         if (sessionType.isEmpty()) {
-            val snackbar =
-                Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
             snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))

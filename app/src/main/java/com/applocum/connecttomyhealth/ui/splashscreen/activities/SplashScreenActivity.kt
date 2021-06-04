@@ -13,6 +13,7 @@ import com.applocum.connecttomyhealth.ui.walkthrough.activities.WalkThroughActiv
 import javax.inject.Inject
 
 class SplashScreenActivity : BaseActivity() {
+
     override fun getLayoutResourceId():Int = R.layout.activity_splash_screen
 
     @Inject
@@ -25,19 +26,16 @@ class SplashScreenActivity : BaseActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             if (userHolder.userToken.isNullOrBlank())
             {
-                val intent= Intent(this,
-                    WalkThroughActivity::class.java)
+                val intent= Intent(this, WalkThroughActivity::class.java)
                 startActivity(intent)
                 finish()
             }
           else
             {
-                val intent= Intent(this,
-                    BottomNavigationViewActivity::class.java)
+                val intent= Intent(this, BottomNavigationViewActivity::class.java)
                 startActivity(intent)
                 finish()
             }
         },1000)
     }
-
 }

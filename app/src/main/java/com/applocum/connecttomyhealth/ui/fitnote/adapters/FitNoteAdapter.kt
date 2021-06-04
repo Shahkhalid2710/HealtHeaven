@@ -13,14 +13,15 @@ import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_download.view.*
 import java.util.concurrent.TimeUnit
 
-class FitNoteAdapter(context: Context, list:ArrayList<Document>, private val onNoteClick:FitNoteClickListner): RecyclerView.Adapter<FitNoteAdapter.FitNoteHolder>() {
-    var mContext=context
-    var mList=list
+class FitNoteAdapter(context: Context, list: ArrayList<Document>, private val onNoteClick: FitNoteClickListner
+) : RecyclerView.Adapter<FitNoteAdapter.FitNoteHolder>() {
+    var mContext = context
+    var mList = list
 
-    inner class FitNoteHolder(itemView: View): RecyclerView.ViewHolder(itemView){}
+    inner class FitNoteHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FitNoteHolder {
-        val v= LayoutInflater.from(mContext).inflate(R.layout.raw_download,parent,false)
+        val v = LayoutInflater.from(mContext).inflate(R.layout.raw_download, parent, false)
         return FitNoteHolder(v)
     }
 
@@ -30,18 +31,18 @@ class FitNoteAdapter(context: Context, list:ArrayList<Document>, private val onN
 
     @SuppressLint("CheckResult")
     override fun onBindViewHolder(holder: FitNoteHolder, position: Int) {
-        val document=mList[position]
+        val document = mList[position]
         holder.itemView.tvDocType.text = mContext.resources.getString(R.string.fit_note)
-        holder.itemView.tvDate.text= convertDocumentTime(document.created_at)
-        holder.itemView.tvDoctorName.text=("By"+" "+document.by)
+        holder.itemView.tvDate.text = convertDocumentTime(document.created_at)
+        holder.itemView.tvDoctorName.text = ("By" + " " + document.by)
 
-        RxView.clicks(holder.itemView).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(holder.itemView).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 onNoteClick.onNoteClick(document, position)
             }
-    }
+     }
 
-    interface FitNoteClickListner{
+    interface FitNoteClickListner {
         fun onNoteClick(document: Document, position: Int)
     }
 }

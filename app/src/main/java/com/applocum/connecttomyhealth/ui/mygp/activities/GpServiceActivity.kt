@@ -33,18 +33,15 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 
-@Suppress("DEPRECATION", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
-    "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS"
-)
-class GpServiceActivity : BaseActivity(),
-    GpservicePresenter.View{
+@Suppress("DEPRECATION", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     @Inject
     lateinit var presenter: GpservicePresenter
-
     private lateinit var map: GoogleMap
     private lateinit var supportMapFragment: SupportMapFragment
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_gp_service
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,25 +50,20 @@ class GpServiceActivity : BaseActivity(),
         presenter.injectview(this)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
+
         RxView.clicks(ivBackMyGp).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(tvChangeGpService).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    AddGPServiceActivity::class.java))
+                startActivity(Intent(this, AddGPServiceActivity::class.java))
                 this.finish()
             }
 
         RxView.clicks(btnAddGpService).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    AddGPServiceActivity::class.java))
+                startActivity(Intent(this, AddGPServiceActivity::class.java))
             }
 
         locationPermission()
@@ -79,38 +71,36 @@ class GpServiceActivity : BaseActivity(),
 
     }
 
-    override fun getLayoutResourceId(): Int = R.layout.activity_gp_service
-
-    private fun locationPermission()
-    {
-        ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
+    private fun locationPermission() {
+        ContextCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+        ) != PackageManager.PERMISSION_GRANTED
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            1
+        )
     }
 
-    override fun displayMessage(message: String) {
-    }
+    override fun displayMessage(message: String) {}
 
-    override fun getGpList(list: ArrayList<GpService>) {
-    }
+    override fun getGpList(list: ArrayList<GpService>) {}
 
-    override fun viewProgress(isShow: Boolean) {
-    }
+    override fun viewProgress(isShow: Boolean) {}
 
     override fun viewFullProgress(isShow: Boolean) {
-        progress.visibility=if (isShow)View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     @SuppressLint("CheckResult")
     override fun showSurgery(surgery: Surgery) {
-        if (surgery.city.isEmpty())
-        {
-            llMyGp.visibility=View.VISIBLE
-            llGpService.visibility=View.GONE
-        }
-        else
-        {
-            llMyGp.visibility=View.GONE
-            llGpService.visibility=View.VISIBLE
+        if (surgery.city.isEmpty()) {
+            llMyGp.visibility = View.VISIBLE
+            llGpService.visibility = View.GONE
+        } else {
+            llMyGp.visibility = View.GONE
+            llGpService.visibility = View.VISIBLE
         }
 
         supportMapFragment = supportFragmentManager.findFragmentById(R.id.mapwhere) as SupportMapFragment
@@ -118,29 +108,26 @@ class GpServiceActivity : BaseActivity(),
         supportMapFragment.getMapAsync { googleMap ->
             map = googleMap
 
-              val height= 150
-              val width = 150
-              val b = BitmapFactory.decodeResource(resources, R.drawable.ic_marker)
-              val smallMarker = Bitmap.createScaledBitmap(b, width, height, false)
-              val smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker)
+            val height = 150
+            val width = 150
+            val b = BitmapFactory.decodeResource(resources, R.drawable.ic_marker)
+            val smallMarker = Bitmap.createScaledBitmap(b, width, height, false)
+            val smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker)
 
             map.uiSettings.setAllGesturesEnabled(true)
             map.isMyLocationEnabled
-            val marker = LatLng(surgery.lat,surgery.long)
+            val marker = LatLng(surgery.lat, surgery.long)
             val cameraPosition = CameraPosition.Builder().target(marker).zoom(15.0f).build()
             map.addMarker(MarkerOptions().position(marker).title(capitalize(surgery.practice_name))).setIcon(smallMarkerIcon)
             val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
             map.moveCamera(cameraUpdate)
 
             map.setOnInfoWindowClickListener {}
-            map.setOnMarkerClickListener {
-                false
-            }
-
+            map.setOnMarkerClickListener { false }
         }
 
-        tvAddress.text= capitalize(surgery.address)
-        tvName.text= capitalize(surgery.practice_name)
+        tvAddress.text = capitalize(surgery.address)
+        tvName.text = capitalize(surgery.practice_name)
 
         RxView.clicks(btnCallGPService).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -148,21 +135,17 @@ class GpServiceActivity : BaseActivity(),
                 {
                     ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE), 1)
                 } else {
-                    startActivity(Intent(Intent.ACTION_CALL, Uri.fromParts("tel",surgery.phone, null)))
+                    startActivity(Intent(Intent.ACTION_CALL, Uri.fromParts("tel", surgery.phone, null)))
                 }
             }
     }
+
     private fun capitalize(capString: String): String? {
         val capBuffer = StringBuffer()
         val capMatcher: Matcher =
             Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString)
         while (capMatcher.find()) {
-            capMatcher.appendReplacement(
-                capBuffer,
-                capMatcher.group(1).toUpperCase(Locale.ROOT) + capMatcher.group(2).toLowerCase(
-                    Locale.ROOT
-                )
-            )
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase(Locale.ROOT) + capMatcher.group(2).toLowerCase(Locale.ROOT))
         }
         return capMatcher.appendTail(capBuffer).toString()
     }

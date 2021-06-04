@@ -11,23 +11,23 @@ import kotlinx.android.synthetic.main.activity_validation_valid_u_k_driving_lice
 import kotlinx.android.synthetic.main.activity_validation_valid_u_k_driving_license.ivBack
 
 class ValidationValidUKDrivingLicenseActivity : BaseActivity() {
+
+    override fun getLayoutResourceId(): Int = R.layout.activity_validation_valid_u_k_driving_license
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ivBack.setOnClickListener { finish() }
 
-        val selectedImagePath=intent.getStringExtra("image")
+        val selectedImagePath = intent.getStringExtra("image")
 
         btnSubmit.setOnClickListener {
-            startActivity(Intent(this,VerifiedActivity::class.java))
+            startActivity(Intent(this, VerifiedActivity::class.java))
             finish()
         }
         btnRetakePhoto.setOnClickListener {
-            startActivity(Intent(this,ValidPassportActivity::class.java))
+            startActivity(Intent(this, ValidPassportActivity::class.java))
             finish()
         }
         Glide.with(this).load(selectedImagePath).into(ivDrivingLicense)
-
     }
-
-    override fun getLayoutResourceId(): Int= R.layout.activity_validation_valid_u_k_driving_license
 }

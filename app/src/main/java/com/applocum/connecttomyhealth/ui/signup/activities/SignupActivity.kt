@@ -36,10 +36,7 @@ import javax.inject.Inject
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class SignupActivity : BaseActivity(),
-    SignupPresenter.View,
-    DatePickerDialog.OnDateSetListener {
-
+class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.OnDateSetListener {
     @Inject
     lateinit var presenter: SignupPresenter
 
@@ -51,6 +48,8 @@ class SignupActivity : BaseActivity(),
     private var myMonth: Int = 0
     private var myYear: Int = 0
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_signup
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
@@ -61,7 +60,7 @@ class SignupActivity : BaseActivity(),
                 etFirstName.text.toString(),
                 etLastName.text.toString(),
                 etEmail.text.toString(),
-                "+$countrycode",countrycode+""+etPhoneNumber.text.toString(),
+                "+$countrycode", countrycode + "" + etPhoneNumber.text.toString(),
                 etPassword.text.toString(),
                 etConfirmPassword.text.toString(),
                 etGender.text.toString().toLowerCase(Locale.ROOT),
@@ -70,8 +69,6 @@ class SignupActivity : BaseActivity(),
         }
         clickHandler()
     }
-
-    override fun getLayoutResourceId(): Int = R.layout.activity_signup
 
     override fun displaymessage(message: String?) {
         val snackbar = Snackbar.make(llSignup, message.toString(), Snackbar.LENGTH_LONG)
@@ -82,12 +79,14 @@ class SignupActivity : BaseActivity(),
     }
 
     override fun displaySuccessMessage(message: String?) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun sendUserData(user: User) {
-        val intent=Intent(this,
-            BottomNavigationViewActivity::class.java)
+        val intent = Intent(
+            this,
+            BottomNavigationViewActivity::class.java
+        )
         startActivity(intent)
         finish()
     }
@@ -111,8 +110,7 @@ class SignupActivity : BaseActivity(),
         etDOB.setText(newDateString)
     }
 
-    private fun clickHandler()
-    {
+    private fun clickHandler() {
         ccp.setOnCountryChangeListener {
             countrycode = ccp.selectedCountryCode
         }
@@ -121,12 +119,12 @@ class SignupActivity : BaseActivity(),
         }
 
         etGender.setOnClickListener {
-            val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_gender_dialog, null, false)
+            val showDialogView =
+                LayoutInflater.from(this).inflate(R.layout.custom_gender_dialog, null, false)
             val dialog = AlertDialog.Builder(this).create()
             dialog.setView(showDialogView)
 
-            when(etGender.text.toString())
-            {
+            when (etGender.text.toString()) {
                 "Male" -> showDialogView.rbMale.isChecked = true
                 "Female" -> showDialogView.rbFemale.isChecked = true
                 "Transgender" -> showDialogView.rbTransgender.isChecked = true
@@ -136,9 +134,8 @@ class SignupActivity : BaseActivity(),
                 "Other" -> showDialogView.rbOther.isChecked = true
             }
 
-
-            showDialogView.btnDone.setOnClickListener  {
-                var selectedGender=""
+            showDialogView.btnDone.setOnClickListener {
+                var selectedGender = ""
                 when {
                     showDialogView.rbMale.isChecked -> {
                         selectedGender = showDialogView.rbMale.text.toString()
@@ -147,19 +144,19 @@ class SignupActivity : BaseActivity(),
                         selectedGender = showDialogView.rbFemale.text.toString()
                     }
                     showDialogView.rbTransgender.isChecked -> {
-                        selectedGender =showDialogView.rbTransgender.text.toString()
+                        selectedGender = showDialogView.rbTransgender.text.toString()
                     }
                     showDialogView.rbGenderNeutral.isChecked -> {
                         selectedGender = showDialogView.rbGenderNeutral.text.toString()
                     }
                     showDialogView.rbGenderFluid.isChecked -> {
-                        selectedGender =showDialogView.rbGenderFluid.text.toString()
+                        selectedGender = showDialogView.rbGenderFluid.text.toString()
                     }
                     showDialogView.rbPreferNotToSay.isChecked -> {
                         selectedGender = showDialogView.rbPreferNotToSay.text.toString()
                     }
                     showDialogView.rbOther.isChecked -> {
-                        selectedGender =showDialogView.rbOther.text.toString()
+                        selectedGender = showDialogView.rbOther.text.toString()
                     }
                 }
                 etGender.setText(selectedGender)

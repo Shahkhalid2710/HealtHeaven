@@ -29,91 +29,72 @@ import javax.inject.Inject
 
 
 class AddSymptomActivity : BaseActivity() {
-    private val requestCodeGallery= 999
-    private var selectedImagePath:String=""
+    private val requestCodeGallery = 999
+    private var selectedImagePath: String = ""
 
     @Inject
     lateinit var userHolder: UserHolder
 
-    override fun getLayoutResourceId(): Int=R.layout.activity_add_symptom
+    override fun getLayoutResourceId(): Int = R.layout.activity_add_symptom
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         (application as MyApplication).component.inject(this)
-        val specialist=intent.getSerializableExtra("specialist") as Specialist
+        val specialist = intent.getSerializableExtra("specialist") as Specialist
 
-        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe { finish()}
 
-        val alldayDr = "<font color='#008976'>alldayDr</font>"
+        val allDayDr = "<font color='#008976'>alldayDr</font>"
         val nhsGP = "<font color='#008976'>NHS GP.</font>"
-        cbGeoLocation.text = HtmlCompat.fromHtml(
-            "I allow $alldayDr to access my geo Location. (This will only be used in an emergency)",
-            HtmlCompat.FROM_HTML_MODE_LEGACY
-        )
-        cbRecords.text = HtmlCompat.fromHtml(
-            "I give consult to alldayDr to share my records with my $nhsGP",
-            HtmlCompat.FROM_HTML_MODE_LEGACY
-        )
 
+        cbGeoLocation.text = HtmlCompat.fromHtml("I allow $allDayDr to access my geo Location. (This will only be used in an emergency)", HtmlCompat.FROM_HTML_MODE_LEGACY)
+        cbRecords.text = HtmlCompat.fromHtml("I give consult to alldayDr to share my records with my $nhsGP", HtmlCompat.FROM_HTML_MODE_LEGACY)
 
         ivSymptom.setOnClickListener {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                requestCodeGallery
-            )
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),requestCodeGallery)
         }
 
-        RxView.clicks(btnContinue).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(btnContinue).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                if (checkCondition(cbGeoLocation.isChecked,cbRecords.isChecked)){
+                if (checkCondition(cbGeoLocation.isChecked, cbRecords.isChecked)) {
                     val intent = Intent(this, SessionBookActivity::class.java)
-                    intent.putExtra("specialist",specialist)
+                    intent.putExtra("specialist", specialist)
                     val appointment = userHolder.getBookAppointmentData()
                     appointment.pickedFilePath = selectedImagePath
                     appointment.appointmentReason = etAddSymptoms.text.toString()
-                    appointment.allowGeoAccess=cbGeoLocation.isChecked
-                    appointment.sharedRecordWithNhs=cbRecords.isChecked
+                    appointment.allowGeoAccess = cbGeoLocation.isChecked
+                    appointment.sharedRecordWithNhs = cbRecords.isChecked
                     userHolder.saveBookAppointmentData(appointment)
                     startActivity(intent)
                 }
             }
     }
 
-
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode==requestCodeGallery)
-        {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
-                val intent=Intent(Intent.ACTION_PICK)
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == requestCodeGallery) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
-                startActivityForResult(intent,requestCodeGallery)
-            }else{
-                Toast.makeText(this,"You don't have permission",Toast.LENGTH_LONG).show()
+                startActivityForResult(intent, requestCodeGallery)
+            } else {
+                Toast.makeText(this, "You don't have permission", Toast.LENGTH_LONG).show()
             }
         }
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode==requestCodeGallery && resultCode == Activity.RESULT_OK && data !=null)
-        {
-            val uri=data.data
-            val inputStream : InputStream = uri.let { it?.let { it1 ->
-                contentResolver.openInputStream(
-                    it1
-                )
-            } }!!
-            val bitmap=BitmapFactory.decodeStream(inputStream)
+        if (requestCode == requestCodeGallery && resultCode == Activity.RESULT_OK && data != null) {
+            val uri = data.data
+            val inputStream: InputStream = uri.let { it?.let { it1 -> contentResolver.openInputStream(it1) } }!!
+            val bitmap = BitmapFactory.decodeStream(inputStream)
             ivSymptom.setImageBitmap(bitmap)
             selectedImagePath = getRealPathFromURI(uri)
         }
@@ -128,24 +109,21 @@ class AddSymptomActivity : BaseActivity() {
         return cursor.getString(columnIndex)
     }
 
-    private fun checkCondition(geolocation:Boolean,records:Boolean):Boolean
-    {
-        if (!geolocation)
-        {
-            val snackbar = Snackbar.make(lladdsymptoms,"Please agree to share your geo location", Snackbar.LENGTH_LONG)
-            snackbar.changeFont()
-            val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-            snackbar.show()
+    private fun checkCondition(geolocation: Boolean, records: Boolean): Boolean {
+        if (!geolocation) {
+            val snackBar = Snackbar.make(lladdsymptoms, "Please agree to share your geo location", Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
             return false
         }
-        if (!records)
-        {
-            val snackbar = Snackbar.make(lladdsymptoms,"Please agree to share your records with NHS GP.", Snackbar.LENGTH_LONG)
-            snackbar.changeFont()
-            val snackview = snackbar.view
+        if (!records) {
+            val snackBar = Snackbar.make(lladdsymptoms,"Please agree to share your records with NHS GP.", Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackview = snackBar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-            snackbar.show()
+            snackBar.show()
             return false
         }
         return true

@@ -24,49 +24,44 @@ class FitNoteActivity : BaseActivity(),
     @Inject
     lateinit var presenter: DocumentPresenter
 
+    override fun getLayoutResourceId(): Int = R.layout.activity_fit_note
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
 
-        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe{
-                finish()
-            }
+        RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe { finish() }
 
         presenter.getFitNote()
     }
 
-    override fun getLayoutResourceId(): Int = R.layout.activity_fit_note
-
     override fun displayErrorMessage(message: String) {
-      Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun getDocument(list: ArrayList<Document>) {
-        if (list.isEmpty())
-        {
-            layoutNotFoundFitNote.visibility= View.VISIBLE
-            rvFitNote.visibility= View.GONE
-        }
-        else
-        {
-            layoutNotFoundFitNote.visibility= View.GONE
-            rvFitNote.visibility= View.VISIBLE
+        if (list.isEmpty()) {
+            layoutNotFoundFitNote.visibility = View.VISIBLE
+            rvFitNote.visibility = View.GONE
+        } else {
+            layoutNotFoundFitNote.visibility = View.GONE
+            rvFitNote.visibility = View.VISIBLE
         }
 
-        rvFitNote.layoutManager= LinearLayoutManager(this)
-        rvFitNote.adapter= FitNoteAdapter(this,list,object :FitNoteAdapter.FitNoteClickListner{
+        rvFitNote.layoutManager = LinearLayoutManager(this)
+        rvFitNote.adapter = FitNoteAdapter(this, list, object : FitNoteAdapter.FitNoteClickListner {
             override fun onNoteClick(document: Document, position: Int) {
-                val intent= Intent(this@FitNoteActivity, DocumentViewActivity::class.java)
-                intent.putExtra("document",document)
+                val intent = Intent(this@FitNoteActivity, DocumentViewActivity::class.java)
+                intent.putExtra("document", document)
                 startActivity(intent)
             }
         })
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 }

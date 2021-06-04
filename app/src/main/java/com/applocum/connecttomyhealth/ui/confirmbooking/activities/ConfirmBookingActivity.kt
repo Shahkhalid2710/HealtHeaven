@@ -20,13 +20,12 @@ import javax.inject.Inject
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ConfirmBookingActivity : BaseActivity() {
-
     @Inject
     lateinit var userHolder: UserHolder
 
     lateinit var common: Common
 
-    override fun getLayoutResourceId(): Int =R.layout.activity_confirm_booking
+    override fun getLayoutResourceId(): Int = R.layout.activity_confirm_booking
 
     @SuppressLint("SimpleDateFormat", "CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,26 +34,22 @@ class ConfirmBookingActivity : BaseActivity() {
         (application as MyApplication).component.inject(this)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(btnConfirm).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,
-                    PaymentShowActivity::class.java))
+                startActivity(Intent(this, PaymentShowActivity::class.java))
             }
 
-
-        common=intent.getSerializableExtra("commonData") as Common
-        val appointmentBasicPrice=common.appointment_basic_price
-        tvBookingCost.text=("€$appointmentBasicPrice.00")
-        tvTotalCost.text=("€$appointmentBasicPrice.00")
-        val bookAppointment=userHolder.getBookAppointmentData()
-        tvTime.text= convertAvailableTimeSlots(bookAppointment.appointmentTime)
-        tvDuration.text=(bookAppointment.appointmentSlot +" "+"min")
-        tvDoctorName.text=bookAppointment.therapistName
-        tvDoctorBio.text=bookAppointment.threapistBio
+        common = intent.getSerializableExtra("commonData") as Common
+        val appointmentBasicPrice = common.appointment_basic_price
+        tvBookingCost.text = ("€$appointmentBasicPrice.00")
+        tvTotalCost.text = ("€$appointmentBasicPrice.00")
+        val bookAppointment = userHolder.getBookAppointmentData()
+        tvTime.text = convertAvailableTimeSlots(bookAppointment.appointmentTime)
+        tvDuration.text = (bookAppointment.appointmentSlot + " " + "min")
+        tvDoctorName.text = bookAppointment.therapistName
+        tvDoctorBio.text = bookAppointment.threapistBio
         Glide.with(this).load(bookAppointment.therapistImage).into(ivDoctor)
 
         var spf = SimpleDateFormat("yy-MM-dd")
@@ -63,15 +58,15 @@ class ConfirmBookingActivity : BaseActivity() {
         val newDateString = spf.format(newDate)
         tvAppointmentDate.text = newDateString
 
-        when(bookAppointment.appointmentType)
-        {
-            "face_to_face"->{
-                tvSessionType.text=("Face to Face")
+        when (bookAppointment.appointmentType) {
+            "face_to_face" -> {
+                tvSessionType.text = ("Face to Face")
             }
-            "phone_call"->{
-                tvSessionType.text=("Phone Call")
+            "phone_call" -> {
+                tvSessionType.text = ("Phone Call")
             }
-            "video"->{ tvSessionType.text=("Video Call")
+            "video" -> {
+                tvSessionType.text = ("Video Call")
             }
         }
     }
