@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/custom_solid_white"
     android:backgroundTint="@color/white"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <TextView
@@ -45,14 +45,22 @@
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
+            app:ccpDialog_backgroundColor="@color/white"
             android:focusable="false"
             android:keepScreenOn="false"
-            app:ccpDialog_background="@color/green"
-            app:ccpDialog_textColor="@color/white"
+            app:ccpDialog_textColor="@color/green"
+            app:ccp_countryAutoDetectionPref="SIM_LOCALE_NETWORK"
+            app:ccp_countryPreference="GB,IN,US"
+            app:ccpDialog_keyboardAutoPopup="false"
             app:ccp_arrowColor="@color/aapBlack"
             app:ccp_rememberLastSelection="true"
+            app:ccp_autoDetectCountry="true"
             app:ccp_showFlag="false"
-            app:ccp_showFullName="false"
+            app:ccpDialog_showFlag="true"
+            app:ccpDialog_showNameCode="false"
+            app:ccp_showNameCode="false"
+            android:gravity="center"
+            app:ccp_arrowSize="26sp"
             app:ccp_textSize="12sp" />
 
         <EditText
@@ -65,6 +73,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:hint="@string/phone_number"
             android:imeOptions="actionNext"
+            android:maxLength="10"
             android:inputType="number"
             android:textColor="@color/aapBlack"
             android:textColorHint="@color/grey"

@@ -26,7 +26,7 @@ data class Patient (
 	@SerializedName("weight_value2") val weight_value2 : String,
 	@SerializedName("gp_service") val gp_service : GpService,
 	@SerializedName("addresses") val addresses : Addresses,
-	@SerializedName("documents") val documents : List<String>,
+	@SerializedName("documents") val documents :ArrayList<Documents>,
 	@SerializedName("smoke") val smoke : String,
 	@SerializedName("alcohol") val alcohol : String,
 	@SerializedName("blood_pressure") val blood_pressure : String,

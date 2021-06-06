@@ -5,10 +5,12 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import android.view.WindowManager
 import android.widget.DatePicker
 import android.widget.Toast
@@ -55,6 +57,11 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
 
+        val window: Window = this.window
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.green)
+
         btnRegister.setOnClickListener {
             presenter.getSignup(
                 etFirstName.text.toString(),
@@ -69,6 +76,9 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
             )
         }
         clickHandler()
+        val font = Typeface.createFromAsset(this.assets, "fonts/montserrat_medium.ttf")
+        ccp.setTypeFace(font)
+
     }
 
     override fun displaymessage(message: String?) {
@@ -84,10 +94,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
     }
 
     override fun sendUserData(user: User) {
-        val intent = Intent(
-            this,
-            BottomNavigationViewActivity::class.java
-        )
+        val intent = Intent(this, BottomNavigationViewActivity::class.java)
         startActivity(intent)
         finish()
     }

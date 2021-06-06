@@ -5,12 +5,10 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Toast
@@ -23,12 +21,18 @@ import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.profiledetails.presenters.ProfileDetailsPresenter
 import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.signup.models.User
+import com.applocum.connecttomyhealth.ui.verification.activities.VerificationActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_profile_details.*
+import kotlinx.android.synthetic.main.activity_profile_details.etDOB
+import kotlinx.android.synthetic.main.activity_profile_details.etEmail
+import kotlinx.android.synthetic.main.activity_profile_details.etFirstName
+import kotlinx.android.synthetic.main.activity_profile_details.etGender
+import kotlinx.android.synthetic.main.activity_profile_details.etLastName
 import kotlinx.android.synthetic.main.activity_profile_details.ivBack
 import kotlinx.android.synthetic.main.custom_edit_phone_number_dialog.view.*
 import kotlinx.android.synthetic.main.custom_gender_dialog.view.*
@@ -50,12 +54,15 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     private var myDay: Int = 0
     private var myMonth: Int = 0
     private var myYear: Int = 0
+    private var countryCode =" "
 
     @Inject
     lateinit var presenter: ProfileDetailsPresenter
 
     @Inject
     lateinit var userHolder: UserHolder
+
+    private lateinit var patientData: Patient
 
     override fun getLayoutResourceId(): Int = R.layout.activity_profile_details
 
@@ -65,7 +72,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
         presenter.showProfile()
-
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -107,8 +113,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 showDialogView.tvCancel.setOnClickListener {
                     dialog.dismiss()
                 }
-                dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.show()
             }
         editTextClicks()
@@ -117,6 +121,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
 
     @SuppressLint("SimpleDateFormat")
     override fun showProfile(patient: Patient) {
+        patientData=patient
         tvFName.text = patient.user.firstName
         tvLName.text = patient.user.lastName
         etFirstName.setText(patient.user.firstName)
@@ -243,7 +248,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 showDialogView.btnCancel.setOnClickListener {
                     dialog.dismiss()
                 }
-                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                 dialog.show()
             }
 
@@ -288,18 +292,32 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
 
         RxView.clicks(tvPhoneNoEdit).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                val showDialogView = LayoutInflater.from(this)
-                    .inflate(R.layout.custom_edit_phone_number_dialog, null, false)
+                val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_edit_phone_number_dialog, null, false)
                 val dialog = AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
 
-                showDialogView.btnDonePhoneNumber.setOnClickListener {
+                val font = Typeface.createFromAsset(this.assets, "fonts/montserrat_medium.ttf")
+                showDialogView.ccp.setTypeFace(font)
 
+                showDialogView.ccp.setOnCountryChangeListener {
+                    countryCode = showDialogView.ccp.selectedCountryCode
+                }
+
+                showDialogView.etPhoneNumber.setText(patientData.phone_detail.number)
+
+                showDialogView.btnDonePhoneNumber.setOnClickListener {
+                    if (validateMobileNumber(showDialogView.etPhoneNumber.text.toString())) {
+                        val intent = Intent(this, VerificationActivity::class.java)
+                        intent.putExtra("phoneNumber", showDialogView.etPhoneNumber.text.toString().trim())
+                        intent.putExtra("countryCode", countryCode)
+                        startActivity(intent)
+
+                        dialog.dismiss()
+                    }
                 }
                 showDialogView.btnCancelPhoneNumber.setOnClickListener {
                     dialog.dismiss()
                 }
-                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                 dialog.show()
             }
     }
@@ -442,4 +460,28 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     }
 */
 
+    private fun validateMobileNumber(mobileNumber:String):Boolean
+    {
+        if (mobileNumber.isEmpty())
+        {
+            val snackbar = Snackbar.make(llProfileDetails,"Please enter valid Mobile Number", Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
+            return false
+        }
+        if (mobileNumber.length < 10)
+        {
+            val snackbar = Snackbar.make(llProfileDetails,"Please enter valid Mobile Number", Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
+            return false
+        }
+
+
+        return true
+    }
 }

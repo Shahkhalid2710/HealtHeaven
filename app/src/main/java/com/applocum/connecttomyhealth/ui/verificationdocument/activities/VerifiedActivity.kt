@@ -9,7 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
+import com.applocum.connecttomyhealth.ui.photoid.activities.PhotoIdActivity
 import kotlinx.android.synthetic.main.activity_verified.*
 import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 
@@ -20,7 +20,11 @@ class VerifiedActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         btnContinue.setOnClickListener {
-            openDialog()
+            val intent=(Intent(this,PhotoIdActivity::class.java))
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -34,10 +38,12 @@ class VerifiedActivity : BaseActivity() {
         wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
         window.attributes = wlp
         dialog.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT)
-
         dialog.btnDone.setOnClickListener {
             dialog.dismiss()
-            startActivity(Intent(this, BottomNavigationViewActivity::class.java))
+            val intent=(Intent(this,PhotoIdActivity::class.java))
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
             this.finish()
         }
         dialog.show()

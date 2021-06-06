@@ -86,7 +86,6 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
                     val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_cancel_book_session_dialog, null, false)
                     val dialog = AlertDialog.Builder(requireActivity()).create()
                     dialog.setView(showDialogView)
-                    dialog.setCanceledOnTouchOutside(false)
 
                     showDialogView.btnCancel.setOnClickListener {
                         presenter.deleteSession(bookAppointmentResponse.id)

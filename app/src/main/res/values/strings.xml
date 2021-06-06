@@ -619,4 +619,10 @@
     <string name="please_wait_we_are_connecting_you_with_your_clinician_please_stay_on_this_screen_our_doctor_will_connect_with_you_shortly">Please wait, we are connecting you with your Clinician. Please stay on this screen. Our Doctor will connect with you shortly.</string>
     <string name="choose_image">Choose image</string>
     <string name="__0">-</string>
+    <string name="photo_id">Photo ID</string>
+    <string name="your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_photo_id">Your safety is our priority.To prevent misuse of your details, upload a valid form of photo ID.</string>
+    <string name="dot">.</string>
+    <string name="upload_photo_id">Upload Photo ID</string>
+    <string name="remove_document">Remove Document</string>
+    <string name="are_you_sure_you_want_to_remove_this_document">Are you sure you want to remove this document?</string>
 </resources>

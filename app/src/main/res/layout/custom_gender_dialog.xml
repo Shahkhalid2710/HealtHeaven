@@ -4,8 +4,8 @@
     android:id="@+id/llGender"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/custom_solid_white"
     android:backgroundTint="@color/white"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <TextView

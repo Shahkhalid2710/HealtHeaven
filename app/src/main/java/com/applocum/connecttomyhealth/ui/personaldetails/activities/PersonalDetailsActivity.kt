@@ -7,6 +7,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.exemptions.activities.ExemptionsActivity
 import com.applocum.connecttomyhealth.ui.mygp.activities.GpServiceActivity
+import com.applocum.connecttomyhealth.ui.photoid.activities.PhotoIdActivity
 import com.applocum.connecttomyhealth.ui.profiledetails.activities.ProfileDetailsActivity
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_personal_details.*
@@ -36,6 +37,11 @@ class PersonalDetailsActivity : BaseActivity() {
         RxView.clicks(rlExemptions).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, ExemptionsActivity::class.java))
+            }
+
+        RxView.clicks(rlPhotoId).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this,PhotoIdActivity::class.java))
             }
     }
 }

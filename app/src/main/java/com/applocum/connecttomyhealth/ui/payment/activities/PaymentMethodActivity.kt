@@ -96,7 +96,6 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
                         .inflate(R.layout.custom_cancel_saved_card_dialog, null, false)
                     val dialog = AlertDialog.Builder(this@PaymentMethodActivity).create()
                     dialog.setView(showDialogView)
-                    dialog.setCanceledOnTouchOutside(false)
 
                     showDialogView.btnRemove.setOnClickListener {
                         presenter.deleteCard(card.id)

@@ -12,6 +12,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:name=".MyApplication"
@@ -22,39 +25,52 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".ui.waitingarea.activities.WaitingAreaActivity"
+        <activity android:name=".ui.photoid.activities.PhotoIdActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.mydownloads.activities.DocumentViewActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.othernotes.activities.OtherNoteActivity"
+        <activity
+            android:name=".ui.waitingarea.activities.WaitingAreaActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.referral.activities.ReferralActivity"
+        <activity
+            android:name=".ui.mydownloads.activities.DocumentViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.fitnote.activities.FitNoteActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.prescription.activities.PrescriptionActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.othernotes.activities.OtherNoteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.referral.activities.ReferralActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.fitnote.activities.FitNoteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.prescription.activities.PrescriptionActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.securitycheck.activities.SecurityActivity"
             android:label="@string/title_activity_security"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.addsymptoms.activities.AddSymptomActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.payment.activities.MemberShipActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.payment.activities.PaymentMethodActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.payment.activities.PaymentShowActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.walkthrough.activities.WalkThroughActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.exemptions.activities.UploadCertificateActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.addsymptoms.activities.AddSymptomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.payment.activities.MemberShipActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.payment.activities.PaymentMethodActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.payment.activities.PaymentShowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.walkthrough.activities.WalkThroughActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.exemptions.activities.UploadCertificateActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.Theme.AppCompat" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -74,94 +90,134 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
-        <activity android:name=".ui.mygp.activities.GpServiceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.verificationdocument.activities.VerifiedActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.verificationdocument.activities.ValidationValidUKDrivingLicenseActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.verificationdocument.activities.ValidationValidPassportActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.verificationdocument.activities.UkDrivingLicenseActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.verificationdocument.activities.ValidPassportActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.verificationdocument.activities.VerifyIdentityActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.splashscreen.activities.SplashScreenActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".ui.mygp.activities.GpServiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.verificationdocument.activities.VerifiedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.verificationdocument.activities.ValidationValidUKDrivingLicenseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.verificationdocument.activities.ValidationValidPassportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.verificationdocument.activities.UkDrivingLicenseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.verificationdocument.activities.ValidPassportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.verificationdocument.activities.VerifyIdentityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.splashscreen.activities.SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.booksession.activities.SessionBookActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.exemptions.activities.ChooseExemptionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.payment.activities.AddCodeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.payment.activities.PaymentActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.addcard.activities.AddCardActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.confirmbooking.activities.ConfirmBookingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.sessiondetails.activities.SessionDetailsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.booksession.activities.BookSessionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.medicalhistory.activities.AddMedicalHistoryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.medicalhistory.activities.MedicalHistoryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.BaseActivity"/>
-        <activity android:name=".ui.specialists.activities.SpecialistsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.medication.activities.MedicationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.familyhistory.activities.AddFamilyHistoryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.exemptions.activities.ExemptionsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.mygp.activities.AddGPServiceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.profiledetails.activities.ProfileDetailsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.investigation.activities.AddInvestigationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.allergyhistory.activities.AddAllergyActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.investigation.activities.InvestigationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.allergyhistory.activities.AllergyHistoryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.familyhistory.activities.FamilyHistoryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.settings.activities.SettingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.changepassword.activities.ChangePasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.mydownloads.activities.MyDownloadsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.clinicalrecords.activities.ClinicalRecordsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.personaldetails.activities.PersonalDetailsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.booksession.activities.SessionBookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.exemptions.activities.ChooseExemptionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.payment.activities.AddCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.payment.activities.PaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.addcard.activities.AddCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.confirmbooking.activities.ConfirmBookingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.sessiondetails.activities.SessionDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.booksession.activities.BookSessionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.medicalhistory.activities.AddMedicalHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.medicalhistory.activities.MedicalHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.BaseActivity" />
+        <activity
+            android:name=".ui.specialists.activities.SpecialistsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.medication.activities.MedicationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.familyhistory.activities.AddFamilyHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.exemptions.activities.ExemptionsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mygp.activities.AddGPServiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.profiledetails.activities.ProfileDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.investigation.activities.AddInvestigationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.allergyhistory.activities.AddAllergyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.investigation.activities.InvestigationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.allergyhistory.activities.AllergyHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.familyhistory.activities.FamilyHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.settings.activities.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.changepassword.activities.ChangePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mydownloads.activities.MyDownloadsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.clinicalrecords.activities.ClinicalRecordsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personaldetails.activities.PersonalDetailsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.bottomnavigationview.activities.BottomNavigationViewActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.signup.activities.SignupActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.signup.activities.SignupActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.createnewpassword.activities.CreateNewPasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.verification.activities.VerificationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.forgotpassword.activities.ForgotPasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.login.activities.LoginActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.createnewpassword.activities.CreateNewPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.verification.activities.VerificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.forgotpassword.activities.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.activities.LoginActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

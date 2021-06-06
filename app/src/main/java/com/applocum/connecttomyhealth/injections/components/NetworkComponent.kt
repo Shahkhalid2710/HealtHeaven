@@ -36,6 +36,7 @@ import com.applocum.connecttomyhealth.ui.notification.fragments.NotificationFrag
 import com.applocum.connecttomyhealth.ui.othernotes.activities.OtherNoteActivity
 import com.applocum.connecttomyhealth.ui.payment.activities.*
 import com.applocum.connecttomyhealth.ui.personaldetails.activities.PersonalDetailsActivity
+import com.applocum.connecttomyhealth.ui.photoid.activities.PhotoIdActivity
 import com.applocum.connecttomyhealth.ui.prescription.activities.PrescriptionActivity
 import com.applocum.connecttomyhealth.ui.profile.fragments.ProfileFragment
 import com.applocum.connecttomyhealth.ui.profiledetails.activities.ProfileDetailsActivity
@@ -67,6 +68,8 @@ interface NetworkComponent {
 
     fun inject(activity: MemberShipActivity)
 
+    fun inject(activity: PhotoIdActivity)
+
     fun inject(activity: PrescriptionActivity)
 
     fun inject(activity: FitNoteActivity)
@@ -80,6 +83,7 @@ interface NetworkComponent {
     fun inject(activity: ClinicalRecordsActivity)
 
     fun inject(activity: SettingActivity)
+
 
     fun inject(activity: FamilyHistoryActivity)
 

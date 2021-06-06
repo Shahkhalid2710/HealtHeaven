@@ -121,7 +121,7 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
         view.viewprogress(true)
         val multiPartBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
         val requestBody = RequestBody.create("image/png".toMediaTypeOrNull(), image)
-        multiPartBuilder.addFormDataPart("user[image]", image.nameWithoutExtension, requestBody)
+        multiPartBuilder.addFormDataPart("user[imagpe]", image.nameWithoutExtension, requestBody)
 
         api.updateUser(userHolder.userToken, userHolder.userid, multiPartBuilder.build())
             .observeOn(AndroidSchedulers.mainThread())

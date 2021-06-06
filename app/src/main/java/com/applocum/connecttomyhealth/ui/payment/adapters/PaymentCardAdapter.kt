@@ -66,6 +66,7 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
             holder.itemView.cbotherPayment.isChecked=false
         }
     }
+
     interface CardClickListener{
         fun cardClick(card: Card,position: Int)
         fun deleteCardClick(card: Card,position: Int)

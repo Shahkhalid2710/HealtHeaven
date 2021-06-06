@@ -1,5 +1,4 @@
 package com.applocum.connecttomyhealth.ui.verificationdocument.activities
-
 import android.content.Intent
 import android.os.Bundle
 import com.applocum.connecttomyhealth.R

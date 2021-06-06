@@ -10,5 +10,7 @@ class ErrorCodes {
         const val AlreadyExist=805
         const val NotFound=404
         const val MissingParameter=801
+        const val InvalidOtp=803
+        const val OtpTryAgain=813
     }
 }

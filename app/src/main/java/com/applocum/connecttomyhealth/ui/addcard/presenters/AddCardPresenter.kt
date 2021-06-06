@@ -95,7 +95,6 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
                 view.viewFullProgress(false)
                 it.printStackTrace()
             }).let { disposables.addAll(it) }
-
     }
 
     private fun validateCard(

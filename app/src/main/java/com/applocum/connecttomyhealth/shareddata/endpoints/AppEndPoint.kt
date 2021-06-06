@@ -17,12 +17,14 @@ import com.applocum.connecttomyhealth.ui.mygp.models.GpResponse
 import com.applocum.connecttomyhealth.ui.mygp.models.GpServiceGlobalResponse
 import com.applocum.connecttomyhealth.ui.mygp.models.SurgeryGlobaResponse
 import com.applocum.connecttomyhealth.ui.payment.models.MembershipGlobalResponse
+import com.applocum.connecttomyhealth.ui.photoid.models.PhotoIdGlobalResponse
 import com.applocum.connecttomyhealth.ui.prescription.models.DocumentGlobalResponse
 import com.applocum.connecttomyhealth.ui.securitycheck.models.SecurityGlobalResponse
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotificationGlobalResponse
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotificationResponse
 import com.applocum.connecttomyhealth.ui.signup.models.GlobalResponse
 import com.applocum.connecttomyhealth.ui.specialists.models.DoctorResponse
+import com.applocum.connecttomyhealth.ui.verification.models.OtpGlobalResponse
 import io.reactivex.Observable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -67,10 +69,19 @@ interface AppEndPoint {
                       @Path("id") userid: String?,
                       @Body body:RequestBody?):Observable<GlobalResponse>
 
-    @PATCH(" /api/users/{id}.json")
+    @PATCH("/api/users/{id}.json")
     fun updateUser(@Header("AUTH_TOKEN") authtoken: String?,
                    @Path("id") userid: String?,
                    @Body body: MultipartBody):Observable<GlobalResponse>
+
+    @PATCH("/api/priory/patients/{id}.json")
+    fun updateDocument(@Header("AUTH_TOKEN") authtoken: String?,
+                      @Path("id") userid: String?,
+                      @Body body:MultipartBody):Observable<GlobalResponse>
+
+    @DELETE("/api/documents/{id}.json")
+    fun deleteDocument(@Header("AUTH_TOKEN") authtoken: String?,
+                       @Path("id")documentId:Int):Observable<PhotoIdGlobalResponse>
 
     @GET("/api/priory/surgeries/search.json")
     fun getGpList(@Query("search")search:String?):Observable<GpServiceGlobalResponse>
@@ -170,6 +181,13 @@ interface AppEndPoint {
     @GET("/api/customer_support/memberships.json")
     fun getMembershipList(@Header("AUTH_TOKEN")authtoken: String?,
                           @Query("corporate_organization_id")corporateId: Int):Observable<MembershipGlobalResponse>
+
+    @POST("/api/priory/users/verify_otp/send_otp.json")
+    fun sendOtp(@Query("phone") phoneNumber:String,@Query("role") role :String):Observable<OtpGlobalResponse>
+
+    @POST("/api/priory/users/verify_otp.json")
+    fun verifyOtp(@Header("AUTH_TOKEN")authtoken: String?,
+                  @Body requestBody: RequestBody):Observable<GlobalResponse>
 
 }
 
