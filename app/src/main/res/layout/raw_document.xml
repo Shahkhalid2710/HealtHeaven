@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:background="@color/white"
-    android:layout_margin="@dimen/spacing_10"
+    android:layout_marginStart="@dimen/spacing_24"
+    android:layout_marginEnd="@dimen/spacing_24"
+    android:layout_marginBottom="@dimen/spacing_10"
+    android:layout_marginTop="@dimen/spacing_10"
     android:backgroundTint="@color/white"
     app:cardCornerRadius="20dp">
 

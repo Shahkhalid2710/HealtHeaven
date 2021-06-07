@@ -1,8 +1,10 @@
 package com.applocum.connecttomyhealth.ui.verificationdocument.activities
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
@@ -15,7 +17,10 @@ import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_validation_valid_passport.*
+import kotlinx.android.synthetic.main.custom_profile_dialog.view.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.io.File
 import java.net.URI
@@ -28,6 +33,8 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
     @Inject
     lateinit var photoIdPresenter: PhotoIdPresenter
 
+    private lateinit var fileOfPic:File
+
     override fun getLayoutResourceId(): Int =R.layout.activity_validation_valid_passport
 
     @SuppressLint("CheckResult")
@@ -38,8 +45,7 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
 
         val documentPhoto=intent.getStringExtra("documentPhoto")
         Glide.with(this).load(documentPhoto).into(ivPassport)
-        val fileOfPic = File(URI(documentPhoto))
-
+        fileOfPic = File(URI(documentPhoto))
 
         RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
@@ -49,6 +55,36 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
         RxView.clicks(btnSubmit).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
                 photoIdPresenter.uploadDocument(fileOfPic)
+            }
+
+        RxView.clicks(btnRetakePhoto).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val showDialogView = LayoutInflater.from(this)
+                    .inflate(R.layout.custom_profile_dialog, null, false)
+                val dialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
+                dialog.setView(showDialogView)
+
+                showDialogView.tvChooseImage.setOnClickListener {
+                    this.let {
+                        CropImage.activity()
+                            .setAllowFlipping(false)
+                            .setAllowCounterRotation(false)
+                            .setBorderLineColor(resources.getColor(R.color.green))
+                            .setBorderCornerColor(resources.getColor(R.color.green))
+                            .setMinCropResultSize(400,400)
+                            .setGuidelines(CropImageView.Guidelines.ON)
+                            .setCropShape(CropImageView.CropShape.RECTANGLE)
+                            .setCropMenuCropButtonIcon(R.drawable.ic_yes)
+                            .setRequestedSize(500, 500)
+                            .start(this)
+                    }
+                    dialog.dismiss()
+                }
+
+                showDialogView.tvCancel.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.show()
             }
     }
 
@@ -74,4 +110,15 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
     }
 
     override fun viewFullProgress(isShow: Boolean) {}
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode == Activity.RESULT_OK) {
+                ivPassport.setImageURI(result.uri)
+                 fileOfPic = File(URI(result.uri.toString()))
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 }

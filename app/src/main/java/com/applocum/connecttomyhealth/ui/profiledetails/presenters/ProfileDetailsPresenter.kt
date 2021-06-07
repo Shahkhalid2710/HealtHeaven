@@ -117,11 +117,11 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
         }
     }
 
-    fun updateUser(image: File) {
+    fun updateUser(image:File) {
         view.viewprogress(true)
         val multiPartBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
         val requestBody = RequestBody.create("image/png".toMediaTypeOrNull(), image)
-        multiPartBuilder.addFormDataPart("user[imagpe]", image.nameWithoutExtension, requestBody)
+        multiPartBuilder.addFormDataPart("user[image]", image.nameWithoutExtension, requestBody)
 
         api.updateUser(userHolder.userToken, userHolder.userid, multiPartBuilder.build())
             .observeOn(AndroidSchedulers.mainThread())

@@ -72,10 +72,15 @@ class ProfileFragment : Fragment(),
                 showDialogView.tvChooseImage.setOnClickListener {
                     context?.let { it1 ->
                         CropImage.activity()
+                            .setAllowFlipping(false)
+                            .setAllowCounterRotation(false)
+                            .setBorderLineColor(resources.getColor(R.color.green))
+                            .setBorderCornerColor(resources.getColor(R.color.green))
+                            .setMinCropResultSize(400,400)
                             .setGuidelines(CropImageView.Guidelines.ON)
                             .setCropShape(CropImageView.CropShape.OVAL)
                             .setCropMenuCropButtonIcon(R.drawable.ic_yes)
-                            .setRequestedSize(400, 400)
+                            .setRequestedSize(500, 500)
                             .start(it1, this)
                     }
                     dialog.dismiss()

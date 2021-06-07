@@ -102,10 +102,15 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
 
                 showDialogView.tvChooseImage.setOnClickListener {
                     CropImage.activity()
+                        .setAllowFlipping(false)
+                        .setAllowCounterRotation(false)
+                        .setBorderLineColor(resources.getColor(R.color.green))
+                        .setBorderCornerColor(resources.getColor(R.color.green))
+                        .setMinCropResultSize(400,400)
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setCropShape(CropImageView.CropShape.OVAL)
                         .setCropMenuCropButtonIcon(R.drawable.ic_yes)
-                        .setRequestedSize(400, 400)
+                        .setRequestedSize(500, 500)
                         .start(this)
                     dialog.dismiss()
                 }
@@ -480,8 +485,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
             snackbar.show()
             return false
         }
-
-
         return true
     }
 }

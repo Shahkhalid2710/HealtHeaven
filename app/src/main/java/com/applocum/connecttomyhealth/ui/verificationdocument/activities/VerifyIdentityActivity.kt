@@ -28,6 +28,7 @@ class VerifyIdentityActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         enableRuntimePermission()
+
         RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
                 finish()
@@ -43,10 +44,16 @@ class VerifyIdentityActivity : BaseActivity() {
                 showDialogView.tvChooseImage.setOnClickListener {
                     this.let {
                         CropImage.activity()
+                            .setAllowFlipping(false)
+                            .setAllowCounterRotation(false)
+                            .setBorderLineColor(resources.getColor(R.color.green))
+                            .setBorderCornerColor(resources.getColor(R.color.green))
+                            .setMinCropResultSize(400,400)
+                            .setScaleType(CropImageView.ScaleType.CENTER_CROP)
                             .setGuidelines(CropImageView.Guidelines.ON)
-                            .setCropShape(CropImageView.CropShape.OVAL)
+                            .setCropShape(CropImageView.CropShape.RECTANGLE)
                             .setCropMenuCropButtonIcon(R.drawable.ic_yes)
-                            .setRequestedSize(400, 400)
+                            .setRequestedSize(500, 500)
                             .start(this)
                     }
                     dialog.dismiss()
@@ -58,7 +65,7 @@ class VerifyIdentityActivity : BaseActivity() {
                 dialog.show()
             }
 
-        /*RxView.clicks(rlDrivingLicense).throttleFirst(500, TimeUnit.MILLISECONDS)
+        RxView.clicks(rlDrivingLicense).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 val showDialogView = LayoutInflater.from(this)
                     .inflate(R.layout.custom_profile_dialog, null, false)
@@ -66,12 +73,17 @@ class VerifyIdentityActivity : BaseActivity() {
                 dialog.setView(showDialogView)
 
                 showDialogView.tvChooseImage.setOnClickListener {
-                    this.let { it1 ->
+                    this.let {
                         CropImage.activity()
+                            .setAllowFlipping(false)
+                            .setAllowCounterRotation(false)
+                            .setBorderLineColor(resources.getColor(R.color.green))
+                            .setBorderCornerColor(resources.getColor(R.color.green))
+                            .setMinCropResultSize(400,400)
                             .setGuidelines(CropImageView.Guidelines.ON)
-                            .setCropShape(CropImageView.CropShape.OVAL)
+                            .setCropShape(CropImageView.CropShape.RECTANGLE)
                             .setCropMenuCropButtonIcon(R.drawable.ic_yes)
-                            .setRequestedSize(400, 400)
+                            .setRequestedSize(500, 500)
                             .start( this)
                     }
                     dialog.dismiss()
@@ -81,7 +93,7 @@ class VerifyIdentityActivity : BaseActivity() {
                     dialog.dismiss()
                 }
                 dialog.show()
-            }*/
+            }
     }
 
     private fun enableRuntimePermission() {
@@ -112,13 +124,12 @@ class VerifyIdentityActivity : BaseActivity() {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
-                val intent=Intent(this,ValidationValidPassportActivity::class.java)
-                intent.putExtra("documentPhoto",result.uri.toString())
-                startActivity(intent)
-                this.finish()
+                        val intent = Intent(this,ValidationValidPassportActivity::class.java)
+                        intent.putExtra("documentPhoto", result.uri.toString())
+                        startActivity(intent)
+                        this.finish()
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
-
 }

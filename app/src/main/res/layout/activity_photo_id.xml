@@ -12,7 +12,6 @@
         tools:context=".ui.photoid.activities.PhotoIdActivity"
         tools:ignore="UselessParent">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,12 +66,18 @@
                 android:id="@+id/rvPhotoId"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:layout_marginStart="14dp"
-                android:layout_marginEnd="14dp"
+                android:scrollbarSize="2dp"
+                android:scrollbars="vertical"
+                android:scrollbarThumbVertical="@drawable/scrollbar"
                 android:nestedScrollingEnabled="false" />
 
             <include
                 layout="@layout/custom_loader_progress"
+                android:visibility="gone" />
+
+            <include
+                android:id="@+id/NoPhotoId"
+                layout="@layout/custom_no_photo_id"
                 android:visibility="gone" />
 
         </FrameLayout>
@@ -163,6 +168,8 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <include layout="@layout/custom_progress"
-             android:id="@+id/fullProgress"/>
+
+    <include
+        android:id="@+id/fullProgress"
+        layout="@layout/custom_progress" />
 </FrameLayout>

@@ -68,7 +68,19 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
     }
 
     override fun showDocument(list: ArrayList<Documents>) {
-        btnUploadPhotoId.isEnabled = list.isEmpty()
+        if(list.isEmpty())
+        {
+            btnUploadPhotoId.isEnabled = true
+            tvAddPhotoId.visibility=View.GONE
+            NoPhotoId.visibility=View.VISIBLE
+        }
+        else
+        {
+            btnUploadPhotoId.isEnabled = false
+            tvAddPhotoId.visibility=View.VISIBLE
+            NoPhotoId.visibility=View.GONE
+        }
+
         rvPhotoId.layoutManager=LinearLayoutManager(this)
         photoIdAdapter= PhotoIdAdapter(this,list,object :PhotoIdAdapter.DocumentClick{
             override fun deleteDocument(documents: Documents, position: Int) {

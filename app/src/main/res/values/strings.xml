@@ -625,4 +625,6 @@
     <string name="upload_photo_id">Upload Photo ID</string>
     <string name="remove_document">Remove Document</string>
     <string name="are_you_sure_you_want_to_remove_this_document">Are you sure you want to remove this document?</string>
+    <string name="no_photo_id_found">No Photo ID Found</string>
+    <string name="you_have_not_uploaded_any_photo_id_please_click_on_below_button_to_upload">You have not uploaded any Photo ID. Please click on below button to upload</string>
 </resources>
