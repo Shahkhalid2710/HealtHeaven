@@ -29,6 +29,8 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
 
     lateinit var photoIdAdapter: PhotoIdAdapter
 
+    override fun getLayoutResourceId(): Int =R.layout.activity_photo_id
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,16 +58,11 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
 
     }
 
-    override fun getLayoutResourceId(): Int =R.layout.activity_photo_id
-    override fun displayMessage(message: String) {
+    override fun displayMessage(message: String) {}
 
-    }
+    override fun displayErrorMessage(message: String) {}
 
-    override fun displayErrorMessage(message: String) {
-    }
-
-    override fun showDocument(patient: Patient) {
-    }
+    override fun showDocument(patient: Patient) {}
 
     override fun showDocument(list: ArrayList<Documents>) {
         if(list.isEmpty())

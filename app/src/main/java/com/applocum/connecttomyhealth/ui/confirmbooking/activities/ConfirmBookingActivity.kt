@@ -47,7 +47,7 @@ class ConfirmBookingActivity : BaseActivity() {
         tvTotalCost.text = ("€$appointmentBasicPrice.00")
         val bookAppointment = userHolder.getBookAppointmentData()
         tvTime.text = convertAvailableTimeSlots(bookAppointment.appointmentTime)
-        tvDuration.text = (bookAppointment.appointmentSlot + " " + "min")
+        tvDuration.text = (bookAppointment.appointmentSlot + " " + "mins")
         tvDoctorName.text = bookAppointment.therapistName
         tvDoctorBio.text = bookAppointment.threapistBio
         Glide.with(this).load(bookAppointment.therapistImage).into(ivDoctor)

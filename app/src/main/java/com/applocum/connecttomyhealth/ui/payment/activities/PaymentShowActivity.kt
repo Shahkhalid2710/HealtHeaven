@@ -31,9 +31,11 @@ import kotlinx.android.synthetic.main.activity_payment_show.progress
 import kotlinx.android.synthetic.main.activity_payment_show.rvSavedCards
 import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 import kotlinx.android.synthetic.main.custom_payment_add.*
+import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointmentPresenter.View {
 
     @Inject
@@ -50,7 +52,7 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
 
     override fun getLayoutResourceId(): Int = R.layout.activity_payment_show
 
-    @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,6 +63,13 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         val bookAppointment = userHolder.getBookAppointmentData()
         bookAppointment.corporateId = 66
         userHolder.saveBookAppointmentData(bookAppointment)
+
+        var spf = SimpleDateFormat("yy-MM-dd")
+        val newDate = spf.parse(bookAppointment.appointmentDate)
+        spf = SimpleDateFormat("dd-MM-yyyy")
+        val newDateString = spf.format(newDate)
+        tvDate.text = newDateString
+
 
         RxView.clicks(btnConfirmSessionBooking).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {

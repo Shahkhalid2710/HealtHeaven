@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
@@ -127,8 +126,8 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     @SuppressLint("SimpleDateFormat")
     override fun showProfile(patient: Patient) {
         patientData=patient
-        tvFName.text = patient.user.firstName
-        tvLName.text = patient.user.lastName
+        tvFName.text = patient.first_name
+        tvLName.text = patient.last_name
         etFirstName.setText(patient.user.firstName)
         etLastName.setText(patient.user.lastName)
         etEmail.setText(patient.user.email)
@@ -138,6 +137,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         etStone.setText(patient.user.profile.weightValue1)
         etLbs.setText(patient.user.profile.weightValue2)
         etBP.setText(patient.blood_pressure)
+        etBMI.setText(patient.bmi)
         val date = patient.user.profile.dateOfBirth
         var spf = SimpleDateFormat("yyyy-MM-dd")
         val newDate = spf.parse(date)
@@ -179,9 +179,14 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         }
     }
 
-    override fun displayMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        this.finish()
+    override fun displayMessage(message: String) {}
+
+    override fun displaySuccessMessage(message: String) {
+        val snackbar = Snackbar.make(llProfileDetails, message, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.blue))
+        snackbar.show()
     }
 
     override fun displayErrorMessage(message: String) {
@@ -192,7 +197,36 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         snackbar.show()
     }
 
-    override fun userData(user: User) {}
+    @SuppressLint("SimpleDateFormat")
+    override fun userData(user: User) {
+        tvFName.text =user.firstName
+        tvLName.text =user.lastName
+        etFirstName.setText(user.firstName)
+        etLastName.setText(user.lastName)
+        etEmail.setText(user.email)
+        etPhoneNo.setText(user.phone)
+        etMeter.setText(user.profile.heightValue1)
+        etCentimeter.setText(user.profile.heightValue2)
+        etStone.setText(user.profile.weightValue1)
+        etLbs.setText(user.profile.weightValue2)
+        etBP.setText(patientData.blood_pressure)
+        etBMI.setText(patientData.bmi)
+        val date =user.profile.dateOfBirth
+        var spf = SimpleDateFormat("yyyy-MM-dd")
+        val newDate = spf.parse(date)
+        spf = SimpleDateFormat("dd/MM/yyyy")
+        val newDateString = spf.format(newDate)
+        println(newDateString)
+        etDOB.setText(newDateString)
+
+        if (user.image.isEmpty())
+        {
+            Glide.with(this).load(R.drawable.ic_blank_profile_pic).into(ivProfile)
+        }
+        else {
+            Glide.with(this).load(user.image).into(ivProfile)
+        }
+    }
 
     override fun viewprogress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
@@ -316,7 +350,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                         intent.putExtra("phoneNumber", showDialogView.etPhoneNumber.text.toString().trim())
                         intent.putExtra("countryCode", countryCode)
                         startActivity(intent)
-
                         dialog.dismiss()
                     }
                 }
@@ -327,13 +360,18 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
             }
     }
 
-
+    @SuppressLint("SimpleDateFormat")
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         myYear = year
         myMonth = month
         myDay = dayOfMonth
         val date = "" + myDay + "/" + (myMonth + 1) + "/" + myYear
-        etDOB.setText(date)
+        var spf = SimpleDateFormat("d/M/yyyy")
+        val newDate = spf.parse(date)
+        spf = SimpleDateFormat("dd/MM/yyyy")
+        val newDateString = spf.format(newDate)
+        println(newDateString)
+        etDOB.setText(newDateString)
     }
 
     private fun selectBloodPressure() {
@@ -410,7 +448,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
-                ivProfile.setImageURI(result.uri)
                 val fileOfPic = File(URI(result.uri.toString()))
                 presenter.updateUser(fileOfPic)
             }

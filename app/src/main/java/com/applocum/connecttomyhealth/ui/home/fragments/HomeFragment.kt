@@ -90,6 +90,7 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
     }
 
     override fun displayMessage(message: String) {}
+    override fun displaySuccessMessage(message: String) {}
 
     override fun displayErrorMessage(message: String) {}
 

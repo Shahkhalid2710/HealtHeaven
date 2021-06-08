@@ -178,6 +178,10 @@ interface AppEndPoint {
     @GET("/api/priory/users/utils/show_notification_setting.json")
     fun showNotification(@Header("AUTH_TOKEN")authtoken: String?):Observable<SettingNotificationResponse>
 
+    @POST("/api/customer_support/memberships.json")
+    fun addMembership(@Header("AUTH_TOKEN")authtoken: String?,
+                      @Body requestBody: RequestBody):Observable<MembershipGlobalResponse>
+
     @GET("/api/customer_support/memberships.json")
     fun getMembershipList(@Header("AUTH_TOKEN")authtoken: String?,
                           @Query("corporate_organization_id")corporateId: Int):Observable<MembershipGlobalResponse>

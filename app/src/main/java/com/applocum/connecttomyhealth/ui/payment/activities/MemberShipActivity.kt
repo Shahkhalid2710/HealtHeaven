@@ -60,6 +60,8 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
         snackbar.show()
     }
 
+    override fun displayErrorMessage(message: String) {}
+
     override fun viewProgress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }

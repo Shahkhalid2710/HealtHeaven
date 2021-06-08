@@ -51,6 +51,7 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
                 cardClick.cardClick(card, position)
                 notifyDataSetChanged()
             }
+
         RxView.clicks(holder.itemView.ivDelete).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe{
                 cardClick.deleteCardClick(card, position)

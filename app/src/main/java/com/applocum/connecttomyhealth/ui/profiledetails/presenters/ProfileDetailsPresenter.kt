@@ -16,6 +16,7 @@ import io.reactivex.disposables.CompositeDisposable
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import javax.inject.Inject
 
@@ -42,7 +43,6 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                     Success -> {
                         val patientObject = Gson().fromJson(it.data, PatientResponse::class.java)
                         val patient = patientObject.patient
-
                         view.showProfile(patient)
                     }
                     InvalidCredentials, InternalServer -> {
@@ -55,27 +55,9 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
             }).let { disposables.add(it) }
     }
 
-    fun updateProfile(
-        firstname: String,
-        lastname: String,
-        email: String,
-        phoneno: String,
-        gender: String,
-        dob: String,
-        heightValue1: String,
-        heightValue2: String,
-        weightValue1: String,
-        weightValue2: String,
-        bloodPressure: String
-    ) {
-        if (validateProfile(
-                heightValue1,
-                heightValue2,
-                weightValue1,
-                weightValue2,
-                bloodPressure
-            )
-        ) {
+    fun updateProfile(firstname: String, lastname: String, email: String, phoneno: String, gender: String, dob: String, heightValue1: String, heightValue2: String, weightValue1: String, weightValue2: String, bloodPressure: String) {
+        if (validateProfile(heightValue1, heightValue2, weightValue1, weightValue2, bloodPressure))
+        {
             view.viewprogress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -100,11 +82,10 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                     view.viewprogress(false)
                     when (it.status) {
                         Success -> {
-                            view.displayMessage("Profile updated successfully")
-                            val patientObject =
-                                Gson().fromJson(it.data, PatientResponse::class.java)
-                            val patient = patientObject.patient
-                            view.showProfile(patient)
+                            view.displaySuccessMessage("Profile updated successfully")
+                            val userObject = Gson().fromJson(it.data, UserResponse::class.java)
+                            val user = userObject.user
+                            view.userData(user)
                         }
                         InvalidCredentials, InternalServer -> {
                             view.displayErrorMessage(it.message)
@@ -120,7 +101,7 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
     fun updateUser(image:File) {
         view.viewprogress(true)
         val multiPartBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
-        val requestBody = RequestBody.create("image/png".toMediaTypeOrNull(), image)
+        val requestBody = image.asRequestBody("image/png".toMediaTypeOrNull())
         multiPartBuilder.addFormDataPart("user[image]", image.nameWithoutExtension, requestBody)
 
         api.updateUser(userHolder.userToken, userHolder.userid, multiPartBuilder.build())
@@ -175,8 +156,9 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
     }
 
     interface View {
-        fun showProfile(patient: Patient)
+        fun showProfile(patient:Patient)
         fun displayMessage(message: String)
+        fun displaySuccessMessage(message: String)
         fun displayErrorMessage(message: String)
         fun userData(user: User)
         fun viewprogress(isShow: Boolean)

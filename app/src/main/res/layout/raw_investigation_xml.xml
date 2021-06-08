@@ -76,7 +76,6 @@
                 android:textColor="@color/grey"
                 android:textSize="@dimen/font_10"
                 tools:ignore="RelativeOverlap" />
-
         </LinearLayout>
     </LinearLayout>
 

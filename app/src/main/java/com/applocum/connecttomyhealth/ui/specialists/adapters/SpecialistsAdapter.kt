@@ -45,7 +45,13 @@ class SpecialistsAdapter(context: Context,list: ArrayList<Specialist>,private va
             .subscribe {
                 onitemclick.onbookSession(specialist,position)
             }
-        Glide.with(mContext).load(specialist.image).into(holder.itemView.ivDoctor)
+
+        if (specialist.image.isEmpty())
+        {
+            Glide.with(mContext).load(R.drawable.ic_blank_profile_pic).into(holder.itemView.ivDoctor)
+        }else {
+            Glide.with(mContext).load(specialist.image).into(holder.itemView.ivDoctor)
+        }
     }
     interface ItemClickListner
     {

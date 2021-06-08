@@ -10,6 +10,8 @@ import com.applocum.connecttomyhealth.ui.payment.models.MembershipResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -26,6 +28,38 @@ class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
 
     @Inject
     lateinit var userHolder: UserHolder
+
+    fun addMembership(code:String)
+    {
+        if (validateCode(code))
+        {
+            view.viewProgress(true)
+            val requestBody: RequestBody = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("subscribe_code",code)
+                .build()
+
+            api.addMembership(userHolder.userToken,requestBody)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(onNext = {
+                    view.viewProgress(false)
+                    when(it.status)
+                    {
+                        Success->
+                        {
+                            view.displayMessage(it.message)
+                        }
+                        InternalServer, InvalidCredentials,NotFound->
+                        {
+                            view.displayErrorMessage(it.message)
+                        }
+                    }
+                },onError = {
+                    view.viewProgress(false)
+                    it.printStackTrace()
+                }).let { disposables.addAll(it) }
+           }
+      }
 
     fun showSavedCodes() {
         view.viewProgress(true)
@@ -50,8 +84,18 @@ class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
             }).let { disposables.addAll(it) }
     }
 
+    private fun validateCode(code: String):Boolean {
+        if (code.isEmpty())
+        {
+            view.displayErrorMessage("Please enter membership code to access additional benefits")
+            return false
+        }
+        return true
+    }
+
     interface View {
         fun displayMessage(message: String)
+        fun displayErrorMessage(message: String)
         fun viewProgress(isShow: Boolean)
         fun showMembershipList(membershipResponse: ArrayList<MembershipResponse>)
     }

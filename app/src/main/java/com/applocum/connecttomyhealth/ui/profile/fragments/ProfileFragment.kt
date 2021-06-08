@@ -44,8 +44,7 @@ import javax.inject.Inject
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class ProfileFragment : Fragment(),
-    ProfileDetailsPresenter.View {
+class ProfileFragment : Fragment(), ProfileDetailsPresenter.View {
     lateinit var v: View
 
     @Inject
@@ -64,8 +63,7 @@ class ProfileFragment : Fragment(),
 
         RxView.clicks(v.flProfile).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                val showDialogView = LayoutInflater.from(requireActivity())
-                    .inflate(R.layout.custom_profile_dialog, null, false)
+                val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_profile_dialog, null, false)
                 val dialog = androidx.appcompat.app.AlertDialog.Builder(requireActivity()).create()
                 dialog.setView(showDialogView)
 
@@ -91,7 +89,6 @@ class ProfileFragment : Fragment(),
                 }
                 dialog.show()
             }
-
 
         RxView.clicks(v.llPersonalDetails).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -123,7 +120,6 @@ class ProfileFragment : Fragment(),
                 startActivity(Intent(requireActivity(), ChangePasswordActivity::class.java))
             }
 
-
         RxView.clicks(v.llSetting).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), SettingActivity::class.java))
@@ -137,10 +133,7 @@ class ProfileFragment : Fragment(),
                 dialog.setView(showDialogView)
 
                 showDialogView.btnSignOut.setOnClickListener {
-                    val intent = Intent(
-                        requireActivity(),
-                        LoginActivity::class.java
-                    )
+                    val intent = Intent(requireActivity(), LoginActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
@@ -158,30 +151,40 @@ class ProfileFragment : Fragment(),
     override fun showProfile(patient: Patient) {
         v.tvFName.text = patient.user.firstName
         v.tvLName.text = patient.user.lastName
-        Glide.with(requireActivity()).clear(v.ivProfile)
 
-        if (patient.image.isEmpty())
+        if (patient.user.image.isEmpty())
         {
             Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).into(v.ivProfile)
         }
         else {
-            Glide.with(requireActivity()).load(patient.image).into(v.ivProfile)
+            Glide.with(requireActivity()).load(patient.user.image).into(v.ivProfile)
         }
+
     }
 
     override fun displayMessage(message: String) {
         Toast.makeText(requireActivity(), message, Toast.LENGTH_LONG).show()
     }
 
+    override fun displaySuccessMessage(message: String) {}
+
     override fun displayErrorMessage(message: String) {
-        val snackbar = Snackbar.make(llProfile, message, Snackbar.LENGTH_LONG)
-        snackbar.changeFont()
-        val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
-        snackbar.show()
+        val snackBar = Snackbar.make(llProfile, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+        snackBar.show()
     }
 
-    override fun userData(user: User) {}
+    override fun userData(user: User) {
+        if (user.image.isEmpty())
+        {
+            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).into(v.ivProfile)
+        }
+        else {
+            Glide.with(requireActivity()).load(user.image).into(v.ivProfile)
+        }
+    }
 
     override fun viewprogress(isShow: Boolean) {
         v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
