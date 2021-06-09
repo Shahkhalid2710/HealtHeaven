@@ -108,36 +108,25 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/spacing_24">
-
-                    <ProgressBar
-                        android:id="@+id/progress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:indeterminateTint="@color/green"
-                        android:progressTint="@color/green"
-                        android:visibility="gone" />
+                    android:layout_marginTop="@dimen/spacing_15">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvAddGp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_24"
                         android:nestedScrollingEnabled="false" />
 
                     <include
                         android:id="@+id/NoGpService"
                         layout="@layout/custom_no_gp_service_area"
                         android:visibility="gone" />
+
+                    <include layout="@layout/custom_small_progress" />
+
                 </FrameLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
     <include layout="@layout/custom_progress" />
-
 </FrameLayout>

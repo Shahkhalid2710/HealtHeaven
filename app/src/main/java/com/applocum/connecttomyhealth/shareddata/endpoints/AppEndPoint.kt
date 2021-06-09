@@ -19,6 +19,7 @@ import com.applocum.connecttomyhealth.ui.mygp.models.SurgeryGlobaResponse
 import com.applocum.connecttomyhealth.ui.payment.models.MembershipGlobalResponse
 import com.applocum.connecttomyhealth.ui.photoid.models.PhotoIdGlobalResponse
 import com.applocum.connecttomyhealth.ui.prescription.models.DocumentGlobalResponse
+import com.applocum.connecttomyhealth.ui.profile.models.ProfileProgressGlobalResponse
 import com.applocum.connecttomyhealth.ui.securitycheck.models.SecurityGlobalResponse
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotificationGlobalResponse
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotificationResponse
@@ -192,6 +193,9 @@ interface AppEndPoint {
     @POST("/api/priory/users/verify_otp.json")
     fun verifyOtp(@Header("AUTH_TOKEN")authtoken: String?,
                   @Body requestBody: RequestBody):Observable<GlobalResponse>
+
+    @GET("/api/priory/patients/track_profile_progress.json")
+    fun trackProfileProgress(@Header("AUTH_TOKEN")authtoken: String?):Observable<ProfileProgressGlobalResponse>
 
 }
 

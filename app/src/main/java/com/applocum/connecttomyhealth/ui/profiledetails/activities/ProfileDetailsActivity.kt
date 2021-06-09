@@ -126,8 +126,8 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     @SuppressLint("SimpleDateFormat")
     override fun showProfile(patient: Patient) {
         patientData=patient
-        tvFName.text = patient.first_name
-        tvLName.text = patient.last_name
+        tvFName.text = patient.user.firstName
+        tvLName.text = patient.user.lastName
         etFirstName.setText(patient.user.firstName)
         etLastName.setText(patient.user.lastName)
         etEmail.setText(patient.user.email)
@@ -209,8 +209,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         etCentimeter.setText(user.profile.heightValue2)
         etStone.setText(user.profile.weightValue1)
         etLbs.setText(user.profile.weightValue2)
-        etBP.setText(patientData.blood_pressure)
-        etBMI.setText(patientData.bmi)
+        etBMI.setText(user.profile.bmi)
         val date =user.profile.dateOfBirth
         var spf = SimpleDateFormat("yyyy-MM-dd")
         val newDate = spf.parse(date)

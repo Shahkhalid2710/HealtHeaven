@@ -628,4 +628,8 @@
     <string name="no_photo_id_found">No Photo ID Found</string>
     <string name="you_have_not_uploaded_any_photo_id_please_click_on_below_button_to_upload">You have not uploaded any Photo ID. Please click on below button to upload</string>
     <string name="__1">1</string>
+    <string name="no_notifications">No notifications</string>
+    <string name="_1_steps_left">1 steps left</string>
+    <string name="please_fill_personal_details">Please fill Personal Details</string>
+    <string name="_1_step_left_">1 Step Left</string>
 </resources>

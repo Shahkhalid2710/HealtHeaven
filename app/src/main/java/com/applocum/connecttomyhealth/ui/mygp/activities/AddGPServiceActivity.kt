@@ -20,8 +20,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_g_p_service.*
 import kotlinx.android.synthetic.main.activity_add_g_p_service.ivBack
-import kotlinx.android.synthetic.main.activity_add_g_p_service.progress
 import kotlinx.android.synthetic.main.custom_gp_service_dialog.view.*
+import kotlinx.android.synthetic.main.custom_progress.*
+import kotlinx.android.synthetic.main.custom_small_progress.*
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Matcher
@@ -111,7 +112,7 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility = if (isShow) View.VISIBLE else View.GONE
+        progressSmall.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun viewFullProgress(isShow: Boolean) {

@@ -34,12 +34,10 @@ class DocumentViewActivity : BaseActivity() {
         mWebSettings.displayZoomControls = false
 
         webView.webViewClient = object : WebViewClient() {
-
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
-                return true
+                return false
             }
-
             override fun onPageFinished(view: WebView, url: String) {
                 progressWeb.visibility = View.GONE
             }

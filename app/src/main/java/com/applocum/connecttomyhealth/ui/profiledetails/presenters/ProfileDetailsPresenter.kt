@@ -73,17 +73,17 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                 .addFormDataPart("patient[weight_category]", weightCategory)
                 .addFormDataPart("patient[weight_value1]", weightValue1)
                 .addFormDataPart("patient[weight_value2]", weightValue2)
-                .addFormDataPart("patient[blood_pressure]", bloodPressure)
+                .addFormDataPart("patient[blood_pressure]",bloodPressure)
                 .build()
 
-            api.updateProfile(userHolder.userToken, userHolder.userid, requestBody)
+            api.updateProfile(userHolder.userToken,userHolder.userid, requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onNext = {
                     view.viewprogress(false)
                     when (it.status) {
                         Success -> {
                             view.displaySuccessMessage("Profile updated successfully")
-                            val userObject = Gson().fromJson(it.data, UserResponse::class.java)
+                            val userObject = Gson().fromJson(it.data,UserResponse::class.java)
                             val user = userObject.user
                             view.userData(user)
                         }

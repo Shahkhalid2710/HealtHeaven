@@ -63,7 +63,6 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                             )
                             view.senduserdata(userObject.user)
                         }
-
                         InvalidCredentials, InternalServer -> {
                             view.displaymessage(it.message)
                         }

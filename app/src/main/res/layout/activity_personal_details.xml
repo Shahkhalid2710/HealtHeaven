@@ -1,221 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".ui.personaldetails.activities.PersonalDetailsActivity">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent">
-
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="8dp"
-            android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/spacing_25"
-            android:clickable="true"
-            android:contentDescription="@string/todo"
-            android:focusable="true"
-            android:foreground="@drawable/effect_button"
-            android:src="@drawable/ic_back" />
-
-        <TextView
-            android:id="@+id/tvPersonalDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/personal_details"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_20" />
-    </RelativeLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/spacing_16"
         android:background="@color/white"
-        android:fillViewport="true">
+        android:orientation="vertical"
+        android:id="@+id/llPersonalDetails"
+        tools:context=".ui.personaldetails.activities.PersonalDetailsActivity"
+        tools:ignore="UselessParent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_25"
+                android:clickable="true"
+                android:contentDescription="@string/todo"
+                android:focusable="true"
+                android:foreground="@drawable/effect_button"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/tvPersonalDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/personal_details"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_20" />
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:background="@color/white"
+            android:fillViewport="true">
 
             <LinearLayout
-                android:id="@+id/rlProfileddetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/rlProfileddetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_42"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvProfileDetails"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/profile_details"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_42"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivProfileDetailsNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvProfileDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/profile_details"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/textcolorgrey" />
+                        <ImageView
+                            android:id="@+id/ivProfileDetailsWarning"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginEnd="11dp"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            android:layout_toEndOf="@id/tvProfileDetails"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_warning" />
 
-            <LinearLayout
-                android:id="@+id/rlMyGp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivProfileDetailsNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/textcolorgrey" />
+
+                <LinearLayout
+                    android:id="@+id/rlMyGp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvMyGp"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/my_gp"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivMyGpNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvMyGp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/my_gp"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/textcolorgrey" />
+                        <ImageView
+                            android:id="@+id/ivMyGPWarning"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginEnd="11dp"
+                            android:scaleType="centerCrop"
+                            android:layout_toEndOf="@id/tvMyGp"
+                            android:visibility="gone"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_warning" />
 
-            <LinearLayout
-                android:id="@+id/rlExemptions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivMyGpNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/textcolorgrey" />
 
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/rlExemptions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvExemptions"
-                        android:layout_width="wrap_content"
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/exemptions"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:id="@+id/ivExemptionsNext"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvExemptions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/exemptions"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/textcolorgrey" />
+                        <ImageView
+                            android:id="@+id/ivExemptionWarning"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginEnd="11dp"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            android:layout_toEndOf="@id/tvExemptions"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_warning" />
 
-            <LinearLayout
-                android:id="@+id/rlPhotoId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivExemptionsNext"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/textcolorgrey" />
 
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/rlPhotoId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="@dimen/spacing_16"
-                    tools:ignore="UselessParent">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/photo_id"
-                        android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_14"
-                        tools:ignore="RelativeOverlap" />
+                        android:layout_marginStart="@dimen/spacing_24"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:layout_marginBottom="@dimen/spacing_16"
+                        tools:ignore="UselessParent">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_next" />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvPhotoID"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/photo_id"
+                            android:textColor="@color/aapBlack"
+                            android:textSize="@dimen/font_14"
+                            tools:ignore="RelativeOverlap" />
+
+                        <ImageView
+                            android:id="@+id/ivPhotoIDWarning"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:visibility="gone"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginEnd="11dp"
+                            android:scaleType="centerCrop"
+                            android:layout_toEndOf="@id/tvPhotoID"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_warning" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_next" />
+                    </RelativeLayout>
+                </LinearLayout>
+
             </LinearLayout>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+    <include layout="@layout/custom_progress"/>
+</FrameLayout>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,8 @@ import com.applocum.connecttomyhealth.ui.mydownloads.activities.MyDownloadsActiv
 import com.applocum.connecttomyhealth.ui.payment.activities.MemberShipActivity
 import com.applocum.connecttomyhealth.ui.payment.activities.PaymentMethodActivity
 import com.applocum.connecttomyhealth.ui.personaldetails.activities.PersonalDetailsActivity
+import com.applocum.connecttomyhealth.ui.profile.models.ProfileProgressResponse
+import com.applocum.connecttomyhealth.ui.profile.presenters.ProfileProgressPresenter
 import com.applocum.connecttomyhealth.ui.profiledetails.presenters.ProfileDetailsPresenter
 import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.securitycheck.activities.SecurityActivity
@@ -44,7 +47,7 @@ import javax.inject.Inject
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class ProfileFragment : Fragment(), ProfileDetailsPresenter.View {
+class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgressPresenter.View {
     lateinit var v: View
 
     @Inject
@@ -53,13 +56,18 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View {
     @Inject
     lateinit var presenter: ProfileDetailsPresenter
 
+    @Inject
+    lateinit var profileProgressPresenter: ProfileProgressPresenter
+
     @SuppressLint("CheckResult")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_profile, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectview(this)
+        profileProgressPresenter.injectView(this)
 
         presenter.showProfile()
+        profileProgressPresenter.trackProfileProgress()
 
         RxView.clicks(v.flProfile).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -203,6 +211,59 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View {
 
     override fun onResume() {
         presenter.showProfile()
+        profileProgressPresenter.trackProfileProgress()
         super.onResume()
+    }
+
+    override fun displayProgressErrorMessage(message: String) {
+        val snackBar = Snackbar.make(llProfile, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+        snackBar.show()
+    }
+
+    override fun viewProfileProgress(isShow: Boolean) {
+        v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun profileProgressDetail(progressResponse: ProfileProgressResponse) {
+        if (!progressResponse.profile_progress.my_bio || !progressResponse.profile_progress.photo_id || !progressResponse.profile_progress.exemption || !progressResponse.profile_progress.my_gp)
+        {
+            v.ivWarning.visibility=View.VISIBLE
+        }else {
+            v.ivWarning.visibility=View.GONE
+        }
+
+        when (progressResponse.total_filled_details)
+        {
+            1->{
+                v.view1.setBackgroundColor(Color.RED)
+                v.view2.setBackgroundColor(Color.parseColor("#d8d8d8"))
+                v.view3.setBackgroundColor(Color.parseColor("#d8d8d8"))
+                v.view4.setBackgroundColor(Color.parseColor("#d8d8d8"))
+                v.tvSteps.text =("3 Steps Left")
+                v.llSteps.visibility=View.VISIBLE
+            }
+            2->{
+                v.view1.setBackgroundColor(Color.parseColor("#eaa100"))
+                v.view2.setBackgroundColor(Color.parseColor("#eaa100"))
+                v.view3.setBackgroundColor(Color.parseColor("#d8d8d8"))
+                v.view4.setBackgroundColor(Color.parseColor("#d8d8d8"))
+                v.tvSteps.text =("2 Steps Left")
+                v.llSteps.visibility=View.VISIBLE
+            }
+            3->{
+                v.view1.setBackgroundColor(Color.parseColor("#eaa100"))
+                v.view2.setBackgroundColor(Color.parseColor("#eaa100"))
+                v.view3.setBackgroundColor(Color.parseColor("#eaa100"))
+                v.view4.setBackgroundColor(Color.parseColor("#d8d8d8"))
+                v.tvSteps.text =("1 Step Left")
+                v.llSteps.visibility=View.VISIBLE
+            }
+            4->{
+                v.llSteps.visibility=View.GONE
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
@@ -23,17 +24,16 @@ class NotificationFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_notification, container, false)
 
         if (!haveNetworkConnection()) {
-
             val snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), "No network connection", Snackbar.LENGTH_LONG)
             val snackview = snackbar.view
+            snackbar.changeFont()
             snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
             snackbar.show()
             v.noInternet.visibility = View.VISIBLE
-            v.tvNotification.visibility = View.GONE
-
+            v.noNotification.visibility = View.GONE
         } else {
             v.noInternet.visibility = View.GONE
-            v.tvNotification.visibility = View.VISIBLE
+            v.noNotification.visibility = View.VISIBLE
         }
 
         v.tvRetry.setOnClickListener {

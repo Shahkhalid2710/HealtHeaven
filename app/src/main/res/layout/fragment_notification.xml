@@ -7,16 +7,13 @@
     android:background="@color/white"
     tools:context=".ui.notification.fragments.NotificationFragment">
 
-        <TextView
-            android:id="@+id/tvNotification"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/notification"
-            android:textColor="@color/black" />
-
         <include
             layout="@layout/custom_no_internet"
             android:visibility="gone" />
+
+        <include
+            android:id="@+id/noNotification"
+            layout="@layout/custom_no_notification"
+            android:visibility="visible" />
 
 </FrameLayout>

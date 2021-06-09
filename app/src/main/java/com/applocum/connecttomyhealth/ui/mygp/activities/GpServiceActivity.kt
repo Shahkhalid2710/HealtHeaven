@@ -87,7 +87,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     @SuppressLint("CheckResult")
     override fun showSurgery(surgery: Surgery) {
-        if (surgery.city.isEmpty()) {
+        if (surgery.practice_code!!.isEmpty()) {
             llMyGp.visibility = View.VISIBLE
             llGpService.visibility = View.GONE
         } else {
@@ -108,9 +108,10 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
 
             map.uiSettings.setAllGesturesEnabled(true)
             map.isMyLocationEnabled
-            val marker = LatLng(surgery.lat, surgery.long)
+            val marker = surgery.long?.let { surgery.lat?.let { it1 -> LatLng(it1, it) } }
             val cameraPosition = CameraPosition.Builder().target(marker).zoom(15.0f).build()
-            map.addMarker(MarkerOptions().position(marker).title(capitalize(surgery.practice_name))).setIcon(smallMarkerIcon)
+            map.addMarker(marker?.let { MarkerOptions().position(it).title(surgery.practice_name?.let { capitalize(it) })
+            }).setIcon(smallMarkerIcon)
             val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
             map.moveCamera(cameraUpdate)
 
@@ -118,8 +119,8 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
             map.setOnMarkerClickListener { false }
         }
 
-        tvAddress.text = capitalize(surgery.address)
-        tvName.text = capitalize(surgery.practice_name)
+        tvAddress.text = surgery.address?.let { capitalize(it) }
+        tvName.text = surgery.practice_name?.let { capitalize(it) }
 
         RxView.clicks(btnCallGPService).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {

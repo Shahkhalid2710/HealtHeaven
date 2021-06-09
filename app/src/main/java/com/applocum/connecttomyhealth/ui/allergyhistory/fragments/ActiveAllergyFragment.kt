@@ -31,10 +31,7 @@ class ActiveAllergyFragment : Fragment(),AllergyHistoryPresenter.View {
     lateinit var v: View
 
     @SuppressLint("CheckResult")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_active_allergy, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)

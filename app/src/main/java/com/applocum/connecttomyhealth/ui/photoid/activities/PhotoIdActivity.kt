@@ -81,8 +81,7 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
         rvPhotoId.layoutManager=LinearLayoutManager(this)
         photoIdAdapter= PhotoIdAdapter(this,list,object :PhotoIdAdapter.DocumentClick{
             override fun deleteDocument(documents: Documents, position: Int) {
-                val showDialogView = LayoutInflater.from(this@PhotoIdActivity)
-                    .inflate(R.layout.custom_remove_document_dialog, null, false)
+                val showDialogView = LayoutInflater.from(this@PhotoIdActivity).inflate(R.layout.custom_remove_document_dialog, null, false)
                 val dialog = AlertDialog.Builder(this@PhotoIdActivity).create()
                 dialog.setView(showDialogView)
 
@@ -91,6 +90,7 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
                     list.removeAt(position)
                     photoIdAdapter.notifyDataSetChanged()
                     dialog.dismiss()
+                    this@PhotoIdActivity.recreate()
                 }
                 showDialogView.btnNo.setOnClickListener {
                     dialog.dismiss()

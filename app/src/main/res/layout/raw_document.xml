@@ -32,6 +32,9 @@
             android:layout_marginStart="@dimen/spacing_10"
             android:layout_marginEnd="@dimen/spacing_10"
             android:layout_marginBottom="@dimen/spacing_10"
+            android:focusable="true"
+            android:clickable="true"
+            android:foreground="@drawable/effect_button"
             android:background="@drawable/custom_solid_white">
 
             <ImageView
