@@ -88,9 +88,8 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
                 showDialogView.btnYes.setOnClickListener {
                     photoIdPresenter.deleteDocument(documents.id)
                     list.removeAt(position)
-                    photoIdAdapter.notifyDataSetChanged()
+                    photoIdAdapter.notifyItemRemoved(position)
                     dialog.dismiss()
-                    this@PhotoIdActivity.recreate()
                 }
                 showDialogView.btnNo.setOnClickListener {
                     dialog.dismiss()

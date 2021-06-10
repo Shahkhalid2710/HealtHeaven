@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
@@ -185,12 +186,17 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
     }
 
     override fun userData(user: User) {
+        val circularProgressDrawable = CircularProgressDrawable(requireActivity())
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
+
         if (user.image.isEmpty())
         {
-            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).into(v.ivProfile)
+            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(v.ivProfile)
         }
         else {
-            Glide.with(requireActivity()).load(user.image).into(v.ivProfile)
+            Glide.with(requireActivity()).load(user.image).placeholder(circularProgressDrawable).into(v.ivProfile)
         }
     }
 
@@ -237,27 +243,31 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
 
         when (progressResponse.total_filled_details)
         {
+            0-> {
+                v.llSteps.visibility=View.VISIBLE
+                v.tvSteps.text=("4 Steps Left")
+            }
             1->{
-                v.view1.setBackgroundColor(Color.RED)
+                v.view1.setBackgroundResource(R.drawable.custom_left_red_step)
                 v.view2.setBackgroundColor(Color.parseColor("#d8d8d8"))
                 v.view3.setBackgroundColor(Color.parseColor("#d8d8d8"))
-                v.view4.setBackgroundColor(Color.parseColor("#d8d8d8"))
+                v.view4.setBackgroundResource(R.drawable.custom_right_step)
                 v.tvSteps.text =("3 Steps Left")
                 v.llSteps.visibility=View.VISIBLE
             }
             2->{
-                v.view1.setBackgroundColor(Color.parseColor("#eaa100"))
+                v.view1.setBackgroundResource(R.drawable.custom_left_yellow_step)
                 v.view2.setBackgroundColor(Color.parseColor("#eaa100"))
                 v.view3.setBackgroundColor(Color.parseColor("#d8d8d8"))
-                v.view4.setBackgroundColor(Color.parseColor("#d8d8d8"))
+                v.view4.setBackgroundResource(R.drawable.custom_right_step)
                 v.tvSteps.text =("2 Steps Left")
                 v.llSteps.visibility=View.VISIBLE
             }
             3->{
-                v.view1.setBackgroundColor(Color.parseColor("#eaa100"))
+                v.view1.setBackgroundResource(R.drawable.custom_left_yellow_step)
                 v.view2.setBackgroundColor(Color.parseColor("#eaa100"))
                 v.view3.setBackgroundColor(Color.parseColor("#eaa100"))
-                v.view4.setBackgroundColor(Color.parseColor("#d8d8d8"))
+                v.view4.setBackgroundResource(R.drawable.custom_right_step)
                 v.tvSteps.text =("1 Step Left")
                 v.llSteps.visibility=View.VISIBLE
             }

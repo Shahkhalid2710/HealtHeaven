@@ -24,6 +24,7 @@ import com.applocum.connecttomyhealth.ui.login.activities.LoginActivity
 import com.applocum.connecttomyhealth.ui.signup.presenters.SignupPresenter
 import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.activity_signup.etDOB
 import kotlinx.android.synthetic.main.activity_signup.etEmail
@@ -34,6 +35,7 @@ import kotlinx.android.synthetic.main.custom_gender_dialog.view.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -52,6 +54,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
 
     override fun getLayoutResourceId(): Int = R.layout.activity_signup
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
@@ -62,19 +65,22 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, R.color.green)
 
-        btnRegister.setOnClickListener {
-            presenter.getSignup(
-                etFirstName.text.toString(),
-                etLastName.text.toString(),
-                etEmail.text.toString(),
-                "+$countrycode",
-                 etPhoneNumber.text.toString(),
-                 etPassword.text.toString(),
-                 etConfirmPassword.text.toString(),
-                 etGender.text.toString().toLowerCase(Locale.ROOT),
-                 etDOB.text.toString()
-            )
-        }
+
+        RxView.clicks(btnRegister).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                presenter.getSignup(
+                    etFirstName.text.toString(),
+                    etLastName.text.toString(),
+                    etEmail.text.toString(),
+                    "+$countrycode",
+                    etPhoneNumber.text.toString(),
+                    etPassword.text.toString(),
+                    etConfirmPassword.text.toString(),
+                    etGender.text.toString().toLowerCase(Locale.ROOT),
+                    etDOB.text.toString()
+                )
+            }
+
         clickHandler()
         val font = Typeface.createFromAsset(this.assets, "fonts/montserrat_medium.ttf")
         ccp.setTypeFace(font)
@@ -124,6 +130,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
         }
         tvSignin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+            this.finish()
         }
 
         etGender.setOnClickListener {

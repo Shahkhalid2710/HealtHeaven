@@ -99,8 +99,10 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
 
                     showDialogView.btnRemove.setOnClickListener {
                         presenter.deleteCard(card.id)
-                        paymentCardAdapter.notifyDataSetChanged()
                         dialog.dismiss()
+                        list.removeAt(position)
+                        paymentCardAdapter.notifyItemRemoved(position)
+                        paymentCardAdapter.notifyDataSetChanged()
                     }
                     showDialogView.btnCancel.setOnClickListener {
                         dialog.dismiss()

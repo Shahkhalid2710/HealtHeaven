@@ -53,7 +53,8 @@ class LoginActivity : BaseActivity(),
 
         RxView.clicks(tvSignup).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this, SignupActivity::class.java))
+                startActivity(Intent(this,SignupActivity::class.java))
+                this.finish()
             }
 
         RxView.clicks(btnLogin).throttleFirst(500,TimeUnit.MILLISECONDS)
@@ -75,7 +76,7 @@ class LoginActivity : BaseActivity(),
     }
 
     override fun senduserdata(user: User) {
-        val intent = Intent(this, BottomNavigationViewActivity::class.java)
+        val intent = Intent(this,BottomNavigationViewActivity::class.java)
         startActivity(intent)
         this.finish()
     }

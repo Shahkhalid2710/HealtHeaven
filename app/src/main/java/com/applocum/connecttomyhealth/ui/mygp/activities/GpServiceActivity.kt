@@ -63,6 +63,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
         RxView.clicks(btnAddGpService).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddGPServiceActivity::class.java))
+                this.finish()
             }
 
         locationPermission()
@@ -87,13 +88,8 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     @SuppressLint("CheckResult")
     override fun showSurgery(surgery: Surgery) {
-        if (surgery.practice_code!!.isEmpty()) {
-            llMyGp.visibility = View.VISIBLE
-            llGpService.visibility = View.GONE
-        } else {
-            llMyGp.visibility = View.GONE
-            llGpService.visibility = View.VISIBLE
-        }
+        llMyGp.visibility = View.GONE
+        llGpService.visibility = View.VISIBLE
 
         supportMapFragment = supportFragmentManager.findFragmentById(R.id.mapwhere) as SupportMapFragment
 

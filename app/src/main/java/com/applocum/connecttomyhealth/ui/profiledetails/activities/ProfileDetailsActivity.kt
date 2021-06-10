@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
@@ -218,12 +219,17 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         println(newDateString)
         etDOB.setText(newDateString)
 
+        val circularProgressDrawable = CircularProgressDrawable(this)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
+
         if (user.image.isEmpty())
         {
-            Glide.with(this).load(R.drawable.ic_blank_profile_pic).into(ivProfile)
+            Glide.with(this).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(ivProfile)
         }
         else {
-            Glide.with(this).load(user.image).into(ivProfile)
+            Glide.with(this).load(user.image).placeholder(circularProgressDrawable).into(ivProfile)
         }
     }
 
@@ -337,6 +343,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 val font = Typeface.createFromAsset(this.assets, "fonts/montserrat_medium.ttf")
                 showDialogView.ccp.setTypeFace(font)
 
+
                 showDialogView.ccp.setOnCountryChangeListener {
                     countryCode = showDialogView.ccp.selectedCountryCode
                 }
@@ -347,7 +354,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                     if (validateMobileNumber(showDialogView.etPhoneNumber.text.toString())) {
                         val intent = Intent(this, VerificationActivity::class.java)
                         intent.putExtra("phoneNumber", showDialogView.etPhoneNumber.text.toString().trim())
-                        intent.putExtra("countryCode", countryCode)
+                        intent.putExtra("countryCode",countryCode)
                         startActivity(intent)
                         dialog.dismiss()
                     }

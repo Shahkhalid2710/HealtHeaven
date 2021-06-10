@@ -38,8 +38,8 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
             view.setOnLongClickListener { true }
         }
 
-        showBadge(this, bottomnavigationView, R.id.nav_notification, "1")
-        removeBadge(bottomnavigationView, R.id.nav_notification)
+        showBadge(this, bottomnavigationView, R.id.nav_notification, "15")
+       // removeBadge(bottomnavigationView, R.id.nav_notification)
 
         loadFragment(HomeFragment())
 

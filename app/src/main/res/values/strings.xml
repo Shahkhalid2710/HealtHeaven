@@ -632,4 +632,7 @@
     <string name="_1_steps_left">1 steps left</string>
     <string name="please_fill_personal_details">Please fill Personal Details</string>
     <string name="_1_step_left_">1 Step Left</string>
+    <string name="scheduled_consultation">Scheduled Consultation</string>
+    <string name="please_join_the_waiting_room_the_healtheaven_specialist_is_ready_to_see">Please join the waiting room, the Healtheaven specialist is ready to see</string>
+    <string name="_07_56_am_10_april_2021">07 : 56 AM | 10 April 2021</string>
 </resources>

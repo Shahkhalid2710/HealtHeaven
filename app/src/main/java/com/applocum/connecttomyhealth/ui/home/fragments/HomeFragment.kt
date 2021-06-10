@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -80,12 +81,18 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
 
     override fun showProfile(patient: Patient) {
         v.tvName.text = patient.user.firstName
+
+        val circularProgressDrawable = CircularProgressDrawable(requireActivity())
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
+
         if (patient.image.isEmpty())
         {
-            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).into(v.ivUser)
+            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(v.ivUser)
         }
         else {
-            Glide.with(requireActivity()).load(patient.image).into(v.ivUser)
+            Glide.with(requireActivity()).load(patient.image).placeholder(circularProgressDrawable).into(v.ivUser)
         }
     }
 

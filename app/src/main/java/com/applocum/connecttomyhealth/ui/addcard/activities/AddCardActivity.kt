@@ -111,9 +111,7 @@ class AddCardActivity : BaseActivity(), TextWatcher,
         snackBar.show()
     }
 
-    override fun displaySuccessmessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
+    override fun displaySuccessmessage(message: String) {}
 
     override fun addcard(card: Card) {
         finish()
