@@ -8,7 +8,7 @@
     android:background="@drawable/custom_exemption_layout"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="@drawable/effect"
+    android:foreground="@drawable/ripple_effect_button_radius"
     android:orientation="horizontal"
     tools:ignore="UselessParent">
 

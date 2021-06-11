@@ -4,32 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="@drawable/effect_button"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_16"
-        android:layout_marginEnd="@dimen/spacing_24"
-        tools:ignore="UselessParent">
+        android:background="@drawable/ripple_effect_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvFamilyHistoryName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/repair_of_joint_capsule_of_knee"
-            android:textColor="@color/aapBlack"
-            android:textSize="@dimen/font_12" />
-    </LinearLayout>
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_24"
+            tools:ignore="UselessParent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/spacing_16"
-        android:background="@color/textcolorgrey" />
+            <TextView
+                android:id="@+id/tvFamilyHistoryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/repair_of_joint_capsule_of_knee"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:background="@color/textcolorgrey" />
+    </LinearLayout>
 </LinearLayout>

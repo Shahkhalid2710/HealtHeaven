@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.activity_payment_show.progress
 import kotlinx.android.synthetic.main.activity_payment_show.rvSavedCards
 import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 import kotlinx.android.synthetic.main.custom_payment_add.*
+import kotlinx.android.synthetic.main.custom_payment_add.view.*
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -69,6 +70,8 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         spf = SimpleDateFormat("dd-MM-yyyy")
         val newDateString = spf.format(newDate)
         tvDate.text = newDateString
+
+        customPaymentAdd.tvSessionDate.text=newDateString
 
 
         RxView.clicks(btnConfirmSessionBooking).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -152,10 +155,10 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
 
     override fun showcard(list: ArrayList<Card>) {
         if (list.isEmpty()) {
-            llPayment.visibility = View.VISIBLE
+            customPaymentAdd.visibility = View.VISIBLE
             llPaymentShow.visibility = View.GONE
         } else {
-            llPayment.visibility = View.GONE
+            customPaymentAdd.visibility = View.GONE
             llPaymentShow.visibility = View.VISIBLE
         }
         rvSavedCards.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

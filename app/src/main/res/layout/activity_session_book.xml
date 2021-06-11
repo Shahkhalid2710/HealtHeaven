@@ -17,28 +17,35 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="@dimen/spacing_10"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <ImageView
+            <LinearLayout
                 android:id="@+id/ivBack"
-                android:layout_width="8dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/spacing_25"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
-                android:contentDescription="@string/todo"
                 android:focusable="true"
-                android:foreground="@drawable/effect_button"
-                android:src="@drawable/ic_back" />
+                android:padding="@dimen/spacing_24">
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="15dp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_back" />
+            </LinearLayout>
         </RelativeLayout>
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_10"
+            android:layout_marginStart="@dimen/spacing_10"
+            android:layout_marginEnd="@dimen/spacing_10"
+            android:layout_marginBottom="@dimen/spacing_10"
             app:mcv_calendarMode="week"
             app:mcv_firstDayOfWeek="sunday"
             app:mcv_headerTextAppearance="@style/MonthdayHeader"
@@ -144,7 +151,6 @@
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/montserrat_semibold"
-            android:foreground="@drawable/effect_button"
             android:text="@string/book_multiple_sessions"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_14"
@@ -236,7 +242,7 @@
 
             <CheckBox
                 android:id="@+id/cbDaily"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="26dp"
@@ -245,7 +251,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
-                android:foreground="@drawable/effect_button"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/daily"
@@ -254,7 +259,7 @@
 
             <CheckBox
                 android:id="@+id/cbWeeklyonthursday"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="17dp"
@@ -263,7 +268,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
-                android:foreground="@drawable/effect_button"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/weekly_on_thursday"
@@ -272,7 +276,7 @@
 
             <CheckBox
                 android:id="@+id/cbMonthly1stThursday"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="17dp"
@@ -281,7 +285,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
-                android:foreground="@drawable/effect_button"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/monthly_on_1st_thursday"
@@ -290,7 +293,7 @@
 
             <CheckBox
                 android:id="@+id/cbAnuallyonApril13th"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="17dp"
@@ -299,7 +302,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
-                android:foreground="@drawable/effect_button"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/anually_on_april_13th"
@@ -308,7 +310,7 @@
 
             <CheckBox
                 android:id="@+id/cbEveryWeekday"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="17dp"
@@ -317,7 +319,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
-                android:foreground="@drawable/effect_button"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/every_weekday"
@@ -326,7 +327,7 @@
 
             <CheckBox
                 android:id="@+id/cbCustom"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="17dp"
@@ -335,7 +336,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
-                android:foreground="@drawable/effect_button"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/custom"

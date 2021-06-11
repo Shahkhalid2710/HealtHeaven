@@ -10,7 +10,7 @@
     android:backgroundTint="@color/white"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="@drawable/effect"
+    android:foreground="@drawable/effect_button"
     app:cardCornerRadius="6dp">
 
     <RelativeLayout

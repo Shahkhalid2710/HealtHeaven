@@ -3,66 +3,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="@drawable/effect_button"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginEnd="@dimen/spacing_24"
-        android:background="@color/white"
+        android:background="@drawable/ripple_effect_button"
+        android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginBottom="@dimen/spacing_16"
-            android:orientation="vertical"
             tools:ignore="UselessParent">
 
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/route_du_fort_surgery"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_14" />
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:layout_marginBottom="@dimen/spacing_16"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
 
-            <TextView
-                android:id="@+id/tvArea"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/st_saviours_road"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/route_du_fort_surgery"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
 
-            <TextView
-                android:id="@+id/tvCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="@string/st_saviours_jersey"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_12" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvArea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/st_saviours_road"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
 
-        <ImageView
-            android:id="@+id/ivNext"
-            android:layout_width="8dp"
-            android:layout_height="15dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/ic_next" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/st_saviours_jersey"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_12" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivNext"
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_next" />
+        </RelativeLayout>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

@@ -6,7 +6,8 @@
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
     android:fontFamily="@font/poppins_regular"
-    android:padding="@dimen/spacing_5"
-    android:text=""
+    android:padding="@dimen/spacing_10"
+    android:text="@string/valid_passport"
+    android:background="@drawable/ripple_effect_button"
     android:textColor="@color/aapBlack"
     android:textSize="@dimen/font_15" />

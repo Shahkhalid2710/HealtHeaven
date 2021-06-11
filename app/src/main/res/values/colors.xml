@@ -12,6 +12,7 @@
     <color name="aapBlack">#3a3a3a</color>
     <color name="textcolorgrey">#d8d8d8</color>
     <color name="grey">#828282</color>
+    <color name="boldgrey">#666464</color>
     <color name="lightgreen">#b1e3d3</color>
     <color name="layoutbackground">#e6e6e6</color>
     <color name="progressback">#80ffffff</color>

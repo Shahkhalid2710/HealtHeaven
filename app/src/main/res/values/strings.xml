@@ -537,6 +537,32 @@
         <item>Low - 90/60 or below</item>
     </string-array>
 
+    <string-array name="Alcohol">
+        <item>Non alcoholic</item>
+        <item>1–5 units per week</item>
+        <item>6–10 units per week</item>
+        <item>11–15 units per week</item>
+        <item>16–20 units per week</item>
+        <item>21–25 units per week</item>
+        <item>26–30 units per week</item>
+        <item>31–35 units per week</item>
+        <item>36–40 units per week</item>
+        <item>41+ units per week</item>
+    </string-array>
+
+    <string-array name="Smoker">
+        <item>Non smoker</item>
+        <item>1–5 cigarettes per day</item>
+        <item>6–10 cigarettes per day</item>
+        <item>11–15 cigarettes per day</item>
+        <item>16–20 cigarettes per day</item>
+        <item>21–25 cigarettes per day</item>
+        <item>26–30 cigarettes per day</item>
+        <item>31–40 cigarettes per day</item>
+        <item>41+ cigarettes per day</item>
+    </string-array>
+
+
     <string-array name="Meter">
         <item>1 m</item>
         <item>2 m</item>
@@ -635,4 +661,13 @@
     <string name="scheduled_consultation">Scheduled Consultation</string>
     <string name="please_join_the_waiting_room_the_healtheaven_specialist_is_ready_to_see">Please join the waiting room, the Healtheaven specialist is ready to see</string>
     <string name="_07_56_am_10_april_2021">07 : 56 AM | 10 April 2021</string>
+    <string name="_40_93_obese_class_ii">40.93 Obese Class II</string>
+    <string name="alcohol">Alcohol</string>
+    <string name="select_option">Select Option</string>
+    <string name="smoker">Smoker</string>
+    <string name="postcode">Postcode</string>
+    <string name="enter_your_postcode">Enter Your postcode</string>
+    <string name="address_line_1">Address Line 1</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="city">City</string>
 </resources>

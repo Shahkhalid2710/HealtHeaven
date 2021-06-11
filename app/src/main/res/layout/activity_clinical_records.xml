@@ -10,59 +10,65 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="@dimen/spacing_10"
         android:orientation="horizontal"
         tools:ignore="UselessParent">
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/ivBack"
-            android:layout_width="8dp"
-            android:layout_height="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/spacing_25"
+            android:background="@drawable/ripple_effect_button"
             android:clickable="true"
-            android:contentDescription="@string/todo"
             android:focusable="true"
-            android:foreground="@drawable/effect_button"
-            android:src="@drawable/ic_back" />
+            android:padding="@dimen/spacing_24">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_back" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tvClinicRecords"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/clinical_records"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_20" />
+
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/spacing_16"
         android:background="@color/white"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_30"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/rlMedicalHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="@drawable/effect"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="@dimen/spacing_15">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_42"
                     android:layout_marginEnd="@dimen/spacing_24"
                     android:layout_marginBottom="@dimen/spacing_16"
                     tools:ignore="UselessParent">
@@ -96,9 +102,9 @@
                 android:id="@+id/rlMedicalBased"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="@drawable/effect"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -139,9 +145,9 @@
                 android:id="@+id/rlAllergyHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="@drawable/effect"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -182,9 +188,9 @@
                 android:id="@+id/rlInvestigation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="@drawable/effect"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -225,9 +231,9 @@
                 android:id="@+id/rlFamilyHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="@drawable/effect"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -236,7 +242,7 @@
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="@dimen/spacing_16"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="60dp"
+                    android:paddingBottom="@dimen/spacing_15"
                     tools:ignore="UselessParent">
 
                     <TextView

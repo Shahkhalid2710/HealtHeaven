@@ -4,98 +4,104 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="@drawable/effect_button"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/spacing_10"
-        tools:ignore="UselessParent">
+        android:background="@drawable/ripple_effect_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_24"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:layout_marginEnd="@dimen/spacing_24"
-            android:layout_marginBottom="8dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="2"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_10"
             tools:ignore="UselessParent">
 
             <LinearLayout
-                android:id="@+id/ll"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
-                android:orientation="vertical"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:layout_marginBottom="8dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="2"
                 tools:ignore="UselessParent">
 
-                <TextView
-                    android:id="@+id/tvDes"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/aciclovir_500mg_20ml_solution_for_infusion_vials"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_12" />
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
 
-                <TextView
-                    android:id="@+id/tvDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/_07_jan_2020"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_12" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvDes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@string/aciclovir_500mg_20ml_solution_for_infusion_vials"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/font_12" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5">
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/_07_jan_2020"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="65dp"
-                    android:layout_height="52dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/default_button"
-                    android:orientation="vertical">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_10"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:gravity="center"
-                        android:text="@string/quantity"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/font_10" />
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="52dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/default_button"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvQuantity"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:gravity="center"
-                        android:text="@string/_10"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/font_12" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_10"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:gravity="center"
+                            android:text="@string/quantity"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/font_10" />
+
+                        <TextView
+                            android:id="@+id/tvQuantity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:gravity="center"
+                            android:text="@string/_10"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/font_12" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/textcolorgrey" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/textcolorgrey" />
+    </LinearLayout>
 </LinearLayout>

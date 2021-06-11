@@ -32,21 +32,26 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="@dimen/spacing_10"
                     android:orientation="horizontal"
                     tools:ignore="UselessParent">
 
-                    <ImageView
+                    <LinearLayout
                         android:id="@+id/ivBack"
-                        android:layout_width="8dp"
-                        android:layout_height="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/spacing_25"
+                        android:background="@drawable/ripple_effect_button"
                         android:clickable="true"
-                        android:contentDescription="@string/todo"
                         android:focusable="true"
-                        android:foreground="@drawable/effect_button"
-                        android:src="@drawable/ic_back_white" />
+                        android:padding="@dimen/spacing_24">
+
+                        <ImageView
+                            android:layout_width="8dp"
+                            android:layout_height="15dp"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_back_white" />
+                    </LinearLayout>
                 </RelativeLayout>
 
                 <androidx.cardview.widget.CardView
@@ -54,7 +59,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="14dp"
                     android:backgroundTint="@color/white"
                     android:elevation="10dp"
                     app:cardCornerRadius="6dp">

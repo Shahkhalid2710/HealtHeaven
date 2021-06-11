@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvDiseaseName"
-        style="?android:attr/dropDownItemStyle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/listPreferredItemHeightSmall"
-        android:ellipsize="marquee"
-        android:fontFamily="@font/montserrat_medium"
-        android:singleLine="true"
-        android:text="@string/sadness"
-        android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
-        android:textColor="@color/aapBlack"
-        android:textSize="@dimen/font_12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple_effect_button"
+        android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/textcolorgrey" />
+        <TextView
+            android:id="@+id/tvDiseaseName"
+            style="?android:attr/dropDownItemStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/listPreferredItemHeightSmall"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/montserrat_medium"
+            android:singleLine="true"
+            android:text="@string/sadness"
+            android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_12" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/textcolorgrey" />
+    </LinearLayout>
 </LinearLayout>

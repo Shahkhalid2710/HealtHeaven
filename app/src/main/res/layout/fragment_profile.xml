@@ -148,7 +148,7 @@
                         <View
                             android:id="@+id/view1"
                             android:layout_width="0dp"
-                            android:layout_height="25dp"
+                            android:layout_height="@dimen/spacing_30"
                             android:layout_marginEnd="2dp"
                             android:layout_weight="1"
                             android:background="@drawable/custom_left_step" />
@@ -156,7 +156,7 @@
                         <View
                             android:id="@+id/view2"
                             android:layout_width="0dp"
-                            android:layout_height="25dp"
+                            android:layout_height="@dimen/spacing_30"
                             android:layout_marginEnd="2dp"
                             android:layout_weight="1"
                             android:background="@color/textcolorgrey" />
@@ -164,7 +164,7 @@
                         <View
                             android:id="@+id/view3"
                             android:layout_width="0dp"
-                            android:layout_height="25dp"
+                            android:layout_height="@dimen/spacing_30"
                             android:layout_marginEnd="2dp"
                             android:layout_weight="1"
                             android:background="@color/textcolorgrey" />
@@ -172,7 +172,7 @@
                         <View
                             android:id="@+id/view4"
                             android:layout_width="0dp"
-                            android:layout_height="25dp"
+                            android:layout_height="@dimen/spacing_30"
                             android:layout_weight="1"
                             android:background="@drawable/custom_right_step" />
                     </LinearLayout>
@@ -192,7 +192,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:layout_marginTop="@dimen/spacing_25"
+                    android:layout_marginTop="@dimen/spacing_30"
                     android:background="@color/textcolorgrey" />
 
                 <LinearLayout
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="@drawable/effect"
+                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -265,7 +265,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="@drawable/effect"
+                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -316,7 +316,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="@drawable/effect"
+                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -367,7 +367,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="@drawable/effect"
+                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -418,7 +418,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="@drawable/effect"
+                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -469,7 +469,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="@drawable/effect"
+                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -520,7 +520,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="@drawable/effect"
+                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -571,7 +571,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="@drawable/effect"
+                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout

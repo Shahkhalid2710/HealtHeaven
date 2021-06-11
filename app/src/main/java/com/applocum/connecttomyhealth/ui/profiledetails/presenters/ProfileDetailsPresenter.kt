@@ -55,8 +55,8 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
             }).let { disposables.add(it) }
     }
 
-    fun updateProfile(firstname: String, lastname: String, email: String, phoneno: String, gender: String, dob: String, heightValue1: String, heightValue2: String, weightValue1: String, weightValue2: String, bloodPressure: String) {
-        if (validateProfile(heightValue1, heightValue2, weightValue1, weightValue2, bloodPressure))
+    fun updateProfile(firstname: String, lastname: String, email: String, phoneno: String, gender:String, dob: String, heightValue1: String, heightValue2: String, weightValue1: String, weightValue2: String,bmi:String, bloodPressure: String,smoker:String,alcohol:String,postcode:String,addressline1:String,addressline2: String,city:String) {
+        if (validateProfile(heightValue1,heightValue2,weightValue1,weightValue2,bmi,bloodPressure,alcohol,smoker,postcode,addressline1, addressline2, city))
         {
             view.viewprogress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
@@ -73,6 +73,13 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                 .addFormDataPart("patient[weight_category]", weightCategory)
                 .addFormDataPart("patient[weight_value1]", weightValue1)
                 .addFormDataPart("patient[weight_value2]", weightValue2)
+                .addFormDataPart("patient[bmi]",bmi)
+                .addFormDataPart("patient[alcohol]",alcohol)
+                .addFormDataPart("patient[smoke]",smoker)
+                .addFormDataPart("address[pincode]",postcode)
+                .addFormDataPart("address[line1]",addressline1)
+                .addFormDataPart("address[line2]",addressline2)
+                .addFormDataPart("address[town]",city)
                 .addFormDataPart("patient[blood_pressure]",bloodPressure)
                 .build()
 
@@ -125,31 +132,53 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
             }).let { disposables.addAll(it) }
     }
 
-    private fun validateProfile(
-        heightValue1: String,
-        heightValue2: String,
-        weightValue1: String,
-        weightValue2: String,
-        bloodPressure: String
-    ): Boolean {
+    private fun validateProfile(heightValue1: String, heightValue2: String, weightValue1: String, weightValue2: String, bmi: String, bloodPressure: String,alcohol: String,smoker: String,postcode: String,addressline1: String,addressline2: String,city: String): Boolean {
         if (heightValue1.isEmpty()) {
-            view.displayErrorMessage("Please fill all the credentials")
+            view.displayErrorMessage("Please provide all mandatory details")
             return false
         }
         if (heightValue2.isEmpty()) {
-            view.displayErrorMessage("Please fill all the credentials")
+            view.displayErrorMessage("Please provide all mandatory details")
             return false
         }
         if (weightValue1.isEmpty()) {
-            view.displayErrorMessage("Please fill all the credentials")
+            view.displayErrorMessage("Please provide all mandatory details")
             return false
         }
         if (weightValue2.isEmpty()) {
-            view.displayErrorMessage("Please fill all the credentials")
+            view.displayErrorMessage("Please provide all mandatory details")
+            return false
+        }
+        if (bmi.isEmpty()) {
+            view.displayErrorMessage("Please provide all mandatory details")
             return false
         }
         if (bloodPressure.isEmpty()) {
-            view.displayErrorMessage("Please fill all the credentials")
+            view.displayErrorMessage("Please provide all mandatory details")
+            return false
+        }
+        if (alcohol.isEmpty()) {
+            view.displayErrorMessage("Please provide all mandatory details")
+            return false
+        }
+        if (smoker.isEmpty()) {
+            view.displayErrorMessage("Please provide all mandatory details")
+            return false
+        }
+        if (postcode.isEmpty()) {
+            view.displayErrorMessage("Please provide all mandatory details")
+            return false
+        }
+        if (addressline1.isEmpty()) {
+            view.displayErrorMessage("Please provide all mandatory details")
+            return false
+        }
+        if (addressline2.isEmpty()) {
+            view.displayErrorMessage("Please provide all mandatory details")
+            return false
+        }
+        if (city.isEmpty()) {
+            view.displayErrorMessage("Please provide all mandatory details")
             return false
         }
         return true

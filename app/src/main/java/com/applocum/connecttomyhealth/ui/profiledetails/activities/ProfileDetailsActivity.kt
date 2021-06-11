@@ -89,7 +89,14 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                     etCentimeter.text.toString(),
                     etStone.text.toString(),
                     etLbs.text.toString(),
-                    etBP.text.toString()
+                    etBMI.text.toString(),
+                    etBP.text.toString(),
+                    etSmoker.text.toString(),
+                    etAlcohol.text.toString(),
+                    etPostcode.text.toString(),
+                    etAddressLine1.text.toString(),
+                    etAddressLine2.text.toString(),
+                    etCity.text.toString()
                 )
             }
 
@@ -138,7 +145,13 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         etStone.setText(patient.user.profile.weightValue1)
         etLbs.setText(patient.user.profile.weightValue2)
         etBP.setText(patient.blood_pressure)
-        etBMI.setText(patient.bmi)
+        etPostcode.setText(patient.addresses.primary.pincode)
+        etAddressLine1.setText(patient.addresses.primary.line1)
+        etAddressLine2.setText(patient.addresses.primary.line2)
+        etCity.setText(patient.addresses.primary.town)
+        etSmoker.setText(patient.smoke)
+        etAlcohol.setText(patient.alcohol)
+
         val date = patient.user.profile.dateOfBirth
         var spf = SimpleDateFormat("yyyy-MM-dd")
         val newDate = spf.parse(date)
@@ -210,7 +223,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         etCentimeter.setText(user.profile.heightValue2)
         etStone.setText(user.profile.weightValue1)
         etLbs.setText(user.profile.weightValue2)
-        etBMI.setText(user.profile.bmi)
         val date =user.profile.dateOfBirth
         var spf = SimpleDateFormat("yyyy-MM-dd")
         val newDate = spf.parse(date)
@@ -314,6 +326,15 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 selectBloodPressure()
             }
 
+        RxView.clicks(etSmoker).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectSmoker()
+            }
+        RxView.clicks(etAlcohol).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                selectAlcohol()
+            }
+
         RxView.clicks(etMeter).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 selectMeter()
@@ -382,7 +403,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
 
     private fun selectBloodPressure() {
         val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
-        builder.setTitle("Select blood pressure")
+        builder.setTitle("Select option")
         val bloodPressure = resources.getStringArray(R.array.BloodPressure)
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, bloodPressure)
         builder.setAdapter(dataAdapter) { _, which ->
@@ -390,13 +411,36 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         }
         val dialog = builder.create()
         dialog.show()
+    }
 
+    private fun selectSmoker() {
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
+        builder.setTitle("Select option")
+        val smoker = resources.getStringArray(R.array.Smoker)
+        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, smoker)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etSmoker.setText(smoker[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun selectAlcohol() {
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
+        builder.setTitle("Select option")
+        val alcohol = resources.getStringArray(R.array.Alcohol)
+        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, alcohol)
+        builder.setAdapter(dataAdapter) { _, which ->
+            etAlcohol.setText(alcohol[which]).toString()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun selectMeter() {
         val meter = resources.getStringArray(R.array.Meter)
         val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
-        builder.setTitle("Select meter")
+        builder.setTitle("Meter*")
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, meter)
         builder.setAdapter(dataAdapter) { _, which ->
             etMeter.setText(meter[which]).toString()
@@ -411,7 +455,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
             centimeter.add("$i cm")
         }
         val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
-        builder.setTitle("Select centimeter")
+        builder.setTitle("Centimeter*")
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
             etCentimeter.setText(centimeter[which]).toString()
@@ -426,7 +470,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
             centimeter.add("$i st")
         }
         val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
-        builder.setTitle("Select stone")
+        builder.setTitle("Stone*")
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
             etStone.setText(centimeter[which]).toString()
@@ -441,7 +485,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
             centimeter.add("$i lbs")
         }
         val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
-        builder.setTitle("Select pound")
+        builder.setTitle("Pound*")
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
             etLbs.setText(centimeter[which]).toString()

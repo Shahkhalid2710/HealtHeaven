@@ -16,29 +16,43 @@
         android:textColor="@color/green"
         android:textSize="@dimen/font_13" />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/tvChooseImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_16"
+        android:layout_marginTop="@dimen/spacing_10"
+        android:background="@drawable/ripple_effect_button"
         android:clickable="true"
         android:focusable="true"
-        android:fontFamily="@font/montserrat_medium"
-        android:foreground="@drawable/effect"
-        android:text="@string/choose_image"
-        android:textColor="@color/aapBlack"
-        android:textSize="@dimen/font_15" />
+        android:padding="@dimen/spacing_16">
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/choose_image"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_15" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/tvCancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_16"
+        android:background="@drawable/ripple_effect_button"
         android:clickable="true"
         android:focusable="true"
-        android:fontFamily="@font/montserrat_medium"
-        android:foreground="@drawable/effect"
-        android:text="@string/cancel"
-        android:textColor="@color/aapBlack"
-        android:textSize="@dimen/font_15" />
-</LinearLayout>
+        android:layout_marginBottom="@dimen/spacing_10"
+        android:layout_marginTop="@dimen/spacing_5"
+        android:padding="@dimen/spacing_16">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/cancel"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_15" />
+    </LinearLayout>
+    </LinearLayout>

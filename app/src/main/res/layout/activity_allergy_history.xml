@@ -11,54 +11,65 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_10"
         tools:ignore="UselessParent">
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/ivBack"
-            android:layout_width="8dp"
-            android:layout_height="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/spacing_25"
+            android:background="@drawable/ripple_effect_button"
             android:clickable="true"
-            android:contentDescription="@string/todo"
             android:focusable="true"
-            android:foreground="@drawable/effect_button"
-            android:src="@drawable/ic_back" />
+            android:padding="@dimen/spacing_24">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_back" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tvAllergyHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/allergy_history"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_20" />
 
-        <TextView
+        <LinearLayout
             android:id="@+id/tvAddAllergy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/spacing_24"
+            android:background="@drawable/ripple_effect_button"
             android:clickable="true"
             android:focusable="true"
-            android:fontFamily="@font/montserrat_bold"
-            android:foreground="@drawable/effect_button"
-            android:text="@string/add"
-            android:textColor="@color/green"
-            android:textSize="@dimen/font_16"
-            tools:ignore="RelativeOverlap" />
+            android:padding="@dimen/spacing_24"
+            tools:ignore="RelativeOverlap">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="end"
+                android:text="@string/add"
+                android:textColor="@color/green"
+                android:textSize="@dimen/font_16"
+                tools:ignore="RelativeOverlap" />
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_marginStart="@dimen/spacing_24"
-        android:layout_marginTop="@dimen/spacing_40"
+        android:layout_marginTop="@dimen/spacing_20"
         android:layout_marginEnd="@dimen/spacing_24"
         android:background="@drawable/custom_tab_stroke_layout"
         android:orientation="vertical">

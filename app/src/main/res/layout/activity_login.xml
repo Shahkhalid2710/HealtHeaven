@@ -259,7 +259,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:fontFamily="@font/montserrat_medium"
-                    android:foreground="@drawable/effect_button"
+                    android:background="@drawable/ripple_effect_button"
                     android:text="@string/forgot_password"
                     android:textColor="@color/green"
                     android:textSize="@dimen/font_12" />
@@ -289,7 +289,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:fontFamily="@font/montserrat_semibold"
-                        android:foreground="@drawable/effect_button"
+                        android:background="@drawable/ripple_effect_button"
                         android:text="@string/sign_up"
                         android:textColor="@color/green"
                         android:textSize="@dimen/font_12" />

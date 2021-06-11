@@ -1,103 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/llPaymentCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_10"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="@drawable/effect">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/llPaymentCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_exemption_layout"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:weightSum="2"
+        android:layout_margin="@dimen/spacing_10"
+        android:foreground="@drawable/ripple_effect_button_radius"
+        android:clickable="true"
+        android:focusable="true"
         tools:ignore="UselessParent">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing_16"
-            android:layout_weight="1.7"
-            android:orientation="vertical"
+            android:background="@drawable/custom_exemption_layout"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="2"
             tools:ignore="UselessParent">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/spacing_16"
+                android:layout_weight="1.7"
+                android:orientation="vertical"
                 tools:ignore="UselessParent">
 
                 <LinearLayout
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
 
-                    <CheckBox
-                        android:id="@+id/cbotherPayment"
+                    <LinearLayout
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/cbotherPayment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/checkbox"
+                            android:checked="false"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:padding="2dp"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/font_10"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:button="@drawable/checkbox"
-                        android:checked="false"
+                        android:layout_marginStart="8dp"
                         android:fontFamily="@font/montserrat_semibold"
-                        android:padding="2dp"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/font_10"
-                        android:visibility="gone" />
+                        android:text="@string/icici_bank_credit_card"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_14" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tvCard"
+                    android:id="@+id/tvHolderName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="@dimen/spacing_25"
+                    android:layout_marginTop="4dp"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/icici_bank_credit_card"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_14" />
+                    android:text="@string/john_martin"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_11" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_25"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/expires_18_10"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/font_11" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvHolderName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_25"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/john_martin"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_11" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3">
 
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_25"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/expires_18_10"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/font_11" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3">
-
-            <ImageView
-                android:id="@+id/ivDelete"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/ic_delete"
-                android:visibility="visible" />
+                <ImageView
+                    android:id="@+id/ivDelete"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_delete"
+                    android:visibility="visible" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

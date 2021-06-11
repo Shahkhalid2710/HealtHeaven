@@ -51,7 +51,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
-        RxView.clicks(ivBackMyGp).throttleFirst(500, TimeUnit.MILLISECONDS)
+        RxView.clicks(gpserivBackMyGp).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
         RxView.clicks(tvChangeGpService).throttleFirst(500, TimeUnit.MILLISECONDS)

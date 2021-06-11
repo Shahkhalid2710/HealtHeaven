@@ -17,54 +17,63 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_10"
             tools:ignore="UselessParent">
 
-            <ImageView
+            <LinearLayout
                 android:id="@+id/ivBack"
-                android:layout_width="8dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/spacing_25"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
-                android:contentDescription="@string/todo"
                 android:focusable="true"
-                android:foreground="@drawable/effect_button"
-                android:src="@drawable/ic_back" />
+                android:padding="@dimen/spacing_24">
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="15dp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_back" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvProfileDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/profile_details"
                 android:textColor="@color/aapBlack"
                 android:textSize="@dimen/font_20" />
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/tvSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/spacing_24"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
                 android:focusable="true"
-                android:fontFamily="@font/montserrat_bold"
-                android:foreground="@drawable/effect_button"
-                android:gravity="center"
-                android:text="@string/save"
-                android:textColor="@color/green"
-                android:textSize="@dimen/font_16"
-                tools:ignore="RelativeOverlap" />
+                android:padding="@dimen/spacing_24"
+                tools:ignore="RelativeOverlap">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="end"
+                    android:text="@string/save"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/font_16"
+                    tools:ignore="RelativeOverlap" />
+            </LinearLayout>
         </RelativeLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spacing_16"
             android:background="@color/white"
             android:fillViewport="true">
 
@@ -241,6 +250,7 @@
                         android:id="@+id/etPhoneNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/spacing_24"
                         android:layout_marginEnd="@dimen/spacing_24"
                         android:autofillHints="0"
@@ -254,24 +264,144 @@
                         android:textSize="@dimen/font_12"
                         tools:ignore="LabelFor,TextFields" />
 
-                    <TextView
+                    <LinearLayout
                         android:id="@+id/tvPhoneNoEdit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="28dp"
+                        android:background="@drawable/ripple_effect_button"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:foreground="@drawable/effect_button"
-                        android:paddingBottom="8dp"
-                        android:text="@string/edit"
-                        android:textColor="@color/green"
-                        android:textSize="12sp"
-                        android:visibility="visible"
-                        tools:ignore="RelativeOverlap" />
+                        android:paddingStart="@dimen/spacing_24"
+                        android:paddingTop="@dimen/spacing_10"
+                        android:paddingEnd="@dimen/spacing_24"
+                        android:paddingBottom="@dimen/spacing_10"
+                        tools:ignore="RelativeOverlap">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/edit"
+                            android:textColor="@color/green"
+                            android:textSize="12sp"
+                            android:visibility="visible"
+                            tools:ignore="RelativeOverlap" />
+                    </LinearLayout>
                 </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_24"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/postcode"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/etPostcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/enter_your_postcode"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_24"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/address_line_1"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/etAddressLine1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/address_line_1"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_24"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/address_line_2"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/etAddressLine2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/address_line_2"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="@dimen/spacing_24"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/city"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/etCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/city"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor" />
 
                 <TextView
                     android:id="@+id/tvGender"
@@ -467,6 +597,63 @@
                     android:fontFamily="@font/poppins_regular"
                     android:hint="@string/select_proper_height_and_weight_for_bmi"
                     android:inputType="text"
+                    android:text="@string/_40_93_obese_class_ii"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor,TextFields" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/smoker"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/etSmoker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:drawableEnd="@drawable/ic_dropdown_list"
+                    android:focusable="false"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/select_option"
+                    android:inputType="text"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor,TextFields" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/alcohol"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/etAlcohol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:drawableEnd="@drawable/ic_dropdown_list"
+                    android:focusable="false"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/select_option"
+                    android:inputType="text"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"
@@ -489,13 +676,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:layout_marginBottom="69dp"
+                    android:layout_marginBottom="@dimen/spacing_30"
                     android:autofillHints="0"
                     android:backgroundTint="@color/textcolorgrey"
                     android:drawableEnd="@drawable/ic_dropdown_list"
                     android:focusable="false"
                     android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/select_blood_pressure"
+                    android:hint="@string/select_option"
                     android:inputType="text"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"

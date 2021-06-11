@@ -495,7 +495,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:fontFamily="@font/montserrat_semibold"
-                        android:foreground="@drawable/effect_button"
+                        android:background="@drawable/ripple_effect_button"
                         android:text="@string/sign_in"
                         android:textColor="@color/green"
                         android:textSize="@dimen/font_12" />

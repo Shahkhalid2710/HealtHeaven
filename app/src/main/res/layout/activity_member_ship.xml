@@ -16,47 +16,59 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_10"
             tools:ignore="UselessParent">
 
-            <ImageView
+            <LinearLayout
                 android:id="@+id/ivBack"
-                android:layout_width="8dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/spacing_25"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
-                android:contentDescription="@string/todo"
                 android:focusable="true"
-                android:foreground="@drawable/effect_button"
-                android:src="@drawable/ic_back" />
+                android:padding="@dimen/spacing_24">
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="15dp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_back" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/membership"
                 android:textColor="@color/aapBlack"
                 android:textSize="@dimen/font_20" />
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/tvAddmembershipcode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/spacing_24"
+                android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
                 android:focusable="true"
-                android:fontFamily="@font/montserrat_bold"
-                android:foreground="@drawable/effect_button"
-                android:text="@string/add"
-                android:textColor="@color/green"
-                android:textSize="@dimen/font_16"
                 android:visibility="gone"
-                tools:ignore="RelativeOverlap" />
+                android:padding="@dimen/spacing_24"
+                tools:ignore="RelativeOverlap">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="end"
+                    android:text="@string/add"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/font_16"
+                    tools:ignore="RelativeOverlap" />
+            </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -67,7 +79,7 @@
                 android:id="@+id/llSavedCodes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_5"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:visibility="gone">
