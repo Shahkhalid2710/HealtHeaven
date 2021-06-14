@@ -4,6 +4,5 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class SurgeryResponse(
-
-    @SerializedName("surgery") val surgery: Surgery = Surgery()
+    @SerializedName("surgery") val surgery: Surgery? = Surgery()
 ) : Serializable

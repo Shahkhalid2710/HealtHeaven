@@ -32,6 +32,9 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
     @Inject
     lateinit var presenter: AddCardPresenter
 
+    var cardPosition:Int = 0
+    var mList:ArrayList<Card> = ArrayList()
+
     override fun getLayoutResourceId(): Int = R.layout.activity_payment_method
 
     @SuppressLint("CheckResult")
@@ -64,7 +67,12 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
         snackbar.show()
     }
 
-    override fun displaySuccessmessage(message: String) {}
+    override fun displaySuccessmessage(message: String) {
+        mList.removeAt(cardPosition)
+        mList.trimToSize()
+        paymentCardAdapter.notifyItemRemoved(cardPosition)
+        paymentCardAdapter.notifyDataSetChanged()
+    }
 
     override fun addcard(card: Card) {}
 
@@ -92,17 +100,16 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
                 override fun cardClick(card: Card, position: Int) {}
 
                 override fun deleteCardClick(card: Card, position: Int) {
-                    val showDialogView = LayoutInflater.from(this@PaymentMethodActivity)
-                        .inflate(R.layout.custom_cancel_saved_card_dialog, null, false)
+                    val showDialogView = LayoutInflater.from(this@PaymentMethodActivity).inflate(R.layout.custom_cancel_saved_card_dialog, null, false)
                     val dialog = AlertDialog.Builder(this@PaymentMethodActivity).create()
                     dialog.setView(showDialogView)
 
+                    cardPosition=position
+                    mList=list
+
                     showDialogView.btnRemove.setOnClickListener {
-                        presenter.deleteCard(card.id)
                         dialog.dismiss()
-                        list.removeAt(position)
-                        paymentCardAdapter.notifyItemRemoved(position)
-                        paymentCardAdapter.notifyDataSetChanged()
+                        presenter.deleteCard(card.id)
                     }
                     showDialogView.btnCancel.setOnClickListener {
                         dialog.dismiss()

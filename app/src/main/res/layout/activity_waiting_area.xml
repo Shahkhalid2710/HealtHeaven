@@ -10,23 +10,29 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="@dimen/spacing_10"
         android:orientation="horizontal"
         tools:ignore="UselessParent">
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/ivBack"
-            android:layout_width="8dp"
-            android:layout_height="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/spacing_25"
+            android:background="@drawable/ripple_effect_button"
             android:clickable="true"
-            android:contentDescription="@string/todo"
             android:focusable="true"
-            android:foreground="@drawable/effect_button"
-            android:src="@drawable/ic_back" />
+            android:padding="@dimen/spacing_24">
 
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_back" />
+        </LinearLayout>
+        
     </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,12 +63,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_20"
+            android:layout_marginStart="@dimen/spacing_24"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="@dimen/spacing_20"
+            android:layout_marginEnd="@dimen/spacing_24"
             android:fontFamily="@font/montserrat_medium"
             android:gravity="center"
-            android:text="@string/please_wait_we_are_connecting_you_with_your_clinician_please_stay_on_this_screen_our_doctor_will_connect_with_you_shortly"
+            android:text="@string/connect_specialist"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/font_14" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/shortly_connect"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_14" />
     </LinearLayout>

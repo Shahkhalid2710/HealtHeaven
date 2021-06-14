@@ -40,7 +40,7 @@
     <string name="gender">Gender</string>
     <string name="select">Select</string>
     <string name="dob">DOB</string>
-    <string name="enter_your_date_of_birth">Enter Your Date of Birth</string>
+    <string name="enter_your_date_of_birth">Select Your Date of Birth</string>
     <string name="register">Register</string>
     <string name="already_registered">Already Registered ?</string>
     <string name="sign_in">Sign In</string>
@@ -250,7 +250,7 @@
     <string name="enter_name">Enter name</string>
     <string name="expiry_date">Expiry Date</string>
     <string name="cvv">CVV</string>
-    <string name="enter_date">Enter date</string>
+    <string name="enter_date">Enter date(MM/YY)</string>
     <string name="enter_cvv">Enter CVV</string>
     <string name="save_card_for_other_payments">Save Card for other payments</string>
     <string name="select_slot">Select Slot</string>
@@ -642,7 +642,8 @@
     <string name="phone_number">Phone Number</string>
     <string name="_9">9+</string>
     <string name="waiting_area">Waiting Area</string>
-    <string name="please_wait_we_are_connecting_you_with_your_clinician_please_stay_on_this_screen_our_doctor_will_connect_with_you_shortly">Please wait, we are connecting you with your Clinician. Please stay on this screen. Our Doctor will connect with you shortly.</string>
+    <string name="connect_specialist">Please wait, we are connecting you with your Specialist.</string>
+    <string name="shortly_connect">Please stay on this screen. Our Doctor will connect with you shortly.</string>
     <string name="choose_image">Choose image</string>
     <string name="__0">-</string>
     <string name="photo_id">Photo ID</string>
@@ -670,4 +671,5 @@
     <string name="address_line_1">Address Line 1</string>
     <string name="address_line_2">Address Line 2</string>
     <string name="city">City</string>
+    <string name="select_gender_">Select gender</string>
 </resources>

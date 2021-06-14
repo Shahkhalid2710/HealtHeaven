@@ -420,7 +420,7 @@
                     android:drawableEnd="@drawable/ic_dropdown_list"
                     android:focusable="false"
                     android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/select"
+                    android:hint="@string/select_gender_"
                     android:inputType="text"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"

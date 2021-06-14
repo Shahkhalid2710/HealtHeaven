@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.shareddata.endpoints.BookAppointment
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.booksession.activities.BookSessionActivity
 import com.applocum.connecttomyhealth.ui.home.adapters.DoctorAdapter
@@ -51,6 +52,10 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
         specilistPresenter.injectview(this)
         profileDetailsPresenter.injectview(this)
 
+        val appointment = BookAppointment()
+        appointment.corporateId = 66
+        userHolder.saveBookAppointmentData(appointment)
+
         RxView.clicks(v.btnBookAppointment).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), SpecialistsActivity::class.java))
@@ -68,8 +73,18 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
         rvTopDoctors.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         rvTopDoctors.adapter = DoctorAdapter(requireActivity(), list, object : DoctorAdapter.DoctorClickListner {
                 override fun onDoctorClick(specialist: Specialist, position: Int) {
-                    val intent = Intent(requireActivity(), BookSessionActivity::class.java)
+                    val intent = Intent(requireActivity(),BookSessionActivity::class.java)
                     intent.putExtra("specialist", specialist)
+                    val appointment = userHolder.getBookAppointmentData()
+                    appointment.therapistId = specialist.id
+                    appointment.therapistImage = specialist.image
+                    appointment.threapistBio = specialist.bio
+                    appointment.therapistName =
+                        "${specialist.first_name} ${specialist.last_name}"
+                    specialist.usual_address.apply {
+                        appointment.therapistAddress = "$line1, $line2,$line3, $town, $pincode"
+                    }
+                    userHolder.saveBookAppointmentData(appointment)
                     startActivity(intent)
                 }
             })
@@ -90,9 +105,11 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
         if (patient.image.isEmpty())
         {
             Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(v.ivUser)
+            v.ivPicWarning.visibility=View.VISIBLE
         }
         else {
             Glide.with(requireActivity()).load(patient.image).placeholder(circularProgressDrawable).into(v.ivUser)
+            v.ivPicWarning.visibility=View.GONE
         }
     }
 

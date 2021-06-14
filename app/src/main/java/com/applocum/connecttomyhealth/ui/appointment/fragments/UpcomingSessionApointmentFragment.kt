@@ -35,12 +35,12 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
     @Inject
     lateinit var userHolder: UserHolder
 
+    var bookAppointmentPosition=0
+    var mListUpcomingSession:ArrayList<BookAppointmentResponse> = ArrayList()
+
     lateinit var v: View
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_upcoming_session_apointment, container, false)
 
         MyApplication.getAppContext().component.inject(this)
@@ -60,6 +60,11 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
     }
 
     override fun displaySuccessMessage(message: String) {
+        mListUpcomingSession.removeAt(bookAppointmentPosition)
+        mListUpcomingSession.trimToSize()
+        upcomingSessionAdapter.notifyItemRemoved(bookAppointmentPosition)
+        upcomingSessionAdapter.notifyDataSetChanged()
+
         val snackbar = Snackbar.make(llUpcomingSession, message, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
         val snackview = snackbar.view
@@ -68,7 +73,6 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
     }
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
-
         if (list.isEmpty()) {
             layoutNotFoundUpcomingSession.visibility = View.VISIBLE
             rvUpcomingSession.visibility = View.GONE
@@ -87,12 +91,11 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
                     val dialog = AlertDialog.Builder(requireActivity()).create()
                     dialog.setView(showDialogView)
 
+                    mListUpcomingSession=list
+                    bookAppointmentPosition=position
+
                     showDialogView.btnCancel.setOnClickListener {
                         presenter.deleteSession(bookAppointmentResponse.id)
-                        list.removeAt(position)
-                        upcomingSessionAdapter.notifyItemRemoved(position)
-                        upcomingSessionAdapter.notifyItemRangeChanged(position, list.size)
-                        upcomingSessionAdapter.notifyDataSetChanged()
                         dialog.dismiss()
                     }
                     showDialogView.btnNo.setOnClickListener {

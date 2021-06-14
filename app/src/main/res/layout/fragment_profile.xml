@@ -44,18 +44,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_20"
                     android:orientation="horizontal">
 
                     <FrameLayout
                         android:id="@+id/flProfile"
                         android:layout_width="65dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_24"
-                        android:layout_marginTop="@dimen/spacing_20">
+                        android:layout_height="63dp"
+                        android:layout_marginStart="@dimen/spacing_24">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom">
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="wrap_content"
@@ -81,12 +82,21 @@
                             android:layout_gravity="bottom|end"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/ic_edit" />
+
+                        <ImageView
+                            android:id="@+id/ivPicWarning"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:layout_gravity="top|end"
+                            android:visibility="gone"
+                            android:contentDescription="@string/todo"
+                            android:src="@drawable/ic_warning" />
                     </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="39dp"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <TextView
@@ -199,9 +209,9 @@
                     android:id="@+id/llPersonalDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_effect_button"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -263,9 +273,9 @@
                     android:id="@+id/llClinicalRecords"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_effect_button"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -314,9 +324,9 @@
                     android:id="@+id/llMyDownloads"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_effect_button"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -365,9 +375,9 @@
                     android:id="@+id/llPaymentMethods"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_effect_button"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -416,9 +426,9 @@
                     android:id="@+id/llMemberships"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_effect_button"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -467,9 +477,9 @@
                     android:id="@+id/llChangePassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_effect_button"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -518,9 +528,9 @@
                     android:id="@+id/llSetting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_effect_button"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -569,9 +579,9 @@
                     android:id="@+id/llHelp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/ripple_effect_button"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/ripple_effect_button"
                     android:orientation="vertical">
 
                     <RelativeLayout

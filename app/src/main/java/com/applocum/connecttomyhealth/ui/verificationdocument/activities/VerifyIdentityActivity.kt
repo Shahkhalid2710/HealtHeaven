@@ -124,10 +124,10 @@ class VerifyIdentityActivity : BaseActivity() {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
-                        val intent = Intent(this,ValidationValidPassportActivity::class.java)
-                        intent.putExtra("documentPhoto", result.uri.toString())
-                        startActivity(intent)
-                        this.finish()
+                val intent = Intent(this,ValidationValidPassportActivity::class.java)
+                intent.putExtra("documentPhoto", result.uri.toString())
+                startActivity(intent)
+                this.finish()
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

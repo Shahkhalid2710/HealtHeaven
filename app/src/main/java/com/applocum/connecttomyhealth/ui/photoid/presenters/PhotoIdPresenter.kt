@@ -90,6 +90,7 @@ class PhotoIdPresenter@Inject constructor(private val api:AppEndPoint) {
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.displayMessage(it.message)
                     }
                     InvalidCredentials, InternalServer,MissingParameter -> {
                         view.displayErrorMessage(it.message)

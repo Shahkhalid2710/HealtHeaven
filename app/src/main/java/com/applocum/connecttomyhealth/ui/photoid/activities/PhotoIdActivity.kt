@@ -29,6 +29,9 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
 
     lateinit var photoIdAdapter: PhotoIdAdapter
 
+    var photoPosition=0
+    var mListPhotoId:ArrayList<Documents> = ArrayList()
+
     override fun getLayoutResourceId(): Int =R.layout.activity_photo_id
 
     @SuppressLint("CheckResult")
@@ -58,7 +61,12 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
 
     }
 
-    override fun displayMessage(message: String) {}
+    override fun displayMessage(message: String) {
+        mListPhotoId.removeAt(photoPosition)
+        mListPhotoId.trimToSize()
+        photoIdAdapter.notifyItemRemoved(photoPosition)
+        photoIdAdapter.notifyDataSetChanged()
+    }
 
     override fun displayErrorMessage(message: String) {}
 
@@ -85,10 +93,11 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
                 val dialog = AlertDialog.Builder(this@PhotoIdActivity).create()
                 dialog.setView(showDialogView)
 
+                photoPosition=position
+                mListPhotoId=list
+
                 showDialogView.btnYes.setOnClickListener {
                     photoIdPresenter.deleteDocument(documents.id)
-                    list.removeAt(position)
-                    photoIdAdapter.notifyItemRemoved(position)
                     dialog.dismiss()
                 }
                 showDialogView.btnNo.setOnClickListener {

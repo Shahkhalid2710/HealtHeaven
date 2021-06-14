@@ -94,12 +94,11 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
                         showDialogView.tvGpCity.text = gpService.city?.let { capitalize(it) }
 
                         showDialogView.btnSubmit.setOnClickListener {
-                            dialog.dismiss()
                             gpService.id?.let { it1 -> presenter.addGpService(it1) }
-                            val intent = Intent(this@AddGPServiceActivity, GpServiceActivity::class.java)
-                            intent.putExtra("gpService", gpService)
+                            val intent = Intent(this@AddGPServiceActivity,GpServiceActivity::class.java)
                             startActivity(intent)
                             this@AddGPServiceActivity.finish()
+                            dialog.dismiss()
                         }
                         showDialogView.btnCancel.setOnClickListener {
                             dialog.dismiss()

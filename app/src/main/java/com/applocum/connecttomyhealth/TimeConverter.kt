@@ -91,3 +91,10 @@ fun Snackbar.changeFont()
     val font = Typeface.createFromAsset(context.assets, "fonts/montserrat_regular.ttf")
     tv.typeface = font
 }
+
+fun convertCardDate(date: String): String {
+    val defaultSdf = SimpleDateFormat("MMyy", Locale.getDefault())
+    defaultSdf.timeZone = TimeZone.getTimeZone("UTC")
+    val sdf = SimpleDateFormat("MM/yy", Locale.getDefault())
+    return sdf.format(defaultSdf.parse(date))
+}

@@ -85,13 +85,14 @@
                 <FrameLayout
                     android:id="@+id/flPic"
                     android:layout_width="65dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="63dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="32dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
@@ -118,6 +119,15 @@
                         android:layout_gravity="bottom|end"
                         android:contentDescription="@string/todo"
                         android:src="@drawable/ic_edit" />
+
+                    <ImageView
+                        android:id="@+id/ivPicWarning"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_gravity="top|end"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_warning"
+                        android:visibility="gone" />
                 </FrameLayout>
 
                 <LinearLayout
@@ -171,6 +181,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textCapSentences"
                     android:textColor="@color/aapBlack"
+                    android:hint="@string/enter_your_first_name"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"
                     tools:ignore="LabelFor" />
@@ -197,6 +208,7 @@
                     android:focusable="true"
                     android:fontFamily="@font/montserrat_medium"
                     android:imeOptions="actionNext"
+                    android:hint="@string/enter_your_last_name"
                     android:inputType="textCapSentences"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
@@ -226,6 +238,7 @@
                     android:fontFamily="@font/montserrat_regular"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/aapBlack"
+                    android:hint="@string/enter_your_email_address"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"
                     tools:ignore="LabelFor" />
@@ -260,6 +273,7 @@
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:textColor="@color/aapBlack"
+                        android:hint="@string/enter_mobile_number"
                         android:textColorHint="@color/grey"
                         android:textSize="@dimen/font_12"
                         tools:ignore="LabelFor,TextFields" />
@@ -290,6 +304,65 @@
                             tools:ignore="RelativeOverlap" />
                     </LinearLayout>
                 </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/gender"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/etGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:drawableEnd="@drawable/ic_dropdown_list"
+                    android:focusable="false"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:textColor="@color/aapBlack"
+                    android:hint="@string/select_gender_"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor" />
+
+                <TextView
+                    android:id="@+id/tvDOB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/dob"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/etDOB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:focusable="false"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:inputType="text"
+                    android:hint="@string/enter_your_date_of_birth"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -398,63 +471,6 @@
                     android:hint="@string/city"
                     android:imeOptions="actionDone"
                     android:inputType="textCapSentences"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor" />
-
-                <TextView
-                    android:id="@+id/tvGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/gender"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_14" />
-
-                <EditText
-                    android:id="@+id/etGender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_dropdown_list"
-                    android:focusable="false"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:imeOptions="actionDone"
-                    android:inputType="text"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor" />
-
-                <TextView
-                    android:id="@+id/tvDOB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/dob"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_14" />
-
-                <EditText
-                    android:id="@+id/etDOB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_calendar"
-                    android:focusable="false"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:inputType="text"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"

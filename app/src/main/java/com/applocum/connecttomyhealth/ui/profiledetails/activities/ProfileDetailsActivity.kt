@@ -71,7 +71,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
-        presenter.showProfile()
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -128,7 +127,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 dialog.show()
             }
         editTextClicks()
-
+        presenter.showProfile()
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -145,14 +144,8 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         etStone.setText(patient.user.profile.weightValue1)
         etLbs.setText(patient.user.profile.weightValue2)
         etBP.setText(patient.blood_pressure)
-        etPostcode.setText(patient.addresses.primary.pincode)
-        etAddressLine1.setText(patient.addresses.primary.line1)
-        etAddressLine2.setText(patient.addresses.primary.line2)
-        etCity.setText(patient.addresses.primary.town)
-        etSmoker.setText(patient.smoke)
-        etAlcohol.setText(patient.alcohol)
 
-        val date = patient.user.profile.dateOfBirth
+        val date = patient.date_of_birth
         var spf = SimpleDateFormat("yyyy-MM-dd")
         val newDate = spf.parse(date)
         spf = SimpleDateFormat("dd/MM/yyyy")
@@ -163,12 +156,14 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         if (patient.image.isEmpty())
         {
             Glide.with(this).load(R.drawable.ic_blank_profile_pic).into(ivProfile)
+            ivPicWarning.visibility=View.VISIBLE
         }
         else {
             Glide.with(this).load(patient.image).into(ivProfile)
+            ivPicWarning.visibility = View.GONE
         }
 
-        when (patient.user.gender) {
+        when(patient.user.gender) {
             "male" -> {
                 etGender.setText(R.string.male)
             }
@@ -191,6 +186,12 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 etGender.setText(R.string.other)
             }
         }
+        etPostcode.setText(patientData.addresses.primary.pincode)
+        etAddressLine1.setText(patientData.addresses.primary.line1)
+        etAddressLine2.setText(patientData.addresses.primary.line2)
+        etCity.setText(patientData.addresses.primary.town)
+        etSmoker.setText(patientData.smoke)
+        etAlcohol.setText(patientData.alcohol)
     }
 
     override fun displayMessage(message: String) {}
@@ -239,10 +240,37 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         if (user.image.isEmpty())
         {
             Glide.with(this).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(ivProfile)
+            ivPicWarning.visibility = View.VISIBLE
         }
         else {
             Glide.with(this).load(user.image).placeholder(circularProgressDrawable).into(ivProfile)
+            ivPicWarning.visibility = View.GONE
         }
+
+        when(user.gender) {
+            "male" -> {
+                etGender.setText(R.string.male)
+            }
+            "female" -> {
+                etGender.setText(R.string.female)
+            }
+            "transgender" -> {
+                etGender.setText(R.string.transgender)
+            }
+            "gender neutral" -> {
+                etGender.setText(R.string.gender_neutral)
+            }
+            "gender fluid" -> {
+                etGender.setText(R.string.gender_fluid)
+            }
+            "prefer not to say" -> {
+                etGender.setText(R.string.prefer_not_to_say)
+            }
+            "other" -> {
+                etGender.setText(R.string.other)
+            }
+        }
+
     }
 
     override fun viewprogress(isShow: Boolean) {
@@ -363,7 +391,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
 
                 val font = Typeface.createFromAsset(this.assets, "fonts/montserrat_medium.ttf")
                 showDialogView.ccp.setTypeFace(font)
-
 
                 showDialogView.ccp.setOnCountryChangeListener {
                     countryCode = showDialogView.ccp.selectedCountryCode

@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.convertCardDate
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_other_payment.view.*
 import java.util.concurrent.TimeUnit
+
 
 class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boolean,isDeleteShoww:Boolean,private val cardClick:CardClickListener):RecyclerView.Adapter<PaymentCardAdapter.PaymentHolder>() {
     var mContext=context
@@ -36,7 +38,7 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
         val expires="Expires"
         holder.itemView.tvCard.text=(card.card_type+" "+card.card_number)
         holder.itemView.tvHolderName.text=card.card_holder_name
-        holder.itemView.tvDate.text = (expires+" "+card.expiry_date.toString())
+        holder.itemView.tvDate.text = (expires+" "+ convertCardDate(card.expiry_date.toString()))
 
         if (isShow) holder.itemView.cbotherPayment.visibility=View.VISIBLE
         else holder.itemView.cbotherPayment.visibility=View.GONE

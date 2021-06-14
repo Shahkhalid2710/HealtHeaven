@@ -48,6 +48,8 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
 
+        presenter.getGpService()
+
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
@@ -67,8 +69,6 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
             }
 
         locationPermission()
-        presenter.getGpService()
-
     }
 
     private fun locationPermission() {
@@ -88,8 +88,9 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     @SuppressLint("CheckResult")
     override fun showSurgery(surgery: Surgery) {
+
+        rlGpService.visibility = View.VISIBLE
         llMyGp.visibility = View.GONE
-        llGpService.visibility = View.VISIBLE
 
         supportMapFragment = supportFragmentManager.findFragmentById(R.id.mapwhere) as SupportMapFragment
 
@@ -140,7 +141,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
     }
 
     override fun onResume() {
-        super.onResume()
         presenter.getGpService()
+        super.onResume()
     }
 }

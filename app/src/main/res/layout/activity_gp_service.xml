@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ui.mygp.activities.GpServiceActivity"
     android:background="@color/white">
 
     <RelativeLayout
@@ -11,17 +12,16 @@
         tools:ignore="UselessParent">
 
         <RelativeLayout
-            android:id="@+id/llGpService"
+            android:id="@+id/rlGpService"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:orientation="vertical"
-                tools:context=".ui.mygp.activities.GpServiceActivity"
                 tools:ignore="UselessParent">
 
                 <RelativeLayout
@@ -95,7 +95,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -103,8 +102,7 @@
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:layout_marginBottom="@dimen/spacing_10"
                 android:background="@drawable/custom_dialog"
-                android:orientation="vertical"
-                android:visibility="visible">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvName"
@@ -156,7 +154,7 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -198,7 +196,6 @@
                 layout="@layout/custom_mygp_xml"
                 android:visibility="visible" />
         </LinearLayout>
+        <include layout="@layout/custom_progress"/>
     </RelativeLayout>
-
-    <include layout="@layout/custom_progress" />
 </FrameLayout>

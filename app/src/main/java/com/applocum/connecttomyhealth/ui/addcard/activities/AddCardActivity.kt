@@ -4,28 +4,27 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.addcard.presenters.AddCardPresenter
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
+import com.applocum.connecttomyhealth.ui.addcard.presenters.AddCardPresenter
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_add_card.*
-import kotlinx.android.synthetic.main.activity_add_card.ivBack
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class AddCardActivity : BaseActivity(), TextWatcher,
-    AddCardPresenter.View {
-    private var count = 0
+
+class AddCardActivity : BaseActivity(), AddCardPresenter.View {
+    private var count2 = 0
     lateinit var v: View
 
     @Inject
@@ -45,22 +44,23 @@ class AddCardActivity : BaseActivity(), TextWatcher,
                 finish()
             }
 
-        etCardNumber.addTextChangedListener(this)
+        etCardNumber.addTextChangedListener(FourDigitCardFormatWatcher())
+        etExpiryDate.addTextChangedListener(editTextDateWatcher)
 
-        etHolderName.addTextChangedListener {
-            if (etHolderName.text.length >= 5) ivSuccessNameonCard.visibility =
-                View.VISIBLE else ivSuccessNameonCard.visibility = View.GONE
+        etCardNumber.addTextChangedListener {
+            if (etCardNumber.text.length >=19) {
+                ivSuccessCardNumber.visibility = View.VISIBLE
+            } else {
+                ivSuccessCardNumber.visibility = View.GONE
+            }
         }
 
-        etExpiryDate.addTextChangedListener {
-            if (etExpiryDate.text.length == 4) ivSuccessExpiryDate.visibility =
-                View.VISIBLE else ivSuccessExpiryDate.visibility = View.GONE
+        etHolderName.addTextChangedListener {
+            if (etHolderName.text.length >= 2) ivSuccessNameonCard.visibility = View.VISIBLE else ivSuccessNameonCard.visibility = View.GONE
         }
 
         etCVV.addTextChangedListener {
-            if (etCVV.text.length >= 1) ivCrossCVV.visibility =
-                View.VISIBLE else ivCrossCVV.visibility = View.GONE
-
+            if (etCVV.text.length >= 1) ivCrossCVV.visibility = View.VISIBLE else ivCrossCVV.visibility = View.GONE
             etCardNumber.filters = arrayOf(InputFilter.LengthFilter(20))
 
             ivCrossCVV.setOnClickListener {
@@ -71,36 +71,26 @@ class AddCardActivity : BaseActivity(), TextWatcher,
 
         RxView.clicks(btnAdd).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                presenter.addCard(
-                    etCardNumber.text.toString().trim(),
-                    etHolderName.text.toString(),
-                    etExpiryDate.text.toString(),
-                    etCVV.text.toString()
-                )
+                presenter.addCard(etCardNumber.text.toString().replace(" ",""),etHolderName.text.toString(), etExpiryDate.text.toString().replace("/",""), etCVV.text.toString())
             }
     }
 
-    override fun afterTextChanged(s: Editable?) {
-/*         if (count == 4) {
-             var str = s.toString()
-             str += " "
-             etCardNumber.setText(str)
-             etCardNumber.setSelection(str.length)
-             count = 0
-         }*/
-    }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-    }
-
-    override fun onTextChanged(s: CharSequence, start: Int, before: Int, a: Int) {
-        count++
-        if (s.length >= 16) {
-            ivSuccessCardNumber.visibility = View.VISIBLE
-        } else {
-            ivSuccessCardNumber.visibility = View.GONE
+    var editTextDateWatcher: TextWatcher = object : TextWatcher {
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            if (etExpiryDate.text.length == 5) ivSuccessExpiryDate.visibility =
+                View.VISIBLE else ivSuccessExpiryDate.visibility = View.GONE
         }
 
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            count2 = etExpiryDate.text.toString().length
+        }
+
+        override fun afterTextChanged(s: Editable) {
+                val str = s.length
+                if ((count2 < str) && (str == 2 || str == 5)) {
+                s.append("/")
+            }
+        }
     }
 
     override fun displaymessage(message: String) {
@@ -124,4 +114,39 @@ class AddCardActivity : BaseActivity(), TextWatcher,
     override fun viewFullProgress(isShow: Boolean) {}
 
     override fun showcard(list: ArrayList<Card>) {}
+
+    class FourDigitCardFormatWatcher : TextWatcher {
+        override fun onTextChanged(
+            s: CharSequence,
+            start: Int,
+            before: Int,
+            count: Int
+        ) {}
+
+        override fun beforeTextChanged(
+            s: CharSequence,
+            start: Int,
+            count: Int,
+            after: Int
+        ) {}
+
+        override fun afterTextChanged(s: Editable) {
+            if (s.isNotEmpty() && s.length % 5 == 0) {
+                val c = s[s.length - 1]
+                if (space == c) {
+                    s.delete(s.length - 1, s.length)
+                }
+            }
+            if (s.isNotEmpty() && s.length % 5 == 0) {
+                val c = s[s.length - 1]
+                if (Character.isDigit(c) && TextUtils.split(s.toString(), space.toString()).size <= 3) {
+                    s.insert(s.length - 1, space.toString())
+                }
+            }
+        }
+
+        companion object {
+            private const val space = ' '
+        }
+    }
 }

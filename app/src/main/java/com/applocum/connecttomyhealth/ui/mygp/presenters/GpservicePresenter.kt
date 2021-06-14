@@ -81,9 +81,9 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
-                        val surgeryObject = Gson().fromJson(it.data, SurgeryResponse::class.java)
+                        val surgeryObject = Gson().fromJson(it.data,SurgeryResponse::class.java)
                         val surgery = surgeryObject.surgery
-                        view.showSurgery(surgery)
+                        surgery?.let { it1 -> view.showSurgery(it1) }
                     }
                     InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)

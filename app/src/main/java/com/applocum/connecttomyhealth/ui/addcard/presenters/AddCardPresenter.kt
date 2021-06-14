@@ -86,6 +86,7 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.displaySuccessmessage(it.message)
                     }
                     InvalidCredentials, InternalServer, MissingParameter -> {
                         view.displaymessage(it.message)
@@ -117,16 +118,8 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
             return false
         }
 
-        if (date.length != 4) {
-            view.displaymessage("Minimum 4 characters allowed")
-            return false
-        }
         if (cvv.isEmpty()) {
             view.displaymessage("Please enter cvv")
-            return false
-        }
-        if (cvv.length != 3) {
-            view.displaymessage("Minimum 3 characters allowed")
             return false
         }
         return true

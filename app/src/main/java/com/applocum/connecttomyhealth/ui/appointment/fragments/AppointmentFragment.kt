@@ -10,10 +10,12 @@ import com.applocum.connecttomyhealth.ui.allergyhistory.adapters.ViewPagerFragme
 import kotlinx.android.synthetic.main.fragment_appointment.view.*
 
 
-class AppointmentFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+class AppointmentFragment : Fragment(){
 
-        val v = inflater.inflate(R.layout.fragment_appointment, container, false)
+    lateinit var v: View
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+         v = inflater.inflate(R.layout.fragment_appointment, container, false)
 
         val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(requireActivity(),requireActivity().supportFragmentManager)
         viewPagerFragmentAdapter.addfragment(UpcomingSessionApointmentFragment(), "Upcoming Session")

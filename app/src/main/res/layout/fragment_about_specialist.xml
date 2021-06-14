@@ -118,7 +118,7 @@
             android:focusable="true"
             android:foreground="@drawable/effect_button"
             android:orientation="horizontal"
-            android:padding="11dp"
+            android:padding="8dp"
             tools:ignore="UseCompoundDrawables">
 
             <ImageView
