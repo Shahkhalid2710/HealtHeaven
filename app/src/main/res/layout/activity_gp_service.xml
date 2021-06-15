@@ -3,13 +3,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mygp.activities.GpServiceActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".ui.mygp.activities.GpServiceActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:id="@+id/llMyGp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_10"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <LinearLayout
+                    android:id="@+id/gpserivBackMyGp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ripple_effect_button"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="@dimen/spacing_24">
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="15dp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_back" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/my_gp"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_20" />
+            </RelativeLayout>
+
+            <include
+                android:id="@+id/mygp"
+                layout="@layout/custom_mygp_xml"
+                android:visibility="visible" />
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/rlGpService"
@@ -148,54 +197,6 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/llMyGp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_10"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <LinearLayout
-                    android:id="@+id/gpserivBackMyGp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ripple_effect_button"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:padding="@dimen/spacing_24">
-
-                    <ImageView
-                        android:layout_width="8dp"
-                        android:layout_height="15dp"
-                        android:contentDescription="@string/todo"
-                        android:src="@drawable/ic_back" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="@string/my_gp"
-                    android:textColor="@color/aapBlack"
-                    android:textSize="@dimen/font_20" />
-            </RelativeLayout>
-
-            <include
-                android:id="@+id/mygp"
-                layout="@layout/custom_mygp_xml"
-                android:visibility="visible" />
-        </LinearLayout>
-        <include layout="@layout/custom_progress"/>
+        <include layout="@layout/custom_progress" />
     </RelativeLayout>
 </FrameLayout>

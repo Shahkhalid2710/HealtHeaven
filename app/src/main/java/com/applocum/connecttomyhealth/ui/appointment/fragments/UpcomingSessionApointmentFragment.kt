@@ -45,6 +45,7 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
 
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
+        checkList()
 
         presenter.showUpcomingSession()
 
@@ -63,8 +64,7 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
         mListUpcomingSession.removeAt(bookAppointmentPosition)
         mListUpcomingSession.trimToSize()
         upcomingSessionAdapter.notifyItemRemoved(bookAppointmentPosition)
-        upcomingSessionAdapter.notifyDataSetChanged()
-
+        checkList()
         val snackbar = Snackbar.make(llUpcomingSession, message, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
         val snackview = snackbar.view
@@ -73,14 +73,8 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
     }
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
-        if (list.isEmpty()) {
-            layoutNotFoundUpcomingSession.visibility = View.VISIBLE
-            rvUpcomingSession.visibility = View.GONE
-        } else {
-            layoutNotFoundUpcomingSession.visibility = View.GONE
-            rvUpcomingSession.visibility = View.VISIBLE
-        }
-
+        mListUpcomingSession=list
+        checkList()
         rvUpcomingSession.layoutManager = LinearLayoutManager(requireActivity())
         upcomingSessionAdapter = UpcomingSessionAdapter(
             requireActivity(),
@@ -91,7 +85,6 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
                     val dialog = AlertDialog.Builder(requireActivity()).create()
                     dialog.setView(showDialogView)
 
-                    mListUpcomingSession=list
                     bookAppointmentPosition=position
 
                     showDialogView.btnCancel.setOnClickListener {
@@ -126,4 +119,16 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
         presenter.showUpcomingSession()
         super.onResume()
     }
+
+    private fun checkList()
+    {
+        if (mListUpcomingSession.isEmpty()) {
+            v.layoutNotFoundUpcomingSession.visibility = View.VISIBLE
+            v.rvUpcomingSession.visibility = View.GONE
+        } else {
+            v.layoutNotFoundUpcomingSession.visibility = View.GONE
+            v.rvUpcomingSession.visibility = View.VISIBLE
+        }
+    }
+
 }

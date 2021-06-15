@@ -672,4 +672,9 @@
     <string name="address_line_2">Address Line 2</string>
     <string name="city">City</string>
     <string name="select_gender_">Select gender</string>
+    <string name="phone_call">Phone Call</string>
+    <string name="video_call">Video Call</string>
+    <string name="_10_mins">10 mins</string>
+    <string name="_20_mins">20 mins</string>
+    <string name="_30_mins">30 mins</string>
 </resources>

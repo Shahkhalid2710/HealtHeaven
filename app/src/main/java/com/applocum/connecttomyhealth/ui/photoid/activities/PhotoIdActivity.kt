@@ -65,7 +65,7 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
         mListPhotoId.removeAt(photoPosition)
         mListPhotoId.trimToSize()
         photoIdAdapter.notifyItemRemoved(photoPosition)
-        photoIdAdapter.notifyDataSetChanged()
+        checkList()
     }
 
     override fun displayErrorMessage(message: String) {}
@@ -73,18 +73,8 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
     override fun showDocument(patient: Patient) {}
 
     override fun showDocument(list: ArrayList<Documents>) {
-        if(list.isEmpty())
-        {
-            btnUploadPhotoId.isEnabled = true
-            tvAddPhotoId.visibility=View.GONE
-            NoPhotoId.visibility=View.VISIBLE
-        }
-        else
-        {
-            btnUploadPhotoId.isEnabled = false
-            tvAddPhotoId.visibility=View.VISIBLE
-            NoPhotoId.visibility=View.GONE
-        }
+        mListPhotoId=list
+        checkList()
 
         rvPhotoId.layoutManager=LinearLayoutManager(this)
         photoIdAdapter= PhotoIdAdapter(this,list,object :PhotoIdAdapter.DocumentClick{
@@ -94,7 +84,6 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
                 dialog.setView(showDialogView)
 
                 photoPosition=position
-                mListPhotoId=list
 
                 showDialogView.btnYes.setOnClickListener {
                     photoIdPresenter.deleteDocument(documents.id)
@@ -121,5 +110,21 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
     override fun onResume() {
         photoIdPresenter.showDocument()
         super.onResume()
+    }
+
+    private fun checkList()
+    {
+        if(mListPhotoId.isEmpty())
+        {
+            btnUploadPhotoId.isEnabled = true
+            tvAddPhotoId.visibility=View.GONE
+            NoPhotoId.visibility=View.VISIBLE
+        }
+        else
+        {
+            btnUploadPhotoId.isEnabled = false
+            tvAddPhotoId.visibility=View.VISIBLE
+            NoPhotoId.visibility=View.GONE
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.applocum.connecttomyhealth.ui.booksession.fragments
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -11,16 +12,12 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.booksession.presenters.BookSessionPresenter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeAdapter
-import com.applocum.connecttomyhealth.ui.booksession.adapters.SelectSlotAdapter
-import com.applocum.connecttomyhealth.ui.booksession.adapters.SessionTypeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
-import com.applocum.connecttomyhealth.ui.booksession.models.SessionType
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
@@ -36,8 +33,6 @@ import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class AvailabilityFragment : Fragment(), OnDateSelectedListener, BookSessionPresenter.View {
-    private val mListSessionType: ArrayList<SessionType> = ArrayList()
-    private val mListSelectSlot: ArrayList<SessionType> = ArrayList()
     private var sType = ""
     private var sSlot = ""
     private var seleteddate = ""
@@ -56,64 +51,79 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener, BookSessionPres
 
         specialist = arguments?.getSerializable("specialist") as Specialist
 
-        val sessionType1 = SessionType("Phone Call")
-        val sessionType2 = SessionType("Video Call")
-        val sessionType3 = SessionType("Face to Face")
-        mListSessionType.add(sessionType1)
-        mListSessionType.add(sessionType2)
-        mListSessionType.add(sessionType3)
 
-        v.rvSessionType.layoutManager = GridLayoutManager(requireActivity(), 3)
-        v.rvSessionType.adapter = SessionTypeAdapter(requireActivity(), mListSessionType,
-            object : SessionTypeAdapter.ItemClickListner {
-                override fun onItemClick(sessionType: SessionType, position: Int) {
-                    when (position) {
-                        0 -> {
-                            sType = "phone_call_appointment"
-                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-                        }
-                        1 -> {
-                            sType = "online_appointment"
-                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-                        }
-                        2 -> {
-                            sType = "offline_appointment"
-                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-                        }
-                    }
-                }
-            })
+        v.btnPhoneCall.setOnClickListener {
+            sType = "phone_call_appointment"
+            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+            v.btnPhoneCall.setBackgroundResource(R.drawable.custom_btn)
+            v.btnVideoCall.setBackgroundResource(R.drawable.default_button)
+            v.btnFaceToFace.setBackgroundResource(R.drawable.default_button)
+            v.btnPhoneCall.setTextColor(Color.WHITE)
+            v.btnVideoCall.setTextColor(Color.parseColor("#008976"))
+            v.btnFaceToFace.setTextColor(Color.parseColor("#008976"))
+        }
 
-        val sessionType4 = SessionType("10 mins")
-        val sessionType5 = SessionType("20 mins")
-        val sessionType11 = SessionType("30 mins")
+        v.btnVideoCall.setOnClickListener {
+            sType = "online_appointment"
+            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+            v.btnPhoneCall.setBackgroundResource(R.drawable.default_button)
+            v.btnVideoCall.setBackgroundResource(R.drawable.custom_btn)
+            v.btnFaceToFace.setBackgroundResource(R.drawable.default_button)
+            v.btnPhoneCall.setTextColor(Color.parseColor("#008976"))
+            v.btnVideoCall.setTextColor(Color.WHITE)
+            v.btnFaceToFace.setTextColor(Color.parseColor("#008976"))
+        }
 
-        mListSelectSlot.add(sessionType4)
-        mListSelectSlot.add(sessionType5)
-        mListSelectSlot.add(sessionType11)
-        v.rvSelectSlot.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        v.rvSelectSlot.adapter = SelectSlotAdapter(requireActivity(),mListSelectSlot,
-            object : SelectSlotAdapter.ItemClickListner {
-                override fun onItemClick(sessionType: SessionType, position: Int) {
-                    when (position) {
-                        0 -> {
-                            sSlot = "10"
-                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-                        }
-                        1 -> {
-                            sSlot = "20"
-                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-                        }
-                        2 -> {
-                            sSlot = "30"
-                            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-                        }
-                    }
-                }
-            })
+        v.btnFaceToFace.setOnClickListener {
+            sType = "offline_appointment"
+            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+            v.btnPhoneCall.setBackgroundResource(R.drawable.default_button)
+            v.btnVideoCall.setBackgroundResource(R.drawable.default_button)
+            v.btnFaceToFace.setBackgroundResource(R.drawable.custom_btn)
+            v.btnPhoneCall.setTextColor(Color.parseColor("#008976"))
+            v.btnVideoCall.setTextColor(Color.parseColor("#008976"))
+            v.btnFaceToFace.setTextColor(Color.WHITE)
+        }
+
+
+        v.btn10Mins.setOnClickListener {
+            sSlot = "10"
+            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+            v.btn10Mins.setBackgroundResource(R.drawable.custom_btn)
+            v.btn20Mins.setBackgroundResource(R.drawable.default_button)
+            v.btn30Mins.setBackgroundResource(R.drawable.default_button)
+            v.btn10Mins.setTextColor(Color.WHITE)
+            v.btn20Mins.setTextColor(Color.parseColor("#008976"))
+            v.btn30Mins.setTextColor(Color.parseColor("#008976"))
+        }
+
+        v.btn20Mins.setOnClickListener {
+            sSlot = "20"
+            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+            v.btn10Mins.setBackgroundResource(R.drawable.default_button)
+            v.btn20Mins.setBackgroundResource(R.drawable.custom_btn)
+            v.btn30Mins.setBackgroundResource(R.drawable.default_button)
+            v.btn10Mins.setTextColor(Color.parseColor("#008976"))
+            v.btn20Mins.setTextColor(Color.WHITE)
+            v.btn30Mins.setTextColor(Color.parseColor("#008976"))
+        }
+
+        v.btn30Mins.setOnClickListener {
+            sSlot = "30"
+            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+            v.btn10Mins.setBackgroundResource(R.drawable.default_button)
+            v.btn20Mins.setBackgroundResource(R.drawable.default_button)
+            v.btn30Mins.setBackgroundResource(R.drawable.custom_btn)
+            v.btn10Mins.setTextColor(Color.parseColor("#008976"))
+            v.btn20Mins.setTextColor(Color.parseColor("#008976"))
+            v.btn30Mins.setTextColor(Color.WHITE)
+        }
+
+        v.btn10Mins.performClick()
 
         v.calendarView.setOnDateChangedListener(this)
         v.calendarView.addDecorator(PrimeDayDisableDecorator())
+
         return v
     }
 

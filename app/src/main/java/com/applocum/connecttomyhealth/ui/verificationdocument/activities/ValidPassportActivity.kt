@@ -28,7 +28,6 @@ class ValidPassportActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ivBack.setOnClickListener { finish() }
-
     }
 
     private fun getRealPathFromURI(uri: Uri?): String {

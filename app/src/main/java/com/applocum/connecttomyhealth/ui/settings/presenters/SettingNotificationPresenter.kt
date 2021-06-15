@@ -68,8 +68,7 @@ class SettingNotificationPresenter @Inject constructor(private val api: AppEndPo
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
-                        val notificationObject =
-                            Gson().fromJson(it.data, SettingNotification::class.java)
+                        val notificationObject = Gson().fromJson(it.data, SettingNotification::class.java)
                         view.showNotification(notificationObject)
                     }
                     InvalidCredentials, InternalServer -> {

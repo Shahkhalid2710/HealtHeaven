@@ -102,8 +102,7 @@ class SettingActivity : BaseActivity(),
         switchtextmessage.isChecked = settingNotification.is_notify_by_sms == true
         switchemail.isChecked = settingNotification.is_notify_by_email == true
         switchPhone.isChecked = settingNotification.is_notify_by_phone == true
-        switchPuchNotification.isChecked =
-            settingNotification.is_notify_by_push_notification == true
+        switchPuchNotification.isChecked = settingNotification.is_notify_by_push_notification == true
     }
 
     private fun checkGpsStatus() {

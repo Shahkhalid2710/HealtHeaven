@@ -96,15 +96,11 @@
         <activity
             android:name=".ui.verificationdocument.activities.VerifiedActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.verificationdocument.activities.ValidationValidUKDrivingLicenseActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.verificationdocument.activities.ValidationValidPassportActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.verificationdocument.activities.UkDrivingLicenseActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.verificationdocument.activities.ValidPassportActivity"
             android:screenOrientation="portrait" />
@@ -169,7 +165,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.profiledetails.activities.ProfileDetailsActivity"
-             />
+            android:screenOrientation="portrait"  />
         <activity
             android:name=".ui.investigation.activities.AddInvestigationActivity"
             android:screenOrientation="portrait" />
@@ -199,13 +195,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.personaldetails.activities.PersonalDetailsActivity"
-             />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.bottomnavigationview.activities.BottomNavigationViewActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.signup.activities.SignupActivity"
-             />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.createnewpassword.activities.CreateNewPasswordActivity"
             android:screenOrientation="portrait" />
@@ -217,7 +214,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.activities.LoginActivity"
-            />
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -37,7 +37,7 @@ class OtherNoteAdapter(context: Context, list: ArrayList<Document>, private val 
 
         RxView.clicks(holder.itemView).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                onNoteClick.onNoteClick(document, position)
+                onNoteClick.onNoteClick(document,position)
             }
     }
 

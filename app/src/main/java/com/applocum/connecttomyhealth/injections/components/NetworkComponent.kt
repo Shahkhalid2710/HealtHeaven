@@ -119,10 +119,6 @@ interface NetworkComponent {
 
     fun inject(activity:ValidationValidPassportActivity)
 
-    fun inject(activity:UkDrivingLicenseActivity)
-
-    fun inject(activity:ValidationValidUKDrivingLicenseActivity)
-
     fun inject(activity:VerifiedActivity)
 
     fun inject(activity: AddCodeActivity)

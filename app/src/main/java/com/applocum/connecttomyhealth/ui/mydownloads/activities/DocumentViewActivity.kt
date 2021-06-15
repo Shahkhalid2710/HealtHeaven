@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.mydownloads.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
@@ -17,6 +18,7 @@ class DocumentViewActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_document_view
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ivBack.setOnClickListener { finish() }
@@ -33,6 +35,8 @@ class DocumentViewActivity : BaseActivity() {
         mWebSettings.builtInZoomControls = true
         mWebSettings.displayZoomControls = false
 
+        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url="+ URLEncoder.encode(document.file, "ISO-8859-1"))
+
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
@@ -42,6 +46,5 @@ class DocumentViewActivity : BaseActivity() {
                 progressWeb.visibility = View.GONE
             }
         }
-        webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + URLEncoder.encode(document.file, "ISO-8859-1"))
     }
 }

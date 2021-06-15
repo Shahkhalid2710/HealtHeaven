@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit
 
 class VerifyIdentityActivity : BaseActivity() {
     private val requestCodee = 1
+    private var nameOfDocument=""
 
     override fun getLayoutResourceId(): Int= R.layout.activity_verify_identity
 
@@ -40,6 +41,8 @@ class VerifyIdentityActivity : BaseActivity() {
                     .inflate(R.layout.custom_profile_dialog, null, false)
                 val dialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
+
+                nameOfDocument="Valid Passport"
 
                 showDialogView.tvChooseImage.setOnClickListener {
                     this.let {
@@ -71,6 +74,8 @@ class VerifyIdentityActivity : BaseActivity() {
                     .inflate(R.layout.custom_profile_dialog, null, false)
                 val dialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
+
+                nameOfDocument="UK Driving License"
 
                 showDialogView.tvChooseImage.setOnClickListener {
                     this.let {
@@ -123,12 +128,13 @@ class VerifyIdentityActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
-            if (resultCode == Activity.RESULT_OK) {
-                val intent = Intent(this,ValidationValidPassportActivity::class.java)
-                intent.putExtra("documentPhoto", result.uri.toString())
-                startActivity(intent)
-                this.finish()
-            }
+            if (resultCode == Activity.RESULT_OK ) {
+                 val intent = Intent(this,ValidationValidPassportActivity::class.java)
+                    intent.putExtra("documentPhoto", result.uri.toString())
+                    intent.putExtra("name",nameOfDocument)
+                    startActivity(intent)
+                    this.finish()
+                }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

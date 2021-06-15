@@ -46,5 +46,5 @@ data class Patient (
 	@SerializedName("user") val user : User,
 	@SerializedName("corporate_id") val corporate_id : Int,
 	@SerializedName("corporate_name") val corporate_name : String,
-	@SerializedName("phone_detail") val phone_detail : PhoneDetail
+	@SerializedName("phone_detail") val phone_detail : PhoneDetail?
 )

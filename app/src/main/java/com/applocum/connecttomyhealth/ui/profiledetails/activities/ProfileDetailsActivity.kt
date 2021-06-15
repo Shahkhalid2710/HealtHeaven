@@ -396,7 +396,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                     countryCode = showDialogView.ccp.selectedCountryCode
                 }
 
-                showDialogView.etPhoneNumber.setText(patientData.phone_detail.number)
+                showDialogView.etPhoneNumber.setText(patientData.phone_detail?.number)
 
                 showDialogView.btnDonePhoneNumber.setOnClickListener {
                     if (validateMobileNumber(showDialogView.etPhoneNumber.text.toString())) {

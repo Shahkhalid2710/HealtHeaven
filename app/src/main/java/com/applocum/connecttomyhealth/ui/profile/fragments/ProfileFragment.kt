@@ -196,9 +196,11 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
         if (user.image.isEmpty())
         {
             Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(v.ivProfile)
+            v.ivPicWarning.visibility=View.VISIBLE
         }
         else {
             Glide.with(requireActivity()).load(user.image).placeholder(circularProgressDrawable).into(v.ivProfile)
+            v.ivPicWarning.visibility=View.GONE
         }
     }
 

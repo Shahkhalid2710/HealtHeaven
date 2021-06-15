@@ -37,7 +37,7 @@ class PhotoIdAdapter(context: Context,list:ArrayList<Documents>,private val docu
         Glide.with(mContext).load(documents.file_url).placeholder(circularProgressDrawable).into(holder.itemView.ivDocument)
 
         holder.itemView.ivDelete.setOnClickListener {
-            documentClick.deleteDocument(documents, position)
+            documentClick.deleteDocument(documents,holder.adapterPosition)
         }
     }
 

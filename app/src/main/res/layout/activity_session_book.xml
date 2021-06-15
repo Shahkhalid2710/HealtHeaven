@@ -58,7 +58,6 @@
             app:mcv_weekDayLabels="@array/custom_weekdays"
             app:mcv_weekDayTextAppearance="@style/WeekdayHeader" />
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,14 +69,69 @@
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_14" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSessionType"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="@dimen/spacing_5"
-            android:layout_marginEnd="19dp"
-            android:nestedScrollingEnabled="false" />
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_10"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btnPhoneCall"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/spacing_5"
+                android:layout_weight="1"
+                android:background="@drawable/default_button"
+                android:fontFamily="@font/montserrat_medium"
+                android:foreground="@drawable/effect_button"
+                android:gravity="center"
+                android:text="@string/phone_call"
+                android:textAllCaps="false"
+                android:textColor="@color/green"
+                android:textSize="@dimen/font_11"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btnVideoCall"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_5"
+                android:layout_marginEnd="@dimen/spacing_5"
+                android:layout_weight="1"
+                android:background="@drawable/default_button"
+                android:fontFamily="@font/montserrat_medium"
+                android:foreground="@drawable/effect_button"
+                android:gravity="center"
+                android:text="@string/video_call"
+                android:textAllCaps="false"
+                android:textColor="@color/green"
+                android:textSize="@dimen/font_11"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btnFaceToFace"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_5"
+                android:layout_weight="1"
+                android:background="@drawable/default_button"
+                android:fontFamily="@font/montserrat_medium"
+                android:foreground="@drawable/effect_button"
+                android:gravity="center"
+                android:text="@string/face_to_face"
+                android:textAllCaps="false"
+                android:textColor="@color/green"
+                android:textSize="@dimen/font_11"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,14 +144,64 @@
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_14" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSelectSlot"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="@dimen/spacing_5"
-            android:layout_marginEnd="19dp"
-            android:nestedScrollingEnabled="false" />
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginTop="@dimen/spacing_10"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn10Mins"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/spacing_5"
+                android:background="@drawable/default_button"
+                android:fontFamily="@font/montserrat_medium"
+                android:foreground="@drawable/effect_button"
+                android:gravity="center"
+                android:text="@string/_10_mins"
+                android:textAllCaps="false"
+                android:textColor="@color/green"
+                android:textSize="@dimen/font_11"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btn20Mins"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_5"
+                android:layout_marginEnd="@dimen/spacing_5"
+                android:background="@drawable/default_button"
+                android:fontFamily="@font/montserrat_medium"
+                android:foreground="@drawable/effect_button"
+                android:gravity="center"
+                android:text="@string/_20_mins"
+                android:textAllCaps="false"
+                android:textColor="@color/green"
+                android:textSize="@dimen/font_11"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/btn30Mins"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_5"
+                android:background="@drawable/default_button"
+                android:fontFamily="@font/montserrat_medium"
+                android:foreground="@drawable/effect_button"
+                android:gravity="center"
+                android:text="@string/_30_mins"
+                android:textAllCaps="false"
+                android:textColor="@color/green"
+                android:textSize="@dimen/font_11"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

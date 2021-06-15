@@ -44,6 +44,9 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
         photoIdPresenter.injectView(this)
 
         val documentPhoto=intent.getStringExtra("documentPhoto")
+        val name=intent.getStringExtra("name")
+
+        tvName.text = name
         Glide.with(this).load(documentPhoto).into(ivPassport)
         fileOfPic = File(URI(documentPhoto))
 

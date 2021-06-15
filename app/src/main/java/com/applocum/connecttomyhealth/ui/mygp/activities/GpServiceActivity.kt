@@ -97,8 +97,8 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
         supportMapFragment.getMapAsync { googleMap ->
             map = googleMap
 
-            val height = 150
-            val width = 150
+            val height = 160
+            val width = 160
             val b = BitmapFactory.decodeResource(resources, R.drawable.ic_marker)
             val smallMarker = Bitmap.createScaledBitmap(b, width, height, false)
             val smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker)
@@ -106,7 +106,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
             map.uiSettings.setAllGesturesEnabled(true)
             map.isMyLocationEnabled
             val marker = surgery.long?.let { surgery.lat?.let { it1 -> LatLng(it1, it) } }
-            val cameraPosition = CameraPosition.Builder().target(marker).zoom(15.0f).build()
+            val cameraPosition = CameraPosition.Builder().target(marker).zoom(16.0f).build()
             map.addMarker(marker?.let { MarkerOptions().position(it).title(surgery.practice_name?.let { capitalize(it) })
             }).setIcon(smallMarkerIcon)
             val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)

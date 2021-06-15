@@ -3,6 +3,7 @@ package com.applocum.connecttomyhealth.ui.othernotes.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,15 +54,12 @@ class OtherNoteActivity : BaseActivity(), DocumentPresenter.View {
         }
 
         rvOtherNotes.layoutManager = LinearLayoutManager(this)
-        rvOtherNotes.adapter =
-            OtherNoteAdapter(this, list, object : OtherNoteAdapter.NoteClickListner {
+        rvOtherNotes.adapter = OtherNoteAdapter(this, list, object : OtherNoteAdapter.NoteClickListner {
                 override fun onNoteClick(document: Document, position: Int) {
-                    val intent = Intent(
-                        this@OtherNoteActivity,
-                        DocumentViewActivity::class.java
-                    )
+                    val intent = Intent(this@OtherNoteActivity,DocumentViewActivity::class.java)
                     intent.putExtra("document", document)
                     startActivity(intent)
+
                 }
             })
     }

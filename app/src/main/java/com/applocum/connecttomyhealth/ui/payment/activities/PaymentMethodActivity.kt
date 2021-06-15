@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -71,7 +72,7 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
         mList.removeAt(cardPosition)
         mList.trimToSize()
         paymentCardAdapter.notifyItemRemoved(cardPosition)
-        paymentCardAdapter.notifyDataSetChanged()
+        checkList()
     }
 
     override fun addcard(card: Card) {}
@@ -85,15 +86,8 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
     }
 
     override fun showcard(list: ArrayList<Card>) {
-        if (list.isEmpty()) {
-            layoutnotfoundcard.visibility = View.VISIBLE
-            llSavedCards.visibility = View.GONE
-            tvAddPaymentMethod.visibility = View.GONE
-        } else {
-            layoutnotfoundcard.visibility = View.GONE
-            llSavedCards.visibility = View.VISIBLE
-            tvAddPaymentMethod.visibility = View.VISIBLE
-        }
+        mList=list
+        checkList()
         rvSavedCards.layoutManager = LinearLayoutManager(this)
         paymentCardAdapter = PaymentCardAdapter(this, list, false, true,
             object : PaymentCardAdapter.CardClickListener {
@@ -105,7 +99,6 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
                     dialog.setView(showDialogView)
 
                     cardPosition=position
-                    mList=list
 
                     showDialogView.btnRemove.setOnClickListener {
                         dialog.dismiss()
@@ -121,6 +114,19 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
         paymentCardAdapter.notifyDataSetChanged()
     }
 
+    fun checkList(){
+
+        if (mList.isEmpty()) {
+            layoutnotfoundcard.visibility = View.VISIBLE
+            llSavedCards.visibility = View.GONE
+            tvAddPaymentMethod.visibility = View.GONE
+        } else {
+            layoutnotfoundcard.visibility = View.GONE
+            llSavedCards.visibility = View.VISIBLE
+            tvAddPaymentMethod.visibility = View.VISIBLE
+        }
+
+    }
     override fun onResume() {
         presenter.showSavedCards()
         super.onResume()
