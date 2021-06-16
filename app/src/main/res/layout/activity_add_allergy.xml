@@ -72,7 +72,7 @@
                     android:focusable="true"
                     android:fontFamily="@font/montserrat_medium"
                     android:hint="@string/add_allergy"
-                    android:inputType="text"
+                    android:inputType="textCapSentences"
                     android:paddingBottom="@dimen/spacing_10"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"

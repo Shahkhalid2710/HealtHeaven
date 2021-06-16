@@ -61,12 +61,14 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginTop="@dimen/spacing_46"
                     android:layout_marginEnd="@dimen/spacing_24"
+                    android:gravity="center"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_valid_passport"
                     android:textColor="@color/aapBlack"

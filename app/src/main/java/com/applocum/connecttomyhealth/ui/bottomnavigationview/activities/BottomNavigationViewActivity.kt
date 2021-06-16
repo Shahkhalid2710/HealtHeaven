@@ -46,21 +46,25 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        if (id == R.id.nav_home) {
-            loadFragment(HomeFragment())
-            return true
-        } else if (id == R.id.nav_notification) {
-            loadFragment(NotificationFragment())
-            return true
-        } else if (id == R.id.nav_appointment) {
-            loadFragment(AppointmentFragment())
-            return true
-        } else if (id == R.id.nav_profile) {
-            loadFragment(ProfileFragment())
-            return true
+        when (item.itemId) {
+            R.id.nav_home -> {
+                loadFragment(HomeFragment())
+                return true
+            }
+            R.id.nav_notification -> {
+                loadFragment(NotificationFragment())
+                return true
+            }
+            R.id.nav_appointment -> {
+                loadFragment(AppointmentFragment())
+                return true
+            }
+            R.id.nav_profile -> {
+                loadFragment(ProfileFragment())
+                return true
+            }
+            else -> return true
         }
-        return true
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -86,4 +90,13 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
             itemView.removeViewAt(2)
         }
     }
+
+    override fun onBackPressed() {
+        if (bottomnavigationView.selectedItemId == R.id.nav_home) {
+            super.onBackPressed()
+        } else {
+            bottomnavigationView.selectedItemId = R.id.nav_home
+        }
+    }
+
 }

@@ -121,4 +121,5 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
     override fun userData(user: User) {}
 
     override fun viewprogress(isShow: Boolean) {}
+
 }

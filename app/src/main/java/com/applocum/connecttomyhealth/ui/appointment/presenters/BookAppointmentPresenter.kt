@@ -34,6 +34,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
 
     fun bookAppointment(time: String, duration: String, comment: String, allowGeoAccess: Boolean, sharedRecordsWithNhsGp: Boolean, appointmentType: String, doctorId: Int, cardIdentifier: Int, organizationId: Int)
     {
+        view.viewFullProgress(true)
         val requestBody: RequestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
             .addFormDataPart("appointment[start_time]", time)
@@ -50,9 +51,10 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
         api.bookAppointment(userHolder.userToken!!, requestBody)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
+                view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
-                        // view.displayMessage(it.message)
+                         view.displaySuccessMessage(it.message)
                     }
                     InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)
@@ -65,6 +67,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                     }
                 }
             }, onError = {
+                view.viewFullProgress(false)
                 it.printStackTrace()
             }).let { disposables.addAll(it) }
     }

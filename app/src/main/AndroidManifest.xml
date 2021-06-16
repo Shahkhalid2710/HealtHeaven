@@ -25,8 +25,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.photoid.activities.PhotoIdActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.help.activities.HelpActivity"></activity>
+        <activity
+            android:name=".ui.photoid.activities.PhotoIdActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.waitingarea.activities.WaitingAreaActivity"
             android:screenOrientation="portrait" />
@@ -96,11 +98,9 @@
         <activity
             android:name=".ui.verificationdocument.activities.VerifiedActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.verificationdocument.activities.ValidationValidPassportActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.verificationdocument.activities.ValidPassportActivity"
             android:screenOrientation="portrait" />
@@ -115,7 +115,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ui.booksession.activities.SessionBookActivity"
@@ -165,7 +164,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.profiledetails.activities.ProfileDetailsActivity"
-            android:screenOrientation="portrait"  />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.investigation.activities.AddInvestigationActivity"
             android:screenOrientation="portrait" />
@@ -195,14 +194,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.personaldetails.activities.PersonalDetailsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.bottomnavigationview.activities.BottomNavigationViewActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.signup.activities.SignupActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.createnewpassword.activities.CreateNewPasswordActivity"
             android:screenOrientation="portrait" />
@@ -214,7 +213,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.activities.LoginActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

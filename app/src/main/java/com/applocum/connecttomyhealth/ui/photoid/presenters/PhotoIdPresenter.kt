@@ -60,6 +60,34 @@ class PhotoIdPresenter@Inject constructor(private val api:AppEndPoint) {
             }).let { disposable.addAll(it) }
     }
 
+    fun uploadLicenseDocument(documentImage:File)
+    {
+        view.viewProgress(true)
+        val multiPartBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
+        val requestBody = RequestBody.create("image/png".toMediaTypeOrNull(),documentImage)
+        multiPartBuilder.addFormDataPart("document[1][file]", documentImage.nameWithoutExtension, requestBody)
+
+        api.updateDocument(userHolder.userToken, userHolder.userid,multiPartBuilder.build())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(onNext = {
+                view.viewProgress(false)
+                when (it.status) {
+                    Success -> {
+                        view.displayMessage(it.message)
+                        val patientObject = Gson().fromJson(it.data, PatientResponse::class.java)
+                        val patient = patientObject.patient
+                        view.showDocument(patient)
+                    }
+                    InvalidCredentials,InternalServer -> {
+                        view.displayErrorMessage(it.message)
+                    }
+                }
+            }, onError = {
+                view.viewProgress(false)
+                it.printStackTrace()
+            }).let { disposable.addAll(it) }
+    }
+
     fun showDocument() {
         view.viewProgress(true)
         api.showProfile(userHolder.userToken, userHolder.userid)

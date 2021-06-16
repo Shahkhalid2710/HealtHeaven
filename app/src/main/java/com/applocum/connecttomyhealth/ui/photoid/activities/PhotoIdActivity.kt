@@ -17,7 +17,6 @@ import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
 import com.applocum.connecttomyhealth.ui.verificationdocument.activities.VerifyIdentityActivity
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_photo_id.*
-import kotlinx.android.synthetic.main.custom_loader_progress.*
 import kotlinx.android.synthetic.main.custom_remove_document_dialog.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -100,7 +99,7 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
     }
 
     override fun viewProgress(isShow: Boolean) {
-        progress.visibility=if (isShow) View.VISIBLE else View.GONE
+        fullProgress.visibility=if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun viewFullProgress(isShow: Boolean) {
@@ -116,13 +115,13 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
     {
         if(mListPhotoId.isEmpty())
         {
-            btnUploadPhotoId.isEnabled = true
+            btnUploadPhotoId.visibility = View.VISIBLE
             tvAddPhotoId.visibility=View.GONE
             NoPhotoId.visibility=View.VISIBLE
         }
         else
         {
-            btnUploadPhotoId.isEnabled = false
+            btnUploadPhotoId.visibility=View.GONE
             tvAddPhotoId.visibility=View.VISIBLE
             NoPhotoId.visibility=View.GONE
         }

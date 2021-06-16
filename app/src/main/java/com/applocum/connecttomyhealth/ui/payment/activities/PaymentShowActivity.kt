@@ -108,7 +108,6 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
                             selectCard,
                             bookAppointment.corporateId
                         )
-                        openDialog()
                     }
                 }
             }
@@ -151,7 +150,9 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         rvSavedCards.visibility = if (isShow) View.GONE else View.VISIBLE
     }
 
-    override fun viewFullProgress(isShow: Boolean) {}
+    override fun viewFullProgress(isShow: Boolean) {
+        bookingProgress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
 
     override fun showcard(list: ArrayList<Card>) {
         if (list.isEmpty()) {
@@ -198,10 +199,16 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
     }
 
     override fun displayMessage(mesage: String) {
-        Toast.makeText(this, mesage, Toast.LENGTH_SHORT).show()
+        val snackbar = Snackbar.make(flPayment, mesage, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackbar.show()
     }
 
-    override fun displaySuccessMessage(message: String) {}
+    override fun displaySuccessMessage(message: String) {
+        openDialog()
+    }
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {}
 

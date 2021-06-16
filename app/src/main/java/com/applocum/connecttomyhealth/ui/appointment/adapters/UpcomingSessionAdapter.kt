@@ -38,7 +38,7 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
         holder.itemView.tvDoctorFName.text = bookAppointmentResponse.gp_details.first_name
         holder.itemView.tvDoctorLName.text = bookAppointmentResponse.gp_details.last_name
         holder.itemView.tvSessionType.text = bookAppointmentResponse.appointment_type
-        holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "min")
+        holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "mins")
         holder.itemView.tvSessionDateTime.text =
             bookAppointmentResponse.start_time?.let { convertDateTime(it) }
 

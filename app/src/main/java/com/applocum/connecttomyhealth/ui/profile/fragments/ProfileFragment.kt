@@ -18,6 +18,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.changepassword.activities.ChangePasswordActivity
+import com.applocum.connecttomyhealth.ui.help.activities.HelpActivity
 import com.applocum.connecttomyhealth.ui.login.activities.LoginActivity
 import com.applocum.connecttomyhealth.ui.mydownloads.activities.MyDownloadsActivity
 import com.applocum.connecttomyhealth.ui.payment.activities.MemberShipActivity
@@ -133,6 +134,12 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
             .subscribe {
                 startActivity(Intent(requireActivity(), SettingActivity::class.java))
             }
+
+        RxView.clicks(v.llHelp).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(requireActivity(),HelpActivity::class.java))
+            }
+
 
         RxView.clicks(v.btnSignOut).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {

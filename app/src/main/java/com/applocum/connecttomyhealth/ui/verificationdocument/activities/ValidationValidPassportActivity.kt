@@ -46,6 +46,8 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
         val documentPhoto=intent.getStringExtra("documentPhoto")
         val name=intent.getStringExtra("name")
 
+        tvDescription.text=("Your safety is our priority. To prevent misuse of your details, upload a valid form of $name")
+
         tvName.text = name
         Glide.with(this).load(documentPhoto).into(ivPassport)
         fileOfPic = File(URI(documentPhoto))
@@ -57,7 +59,11 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
 
         RxView.clicks(btnSubmit).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
-                photoIdPresenter.uploadDocument(fileOfPic)
+                when(name)
+                {
+                    "Valid Passport"->{photoIdPresenter.uploadDocument(fileOfPic)}
+                    "UK Driving License"->{photoIdPresenter.uploadLicenseDocument(fileOfPic)}
+                }
             }
 
         RxView.clicks(btnRetakePhoto).throttleFirst(500,TimeUnit.MILLISECONDS)

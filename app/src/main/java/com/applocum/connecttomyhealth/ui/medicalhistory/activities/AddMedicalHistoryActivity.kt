@@ -81,13 +81,11 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
                if (selectedString!=null && selectedString == etDiseaseName.text.toString())
                {
                    isMatched=true
-               }
-                else
+               } else
                {
                    isMatched=false
                    selectedString=""
                }
-
             }
             .observeOn(Schedulers.computation())
             .filter { s -> s.length >= 2}

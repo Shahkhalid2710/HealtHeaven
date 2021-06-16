@@ -23,8 +23,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
-class SettingActivity : BaseActivity(),
-    SettingNotificationPresenter.View {
+class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
 
     @Inject
     lateinit var presenter: SettingNotificationPresenter
@@ -56,15 +55,11 @@ class SettingActivity : BaseActivity(),
             } else {
                 turnOnGps()
             }
-
         }
+
         switchtextmessage.setOnCheckedChangeListener { _, isChecked ->
-            switchText = if (isChecked) {
-                "true"
-            } else {
-                "false"
-            }
-            presenter.notificationSetting(switchText, switchEmail, switchphone, switchpuchNotification)
+            switchText = if (isChecked) { "true" } else { "false" }
+            presenter.notificationSetting(switchText,switchEmail,switchphone,switchpuchNotification)
         }
 
         switchemail.setOnCheckedChangeListener { _, isChecked ->
@@ -74,15 +69,14 @@ class SettingActivity : BaseActivity(),
 
         switchPhone.setOnCheckedChangeListener { _, isChecked ->
             switchphone = if (isChecked) { "true" } else { "false" }
-            presenter.notificationSetting(switchText, switchEmail, switchphone, switchpuchNotification)
+            presenter.notificationSetting(switchText, switchEmail,switchphone, switchpuchNotification)
         }
 
         switchPuchNotification.setOnCheckedChangeListener { _, isChecked ->
             switchpuchNotification = if (isChecked) { "true" } else { "false" }
-            presenter.notificationSetting(switchText, switchEmail, switchphone, switchpuchNotification)
+            presenter.notificationSetting(switchText,switchEmail, switchphone, switchpuchNotification)
         }
     }
-
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llSetting, message, Snackbar.LENGTH_LONG)
         val snackView = snackBar.view

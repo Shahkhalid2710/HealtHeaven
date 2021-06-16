@@ -65,6 +65,7 @@
                         android:background="@drawable/ripple_effect_button"
                         android:clickable="true"
                         android:focusable="true"
+                        android:visibility="gone"
                         android:padding="@dimen/spacing_24"
                         tools:ignore="RelativeOverlap">
 
@@ -93,10 +94,6 @@
                         android:scrollbarSize="2dp"
                         android:scrollbarThumbVertical="@drawable/scrollbar"
                         android:scrollbars="vertical" />
-
-                    <include
-                        layout="@layout/custom_loader_progress"
-                        android:visibility="gone" />
 
                     <include
                         android:id="@+id/NoPhotoId"
@@ -186,6 +183,7 @@
                             android:foreground="@drawable/effect_button"
                             android:text="@string/upload_photo_id"
                             android:textAllCaps="false"
+                            android:visibility="gone"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font_12" />
                     </LinearLayout>

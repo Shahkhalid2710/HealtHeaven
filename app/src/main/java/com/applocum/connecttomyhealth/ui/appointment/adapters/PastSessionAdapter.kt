@@ -36,7 +36,7 @@ class PastSessionAdapter(context: Context, list: ArrayList<BookAppointmentRespon
         holder.itemView.tvDoctorFName.text = bookAppointmentResponse.gp_details.first_name
         holder.itemView.tvDoctorLName.text = bookAppointmentResponse.gp_details.last_name
         holder.itemView.tvSessionType.text = bookAppointmentResponse.appointment_type
-        holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "min")
+        holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "mins")
         holder.itemView.tvSessionDateTime.text =
             convertDateTime(bookAppointmentResponse.actual_start_time)
 
