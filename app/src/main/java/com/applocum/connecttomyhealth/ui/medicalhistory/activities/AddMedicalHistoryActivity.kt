@@ -78,21 +78,20 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View{
             .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnEach {
-               if (selectedString!=null && selectedString == etDiseaseName.text.toString())
-               {
-                   isMatched=true
-               } else
-               {
-                   isMatched=false
-                   selectedString=""
-               }
+                if (selectedString == etDiseaseName.text.toString())
+                {
+                    isMatched=true
+                } else
+                {
+                    isMatched=false
+                    selectedString=""
+                }
             }
             .observeOn(Schedulers.computation())
-            .filter { s -> s.length >= 2}
+            .filter { s -> s.length >= 2 }
             .observeOn(AndroidSchedulers.mainThread())
             .map {
-                if (!isMatched)
-                {
+                if (!isMatched) {
                     presenter.getDiseaseList(etDiseaseName.text.toString())
                 }
             }.subscribe().let { presenter.disposables.add(it) }

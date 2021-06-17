@@ -680,4 +680,6 @@
     <string name="looks_like_you_are_facing_some_problem_while_using_the_apps_feel_free_to_contact_us">Looks like you are facing some problem while using the apps, feel free to contact us</string>
     <string name="chat_with_us">Chat with us</string>
     <string name="email_us">Email us</string>
+    <string name="chat">Chat</string>
+    <string name="write_something">Write Something…</string>
 </resources>

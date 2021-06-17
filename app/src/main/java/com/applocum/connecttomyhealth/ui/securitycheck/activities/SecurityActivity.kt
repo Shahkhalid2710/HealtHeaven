@@ -44,12 +44,10 @@ class SecurityActivity : BaseActivity(),
     }
 
     override fun security(security: Security) {
-        val intent = Intent(
-            this,
-            ClinicalRecordsActivity::class.java
-        )
+        val intent = Intent(this, ClinicalRecordsActivity::class.java)
         startActivity(intent)
         finish()
+        overridePendingTransition(0,0)
     }
 
     override fun displayMessage(message: String) {

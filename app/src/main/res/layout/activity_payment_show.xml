@@ -17,25 +17,66 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="@dimen/spacing_10"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
+            <LinearLayout
+                android:id="@+id/ivBackPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ripple_effect_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/spacing_24">
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="15dp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_back" />
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/tvPayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/payment"
                 android:textColor="@color/aapBlack"
                 android:textSize="@dimen/font_20" />
+
+            <LinearLayout
+                android:id="@+id/tvCancelPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ripple_effect_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/spacing_24"
+                tools:ignore="RelativeOverlap">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="end"
+                    android:text="@string/cancel"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/font_16"
+                    tools:ignore="RelativeOverlap" />
+            </LinearLayout>
+
         </RelativeLayout>
+
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spacing_16"
             android:background="@color/white"
             android:fillViewport="true">
 
@@ -131,10 +172,10 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="8dp"
+                            android:background="@drawable/ripple_effect_button"
                             android:clickable="true"
                             android:focusable="true"
                             android:fontFamily="@font/montserrat_semibold"
-                            android:background="@drawable/ripple_effect_button"
                             android:text="@string/add_code"
                             android:textColor="@color/green"
                             android:textSize="@dimen/font_12"
@@ -203,10 +244,10 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="8dp"
+                        android:background="@drawable/ripple_effect_button"
                         android:clickable="true"
                         android:focusable="true"
                         android:fontFamily="@font/montserrat_semibold"
-                        android:background="@drawable/ripple_effect_button"
                         android:text="@string/add_new_code"
                         android:textColor="@color/green"
                         android:textSize="@dimen/font_12"
@@ -260,9 +301,10 @@
     <include
         android:id="@+id/customPaymentAdd"
         layout="@layout/custom_payment_add"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
-    <include android:id="@+id/bookingProgress"
-        layout="@layout/custom_progress"/>
+    <include
+        android:id="@+id/bookingProgress"
+        layout="@layout/custom_progress" />
 
 </FrameLayout>

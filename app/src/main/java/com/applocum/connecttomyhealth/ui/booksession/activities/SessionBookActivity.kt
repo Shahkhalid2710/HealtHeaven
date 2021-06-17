@@ -18,15 +18,24 @@ import com.applocum.connecttomyhealth.ui.booksession.presenters.BookSessionPrese
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeClickAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.confirmbooking.activities.ConfirmBookingActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.prolificinteractive.materialcalendarview.*
 import kotlinx.android.synthetic.main.activity_session_book.*
+import kotlinx.android.synthetic.main.activity_session_book.NotAvailabeTime
+import kotlinx.android.synthetic.main.activity_session_book.btn10Mins
+import kotlinx.android.synthetic.main.activity_session_book.btn20Mins
+import kotlinx.android.synthetic.main.activity_session_book.btn30Mins
+import kotlinx.android.synthetic.main.activity_session_book.btnFaceToFace
+import kotlinx.android.synthetic.main.activity_session_book.btnPhoneCall
+import kotlinx.android.synthetic.main.activity_session_book.btnVideoCall
 import kotlinx.android.synthetic.main.activity_session_book.calendarView
 import kotlinx.android.synthetic.main.activity_session_book.ivBack
 import kotlinx.android.synthetic.main.activity_session_book.rvAvailableTime
+import kotlinx.android.synthetic.main.activity_session_book.tvCancel
 import kotlinx.android.synthetic.main.custom_small_progress.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -61,6 +70,16 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
+
+        RxView.clicks(tvCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val intent = (Intent(this, BottomNavigationViewActivity::class.java))
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finishAffinity()
+                overridePendingTransition(0,0)
+            }
 
         specialist = intent.getSerializableExtra("specialist") as Specialist
 
@@ -217,6 +236,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                     userHolder.saveBookAppointmentData(appointment)
                     intent.putExtra("commonData", commonData)
                     startActivity(intent)
+                    overridePendingTransition(0,0)
                 }
             }
 

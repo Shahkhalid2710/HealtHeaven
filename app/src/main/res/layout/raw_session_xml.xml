@@ -25,8 +25,8 @@
                 android:id="@+id/cvDoctor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_16"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_16"
                 android:backgroundTint="@color/white"
                 android:elevation="10dp"
                 app:cardCornerRadius="6dp">
@@ -45,8 +45,8 @@
                 android:id="@+id/ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_16"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_16"
                 android:layout_toEndOf="@+id/cvDoctor"
                 android:orientation="vertical">
 

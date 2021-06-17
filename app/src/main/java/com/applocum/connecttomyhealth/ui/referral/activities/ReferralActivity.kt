@@ -61,6 +61,7 @@ class ReferralActivity : BaseActivity(),
                     val intent = Intent(this@ReferralActivity, DocumentViewActivity::class.java)
                     intent.putExtra("document", document)
                     startActivity(intent)
+                    overridePendingTransition(0,0)
                 }
             })
     }

@@ -38,11 +38,13 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
         RxView.clicks(tvAddInvestigation).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddInvestigationActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(btnAddInvestigation).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddInvestigationActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         investigationPresenter.showInvestigationList()

@@ -39,6 +39,7 @@ class ActiveAllergyFragment : Fragment(),AllergyHistoryPresenter.View {
         RxView.clicks(v.layoutNotfoundActiveAllergy.btnAddAllergy).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(),AddAllergyActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
         presenter.activeAllergy()

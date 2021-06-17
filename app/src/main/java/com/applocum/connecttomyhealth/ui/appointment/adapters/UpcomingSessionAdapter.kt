@@ -71,7 +71,7 @@ class UpcomingSessionAdapter(context: Context, list: ArrayList<BookAppointmentRe
 
         RxView.clicks(holder.itemView.btnCancel).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                itemCLick.itemClick(bookAppointmentResponse, position)
+                itemCLick.itemClick(bookAppointmentResponse,holder.adapterPosition)
             }
     }
 

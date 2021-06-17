@@ -134,6 +134,7 @@ class VerifyIdentityActivity : BaseActivity() {
                     intent.putExtra("name",nameOfDocument)
                     startActivity(intent)
                     this.finish()
+                    overridePendingTransition(0,0)
                 }
         }
         super.onActivityResult(requestCode, resultCode, data)

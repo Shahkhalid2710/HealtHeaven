@@ -50,7 +50,6 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
         presenter.injectView(this)
         familyHistoryPresenter.injectView(this)
 
-
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
@@ -64,7 +63,7 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
             .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnEach {
-                if (selectedString != null && selectedString == etAddFamilyHistory.text.toString()) {
+                if (selectedString == etAddFamilyHistory.text.toString()) {
                     isMatched = true
                 } else {
                     isMatched = false

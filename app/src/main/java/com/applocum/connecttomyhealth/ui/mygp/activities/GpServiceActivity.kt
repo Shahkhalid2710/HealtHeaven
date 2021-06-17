@@ -60,12 +60,14 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
             .subscribe {
                 startActivity(Intent(this, AddGPServiceActivity::class.java))
                 this.finish()
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(btnAddGpService).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddGPServiceActivity::class.java))
                 this.finish()
+                overridePendingTransition(0,0)
             }
 
         locationPermission()
@@ -88,18 +90,23 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     @SuppressLint("CheckResult")
     override fun showSurgery(surgery: Surgery) {
-
-        rlGpService.visibility = View.VISIBLE
-        llMyGp.visibility = View.GONE
+          if (surgery == null)
+          {
+              rlGpService.visibility = View.GONE
+              llMyGp.visibility = View.VISIBLE
+          }else {
+              rlGpService.visibility = View.VISIBLE
+              llMyGp.visibility = View.GONE
+          }
 
         supportMapFragment = supportFragmentManager.findFragmentById(R.id.mapwhere) as SupportMapFragment
 
         supportMapFragment.getMapAsync { googleMap ->
             map = googleMap
 
-            val height = 160
-            val width = 160
-            val b = BitmapFactory.decodeResource(resources, R.drawable.ic_marker)
+            val height = 140
+            val width = 100
+            val b = BitmapFactory.decodeResource(resources, R.drawable.ic_map_marker)
             val smallMarker = Bitmap.createScaledBitmap(b, width, height, false)
             val smallMarkerIcon = BitmapDescriptorFactory.fromBitmap(smallMarker)
 

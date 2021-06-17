@@ -20,7 +20,9 @@ class VerifiedActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         btnContinue.setOnClickListener {
-            finish()
+            startActivity(Intent(this,PhotoIdActivity::class.java))
+            this.finish()
+            overridePendingTransition(0,0)
         }
     }
 
@@ -41,6 +43,7 @@ class VerifiedActivity : BaseActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             this.finish()
+
         }
         dialog.show()
     }

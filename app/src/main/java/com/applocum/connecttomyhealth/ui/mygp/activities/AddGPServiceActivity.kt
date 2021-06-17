@@ -52,6 +52,7 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
             .subscribe {
                 startActivity(Intent(this, GpServiceActivity::class.java))
                 finish()
+                overridePendingTransition(0,0)
             }
 
         RxTextView.textChanges(etGpSearch)
@@ -98,6 +99,7 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
                             val intent = Intent(this@AddGPServiceActivity,GpServiceActivity::class.java)
                             startActivity(intent)
                             this@AddGPServiceActivity.finish()
+                            overridePendingTransition(0,0)
                             dialog.dismiss()
                         }
                         showDialogView.btnCancel.setOnClickListener {

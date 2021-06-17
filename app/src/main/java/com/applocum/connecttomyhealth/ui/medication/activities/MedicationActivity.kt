@@ -24,8 +24,7 @@ class MedicationActivity : BaseActivity() {
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
-        val viewPagerFragmentAdapter =
-            ViewPagerFragmentAdapter(this, supportFragmentManager)
+        val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(this, supportFragmentManager)
         viewPagerFragmentAdapter.addfragment(ActiveAcuteMedicationIssueFragment(), "Active Acute")
         viewPagerFragmentAdapter.addfragment(PastAcuteMedicationIssueFragment(), "Past Acute")
         viewPager.adapter = viewPagerFragmentAdapter

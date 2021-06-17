@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.help.activities.HelpActivity"></activity>
+        <activity android:name=".ui.chat.activities.ChatActivity"></activity>
+        <activity android:name=".ui.help.activities.HelpActivity" />
         <activity
             android:name=".ui.photoid.activities.PhotoIdActivity"
             android:screenOrientation="portrait" />

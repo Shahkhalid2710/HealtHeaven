@@ -58,6 +58,7 @@ class PrescriptionActivity : BaseActivity(),
                         val intent = Intent(this@PrescriptionActivity, DocumentViewActivity::class.java)
                         intent.putExtra("document", document)
                         startActivity(intent)
+                        overridePendingTransition(0,0)
                     }
                 })
         }

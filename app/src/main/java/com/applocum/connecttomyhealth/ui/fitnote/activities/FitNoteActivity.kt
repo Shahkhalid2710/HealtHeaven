@@ -57,6 +57,7 @@ class FitNoteActivity : BaseActivity(),
                 val intent = Intent(this@FitNoteActivity, DocumentViewActivity::class.java)
                 intent.putExtra("document", document)
                 startActivity(intent)
+                overridePendingTransition(0,0)
             }
         })
     }

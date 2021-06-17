@@ -41,6 +41,7 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
         RxView.clicks(v.layoutNotfoundPastMedicalHistory.btnAddMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), AddMedicalHistoryActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
         presenter.pastMedicalHistory()

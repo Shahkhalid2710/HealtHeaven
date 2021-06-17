@@ -27,21 +27,25 @@ class MyDownloadsActivity : BaseActivity() {
         RxView.clicks(llPrescription).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this,PrescriptionActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(llFitNote).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, FitNoteActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(llReferral).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, ReferralActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(llotherNotes).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, OtherNoteActivity::class.java))
+                overridePendingTransition(0,0)
             }
      }
 }

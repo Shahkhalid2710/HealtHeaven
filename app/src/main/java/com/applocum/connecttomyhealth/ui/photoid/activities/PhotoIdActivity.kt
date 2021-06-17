@@ -40,20 +40,20 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
         photoIdPresenter.injectView(this)
 
         RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe {
-                finish()
-            }
+            .subscribe { finish() }
 
         RxView.clicks(btnUploadPhotoId).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
                 val intent=Intent(this,VerifyIdentityActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(tvAddPhotoId).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
                 val intent=Intent(this,VerifyIdentityActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(0,0)
             }
 
         photoIdPresenter.showDocument()

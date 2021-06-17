@@ -63,16 +63,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginStart="@dimen/spacing_35"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_35"
             android:fontFamily="@font/montserrat_medium"
             android:gravity="center"
             android:text="@string/connect_specialist"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_14" />
 
-        <TextView
+      <!--  <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -83,7 +83,7 @@
             android:gravity="center"
             android:text="@string/shortly_connect"
             android:textColor="@color/grey"
-            android:textSize="@dimen/font_14" />
+            android:textSize="@dimen/font_14" />-->
     </LinearLayout>
 </FrameLayout>
 

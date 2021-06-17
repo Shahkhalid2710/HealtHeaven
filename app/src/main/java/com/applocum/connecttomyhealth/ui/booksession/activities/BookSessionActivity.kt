@@ -15,13 +15,15 @@ import com.applocum.connecttomyhealth.ui.allergyhistory.adapters.ViewPagerFragme
 import com.applocum.connecttomyhealth.ui.booksession.fragments.AboutSpecialistFragment
 import com.applocum.connecttomyhealth.ui.booksession.fragments.AvailabilityFragment
 import com.applocum.connecttomyhealth.ui.booksession.presenters.BookSessionPresenter
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_book_session.*
+import kotlinx.android.synthetic.main.activity_book_session.ivBack
+import kotlinx.android.synthetic.main.activity_book_session.tvCancel
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-
 
 class BookSessionActivity : BaseActivity() {
     @Inject
@@ -45,6 +47,16 @@ class BookSessionActivity : BaseActivity() {
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
+        RxView.clicks(tvCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val intent = (Intent(this,BottomNavigationViewActivity::class.java))
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finishAffinity()
+                overridePendingTransition(0,0)
+            }
+
         val specialist = intent.getSerializableExtra("specialist") as Specialist
 
         val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(this, supportFragmentManager)
@@ -67,6 +79,7 @@ class BookSessionActivity : BaseActivity() {
                 }
                 userHolder.saveBookAppointmentData(appointment)
                 startActivity(intent)
+                overridePendingTransition(0,0)
             }
 
         tvDoctorFirstName.text = specialist.first_name

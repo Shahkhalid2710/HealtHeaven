@@ -41,21 +41,25 @@ class PersonalDetailsActivity : BaseActivity(),ProfileProgressPresenter.View {
         RxView.clicks(rlProfileddetails).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, ProfileDetailsActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(rlMyGp).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, GpServiceActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(rlExemptions).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, ExemptionsActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(rlPhotoId).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this,PhotoIdActivity::class.java))
+                overridePendingTransition(0,0)
             }
     }
 

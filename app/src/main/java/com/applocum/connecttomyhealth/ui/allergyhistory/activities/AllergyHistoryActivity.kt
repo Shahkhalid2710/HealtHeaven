@@ -27,6 +27,7 @@ class AllergyHistoryActivity : BaseActivity() {
         RxView.clicks(tvAddAllergy).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddAllergyActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(this, supportFragmentManager)

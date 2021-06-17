@@ -59,6 +59,7 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
         RxView.clicks(v.btnBookAppointment).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), SpecialistsActivity::class.java))
+               requireActivity().overridePendingTransition(0,0)
             }
 
         specilistPresenter.getDoctorlist()
@@ -86,6 +87,7 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
                     }
                     userHolder.saveBookAppointmentData(appointment)
                     startActivity(intent)
+                    requireActivity().overridePendingTransition(0,0)
                 }
             })
      }

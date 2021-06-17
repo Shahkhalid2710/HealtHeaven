@@ -25,6 +25,7 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         if (restoreprefdata()) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+            overridePendingTransition(0,0)
         }
 
         btnGetStarted.setOnClickListener {
@@ -32,6 +33,7 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
             startActivity(intent)
             saveprefdata()
             finish()
+            overridePendingTransition(0,0)
         }
 
         tvSkip.setOnClickListener {
@@ -39,6 +41,7 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
             startActivity(intent)
             saveprefdata()
             finish()
+            overridePendingTransition(0,0)
         }
 
         val selectItem1 = SelectItem(

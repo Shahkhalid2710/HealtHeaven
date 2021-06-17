@@ -103,41 +103,49 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
         RxView.clicks(v.llPersonalDetails).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), PersonalDetailsActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
         RxView.clicks(v.llClinicalRecords).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), SecurityActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
         RxView.clicks(v.llMyDownloads).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), MyDownloadsActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
         RxView.clicks(v.llPaymentMethods).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), PaymentMethodActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
         RxView.clicks(v.llMemberships).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), MemberShipActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
         RxView.clicks(v.llChangePassword).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), ChangePasswordActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
         RxView.clicks(v.llSetting).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), SettingActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
         RxView.clicks(v.llHelp).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(),HelpActivity::class.java))
+                requireActivity().overridePendingTransition(0,0)
             }
 
 
@@ -154,6 +162,7 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     requireActivity().finish()
+                    requireActivity().overridePendingTransition(0,0)
                     userHolder.clearUserData("", "", "", "", "", "", "")
                 }
                 showDialogView.btnNo.setOnClickListener {

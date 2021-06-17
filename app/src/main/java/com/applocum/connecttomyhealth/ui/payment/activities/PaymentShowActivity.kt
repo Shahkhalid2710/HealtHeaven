@@ -9,7 +9,6 @@ import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.*
@@ -60,6 +59,32 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
         bookAppointmentPresenter.injectView(this)
+
+        RxView.clicks(customPaymentAdd.tvCancelCustom).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val intent = (Intent(this,BottomNavigationViewActivity::class.java))
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finishAffinity()
+                overridePendingTransition(0,0)
+            }
+
+        RxView.clicks(tvCancelPayment).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val intent = (Intent(this,BottomNavigationViewActivity::class.java))
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finishAffinity()
+                overridePendingTransition(0,0)
+            }
+
+        RxView.clicks(ivBackPayment).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {finish()}
+
+        RxView.clicks(customPaymentAdd.ivBackCustom).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {finish()}
 
         val bookAppointment = userHolder.getBookAppointmentData()
         bookAppointment.corporateId = 66
@@ -116,23 +141,28 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         RxView.clicks(tvAddNewCode).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddCardActivity::class.java))
+                overridePendingTransition(0,0)
             }
         RxView.clicks(tvAddmembershipcode).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddCodeActivity::class.java))
+                overridePendingTransition(0,0)
             }
         RxView.clicks(tvAddPaymentMethod).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddCardActivity::class.java))
+                overridePendingTransition(0,0)
             }
         RxView.clicks(btnConfirmSessionBook).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, VerifyIdentityActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(etAddCode).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddCodeActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         presenter.showSavedCards()
@@ -189,11 +219,13 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
 
         dialog.btnDone.setOnClickListener {
             dialog.dismiss()
+
             val intent = (Intent(this, BottomNavigationViewActivity::class.java))
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             finishAffinity()
+            overridePendingTransition(0,0)
         }
         dialog.show()
     }

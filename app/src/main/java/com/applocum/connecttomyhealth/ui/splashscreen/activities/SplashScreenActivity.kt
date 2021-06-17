@@ -29,12 +29,14 @@ class SplashScreenActivity : BaseActivity() {
                 val intent= Intent(this, WalkThroughActivity::class.java)
                 startActivity(intent)
                 finish()
+                overridePendingTransition(0,0)
             }
           else
             {
                 val intent= Intent(this, BottomNavigationViewActivity::class.java)
                 startActivity(intent)
                 finish()
+                overridePendingTransition(0,0)
             }
         },1000)
     }

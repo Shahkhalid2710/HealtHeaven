@@ -60,13 +60,12 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
             .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnEach {
-                if (selectedString != null && selectedString == etAddAllergy.text.toString()) {
+                if (selectedString == etAddAllergy.text.toString()) {
                     isMatched = true
                 } else {
                     isMatched = false
                     selectedString = ""
                 }
-
             }
             .observeOn(Schedulers.computation())
             .filter { s -> s.length >= 2 }

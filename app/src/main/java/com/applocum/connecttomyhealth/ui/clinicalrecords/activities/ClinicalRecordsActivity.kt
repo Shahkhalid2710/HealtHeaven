@@ -29,26 +29,31 @@ class ClinicalRecordsActivity : BaseActivity() {
         RxView.clicks(rlFamilyHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this,FamilyHistoryActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(rlAllergyHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AllergyHistoryActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(rlInvestigation).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, InvestigationActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(rlMedicalBased).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, MedicationActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(rlMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, MedicalHistoryActivity::class.java))
+                overridePendingTransition(0,0)
             }
     }
 }

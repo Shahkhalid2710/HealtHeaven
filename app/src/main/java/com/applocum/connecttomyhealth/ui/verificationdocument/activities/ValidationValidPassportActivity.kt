@@ -100,6 +100,7 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
     override fun displayMessage(message: String) {
         startActivity(Intent(this@ValidationValidPassportActivity,VerifiedActivity::class.java))
         this.finish()
+        overridePendingTransition(0,0)
     }
 
     override fun displayErrorMessage(message: String) {

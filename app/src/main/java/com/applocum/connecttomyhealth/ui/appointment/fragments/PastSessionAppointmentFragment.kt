@@ -66,14 +66,16 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
         }
         rvPastSession.layoutManager = LinearLayoutManager(requireActivity())
         rvPastSession.adapter = PastSessionAdapter(requireActivity(), list, object : PastSessionAdapter.ItemClickListner {
-                override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int
-                ) {
+                override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
                     val intent = Intent(requireActivity(), SessionDetailsActivity::class.java)
                     intent.putExtra("bookAppointmentResponse", bookAppointmentResponse)
                     startActivity(intent)
+                    requireActivity().overridePendingTransition(0,0)
                 }
                 override fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse,position: Int) {
-
+                  /*  val intent=Intent(requireActivity(),AddSymptomActivity::class.java)
+                    intent.putExtra("bookAppointmentResponse", bookAppointmentResponse)
+                    startActivity(intent)*/
                 }
             })
       }

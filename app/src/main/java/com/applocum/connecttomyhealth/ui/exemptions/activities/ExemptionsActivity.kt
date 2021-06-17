@@ -25,6 +25,7 @@ class ExemptionsActivity : BaseActivity() {
         RxView.clicks(exemptions.btnAddCertificate).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, ChooseExemptionActivity::class.java))
+                overridePendingTransition(0,0)
             }
      }
 }

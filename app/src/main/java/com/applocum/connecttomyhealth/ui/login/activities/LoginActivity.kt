@@ -49,12 +49,14 @@ class LoginActivity : BaseActivity(),
         RxView.clicks(tvForgotPasword).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, ForgotPasswordActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(tvSignup).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this,SignupActivity::class.java))
                 this.finish()
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(btnLogin).throttleFirst(500,TimeUnit.MILLISECONDS)
@@ -79,6 +81,7 @@ class LoginActivity : BaseActivity(),
         val intent = Intent(this,BottomNavigationViewActivity::class.java)
         startActivity(intent)
         this.finish()
+        overridePendingTransition(0,0)
     }
 
     override fun viewProgress(isShow: Boolean) {

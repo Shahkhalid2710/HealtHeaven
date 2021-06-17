@@ -389,9 +389,10 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 val dialog = AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
 
+                countryCode=showDialogView.ccp.selectedCountryCode
+
                 val font = Typeface.createFromAsset(this.assets, "fonts/montserrat_medium.ttf")
                 showDialogView.ccp.setTypeFace(font)
-
                 showDialogView.ccp.setOnCountryChangeListener {
                     countryCode = showDialogView.ccp.selectedCountryCode
                 }

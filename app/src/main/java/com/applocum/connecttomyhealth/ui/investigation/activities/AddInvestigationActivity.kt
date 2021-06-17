@@ -66,7 +66,7 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
             .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnEach {
-                if (selectedString != null && selectedString == etInvestigationName.text.toString()) {
+                if (selectedString == etInvestigationName.text.toString()) {
                     isMatched = true
                 } else {
                     isMatched = false

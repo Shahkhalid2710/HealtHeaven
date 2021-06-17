@@ -38,11 +38,13 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
         RxView.clicks(tvAddFamilyHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddFamilyHistoryActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(btnAddFamilyHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddFamilyHistoryActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         presenter.showFamilyHistoryList()

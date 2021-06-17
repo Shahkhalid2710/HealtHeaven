@@ -65,6 +65,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = ContextCompat.getColor(this, R.color.green)
 
+        countrycode=ccp.selectedCountryCode
 
         RxView.clicks(btnRegister).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
@@ -124,14 +125,18 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
         etDOB.setText(newDateString)
     }
 
+    @SuppressLint("CheckResult")
     private fun clickHandler() {
         ccp.setOnCountryChangeListener {
             countrycode = ccp.selectedCountryCode
         }
-        tvSignin.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            this.finish()
-        }
+
+        RxView.clicks(tvSignin).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe{
+                startActivity(Intent(this, LoginActivity::class.java))
+                this.finish()
+                overridePendingTransition(0,0)
+            }
 
         etGender.setOnClickListener {
             val showDialogView =

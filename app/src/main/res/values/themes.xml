@@ -17,9 +17,12 @@
         <item name="android:windowLightStatusBar">true</item>
 
 <!--
-        <item name="android:windowAnimationStyle">@style/ActivityAnimation2</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
 -->
+    </style>
 
+    <style name="noAnimTheme" parent="android:Theme">
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 
     <style name="MyCustomTheme" parent="Theme.AppCompat.Light">

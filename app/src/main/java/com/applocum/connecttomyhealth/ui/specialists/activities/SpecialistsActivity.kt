@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.specialists.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,11 +13,14 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.addsymptoms.activities.AddSymptomActivity
 import com.applocum.connecttomyhealth.ui.booksession.activities.BookSessionActivity
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.specialists.adapters.SpecialistsAdapter
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.applocum.connecttomyhealth.ui.specialists.presenters.SpecilistPresenter
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_specialists.*
 import kotlinx.android.synthetic.main.custom_progress.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
@@ -28,12 +32,25 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_specialists
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ivBack.setOnClickListener { finish() }
 
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
+
+        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe { finish() }
+
+        RxView.clicks(tvCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val intent = (Intent(this,BottomNavigationViewActivity::class.java))
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finishAffinity()
+                overridePendingTransition(0,0)
+            }
 
         presenter.getDoctorlist()
 
@@ -55,6 +72,7 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
                         val intent = Intent(this@SpecialistsActivity, BookSessionActivity::class.java)
                         intent.putExtra("specialist", specialist)
                         startActivity(intent)
+                        overridePendingTransition(0,0)
                     }
 
                     override fun onbookSession(specialist: Specialist, position: Int) {
@@ -71,6 +89,7 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
                         }
                         userHolder.saveBookAppointmentData(appointment)
                         startActivity(intent)
+                        overridePendingTransition(0,0)
                     }
                 })
         rvDoctors.adapter = specialistsAdapter

@@ -9,11 +9,14 @@ import com.applocum.connecttomyhealth.convertAvailableTimeSlots
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.payment.activities.PaymentShowActivity
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_confirm_booking.*
 import kotlinx.android.synthetic.main.activity_confirm_booking.ivBack
+import kotlinx.android.synthetic.main.activity_confirm_booking.ivDoctor
+import kotlinx.android.synthetic.main.activity_confirm_booking.tvCancel
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -39,6 +42,17 @@ class ConfirmBookingActivity : BaseActivity() {
         RxView.clicks(btnConfirm).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, PaymentShowActivity::class.java))
+                overridePendingTransition(0,0)
+            }
+
+        RxView.clicks(tvCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val intent = (Intent(this, BottomNavigationViewActivity::class.java))
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finishAffinity()
+                overridePendingTransition(0,0)
             }
 
         common = intent.getSerializableExtra("commonData") as Common

@@ -28,15 +28,16 @@ class MedicalHistoryActivity : BaseActivity() {
         RxView.clicks(btnAddMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddMedicalHistoryActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(tvAddMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddMedicalHistoryActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
-        val viewPagerFragmentAdapter =
-            ViewPagerFragmentAdapter(this, supportFragmentManager)
+        val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(this, supportFragmentManager)
         viewPagerFragmentAdapter.addfragment(ActiveMedicalHistoryFragment(), "Active")
         viewPagerFragmentAdapter.addfragment(PastMedicalHistoryFragment(), "Past ")
         viewPager.adapter = viewPagerFragmentAdapter

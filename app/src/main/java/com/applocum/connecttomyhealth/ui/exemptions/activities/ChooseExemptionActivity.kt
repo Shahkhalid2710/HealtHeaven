@@ -57,6 +57,7 @@ class ChooseExemptionActivity : BaseActivity() {
         RxView.clicks(btnAddCertificate).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, UploadCertificateActivity::class.java))
+                overridePendingTransition(0,0)
             }
     }
 }

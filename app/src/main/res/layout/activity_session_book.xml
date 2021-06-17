@@ -37,6 +37,29 @@
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_back" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ripple_effect_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/spacing_24"
+                tools:ignore="RelativeOverlap">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="end"
+                    android:text="@string/cancel"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/font_16"
+                    tools:ignore="RelativeOverlap" />
+            </LinearLayout>
         </RelativeLayout>
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView

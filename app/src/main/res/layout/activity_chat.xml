@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.chat.activities.ChatActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_10"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ripple_effect_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/spacing_24">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_back" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/chat"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_20" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textcolorgrey" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/spacing_10" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/spacing_24"
+            android:layout_marginEnd="@dimen/spacing_24"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.7"
+                android:background="@drawable/custom_chat_edittext"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                tools:ignore="UselessParent">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.8"
+                    android:autofillHints="@string/_0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/write_something"
+                    android:inputType="textCapSentences|textMultiLine|textNoSuggestions"
+                    android:paddingStart="@dimen/spacing_16"
+                    android:paddingEnd="5dp"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="NestedWeights" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.2">
+
+                    <ImageView
+                        android:id="@+id/ivGallery"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/todo"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_gallery" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="3dp"
+                android:layout_weight="0.3">
+
+                <RelativeLayout
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/custom_dot"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="@drawable/effect_button"
+                    tools:ignore="UselessParent">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerInParent="true"
+                        android:contentDescription="@string/todo"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_send_button" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

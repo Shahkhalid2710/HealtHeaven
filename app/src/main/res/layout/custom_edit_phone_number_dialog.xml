@@ -72,7 +72,7 @@
             android:backgroundTint="@color/textcolorgrey"
             android:fontFamily="@font/montserrat_medium"
             android:hint="@string/phone_number"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionDone"
             android:maxLength="10"
             android:inputType="number"
             android:textColor="@color/aapBlack"

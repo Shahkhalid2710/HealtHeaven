@@ -62,8 +62,9 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
 
     override fun displaySuccessMessage(message: String) {
         mListUpcomingSession.removeAt(bookAppointmentPosition)
-        mListUpcomingSession.trimToSize()
         upcomingSessionAdapter.notifyItemRemoved(bookAppointmentPosition)
+        mListUpcomingSession.trimToSize()
+
         checkList()
         val snackbar = Snackbar.make(llUpcomingSession, message, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
@@ -76,9 +77,7 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
         mListUpcomingSession=list
         checkList()
         rvUpcomingSession.layoutManager = LinearLayoutManager(requireActivity())
-        upcomingSessionAdapter = UpcomingSessionAdapter(
-            requireActivity(),
-            list,
+        upcomingSessionAdapter = UpcomingSessionAdapter(requireActivity(), list,
             object : UpcomingSessionAdapter.ItemClickListner {
                 override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
                     val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_cancel_book_session_dialog, null, false)
@@ -100,6 +99,7 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
                 override fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
                     val intent = Intent(requireActivity(), WaitingAreaActivity::class.java)
                     startActivity(intent)
+                   requireActivity().overridePendingTransition(0,0)
                 }
             })
 

@@ -18,11 +18,15 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
+import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.applocum.connecttomyhealth.ui.booksession.activities.SessionBookActivity
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_add_symptom.*
+import kotlinx.android.synthetic.main.activity_add_symptom.ivBack
+import kotlinx.android.synthetic.main.activity_add_symptom.tvCancel
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -31,6 +35,7 @@ import javax.inject.Inject
 class AddSymptomActivity : BaseActivity() {
     private val requestCodeGallery = 999
     private var selectedImagePath: String = ""
+    lateinit var bookAppointmentResponse: BookAppointmentResponse
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -42,10 +47,22 @@ class AddSymptomActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         (application as MyApplication).component.inject(this)
+
         val specialist = intent.getSerializableExtra("specialist") as Specialist
+       // bookAppointmentResponse = intent.getSerializableExtra("bookAppointmentResponse") as BookAppointmentResponse
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish()}
+
+        RxView.clicks(tvCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val intent = (Intent(this, BottomNavigationViewActivity::class.java))
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finishAffinity()
+                overridePendingTransition(0,0)
+            }
 
         val allDayDr = "<font color='#008976'>alldayDr</font>"
         val nhsGP = "<font color='#008976'>NHS GP.</font>"
@@ -60,7 +77,7 @@ class AddSymptomActivity : BaseActivity() {
         RxView.clicks(btnContinue).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 if (checkCondition(cbGeoLocation.isChecked, cbRecords.isChecked)) {
-                    val intent = Intent(this, SessionBookActivity::class.java)
+                    val intent = Intent(this,SessionBookActivity::class.java)
                     intent.putExtra("specialist", specialist)
                     val appointment = userHolder.getBookAppointmentData()
                     appointment.pickedFilePath = selectedImagePath
@@ -69,6 +86,7 @@ class AddSymptomActivity : BaseActivity() {
                     appointment.sharedRecordWithNhs = cbRecords.isChecked
                     userHolder.saveBookAppointmentData(appointment)
                     startActivity(intent)
+                    overridePendingTransition(0,0)
                 }
             }
     }

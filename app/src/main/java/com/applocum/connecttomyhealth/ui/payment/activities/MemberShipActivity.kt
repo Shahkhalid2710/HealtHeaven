@@ -42,11 +42,13 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
         RxView.clicks(tvAddmembershipcode).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddCodeActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         RxView.clicks(btnAddCode).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddCodeActivity::class.java))
+                overridePendingTransition(0,0)
             }
 
         membershipPresenter.showSavedCodes()
