@@ -45,8 +45,6 @@ class PastAllergyFragment : Fragment(), AllergyHistoryPresenter.View {
                 requireActivity().overridePendingTransition(0,0)
             }
 
-        presenter.pastAllergy()
-
         return v
     }
 
@@ -83,7 +81,7 @@ class PastAllergyFragment : Fragment(), AllergyHistoryPresenter.View {
     override fun viewAllergyProgress(isShow: Boolean) {}
 
     override fun onResume() {
-        presenter.pastAllergy()
         super.onResume()
+        presenter.pastAllergy()
     }
 }

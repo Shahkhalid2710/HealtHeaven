@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -149,6 +149,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginEnd="@dimen/spacing_24"
+                android:visibility="visible"
                 android:layout_marginBottom="@dimen/spacing_10"
                 android:background="@drawable/custom_dialog"
                 android:orientation="vertical">

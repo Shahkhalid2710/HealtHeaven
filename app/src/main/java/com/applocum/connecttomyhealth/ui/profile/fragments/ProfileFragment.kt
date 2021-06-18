@@ -68,8 +68,6 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
         presenter.injectview(this)
         profileProgressPresenter.injectView(this)
 
-        presenter.showProfile()
-        profileProgressPresenter.trackProfileProgress()
 
         RxView.clicks(v.flProfile).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -236,9 +234,9 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
     }
 
     override fun onResume() {
+        super.onResume()
         presenter.showProfile()
         profileProgressPresenter.trackProfileProgress()
-        super.onResume()
     }
 
     override fun displayProgressErrorMessage(message: String) {

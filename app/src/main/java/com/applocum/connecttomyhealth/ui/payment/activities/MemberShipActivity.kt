@@ -50,9 +50,6 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
                 startActivity(Intent(this, AddCodeActivity::class.java))
                 overridePendingTransition(0,0)
             }
-
-        membershipPresenter.showSavedCodes()
-
     }
 
     override fun displayMessage(message: String) {
@@ -93,7 +90,7 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
     }
 
     override fun onResume() {
-        membershipPresenter.showSavedCodes()
         super.onResume()
+        membershipPresenter.showSavedCodes()
     }
 }

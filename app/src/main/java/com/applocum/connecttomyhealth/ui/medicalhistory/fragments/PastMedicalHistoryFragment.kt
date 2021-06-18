@@ -44,8 +44,6 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
                 requireActivity().overridePendingTransition(0,0)
             }
 
-        presenter.pastMedicalHistory()
-
         return v
     }
 
@@ -73,13 +71,12 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
             layoutNotfoundPastMedicalHistory.visibility=View.GONE
             rvPastMedicalHistory.visibility=View.VISIBLE
         }
-
         rvPastMedicalHistory.layoutManager = LinearLayoutManager(requireActivity())
         rvPastMedicalHistory.adapter = PastMedicalHistoryAdapter(requireActivity(), falseMedicalHistory)
     }
 
     override fun onResume() {
-        presenter.pastMedicalHistory()
         super.onResume()
+        presenter.pastMedicalHistory()
     }
 }

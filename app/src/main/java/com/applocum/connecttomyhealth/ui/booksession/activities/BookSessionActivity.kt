@@ -60,7 +60,7 @@ class BookSessionActivity : BaseActivity() {
         val specialist = intent.getSerializableExtra("specialist") as Specialist
 
         val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(this, supportFragmentManager)
-        viewPagerFragmentAdapter.addfragment(AboutSpecialistFragment().newInstance(specialist), "About Specialists")
+        viewPagerFragmentAdapter.addfragment(AboutSpecialistFragment().newInstance(specialist), "About Specialist")
         viewPagerFragmentAdapter.addfragment(AvailabilityFragment().newInstance(specialist), "Availability")
         viewPager.adapter = viewPagerFragmentAdapter
         tablayout.setupWithViewPager(viewPager)

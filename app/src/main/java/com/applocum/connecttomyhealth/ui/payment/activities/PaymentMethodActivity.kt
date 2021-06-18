@@ -58,9 +58,6 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
                 startActivity(Intent(this, AddCardActivity::class.java))
                 overridePendingTransition(0,0)
             }
-
-        presenter.showSavedCards()
-
     }
 
     override fun displaymessage(message: String) {
@@ -131,7 +128,7 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
 
     }
     override fun onResume() {
-        presenter.showSavedCards()
         super.onResume()
+        presenter.showSavedCards()
     }
 }

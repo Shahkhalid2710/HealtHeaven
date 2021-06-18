@@ -11,23 +11,22 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.applocum.connecttomyhealth.*
+import com.applocum.connecttomyhealth.MyApplication
+import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.addcard.activities.AddCardActivity
-import com.applocum.connecttomyhealth.ui.addcard.presenters.AddCardPresenter
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
-import com.applocum.connecttomyhealth.ui.appointment.presenters.BookAppointmentPresenter
+import com.applocum.connecttomyhealth.ui.addcard.presenters.AddCardPresenter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
+import com.applocum.connecttomyhealth.ui.appointment.presenters.BookAppointmentPresenter
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.payment.adapters.PaymentCardAdapter
 import com.applocum.connecttomyhealth.ui.verificationdocument.activities.VerifyIdentityActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_payment_show.*
-import kotlinx.android.synthetic.main.activity_payment_show.btnConfirmSessionBooking
-import kotlinx.android.synthetic.main.activity_payment_show.progress
-import kotlinx.android.synthetic.main.activity_payment_show.rvSavedCards
 import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 import kotlinx.android.synthetic.main.custom_payment_add.*
 import kotlinx.android.synthetic.main.custom_payment_add.view.*
@@ -164,9 +163,6 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
                 startActivity(Intent(this, AddCodeActivity::class.java))
                 overridePendingTransition(0,0)
             }
-
-        presenter.showSavedCards()
-
     }
 
     override fun displaymessage(message: String) {}
@@ -245,7 +241,7 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {}
 
     override fun onResume() {
-        presenter.showSavedCards()
         super.onResume()
+        presenter.showSavedCards()
     }
 }

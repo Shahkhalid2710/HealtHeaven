@@ -46,8 +46,6 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
                 startActivity(Intent(this, AddInvestigationActivity::class.java))
                 overridePendingTransition(0,0)
             }
-
-        investigationPresenter.showInvestigationList()
     }
 
     override fun displaySuccessMessage(message: String) {}
@@ -73,7 +71,7 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
     }
 
     override fun onResume() {
-        investigationPresenter.showInvestigationList()
         super.onResume()
+        investigationPresenter.showInvestigationList()
     }
 }

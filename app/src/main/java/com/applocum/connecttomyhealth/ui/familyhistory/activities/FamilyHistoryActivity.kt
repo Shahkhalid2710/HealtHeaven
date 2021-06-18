@@ -46,9 +46,6 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
                 startActivity(Intent(this, AddFamilyHistoryActivity::class.java))
                 overridePendingTransition(0,0)
             }
-
-        presenter.showFamilyHistoryList()
-
     }
 
     override fun displayErrorMessage(message: String) {}
@@ -78,7 +75,7 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
     }
 
     override fun onResume() {
-        presenter.showFamilyHistoryList()
         super.onResume()
+        presenter.showFamilyHistoryList()
     }
 }

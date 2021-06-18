@@ -91,10 +91,10 @@ class PersonalDetailsActivity : BaseActivity(),ProfileProgressPresenter.View {
         {
             ivExemptionWarning.visibility=View.VISIBLE
         }
-
         if (progressResponse.profile_progress.photo_id)
         {
             ivPhotoIDWarning.visibility=View.GONE
+
         } else
         {
             ivPhotoIDWarning.visibility=View.VISIBLE
@@ -110,7 +110,7 @@ class PersonalDetailsActivity : BaseActivity(),ProfileProgressPresenter.View {
     }
 
     override fun onResume() {
-        profileProgressPresenter.trackProfileProgress()
         super.onResume()
+        profileProgressPresenter.trackProfileProgress()
     }
 }

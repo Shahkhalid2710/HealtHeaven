@@ -37,9 +37,11 @@ class ReferralActivity : BaseActivity(),
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
+    }
 
+    override fun onResume() {
+        super.onResume()
         presenter.getReferral()
-
     }
 
     override fun displayErrorMessage(message: String) {

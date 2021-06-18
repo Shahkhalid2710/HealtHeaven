@@ -25,8 +25,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.chat.activities.ChatActivity"></activity>
-        <activity android:name=".ui.help.activities.HelpActivity" />
+        <activity android:name=".ui.chat.activities.ChatActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.help.activities.HelpActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.photoid.activities.PhotoIdActivity"
             android:screenOrientation="portrait" />
@@ -201,8 +203,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.signup.activities.SignupActivity"
-            android:screenOrientation="portrait" />
+            android:name=".ui.signup.activities.SignupActivity" />
         <activity
             android:name=".ui.createnewpassword.activities.CreateNewPasswordActivity"
             android:screenOrientation="portrait" />
@@ -213,8 +214,7 @@
             android:name=".ui.forgotpassword.activities.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.login.activities.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:name=".ui.login.activities.LoginActivity" />
     </application>
 
 </manifest>

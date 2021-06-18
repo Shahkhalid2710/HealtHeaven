@@ -133,15 +133,15 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
         )
 
         if (firstname.isEmpty()) {
-            view.displaymessage("Please enter first name")
+            view.displaymessage("Please enter your first name")
             return false
         }
         if (lastname.isEmpty()) {
-            view.displaymessage("Please enter last name")
+            view.displaymessage("Please enter your last name")
             return false
         }
         if (email.isEmpty()) {
-            view.displaymessage("Please enter email")
+            view.displaymessage("Please enter your email address")
             return false
         }
         if (!EMAIL_PATTERN.matcher(email).matches()) {
@@ -149,29 +149,39 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
             return false
         }
         if (mobileno.isEmpty()) {
-            view.displaymessage("Please enter mobile number")
+            view.displaymessage("Please enter your mobile number")
+            return false
+        }
+        if (mobileno.length < 10)
+        {
+            view.displaymessage("Please enter valid mobile number")
             return false
         }
         if (password.isEmpty()) {
-            view.displaymessage("Please enter password")
+            view.displaymessage("Please enter your password")
+            return false
+        }
+
+        if (password.length < 8) {
+            view.displaymessage("Password length should be of minimum 8 characters including one number,one uppercase letter,one lowercase letter and one special character.")
             return false
         }
 
         if (confirmPassword.isEmpty()) {
-            view.displaymessage("Please enter confirm password")
+            view.displaymessage("You must enter the same password twice in order to confirm it")
             return false
         }
 
         if (!confirmPassword.matches(password.toRegex())) {
-            view.displaymessage("Password not matching")
+            view.displaymessage("You must enter the same password twice in order to confirm it")
             return false
         }
         if (gender.isEmpty()) {
-            view.displaymessage("Please select gender")
+            view.displaymessage("Please select your gender")
             return false
         }
         if (date_of_birth.isEmpty()) {
-            view.displaymessage("Please select date of birth")
+            view.displaymessage("Please select your date of birth")
             return false
         }
         return true

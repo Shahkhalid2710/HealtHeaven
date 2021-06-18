@@ -20,9 +20,7 @@ class VerifiedActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         btnContinue.setOnClickListener {
-            startActivity(Intent(this,PhotoIdActivity::class.java))
-            this.finish()
-            overridePendingTransition(0,0)
+            finish()
         }
     }
 

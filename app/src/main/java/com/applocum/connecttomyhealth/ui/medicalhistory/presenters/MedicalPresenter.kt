@@ -141,8 +141,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
-                        val medicalHistoryTrueFalseResponse =
-                            Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
+                        val medicalHistoryTrueFalseResponse = Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
                         view.showPastMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.falseMedicalHistory)
                     }
                     InvalidCredentials, InternalServer -> {

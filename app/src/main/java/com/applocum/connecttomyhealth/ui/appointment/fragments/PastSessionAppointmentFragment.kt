@@ -40,8 +40,6 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
 
-        presenter.showPastSession()
-
         return v
     }
 
@@ -87,7 +85,7 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
     override fun viewFullProgress(isShow: Boolean) {}
 
     override fun onResume() {
-        presenter.showPastSession()
         super.onResume()
+        presenter.showPastSession()
     }
 }

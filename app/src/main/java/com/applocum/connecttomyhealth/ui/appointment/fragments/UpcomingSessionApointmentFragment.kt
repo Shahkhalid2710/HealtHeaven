@@ -47,8 +47,6 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
         presenter.injectView(this)
         checkList()
 
-        presenter.showUpcomingSession()
-
         return v
     }
 
@@ -116,8 +114,8 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
     }
 
     override fun onResume() {
-        presenter.showUpcomingSession()
         super.onResume()
+        presenter.showUpcomingSession()
     }
 
     private fun checkList()

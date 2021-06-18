@@ -55,9 +55,6 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
                 startActivity(intent)
                 overridePendingTransition(0,0)
             }
-
-        photoIdPresenter.showDocument()
-
     }
 
     override fun displayMessage(message: String) {
@@ -107,8 +104,8 @@ class PhotoIdActivity : BaseActivity(),PhotoIdPresenter.View {
     }
 
     override fun onResume() {
-        photoIdPresenter.showDocument()
         super.onResume()
+        photoIdPresenter.showDocument()
     }
 
     private fun checkList()

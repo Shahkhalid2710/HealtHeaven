@@ -83,7 +83,7 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
                     Success -> {
                         val surgeryObject = Gson().fromJson(it.data,SurgeryResponse::class.java)
                         val surgery = surgeryObject.surgery
-                        surgery?.let { it1 -> view.showSurgery(it1) }
+                        surgery?.let { it1 -> view.showSurgery(it1) }?: kotlin.run{view.emptySurgery()}
                     }
                     InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)
@@ -101,5 +101,6 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
         fun viewProgress(isShow: Boolean)
         fun viewFullProgress(isShow: Boolean)
         fun showSurgery(surgery: Surgery)
+        fun emptySurgery()
     }
 }

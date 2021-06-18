@@ -25,7 +25,7 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         if (restoreprefdata()) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-            overridePendingTransition(0,0)
+            //overridePendingTransition(0,0)
         }
 
         btnGetStarted.setOnClickListener {

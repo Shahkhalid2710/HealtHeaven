@@ -122,6 +122,8 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     override fun showSurgery(surgery: Surgery) {}
 
+    override fun emptySurgery() {}
+
     private fun capitalize(capString: String): String? {
         val capBuffer = StringBuffer()
         val capMatcher: Matcher =

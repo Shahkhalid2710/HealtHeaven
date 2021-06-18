@@ -127,7 +127,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 dialog.show()
             }
         editTextClicks()
-        presenter.showProfile()
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -270,7 +269,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 etGender.setText(R.string.other)
             }
         }
-
     }
 
     override fun viewprogress(isShow: Boolean) {
@@ -278,8 +276,8 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     }
 
     override fun onResume() {
-        presenter.showProfile()
         super.onResume()
+        presenter.showProfile()
     }
 
     @SuppressLint("CheckResult")

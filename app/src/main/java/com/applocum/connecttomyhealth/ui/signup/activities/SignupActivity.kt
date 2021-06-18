@@ -13,6 +13,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.DatePicker
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
@@ -89,7 +90,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
     }
 
     override fun displaymessage(message: String?) {
-        val snackbar = Snackbar.make(llSignup, message.toString(), Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(llSignup, message.toString(), Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
         snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))

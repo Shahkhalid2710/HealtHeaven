@@ -10,6 +10,7 @@ import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_help.*
 import java.util.concurrent.TimeUnit
 
+
 class HelpActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int= R.layout.activity_help
@@ -24,6 +25,18 @@ class HelpActivity : BaseActivity() {
         RxView.clicks(llChat).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this,ChatActivity::class.java))
+            }
+
+        RxView.clicks(llEmail).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+               /* val km = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+                if (km.isKeyguardSecure) {
+                    val authIntent = km.createConfirmDeviceCredentialIntent(
+                        getString(R.string.done),
+                        getString(R.string.cancel)
+                    )
+                    startActivityForResult(authIntent, INTENT_AUTHENTICATE)
+                }*/
             }
     }
 }

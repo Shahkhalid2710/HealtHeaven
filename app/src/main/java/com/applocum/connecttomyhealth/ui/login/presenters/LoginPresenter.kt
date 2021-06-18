@@ -86,7 +86,7 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
         )
 
         if (email.isEmpty()) {
-            view.displaymessage("Please enter email")
+            view.displaymessage("Please provide all mandatory details")
             return false
         }
         if (!EMAIL_PATTERN.matcher(email).matches()) {
@@ -94,7 +94,7 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
             return false
         }
         if (password.isEmpty()) {
-            view.displaymessage("Please enter password")
+            view.displaymessage("Please provide all mandatory details")
             return false
         }
         return true

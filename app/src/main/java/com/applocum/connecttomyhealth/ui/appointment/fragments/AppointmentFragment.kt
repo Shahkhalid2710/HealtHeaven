@@ -14,6 +14,7 @@ class AppointmentFragment : Fragment(){
 
     lateinit var v: View
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
          v = inflater.inflate(R.layout.fragment_appointment, container, false)
 

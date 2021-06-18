@@ -45,8 +45,6 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
-        presenter.showNotification()
-
         checkGpsStatus()
 
         switchlocatinservices.setOnCheckedChangeListener { _, isChecked ->
@@ -128,5 +126,6 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
     override fun onResume() {
         checkGpsStatus()
         super.onResume()
+        presenter.showNotification()
     }
 }

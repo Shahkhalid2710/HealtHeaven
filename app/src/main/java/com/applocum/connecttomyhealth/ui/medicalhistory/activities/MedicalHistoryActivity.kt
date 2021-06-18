@@ -11,7 +11,6 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.fragments.PastMedicalHis
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_medical_history.*
 import kotlinx.android.synthetic.main.activity_medical_history.ivBack
-import kotlinx.android.synthetic.main.custom_medical_history.*
 import java.util.concurrent.TimeUnit
 
 class MedicalHistoryActivity : BaseActivity() {
@@ -24,12 +23,6 @@ class MedicalHistoryActivity : BaseActivity() {
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
-
-        RxView.clicks(btnAddMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                startActivity(Intent(this, AddMedicalHistoryActivity::class.java))
-                overridePendingTransition(0,0)
-            }
 
         RxView.clicks(tvAddMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {

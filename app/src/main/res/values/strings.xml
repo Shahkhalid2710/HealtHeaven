@@ -682,4 +682,5 @@
     <string name="email_us">Email us</string>
     <string name="chat">Chat</string>
     <string name="write_something">Write Something…</string>
+    <string name="to_add_medical_records_tap_on_button_above">To add Medical records, Tap on button above</string>
 </resources>

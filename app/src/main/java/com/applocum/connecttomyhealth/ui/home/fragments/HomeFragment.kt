@@ -62,10 +62,13 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
                requireActivity().overridePendingTransition(0,0)
             }
 
+        return v
+    }
+
+    override fun onResume() {
+        super.onResume()
         specilistPresenter.getDoctorlist()
         profileDetailsPresenter.showProfile()
-
-        return v
     }
 
     override fun displaymessage(message: String) {}
@@ -116,6 +119,7 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
     }
 
     override fun displayMessage(message: String) {}
+
     override fun displaySuccessMessage(message: String) {}
 
     override fun displayErrorMessage(message: String) {}

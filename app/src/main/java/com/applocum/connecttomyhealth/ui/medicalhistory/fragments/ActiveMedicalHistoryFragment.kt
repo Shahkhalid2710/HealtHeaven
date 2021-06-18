@@ -41,8 +41,6 @@ class ActiveMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
                 requireActivity().overridePendingTransition(0,0)
             }
 
-        presenter.activeMedicalHistory()
-
         return v
     }
 
@@ -75,7 +73,7 @@ class ActiveMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
     override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {}
 
     override fun onResume() {
-        presenter.activeMedicalHistory()
         super.onResume()
+        presenter.activeMedicalHistory()
     }
 }

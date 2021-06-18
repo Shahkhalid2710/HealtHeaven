@@ -48,8 +48,6 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
 
-        presenter.getGpService()
-
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
@@ -88,9 +86,14 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
+    override fun emptySurgery() {
+        rlGpService.visibility = View.GONE
+        llMyGp.visibility = View.VISIBLE
+    }
+
     @SuppressLint("CheckResult")
     override fun showSurgery(surgery: Surgery) {
-          if (surgery == null)
+          if (surgery.practice_name.isNullOrEmpty())
           {
               rlGpService.visibility = View.GONE
               llMyGp.visibility = View.VISIBLE
@@ -114,8 +117,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
             map.isMyLocationEnabled
             val marker = surgery.long?.let { surgery.lat?.let { it1 -> LatLng(it1, it) } }
             val cameraPosition = CameraPosition.Builder().target(marker).zoom(16.0f).build()
-            map.addMarker(marker?.let { MarkerOptions().position(it).title(surgery.practice_name?.let { capitalize(it) })
-            }).setIcon(smallMarkerIcon)
+            map.addMarker(marker?.let { MarkerOptions().position(it).title(surgery.practice_name?.let { capitalize(it) }) }).setIcon(smallMarkerIcon)
             val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
             map.moveCamera(cameraUpdate)
 
@@ -123,7 +125,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
             map.setOnMarkerClickListener { false }
         }
 
-        tvAddress.text = surgery.address?.let { capitalize(it) }
+        tvAddress.text = surgery.address?.let { capitalize(it+","+surgery.city) }
         tvName.text = surgery.practice_name?.let { capitalize(it) }
 
         RxView.clicks(btnCallGPService).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -148,7 +150,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
     }
 
     override fun onResume() {
-        presenter.getGpService()
         super.onResume()
+        presenter.getGpService()
     }
 }
