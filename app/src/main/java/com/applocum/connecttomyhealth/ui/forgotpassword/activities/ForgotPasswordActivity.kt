@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.forgotpassword.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,8 +14,10 @@ import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
 import com.applocum.connecttomyhealth.ui.forgotpassword.presenters.ForgotPasswordPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 import kotlinx.android.synthetic.main.custom_progress.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class ForgotPasswordActivity : BaseActivity(),ForgotPasswordPresenter.View, TextWatcher {
@@ -23,17 +26,22 @@ class ForgotPasswordActivity : BaseActivity(),ForgotPasswordPresenter.View, Text
 
     override fun getLayoutResourceId(): Int = R.layout.activity_forgot_password
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
 
-        ivBack.setOnClickListener { finish() }
+        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe { finish() }
+
         etEmailNumber.addTextChangedListener(this)
-        btnSend.setOnClickListener {
-            presenter.forgotPassword(etEmailNumber.text.toString())
-        }
-    }
+
+        RxView.clicks(btnSend).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                presenter.forgotPassword(etEmailNumber.text.toString())
+            }
+      }
 
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llForgotPassword, message, Snackbar.LENGTH_LONG)

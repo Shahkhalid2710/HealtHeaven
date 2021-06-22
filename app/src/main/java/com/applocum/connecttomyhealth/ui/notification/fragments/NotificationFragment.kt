@@ -12,7 +12,7 @@ import com.applocum.connecttomyhealth.ui.notification.models.Notification
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 
 class NotificationFragment : Fragment() {
-    var mListNotification:ArrayList<Notification> = ArrayList()
+    private var mListNotification:ArrayList<Notification> = ArrayList()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_notification, container, false)
 

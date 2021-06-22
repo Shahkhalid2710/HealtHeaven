@@ -49,7 +49,7 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
                 doctorClick.onDoctorClick(specialist, position)
             }
 
-        setAnimation(holder.itemView,position)
+       // setAnimation(holder.itemView,position)
     }
 
 

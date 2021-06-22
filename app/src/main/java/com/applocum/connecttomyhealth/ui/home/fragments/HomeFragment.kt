@@ -67,8 +67,14 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
 
     override fun onResume() {
         super.onResume()
+        v.shimmerLayout.startShimmer()
         specilistPresenter.getDoctorlist()
         profileDetailsPresenter.showProfile()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        v.shimmerLayout.stopShimmer()
     }
 
     override fun displaymessage(message: String) {}
@@ -96,7 +102,8 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
      }
 
     override fun viewProgress(isShow: Boolean) {
-        v.progressTopDoctors.visibility = if (isShow) View.VISIBLE else View.GONE
+      //  v.progressTopDoctors.visibility = if (isShow) View.VISIBLE else View.GONE
+          v.shimmerLayout.visibility=if (isShow) { View.VISIBLE }else View.GONE
     }
 
     override fun showProfile(patient: Patient) {

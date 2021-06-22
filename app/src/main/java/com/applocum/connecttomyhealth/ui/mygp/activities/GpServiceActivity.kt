@@ -117,7 +117,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
             map.isMyLocationEnabled
             val marker = surgery.long?.let { surgery.lat?.let { it1 -> LatLng(it1, it) } }
             val cameraPosition = CameraPosition.Builder().target(marker).zoom(16.0f).build()
-            map.addMarker(marker?.let { MarkerOptions().position(it).title(surgery.practice_name?.let { capitalize(it) }) }).setIcon(smallMarkerIcon)
+            map.addMarker(marker.let { it -> it?.let { it1 -> MarkerOptions().position(it1).title(surgery.practice_name?.let { capitalize(it) }) } }).setIcon(smallMarkerIcon)
             val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
             map.moveCamera(cameraUpdate)
 
@@ -137,7 +137,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
                     startActivity(Intent(Intent.ACTION_CALL, Uri.fromParts("tel", surgery.phone, null)))
                 }
             }
-    }
+       }
 
     private fun capitalize(capString: String): String? {
         val capBuffer = StringBuffer()

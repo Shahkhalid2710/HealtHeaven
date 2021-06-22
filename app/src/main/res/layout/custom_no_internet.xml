@@ -44,7 +44,6 @@
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/montserrat_medium"
-            android:foreground="@drawable/effect"
             android:gravity="center"
             android:text="@string/retry"
             android:textColor="@color/green"

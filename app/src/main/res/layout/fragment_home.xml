@@ -77,9 +77,9 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="top|end"
-                    android:visibility="gone"
                     android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_warning" />
+                    android:src="@drawable/ic_warning"
+                    android:visibility="gone" />
             </FrameLayout>
         </RelativeLayout>
 
@@ -149,6 +149,33 @@
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_16" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:shimmer_repeat_mode="restart"
+            app:shimmer_shape="radial">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
+                android:orientation="vertical">
+
+                <include layout="@layout/custom_doctor_shimmer_effect" />
+
+                <include layout="@layout/custom_doctor_shimmer_effect" />
+
+                <include layout="@layout/custom_doctor_shimmer_effect" />
+
+                <include layout="@layout/custom_doctor_shimmer_effect" />
+
+                <include layout="@layout/custom_doctor_shimmer_effect" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,11 +186,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:layout_marginTop="@dimen/spacing_16"
                 android:layout_marginEnd="14dp"
                 android:nestedScrollingEnabled="false" />
 
-            <ProgressBar
+            <!--<ProgressBar
                 android:id="@+id/progressTopDoctors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,7 +199,7 @@
                 android:focusableInTouchMode="true"
                 android:indeterminateTint="@color/green"
                 android:progressTint="@color/green"
-                android:visibility="gone" />
+                android:visibility="gone" />-->
         </FrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

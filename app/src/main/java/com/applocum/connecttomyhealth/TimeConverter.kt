@@ -88,7 +88,7 @@ fun capitalize(capString: String): String? {
 fun Snackbar.changeFont()
 {
     val tv = view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
-    val font = Typeface.createFromAsset(context.assets, "fonts/montserrat_medium.ttf")
+    val font = Typeface.createFromAsset(context.assets, "fonts/montserrat_regular.ttf")
     tv.typeface = font
 }
 
