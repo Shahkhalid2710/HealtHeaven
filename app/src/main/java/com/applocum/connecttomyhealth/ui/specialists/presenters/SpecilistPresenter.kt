@@ -9,6 +9,7 @@ import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 
@@ -30,6 +31,7 @@ class SpecilistPresenter @Inject constructor(private val api: AppEndPoint) {
             .subscribeBy(onNext = {
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.viewProgress(false)
                         view.getdoctorlist(it.data)
                     }
@@ -40,6 +42,12 @@ class SpecilistPresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.add(it) }
     }
 
@@ -47,5 +55,6 @@ class SpecilistPresenter @Inject constructor(private val api: AppEndPoint) {
         fun displaymessage(message: String)
         fun getdoctorlist(list: ArrayList<Specialist>)
         fun viewProgress(isShow: Boolean)
+        fun noInternet(isConnect:Boolean)
     }
 }

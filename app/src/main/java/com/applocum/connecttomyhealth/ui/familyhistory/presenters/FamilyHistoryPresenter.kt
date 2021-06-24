@@ -11,6 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -49,6 +50,12 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
                 }, onError = {
                     view.viewFamilyHistoryProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternet(false)
+                    }
+
                 }).let { disposables.addAll(it) }
         }
     }
@@ -70,6 +77,12 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewFamilyHistoryProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.add(it) }
     }
 
@@ -86,5 +99,6 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
         fun displaySuccessMessage(message: String)
         fun viewFamilyHistoryProgress(isShow: Boolean)
         fun familyHistoryList(list: ArrayList<FamilyHistory>)
+        fun noInternet(isConnect:Boolean)
     }
 }

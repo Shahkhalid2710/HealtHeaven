@@ -12,6 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -40,6 +41,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.getDiseaseList(it.data)
                     }
                     InvalidCredentials, InternalServer -> {
@@ -49,6 +51,12 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -87,6 +95,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewMedicalProgress(false)
                     when (it.status) {
                         Success -> {
+                            view.noInternet(true)
                             val medicalObject =
                                 Gson().fromJson(it.data, MedicalHistoryResponse::class.java)
                             val medicalHistory = medicalObject.medical_history
@@ -100,6 +109,12 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                 }, onError = {
                     view.viewMedicalProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternet(false)
+                    }
+
                 }).let { disposables.addAll(it) }
         }
     }
@@ -116,6 +131,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         val medicalHistoryTrueFalseResponse =
                             Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
                         view.showActiveMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.trueMedicalHistory)
@@ -127,6 +143,12 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.add(it) }
     }
 
@@ -141,6 +163,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         val medicalHistoryTrueFalseResponse = Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
                         view.showPastMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.falseMedicalHistory)
                     }
@@ -151,6 +174,12 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.add(it) }
     }
 
@@ -197,5 +226,6 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
         fun sendMedicalHistoryData(medicalHistory: MedicalHistory)
         fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>)
         fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>)
+        fun noInternet(isConnect:Boolean)
     }
 }

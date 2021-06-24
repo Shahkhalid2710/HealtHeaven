@@ -42,6 +42,10 @@ class AddSymptomActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_symptom
 
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
@@ -33,6 +34,11 @@ class BookSessionActivity : BaseActivity() {
     lateinit var userHolder: UserHolder
 
     override fun getLayoutResourceId(): Int = R.layout.activity_book_session
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+        if (!isConnect!!) {
+            Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,11 +76,11 @@ class BookSessionActivity : BaseActivity() {
                 val intent = Intent(this, AddSymptomActivity::class.java)
                 intent.putExtra("specialist", specialist)
                 val appointment = userHolder.getBookAppointmentData()
-                appointment.therapistId = specialist.id!!
+                appointment.therapistId = specialist.id
                 appointment.therapistImage = specialist.image
                 appointment.threapistBio = specialist.bio
                 appointment.therapistName = "${specialist.first_name} ${specialist.last_name}"
-                specialist.usual_address?.apply {
+                specialist.usual_address.apply {
                     appointment.therapistAddress = "$line1, $line2,$line3, $town, $pincode"
                 }
                 userHolder.saveBookAppointmentData(appointment)

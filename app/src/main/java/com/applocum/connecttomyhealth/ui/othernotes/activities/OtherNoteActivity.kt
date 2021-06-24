@@ -26,6 +26,9 @@ class OtherNoteActivity : BaseActivity(), DocumentPresenter.View {
     lateinit var presenter: DocumentPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_other_note
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

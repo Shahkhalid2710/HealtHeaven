@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.medicalhistory.activities.AddMedicalHistoryActivity
 import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.PastMedicalHistoryAdapter
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.FalseMedicalHistory
@@ -17,11 +19,14 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.custom_loader_progress.view.*
 import kotlinx.android.synthetic.main.custom_medical_history.view.*
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.fragment_past_medical_history.*
 import kotlinx.android.synthetic.main.fragment_past_medical_history.view.*
+import kotlinx.android.synthetic.main.fragment_past_medical_history.view.noInternet
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -44,6 +49,11 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
                 requireActivity().overridePendingTransition(0,0)
             }
 
+        RxView.clicks(v.noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                v.noInternet.visibility=View.GONE
+                presenter.pastMedicalHistory()
+            }
         return v
     }
 
@@ -73,6 +83,24 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
         }
         rvPastMedicalHistory.layoutManager = LinearLayoutManager(requireActivity())
         rvPastMedicalHistory.adapter = PastMedicalHistoryAdapter(requireActivity(), falseMedicalHistory)
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect){
+            v.rvPastMedicalHistory.visibility=View.GONE
+            v.noInternet.visibility=View.VISIBLE
+            v.layoutNotfoundPastMedicalHistory.visibility=View.GONE
+
+            val snackBar = Snackbar.make(llPastMedicalHistory,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+            snackBar.show()
+        }else {
+            v.rvPastMedicalHistory.visibility=View.VISIBLE
+            v.noInternet.visibility=View.GONE
+            v.layoutNotfoundPastMedicalHistory.visibility=View.VISIBLE
+        }
     }
 
     override fun onResume() {

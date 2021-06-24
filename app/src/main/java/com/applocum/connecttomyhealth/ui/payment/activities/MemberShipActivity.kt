@@ -29,6 +29,9 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
     lateinit var membershipPresenter: MembershipPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_member_ship
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

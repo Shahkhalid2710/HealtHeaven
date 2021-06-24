@@ -11,6 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -40,6 +41,7 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewInvestigationProgress(false)
                     when (it.status) {
                         Success -> {
+                            view.noInternet(true)
                             view.displaySuccessMessage(it.message)
                         }
                         InvalidCredentials, InternalServer -> {
@@ -50,6 +52,12 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
                 }, onError = {
                     view.viewInvestigationProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternet(false)
+                    }
+
                 }).let { disposables.addAll(it) }
         }
     }
@@ -61,6 +69,7 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
             .subscribeBy(onNext = {
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.viewInvestigationProgress(false)
                         view.investigationList(it.data)
                     }
@@ -71,6 +80,12 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewInvestigationProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.add(it) }
 
     }
@@ -96,5 +111,6 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
         fun displayMessage(message: String)
         fun viewInvestigationProgress(isShow: Boolean)
         fun investigationList(list: ArrayList<Investigation>)
+        fun noInternet(isConnect:Boolean)
     }
 }

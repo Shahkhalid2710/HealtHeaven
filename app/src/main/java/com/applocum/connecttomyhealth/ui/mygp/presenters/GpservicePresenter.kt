@@ -14,6 +14,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
@@ -34,6 +35,7 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
             .subscribeBy(onNext = {
                 when (it.status) {
                     Success -> {
+                        view.noInternetConnection(true)
                         view.viewProgress(false)
                         view.getGpList(it.data)
                     }
@@ -44,6 +46,12 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternetConnection(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -60,6 +68,7 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternetConnection(true)
                         view.displayMessage(it.message)
                     }
                     InvalidCredentials, InternalServer -> {
@@ -70,6 +79,11 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewFullProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternetConnection(false)
+                }
             }).let { disposables.addAll(it) }
     }
 
@@ -81,6 +95,7 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternetConnection(true)
                         val surgeryObject = Gson().fromJson(it.data,SurgeryResponse::class.java)
                         val surgery = surgeryObject.surgery
                         surgery?.let { it1 -> view.showSurgery(it1) }?: kotlin.run{view.emptySurgery()}
@@ -92,6 +107,12 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewFullProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternetConnection(false)
+                }
+
             }).let { disposables.add(it) }
     }
 
@@ -102,5 +123,6 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
         fun viewFullProgress(isShow: Boolean)
         fun showSurgery(surgery: Surgery)
         fun emptySurgery()
+        fun noInternetConnection(isConnect:Boolean)
     }
 }

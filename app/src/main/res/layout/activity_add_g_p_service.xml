@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
+        android:id="@+id/llAddGp"
         tools:context=".ui.mygp.activities.AddGPServiceActivity">
 
         <RelativeLayout
@@ -123,6 +124,11 @@
                     <include
                         android:id="@+id/NoGpService"
                         layout="@layout/custom_no_gp_service_area"
+                        android:visibility="gone" />
+
+                    <include
+                        android:id="@+id/noInternet"
+                        layout="@layout/custom_no_internet"
                         android:visibility="gone" />
 
                     <include layout="@layout/custom_small_progress" />

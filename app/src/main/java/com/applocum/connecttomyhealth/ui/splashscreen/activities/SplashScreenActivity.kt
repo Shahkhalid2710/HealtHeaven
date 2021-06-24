@@ -15,6 +15,9 @@ import javax.inject.Inject
 class SplashScreenActivity : BaseActivity() {
 
     override fun getLayoutResourceId():Int = R.layout.activity_splash_screen
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @Inject
     lateinit var userHolder: UserHolder

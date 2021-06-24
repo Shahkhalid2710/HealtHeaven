@@ -24,6 +24,9 @@ class AddCodeActivity : BaseActivity(),MembershipPresenter.View {
     lateinit var membershipPresenter: MembershipPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_code
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

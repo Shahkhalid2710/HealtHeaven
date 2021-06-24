@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import com.applocum.connecttomyhealth.ui.mygp.models.Surgery
@@ -20,10 +21,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_gp_service.*
 import kotlinx.android.synthetic.main.activity_gp_service.ivBack
 import kotlinx.android.synthetic.main.custom_mygp_xml.*
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -41,6 +44,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
     private lateinit var supportMapFragment: SupportMapFragment
 
     override fun getLayoutResourceId(): Int = R.layout.activity_gp_service
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +63,11 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
                 startActivity(Intent(this, AddGPServiceActivity::class.java))
                 this.finish()
                 overridePendingTransition(0,0)
+            }
+
+        RxView.clicks(noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                presenter.getGpService()
             }
 
         RxView.clicks(btnAddGpService).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -89,6 +98,24 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
     override fun emptySurgery() {
         rlGpService.visibility = View.GONE
         llMyGp.visibility = View.VISIBLE
+    }
+
+    override fun noInternetConnection(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            rlSurgery.visibility=View.GONE
+            noInternet.visibility=View.VISIBLE
+            val snackBar = Snackbar.make(flGpService, R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
+        }
+        else
+        {
+            rlSurgery.visibility=View.VISIBLE
+            noInternet.visibility=View.GONE
+        }
     }
 
     @SuppressLint("CheckResult")

@@ -11,6 +11,9 @@ import java.util.concurrent.TimeUnit
 class UploadCertificateActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int= R.layout.activity_upload_certificate
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

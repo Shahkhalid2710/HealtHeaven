@@ -14,6 +14,9 @@ import java.util.concurrent.TimeUnit
 class HelpActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int= R.layout.activity_help
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

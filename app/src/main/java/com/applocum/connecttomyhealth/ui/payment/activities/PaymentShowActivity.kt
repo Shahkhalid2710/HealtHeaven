@@ -51,6 +51,15 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
 
     override fun getLayoutResourceId(): Int = R.layout.activity_payment_show
 
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+        if (!isConnect!!) {
+            val snackbar = Snackbar.make(llPaymentShow,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()        }
+    }
+
     @SuppressLint("CheckResult", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,6 +109,7 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
 
         RxView.clicks(btnConfirmSessionBooking).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
+
                 when (selectCard) {
                     0 -> {
                         val snackbar = Snackbar.make(llPaymentShow, "Please select at least one method ", Snackbar.LENGTH_LONG)
@@ -135,7 +145,6 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
                     }
                 }
             }
-
 
         RxView.clicks(tvAddNewCode).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -178,6 +187,17 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
 
     override fun viewFullProgress(isShow: Boolean) {
         bookingProgress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            val snackbar = Snackbar.make(flPayment, R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
+        }
     }
 
     override fun showcard(list: ArrayList<Card>) {

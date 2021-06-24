@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
+        android:id="@+id/llActiveMedicalHistory"
         tools:context=".ui.medicalhistory.fragments.ActiveMedicalHistoryFragment">
 
         <RelativeLayout
@@ -37,6 +38,10 @@
                 android:id="@+id/layoutNotfoundActiveMedicalHistory"
                 layout="@layout/custom_medical_history"
                 android:visibility="gone" />
+
+            <include
+                android:id="@+id/noInternet"
+                layout="@layout/custom_no_internet" />
         </RelativeLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

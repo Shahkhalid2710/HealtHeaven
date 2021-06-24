@@ -13,6 +13,9 @@ class SessionDetailsActivity : BaseActivity() {
     lateinit var bookAppointmentResponse: BookAppointmentResponse
 
     override fun getLayoutResourceId(): Int = R.layout.activity_session_details
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

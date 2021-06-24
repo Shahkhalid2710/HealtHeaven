@@ -25,6 +25,9 @@ class ForgotPasswordActivity : BaseActivity(),ForgotPasswordPresenter.View, Text
     lateinit var presenter: ForgotPasswordPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_forgot_password
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

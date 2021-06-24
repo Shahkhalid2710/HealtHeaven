@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.BookAppointment
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.booksession.activities.BookSessionActivity
@@ -22,9 +25,12 @@ import com.applocum.connecttomyhealth.ui.specialists.activities.SpecialistsActiv
 import com.applocum.connecttomyhealth.ui.specialists.presenters.SpecilistPresenter
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_home.view.noInternet
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -62,19 +68,20 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
                requireActivity().overridePendingTransition(0,0)
             }
 
+        RxView.clicks(v.noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                v.noInternet.visibility=View.GONE
+                specilistPresenter.getDoctorlist()
+                profileDetailsPresenter.showProfile()
+            }
+
         return v
     }
 
     override fun onResume() {
         super.onResume()
-        v.shimmerLayout.startShimmer()
         specilistPresenter.getDoctorlist()
         profileDetailsPresenter.showProfile()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        v.shimmerLayout.stopShimmer()
     }
 
     override fun displaymessage(message: String) {}
@@ -102,8 +109,25 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
      }
 
     override fun viewProgress(isShow: Boolean) {
-      //  v.progressTopDoctors.visibility = if (isShow) View.VISIBLE else View.GONE
-          v.shimmerLayout.visibility=if (isShow) { View.VISIBLE }else View.GONE
+        v.progressTopDoctors.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            v.rvTopDoctors.visibility=View.GONE
+            v.noInternet.visibility=View.VISIBLE
+
+            val snackBar = Snackbar.make(llHome,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+            snackBar.show()
+        }
+        else{
+            v.noInternet.visibility=View.GONE
+            v.rvTopDoctors.visibility=View.VISIBLE
+        }
     }
 
     override fun showProfile(patient: Patient) {
@@ -135,4 +159,21 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
 
     override fun viewprogress(isShow: Boolean) {}
 
+    override fun noInternetConnection(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            v.rvTopDoctors.visibility=View.GONE
+            v.noInternet.visibility=View.VISIBLE
+
+            val snackBar = Snackbar.make(llHome,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+            snackBar.show()
+        }
+        else{
+            v.noInternet.visibility=View.GONE
+            v.rvTopDoctors.visibility=View.VISIBLE
+        }
+    }
 }

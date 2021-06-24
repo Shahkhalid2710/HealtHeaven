@@ -18,6 +18,9 @@ class WalkThroughActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     var position = 0
 
     override fun getLayoutResourceId(): Int = R.layout.activity_walk_through
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

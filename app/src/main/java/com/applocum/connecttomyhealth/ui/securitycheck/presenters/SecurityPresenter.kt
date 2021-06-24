@@ -12,6 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class SecurityPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -39,6 +40,7 @@ class SecurityPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
+                            view.noInternet(true)
                             val security = Gson().fromJson(it.data, Security::class.java)
                             userHolder.saveClinicalToken(security.token)
                             view.security(security)
@@ -50,6 +52,12 @@ class SecurityPresenter @Inject constructor(private val api: AppEndPoint) {
                 }, onError = {
                     view.viewProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternet(false)
+                    }
+
                 }).let { disposables.addAll(it) }
         }
     }
@@ -66,5 +74,6 @@ class SecurityPresenter @Inject constructor(private val api: AppEndPoint) {
         fun security(security: Security)
         fun displayMessage(message: String)
         fun viewProgress(isShow: Boolean)
+        fun noInternet(isConnect:Boolean)
     }
 }

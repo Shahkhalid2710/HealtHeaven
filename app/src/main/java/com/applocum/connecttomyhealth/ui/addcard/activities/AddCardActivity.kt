@@ -32,6 +32,10 @@ class AddCardActivity : BaseActivity(), AddCardPresenter.View {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_card
 
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

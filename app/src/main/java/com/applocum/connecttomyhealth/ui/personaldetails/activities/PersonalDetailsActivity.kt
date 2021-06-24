@@ -26,6 +26,8 @@ class PersonalDetailsActivity : BaseActivity(),ProfileProgressPresenter.View {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_personal_details
 
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
+
     @Inject
     lateinit var profileProgressPresenter: ProfileProgressPresenter
 
@@ -106,6 +108,16 @@ class PersonalDetailsActivity : BaseActivity(),ProfileProgressPresenter.View {
         } else
         {
             ivProfileDetailsWarning.visibility=View.VISIBLE
+        }
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect) {
+            val snackbar = Snackbar.make(llPersonalDetails,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
         }
     }
 

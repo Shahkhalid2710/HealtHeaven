@@ -27,6 +27,10 @@ class BottomNavigationViewActivity : BaseActivity(), BottomNavigationView.OnNavi
 
     override fun getLayoutResourceId(): Int = R.layout.activity_bottomnavigationview
 
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

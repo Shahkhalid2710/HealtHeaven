@@ -36,6 +36,11 @@
                         android:layout_marginTop="@dimen/spacing_16"
                         android:layout_marginEnd="@dimen/spacing_24"
                         android:nestedScrollingEnabled="false" />
+
+                    <include
+                        android:id="@+id/noInternet"
+                        layout="@layout/custom_no_internet"
+                        android:visibility="gone" />
                 </FrameLayout>
 
                 <include
@@ -50,5 +55,5 @@
 
     <include
         android:id="@+id/upcomingProgress"
-        layout="@layout/custom_progress"/>
+        layout="@layout/custom_progress" />
 </FrameLayout>

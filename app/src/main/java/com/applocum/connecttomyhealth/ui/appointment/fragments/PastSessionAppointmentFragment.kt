@@ -1,11 +1,13 @@
 package com.applocum.connecttomyhealth.ui.appointment.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -17,8 +19,13 @@ import com.applocum.connecttomyhealth.ui.appointment.adapters.PastSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.applocum.connecttomyhealth.ui.sessiondetails.activities.SessionDetailsActivity
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.custom_loader_progress.view.*
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.fragment_past_session_appointment.*
+import kotlinx.android.synthetic.main.fragment_past_session_appointment.view.*
+import kotlinx.android.synthetic.main.fragment_past_session_appointment.view.noInternet
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View {
@@ -31,6 +38,7 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
 
     lateinit var v: View
 
+    @SuppressLint("CheckResult")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +47,12 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
 
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
+
+        RxView.clicks(v.noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                v.noInternet.visibility=View.GONE
+                presenter.showPastSession()
+            }
 
         return v
     }
@@ -83,6 +97,26 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
     }
 
     override fun viewFullProgress(isShow: Boolean) {}
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            v.rvPastSession.visibility=View.GONE
+            v.noInternet.visibility=View.VISIBLE
+            v.layoutNotFoundPastSession.visibility=View.GONE
+
+            val snackBar = Snackbar.make(llPastSession,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+            snackBar.show()
+        }
+        else{
+            v.noInternet.visibility=View.GONE
+            v.rvPastSession.visibility=View.VISIBLE
+            v.layoutNotFoundPastSession.visibility=View.VISIBLE
+        }
+    }
 
     override fun onResume() {
         super.onResume()

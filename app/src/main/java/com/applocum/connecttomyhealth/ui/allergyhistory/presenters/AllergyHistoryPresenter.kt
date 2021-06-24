@@ -14,6 +14,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
@@ -58,6 +59,7 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
                     {
                         Success->
                         {
+                            view.noInternetConnection(true)
                             view.displaySuccessMessage(it.message)
                         }
                         InvalidCredentials,InternalServer -> {
@@ -68,10 +70,15 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
                 },onError = {
                     view.viewAllergyProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternetConnection(false)
+                    }
+
                 }).let { disposables.addAll(it) }
         }
     }
-
 
     fun activeAllergy()
     {
@@ -83,6 +90,7 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
             .subscribeBy(onNext = {
                 when (it.status) {
                     Success -> {
+                        view.noInternetConnection(true)
                         view.viewProgress(false)
                         val allergyResponse = Gson().fromJson(it.data,AllergyResponse::class.java)
                         view.showActiveAllergy(allergyResponse.trueAllergy)
@@ -94,6 +102,12 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternetConnection(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -107,6 +121,7 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
             .subscribeBy(onNext = {
                 when (it.status) {
                     Success -> {
+                        view.noInternetConnection(true)
                         view.viewProgress(false)
                         val allergyResponse = Gson().fromJson(it.data,AllergyResponse::class.java)
                         view.showPastAllergy(allergyResponse.falseAllergy)
@@ -118,6 +133,12 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternetConnection(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -139,5 +160,6 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
      fun showPastAllergy(pastAllergy:ArrayList<FalseAllergy>)
      fun viewProgress(isShow: Boolean)
      fun viewAllergyProgress(isShow: Boolean)
- }
+     fun noInternetConnection(isConnect:Boolean)
+  }
 }

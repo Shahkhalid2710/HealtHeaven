@@ -13,6 +13,9 @@ import java.util.concurrent.TimeUnit
 class PaymentActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_payment
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

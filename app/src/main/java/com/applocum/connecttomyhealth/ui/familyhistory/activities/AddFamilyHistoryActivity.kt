@@ -43,6 +43,8 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_family_history
 
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,6 +124,17 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
     override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {}
 
     override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {}
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            val snackbar = Snackbar.make(lladdfamilyhistory,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
+        }
+    }
 
     override fun displayErrorMessage(message: String) {
         val snackbar = Snackbar.make(lladdfamilyhistory, message, Snackbar.LENGTH_LONG)

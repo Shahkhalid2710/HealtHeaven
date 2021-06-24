@@ -16,6 +16,10 @@ import java.util.concurrent.TimeUnit
 class CreateNewPasswordActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_create_new_password
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

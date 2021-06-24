@@ -21,7 +21,7 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_validation_valid_passport.*
 import kotlinx.android.synthetic.main.custom_profile_dialog.view.*
-import kotlinx.android.synthetic.main.custom_progress.*
+import kotlinx.android.synthetic.main.custom_progress.progress
 import java.io.File
 import java.net.URI
 import java.util.concurrent.TimeUnit
@@ -36,6 +36,7 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
     private lateinit var fileOfPic:File
 
     override fun getLayoutResourceId(): Int =R.layout.activity_validation_valid_passport
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -120,6 +121,17 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
     }
 
     override fun viewFullProgress(isShow: Boolean) {}
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            val snackbar = Snackbar.make(llValidPassport, R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
+        }
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {

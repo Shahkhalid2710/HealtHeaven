@@ -6,14 +6,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.mygp.adapters.GpServiceAdapter
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import com.applocum.connecttomyhealth.ui.mygp.models.Surgery
 import com.applocum.connecttomyhealth.ui.mygp.presenters.GpservicePresenter
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,6 +24,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_g_p_service.*
 import kotlinx.android.synthetic.main.activity_add_g_p_service.ivBack
 import kotlinx.android.synthetic.main.custom_gp_service_dialog.view.*
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import kotlinx.android.synthetic.main.custom_small_progress.*
 import java.util.*
@@ -40,19 +44,26 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_g_p_service
 
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
-        presenter.getgpList("")
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, GpServiceActivity::class.java))
                 finish()
                 overridePendingTransition(0,0)
+            }
+
+        RxView.clicks(noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                noInternet.visibility=View.GONE
+                presenter.getgpList("")
             }
 
         RxTextView.textChanges(etGpSearch)
@@ -123,6 +134,28 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View {
     override fun showSurgery(surgery: Surgery) {}
 
     override fun emptySurgery() {}
+
+    override fun noInternetConnection(isConnect: Boolean) {
+         if (!isConnect)
+         {
+             rvAddGp.visibility=View.GONE
+             noInternet.visibility=View.VISIBLE
+
+             val snackBar = Snackbar.make(llAddGp, R.string.no_internet, Snackbar.LENGTH_LONG)
+             snackBar.changeFont()
+             val snackView = snackBar.view
+             snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+             snackBar.show()
+         } else {
+             rvAddGp.visibility=View.VISIBLE
+             noInternet.visibility=View.GONE
+         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.getgpList("")
+    }
 
     private fun capitalize(capString: String): String? {
         val capBuffer = StringBuffer()

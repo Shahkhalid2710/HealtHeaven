@@ -10,6 +10,7 @@ import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class ProfileProgressPresenter@Inject constructor(private val api:AppEndPoint) {
@@ -35,9 +36,9 @@ class ProfileProgressPresenter@Inject constructor(private val api:AppEndPoint) {
                 {
                     Success->
                     {
+                        view.noInternet(true)
                         val progressObject=Gson().fromJson(it.data,ProfileProgressResponse::class.java)
                         view.profileProgressDetail(progressObject)
-
                     }
                     InvalidCredentials,InternalServer -> {
                         view.displayProgressErrorMessage(it.message)
@@ -46,6 +47,12 @@ class ProfileProgressPresenter@Inject constructor(private val api:AppEndPoint) {
             },onError = {
                 view.viewProfileProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -53,5 +60,6 @@ class ProfileProgressPresenter@Inject constructor(private val api:AppEndPoint) {
         fun displayProgressErrorMessage(message:String)
         fun viewProfileProgress(isShow:Boolean)
         fun profileProgressDetail(progressResponse: ProfileProgressResponse)
+        fun noInternet(isConnect:Boolean)
     }
 }

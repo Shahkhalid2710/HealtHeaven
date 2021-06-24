@@ -37,6 +37,9 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
     var mList:ArrayList<Card> = ArrayList()
 
     override fun getLayoutResourceId(): Int = R.layout.activity_payment_method
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

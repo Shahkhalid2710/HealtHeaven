@@ -27,6 +27,9 @@ class ReferralActivity : BaseActivity(),
     lateinit var presenter: DocumentPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_referral
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

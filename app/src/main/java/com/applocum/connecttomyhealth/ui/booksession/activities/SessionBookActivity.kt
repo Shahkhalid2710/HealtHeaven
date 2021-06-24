@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -60,6 +61,11 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     lateinit var userHolder: UserHolder
 
     override fun getLayoutResourceId(): Int = R.layout.activity_session_book
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+        if (!isConnect!!) {
+            Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

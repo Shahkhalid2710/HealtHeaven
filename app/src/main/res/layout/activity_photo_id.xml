@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/llDocuments"
         android:orientation="vertical">
 
         <FrameLayout
@@ -65,8 +67,8 @@
                         android:background="@drawable/ripple_effect_button"
                         android:clickable="true"
                         android:focusable="true"
-                        android:visibility="gone"
                         android:padding="@dimen/spacing_24"
+                        android:visibility="gone"
                         tools:ignore="RelativeOverlap">
 
                         <TextView
@@ -83,111 +85,129 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_30">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvPhotoId"
-                        android:layout_width="match_parent"
-                        android:layout_height="400dp"
-                        android:nestedScrollingEnabled="true"
-                        android:scrollbarSize="2dp"
-                        android:scrollbarThumbVertical="@drawable/scrollbar"
-                        android:scrollbars="vertical" />
-
-                    <include
-                        android:id="@+id/NoPhotoId"
-                        layout="@layout/custom_no_photo_id"
-                        android:visibility="gone" />
-
-                </FrameLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_20"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:gravity="bottom"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="@string/your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_photo_id"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/font_12" />
+                    android:layout_height="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/llPhotoId"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
-                        <RelativeLayout
+                        <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_15"
-                            tools:ignore="UselessParent">
+                            android:layout_marginTop="@dimen/spacing_30">
 
-                            <LinearLayout
-                                android:layout_width="5dp"
-                                android:layout_height="5dp"
-                                android:layout_centerVertical="true"
-                                android:background="@drawable/custom_dot" />
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvPhotoId"
+                                android:layout_width="match_parent"
+                                android:layout_height="400dp"
+                                android:nestedScrollingEnabled="true"
+                                android:scrollbarSize="2dp"
+                                android:scrollbarThumbVertical="@drawable/scrollbar"
+                                android:scrollbars="vertical" />
+
+                            <include
+                                android:id="@+id/NoPhotoId"
+                                layout="@layout/custom_no_photo_id"
+                                android:visibility="gone" />
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginStart="@dimen/spacing_24"
+                            android:layout_marginTop="@dimen/spacing_20"
+                            android:layout_marginEnd="@dimen/spacing_24"
+                            android:gravity="bottom"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/spacing_15"
                                 android:fontFamily="@font/montserrat_medium"
-                                android:text="@string/valid_passport"
+                                android:text="@string/your_safety_is_our_priority_to_prevent_misuse_of_your_details_upload_a_valid_form_of_photo_id"
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/font_12" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_15"
-                            tools:ignore="UselessParent">
 
                             <LinearLayout
-                                android:layout_width="5dp"
-                                android:layout_height="5dp"
-                                android:layout_centerVertical="true"
-                                android:background="@drawable/custom_dot" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="@dimen/spacing_15"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="@string/uk_driving_license"
-                                android:textColor="@color/grey"
-                                android:textSize="@dimen/font_12" />
-                        </RelativeLayout>
+                                android:orientation="vertical">
 
-                        <Button
-                            android:id="@+id/btnUploadPhotoId"
-                            android:layout_width="189dp"
-                            android:layout_height="36dp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/spacing_40"
-                            android:layout_marginBottom="@dimen/spacing_20"
-                            android:background="@drawable/custom_btn"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:foreground="@drawable/effect_button"
-                            android:text="@string/upload_photo_id"
-                            android:textAllCaps="false"
-                            android:visibility="gone"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font_12" />
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_15"
+                                    tools:ignore="UselessParent">
+
+                                    <LinearLayout
+                                        android:layout_width="5dp"
+                                        android:layout_height="5dp"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/custom_dot"
+                                        tools:ignore="TooDeepLayout" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/spacing_15"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/valid_passport"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/font_12" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_15"
+                                    tools:ignore="UselessParent">
+
+                                    <LinearLayout
+                                        android:layout_width="5dp"
+                                        android:layout_height="5dp"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/custom_dot" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="@dimen/spacing_15"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="@string/uk_driving_license"
+                                        android:textColor="@color/grey"
+                                        android:textSize="@dimen/font_12" />
+                                </RelativeLayout>
+
+                                <Button
+                                    android:id="@+id/btnUploadPhotoId"
+                                    android:layout_width="189dp"
+                                    android:layout_height="36dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/spacing_40"
+                                    android:layout_marginBottom="@dimen/spacing_20"
+                                    android:background="@drawable/custom_btn"
+                                    android:fontFamily="@font/montserrat_semibold"
+                                    android:foreground="@drawable/effect_button"
+                                    android:text="@string/upload_photo_id"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/font_12"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
+
+                    <include
+                        android:id="@+id/noInternet"
+                        layout="@layout/custom_no_internet" />
+                </FrameLayout>
             </LinearLayout>
 
             <include

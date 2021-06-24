@@ -16,6 +16,9 @@ import java.util.concurrent.TimeUnit
 class MedicationActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_medication
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

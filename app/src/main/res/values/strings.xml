@@ -235,6 +235,7 @@
     <string name="order_summary">Order Summary</string>
     <string name="session_cost">Session Cost</string>
     <string name="_35_00">€35.00</string>
+    <string name="no_internet">No network connection</string>
     <string name="booking_cost">Booking Cost</string>
     <string name="_55_00">€55.00</string>
     <string name="tax">Tax (%)</string>

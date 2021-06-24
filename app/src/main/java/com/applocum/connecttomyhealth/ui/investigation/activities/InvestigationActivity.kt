@@ -4,18 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.investigation.adapters.InvestigationAdapter
 import com.applocum.connecttomyhealth.ui.investigation.presenters.InvestigationPresenter
 import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_investigation.*
 import kotlinx.android.synthetic.main.activity_investigation.ivBack
-import kotlinx.android.synthetic.main.custom_investigation_xml.*
+import kotlinx.android.synthetic.main.custom_investigation_xml.btnAddInvestigation
 import kotlinx.android.synthetic.main.custom_loader_progress.*
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -25,6 +29,8 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
     lateinit var investigationPresenter: InvestigationPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_investigation
+
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +51,11 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
             .subscribe {
                 startActivity(Intent(this, AddInvestigationActivity::class.java))
                 overridePendingTransition(0,0)
+            }
+
+        RxView.clicks(noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                investigationPresenter.showInvestigationList()
             }
     }
 
@@ -68,6 +79,25 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
         }
         rvInvestigation.layoutManager = LinearLayoutManager(this)
         rvInvestigation.adapter = InvestigationAdapter(this, list)
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            rvInvestigation.visibility=View.GONE
+            layoutNotFoundInvestigation.visibility=View.GONE
+            noInternet.visibility=View.VISIBLE
+
+            val snackBar = Snackbar.make(llInvestigation,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
+        }else{
+            rvInvestigation.visibility=View.VISIBLE
+            layoutNotFoundInvestigation.visibility=View.VISIBLE
+            noInternet.visibility=View.GONE
+        }
     }
 
     override fun onResume() {

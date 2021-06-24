@@ -17,6 +17,9 @@ class DocumentViewActivity : BaseActivity() {
     lateinit var document: Document
 
     override fun getLayoutResourceId(): Int = R.layout.activity_document_view
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {

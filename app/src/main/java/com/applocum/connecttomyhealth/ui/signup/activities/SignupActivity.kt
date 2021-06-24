@@ -54,6 +54,9 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
     private var myYear: Int = 0
 
     override fun getLayoutResourceId(): Int = R.layout.activity_signup
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

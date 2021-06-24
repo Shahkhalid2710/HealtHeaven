@@ -24,6 +24,9 @@ class ValidPassportActivity : BaseActivity() {
     private var imageUri: Uri? = null
 
     override fun getLayoutResourceId(): Int = R.layout.activity_valid_passport
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

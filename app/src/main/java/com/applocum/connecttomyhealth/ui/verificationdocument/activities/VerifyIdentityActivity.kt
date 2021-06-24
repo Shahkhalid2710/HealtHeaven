@@ -23,6 +23,9 @@ class VerifyIdentityActivity : BaseActivity() {
     private var nameOfDocument=""
 
     override fun getLayoutResourceId(): Int= R.layout.activity_verify_identity
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

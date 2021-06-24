@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.BookAppointment
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
@@ -17,8 +20,10 @@ import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomN
 import com.applocum.connecttomyhealth.ui.specialists.adapters.SpecialistsAdapter
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.applocum.connecttomyhealth.ui.specialists.presenters.SpecilistPresenter
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_specialists.*
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -31,6 +36,10 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
     lateinit var userHolder: UserHolder
 
     override fun getLayoutResourceId(): Int = R.layout.activity_specialists
+
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +63,10 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
                 overridePendingTransition(0,0)
             }
 
+        RxView.clicks(noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                presenter.getDoctorlist()
+            }
 
         val appointment = BookAppointment()
         appointment.corporateId = 66
@@ -97,5 +110,24 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
     }
     override fun viewProgress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            rvDoctors.visibility=View.GONE
+            noInternet.visibility=View.VISIBLE
+
+            val snackBar = Snackbar.make(llSpecialist,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
+        }
+        else{
+            noInternet.visibility=View.GONE
+            rvDoctors.visibility=View.VISIBLE
+        }
+
     }
 }

@@ -36,6 +36,10 @@
                     android:id="@+id/layoutNotfoundPastAllergy"
                     layout="@layout/custom_allergy_xml"
                     android:visibility="gone" />
+
+                <include
+                    android:id="@+id/noInternet"
+                    layout="@layout/custom_no_internet" />
             </FrameLayout>
         </RelativeLayout>
     </LinearLayout>

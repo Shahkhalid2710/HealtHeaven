@@ -16,6 +16,9 @@ import java.util.concurrent.TimeUnit
 class AllergyHistoryActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_allergy_history
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

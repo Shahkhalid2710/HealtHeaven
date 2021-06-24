@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.allergyhistory.activities.AddAllergyActivity
 import com.applocum.connecttomyhealth.ui.allergyhistory.adapters.ActiveAllergyHistoryAdapter
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.FalseAllergy
@@ -20,8 +21,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.custom_allergy_xml.view.*
 import kotlinx.android.synthetic.main.custom_loader_progress.view.progress
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.fragment_active_allergy.*
 import kotlinx.android.synthetic.main.fragment_active_allergy.view.*
+import kotlinx.android.synthetic.main.fragment_active_allergy.view.noInternet
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -40,6 +43,12 @@ class ActiveAllergyFragment : Fragment(),AllergyHistoryPresenter.View {
             .subscribe {
                 startActivity(Intent(requireActivity(),AddAllergyActivity::class.java))
                 requireActivity().overridePendingTransition(0,0)
+            }
+
+        RxView.clicks(v.noInternet.tvRetry).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                v.noInternet.visibility=View.GONE
+                presenter.activeAllergy()
             }
 
         return v
@@ -75,6 +84,24 @@ class ActiveAllergyFragment : Fragment(),AllergyHistoryPresenter.View {
     }
 
     override fun viewAllergyProgress(isShow: Boolean) {}
+
+    override fun noInternetConnection(isConnect: Boolean) {
+        if (!isConnect){
+            v.rvActiveAllergy.visibility=View.GONE
+            v.noInternet.visibility=View.VISIBLE
+            v.layoutNotfoundActiveAllergy.visibility=View.GONE
+
+            val snackBar = Snackbar.make(llActiveAllergy,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+            snackBar.show()
+        }else {
+            v.rvActiveAllergy.visibility=View.VISIBLE
+            v.noInternet.visibility=View.GONE
+            v.layoutNotfoundActiveAllergy.visibility=View.VISIBLE
+        }
+    }
 
     override fun onResume() {
         super.onResume()

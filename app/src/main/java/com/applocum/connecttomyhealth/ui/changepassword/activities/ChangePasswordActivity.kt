@@ -27,6 +27,9 @@ class ChangePasswordActivity : BaseActivity(), ChangePasswordPresenter.View {
     lateinit var presenter: ChangePasswordPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_change_password
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+        TODO("Not yet implemented")
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

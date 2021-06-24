@@ -18,24 +18,30 @@
             android:layout_height="match_parent"
             tools:ignore="UselessParent">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="UselessParent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvActiveAllergy"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:nestedScrollingEnabled="false" />
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
 
-            <include layout="@layout/custom_loader_progress" />
-        </FrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvActiveAllergy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_16"
+                    android:nestedScrollingEnabled="false" />
+
+                <include layout="@layout/custom_loader_progress" />
+
+                <include
+                    android:id="@+id/noInternet"
+                    layout="@layout/custom_no_internet" />
+            </FrameLayout>
+
             <include
                 android:id="@+id/layoutNotfoundActiveAllergy"
                 layout="@layout/custom_allergy_xml"
                 android:visibility="gone" />
+
         </RelativeLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

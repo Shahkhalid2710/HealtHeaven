@@ -35,6 +35,9 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
     private var Gpsstatus: Boolean = false
 
     override fun getLayoutResourceId(): Int = R.layout.activity_setting
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

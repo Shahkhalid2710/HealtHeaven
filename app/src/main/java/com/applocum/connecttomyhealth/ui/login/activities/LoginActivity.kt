@@ -34,6 +34,7 @@ class LoginActivity : BaseActivity(),
     lateinit var userHolder: UserHolder
 
     override fun getLayoutResourceId(): Int = R.layout.activity_login
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -12,6 +12,9 @@ import java.util.concurrent.TimeUnit
 class WaitingAreaActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_waiting_area
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

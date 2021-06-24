@@ -99,6 +99,11 @@
                         android:nestedScrollingEnabled="false"
                         android:scrollbars="vertical" />
 
+                    <include
+                        android:id="@+id/noInternet"
+                        layout="@layout/custom_no_internet"
+                        android:visibility="gone" />
+
                     <include layout="@layout/custom_loader_progress" />
 
                 </FrameLayout>

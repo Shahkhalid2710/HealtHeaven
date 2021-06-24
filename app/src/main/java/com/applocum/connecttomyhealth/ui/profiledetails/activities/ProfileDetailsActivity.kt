@@ -27,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_profile_details.*
 import kotlinx.android.synthetic.main.activity_profile_details.etDOB
 import kotlinx.android.synthetic.main.activity_profile_details.etEmail
@@ -65,6 +66,8 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     private lateinit var patientData: Patient
 
     override fun getLayoutResourceId(): Int = R.layout.activity_profile_details
+
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -273,6 +276,16 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
 
     override fun viewprogress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun noInternetConnection(isConnect: Boolean) {
+        if (!isConnect){
+            val snackbar = Snackbar.make(llProfileDetails,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
+        }
     }
 
     override fun onResume() {

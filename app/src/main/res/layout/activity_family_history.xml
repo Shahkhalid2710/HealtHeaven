@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llFamilyHistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -49,8 +50,8 @@
             android:background="@drawable/ripple_effect_button"
             android:clickable="true"
             android:focusable="true"
-            android:visibility="gone"
             android:padding="@dimen/spacing_24"
+            android:visibility="gone"
             tools:ignore="RelativeOverlap">
 
             <TextView
@@ -92,6 +93,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="28dp"
                         android:nestedScrollingEnabled="false" />
+
+                    <include
+                        android:id="@+id/noInternet"
+                        layout="@layout/custom_no_internet" />
 
                     <include layout="@layout/custom_loader_progress" />
 

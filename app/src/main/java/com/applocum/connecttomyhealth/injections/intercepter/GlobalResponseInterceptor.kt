@@ -70,4 +70,7 @@ class GlobalResponseInterceptor : BaseActivity(), Interceptor {
     }
 
     override fun getLayoutResourceId(): Int = 0
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 }

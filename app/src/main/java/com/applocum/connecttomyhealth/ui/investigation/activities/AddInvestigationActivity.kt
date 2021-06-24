@@ -53,6 +53,7 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     lateinit var investigationPresenter: InvestigationPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_investigation
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -171,4 +172,15 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     override fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>) {}
 
     override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {}
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            val snackBar = Snackbar.make(llAddInvesigation,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
+        }
+    }
 }

@@ -222,6 +222,10 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
         v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
+    override fun noInternetConnection(isConnect: Boolean) {
+        if (!isConnect) Toast.makeText(requireActivity(), R.string.no_internet, Toast.LENGTH_SHORT).show()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
@@ -293,5 +297,9 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
                 v.llSteps.visibility=View.GONE
             }
         }
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect) Toast.makeText(requireActivity(), R.string.no_internet, Toast.LENGTH_SHORT).show()
     }
 }

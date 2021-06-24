@@ -13,6 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -54,6 +55,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
+                         view.noInternet(true)
                          view.displaySuccessMessage(it.message)
                     }
                     InvalidCredentials, InternalServer -> {
@@ -69,6 +71,12 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
             }, onError = {
                 view.viewFullProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -80,6 +88,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.getSessions(it.data)
                     }
                     InternalServer, InvalidCredentials -> {
@@ -89,6 +98,12 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -100,6 +115,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.getSessions(it.data)
                     }
                     InternalServer, InvalidCredentials -> {
@@ -109,6 +125,12 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
      }
 
@@ -138,5 +160,6 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
         fun getSessions(list: ArrayList<BookAppointmentResponse>)
         fun viewProgress(isShow: Boolean)
         fun viewFullProgress(isShow: Boolean)
+        fun noInternet(isConnect:Boolean)
     }
 }

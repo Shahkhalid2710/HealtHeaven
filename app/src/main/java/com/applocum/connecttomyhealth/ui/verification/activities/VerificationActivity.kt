@@ -29,6 +29,9 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
     lateinit var otpPresenter: OtpPresenter
 
     override fun getLayoutResourceId(): Int= R.layout.activity_verification
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

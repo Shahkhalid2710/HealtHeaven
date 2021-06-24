@@ -18,6 +18,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -41,6 +42,7 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                 view.viewprogress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternetConnection(true)
                         val patientObject = Gson().fromJson(it.data, PatientResponse::class.java)
                         val patient = patientObject.patient
                         view.showProfile(patient)
@@ -52,6 +54,12 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
             }, onError = {
                 view.viewprogress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternetConnection(false)
+                }
+
             }).let { disposables.add(it) }
     }
 
@@ -89,6 +97,7 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                     view.viewprogress(false)
                     when (it.status) {
                         Success -> {
+                            view.noInternetConnection(true)
                             view.displaySuccessMessage("Profile updated successfully")
                             val userObject = Gson().fromJson(it.data,UserResponse::class.java)
                             val user = userObject.user
@@ -101,6 +110,12 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                 }, onError = {
                     view.viewprogress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternetConnection(false)
+                    }
+
                 }).let { disposables.addAll(it) }
         }
     }
@@ -117,6 +132,7 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                 view.viewprogress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternetConnection(true)
                         val userObject = Gson().fromJson(it.data, UserResponse::class.java)
                         val user = userObject.user
                         view.userData(user)
@@ -129,6 +145,12 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
             }, onError = {
                 view.viewprogress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternetConnection(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -191,5 +213,6 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
         fun displayErrorMessage(message: String)
         fun userData(user: User)
         fun viewprogress(isShow: Boolean)
+        fun noInternetConnection(isConnect:Boolean)
     }
 }

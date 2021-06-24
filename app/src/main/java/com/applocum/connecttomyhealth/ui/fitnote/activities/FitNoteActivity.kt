@@ -25,6 +25,9 @@ class FitNoteActivity : BaseActivity(),
     lateinit var presenter: DocumentPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_fit_note
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

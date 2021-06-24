@@ -16,6 +16,9 @@ import java.util.concurrent.TimeUnit
 class MyDownloadsActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_my_downloads
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit
 class ExemptionsActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_exemptions
+    override fun handleInternetConnectivity(isConnect: Boolean?) {
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
