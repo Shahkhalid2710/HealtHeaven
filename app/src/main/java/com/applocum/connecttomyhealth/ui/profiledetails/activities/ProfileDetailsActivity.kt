@@ -545,52 +545,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    /*private fun calculateBMI() {
-       val height = etHeight.text.toString()
-       val weight = etWeight.text.toString()
-
-       if ("" != height && "" != weight) {
-           val heightValue = height.toFloat() / 100
-           val weightValue = weight.toFloat()
-           val bmi = weightValue / (heightValue * heightValue)
-           displayBMI(bmi)
-       }
-   }*/
-
-/*
-    private fun displayBMI(bmi: Float) {
-        val bmiLabel = if (bmi.compareTo(15f) <= 0) {
-            getString(R.string.very_severely_underweight)
-        } else if (bmi.compareTo(15f) > 0 && bmi.compareTo(16f) <= 0
-        ) {
-            getString(R.string.severely_underweight)
-
-        } else if (bmi.compareTo(16f) > 0 && bmi.compareTo(18.5f) <= 0
-        ) {
-            getString(R.string.underweight)
-
-        } else if (bmi.compareTo(18.5f) > 0 && bmi.compareTo(25f) <= 0
-        ) {
-            getString(R.string.normal)
-
-        } else if (bmi.compareTo(25f) > 0 && bmi.compareTo(30f) <= 0
-        ) {
-            getString(R.string._overweight)
-
-        } else if (bmi.compareTo(30f) > 0 && bmi.compareTo(35f) <= 0
-        ) {
-            getString(R.string.obese_class_i)
-
-        } else if (bmi.compareTo(35f) > 0 && bmi.compareTo(40f) <= 0
-        ) {
-            getString(R.string.obese_class_ii)
-
-        } else {
-            getString(R.string.obese_class_iii)
-        }
-        etBMI.setText("$bmi $bmiLabel")
-    }
-*/
 
     private fun validateMobileNumber(mobileNumber:String):Boolean
     {

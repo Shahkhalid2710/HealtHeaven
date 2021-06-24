@@ -5,9 +5,11 @@
         <item name="colorPrimary">@color/green</item>
         <item name="colorPrimaryDark">@color/green</item>
         <item name="colorAccent">@color/green</item>
-<!--
-        <item name="colorOnPrimary">@color/white</item>
--->
+
+        <item name="colorControlHighlight">@color/colorripple</item>
+        <!--
+                <item name="colorOnPrimary">@color/white</item>
+        -->
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
 
