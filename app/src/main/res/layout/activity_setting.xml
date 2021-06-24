@@ -47,323 +47,336 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
+            android:id="@+id/llSettings"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:background="@color/white"
+                android:fillViewport="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ripple_effect_button"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_24"
-                        android:layout_marginTop="@dimen/spacing_30"
-                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:background="@drawable/ripple_effect_button"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvLocation"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="@string/location"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_16" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchlocatinservices"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="@dimen/spacing_10"
-                            android:checked="false"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:text="@string/location_services"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_14"
-                            android:theme="@style/SwitchStyle" />
+                            android:layout_marginStart="@dimen/spacing_24"
+                            android:layout_marginTop="@dimen/spacing_30"
+                            android:layout_marginEnd="@dimen/spacing_24"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:text="@string/turn_on_location_service_to_enable_it"
-                            android:textColor="@color/grey"
-                            android:textSize="@dimen/font_12" />
+                            <TextView
+                                android:id="@+id/tvLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="@string/location"
+                                android:textColor="@color/aapBlack"
+                                android:textSize="@dimen/font_16" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/switchlocatinservices"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="13dp"
+                                android:layout_marginEnd="@dimen/spacing_10"
+                                android:checked="false"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:text="@string/location_services"
+                                android:textColor="@color/aapBlack"
+                                android:textSize="@dimen/font_14"
+                                android:theme="@style/SwitchStyle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="@string/turn_on_location_service_to_enable_it"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/font_12" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:background="@color/textcolorgrey" />
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:background="@color/textcolorgrey" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ripple_effect_button"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_24"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:background="@drawable/ripple_effect_button"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvNotification"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="@string/notification"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_16" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchtextmessage"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="@dimen/spacing_10"
-                            android:checked="false"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:text="@string/text_message"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_14"
-                            android:theme="@style/SwitchStyle" />
+                            android:layout_marginStart="@dimen/spacing_24"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:layout_marginEnd="@dimen/spacing_24"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:gravity="start"
-                            android:text="@string/send_me_text_messages_about_alldaydr_promotions_special_offers_and_updates"
-                            android:textColor="@color/grey"
-                            android:textSize="@dimen/font_12" />
+                            <TextView
+                                android:id="@+id/tvNotification"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="@string/notification"
+                                android:textColor="@color/aapBlack"
+                                android:textSize="@dimen/font_16" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/switchtextmessage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="13dp"
+                                android:layout_marginEnd="@dimen/spacing_10"
+                                android:checked="false"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:text="@string/text_message"
+                                android:textColor="@color/aapBlack"
+                                android:textSize="@dimen/font_14"
+                                android:theme="@style/SwitchStyle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="start"
+                                android:text="@string/send_me_text_messages_about_alldaydr_promotions_special_offers_and_updates"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/font_12" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:background="@color/textcolorgrey" />
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:background="@color/textcolorgrey" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ripple_effect_button"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_24"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:background="@drawable/ripple_effect_button"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:orientation="vertical">
 
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchemail"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_10"
-                            android:checked="false"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:text="@string/email"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_14"
-                            android:theme="@style/SwitchStyle" />
+                            android:layout_marginStart="@dimen/spacing_24"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:layout_marginEnd="@dimen/spacing_24"
+                            android:orientation="vertical">
 
-                        <TextView
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/switchemail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/spacing_10"
+                                android:checked="false"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:text="@string/email"
+                                android:textColor="@color/aapBlack"
+                                android:textSize="@dimen/font_14"
+                                android:theme="@style/SwitchStyle" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="@dimen/spacing_20"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="start"
+                                android:text="@string/send_me_emails_about_alldaydr_promotions_special_offers_and_updates"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/font_12" />
+                        </LinearLayout>
+
+                        <View
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginEnd="@dimen/spacing_20"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:gravity="start"
-                            android:text="@string/send_me_emails_about_alldaydr_promotions_special_offers_and_updates"
-                            android:textColor="@color/grey"
-                            android:textSize="@dimen/font_12" />
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:background="@color/textcolorgrey" />
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:background="@color/textcolorgrey" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ripple_effect_button"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_24"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:background="@drawable/ripple_effect_button"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:orientation="vertical">
 
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchPhone"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_10"
-                            android:checked="false"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:text="@string/phone"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_14"
-                            android:theme="@style/SwitchStyle" />
+                            android:layout_marginStart="@dimen/spacing_24"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:layout_marginEnd="@dimen/spacing_24"
+                            android:orientation="vertical">
 
-                        <TextView
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/switchPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/spacing_10"
+                                android:checked="false"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:text="@string/phone"
+                                android:textColor="@color/aapBlack"
+                                android:textSize="@dimen/font_14"
+                                android:theme="@style/SwitchStyle" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="@dimen/spacing_35"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="start"
+                                android:text="@string/call_me_about_alldaydr_promotions_special_offers_and_updates"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/font_12" />
+                        </LinearLayout>
+
+                        <View
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginEnd="@dimen/spacing_35"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:gravity="start"
-                            android:text="@string/call_me_about_alldaydr_promotions_special_offers_and_updates"
-                            android:textColor="@color/grey"
-                            android:textSize="@dimen/font_12" />
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:background="@color/textcolorgrey" />
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:background="@color/textcolorgrey" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ripple_effect_button"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_24"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:layout_marginEnd="@dimen/spacing_24"
+                        android:background="@drawable/ripple_effect_button"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:orientation="vertical">
 
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchPuchNotification"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_10"
-                            android:checked="false"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:text="@string/push_notifications"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_14"
-                            android:theme="@style/SwitchStyle" />
+                            android:layout_marginStart="@dimen/spacing_24"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:layout_marginEnd="@dimen/spacing_24"
+                            android:orientation="vertical">
 
-                        <TextView
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/switchPuchNotification"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/spacing_10"
+                                android:checked="false"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:text="@string/push_notifications"
+                                android:textColor="@color/aapBlack"
+                                android:textSize="@dimen/font_14"
+                                android:theme="@style/SwitchStyle" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="@dimen/spacing_35"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="start"
+                                android:text="@string/send_me_push_notifications_from_alldaydr"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/font_12" />
+                        </LinearLayout>
+
+                        <View
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginEnd="@dimen/spacing_35"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:gravity="start"
-                            android:text="@string/send_me_push_notifications_from_alldaydr"
-                            android:textColor="@color/grey"
-                            android:textSize="@dimen/font_12" />
+                            android:layout_height="10dp"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:background="@color/textcolorgrey" />
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:background="@color/textcolorgrey" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ripple_effect_button"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_24"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:layout_marginEnd="@dimen/spacing_24"
-                        android:layout_marginBottom="58dp"
-                        android:orientation="vertical"
-                        tools:ignore="UselessParent">
+                        android:background="@drawable/ripple_effect_button"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvTouchId"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="@string/touch_id_or_face_id"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_16" />
-
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:id="@+id/switchtouchidfaceid"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="@dimen/spacing_10"
-                            android:checked="false"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:text="@string/touch_id_or_face_id"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_14"
-                            android:theme="@style/SwitchStyle" />
+                            android:layout_marginStart="@dimen/spacing_24"
+                            android:layout_marginTop="@dimen/spacing_16"
+                            android:layout_marginEnd="@dimen/spacing_24"
+                            android:layout_marginBottom="58dp"
+                            android:orientation="vertical"
+                            tools:ignore="UselessParent">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginEnd="@dimen/spacing_30"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:gravity="start"
-                            android:text="@string/send_me_promotions_special_offers_and_updates_from_carefully_selected_third_party_companies"
-                            android:textColor="@color/grey"
-                            android:textSize="@dimen/font_12" />
+                            <TextView
+                                android:id="@+id/tvTouchId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="@string/touch_id_or_face_id"
+                                android:textColor="@color/aapBlack"
+                                android:textSize="@dimen/font_16" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/switchtouchidfaceid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="13dp"
+                                android:layout_marginEnd="@dimen/spacing_10"
+                                android:checked="false"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:text="@string/touch_id_or_face_id"
+                                android:textColor="@color/aapBlack"
+                                android:textSize="@dimen/font_14"
+                                android:theme="@style/SwitchStyle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="@dimen/spacing_30"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="start"
+                                android:text="@string/send_me_promotions_special_offers_and_updates_from_carefully_selected_third_party_companies"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/font_12" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/noInternet"
+            layout="@layout/custom_no_internet"
+            android:visibility="gone" />
 
         <include layout="@layout/custom_progress" />
 

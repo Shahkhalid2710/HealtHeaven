@@ -18,9 +18,6 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.BookAppointment
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.booksession.activities.BookSessionActivity
 import com.applocum.connecttomyhealth.ui.home.adapters.DoctorAdapter
-import com.applocum.connecttomyhealth.ui.profiledetails.presenters.ProfileDetailsPresenter
-import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
-import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.applocum.connecttomyhealth.ui.specialists.activities.SpecialistsActivity
 import com.applocum.connecttomyhealth.ui.specialists.presenters.SpecilistPresenter
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
@@ -35,15 +32,12 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
-class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresenter.View {
+class HomeFragment : Fragment(), SpecilistPresenter.View {
     @Inject
     lateinit var userHolder: UserHolder
 
     @Inject
     lateinit var specilistPresenter: SpecilistPresenter
-
-    @Inject
-    lateinit var profileDetailsPresenter: ProfileDetailsPresenter
 
     lateinit var v: View
 
@@ -56,7 +50,6 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
 
         MyApplication.getAppContext().component.inject(this)
         specilistPresenter.injectview(this)
-        profileDetailsPresenter.injectview(this)
 
         val appointment = BookAppointment()
         appointment.corporateId = 66
@@ -72,7 +65,6 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
             .subscribe {
                 v.noInternet.visibility=View.GONE
                 specilistPresenter.getDoctorlist()
-                profileDetailsPresenter.showProfile()
             }
 
         return v
@@ -81,7 +73,24 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
     override fun onResume() {
         super.onResume()
         specilistPresenter.getDoctorlist()
-        profileDetailsPresenter.showProfile()
+
+        val circularProgressDrawable = CircularProgressDrawable(requireActivity())
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
+
+
+        if (userHolder.userPhoto!!.isEmpty())
+        {
+            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(v.ivUser)
+            v.ivPicWarning.visibility=View.VISIBLE
+        }
+        else {
+            Glide.with(requireActivity()).load(userHolder.userPhoto).placeholder(circularProgressDrawable).into(v.ivUser)
+            v.ivPicWarning.visibility=View.GONE
+        }
+
+        v.tvName.text=userHolder.userFirstName
     }
 
     override fun displaymessage(message: String) {}
@@ -130,50 +139,4 @@ class HomeFragment : Fragment(), SpecilistPresenter.View, ProfileDetailsPresente
         }
     }
 
-    override fun showProfile(patient: Patient) {
-        v.tvName.text = patient.user.firstName
-
-        val circularProgressDrawable = CircularProgressDrawable(requireActivity())
-        circularProgressDrawable.strokeWidth = 5f
-        circularProgressDrawable.centerRadius = 30f
-        circularProgressDrawable.start()
-
-        if (patient.image.isEmpty())
-        {
-            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(v.ivUser)
-            v.ivPicWarning.visibility=View.VISIBLE
-        }
-        else {
-            Glide.with(requireActivity()).load(patient.image).placeholder(circularProgressDrawable).into(v.ivUser)
-            v.ivPicWarning.visibility=View.GONE
-        }
-    }
-
-    override fun displayMessage(message: String) {}
-
-    override fun displaySuccessMessage(message: String) {}
-
-    override fun displayErrorMessage(message: String) {}
-
-    override fun userData(user: User) {}
-
-    override fun viewprogress(isShow: Boolean) {}
-
-    override fun noInternetConnection(isConnect: Boolean) {
-        if (!isConnect)
-        {
-            v.rvTopDoctors.visibility=View.GONE
-            v.noInternet.visibility=View.VISIBLE
-
-            val snackBar = Snackbar.make(llHome,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
-            snackBar.changeFont()
-            val snackView = snackBar.view
-            snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
-            snackBar.show()
-        }
-        else{
-            v.noInternet.visibility=View.GONE
-            v.rvTopDoctors.visibility=View.VISIBLE
-        }
-    }
 }

@@ -11,6 +11,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
+import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.settings.presenters.SettingNotificationPresenter
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotification
@@ -18,10 +19,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.activity_setting.ivBack
+import kotlinx.android.synthetic.main.activity_setting.noInternet
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-
 
 class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
 
@@ -35,9 +37,8 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
     private var Gpsstatus: Boolean = false
 
     override fun getLayoutResourceId(): Int = R.layout.activity_setting
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
 
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +48,11 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
+
+        RxView.clicks(noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                presenter.showNotification()
+            }
 
         checkGpsStatus()
 
@@ -98,6 +104,24 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
         switchemail.isChecked = settingNotification.is_notify_by_email == true
         switchPhone.isChecked = settingNotification.is_notify_by_phone == true
         switchPuchNotification.isChecked = settingNotification.is_notify_by_push_notification == true
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            llSettings.visibility=View.GONE
+            noInternet.visibility=View.VISIBLE
+
+            val snackBar = Snackbar.make(llSetting,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
+
+        }else{
+            llSettings.visibility=View.VISIBLE
+            noInternet.visibility=View.GONE
+        }
     }
 
     private fun checkGpsStatus() {

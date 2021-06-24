@@ -93,7 +93,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="114dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/spacing_10"
                 android:layout_marginBottom="8dp"
@@ -103,31 +103,36 @@
                 android:orientation="vertical"
                 tools:ignore="UselessParent">
 
-                <TextView
-                    android:id="@+id/tvConsulatantdoctor"
-                    android:layout_width="204dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_16"
-                    android:layout_marginTop="9dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/need_a_consultation_from_our_top_doctors_and_get_well_soon"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_12" />
+                    android:padding="@dimen/spacing_10"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnBookAppointment"
-                    android:layout_width="150dp"
-                    android:layout_height="33dp"
-                    android:layout_marginStart="@dimen/spacing_16"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:background="@drawable/custombtn_xml"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:foreground="@drawable/effect_button"
-                    android:padding="8dp"
-                    android:text="@string/book_appointment"
-                    android:textAllCaps="false"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/font_12" />
+                    <TextView
+                        android:id="@+id/tvConsulatantdoctor"
+                        android:layout_width="204dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="@string/need_a_consultation_from_our_top_doctors_and_get_well_soon"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_12" />
+
+                    <Button
+                        android:id="@+id/btnBookAppointment"
+                        android:layout_width="150dp"
+                        android:layout_height="33dp"
+                        android:layout_marginTop="@dimen/spacing_16"
+                        android:background="@drawable/custombtn_xml"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:foreground="@drawable/effect_button"
+                        android:padding="8dp"
+                        android:text="@string/book_appointment"
+                        android:textAllCaps="false"
+                        android:textColor="@color/green"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
             </LinearLayout>
 
             <ImageView

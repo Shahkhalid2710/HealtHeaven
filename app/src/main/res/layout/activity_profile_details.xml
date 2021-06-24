@@ -243,7 +243,6 @@
                     android:textSize="@dimen/font_12"
                     tools:ignore="LabelFor" />
 
-
                 <TextView
                     android:id="@+id/tvMobileNumber"
                     android:layout_width="wrap_content"

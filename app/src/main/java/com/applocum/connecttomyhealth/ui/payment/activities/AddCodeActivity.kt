@@ -13,6 +13,7 @@ import com.applocum.connecttomyhealth.ui.payment.presenters.MembershipPresenter
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_add_code.*
+import kotlinx.android.synthetic.main.activity_add_code.btnAdd
 import kotlinx.android.synthetic.main.activity_add_code.ivBack
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.concurrent.TimeUnit
@@ -24,9 +25,7 @@ class AddCodeActivity : BaseActivity(),MembershipPresenter.View {
     lateinit var membershipPresenter: MembershipPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_code
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
-
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,4 +60,15 @@ class AddCodeActivity : BaseActivity(),MembershipPresenter.View {
     }
 
     override fun showMembershipList(membershipResponse: ArrayList<MembershipResponse>) {}
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            val snackBar = Snackbar.make(llAddCode,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
+        }
+    }
 }

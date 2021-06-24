@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <!--<external-path
-        name="my_images"
-        path="Android/data/com.applocum.connecttomyhealth/files/Pictures" />-->
-    <external-path name="external_files" path="."/>
+    <files-path name="cropper" path="cropper-internal/" />
+    <external-files-path name="my_images" path="/" />
+
+    <external-cache-path
+        name="labels"
+        path="labels/"/>
+    <external-cache-path
+        name="share"
+        path="share/"/>
+    <external-cache-path
+        name="images"
+        path="." />
+    <!-- Listing images -->
+    <!-- Context.getExternalFilesDir(String) -->
+    <external-files-path
+        name="my-pictures"
+        path="/" />
+    <!-- Context.getFilesDir()-->
+    <files-path
+        name="my-local-pictures"
+        path="." />
 </paths>

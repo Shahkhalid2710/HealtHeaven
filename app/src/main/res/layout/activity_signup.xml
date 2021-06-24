@@ -250,6 +250,7 @@
                     android:backgroundTint="@color/textcolorgrey"
                     android:fontFamily="@font/montserrat_medium"
                     android:hint="@string/enter_your_email_address"
+                    android:importantForAutofill="noExcludeDescendants"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/aapBlack"
@@ -338,7 +339,7 @@
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/black">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
                         android:id="@+id/etPassword"
                         style="@style/PasswordEdittextStyle"
                         android:layout_width="match_parent"
@@ -351,6 +352,7 @@
                         android:hint="@string/enter_password"
                         android:imeOptions="actionNext"
                         android:inputType="textPassword"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:textColor="@color/aapBlack"
                         android:textColorHint="@color/grey"
                         android:textSize="@dimen/font_12"
@@ -379,7 +381,7 @@
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/black">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
                         android:id="@+id/etConfirmPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -392,6 +394,7 @@
                         android:hint="@string/re_enter_password"
                         android:imeOptions="actionNext"
                         android:inputType="textPassword"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:textColor="@color/aapBlack"
                         android:textColorHint="@color/grey"
                         android:textSize="@dimen/font_12"

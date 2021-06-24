@@ -27,6 +27,7 @@ class SecurityActivity : BaseActivity(),
     lateinit var presenter: SecurityPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_security
+
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")

@@ -13,6 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
@@ -43,6 +44,7 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
+                            view.noInternet(true)
                             val cardobject = Gson().fromJson(it.data, Card::class.java)
                             view.addcard(cardobject)
                             view.displaySuccessmessage(it.message)
@@ -54,6 +56,12 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
                 }, onError = {
                     view.viewProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternet(false)
+                    }
+
                 }).let { disposables.add(it) }
         }
     }
@@ -66,6 +74,7 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.showcard(it.data)
                     }
                     InvalidCredentials, InternalServer -> {
@@ -75,6 +84,12 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -86,6 +101,7 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.displaySuccessmessage(it.message)
                     }
                     InvalidCredentials, InternalServer, MissingParameter -> {
@@ -95,6 +111,12 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
             }, onError = {
                 view.viewFullProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -132,5 +154,6 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
         fun viewProgress(isShow: Boolean)
         fun viewFullProgress(isShow: Boolean)
         fun showcard(list: ArrayList<Card>)
+        fun noInternet(isConnect:Boolean)
     }
 }

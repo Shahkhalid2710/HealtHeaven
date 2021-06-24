@@ -24,6 +24,7 @@ import com.applocum.connecttomyhealth.ui.securitycheck.models.SecurityGlobalResp
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotificationGlobalResponse
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotificationResponse
 import com.applocum.connecttomyhealth.ui.signup.models.GlobalResponse
+import com.applocum.connecttomyhealth.ui.signup.models.SignOutGlobalResponse
 import com.applocum.connecttomyhealth.ui.specialists.models.DoctorResponse
 import com.applocum.connecttomyhealth.ui.verification.models.OtpGlobalResponse
 import io.reactivex.Observable
@@ -38,6 +39,9 @@ interface AppEndPoint {
 
     @POST("/api/priory/users/sign_in.json")
     fun signin(@Body requestBody: RequestBody): Observable<GlobalResponse>
+
+    @DELETE("/api/priory/users/sign_out.json")
+    fun signOut(@Header("AUTH_TOKEN") authtoken:String?):Observable<SignOutGlobalResponse>
 
     @GET("/api/profiles/search.json")
     fun getdoctors(@Header("AUTH_TOKEN") authtoken:String?,

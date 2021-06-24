@@ -12,5 +12,6 @@ class ErrorCodes {
         const val MissingParameter=801
         const val InvalidOtp=803
         const val OtpTryAgain=813
+        const val UnsuccessfulAttemptt=403
     }
 }

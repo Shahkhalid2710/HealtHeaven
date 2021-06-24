@@ -61,6 +61,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     lateinit var userHolder: UserHolder
 
     override fun getLayoutResourceId(): Int = R.layout.activity_session_book
+
     override fun handleInternetConnectivity(isConnect: Boolean?) {
         if (!isConnect!!) {
             Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT).show()
@@ -99,6 +100,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             btnPhoneCall.setTextColor(Color.WHITE)
             btnVideoCall.setTextColor(Color.parseColor("#008976"))
             btnFaceToFace.setTextColor(Color.parseColor("#008976"))
+
+            sTime=""
         }
 
         btnVideoCall.setOnClickListener {
@@ -110,6 +113,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             btnPhoneCall.setTextColor(Color.parseColor("#008976"))
             btnVideoCall.setTextColor(Color.WHITE)
             btnFaceToFace.setTextColor(Color.parseColor("#008976"))
+
+            sTime=""
         }
 
         btnFaceToFace.setOnClickListener {
@@ -121,6 +126,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             btnPhoneCall.setTextColor(Color.parseColor("#008976"))
             btnVideoCall.setTextColor(Color.parseColor("#008976"))
             btnFaceToFace.setTextColor(Color.WHITE)
+
+            sTime=""
         }
 
         btn10Mins.setOnClickListener {
@@ -132,6 +139,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             btn10Mins.setTextColor(Color.WHITE)
             btn20Mins.setTextColor(Color.parseColor("#008976"))
             btn30Mins.setTextColor(Color.parseColor("#008976"))
+
+            sTime=""
         }
 
         btn20Mins.setOnClickListener {
@@ -143,6 +152,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             btn10Mins.setTextColor(Color.parseColor("#008976"))
             btn20Mins.setTextColor(Color.WHITE)
             btn30Mins.setTextColor(Color.parseColor("#008976"))
+
+            sTime=""
         }
 
         btn30Mins.setOnClickListener {
@@ -154,6 +165,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             btn10Mins.setTextColor(Color.parseColor("#008976"))
             btn20Mins.setTextColor(Color.parseColor("#008976"))
             btn30Mins.setTextColor(Color.WHITE)
+
+            sTime=""
         }
 
         btn10Mins.performClick()

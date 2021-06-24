@@ -3,6 +3,7 @@ package com.applocum.connecttomyhealth.ui.login.presenters
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnsuccessfulAttemptt
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.signup.models.User
@@ -13,6 +14,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -49,6 +51,7 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
+                            view.noInternet(true)
                             val userObject: UserResponse =
                                 Gson().fromJson(it.data, UserResponse::class.java)
                             val user = userObject.user
@@ -63,16 +66,52 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
                             )
                             view.senduserdata(userObject.user)
                         }
-                        InvalidCredentials, InternalServer -> {
+                        InvalidCredentials, InternalServer ,UnsuccessfulAttemptt-> {
                             view.displaymessage(it.message)
                         }
                     }
                 }, onError = {
                     view.viewProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternet(false)
+                    }
+
                 }).let { disposables.add(it) }
         }
     }
+
+    fun signOut()
+    {
+        view.viewProgress(true)
+
+        api.signOut(userHolder.userToken!!)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(onNext = {
+                view.viewProgress(false)
+                when (it.status) {
+                    Success -> {
+                        view.noInternet(true)
+                        view.displaySuccessMeessage(it.message)
+                    }
+                    InvalidCredentials, InternalServer -> {
+                        view.displaymessage(it.message)
+                    }
+                }
+            }, onError = {
+                view.viewProgress(false)
+                it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
+            }).let { disposables.addAll(it) }
+    }
+
 
     private fun validateLogin(email: String, password: String): Boolean {
         val EMAIL_PATTERN = Pattern.compile(
@@ -102,8 +141,9 @@ class LoginPresenter @Inject constructor(private val api: AppEndPoint) {
 
     interface View {
         fun displaymessage(message: String?)
-        fun displaySuccessMessage(message: String?)
+        fun displaySuccessMeessage(message: String?)
         fun senduserdata(user: User)
         fun viewProgress(isShow: Boolean)
+        fun noInternet(isConnect:Boolean)
     }
 }

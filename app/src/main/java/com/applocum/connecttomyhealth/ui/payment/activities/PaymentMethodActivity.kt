@@ -20,8 +20,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_payment_method.*
 import kotlinx.android.synthetic.main.activity_payment_method.ivBack
+import kotlinx.android.synthetic.main.activity_payment_method.noInternet
 import kotlinx.android.synthetic.main.custom_cancel_saved_card_dialog.view.*
 import kotlinx.android.synthetic.main.custom_loader_progress.*
+import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.custom_payment.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -37,9 +39,8 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
     var mList:ArrayList<Card> = ArrayList()
 
     override fun getLayoutResourceId(): Int = R.layout.activity_payment_method
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
 
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +61,11 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
             .subscribe {
                 startActivity(Intent(this, AddCardActivity::class.java))
                 overridePendingTransition(0,0)
+            }
+
+        RxView.clicks(noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                presenter.showSavedCards()
             }
     }
 
@@ -117,7 +123,26 @@ class PaymentMethodActivity : BaseActivity(), AddCardPresenter.View {
         paymentCardAdapter.notifyDataSetChanged()
     }
 
-    fun checkList(){
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            rvSavedCards.visibility=View.GONE
+            noInternet.visibility=View.VISIBLE
+            layoutnotfoundcard.visibility=View.GONE
+
+            val snackBar = Snackbar.make(llPaymentMethods,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
+        }else{
+            rvSavedCards.visibility=View.VISIBLE
+            noInternet.visibility=View.GONE
+            layoutnotfoundcard.visibility=View.VISIBLE
+        }
+    }
+
+    private fun checkList(){
 
         if (mList.isEmpty()) {
             layoutnotfoundcard.visibility = View.VISIBLE

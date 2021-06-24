@@ -20,6 +20,7 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.changepassword.activities.ChangePasswordActivity
 import com.applocum.connecttomyhealth.ui.help.activities.HelpActivity
 import com.applocum.connecttomyhealth.ui.login.activities.LoginActivity
+import com.applocum.connecttomyhealth.ui.login.presenters.LoginPresenter
 import com.applocum.connecttomyhealth.ui.mydownloads.activities.MyDownloadsActivity
 import com.applocum.connecttomyhealth.ui.payment.activities.MemberShipActivity
 import com.applocum.connecttomyhealth.ui.payment.activities.PaymentMethodActivity
@@ -49,7 +50,7 @@ import javax.inject.Inject
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgressPresenter.View {
+class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgressPresenter.View ,LoginPresenter.View{
     lateinit var v: View
 
     @Inject
@@ -61,11 +62,15 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
     @Inject
     lateinit var profileProgressPresenter: ProfileProgressPresenter
 
+    @Inject
+    lateinit var loginPresenter: LoginPresenter
+
     @SuppressLint("CheckResult")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_profile, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectview(this)
+        loginPresenter.injectview(this)
         profileProgressPresenter.injectView(this)
 
 
@@ -155,13 +160,11 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
                 dialog.setView(showDialogView)
 
                 showDialogView.btnSignOut.setOnClickListener {
-                    val intent = Intent(requireActivity(), LoginActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    requireActivity().finish()
-                    requireActivity().overridePendingTransition(0,0)
+                    dialog.dismiss()
+                    loginPresenter.signOut()
                     userHolder.clearUserData("", "", "", "", "", "", "")
+                    userHolder.clearUserPhoto("")
+                    userHolder.clearClinicalToken("")
                 }
                 showDialogView.btnNo.setOnClickListener {
                     dialog.dismiss()
@@ -172,19 +175,23 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
     }
 
     override fun showProfile(patient: Patient) {
-        v.tvFName.text = patient.user.firstName
-        v.tvLName.text = patient.user.lastName
+        v.tvFName.text = userHolder.userFirstName
+        v.tvLName.text = userHolder.userLastName
 
-        if (patient.user.image.isEmpty())
+        val circularProgressDrawable = CircularProgressDrawable(requireActivity())
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
+
+        if (userHolder.userPhoto!!.isEmpty())
         {
-            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).into(v.ivProfile)
+            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(v.ivProfile)
             v.ivPicWarning.visibility=View.VISIBLE
         }
         else {
-            Glide.with(requireActivity()).load(patient.user.image).into(v.ivProfile)
+            Glide.with(requireActivity()).load(userHolder.userPhoto).placeholder(circularProgressDrawable).into(v.ivProfile)
             v.ivPicWarning.visibility=View.GONE
         }
-
     }
 
     override fun displayMessage(message: String) {
@@ -192,6 +199,7 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
     }
 
     override fun displaySuccessMessage(message: String) {}
+
 
     override fun displayErrorMessage(message: String) {
         val snackBar = Snackbar.make(llProfile, message, Snackbar.LENGTH_LONG)
@@ -216,6 +224,7 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
             Glide.with(requireActivity()).load(user.image).placeholder(circularProgressDrawable).into(v.ivProfile)
             v.ivPicWarning.visibility=View.GONE
         }
+        userHolder.saveUserPhoto(user.image)
     }
 
     override fun viewprogress(isShow: Boolean) {
@@ -241,6 +250,19 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
         super.onResume()
         presenter.showProfile()
         profileProgressPresenter.trackProfileProgress()
+
+        v.tvFName.text = userHolder.userFirstName
+        v.tvLName.text = userHolder.userLastName
+
+        if (userHolder.userPhoto!!.isEmpty())
+        {
+            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).into(v.ivProfile)
+            v.ivPicWarning.visibility=View.VISIBLE
+        }
+        else {
+            Glide.with(requireActivity()).load(userHolder.userPhoto).into(v.ivProfile)
+            v.ivPicWarning.visibility=View.GONE
+        }
     }
 
     override fun displayProgressErrorMessage(message: String) {
@@ -297,6 +319,24 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
                 v.llSteps.visibility=View.GONE
             }
         }
+    }
+
+    override fun displaymessage(message: String?) {}
+
+    override fun displaySuccessMeessage(message: String?) {
+        val intent = Intent(requireActivity(), LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        requireActivity().finish()
+        requireActivity().overridePendingTransition(0,0)
+    }
+
+    override fun senduserdata(user: User) {}
+
+    override fun viewProgress(isShow: Boolean) {
+        v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
+
     }
 
     override fun noInternet(isConnect: Boolean) {

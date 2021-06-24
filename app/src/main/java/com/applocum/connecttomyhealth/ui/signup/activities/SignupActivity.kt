@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,9 +52,8 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
     private var myYear: Int = 0
 
     override fun getLayoutResourceId(): Int = R.layout.activity_signup
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
 
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,6 +111,17 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            val snackbar = Snackbar.make(llSignup,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
+        }
+    }
+
     @SuppressLint("SimpleDateFormat")
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         myYear = year
@@ -143,8 +151,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
             }
 
         etGender.setOnClickListener {
-            val showDialogView =
-                LayoutInflater.from(this).inflate(R.layout.custom_gender_dialog, null, false)
+            val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_gender_dialog, null, false)
             val dialog = AlertDialog.Builder(this).create()
             dialog.setView(showDialogView)
 
@@ -189,8 +196,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
             showDialogView.btnCancel.setOnClickListener {
                 dialog.dismiss()
             }
-            dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
             dialog.show()
         }
 

@@ -9,10 +9,8 @@ class UserHolder(pref: SharedPreferences) {
         private set
 
     var userFirstName by pref.prefString()
-        private set
 
     var userLastName by pref.prefString()
-        private set
 
     var userEmail by pref.prefString()
         private set
@@ -24,6 +22,9 @@ class UserHolder(pref: SharedPreferences) {
         private set
 
     var userToken by pref.prefString()
+        private set
+
+    var userPhoto by pref.prefString()
         private set
 
     var bookAppointmentData by pref.prefString()
@@ -72,6 +73,21 @@ class UserHolder(pref: SharedPreferences) {
     fun saveClinicalToken(token:String)
     {
         clinicalToken=token
+    }
+
+    fun clearClinicalToken(token:String)
+    {
+        clinicalToken=token
+    }
+
+    fun saveUserPhoto(picUrl:String)
+    {
+        userPhoto=picUrl
+    }
+
+    fun clearUserPhoto(picUrl:String)
+    {
+        userPhoto=picUrl
     }
 
     fun saveBookAppointmentData(appointment: BookAppointment?) {

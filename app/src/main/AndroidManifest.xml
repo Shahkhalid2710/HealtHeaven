@@ -16,6 +16,17 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.GET_CONTENT" />
+            <category android:name="android.intent.category.OPENABLE" />
+            <data android:mimeType="*/*" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
     <application
         android:name=".MyApplication"
         android:icon="@drawable/app_icon"
@@ -203,7 +214,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.signup.activities.SignupActivity" />
+            android:name=".ui.signup.activities.SignupActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.createnewpassword.activities.CreateNewPasswordActivity"
             android:screenOrientation="portrait" />
@@ -214,7 +226,9 @@
             android:name=".ui.forgotpassword.activities.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.login.activities.LoginActivity" />
+            android:name=".ui.login.activities.LoginActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

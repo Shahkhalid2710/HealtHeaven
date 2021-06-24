@@ -12,6 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class SettingNotificationPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -46,7 +47,7 @@ class SettingNotificationPresenter @Inject constructor(private val api: AppEndPo
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
-
+                        view.noInternet(true)
                     }
                     InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)
@@ -56,6 +57,12 @@ class SettingNotificationPresenter @Inject constructor(private val api: AppEndPo
             }, onError = {
                 view.viewFullProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -68,6 +75,7 @@ class SettingNotificationPresenter @Inject constructor(private val api: AppEndPo
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         val notificationObject = Gson().fromJson(it.data, SettingNotification::class.java)
                         view.showNotification(notificationObject)
                     }
@@ -78,6 +86,12 @@ class SettingNotificationPresenter @Inject constructor(private val api: AppEndPo
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.add(it) }
 
     }
@@ -87,5 +101,6 @@ class SettingNotificationPresenter @Inject constructor(private val api: AppEndPo
         fun viewFullProgress(isShow: Boolean)
         fun viewProgress(isShow: Boolean)
         fun showNotification(settingNotification: SettingNotification)
+        fun noInternet(isConnect:Boolean)
     }
 }

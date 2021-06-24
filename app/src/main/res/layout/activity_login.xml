@@ -186,7 +186,8 @@
                     android:backgroundTint="@color/textcolorgrey"
                     android:fontFamily="@font/montserrat_medium"
                     android:hint="@string/enter_your_email_address"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="noExcludeDescendants"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
@@ -215,7 +216,7 @@
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@color/black">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -227,6 +228,7 @@
                         android:fontFamily="@font/montserrat_medium"
                         android:hint="@string/enter_your_password"
                         android:imeOptions="actionDone"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="textPassword"
                         android:textColor="@color/aapBlack"
                         android:textColorHint="@color/grey"

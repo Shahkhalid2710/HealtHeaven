@@ -27,9 +27,8 @@ class ChangePasswordActivity : BaseActivity(), ChangePasswordPresenter.View {
     lateinit var presenter: ChangePasswordPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_change_password
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
-        TODO("Not yet implemented")
-    }
+
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +68,17 @@ class ChangePasswordActivity : BaseActivity(), ChangePasswordPresenter.View {
 
     override fun viewProgress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            val snackBar = Snackbar.make(llChangePassword,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
+        }
     }
 
     private val loginTextWatcher: TextWatcher = object : TextWatcher {

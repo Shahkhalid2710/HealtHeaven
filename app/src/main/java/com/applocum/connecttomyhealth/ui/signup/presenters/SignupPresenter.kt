@@ -15,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -80,6 +81,7 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
+                            view.noInternet(true)
                             val userObject = Gson().fromJson(it.data, UserResponse::class.java)
                             val user = userObject.user
                             user.profile.dateOfBirth.let { it1 ->
@@ -108,6 +110,12 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
                 }, onError = {
                     view.viewProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternet(false)
+                    }
+
                 }).let { disposables.add(it) }
         }
     }
@@ -192,5 +200,6 @@ class SignupPresenter @Inject constructor(private val api: AppEndPoint) {
         fun displaySuccessMessage(message: String?)
         fun sendUserData(user: User)
         fun viewProgress(isShow: Boolean)
+        fun noInternet(isConnect:Boolean)
     }
 }

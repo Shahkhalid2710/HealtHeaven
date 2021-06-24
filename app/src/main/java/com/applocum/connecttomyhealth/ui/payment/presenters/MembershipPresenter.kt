@@ -12,6 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -47,6 +48,7 @@ class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
                     {
                         Success->
                         {
+                            view.noInternet(true)
                             view.displayMessage(it.message)
                         }
                         InternalServer, InvalidCredentials,NotFound->
@@ -57,6 +59,12 @@ class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
                 },onError = {
                     view.viewProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternet(false)
+                    }
+
                 }).let { disposables.addAll(it) }
            }
       }
@@ -69,6 +77,7 @@ class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.showMembershipList(it.data)
                     }
                     InvalidCredentials, InternalServer -> {
@@ -81,6 +90,12 @@ class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
             }, onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -98,5 +113,6 @@ class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
         fun displayErrorMessage(message: String)
         fun viewProgress(isShow: Boolean)
         fun showMembershipList(membershipResponse: ArrayList<MembershipResponse>)
+        fun noInternet(isConnect:Boolean)
     }
 }

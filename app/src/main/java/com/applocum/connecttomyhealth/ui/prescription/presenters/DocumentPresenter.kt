@@ -9,6 +9,7 @@ import com.applocum.connecttomyhealth.ui.prescription.models.Document
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -42,13 +43,20 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                     Success -> {
                         view.viewProgress(false)
                         view.getDocument(it.data)
+                        view.noInternet(true)
                     }
                     InvalidCredentials, InternalServer -> {
                         view.displayErrorMessage(it.message)
                     }
                 }
             }, onError = {
+                view.viewProgress(false)
                 it.printStackTrace()
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -63,6 +71,7 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.viewProgress(false)
                         view.getDocument(it.data)
                     }
@@ -71,7 +80,14 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                     }
                 }
             }, onError = {
+                view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -86,6 +102,7 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.viewProgress(false)
                         view.getDocument(it.data)
                     }
@@ -94,7 +111,14 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                     }
                 }
             }, onError = {
+                view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -109,6 +133,7 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                 view.viewProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.viewProgress(false)
                         view.getDocument(it.data)
                     }
@@ -117,7 +142,14 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                     }
                 }
             }, onError = {
+                view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposables.addAll(it) }
     }
 
@@ -126,5 +158,6 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
         fun displayErrorMessage(message: String)
         fun getDocument(list: ArrayList<Document>)
         fun viewProgress(isShow: Boolean)
+        fun noInternet(isConnect:Boolean)
     }
 }

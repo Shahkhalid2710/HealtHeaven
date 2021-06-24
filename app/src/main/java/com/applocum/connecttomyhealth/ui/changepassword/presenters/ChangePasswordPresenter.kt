@@ -11,6 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class ChangePasswordPresenter @Inject constructor(private val api: AppEndPoint) {
@@ -39,6 +40,7 @@ class ChangePasswordPresenter @Inject constructor(private val api: AppEndPoint) 
                     view.viewProgress(false)
                     when (it.status) {
                         Success -> {
+                            view.noInternet(true)
                             view.displaySuccessMessage("Password change successfully!")
                             view.storePassword(it)
                         }
@@ -49,6 +51,12 @@ class ChangePasswordPresenter @Inject constructor(private val api: AppEndPoint) 
                 }, onError = {
                     view.viewProgress(false)
                     it.printStackTrace()
+
+                    if (it is UnknownHostException)
+                    {
+                        view.noInternet(false)
+                    }
+
                 }).let { disposables.addAll(it) }
         }
     }
@@ -78,5 +86,6 @@ class ChangePasswordPresenter @Inject constructor(private val api: AppEndPoint) 
         fun displaySuccessMessage(message: String)
         fun storePassword(passwordGlobalResponse: PasswordGlobalResponse)
         fun viewProgress(isShow: Boolean)
+        fun noInternet(isConnect:Boolean)
     }
 }

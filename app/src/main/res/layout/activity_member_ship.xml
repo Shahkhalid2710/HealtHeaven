@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
+        android:id="@+id/llMemberships"
         tools:context=".ui.payment.activities.PaymentMethodActivity"
         tools:ignore="UselessParent">
 
@@ -55,8 +56,8 @@
                 android:background="@drawable/ripple_effect_button"
                 android:clickable="true"
                 android:focusable="true"
-                android:visibility="gone"
                 android:padding="@dimen/spacing_24"
+                android:visibility="gone"
                 tools:ignore="RelativeOverlap">
 
                 <TextView
@@ -109,6 +110,11 @@
 
                 </FrameLayout>
             </LinearLayout>
+
+            <include
+                android:id="@+id/noInternet"
+                layout="@layout/custom_no_internet"
+                android:visibility="gone" />
 
             <include layout="@layout/custom_loader_progress" />
 

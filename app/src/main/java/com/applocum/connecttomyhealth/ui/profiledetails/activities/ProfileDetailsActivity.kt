@@ -27,7 +27,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_profile_details.*
 import kotlinx.android.synthetic.main.activity_profile_details.etDOB
 import kotlinx.android.synthetic.main.activity_profile_details.etEmail
@@ -272,6 +271,9 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 etGender.setText(R.string.other)
             }
         }
+        userHolder.userFirstName=user.firstName
+        userHolder.userLastName=user.lastName
+        userHolder.saveUserPhoto(user.image)
     }
 
     override fun viewprogress(isShow: Boolean) {
@@ -354,8 +356,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 this.month = calendar.get(Calendar.MONTH)
                 this.year = calendar.get(Calendar.YEAR)
 
-                val datePickerDialog =
-                    DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
+                val datePickerDialog = DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
                 datePickerDialog.datePicker.maxDate = (System.currentTimeMillis() - 568025136000L)
                 datePickerDialog.show()
             }
