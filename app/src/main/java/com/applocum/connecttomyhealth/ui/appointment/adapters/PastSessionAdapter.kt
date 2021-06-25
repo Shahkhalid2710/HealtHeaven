@@ -37,8 +37,7 @@ class PastSessionAdapter(context: Context, list: ArrayList<BookAppointmentRespon
         holder.itemView.tvDoctorLName.text = bookAppointmentResponse.gp_details.last_name
         holder.itemView.tvSessionType.text = bookAppointmentResponse.appointment_type
         holder.itemView.tvSlot.text = (bookAppointmentResponse.duration.toString() + " " + "mins")
-        holder.itemView.tvSessionDateTime.text =
-            convertDateTime(bookAppointmentResponse.actual_start_time)
+        holder.itemView.tvSessionDateTime.text = convertDateTime(bookAppointmentResponse.actual_start_time)
 
         Glide.with(mContext).load(bookAppointmentResponse.gp_details.image)
             .into(holder.itemView.ivDoctor)
@@ -53,6 +52,16 @@ class PastSessionAdapter(context: Context, list: ArrayList<BookAppointmentRespon
             "video" -> {
                 holder.itemView.tvSessionType.text = ("Video Call")
             }
+        }
+
+        when (bookAppointmentResponse.status) {
+            "cancelled" -> {
+                holder.itemView.tvCancel.visibility=View.VISIBLE
+                holder.itemView.tvMissed.visibility=View.GONE
+            }
+            "missed" -> {
+                holder.itemView.tvCancel.visibility=View.GONE
+                holder.itemView.tvMissed.visibility=View.VISIBLE            }
         }
 
         RxView.clicks(holder.itemView.btnViewDetails).throttleFirst(500, TimeUnit.MILLISECONDS)

@@ -18,8 +18,8 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.profiledetails.presenters.ProfileDetailsPresenter
 import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
+import com.applocum.connecttomyhealth.ui.profiledetails.presenters.ProfileDetailsPresenter
 import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.applocum.connecttomyhealth.ui.verification.activities.VerificationActivity
 import com.bumptech.glide.Glide
@@ -28,12 +28,6 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_profile_details.*
-import kotlinx.android.synthetic.main.activity_profile_details.etDOB
-import kotlinx.android.synthetic.main.activity_profile_details.etEmail
-import kotlinx.android.synthetic.main.activity_profile_details.etFirstName
-import kotlinx.android.synthetic.main.activity_profile_details.etGender
-import kotlinx.android.synthetic.main.activity_profile_details.etLastName
-import kotlinx.android.synthetic.main.activity_profile_details.ivBack
 import kotlinx.android.synthetic.main.custom_edit_phone_number_dialog.view.*
 import kotlinx.android.synthetic.main.custom_gender_dialog.view.*
 import kotlinx.android.synthetic.main.custom_profile_dialog.view.*
@@ -55,6 +49,10 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     private var myMonth: Int = 0
     private var myYear: Int = 0
     private var countryCode =" "
+    private var userMeter =0.0
+    private var userCentimeter =0.0
+    private var userStone =0.0
+    private var userPound =0.0
 
     @Inject
     lateinit var presenter: ProfileDetailsPresenter
@@ -112,6 +110,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                     CropImage.activity()
                         .setAllowFlipping(false)
                         .setAllowCounterRotation(false)
+                        .setActivityMenuIconColor(resources.getColor(R.color.black))
                         .setBorderLineColor(resources.getColor(R.color.green))
                         .setBorderCornerColor(resources.getColor(R.color.green))
                         .setMinCropResultSize(400,400)
@@ -484,6 +483,10 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, meter)
         builder.setAdapter(dataAdapter) { _, which ->
             etMeter.setText(meter[which]).toString()
+
+            val Meter=etMeter.text.toString().replaceFirst(" m","")
+            userMeter= Meter.toDouble()
+            calculateBmi(userMeter,userCentimeter,userStone,userPound)
         }
         val dialog = builder.create()
         dialog.show()
@@ -499,6 +502,9 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
             etCentimeter.setText(centimeter[which]).toString()
+            val centiMeter=etCentimeter.text.toString().replaceFirst(" cm","")
+            userCentimeter= centiMeter.toDouble()
+            calculateBmi(userMeter,userCentimeter,userStone,userPound)
         }
         val dialog = builder.create()
         dialog.show()
@@ -514,6 +520,10 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
             etStone.setText(centimeter[which]).toString()
+
+            val Stone=etStone.text.toString().replaceFirst(" st","")
+            userStone= Stone.toDouble()
+            calculateBmi(userMeter,userCentimeter,userStone,userPound)
         }
         val dialog = builder.create()
         dialog.show()
@@ -529,9 +539,19 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
             etLbs.setText(centimeter[which]).toString()
+
+            val Pound=etLbs.text.toString().replaceFirst(" lbs","")
+            userPound= Pound.toDouble()
+            calculateBmi(userMeter,userCentimeter,userStone,userPound)
         }
         val dialog = builder.create()
         dialog.show()
+    }
+
+    fun calculateBmi(heightValue1:Double,heightValue2: Double,weightValue1:Double,weightValue2: Double)
+    {
+        val meter=heightValue1/100
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

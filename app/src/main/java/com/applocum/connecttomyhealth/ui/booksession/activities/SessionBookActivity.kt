@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -21,7 +20,6 @@ import com.applocum.connecttomyhealth.ui.booksession.models.Common
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.confirmbooking.activities.ConfirmBookingActivity
-import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.prolificinteractive.materialcalendarview.*
@@ -51,7 +49,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     private var sSlot = ""
     private var seleteddate = ""
     private var sTime = ""
-    lateinit var specialist: Specialist
+    private var specialistId = 0
+    //lateinit var specialist: Specialist
     private lateinit var commonData: Common
 
     @Inject
@@ -62,11 +61,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
     override fun getLayoutResourceId(): Int = R.layout.activity_session_book
 
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
-        if (!isConnect!!) {
-            Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT).show()
-        }
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,86 +83,93 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 overridePendingTransition(0,0)
             }
 
-        specialist = intent.getSerializableExtra("specialist") as Specialist
+        //specialist = intent.getSerializableExtra("specialist") as Specialist
+        specialistId = intent.getIntExtra("specialistId",0)
 
 
-        btnPhoneCall.setOnClickListener {
-            sType = "phone_call_appointment"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            btnPhoneCall.setBackgroundResource(R.drawable.custom_btn)
-            btnVideoCall.setBackgroundResource(R.drawable.default_button)
-            btnFaceToFace.setBackgroundResource(R.drawable.default_button)
-            btnPhoneCall.setTextColor(Color.WHITE)
-            btnVideoCall.setTextColor(Color.parseColor("#008976"))
-            btnFaceToFace.setTextColor(Color.parseColor("#008976"))
+        RxView.clicks(btnPhoneCall).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sType = "phone_call_appointment"
+                presenter.getTimeSlots(specialistId, seleteddate, sType, sSlot)
+                btnPhoneCall.setBackgroundResource(R.drawable.custom_btn)
+                btnVideoCall.setBackgroundResource(R.drawable.default_button)
+                btnFaceToFace.setBackgroundResource(R.drawable.default_button)
+                btnPhoneCall.setTextColor(Color.WHITE)
+                btnVideoCall.setTextColor(Color.parseColor("#008976"))
+                btnFaceToFace.setTextColor(Color.parseColor("#008976"))
 
-            sTime=""
-        }
+                sTime=""
+            }
 
-        btnVideoCall.setOnClickListener {
-            sType = "online_appointment"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            btnPhoneCall.setBackgroundResource(R.drawable.default_button)
-            btnVideoCall.setBackgroundResource(R.drawable.custom_btn)
-            btnFaceToFace.setBackgroundResource(R.drawable.default_button)
-            btnPhoneCall.setTextColor(Color.parseColor("#008976"))
-            btnVideoCall.setTextColor(Color.WHITE)
-            btnFaceToFace.setTextColor(Color.parseColor("#008976"))
+        RxView.clicks(btnVideoCall).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sType = "online_appointment"
+                presenter.getTimeSlots(specialistId, seleteddate, sType, sSlot)
+                btnPhoneCall.setBackgroundResource(R.drawable.default_button)
+                btnVideoCall.setBackgroundResource(R.drawable.custom_btn)
+                btnFaceToFace.setBackgroundResource(R.drawable.default_button)
+                btnPhoneCall.setTextColor(Color.parseColor("#008976"))
+                btnVideoCall.setTextColor(Color.WHITE)
+                btnFaceToFace.setTextColor(Color.parseColor("#008976"))
 
-            sTime=""
-        }
+                sTime=""
+            }
 
-        btnFaceToFace.setOnClickListener {
-            sType = "offline_appointment"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            btnPhoneCall.setBackgroundResource(R.drawable.default_button)
-            btnVideoCall.setBackgroundResource(R.drawable.default_button)
-            btnFaceToFace.setBackgroundResource(R.drawable.custom_btn)
-            btnPhoneCall.setTextColor(Color.parseColor("#008976"))
-            btnVideoCall.setTextColor(Color.parseColor("#008976"))
-            btnFaceToFace.setTextColor(Color.WHITE)
+        RxView.clicks(btnFaceToFace).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sType = "offline_appointment"
+                presenter.getTimeSlots(specialistId, seleteddate, sType, sSlot)
+                btnPhoneCall.setBackgroundResource(R.drawable.default_button)
+                btnVideoCall.setBackgroundResource(R.drawable.default_button)
+                btnFaceToFace.setBackgroundResource(R.drawable.custom_btn)
+                btnPhoneCall.setTextColor(Color.parseColor("#008976"))
+                btnVideoCall.setTextColor(Color.parseColor("#008976"))
+                btnFaceToFace.setTextColor(Color.WHITE)
 
-            sTime=""
-        }
+                sTime=""
+            }
 
-        btn10Mins.setOnClickListener {
-            sSlot = "10"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            btn10Mins.setBackgroundResource(R.drawable.custom_btn)
-            btn20Mins.setBackgroundResource(R.drawable.default_button)
-            btn30Mins.setBackgroundResource(R.drawable.default_button)
-            btn10Mins.setTextColor(Color.WHITE)
-            btn20Mins.setTextColor(Color.parseColor("#008976"))
-            btn30Mins.setTextColor(Color.parseColor("#008976"))
+        RxView.clicks(btn10Mins).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sSlot = "10"
+                presenter.getTimeSlots(specialistId, seleteddate, sType, sSlot)
+                btn10Mins.setBackgroundResource(R.drawable.custom_btn)
+                btn20Mins.setBackgroundResource(R.drawable.default_button)
+                btn30Mins.setBackgroundResource(R.drawable.default_button)
+                btn10Mins.setTextColor(Color.WHITE)
+                btn20Mins.setTextColor(Color.parseColor("#008976"))
+                btn30Mins.setTextColor(Color.parseColor("#008976"))
 
-            sTime=""
-        }
+                sTime=""
+            }
 
-        btn20Mins.setOnClickListener {
-            sSlot = "20"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            btn10Mins.setBackgroundResource(R.drawable.default_button)
-            btn20Mins.setBackgroundResource(R.drawable.custom_btn)
-            btn30Mins.setBackgroundResource(R.drawable.default_button)
-            btn10Mins.setTextColor(Color.parseColor("#008976"))
-            btn20Mins.setTextColor(Color.WHITE)
-            btn30Mins.setTextColor(Color.parseColor("#008976"))
+        RxView.clicks(btn20Mins).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sSlot = "20"
+                presenter.getTimeSlots(specialistId, seleteddate, sType, sSlot)
+                btn10Mins.setBackgroundResource(R.drawable.default_button)
+                btn20Mins.setBackgroundResource(R.drawable.custom_btn)
+                btn30Mins.setBackgroundResource(R.drawable.default_button)
+                btn10Mins.setTextColor(Color.parseColor("#008976"))
+                btn20Mins.setTextColor(Color.WHITE)
+                btn30Mins.setTextColor(Color.parseColor("#008976"))
 
-            sTime=""
-        }
+                sTime=""
+            }
 
-        btn30Mins.setOnClickListener {
-            sSlot = "30"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            btn10Mins.setBackgroundResource(R.drawable.default_button)
-            btn20Mins.setBackgroundResource(R.drawable.default_button)
-            btn30Mins.setBackgroundResource(R.drawable.custom_btn)
-            btn10Mins.setTextColor(Color.parseColor("#008976"))
-            btn20Mins.setTextColor(Color.parseColor("#008976"))
-            btn30Mins.setTextColor(Color.WHITE)
+        RxView.clicks(btn30Mins).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sSlot = "30"
+                presenter.getTimeSlots(specialistId, seleteddate, sType, sSlot)
+                btn10Mins.setBackgroundResource(R.drawable.default_button)
+                btn20Mins.setBackgroundResource(R.drawable.default_button)
+                btn30Mins.setBackgroundResource(R.drawable.custom_btn)
+                btn10Mins.setTextColor(Color.parseColor("#008976"))
+                btn20Mins.setTextColor(Color.parseColor("#008976"))
+                btn30Mins.setTextColor(Color.WHITE)
 
-            sTime=""
-        }
+                sTime=""
+            }
 
         btn10Mins.performClick()
 
@@ -252,6 +254,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                     appointment.appointmentType = sType
                     appointment.appointmentSlot = sSlot
                     appointment.appointmentDate = seleteddate
+                    appointment.therapistId=specialistId
                     userHolder.saveBookAppointmentData(appointment)
                     intent.putExtra("commonData", commonData)
                     startActivity(intent)
@@ -319,6 +322,17 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         commonData = common
     }
 
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            val snackbar = Snackbar.make(llSessionbook,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
+        }
+    }
+
     @SuppressLint("SimpleDateFormat")
     override fun onDateSelected(
         widget: MaterialCalendarView,
@@ -337,7 +351,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
         val formateDate = SimpleDateFormat("yyyy-MM-dd").format(date)
         seleteddate = formateDate
-        presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+        presenter.getTimeSlots(specialistId, seleteddate, sType, sSlot)
     }
 
     private class PrimeDayDisableDecorator : DayViewDecorator {

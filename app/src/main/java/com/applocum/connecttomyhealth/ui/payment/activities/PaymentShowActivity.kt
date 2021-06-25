@@ -23,7 +23,6 @@ import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentRespo
 import com.applocum.connecttomyhealth.ui.appointment.presenters.BookAppointmentPresenter
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.payment.adapters.PaymentCardAdapter
-import com.applocum.connecttomyhealth.ui.verificationdocument.activities.VerifyIdentityActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_payment_show.*
@@ -47,6 +46,7 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
     lateinit var userHolder: UserHolder
 
     private var selectCard = 0
+
     private var appointmentType = ""
 
     override fun getLayoutResourceId(): Int = R.layout.activity_payment_show
@@ -106,7 +106,6 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
 
         customPaymentAdd.tvSessionDate.text=newDateString
 
-
         RxView.clicks(btnConfirmSessionBooking).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
 
@@ -163,8 +162,40 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
             }
         RxView.clicks(btnConfirmSessionBook).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this, VerifyIdentityActivity::class.java))
-                overridePendingTransition(0,0)
+                when (selectCard) {
+                  0 -> {
+                    val snackbar = Snackbar.make(llPaymentShow, "Please select at least one method ", Snackbar.LENGTH_LONG)
+                    snackbar.changeFont()
+                    val snackview = snackbar.view
+                    snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                    snackbar.show()
+                }
+                else -> {
+                    when (bookAppointment.appointmentType) {
+                        "phone_call_appointment" -> {
+                            appointmentType = "phone_call"
+                        }
+                        "online_appointment" -> {
+                            appointmentType = "video"
+                        }
+                        "offline_appointment" -> {
+                            appointmentType = "face_to_face"
+                        }
+                    }
+
+                    bookAppointmentPresenter.bookAppointment(
+                        bookAppointment.appointmentTime,
+                        bookAppointment.appointmentSlot,
+                        bookAppointment.appointmentReason,
+                        bookAppointment.allowGeoAccess,
+                        bookAppointment.sharedRecordWithNhs,
+                        appointmentType,
+                        bookAppointment.therapistId,
+                        selectCard,
+                        bookAppointment.corporateId
+                    )
+                }
+              }
             }
 
         RxView.clicks(etAddCode).throttleFirst(500, TimeUnit.MILLISECONDS)

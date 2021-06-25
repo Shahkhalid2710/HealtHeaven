@@ -18,7 +18,6 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.applocum.connecttomyhealth.ui.booksession.activities.SessionBookActivity
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
@@ -31,20 +30,16 @@ import java.io.InputStream
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-
 class AddSymptomActivity : BaseActivity() {
     private val requestCodeGallery = 999
     private var selectedImagePath: String = ""
-    lateinit var bookAppointmentResponse: BookAppointmentResponse
 
     @Inject
     lateinit var userHolder: UserHolder
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_symptom
 
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
-
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,8 +47,8 @@ class AddSymptomActivity : BaseActivity() {
 
         (application as MyApplication).component.inject(this)
 
-        val specialist = intent.getSerializableExtra("specialist") as Specialist
-       // bookAppointmentResponse = intent.getSerializableExtra("bookAppointmentResponse") as BookAppointmentResponse
+       // val specialist = intent.getSerializableExtra("specialist") as Specialist
+        val specialistId = intent.getIntExtra("specialistId",0)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish()}
@@ -82,7 +77,8 @@ class AddSymptomActivity : BaseActivity() {
             .subscribe {
                 if (checkCondition(cbGeoLocation.isChecked, cbRecords.isChecked)) {
                     val intent = Intent(this,SessionBookActivity::class.java)
-                    intent.putExtra("specialist", specialist)
+                    //intent.putExtra("specialist", specialist)
+                    intent.putExtra("specialistId", specialistId)
                     val appointment = userHolder.getBookAppointmentData()
                     appointment.pickedFilePath = selectedImagePath
                     appointment.appointmentReason = etAddSymptoms.text.toString()

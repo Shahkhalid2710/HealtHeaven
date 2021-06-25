@@ -11,6 +11,7 @@ import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class BookSessionPresenter@Inject constructor(private val api:AppEndPoint) {
@@ -36,6 +37,7 @@ class BookSessionPresenter@Inject constructor(private val api:AppEndPoint) {
                         view.viewProgress(false)
                         when(it.status) {
                             Success-> {
+                                view.noInternet(true)
                                 view.getTimeSlot(it.data)
                                 view.getPrice(it.common)
                             }
@@ -50,6 +52,12 @@ class BookSessionPresenter@Inject constructor(private val api:AppEndPoint) {
                     },onError = {
                         view.viewProgress(false)
                         it.printStackTrace()
+
+                        if (it is UnknownHostException)
+                        {
+                            view.noInternet(false)
+                        }
+
                     }).let { disposables.addAll(it) }
             }
         }
@@ -60,5 +68,6 @@ class BookSessionPresenter@Inject constructor(private val api:AppEndPoint) {
         fun displaymessage(message:String)
         fun viewProgress(isShow: Boolean)
         fun getPrice(common: Common)
+        fun noInternet(isConnect:Boolean)
     }
 }

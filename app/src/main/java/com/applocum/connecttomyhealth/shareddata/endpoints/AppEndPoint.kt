@@ -45,7 +45,8 @@ interface AppEndPoint {
 
     @GET("/api/profiles/search.json")
     fun getdoctors(@Header("AUTH_TOKEN") authtoken:String?,
-                   @Query("corporate_organization_id") corporateId:Int):Observable<DoctorResponse>
+                   @Query("corporate_organization_id") corporateId:Int,
+                   @Query("page")page:Int):Observable<DoctorResponse>
 
     @GET("/api/patients/time_slots.json")
     fun getTimeSlots(@Header("AUTH_TOKEN") authtoken: String?,

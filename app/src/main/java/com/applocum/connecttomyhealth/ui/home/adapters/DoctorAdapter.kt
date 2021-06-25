@@ -5,8 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.ScaleAnimation
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
@@ -22,7 +20,6 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
     var mContext=context
     var mList=list
     lateinit var view:View
-    private var lastPosition = -1
 
     inner class DoctorHolder(itemview:View):RecyclerView.ViewHolder(itemview){}
 
@@ -32,7 +29,7 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 6
     }
 
     @SuppressLint("CheckResult")
@@ -44,41 +41,11 @@ class DoctorAdapter(context: Context,list:ArrayList<Specialist>,private val doct
         holder.itemView.tvDoctorEmail.text=specialist.email
         Glide.with(mContext).load(specialist.image).into(holder.itemView.ivDoctor)
 
-        RxView.clicks(holder.itemView.cvDoctor).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(holder.itemView.cvDoctor).throttleFirst(2000,TimeUnit.MILLISECONDS)
             .subscribe {
                 doctorClick.onDoctorClick(specialist, position)
             }
 
-       // setAnimation(holder.itemView,position)
-    }
-
-
-   /* private fun setAnimation(viewToAnimate: View, position: Int) {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition) {
-            val animation: Animation = AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right)
-            viewToAnimate.startAnimation(animation)
-            lastPosition = position
-        }
-    }*/
-
-    private fun setAnimation(viewToAnimate: View, position: Int) {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition) {
-            val anim = ScaleAnimation(
-                0.0f,
-                1.0f,
-                0.0f,
-                1.0f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f
-            )
-            anim.duration = Random().nextInt(301).toLong()
-            viewToAnimate.startAnimation(anim)
-            lastPosition = position
-        }
     }
 
     interface DoctorClickListner{

@@ -37,9 +37,7 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_specialists
 
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
-
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +83,7 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
                     override fun onItemClick(specialist: Specialist, position: Int) {
                         val intent = Intent(this@SpecialistsActivity, BookSessionActivity::class.java)
                         intent.putExtra("specialist", specialist)
+                        intent.putExtra("specialistId", specialist.id)
                         startActivity(intent)
                         overridePendingTransition(0,0)
                     }
@@ -92,6 +91,7 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View {
                     override fun onbookSession(specialist: Specialist, position: Int) {
                         val intent = Intent(this@SpecialistsActivity, AddSymptomActivity::class.java)
                         intent.putExtra("specialist", specialist)
+                        intent.putExtra("specialistId", specialist.id)
                         val appointment = userHolder.getBookAppointmentData()
                         appointment.therapistId = specialist.id
                         appointment.therapistImage = specialist.image

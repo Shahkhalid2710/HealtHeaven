@@ -21,15 +21,16 @@ import com.applocum.connecttomyhealth.ui.booksession.models.Common
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.view.RxView
 import com.prolificinteractive.materialcalendarview.*
 import kotlinx.android.synthetic.main.custom_small_progress.view.*
 import kotlinx.android.synthetic.main.fragment_availability.*
 import kotlinx.android.synthetic.main.fragment_availability.view.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.collections.ArrayList
-
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class AvailabilityFragment : Fragment(), OnDateSelectedListener, BookSessionPresenter.View {
@@ -42,6 +43,7 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener, BookSessionPres
     @Inject
     lateinit var presenter: BookSessionPresenter
 
+    @SuppressLint("CheckResult")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_availability, container, false)
@@ -51,73 +53,77 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener, BookSessionPres
 
         specialist = arguments?.getSerializable("specialist") as Specialist
 
+        RxView.clicks(v.btnPhoneCall).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sType = "phone_call_appointment"
+                presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+                v.btnPhoneCall.setBackgroundResource(R.drawable.custom_btn)
+                v.btnVideoCall.setBackgroundResource(R.drawable.default_button)
+                v.btnFaceToFace.setBackgroundResource(R.drawable.default_button)
+                v.btnPhoneCall.setTextColor(Color.WHITE)
+                v.btnVideoCall.setTextColor(Color.parseColor("#008976"))
+                v.btnFaceToFace.setTextColor(Color.parseColor("#008976"))
+            }
 
-        v.btnPhoneCall.setOnClickListener {
-            sType = "phone_call_appointment"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            v.btnPhoneCall.setBackgroundResource(R.drawable.custom_btn)
-            v.btnVideoCall.setBackgroundResource(R.drawable.default_button)
-            v.btnFaceToFace.setBackgroundResource(R.drawable.default_button)
-            v.btnPhoneCall.setTextColor(Color.WHITE)
-            v.btnVideoCall.setTextColor(Color.parseColor("#008976"))
-            v.btnFaceToFace.setTextColor(Color.parseColor("#008976"))
-        }
+        RxView.clicks(v.btnVideoCall).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sType = "online_appointment"
+                presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+                v.btnPhoneCall.setBackgroundResource(R.drawable.default_button)
+                v.btnVideoCall.setBackgroundResource(R.drawable.custom_btn)
+                v.btnFaceToFace.setBackgroundResource(R.drawable.default_button)
+                v.btnPhoneCall.setTextColor(Color.parseColor("#008976"))
+                v.btnVideoCall.setTextColor(Color.WHITE)
+                v.btnFaceToFace.setTextColor(Color.parseColor("#008976"))
+            }
 
-        v.btnVideoCall.setOnClickListener {
-            sType = "online_appointment"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            v.btnPhoneCall.setBackgroundResource(R.drawable.default_button)
-            v.btnVideoCall.setBackgroundResource(R.drawable.custom_btn)
-            v.btnFaceToFace.setBackgroundResource(R.drawable.default_button)
-            v.btnPhoneCall.setTextColor(Color.parseColor("#008976"))
-            v.btnVideoCall.setTextColor(Color.WHITE)
-            v.btnFaceToFace.setTextColor(Color.parseColor("#008976"))
-        }
+        RxView.clicks(v.btnFaceToFace).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sType = "offline_appointment"
+                presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+                v.btnPhoneCall.setBackgroundResource(R.drawable.default_button)
+                v.btnVideoCall.setBackgroundResource(R.drawable.default_button)
+                v.btnFaceToFace.setBackgroundResource(R.drawable.custom_btn)
+                v.btnPhoneCall.setTextColor(Color.parseColor("#008976"))
+                v.btnVideoCall.setTextColor(Color.parseColor("#008976"))
+                v.btnFaceToFace.setTextColor(Color.WHITE)
+            }
 
-        v.btnFaceToFace.setOnClickListener {
-            sType = "offline_appointment"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            v.btnPhoneCall.setBackgroundResource(R.drawable.default_button)
-            v.btnVideoCall.setBackgroundResource(R.drawable.default_button)
-            v.btnFaceToFace.setBackgroundResource(R.drawable.custom_btn)
-            v.btnPhoneCall.setTextColor(Color.parseColor("#008976"))
-            v.btnVideoCall.setTextColor(Color.parseColor("#008976"))
-            v.btnFaceToFace.setTextColor(Color.WHITE)
-        }
+        RxView.clicks(v.btn10Mins).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sSlot = "10"
+                presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+                v.btn10Mins.setBackgroundResource(R.drawable.custom_btn)
+                v.btn20Mins.setBackgroundResource(R.drawable.default_button)
+                v.btn30Mins.setBackgroundResource(R.drawable.default_button)
+                v.btn10Mins.setTextColor(Color.WHITE)
+                v.btn20Mins.setTextColor(Color.parseColor("#008976"))
+                v.btn30Mins.setTextColor(Color.parseColor("#008976"))
+            }
 
+        RxView.clicks(v.btn20Mins).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sSlot = "20"
+                presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+                v.btn10Mins.setBackgroundResource(R.drawable.default_button)
+                v.btn20Mins.setBackgroundResource(R.drawable.custom_btn)
+                v.btn30Mins.setBackgroundResource(R.drawable.default_button)
+                v.btn10Mins.setTextColor(Color.parseColor("#008976"))
+                v.btn20Mins.setTextColor(Color.WHITE)
+                v.btn30Mins.setTextColor(Color.parseColor("#008976"))
+            }
 
-        v.btn10Mins.setOnClickListener {
-            sSlot = "10"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            v.btn10Mins.setBackgroundResource(R.drawable.custom_btn)
-            v.btn20Mins.setBackgroundResource(R.drawable.default_button)
-            v.btn30Mins.setBackgroundResource(R.drawable.default_button)
-            v.btn10Mins.setTextColor(Color.WHITE)
-            v.btn20Mins.setTextColor(Color.parseColor("#008976"))
-            v.btn30Mins.setTextColor(Color.parseColor("#008976"))
-        }
-
-        v.btn20Mins.setOnClickListener {
-            sSlot = "20"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            v.btn10Mins.setBackgroundResource(R.drawable.default_button)
-            v.btn20Mins.setBackgroundResource(R.drawable.custom_btn)
-            v.btn30Mins.setBackgroundResource(R.drawable.default_button)
-            v.btn10Mins.setTextColor(Color.parseColor("#008976"))
-            v.btn20Mins.setTextColor(Color.WHITE)
-            v.btn30Mins.setTextColor(Color.parseColor("#008976"))
-        }
-
-        v.btn30Mins.setOnClickListener {
-            sSlot = "30"
-            presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
-            v.btn10Mins.setBackgroundResource(R.drawable.default_button)
-            v.btn20Mins.setBackgroundResource(R.drawable.default_button)
-            v.btn30Mins.setBackgroundResource(R.drawable.custom_btn)
-            v.btn10Mins.setTextColor(Color.parseColor("#008976"))
-            v.btn20Mins.setTextColor(Color.parseColor("#008976"))
-            v.btn30Mins.setTextColor(Color.WHITE)
-        }
+        RxView.clicks(v.btn30Mins).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                sSlot = "30"
+                presenter.getTimeSlots(specialist.id, seleteddate, sType, sSlot)
+                v.btn10Mins.setBackgroundResource(R.drawable.default_button)
+                v.btn20Mins.setBackgroundResource(R.drawable.default_button)
+                v.btn30Mins.setBackgroundResource(R.drawable.custom_btn)
+                v.btn10Mins.setTextColor(Color.parseColor("#008976"))
+                v.btn20Mins.setTextColor(Color.parseColor("#008976"))
+                v.btn30Mins.setTextColor(Color.WHITE)
+            }
 
         v.btn10Mins.performClick()
 
@@ -175,6 +181,17 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener, BookSessionPres
 
     override fun getPrice(common: Common) {}
 
+    override fun noInternet(isConnect: Boolean) {
+
+        if(!isConnect)
+        {
+            val snackBar = Snackbar.make(llAvailability,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+            snackBar.show()
+        }
+    }
 
     private class PrimeDayDisableDecorator : DayViewDecorator {
         override fun shouldDecorate(day: CalendarDay): Boolean {

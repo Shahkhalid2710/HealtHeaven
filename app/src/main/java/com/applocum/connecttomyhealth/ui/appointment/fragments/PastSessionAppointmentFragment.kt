@@ -14,6 +14,7 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
+import com.applocum.connecttomyhealth.ui.addsymptoms.activities.AddSymptomActivity
 import com.applocum.connecttomyhealth.ui.appointment.presenters.BookAppointmentPresenter
 import com.applocum.connecttomyhealth.ui.appointment.adapters.PastSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
@@ -85,9 +86,9 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
                     requireActivity().overridePendingTransition(0,0)
                 }
                 override fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse,position: Int) {
-                  /*  val intent=Intent(requireActivity(),AddSymptomActivity::class.java)
-                    intent.putExtra("bookAppointmentResponse", bookAppointmentResponse)
-                    startActivity(intent)*/
+                    val intent=Intent(requireActivity(), AddSymptomActivity::class.java)
+                    intent.putExtra("specialistId", bookAppointmentResponse.gp_details.id)
+                    startActivity(intent)
                 }
             })
       }

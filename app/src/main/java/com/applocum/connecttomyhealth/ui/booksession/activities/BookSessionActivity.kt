@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
@@ -34,11 +33,8 @@ class BookSessionActivity : BaseActivity() {
     lateinit var userHolder: UserHolder
 
     override fun getLayoutResourceId(): Int = R.layout.activity_book_session
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
-        if (!isConnect!!) {
-            Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT).show()
-        }
-    }
+
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +60,7 @@ class BookSessionActivity : BaseActivity() {
             }
 
         val specialist = intent.getSerializableExtra("specialist") as Specialist
+        val specialistId=intent.getIntExtra("specialistId",0)
 
         val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(this, supportFragmentManager)
         viewPagerFragmentAdapter.addfragment(AboutSpecialistFragment().newInstance(specialist), "About Specialist")
@@ -74,9 +71,11 @@ class BookSessionActivity : BaseActivity() {
         RxView.clicks(btnBookSession).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 val intent = Intent(this, AddSymptomActivity::class.java)
-                intent.putExtra("specialist", specialist)
+                //intent.putExtra("specialist", specialist)
+                intent.putExtra("specialistId", specialistId)
                 val appointment = userHolder.getBookAppointmentData()
                 appointment.therapistId = specialist.id
+                appointment.therapistId = specialistId
                 appointment.therapistImage = specialist.image
                 appointment.threapistBio = specialist.bio
                 appointment.therapistName = "${specialist.first_name} ${specialist.last_name}"

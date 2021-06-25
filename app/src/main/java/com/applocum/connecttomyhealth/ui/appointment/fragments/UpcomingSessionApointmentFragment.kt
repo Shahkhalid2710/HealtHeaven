@@ -77,7 +77,7 @@ class UpcomingSessionApointmentFragment : Fragment(),BookAppointmentPresenter.Vi
         mListUpcomingSession.trimToSize()
 
         checkList()
-        val snackbar = Snackbar.make(llUpcomingSession, message, Snackbar.LENGTH_LONG)
+        val snackbar = Snackbar.make(llUpcomingSession, message, Snackbar.LENGTH_SHORT)
         snackbar.changeFont()
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.blue))

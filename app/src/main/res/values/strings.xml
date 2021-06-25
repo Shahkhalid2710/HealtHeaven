@@ -188,6 +188,8 @@
     <string name="friday_14th_august_2020_1_00pm">Friday, 14th August 2020, 1:00PM</string>
     <string name="check_in">Check-in</string>
     <string name="cancel">Cancel</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="missed">Missed</string>
     <string name="book_again">Book Again</string>
     <string name="view_details">View Details</string>
     <string name="cancel_booked_session">Cancel Booked Session</string>
@@ -597,6 +599,7 @@
     <string name="lbl_take_camera_picture">Take a picture</string>
     <string name="lbl_choose_from_gallery">Choose from gallery</string>
     <string name="toast_image_intent_null">Image picker option is missing!</string>
+    <string name="press_once_again_to_exit">Press once again to exit!</string>
 
     <!-- font families -->
     <string name="font_family_light">sans-serif-light</string>

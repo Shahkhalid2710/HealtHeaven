@@ -17,9 +17,7 @@ class ChooseExemptionActivity : BaseActivity() {
     private var mListExemption: ArrayList<Exemption> = ArrayList()
 
     override fun getLayoutResourceId(): Int = R.layout.activity_choose_exemption
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
-        TODO("Not yet implemented")
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

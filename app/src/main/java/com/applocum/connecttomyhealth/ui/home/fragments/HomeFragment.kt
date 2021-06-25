@@ -3,10 +3,13 @@ package com.applocum.connecttomyhealth.ui.home.fragments
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,8 +22,8 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.booksession.activities.BookSessionActivity
 import com.applocum.connecttomyhealth.ui.home.adapters.DoctorAdapter
 import com.applocum.connecttomyhealth.ui.specialists.activities.SpecialistsActivity
-import com.applocum.connecttomyhealth.ui.specialists.presenters.SpecilistPresenter
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
+import com.applocum.connecttomyhealth.ui.specialists.presenters.SpecilistPresenter
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
@@ -33,6 +36,8 @@ import javax.inject.Inject
 
 
 class HomeFragment : Fragment(), SpecilistPresenter.View {
+    var doubleBackToExitPressedOnce = false
+
     @Inject
     lateinit var userHolder: UserHolder
 
@@ -66,6 +71,25 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
                 v.noInternet.visibility=View.GONE
                 specilistPresenter.getDoctorlist()
             }
+
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (doubleBackToExitPressedOnce) {
+                        requireActivity().finish()
+                        return
+                    }
+
+                    doubleBackToExitPressedOnce = true
+
+                    Toast.makeText(requireContext(), R.string.press_once_again_to_exit, Toast.LENGTH_SHORT).show()
+
+                    Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+                }
+               }
+            )
 
         return v
     }
@@ -101,6 +125,7 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
                 override fun onDoctorClick(specialist: Specialist, position: Int) {
                     val intent = Intent(requireActivity(),BookSessionActivity::class.java)
                     intent.putExtra("specialist", specialist)
+                    intent.putExtra("specialistId", specialist.id)
                     val appointment = userHolder.getBookAppointmentData()
                     appointment.therapistId = specialist.id
                     appointment.therapistImage = specialist.image

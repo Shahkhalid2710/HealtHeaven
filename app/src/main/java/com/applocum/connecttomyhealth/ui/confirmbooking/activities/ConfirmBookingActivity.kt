@@ -29,9 +29,8 @@ class ConfirmBookingActivity : BaseActivity() {
     lateinit var common: Common
 
     override fun getLayoutResourceId(): Int = R.layout.activity_confirm_booking
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
 
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("SimpleDateFormat", "CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

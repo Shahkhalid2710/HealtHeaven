@@ -25,10 +25,10 @@
                 android:id="@+id/cvDoctor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/spacing_16"
                 android:layout_marginTop="@dimen/spacing_16"
                 android:backgroundTint="@color/white"
-                android:layout_centerVertical="true"
                 android:elevation="10dp"
                 app:cardCornerRadius="6dp">
 
@@ -45,8 +45,8 @@
                 android:id="@+id/ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_16"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/spacing_16"
                 android:layout_toEndOf="@+id/cvDoctor"
                 android:orientation="vertical">
 
@@ -73,6 +73,36 @@
                         android:text="@string/gayoso"
                         android:textColor="@color/aapBlack"
                         android:textSize="@dimen/font_16" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp">
+
+                        <TextView
+                            android:id="@+id/tvCancel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/cancelled"
+                            android:textColor="@color/red"
+                            android:textSize="@dimen/font_11"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tvMissed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/missed"
+                            android:textColor="@color/red"
+                            android:textSize="@dimen/font_11"
+                            android:visibility="gone" />
+                    </FrameLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
