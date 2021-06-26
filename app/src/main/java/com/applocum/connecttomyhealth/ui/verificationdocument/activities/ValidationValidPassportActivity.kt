@@ -79,6 +79,7 @@ class ValidationValidPassportActivity : BaseActivity(),PhotoIdPresenter.View {
                         CropImage.activity()
                             .setAllowFlipping(false)
                             .setAllowCounterRotation(false)
+                            .setActivityMenuIconColor(resources.getColor(R.color.black))
                             .setBorderLineColor(resources.getColor(R.color.green))
                             .setBorderCornerColor(resources.getColor(R.color.green))
                             .setMinCropResultSize(400,400)

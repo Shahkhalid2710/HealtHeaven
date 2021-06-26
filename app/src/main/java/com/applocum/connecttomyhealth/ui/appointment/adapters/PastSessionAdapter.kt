@@ -56,11 +56,9 @@ class PastSessionAdapter(context: Context, list: ArrayList<BookAppointmentRespon
 
         when (bookAppointmentResponse.status) {
             "cancelled" -> {
-                holder.itemView.tvCancel.visibility=View.VISIBLE
-                holder.itemView.tvMissed.visibility=View.GONE
+                holder.itemView.tvCancelled.visibility=View.VISIBLE
             }
-            "missed" -> {
-                holder.itemView.tvCancel.visibility=View.GONE
+            "not_attended" -> {
                 holder.itemView.tvMissed.visibility=View.VISIBLE            }
         }
 
@@ -73,7 +71,7 @@ class PastSessionAdapter(context: Context, list: ArrayList<BookAppointmentRespon
             .subscribe {
                 onItemClick.onButtonClick(bookAppointmentResponse, position)
             }
-    }
+     }
 
     interface ItemClickListner {
         fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int)

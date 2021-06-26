@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/llAppointment"
@@ -37,8 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_24"
                 android:layout_marginTop="@dimen/spacing_40"
+                android:layout_marginEnd="@dimen/spacing_24"
                 android:background="@drawable/custom_tab_stroke_layout"
                 android:orientation="vertical">
 
@@ -59,11 +59,12 @@
                     app:tabTextColor="@color/green" />
             </LinearLayout>
 
-            <androidx.viewpager.widget.ViewPager
+            <com.applocum.connecttomyhealth.ui.SwipeDisableViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="fill_parent"
                 android:layout_marginBottom="55dp" />
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

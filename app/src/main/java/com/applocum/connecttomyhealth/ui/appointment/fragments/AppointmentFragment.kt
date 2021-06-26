@@ -23,6 +23,7 @@ class AppointmentFragment : Fragment(){
         viewPagerFragmentAdapter.addfragment(PastSessionAppointmentFragment(), "Past Session")
         v.viewPager.adapter = viewPagerFragmentAdapter
         v.tablayout.setupWithViewPager(v.viewPager)
+        v.viewPager.setPagingEnabled(false)
 
         return v
     }

@@ -32,5 +32,6 @@ class MedicationActivity : BaseActivity() {
         viewPagerFragmentAdapter.addfragment(PastAcuteMedicationIssueFragment(), "Past Acute")
         viewPager.adapter = viewPagerFragmentAdapter
         tablayout.setupWithViewPager(viewPager)
+        viewPager.setPagingEnabled(false)
     }
 }

@@ -26,6 +26,8 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
     lateinit var view: View
     private var heightCategory = "metric"
     private var weightCategory = "imperial"
+    private var heightValue2 = "null"
+    private var weightValue2 = "null"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -63,8 +65,8 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
             }).let { disposables.add(it) }
     }
 
-    fun updateProfile(firstname: String, lastname: String, email: String, phoneno: String, gender:String, dob: String, heightValue1: String, heightValue2: String, weightValue1: String, weightValue2: String,bmi:String, bloodPressure: String,smoker:String,alcohol:String,postcode:String,addressline1:String,addressline2: String,city:String) {
-        if (validateProfile(heightValue1,heightValue2,weightValue1,weightValue2,bmi,bloodPressure,alcohol,smoker,postcode,addressline1, addressline2, city))
+    fun updateProfile(firstname: String, lastname: String, email: String, phoneno: String, gender:String, dob: String, heightValue1: String, weightValue1: String,bmi:String, bloodPressure: String,smoker:String,alcohol:String,postcode:String,addressline1:String,addressline2: String,city:String) {
+        if (validateProfile(heightValue1,weightValue1,bmi,bloodPressure,alcohol,smoker,postcode,addressline1, addressline2, city))
         {
             view.viewprogress(true)
             val requestBody: RequestBody = MultipartBody.Builder()
@@ -154,20 +156,12 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
             }).let { disposables.addAll(it) }
     }
 
-    private fun validateProfile(heightValue1: String, heightValue2: String, weightValue1: String, weightValue2: String, bmi: String, bloodPressure: String,alcohol: String,smoker: String,postcode: String,addressline1: String,addressline2: String,city: String): Boolean {
+    private fun validateProfile(heightValue1: String, weightValue1: String, bmi: String, bloodPressure: String,alcohol: String,smoker: String,postcode: String,addressline1: String,addressline2: String,city: String): Boolean {
         if (heightValue1.isEmpty()) {
             view.displayErrorMessage("Please provide all mandatory details")
             return false
         }
-        if (heightValue2.isEmpty()) {
-            view.displayErrorMessage("Please provide all mandatory details")
-            return false
-        }
         if (weightValue1.isEmpty()) {
-            view.displayErrorMessage("Please provide all mandatory details")
-            return false
-        }
-        if (weightValue2.isEmpty()) {
             view.displayErrorMessage("Please provide all mandatory details")
             return false
         }

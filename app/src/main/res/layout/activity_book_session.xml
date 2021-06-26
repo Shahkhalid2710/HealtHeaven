@@ -62,6 +62,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:padding="@dimen/spacing_24"
+                        android:visibility="gone"
                         tools:ignore="RelativeOverlap">
 
                         <TextView
@@ -167,6 +168,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/llTab"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginStart="@dimen/spacing_24"
@@ -191,10 +193,10 @@
                     app:tabTextColor="@color/green" />
             </LinearLayout>
 
-            <androidx.viewpager.widget.ViewPager
+            <com.applocum.connecttomyhealth.ui.SwipeDisableViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="fill_parent" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

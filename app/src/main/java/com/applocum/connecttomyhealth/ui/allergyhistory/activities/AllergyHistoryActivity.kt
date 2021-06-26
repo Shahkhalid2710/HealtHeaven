@@ -16,9 +16,8 @@ import java.util.concurrent.TimeUnit
 class AllergyHistoryActivity : BaseActivity() {
 
     override fun getLayoutResourceId(): Int = R.layout.activity_allergy_history
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
 
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,5 +37,6 @@ class AllergyHistoryActivity : BaseActivity() {
         viewPagerFragmentAdapter.addfragment(PastAllergyFragment(), "Past")
         viewPager.adapter = viewPagerFragmentAdapter
         tablayout.setupWithViewPager(viewPager)
+        viewPager.setPagingEnabled(false)
     }
 }

@@ -476,7 +476,6 @@
                     tools:ignore="LabelFor" />
 
                 <TextView
-                    android:id="@+id/tvHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
@@ -486,53 +485,25 @@
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_14" />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/etHeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <EditText
-                        android:id="@+id/etMeter"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/spacing_5"
-                        android:layout_weight="1"
-                        android:autofillHints="0"
-                        android:backgroundTint="@color/textcolorgrey"
-                        android:drawableEnd="@drawable/ic_dropdown_list"
-                        android:focusable="false"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:hint="@string/meter"
-                        android:inputType="text"
-                        android:textColor="@color/aapBlack"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/font_12"
-                        tools:ignore="LabelFor,TextFields" />
-
-                    <EditText
-                        android:id="@+id/etCentimeter"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_5"
-                        android:layout_weight="1"
-                        android:autofillHints="0"
-                        android:backgroundTint="@color/textcolorgrey"
-                        android:drawableEnd="@drawable/ic_dropdown_list"
-                        android:focusable="false"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:hint="@string/centimeter"
-                        android:inputType="text"
-                        android:textColor="@color/aapBlack"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/font_12"
-                        tools:ignore="LabelFor,TextFields" />
-                </LinearLayout>
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:drawableEnd="@drawable/ic_dropdown_list"
+                    android:focusable="false"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/height_cm"
+                    android:inputType="number"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor" />
 
                 <TextView
-                    android:id="@+id/tvWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
@@ -542,52 +513,23 @@
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_14" />
 
-
-                <LinearLayout
+                <EditText
+                    android:id="@+id/etWeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:layout_marginEnd="@dimen/spacing_24"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <EditText
-                        android:id="@+id/etStone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/spacing_5"
-                        android:layout_weight="1"
-                        android:autofillHints="0"
-                        android:backgroundTint="@color/textcolorgrey"
-                        android:drawableEnd="@drawable/ic_dropdown_list"
-                        android:focusable="false"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:hint="@string/stone"
-                        android:inputType="text"
-                        android:textColor="@color/aapBlack"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/font_12"
-                        tools:ignore="LabelFor,TextFields" />
-
-                    <EditText
-                        android:id="@+id/etLbs"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_5"
-                        android:layout_weight="1"
-                        android:autofillHints="0"
-                        android:backgroundTint="@color/textcolorgrey"
-                        android:drawableEnd="@drawable/ic_dropdown_list"
-                        android:focusable="false"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:hint="@string/pound"
-                        android:inputType="text"
-                        android:textColor="@color/aapBlack"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/font_12"
-                        tools:ignore="LabelFor,TextFields" />
-                </LinearLayout>
-
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/textcolorgrey"
+                    android:drawableEnd="@drawable/ic_dropdown_list"
+                    android:focusable="false"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:hint="@string/weight_kg"
+                    android:inputType="number"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="LabelFor" />
 
                 <TextView
                     android:id="@+id/tvBMI"
@@ -612,7 +554,6 @@
                     android:fontFamily="@font/poppins_regular"
                     android:hint="@string/select_proper_height_and_weight_for_bmi"
                     android:inputType="text"
-                    android:text="@string/_40_93_obese_class_ii"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"

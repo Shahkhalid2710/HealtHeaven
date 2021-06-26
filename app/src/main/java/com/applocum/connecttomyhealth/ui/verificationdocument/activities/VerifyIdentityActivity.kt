@@ -23,9 +23,8 @@ class VerifyIdentityActivity : BaseActivity() {
     private var nameOfDocument=""
 
     override fun getLayoutResourceId(): Int= R.layout.activity_verify_identity
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
 
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +51,7 @@ class VerifyIdentityActivity : BaseActivity() {
                         CropImage.activity()
                             .setAllowFlipping(false)
                             .setAllowCounterRotation(false)
+                            .setActivityMenuIconColor(resources.getColor(R.color.black))
                             .setBorderLineColor(resources.getColor(R.color.green))
                             .setBorderCornerColor(resources.getColor(R.color.green))
                             .setMinCropResultSize(400,400)
@@ -85,6 +85,7 @@ class VerifyIdentityActivity : BaseActivity() {
                         CropImage.activity()
                             .setAllowFlipping(false)
                             .setAllowCounterRotation(false)
+                            .setActivityMenuIconColor(resources.getColor(R.color.black))
                             .setBorderLineColor(resources.getColor(R.color.green))
                             .setBorderCornerColor(resources.getColor(R.color.green))
                             .setMinCropResultSize(400,400)

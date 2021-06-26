@@ -39,7 +39,6 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, DatePickerDialog.OnDateSetListener {
     private var day: Int = 0
@@ -49,10 +48,8 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     private var myMonth: Int = 0
     private var myYear: Int = 0
     private var countryCode =" "
-    private var userMeter =0.0
-    private var userCentimeter =0.0
-    private var userStone =0.0
-    private var userPound =0.0
+    private var height:String ="0"
+    private var weight:String ="0"
 
     @Inject
     lateinit var presenter: ProfileDetailsPresenter
@@ -84,10 +81,8 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                     etPhoneNo.text.toString(),
                     etGender.text.toString().toLowerCase(Locale.ROOT),
                     etDOB.text.toString(),
-                    etMeter.text.toString(),
-                    etCentimeter.text.toString(),
-                    etStone.text.toString(),
-                    etLbs.text.toString(),
+                    etHeight.text.toString(),
+                    etWeight.text.toString(),
                     etBMI.text.toString(),
                     etBP.text.toString(),
                     etSmoker.text.toString(),
@@ -113,7 +108,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                         .setActivityMenuIconColor(resources.getColor(R.color.black))
                         .setBorderLineColor(resources.getColor(R.color.green))
                         .setBorderCornerColor(resources.getColor(R.color.green))
-                        .setMinCropResultSize(400,400)
+                        .setMinCropResultSize(500,500)
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setCropShape(CropImageView.CropShape.OVAL)
                         .setCropMenuCropButtonIcon(R.drawable.ic_yes)
@@ -139,10 +134,9 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         etLastName.setText(patient.user.lastName)
         etEmail.setText(patient.user.email)
         etPhoneNo.setText(patient.user.phone)
-        etMeter.setText(patient.user.profile.heightValue1)
-        etCentimeter.setText(patient.user.profile.heightValue2)
-        etStone.setText(patient.user.profile.weightValue1)
-        etLbs.setText(patient.user.profile.weightValue2)
+        etHeight.setText(patient.user.profile.heightValue1)
+        etWeight.setText(patient.user.profile.weightValue1)
+        etBMI.setText(patient.user.profile.bmi)
         etBP.setText(patient.blood_pressure)
 
         val date = patient.date_of_birth
@@ -220,10 +214,9 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         etLastName.setText(user.lastName)
         etEmail.setText(user.email)
         etPhoneNo.setText(user.phone)
-        etMeter.setText(user.profile.heightValue1)
-        etCentimeter.setText(user.profile.heightValue2)
-        etStone.setText(user.profile.weightValue1)
-        etLbs.setText(user.profile.weightValue2)
+        etHeight.setText(user.profile.heightValue1)
+        etWeight.setText(user.profile.weightValue1)
+        etBMI.setText(user.profile.bmi)
         val date =user.profile.dateOfBirth
         var spf = SimpleDateFormat("yyyy-MM-dd")
         val newDate = spf.parse(date)
@@ -374,24 +367,14 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 selectAlcohol()
             }
 
-        RxView.clicks(etMeter).throttleFirst(500, TimeUnit.MILLISECONDS)
+        RxView.clicks(etHeight).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                selectMeter()
+                selectHeight()
             }
 
-        RxView.clicks(etCentimeter).throttleFirst(500, TimeUnit.MILLISECONDS)
+       RxView.clicks(etWeight).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                selectCentimeter()
-            }
-
-        RxView.clicks(etStone).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                selectStone()
-            }
-
-        RxView.clicks(etLbs).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                selectPound()
+                selectWeight()
             }
 
         RxView.clicks(tvPhoneNoEdit).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -476,83 +459,83 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         dialog.show()
     }
 
-    private fun selectMeter() {
-        val meter = resources.getStringArray(R.array.Meter)
-        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
-        builder.setTitle("Meter*")
-        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, meter)
-        builder.setAdapter(dataAdapter) { _, which ->
-            etMeter.setText(meter[which]).toString()
-
-            val Meter=etMeter.text.toString().replaceFirst(" m","")
-            userMeter= Meter.toDouble()
-            calculateBmi(userMeter,userCentimeter,userStone,userPound)
-        }
-        val dialog = builder.create()
-        dialog.show()
-    }
-
-    private fun selectCentimeter() {
+    private fun selectHeight() {
         val centimeter = ArrayList<String>()
-        for (i in 1..51) {
+        for (i in 99..300) {
             centimeter.add("$i cm")
         }
         val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
-        builder.setTitle("Centimeter*")
+        builder.setTitle("Height*")
         val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
         builder.setAdapter(dataAdapter) { _, which ->
-            etCentimeter.setText(centimeter[which]).toString()
-            val centiMeter=etCentimeter.text.toString().replaceFirst(" cm","")
-            userCentimeter= centiMeter.toDouble()
-            calculateBmi(userMeter,userCentimeter,userStone,userPound)
+            etHeight.setText(centimeter[which]).toString()
+            height=etHeight.text.toString().replaceFirst(" cm","")
+            calculateBMI(height,weight)
         }
         val dialog = builder.create()
         dialog.show()
     }
 
-    private fun selectStone() {
-        val centimeter = ArrayList<String>()
-        for (i in 6..40) {
-            centimeter.add("$i st")
+    private fun selectWeight() {
+        val kg = ArrayList<String>()
+        for (i in 35..130) {
+            kg.add("$i kg")
         }
         val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
-        builder.setTitle("Stone*")
-        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
+        builder.setTitle("Weight*")
+        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, kg)
         builder.setAdapter(dataAdapter) { _, which ->
-            etStone.setText(centimeter[which]).toString()
-
-            val Stone=etStone.text.toString().replaceFirst(" st","")
-            userStone= Stone.toDouble()
-            calculateBmi(userMeter,userCentimeter,userStone,userPound)
+            etWeight.setText(kg[which]).toString()
+            weight=etWeight.text.toString().replaceFirst(" kg","")
+            calculateBMI(height, weight)
         }
         val dialog = builder.create()
         dialog.show()
     }
 
-    private fun selectPound() {
-        val centimeter = ArrayList<String>()
-        for (i in 1..13) {
-            centimeter.add("$i lbs")
-        }
-        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogStyle)
-        builder.setTitle("Pound*")
-        val dataAdapter = ArrayAdapter(this, R.layout.custom_drop_down_item, centimeter)
-        builder.setAdapter(dataAdapter) { _, which ->
-            etLbs.setText(centimeter[which]).toString()
-
-            val Pound=etLbs.text.toString().replaceFirst(" lbs","")
-            userPound= Pound.toDouble()
-            calculateBmi(userMeter,userCentimeter,userStone,userPound)
-        }
-        val dialog = builder.create()
-        dialog.show()
+    private fun calculateBMI(height:String,weight:String) {
+            val heightValue = height.toFloat() / 100
+            val weightValue = weight.toFloat()
+            val bmi = weightValue / (heightValue * heightValue)
+            displayBMI(bmi)
     }
 
-    fun calculateBmi(heightValue1:Double,heightValue2: Double,weightValue1:Double,weightValue2: Double)
-    {
-        val meter=heightValue1/100
+    @SuppressLint("SetTextI18n")
+    private fun displayBMI(bmi: Float) {
+        val bmiLabel = if (bmi.compareTo(15f) <= 0) {
+            getString(R.string.very_severely_underweight)
+        } else if (bmi.compareTo(15f) > 0 && bmi.compareTo(16f) <= 0
+        ) {
+            getString(R.string.severely_underweight)
 
+        } else if (bmi.compareTo(16f) > 0 && bmi.compareTo(18.5f) <= 0
+        ) {
+            getString(R.string.underweight)
+
+        } else if (bmi.compareTo(18.5f) > 0 && bmi.compareTo(25f) <= 0
+        ) {
+            getString(R.string.normal)
+
+        } else if (bmi.compareTo(25f) > 0 && bmi.compareTo(30f) <= 0
+        ) {
+            getString(R.string._overweight)
+
+        } else if (bmi.compareTo(30f) > 0 && bmi.compareTo(35f) <= 0
+        ) {
+            getString(R.string.obese_class_i)
+
+        } else if (bmi.compareTo(35f) > 0 && bmi.compareTo(40f) <= 0
+        ) {
+            getString(R.string.obese_class_ii)
+
+        } else {
+            getString(R.string.obese_class_iii)
+        }
+
+        etBMI.setText("$bmi $bmiLabel")
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {

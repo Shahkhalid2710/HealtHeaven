@@ -88,11 +88,11 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
                             .setActivityMenuIconColor(resources.getColor(R.color.black))
                             .setBorderLineColor(resources.getColor(R.color.green))
                             .setBorderCornerColor(resources.getColor(R.color.green))
-                            .setMinCropResultSize(400,400)
                             .setGuidelines(CropImageView.Guidelines.ON)
+                            .setMinCropResultSize(500,500)
                             .setCropShape(CropImageView.CropShape.OVAL)
                             .setCropMenuCropButtonIcon(R.drawable.ic_yes)
-                            .setRequestedSize(500, 500)
+                            .setRequestedSize(500,500)
                             .start(it1, this)
                     }
                     dialog.dismiss()

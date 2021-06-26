@@ -56,6 +56,8 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
         MyApplication.getAppContext().component.inject(this)
         specilistPresenter.injectview(this)
 
+        specilistPresenter.getDoctorlist()
+
         val appointment = BookAppointment()
         appointment.corporateId = 66
         userHolder.saveBookAppointmentData(appointment)
@@ -96,13 +98,10 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
 
     override fun onResume() {
         super.onResume()
-        specilistPresenter.getDoctorlist()
-
         val circularProgressDrawable = CircularProgressDrawable(requireActivity())
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.start()
-
 
         if (userHolder.userPhoto!!.isEmpty())
         {
