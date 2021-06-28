@@ -220,6 +220,10 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         bookingProgress.visibility=if (isShow) View.VISIBLE else View.GONE
     }
 
+    override fun showProgress() {}
+
+    override fun hideProgress() {}
+
     override fun noInternet(isConnect: Boolean) {
         if (!isConnect)
         {

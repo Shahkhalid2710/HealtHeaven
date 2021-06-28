@@ -30,6 +30,7 @@ import com.applocum.connecttomyhealth.ui.verification.models.OtpGlobalResponse
 import io.reactivex.Observable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Response
 import retrofit2.http.*
 
 interface AppEndPoint {
@@ -46,7 +47,7 @@ interface AppEndPoint {
     @GET("/api/profiles/search.json")
     fun getdoctors(@Header("AUTH_TOKEN") authtoken:String?,
                    @Query("corporate_organization_id") corporateId:Int,
-                   @Query("page")page:Int):Observable<DoctorResponse>
+                   @Query("page")page:String):Observable<Response<DoctorResponse>>
 
     @GET("/api/patients/time_slots.json")
     fun getTimeSlots(@Header("AUTH_TOKEN") authtoken: String?,
@@ -105,9 +106,10 @@ interface AppEndPoint {
                         @Body requestBody: RequestBody):Observable<BookAppointmentGlobalResponse>
 
     @GET("/api/priory/doctors/appointments.json")
-    fun upcomingSession(@Header("AUTH_TOKEN")authtoken: String?,
+    fun sessions(@Header("AUTH_TOKEN")authtoken: String?,
                         @Query("appointments_type")appointmentType:String,
-                        @Query("appointment_corporate_id")corporateId:Int):Observable<BookAppointmentGlobalResponse>
+                        @Query("appointment_corporate_id")corporateId:Int,
+                        @Query("page")page:String):Observable<Response<BookAppointmentGlobalResponse>>
 
     @DELETE("/api/priory/patient/appointments/{id}.json")
     fun deleteAppointment(@Header("AUTH_TOKEN")authtoken: String?,

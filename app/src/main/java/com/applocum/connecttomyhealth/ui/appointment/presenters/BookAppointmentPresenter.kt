@@ -7,7 +7,9 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Missi
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
+import com.applocum.connecttomyhealth.ui.PaginationModel
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
+import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -17,7 +19,6 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint) {
-
     companion object {
         const val UPCOMING_APPOINTMENT = "upcoming"
         const val COMPLETED_APPOINTMENT = "past"
@@ -25,6 +26,8 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
 
     val disposables = CompositeDisposable()
     lateinit var view: View
+
+    var nextPage: String? = "1"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -81,57 +84,87 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
     }
 
     fun showUpcomingSession() {
-        view.viewProgress(true)
-        api.upcomingSession(userHolder.userToken!!, UPCOMING_APPOINTMENT, 66)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
-                view.viewProgress(false)
-                when (it.status) {
-                    Success -> {
-                        view.noInternet(true)
-                        view.getSessions(it.data)
-                    }
-                    InternalServer, InvalidCredentials -> {
-                        view.displayMessage(it.message)
-                    }
-                }
-            }, onError = {
-                view.viewProgress(false)
-                it.printStackTrace()
+        nextPage.let {
+            view.noInternet(true)
+            view.viewProgress(true)
+            view.showProgress()
 
-                if (it is UnknownHostException)
-                {
-                    view.noInternet(false)
-                }
+            nextPage?.let {page->
+                api.sessions(userHolder.userToken!!, UPCOMING_APPOINTMENT, 66,page)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext = {
+                        view.viewProgress(false)
+                        view.hideProgress()
+                        when (it.body()?.status) {
+                            Success -> {
+                                val paginationModel = Gson().fromJson(
+                                    it.headers()["X-Pagination"],
+                                    PaginationModel::class.java
+                                )
+                                nextPage = paginationModel.nextPage
+                                it.body()?.let {
+                                    view.getSessions(it.data)
+                                }
+                            }
+                            InternalServer, InvalidCredentials -> {
+                                it.body()?.let {
+                                    view.displayMessage(it.message)
+                                }
+                            }
+                        }
+                    }, onError = {
+                        view.viewProgress(false)
+                        view.hideProgress()
+                        it.printStackTrace()
 
-            }).let { disposables.addAll(it) }
+                        if (it is UnknownHostException) {
+                            view.noInternet(false)
+                        }
+
+                    }).let { disposables.addAll(it) }
+            }
+        }
     }
 
     fun showPastSession() {
-        view.viewProgress(true)
-        api.upcomingSession(userHolder.userToken!!, COMPLETED_APPOINTMENT, 66)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
-                view.viewProgress(false)
-                when (it.status) {
-                    Success -> {
-                        view.noInternet(true)
-                        view.getSessions(it.data)
-                    }
-                    InternalServer, InvalidCredentials -> {
-                        view.displayMessage(it.message)
-                    }
-                }
-            }, onError = {
-                view.viewProgress(false)
-                it.printStackTrace()
+        nextPage.let {
+            view.noInternet(true)
+            view.showProgress()
+            nextPage?.let {
+                api.sessions(userHolder.userToken!!, COMPLETED_APPOINTMENT, 66, it)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext = {
+                        view.hideProgress()
+                        when (it.body()?.status) {
+                            Success -> {
+                                val paginationModel = Gson().fromJson(
+                                    it.headers()["X-Pagination"],
+                                    PaginationModel::class.java
+                                )
+                                nextPage = paginationModel.nextPage
 
-                if (it is UnknownHostException)
-                {
-                    view.noInternet(false)
-                }
+                                it.body()?.let {
+                                    view.getSessions(it.data)
 
-            }).let { disposables.addAll(it) }
+                                }
+                            }
+                            InternalServer, InvalidCredentials -> {
+                                it.body()?.let {
+                                    view.displayMessage(it.message)
+                                }
+                            }
+                        }
+                    }, onError = {
+                        view.hideProgress()
+                        it.printStackTrace()
+
+                        if (it is UnknownHostException) {
+                            view.noInternet(false)
+                        }
+
+                    }).let { disposables.addAll(it) }
+            }
+        }
      }
 
     fun deleteSession(id: Int) {
@@ -154,12 +187,19 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
             }).let { disposables.addAll(it) }
     }
 
+    fun safeDispose() {
+        disposables.clear()
+        disposables.dispose()
+    }
+
     interface View {
         fun displayMessage(mesage: String)
         fun displaySuccessMessage(message: String)
         fun getSessions(list: ArrayList<BookAppointmentResponse>)
         fun viewProgress(isShow: Boolean)
         fun viewFullProgress(isShow: Boolean)
+        fun showProgress()
+        fun hideProgress()
         fun noInternet(isConnect:Boolean)
     }
 }

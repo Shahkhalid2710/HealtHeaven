@@ -15,6 +15,7 @@ import com.applocum.connecttomyhealth.ui.allergyhistory.adapters.ViewPagerFragme
 import com.applocum.connecttomyhealth.ui.booksession.fragments.AboutSpecialistFragment
 import com.applocum.connecttomyhealth.ui.booksession.fragments.AvailabilityFragment
 import com.applocum.connecttomyhealth.ui.booksession.presenters.BookSessionPresenter
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
@@ -47,16 +48,16 @@ class BookSessionActivity : BaseActivity() {
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
-       /* RxView.clicks(tvCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(tvCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
-                val intent = (Intent(this,BottomNavigationViewActivity::class.java))
+                val intent = (Intent(this, BottomNavigationViewActivity::class.java))
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finishAffinity()
                 overridePendingTransition(0,0)
             }
-*/
+
         val specialist = intent.getSerializableExtra("specialist") as Specialist
         val specialistId=intent.getIntExtra("specialistId",0)
 

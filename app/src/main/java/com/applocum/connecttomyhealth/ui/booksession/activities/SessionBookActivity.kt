@@ -340,6 +340,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         selected: Boolean
     ) {
         var date = date1.date
+
         val formatter = SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy")
         val temp: String = date.date.toString()
         try {

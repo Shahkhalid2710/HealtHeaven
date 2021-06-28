@@ -68,47 +68,19 @@
     </RelativeLayout>
 
     <FrameLayout
+        android:id="@+id/flSpecialist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDoctors"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:id="@+id/llSpecialist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    tools:ignore="UselessParent">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvDoctors"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_24"
-                        android:layout_marginEnd="@dimen/spacing_24"
-                        android:nestedScrollingEnabled="false"
-                        android:scrollbars="vertical" />
-
-                    <include
-                        android:id="@+id/noInternet"
-                        layout="@layout/custom_no_internet"
-                        android:visibility="gone" />
-
-                    <include layout="@layout/custom_loader_progress" />
-
-                </FrameLayout>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+            android:nestedScrollingEnabled="false"
+            android:paddingStart="@dimen/spacing_24"
+            android:paddingEnd="@dimen/spacing_24"
+            android:scrollbars="vertical" />
 
         <include
             android:id="@+id/noInternet"

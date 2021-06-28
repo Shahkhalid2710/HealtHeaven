@@ -14,6 +14,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class OtpPresenter@Inject constructor(private val api:AppEndPoint) {
@@ -41,6 +42,7 @@ class OtpPresenter@Inject constructor(private val api:AppEndPoint) {
                     Success->
                     {
                         view.displayMessage(it.message)
+                        view.noInternet(true)
                     }
                     InvalidCredentials,InternalServer -> {
                         view.displayErrorMessage(it.message)
@@ -49,6 +51,12 @@ class OtpPresenter@Inject constructor(private val api:AppEndPoint) {
             },onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposable.addAll(it) }
     }
 
@@ -71,6 +79,7 @@ class OtpPresenter@Inject constructor(private val api:AppEndPoint) {
                     {
                         Success->{
                             view.displaySuccessMessage(it.message)
+                            view.noInternet(true)
                         }
                         InvalidCredentials, InternalServer->
                         {
@@ -84,13 +93,20 @@ class OtpPresenter@Inject constructor(private val api:AppEndPoint) {
             },onError = {
                 view.viewProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
             }).let { disposable.addAll(it) }
-    }
+      }
 
     interface View{
         fun displayMessage(message:String)
         fun displayErrorMessage(message:String)
         fun displaySuccessMessage(message: String)
         fun viewProgress(isShow:Boolean)
+        fun noInternet(isConnect:Boolean)
     }
 }

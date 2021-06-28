@@ -62,7 +62,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:padding="@dimen/spacing_24"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         tools:ignore="RelativeOverlap">
 
                         <TextView

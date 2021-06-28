@@ -75,7 +75,7 @@ class ChangePasswordPresenter @Inject constructor(private val api: AppEndPoint) 
             return false
         }
         if (!confirmPassword.matches(newPassword.toRegex())) {
-            view.displayMessage("Password not matching")
+            view.displayMessage("You must enter the same password twice in order to confirm it")
             return false
         }
         return true

@@ -8,7 +8,7 @@ data class PaginationModel (
     @SerializedName("first_page") val firstPage : Boolean,
     @SerializedName("last_page") val lastPage : Boolean,
     @SerializedName("previous_page") val previousPage : String,
-    @SerializedName("next_page") val nextPage :Int,
+    @SerializedName("next_page") val nextPage :String?,
     @SerializedName("out_of_bounds") val outOfBounds :Boolean,
     @SerializedName("offset") val offSet :Int,
 )

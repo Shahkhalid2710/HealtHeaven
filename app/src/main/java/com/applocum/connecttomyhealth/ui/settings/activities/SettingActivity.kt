@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.ui.settings.activities
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.location.LocationManager
@@ -83,6 +84,17 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
             switchpuchNotification = if (isChecked) { "true" } else { "false" }
             presenter.notificationSetting(switchText,switchEmail, switchphone, switchpuchNotification)
         }
+
+        val INTENT_AUTHENTICATE=241
+
+        switchtouchidfaceid.setOnCheckedChangeListener { _, isChecked ->
+             val km = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+               if (km.isKeyguardSecure) {
+                   val authIntent = km.createConfirmDeviceCredentialIntent(getString(R.string.done), getString(R.string.cancel))
+                   startActivityForResult(authIntent, INTENT_AUTHENTICATE)
+               }
+        }
+
     }
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llSetting, message, Snackbar.LENGTH_LONG)

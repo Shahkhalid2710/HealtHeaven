@@ -15,9 +15,9 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class SpecilistPresenter @Inject constructor(private val api: AppEndPoint) {
-    private val disposables = CompositeDisposable()
+    val disposables = CompositeDisposable()
     lateinit var view: View
-    val nextPage="1"
+    var nextPage: String? = "1"
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -27,37 +27,58 @@ class SpecilistPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun getDoctorlist() {
-        view.viewProgress(true)
-        api.getdoctors(userHolder.userToken!!, 66,nextPage.toInt())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
-                when (it.status) {
-                    Success -> {
-                        //val paginationModel=Gson().fromJson(it.data.get("X-Pagination"),PaginationModel::class.java)
-                        view.noInternet(true)
+        nextPage.let {
+            view.showProgress()
+            view.viewProgress(true)
+
+            view.noInternet(true)
+            nextPage?.let { page ->
+                api.getdoctors(userHolder.userToken!!, 66, page)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext = {
+                        view.hideProgress()
                         view.viewProgress(false)
-                        view.getdoctorlist(it.data)
-                    }
-                    InvalidCredentials, InternalServer -> {
-                        view.displaymessage(it.message)
-                    }
-                }
-            }, onError = {
-                view.viewProgress(false)
-                it.printStackTrace()
+                        when (it.body()?.status) {
+                            Success -> {
+                                val paginationModel = Gson().fromJson(
+                                    it.headers()["X-Pagination"],
+                                    PaginationModel::class.java
+                                )
+                                nextPage = paginationModel.nextPage
+                                it.body()?.let {
+                                    view.getdoctorlist(it.data)
+                                }
+                            }
+                            InvalidCredentials, InternalServer -> {
+                                it.body()?.let {
+                                    view.displaymessage(it.message)
+                                }
+                            }
+                        }
+                    }, onError = {
+                        view.hideProgress()
+                        view.viewProgress(false)
+                        it.printStackTrace()
+                        if (it is UnknownHostException) {
+                            view.noInternet(false)
+                        }
 
-                if (it is UnknownHostException)
-                {
-                    view.noInternet(false)
-                }
+                    }).let { disposables.add(it) }
+            }
+        }
+    }
 
-            }).let { disposables.add(it) }
+    fun safeDispose() {
+        disposables.clear()
+        disposables.dispose()
     }
 
     interface View {
         fun displaymessage(message: String)
         fun getdoctorlist(list: ArrayList<Specialist>)
         fun viewProgress(isShow: Boolean)
-        fun noInternet(isConnect:Boolean)
+        fun showProgress()
+        fun hideProgress()
+        fun noInternet(isConnect: Boolean)
     }
 }

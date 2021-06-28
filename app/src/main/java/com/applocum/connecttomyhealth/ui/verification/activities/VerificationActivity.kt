@@ -29,9 +29,8 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
     lateinit var otpPresenter: OtpPresenter
 
     override fun getLayoutResourceId(): Int= R.layout.activity_verification
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
 
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -140,6 +139,17 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
 
     override fun viewProgress(isShow: Boolean) {
         progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect)
+        {
+            val snackbar = Snackbar.make(llVerification,R.string.no_internet, Snackbar.LENGTH_LONG)
+            snackbar.changeFont()
+            val snackview = snackbar.view
+            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackbar.show()
+        }
     }
 
     private val loginTextWatcher: TextWatcher = object : TextWatcher {

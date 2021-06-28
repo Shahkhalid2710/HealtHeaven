@@ -65,12 +65,12 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
         RxView.clicks(v.btnBookAppointment).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), SpecialistsActivity::class.java))
-               requireActivity().overridePendingTransition(0,0)
+                requireActivity().overridePendingTransition(0, 0)
             }
 
         RxView.clicks(v.noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                v.noInternet.visibility=View.GONE
+                v.noInternet.visibility = View.GONE
                 specilistPresenter.getDoctorlist()
             }
 
@@ -86,11 +86,15 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
 
                     doubleBackToExitPressedOnce = true
 
-                    Toast.makeText(requireContext(), R.string.press_once_again_to_exit, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.press_once_again_to_exit,
+                        Toast.LENGTH_SHORT
+                    ).show()
 
                     Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
                 }
-               }
+            }
             )
 
         return v
@@ -103,26 +107,28 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.start()
 
-        if (userHolder.userPhoto!!.isEmpty())
-        {
-            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic).placeholder(circularProgressDrawable).into(v.ivUser)
-            v.ivPicWarning.visibility=View.VISIBLE
-        }
-        else {
-            Glide.with(requireActivity()).load(userHolder.userPhoto).placeholder(circularProgressDrawable).into(v.ivUser)
-            v.ivPicWarning.visibility=View.GONE
+        if (userHolder.userPhoto!!.isEmpty()) {
+            Glide.with(requireActivity()).load(R.drawable.ic_blank_profile_pic)
+                .placeholder(circularProgressDrawable).into(v.ivUser)
+            v.ivPicWarning.visibility = View.VISIBLE
+        } else {
+            Glide.with(requireActivity()).load(userHolder.userPhoto)
+                .placeholder(circularProgressDrawable).into(v.ivUser)
+            v.ivPicWarning.visibility = View.GONE
         }
 
-        v.tvName.text=userHolder.userFirstName
+        v.tvName.text = userHolder.userFirstName
     }
 
     override fun displaymessage(message: String) {}
 
     override fun getdoctorlist(list: ArrayList<Specialist>) {
-        rvTopDoctors.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        rvTopDoctors.adapter = DoctorAdapter(requireActivity(), list, object : DoctorAdapter.DoctorClickListner {
+        rvTopDoctors.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        rvTopDoctors.adapter =
+            DoctorAdapter(requireActivity(), list, object : DoctorAdapter.DoctorClickListner {
                 override fun onDoctorClick(specialist: Specialist, position: Int) {
-                    val intent = Intent(requireActivity(),BookSessionActivity::class.java)
+                    val intent = Intent(requireActivity(), BookSessionActivity::class.java)
                     intent.putExtra("specialist", specialist)
                     intent.putExtra("specialistId", specialist.id)
                     val appointment = userHolder.getBookAppointmentData()
@@ -136,31 +142,39 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
                     }
                     userHolder.saveBookAppointmentData(appointment)
                     startActivity(intent)
-                    requireActivity().overridePendingTransition(0,0)
+                    requireActivity().overridePendingTransition(0, 0)
                 }
             })
-     }
+    }
 
     override fun viewProgress(isShow: Boolean) {
         v.progressTopDoctors.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun noInternet(isConnect: Boolean) {
-        if (!isConnect)
-        {
-            v.rvTopDoctors.visibility=View.GONE
-            v.noInternet.visibility=View.VISIBLE
+    override fun hideProgress() {
 
-            val snackBar = Snackbar.make(llHome,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
+    }
+
+    override fun showProgress() {
+
+    }
+
+    override fun noInternet(isConnect: Boolean) {
+        if (!isConnect) {
+            v.rvTopDoctors.visibility = View.GONE
+            v.noInternet.visibility = View.VISIBLE
+
+            val snackBar = Snackbar.make(llHome, R.string.no_internet, Snackbar.LENGTH_LONG).apply {
+                view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines =
+                    5
+            }
             snackBar.changeFont()
             val snackView = snackBar.view
             snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
             snackBar.show()
-        }
-        else{
-            v.noInternet.visibility=View.GONE
-            v.rvTopDoctors.visibility=View.VISIBLE
+        } else {
+            v.noInternet.visibility = View.GONE
+            v.rvTopDoctors.visibility = View.VISIBLE
         }
     }
-
 }
