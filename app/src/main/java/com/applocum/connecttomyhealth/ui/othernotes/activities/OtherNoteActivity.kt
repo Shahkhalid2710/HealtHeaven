@@ -17,19 +17,24 @@ import com.applocum.connecttomyhealth.ui.othernotes.adapters.OtherNoteAdapter
 import com.applocum.connecttomyhealth.ui.prescription.models.Document
 import com.applocum.connecttomyhealth.ui.prescription.presenters.DocumentPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_other_note.*
 import kotlinx.android.synthetic.main.activity_other_note.ivBack
 import kotlinx.android.synthetic.main.activity_other_note.noInternet
-import kotlinx.android.synthetic.main.custom_loader_progress.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class OtherNoteActivity : BaseActivity(), DocumentPresenter.View {
+class OtherNoteActivity : BaseActivity(), DocumentPresenter.View,
+    OtherNoteAdapter.NoteClickListner {
 
     @Inject
     lateinit var presenter: DocumentPresenter
+
+    private var isLoading = false
+
+    lateinit var otherNoteAdapter: OtherNoteAdapter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_other_note
 
@@ -40,6 +45,10 @@ class OtherNoteActivity : BaseActivity(), DocumentPresenter.View {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
+
+        otherNoteAdapter = OtherNoteAdapter(this, ArrayList(), this)
+        rvOtherNotes.layoutManager = LinearLayoutManager(this)
+        rvOtherNotes.adapter = otherNoteAdapter
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -68,39 +77,67 @@ class OtherNoteActivity : BaseActivity(), DocumentPresenter.View {
             rvOtherNotes.visibility = View.VISIBLE
         }
 
-        rvOtherNotes.layoutManager = LinearLayoutManager(this)
-        rvOtherNotes.adapter = OtherNoteAdapter(this, list, object : OtherNoteAdapter.NoteClickListner {
-                override fun onNoteClick(document: Document, position: Int) {
-                    val intent = Intent(this@OtherNoteActivity,DocumentViewActivity::class.java)
-                    intent.putExtra("document", document)
-                    startActivity(intent)
-                    overridePendingTransition(0,0)
-
+        otherNoteAdapter.mList.addAll(list)
+        otherNoteAdapter.notifyItemRangeInserted(otherNoteAdapter.mList.size, list.size)
+        RxRecyclerView.scrollEvents(rvOtherNotes)
+            .subscribe {
+                val total = rvOtherNotes.layoutManager?.itemCount ?: 0
+                val last = (rvOtherNotes.layoutManager as LinearLayoutManager)
+                    .findLastVisibleItemPosition()
+                if (total > 0 && total <= last + 2) {
+                    if (!isLoading) {
+                        presenter.getOtherNote()
+                    }
                 }
-            })
-    }
+            }.let { presenter.disposables.add(it) }
 
-    override fun viewProgress(isShow: Boolean) {
-        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun noInternet(isConnect: Boolean) {
-        if (!isConnect)
-        {
-            rvOtherNotes.visibility=View.GONE
-            noInternet.visibility=View.VISIBLE
-            layoutNotFoundOtherNotes.visibility=View.GONE
+        if (!isConnect) {
+            rvOtherNotes.visibility = View.GONE
+            noInternet.visibility = View.VISIBLE
 
-            val snackBar = Snackbar.make(llotherNotes,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
+            val snackBar = Snackbar.make(llotherNotes, R.string.no_internet, Snackbar.LENGTH_LONG)
+                .apply {
+                    view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines =
+                        5
+                }
             snackBar.changeFont()
             val snackView = snackBar.view
             snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackBar.show()
+        } else {
+            noInternet.visibility = View.GONE
+            rvOtherNotes.visibility = View.VISIBLE
         }
-        else{
-            noInternet.visibility=View.GONE
-            rvOtherNotes.visibility=View.VISIBLE
-            layoutNotFoundOtherNotes.visibility=View.VISIBLE
+    }
+
+    override fun showProgress() {
+        isLoading = true
+        rvOtherNotes.post {
+            otherNoteAdapter.mList.add(null)
+            otherNoteAdapter.notifyItemInserted(otherNoteAdapter.mList.size)
         }
+    }
+
+    override fun hideProgress() {
+        isLoading = false
+        rvOtherNotes.post {
+            otherNoteAdapter.mList.remove(null)
+            otherNoteAdapter.notifyItemRemoved(otherNoteAdapter.mList.size)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.safeDispose()
+    }
+
+    override fun onNoteClick(document: Document, position: Int) {
+        val intent = Intent(this@OtherNoteActivity, DocumentViewActivity::class.java)
+        intent.putExtra("document", document)
+        startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 }

@@ -49,126 +49,108 @@
 
         </RelativeLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:fillViewport="true">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/etAddFamilyHistory"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_40"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:autofillHints="0"
+                android:backgroundTint="@color/textcolorgrey"
+                android:drawableEnd="@drawable/ic_dropdown_list"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/add_family_history"
+                android:imeOptions="actionDone"
+                android:inputType="textCapSentences"
+                android:paddingBottom="@dimen/spacing_10"
+                android:textColor="@color/aapBlack"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/font_12"
+                tools:ignore="LabelFor" />
 
-                <EditText
-                    android:id="@+id/etAddFamilyHistory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_40"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_dropdown_list"
-                    android:focusable="true"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/add_family_history"
-                    android:imeOptions="actionDone"
-                    android:inputType="textCapSentences"
-                    android:paddingBottom="@dimen/spacing_10"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor" />
+            <RelativeLayout
+                android:id="@+id/rlDisease"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:background="@drawable/custom_exemption_layout"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:ignore="UselessParent">
 
-                <RelativeLayout
-                    android:id="@+id/rlDisease"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:background="@drawable/custom_exemption_layout"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
-                    tools:ignore="UselessParent">
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/spacing_10"
+                    android:layout_marginEnd="@dimen/spacing_10"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tvDiseaseName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/spacing_10"
-                        android:layout_marginEnd="@dimen/spacing_10"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/done"
+                        android:textColor="@color/aapBlack"
+                        android:textSize="@dimen/font_10" />
 
-                        <TextView
-                            android:id="@+id/tvDiseaseName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:text="@string/done"
-                            android:textColor="@color/aapBlack"
-                            android:textSize="@dimen/font_10" />
+                    <ImageView
+                        android:id="@+id/ivCancel"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp"
+                        android:contentDescription="@string/todo"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_gray_cancel" />
 
-                        <ImageView
-                            android:id="@+id/ivCancel"
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="8dp"
-                            android:contentDescription="@string/todo"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_gray_cancel" />
+                </LinearLayout>
+            </RelativeLayout>
 
-                    </LinearLayout>
-                </RelativeLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:background="@color/white">
 
-                <FrameLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDisease"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:background="@color/white">
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:paddingStart="@dimen/spacing_10"
+                    android:paddingEnd="@dimen/spacing_10"
+                    android:visibility="visible" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvDisease"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_10"
-                        android:layout_marginEnd="@dimen/spacing_10"
-                        android:background="@color/white"
-                        android:visibility="gone" />
+            </FrameLayout>
 
-                    <ProgressBar
-                        android:id="@+id/progressfamilyHistory"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|top"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:indeterminateTint="@color/green"
-                        android:progressTint="@color/green"
-                        android:visibility="gone" />
-                </FrameLayout>
-
-                <Button
-                    android:id="@+id/btnSaveFamilyHistory"
-                    android:layout_width="168dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/spacing_48"
-                    android:layout_marginBottom="@dimen/spacing_40"
-                    android:background="@drawable/custom_btn"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:foreground="@drawable/effect_button"
-                    android:text="@string/save_family_history"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_12" />
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+            <Button
+                android:id="@+id/btnSaveFamilyHistory"
+                android:layout_width="168dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_48"
+                android:layout_marginBottom="@dimen/spacing_40"
+                android:background="@drawable/custom_btn"
+                android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
+                android:text="@string/save_family_history"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
     </LinearLayout>
 
     <include layout="@layout/custom_progress" />

@@ -19,6 +19,7 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,12 +32,14 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
-    AllergyHistoryPresenter.View {
+    AllergyHistoryPresenter.View, MedicalDiseaseAdapter.ItemClickListnter {
     var mListMedical: ArrayList<Medical> = ArrayList()
     private var selectedString = ""
     private var isMatched = false
     private var isActivePast = false
     private var allergyName = ""
+    lateinit var medicalDiseaseAdapter: MedicalDiseaseAdapter
+    private var isLoading = false
 
     @Inject
     lateinit var presenter: MedicalPresenter
@@ -54,6 +57,10 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
         allergyHistoryPresenter.injectView(this)
+
+        medicalDiseaseAdapter = MedicalDiseaseAdapter(this, ArrayList(), this)
+        rvAllergy.layoutManager = LinearLayoutManager(this)
+        rvAllergy.adapter = medicalDiseaseAdapter
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -74,6 +81,10 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 if (!isMatched) {
+                    medicalDiseaseAdapter.mList.remove(null)
+                    medicalDiseaseAdapter.mList.clear()
+                    medicalDiseaseAdapter.notifyDataSetChanged()
+                    presenter.resetPage()
                     presenter.getDiseaseList(etAddAllergy.text.toString())
                 }
             }.subscribe().let { presenter.disposables.add(it) }
@@ -105,27 +116,24 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
     override fun getDiseaseList(list: ArrayList<Medical>) {
         mListMedical = list
         rvAllergy.visibility = View.VISIBLE
-        rvAllergy.layoutManager = LinearLayoutManager(this)
-        rvAllergy.adapter =
-            MedicalDiseaseAdapter(
-                this,
-                mListMedical,
-                object : MedicalDiseaseAdapter.ItemClickListnter {
-                    override fun onItemClick(medical: Medical, position: Int) {
-                        allergyName = medical.id.toString()
-                        if (!etAddAllergy.text.isNullOrBlank()) {
-                            mListMedical.clear()
-                        }
-                        selectedString = medical.description
-                        etAddAllergy.setText(medical.description)
-                        rvAllergy.visibility = View.GONE
+
+        medicalDiseaseAdapter.mList.addAll(list)
+        medicalDiseaseAdapter.notifyItemRangeInserted(medicalDiseaseAdapter.mList.size, list.size)
+        RxRecyclerView.scrollEvents(rvAllergy)
+            .subscribe {
+                val total = rvAllergy.layoutManager?.itemCount ?: 0
+                val last = (rvAllergy.layoutManager as LinearLayoutManager)
+                    .findLastVisibleItemPosition()
+                if (total > 0 && total <= last + 2) {
+                    if (!isLoading) {
+                        presenter.getDiseaseList(etAddAllergy.text.toString())
                     }
-                })
+                }
+            }.let { presenter.disposables.add(it) }
+
     }
 
-    override fun viewProgress(isShow: Boolean) {
-        progressAllergy.visibility = if (isShow) View.VISIBLE else View.GONE
-    }
+    override fun viewProgress(isShow: Boolean) {}
 
     override fun viewAllergyProgress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
@@ -161,6 +169,22 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
         }
     }
 
+    override fun showProgress() {
+        isLoading = true
+        rvAllergy.post {
+            medicalDiseaseAdapter.mList.add(null)
+            medicalDiseaseAdapter.notifyItemInserted(medicalDiseaseAdapter.mList.size)
+        }
+    }
+
+    override fun hideProgress() {
+        isLoading = false
+        rvAllergy.post {
+            medicalDiseaseAdapter.mList.remove(null)
+            medicalDiseaseAdapter.notifyItemRemoved(medicalDiseaseAdapter.mList.size)
+        }
+    }
+
     override fun displaySuccessMessage(message: String) { this.finish()}
 
     override fun displayErrorMessage(message: String) {
@@ -174,4 +198,14 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
     override fun showActiveAllergy(activeAllergy: ArrayList<TrueAllergy>) {}
 
     override fun showPastAllergy(pastAllergy: ArrayList<FalseAllergy>) {}
+
+    override fun onItemClick(medical: Medical, position: Int) {
+        allergyName = medical.id.toString()
+        if (!etAddAllergy.text.isNullOrBlank()) {
+            mListMedical.clear()
+        }
+        selectedString = medical.description
+        etAddAllergy.setText(medical.description)
+        rvAllergy.visibility = View.GONE
+    }
 }

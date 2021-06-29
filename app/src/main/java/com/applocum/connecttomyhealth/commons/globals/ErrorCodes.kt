@@ -13,5 +13,6 @@ class ErrorCodes {
         const val InvalidOtp=803
         const val OtpTryAgain=813
         const val UnsuccessfulAttemptt=403
+        const val SessionExpired=498
     }
 }

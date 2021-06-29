@@ -48,99 +48,81 @@
                 android:textSize="@dimen/font_20" />
         </RelativeLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:fillViewport="true">
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etAddAllergy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_40"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:autofillHints="0"
+                android:backgroundTint="@color/textcolorgrey"
+                android:drawableEnd="@drawable/ic_dropdown_list"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/add_allergy"
+                android:inputType="textCapSentences"
+                android:paddingBottom="@dimen/spacing_10"
+                android:textColor="@color/aapBlack"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/font_12"
+                tools:ignore="LabelFor" />
 
-                <EditText
-                    android:id="@+id/etAddAllergy"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:background="@color/white">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAllergy"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_40"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:autofillHints="0"
-                    android:backgroundTint="@color/textcolorgrey"
-                    android:drawableEnd="@drawable/ic_dropdown_list"
-                    android:focusable="true"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/add_allergy"
-                    android:inputType="textCapSentences"
-                    android:paddingBottom="@dimen/spacing_10"
-                    android:textColor="@color/aapBlack"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/font_12"
-                    tools:ignore="LabelFor" />
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/spacing_10"
+                    android:paddingEnd="@dimen/spacing_10"
+                    android:background="@color/white" />
+            </FrameLayout>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:background="@color/white">
+            <CheckBox
+                android:id="@+id/cbActiveCurrently"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_24"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:button="@drawable/checkbox"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/active_currently"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/font_10" />
 
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvAllergy"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_10"
-                        android:layout_marginEnd="@dimen/spacing_10"
-                        android:background="@color/white" />
-
-                    <ProgressBar
-                        android:id="@+id/progressAllergy"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|top"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:indeterminateTint="@color/green"
-                        android:progressTint="@color/green"
-                        android:visibility="gone" />
-                </FrameLayout>
-
-                <CheckBox
-                    android:id="@+id/cbActiveCurrently"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="@dimen/spacing_24"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:button="@drawable/checkbox"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="@string/active_currently"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/font_10" />
-
-                <Button
-                    android:id="@+id/btnSaveAllergy"
-                    android:layout_width="168dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="51dp"
-                    android:layout_marginBottom="60dp"
-                    android:background="@drawable/custom_btn"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:foreground="@drawable/effect_button"
-                    android:text="@string/save_allergy"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_12" />
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+            <Button
+                android:id="@+id/btnSaveAllergy"
+                android:layout_width="168dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="51dp"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/custom_btn"
+                android:fontFamily="@font/montserrat_semibold"
+                android:foreground="@drawable/effect_button"
+                android:text="@string/save_allergy"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
     </LinearLayout>
 
     <include layout="@layout/custom_progress" />

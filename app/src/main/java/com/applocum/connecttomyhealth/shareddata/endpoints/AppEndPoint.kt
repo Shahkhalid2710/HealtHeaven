@@ -91,7 +91,8 @@ interface AppEndPoint {
                        @Path("id")documentId:Int):Observable<PhotoIdGlobalResponse>
 
     @GET("/api/priory/surgeries/search.json")
-    fun getGpList(@Query("search")search:String?):Observable<GpServiceGlobalResponse>
+    fun getGpList(@Query("search")search:String?,
+                  @Query("page")page:String):Observable<Response<GpServiceGlobalResponse>>
 
     @POST("/api/priory/user_surgeries.json")
     fun addGpService(@Header("AUTH_TOKEN") authtoken: String?,
@@ -127,7 +128,8 @@ interface AppEndPoint {
                       @Body requestBody: RequestBody):Observable<SecurityGlobalResponse>
 
     @GET("/api/consultations/search_snomed_code.json")
-    fun getDiseaseList(@Query("search") search:String?):Observable<MedicalGlobalResponse>
+    fun getDiseaseList(@Query("search") search:String?,
+                       @Query("page")page:String ):Observable<Response<MedicalGlobalResponse>>
 
     @POST("/api/medical_histories.json")
     fun addMedicalHistory(@Header("AUTH_TOKEN")authtoken: String?,
@@ -163,7 +165,8 @@ interface AppEndPoint {
     @GET("/api/investigations.json")
     fun showInvestigation(@Header("AUTH_TOKEN")authtoken: String?,
                           @Header("clinical_token")clinicalToken:String?,
-                          @Query("corporate_id")corporateId: Int):Observable<InvestigationResponse>
+                          @Query("corporate_id")corporateId: Int,
+                          @Query("page")page:String ):Observable<Response<InvestigationResponse>>
 
     @POST("/api/family_histories.json")
     fun addFamilyHistory(@Header("AUTH_TOKEN")authtoken: String?,
@@ -173,11 +176,13 @@ interface AppEndPoint {
     @GET("/api/family_histories.json")
     fun showFamilyHistory(@Header("AUTH_TOKEN")authtoken: String?,
                           @Header("clinical_token")clinicalToken:String?,
-                          @Query("corporate_id")corporateId: Int):Observable<FamilyHistoryResponse>
+                          @Query("corporate_id")corporateId: Int,
+                          @Query("page")page:String ):Observable<Response<FamilyHistoryResponse>>
 
     @GET("/api/documents/list_for_downloads.json")
     fun getDocuments(@Header("AUTH_TOKEN")authtoken: String?,
-                     @Query("document_type")documentType:String):Observable<DocumentGlobalResponse>
+                     @Query("document_type")documentType:String,
+                     @Query("page")page:String):Observable<Response<DocumentGlobalResponse>>
 
     @PUT("/api/users/notification_setting.json")
     fun notificationSetting(@Header("AUTH_TOKEN")authtoken: String?,

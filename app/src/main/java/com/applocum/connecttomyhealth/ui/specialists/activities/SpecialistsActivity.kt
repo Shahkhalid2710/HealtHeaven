@@ -33,6 +33,8 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View,
 
     private lateinit var specialistsAdapter: SpecialistsAdapter
 
+    private var isLoading = false
+
     @Inject
     lateinit var presenter: SpecilistPresenter
 
@@ -41,7 +43,6 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View,
 
     override fun getLayoutResourceId(): Int = R.layout.activity_specialists
 
-    private var isLoading = false
 
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
 

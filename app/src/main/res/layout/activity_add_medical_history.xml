@@ -49,11 +49,6 @@
 
         </RelativeLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,22 +95,10 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvMedicalDisease"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_10"
-                        android:layout_marginEnd="@dimen/spacing_10"
+                        android:layout_height="match_parent"
+                        android:paddingStart="@dimen/spacing_10"
+                        android:paddingEnd="@dimen/spacing_10"
                         android:background="@color/white" />
-
-                    <ProgressBar
-                        android:id="@+id/progressMedical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|top"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:indeterminateTint="@color/green"
-                        android:progressTint="@color/green"
-                        android:visibility="gone" />
                 </FrameLayout>
 
                 <LinearLayout
@@ -287,9 +270,6 @@
                         android:textSize="@dimen/font_12" />
                 </LinearLayout>
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-
     <include layout="@layout/custom_progress" />
-
 </FrameLayout>

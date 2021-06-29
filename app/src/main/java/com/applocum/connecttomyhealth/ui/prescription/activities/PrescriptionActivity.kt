@@ -17,20 +17,24 @@ import com.applocum.connecttomyhealth.ui.prescription.models.Document
 import com.applocum.connecttomyhealth.ui.prescription.presenters.DocumentPresenter
 import com.applocum.connecttomyhealth.ui.prescription.adapters.PrescriptionAdapter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_prescription.*
 import kotlinx.android.synthetic.main.activity_prescription.ivBack
 import kotlinx.android.synthetic.main.activity_prescription.noInternet
-import kotlinx.android.synthetic.main.custom_loader_progress.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class PrescriptionActivity : BaseActivity(),
-    DocumentPresenter.View {
+    DocumentPresenter.View, PrescriptionAdapter.PrescriptionClickListner {
 
     @Inject
     lateinit var presenter: DocumentPresenter
+
+    private var isLoading = false
+
+    lateinit var prescriptionAdapter: PrescriptionAdapter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_prescription
 
@@ -41,6 +45,10 @@ class PrescriptionActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
+
+        prescriptionAdapter= PrescriptionAdapter(this, ArrayList(),this)
+        rvPrescription.layoutManager=LinearLayoutManager(this)
+        rvPrescription.adapter=prescriptionAdapter
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -56,6 +64,11 @@ class PrescriptionActivity : BaseActivity(),
         presenter.getPrescription()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.safeDispose()
+    }
+
     override fun displayErrorMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -69,27 +82,26 @@ class PrescriptionActivity : BaseActivity(),
             rvPrescription.visibility = View.VISIBLE
         }
 
-        rvPrescription.layoutManager = LinearLayoutManager(this)
-        rvPrescription.adapter = PrescriptionAdapter(this, list, object : PrescriptionAdapter.PrescriptionClickListner {
-                    override fun onPrescriptionClick(document: Document, position: Int) {
-                        val intent = Intent(this@PrescriptionActivity, DocumentViewActivity::class.java)
-                        intent.putExtra("document", document)
-                        startActivity(intent)
-                        overridePendingTransition(0,0)
+        prescriptionAdapter.mList.addAll(list)
+        prescriptionAdapter.notifyItemRangeInserted(prescriptionAdapter.mList.size, list.size)
+        RxRecyclerView.scrollEvents(rvPrescription)
+            .subscribe {
+                val total = rvPrescription.layoutManager?.itemCount ?: 0
+                val last = (rvPrescription.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                if (total > 0 && total <= last + 2) {
+                    if (!isLoading) {
+                        presenter.getPrescription()
                     }
-                })
-        }
+                }
+            }.let { presenter.disposables.add(it) }
 
-    override fun viewProgress(isShow: Boolean) {
-        progress.visibility = if (isShow) View.VISIBLE else View.GONE
-    }
+        }
 
     override fun noInternet(isConnect: Boolean) {
         if (!isConnect)
         {
             rvPrescription.visibility=View.GONE
             noInternet.visibility=View.VISIBLE
-            layoutNotFoundPrescription.visibility=View.GONE
 
             val snackBar = Snackbar.make(llPrescription,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
             snackBar.changeFont()
@@ -100,7 +112,29 @@ class PrescriptionActivity : BaseActivity(),
         else{
             noInternet.visibility=View.GONE
             rvPrescription.visibility=View.VISIBLE
-            layoutNotFoundPrescription.visibility=View.VISIBLE
         }
+    }
+
+    override fun showProgress() {
+        isLoading = true
+        rvPrescription.post {
+            prescriptionAdapter.mList.add(null)
+            prescriptionAdapter.notifyItemInserted(prescriptionAdapter.mList.size)
+        }
+    }
+
+    override fun hideProgress() {
+        isLoading = false
+        rvPrescription.post {
+            prescriptionAdapter.mList.remove(null)
+            prescriptionAdapter.notifyItemRemoved(prescriptionAdapter.mList.size)
+        }
+    }
+
+    override fun onPrescriptionClick(document: Document, position: Int) {
+        val intent = Intent(this@PrescriptionActivity, DocumentViewActivity::class.java)
+        intent.putExtra("document", document)
+        startActivity(intent)
+        overridePendingTransition(0,0)
     }
 }

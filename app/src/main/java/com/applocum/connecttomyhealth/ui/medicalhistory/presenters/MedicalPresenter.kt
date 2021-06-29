@@ -5,6 +5,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inval
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
+import com.applocum.connecttomyhealth.ui.PaginationModel
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.*
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,6 +19,8 @@ import javax.inject.Inject
 class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     var disposables = CompositeDisposable()
     lateinit var view: View
+    var nextPage: String? = "1"
+
 
     companion object {
         const val activeMedicalHistory = "active"
@@ -34,30 +37,41 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun getDiseaseList(search: String) {
-        view.viewProgress(true)
-        api.getDiseaseList(search)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
-                view.viewProgress(false)
-                when (it.status) {
-                    Success -> {
-                        view.noInternet(true)
-                        view.getDiseaseList(it.data)
-                    }
-                    InvalidCredentials, InternalServer -> {
-                        view.displayMessage(it.message)
-                    }
-                }
-            }, onError = {
-                view.viewProgress(false)
-                it.printStackTrace()
+        nextPage.let {
+            view.showProgress()
+            view.noInternet(true)
+            nextPage?.let {
+                api.getDiseaseList(search, it)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext = {
+                        view.hideProgress()
+                        when (it.body()?.status) {
+                            Success -> {
+                                val paginationModel = Gson().fromJson(
+                                    it.headers()["X-Pagination"],
+                                    PaginationModel::class.java
+                                )
+                                nextPage = paginationModel.nextPage
+                                it.body()?.let {
+                                    view.getDiseaseList(it.data)
+                                }
+                            }
+                            InvalidCredentials, InternalServer -> {
+                                it.body()?.let {
+                                    view.displayMessage(it.message)
+                                }
+                            }
+                        }
+                    }, onError = {
+                        view.hideProgress()
+                        it.printStackTrace()
+                        if (it is UnknownHostException) {
+                            view.noInternet(false)
+                        }
 
-                if (it is UnknownHostException)
-                {
-                    view.noInternet(false)
-                }
-
-            }).let { disposables.addAll(it) }
+                    }).let { disposables.addAll(it) }
+            }
+        }
     }
 
     fun addMedicalHistory(
@@ -110,8 +124,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewMedicalProgress(false)
                     it.printStackTrace()
 
-                    if (it is UnknownHostException)
-                    {
+                    if (it is UnknownHostException) {
                         view.noInternet(false)
                     }
 
@@ -120,7 +133,6 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun activeMedicalHistory() {
-        view.viewProgress(true)
         api.showMedicalHistory(
             userHolder.userToken, userHolder.clinicalToken, userHolder.userid!!.toInt(),
             activeMedicalHistory,
@@ -128,7 +140,6 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
-                view.viewProgress(false)
                 when (it.status) {
                     Success -> {
                         view.noInternet(true)
@@ -141,11 +152,9 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                     }
                 }
             }, onError = {
-                view.viewProgress(false)
                 it.printStackTrace()
 
-                if (it is UnknownHostException)
-                {
+                if (it is UnknownHostException) {
                     view.noInternet(false)
                 }
 
@@ -153,18 +162,17 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun pastMedicalHistory() {
-        view.viewProgress(true)
         api.showMedicalHistory(
             userHolder.userToken, userHolder.clinicalToken, userHolder.userid!!.toInt(),
             pastMedicalHistory, statusUnverified, 66
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
-                view.viewProgress(false)
                 when (it.status) {
                     Success -> {
                         view.noInternet(true)
-                        val medicalHistoryTrueFalseResponse = Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
+                        val medicalHistoryTrueFalseResponse =
+                            Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
                         view.showPastMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.falseMedicalHistory)
                     }
                     InvalidCredentials, InternalServer -> {
@@ -172,16 +180,26 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                     }
                 }
             }, onError = {
-                view.viewProgress(false)
                 it.printStackTrace()
 
-                if (it is UnknownHostException)
-                {
+                if (it is UnknownHostException) {
                     view.noInternet(false)
                 }
 
             }).let { disposables.add(it) }
     }
+
+
+    fun resetPage()
+    {
+        nextPage="1"
+    }
+
+    fun safeDispose() {
+        disposables.clear()
+        disposables.dispose()
+    }
+
 
     private fun validationMedicalHistory(
         diseaseName: String,
@@ -221,11 +239,12 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     interface View {
         fun displayMessage(message: String)
         fun getDiseaseList(list: ArrayList<Medical>)
-        fun viewProgress(isShow: Boolean)
         fun viewMedicalProgress(isShow: Boolean)
         fun sendMedicalHistoryData(medicalHistory: MedicalHistory)
         fun showActiveMedicalHistory(trueMedicalHistory: ArrayList<TrueMedicalHistory>)
         fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>)
-        fun noInternet(isConnect:Boolean)
+        fun noInternet(isConnect: Boolean)
+        fun showProgress()
+        fun hideProgress()
     }
 }

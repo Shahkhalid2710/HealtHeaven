@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.appointment.presenters
 
+import android.util.Log
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.AlreadyExist
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
@@ -85,15 +86,13 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
 
     fun showUpcomingSession() {
         nextPage.let {
-            view.noInternet(true)
-            view.viewProgress(true)
             view.showProgress()
+            view.noInternet(true)
 
             nextPage?.let {page->
                 api.sessions(userHolder.userToken!!, UPCOMING_APPOINTMENT, 66,page)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(onNext = {
-                        view.viewProgress(false)
                         view.hideProgress()
                         when (it.body()?.status) {
                             Success -> {
@@ -113,10 +112,8 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                             }
                         }
                     }, onError = {
-                        view.viewProgress(false)
                         view.hideProgress()
                         it.printStackTrace()
-
                         if (it is UnknownHostException) {
                             view.noInternet(false)
                         }
@@ -128,8 +125,9 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
 
     fun showPastSession() {
         nextPage.let {
-            view.noInternet(true)
             view.showProgress()
+            view.noInternet(true)
+
             nextPage?.let {
                 api.sessions(userHolder.userToken!!, COMPLETED_APPOINTMENT, 66, it)
                     .observeOn(AndroidSchedulers.mainThread())
@@ -142,10 +140,8 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                                     PaginationModel::class.java
                                 )
                                 nextPage = paginationModel.nextPage
-
                                 it.body()?.let {
                                     view.getSessions(it.data)
-
                                 }
                             }
                             InternalServer, InvalidCredentials -> {
@@ -175,6 +171,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                 view.viewFullProgress(false)
                 when (it.status) {
                     Success -> {
+                        view.noInternet(true)
                         view.displaySuccessMessage(it.message)
                     }
                     InvalidCredentials, InternalServer, MissingParameter -> {
@@ -184,6 +181,10 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
             }, onError = {
                 view.viewFullProgress(false)
                 it.printStackTrace()
+
+                if (it is UnknownHostException) {
+                    view.noInternet(false)
+                }
             }).let { disposables.addAll(it) }
     }
 
@@ -196,7 +197,6 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
         fun displayMessage(mesage: String)
         fun displaySuccessMessage(message: String)
         fun getSessions(list: ArrayList<BookAppointmentResponse>)
-        fun viewProgress(isShow: Boolean)
         fun viewFullProgress(isShow: Boolean)
         fun showProgress()
         fun hideProgress()

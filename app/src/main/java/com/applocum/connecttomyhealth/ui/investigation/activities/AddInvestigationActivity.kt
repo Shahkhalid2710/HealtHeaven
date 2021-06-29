@@ -20,11 +20,13 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_investigation.*
 import kotlinx.android.synthetic.main.activity_add_investigation.ivBack
+import kotlinx.android.synthetic.main.activity_add_investigation.rvDisease
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,7 +35,9 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListener, MedicalPresenter.View, InvestigationPresenter.View {
+class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListener,
+    MedicalPresenter.View, InvestigationPresenter.View,
+    MedicalDiseaseAdapter.ItemClickListnter {
 
     private var day: Int = 0
     private var month: Int = 0
@@ -45,6 +49,8 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     private var selectedString = ""
     private var isMatched = false
     private var investigationName = ""
+    lateinit var medicalDiseaseAdapter: MedicalDiseaseAdapter
+    private var isLoading = false
 
     @Inject
     lateinit var presenter: MedicalPresenter
@@ -53,6 +59,7 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     lateinit var investigationPresenter: InvestigationPresenter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_add_investigation
+
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +69,10 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
         investigationPresenter.injectView(this)
+
+        medicalDiseaseAdapter = MedicalDiseaseAdapter(this, ArrayList(), this)
+        rvDisease.layoutManager = LinearLayoutManager(this)
+        rvDisease.adapter = medicalDiseaseAdapter
 
         RxTextView.textChanges(etInvestigationName)
             .debounce(500, TimeUnit.MILLISECONDS)
@@ -80,6 +91,10 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 if (!isMatched) {
+                    medicalDiseaseAdapter.mList.remove(null)
+                    medicalDiseaseAdapter.mList.clear()
+                    medicalDiseaseAdapter.notifyDataSetChanged()
+                    presenter.resetPage()
                     presenter.getDiseaseList(etInvestigationName.text.toString())
                 }
             }.subscribe().let { presenter.disposables.add(it) }
@@ -142,23 +157,20 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     override fun getDiseaseList(list: ArrayList<Medical>) {
         mListMedical = list
         rvDisease.visibility = View.VISIBLE
-        rvDisease.layoutManager = LinearLayoutManager(this)
-        rvDisease.adapter = MedicalDiseaseAdapter(this, mListMedical,
-                object : MedicalDiseaseAdapter.ItemClickListnter {
-                    override fun onItemClick(medical: Medical, position: Int) {
-                        investigationName = medical.id.toString()
-                        if (!etInvestigationName.text.isNullOrBlank()) {
-                            mListMedical.clear()
-                        }
-                        selectedString = medical.description
-                        etInvestigationName.setText(medical.description)
-                        rvDisease.visibility = View.GONE
-                    }
-                })
-       }
 
-    override fun viewProgress(isShow: Boolean) {
-        progressInvestigation.visibility = if (isShow) View.VISIBLE else View.GONE
+        medicalDiseaseAdapter.mList.addAll(list)
+        medicalDiseaseAdapter.notifyItemRangeInserted(medicalDiseaseAdapter.mList.size, list.size)
+        RxRecyclerView.scrollEvents(rvDisease)
+            .subscribe {
+                val total = rvDisease.layoutManager?.itemCount ?: 0
+                val last = (rvDisease.layoutManager as LinearLayoutManager)
+                    .findLastVisibleItemPosition()
+                if (total > 0 && total <= last + 2) {
+                    if (!isLoading) {
+                        presenter.getDiseaseList(etInvestigationName.text.toString())
+                    }
+                }
+            }.let { presenter.disposables.add(it) }
     }
 
     override fun viewMedicalProgress(isShow: Boolean) {
@@ -174,13 +186,39 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     override fun showPastMedicalHistory(falseMedicalHistory: ArrayList<FalseMedicalHistory>) {}
 
     override fun noInternet(isConnect: Boolean) {
-        if (!isConnect)
-        {
-            val snackBar = Snackbar.make(llAddInvesigation,R.string.no_internet, Snackbar.LENGTH_LONG)
+        if (!isConnect) {
+            val snackBar =
+                Snackbar.make(llAddInvesigation, R.string.no_internet, Snackbar.LENGTH_LONG)
             snackBar.changeFont()
             val snackView = snackBar.view
             snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackBar.show()
         }
+    }
+
+    override fun showProgress() {
+        isLoading = true
+        rvDisease.post {
+            medicalDiseaseAdapter.mList.add(null)
+            medicalDiseaseAdapter.notifyItemInserted(medicalDiseaseAdapter.mList.size)
+        }
+    }
+
+    override fun hideProgress() {
+        isLoading = false
+        rvDisease.post {
+            medicalDiseaseAdapter.mList.remove(null)
+            medicalDiseaseAdapter.notifyItemRemoved(medicalDiseaseAdapter.mList.size)
+        }
+    }
+
+    override fun onItemClick(medical: Medical, position: Int) {
+        investigationName = medical.id.toString()
+        if (!etInvestigationName.text.isNullOrBlank()) {
+            mListMedical.clear()
+        }
+        selectedString = medical.description
+        etInvestigationName.setText(medical.description)
+        rvDisease.visibility = View.GONE
     }
 }

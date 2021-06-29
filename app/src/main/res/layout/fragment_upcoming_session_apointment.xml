@@ -4,54 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/llUpcomingSession"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:fillViewport="true">
+        android:orientation="vertical"
+        tools:context=".ui.appointment.fragments.UpcomingSessionApointmentFragment">
 
-        <LinearLayout
-            android:id="@+id/llUpcomingSession"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical"
-            tools:context=".ui.appointment.fragments.UpcomingSessionApointmentFragment">
+            tools:ignore="UselessParent">
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_16"
                 tools:ignore="UselessParent">
 
-                <FrameLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvUpcomingSession"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:ignore="UselessParent">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvUpcomingSession"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_24"
-                        android:layout_marginTop="@dimen/spacing_16"
-                        android:layout_marginEnd="@dimen/spacing_24"
-                        android:nestedScrollingEnabled="false" />
-
-                    <include
-                        android:id="@+id/noInternet"
-                        layout="@layout/custom_no_internet"
-                        android:visibility="gone" />
-                </FrameLayout>
+                    android:nestedScrollingEnabled="false"
+                    android:paddingStart="@dimen/spacing_24"
+                    android:paddingEnd="@dimen/spacing_24" />
 
                 <include
-                    android:id="@+id/layoutNotFoundUpcomingSession"
-                    layout="@layout/custom_upcoming_session"
+                    android:id="@+id/noInternet"
+                    layout="@layout/custom_no_internet"
                     android:visibility="gone" />
-            </RelativeLayout>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+            </FrameLayout>
 
-    <include layout="@layout/custom_loader_progress" />
+            <include
+                android:id="@+id/layoutNotFoundUpcomingSession"
+                layout="@layout/custom_upcoming_session"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
 
     <include
         android:id="@+id/upcomingProgress"

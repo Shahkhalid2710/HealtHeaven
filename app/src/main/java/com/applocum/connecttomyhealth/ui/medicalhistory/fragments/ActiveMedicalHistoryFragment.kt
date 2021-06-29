@@ -59,10 +59,6 @@ class ActiveMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
 
     override fun getDiseaseList(list: ArrayList<Medical>) {}
 
-    override fun viewProgress(isShow: Boolean) {
-        v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
-    }
-
     override fun viewMedicalProgress(isShow: Boolean) {}
 
     override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {}
@@ -99,6 +95,13 @@ class ActiveMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
             v.noInternet.visibility=View.GONE
             v.layoutNotfoundActiveMedicalHistory.visibility=View.VISIBLE
         }
+    }
+
+    override fun showProgress() {
+
+    }
+
+    override fun hideProgress() {
     }
 
     override fun onResume() {

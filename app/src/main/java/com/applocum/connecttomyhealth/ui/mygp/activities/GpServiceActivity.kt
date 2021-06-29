@@ -44,6 +44,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
     private lateinit var supportMapFragment: SupportMapFragment
 
     override fun getLayoutResourceId(): Int = R.layout.activity_gp_service
+
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
@@ -89,8 +90,6 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
 
     override fun getGpList(list: ArrayList<GpService>) {}
 
-    override fun viewProgress(isShow: Boolean) {}
-
     override fun viewFullProgress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
@@ -99,6 +98,10 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
         rlGpService.visibility = View.GONE
         llMyGp.visibility = View.VISIBLE
     }
+
+    override fun showProgress() {}
+
+    override fun hideProgress() {}
 
     override fun noInternetConnection(isConnect: Boolean) {
         if (!isConnect)

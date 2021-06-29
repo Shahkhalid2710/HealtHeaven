@@ -17,19 +17,23 @@ import com.applocum.connecttomyhealth.ui.mydownloads.activities.DocumentViewActi
 import com.applocum.connecttomyhealth.ui.prescription.models.Document
 import com.applocum.connecttomyhealth.ui.prescription.presenters.DocumentPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_fit_note.*
 import kotlinx.android.synthetic.main.activity_fit_note.ivBack
 import kotlinx.android.synthetic.main.activity_fit_note.noInternet
-import kotlinx.android.synthetic.main.custom_loader_progress.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class FitNoteActivity : BaseActivity(),
-    DocumentPresenter.View {
+    DocumentPresenter.View, FitNoteAdapter.FitNoteClickListner {
     @Inject
     lateinit var presenter: DocumentPresenter
+
+    lateinit var fitNoteAdapter: FitNoteAdapter
+
+    private var isLoading = false
 
     override fun getLayoutResourceId(): Int = R.layout.activity_fit_note
 
@@ -40,6 +44,10 @@ class FitNoteActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
+
+        fitNoteAdapter= FitNoteAdapter(this, ArrayList(),this)
+        rvFitNote.layoutManager=LinearLayoutManager(this)
+        rvFitNote.adapter=fitNoteAdapter
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -55,6 +63,10 @@ class FitNoteActivity : BaseActivity(),
         presenter.getFitNote()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.safeDispose()
+    }
     override fun displayErrorMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -68,19 +80,20 @@ class FitNoteActivity : BaseActivity(),
             rvFitNote.visibility = View.VISIBLE
         }
 
-        rvFitNote.layoutManager = LinearLayoutManager(this)
-        rvFitNote.adapter = FitNoteAdapter(this, list, object : FitNoteAdapter.FitNoteClickListner {
-            override fun onNoteClick(document: Document, position: Int) {
-                val intent = Intent(this@FitNoteActivity, DocumentViewActivity::class.java)
-                intent.putExtra("document", document)
-                startActivity(intent)
-                overridePendingTransition(0,0)
-            }
-        })
-    }
+        fitNoteAdapter.mList.addAll(list)
+        fitNoteAdapter.notifyItemRangeInserted(fitNoteAdapter.mList.size, list.size)
+        RxRecyclerView.scrollEvents(rvFitNote)
+            .subscribe {
+                val total = rvFitNote.layoutManager?.itemCount ?: 0
+                val last = (rvFitNote.layoutManager as LinearLayoutManager)
+                    .findLastVisibleItemPosition()
+                if (total > 0 && total <= last + 2) {
+                    if (!isLoading) {
+                        presenter.getFitNote()
+                    }
+                }
+            }.let { presenter.disposables.add(it) }
 
-    override fun viewProgress(isShow: Boolean) {
-        progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun noInternet(isConnect: Boolean) {
@@ -88,7 +101,6 @@ class FitNoteActivity : BaseActivity(),
         {
             rvFitNote.visibility=View.GONE
             noInternet.visibility=View.VISIBLE
-            layoutNotFoundFitNote.visibility=View.GONE
 
             val snackBar = Snackbar.make(llFitNote,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
             snackBar.changeFont()
@@ -99,7 +111,29 @@ class FitNoteActivity : BaseActivity(),
         else{
             noInternet.visibility=View.GONE
             rvFitNote.visibility=View.VISIBLE
-            layoutNotFoundFitNote.visibility=View.VISIBLE
         }
+    }
+
+    override fun showProgress() {
+        isLoading = true
+        rvFitNote.post {
+            fitNoteAdapter.mList.add(null)
+            fitNoteAdapter.notifyItemInserted(fitNoteAdapter.mList.size)
+        }
+    }
+
+    override fun hideProgress() {
+        isLoading = false
+        rvFitNote.post {
+            fitNoteAdapter.mList.remove(null)
+            fitNoteAdapter.notifyItemRemoved(fitNoteAdapter.mList.size)
+        }
+    }
+
+    override fun onNoteClick(document: Document, position: Int) {
+        val intent = Intent(this@FitNoteActivity, DocumentViewActivity::class.java)
+        intent.putExtra("document", document)
+        startActivity(intent)
+        overridePendingTransition(0,0)
     }
 }

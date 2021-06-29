@@ -5,11 +5,11 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/llAddGp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        android:id="@+id/llAddGp"
         tools:context=".ui.mygp.activities.AddGPServiceActivity">
 
         <RelativeLayout
@@ -47,95 +47,86 @@
                 android:textSize="@dimen/font_20" />
         </RelativeLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:fillViewport="true">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="37dp"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:background="@drawable/search_customlayout"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="@drawable/effect_button"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
 
-                <RelativeLayout
+                <EditText
+                    android:id="@+id/etGpSearch"
                     android:layout_width="match_parent"
-                    android:layout_height="37dp"
-                    android:layout_marginStart="@dimen/spacing_24"
-                    android:layout_marginTop="27dp"
-                    android:layout_marginEnd="@dimen/spacing_24"
-                    android:background="@drawable/search_customlayout"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:autofillHints="0"
+                    android:backgroundTint="@color/layoutbackground"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="@drawable/effect_button"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="@string/search_gp"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/spacing_16"
+                    android:paddingEnd="0dp"
+                    android:textColor="@color/aapBlack"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/font_12"
+                    tools:ignore="RelativeOverlap" />
 
-                    <EditText
-                        android:id="@+id/etGpSearch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:layout_width="31dp"
+                    android:layout_height="31dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/custom_btn"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_centerInParent="true"
-                        android:autofillHints="0"
-                        android:backgroundTint="@color/layoutbackground"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="@string/search_gp"
-                        android:imeOptions="actionDone"
-                        android:inputType="text"
-                        android:paddingStart="@dimen/spacing_16"
-                        android:paddingEnd="0dp"
-                        android:textColor="@color/aapBlack"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/font_12"
-                        tools:ignore="RelativeOverlap" />
-
-                    <RelativeLayout
-                        android:layout_width="31dp"
-                        android:layout_height="31dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerInParent="true"
-                        android:layout_marginEnd="4dp"
-                        android:background="@drawable/custom_btn"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_centerInParent="true"
-                            android:contentDescription="@string/todo"
-                            android:src="@drawable/ic_search" />
-                    </RelativeLayout>
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_search" />
                 </RelativeLayout>
+            </RelativeLayout>
 
-                <FrameLayout
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/spacing_15">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAddGp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/spacing_15">
+                    android:nestedScrollingEnabled="false" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvAddGp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false" />
+                <include
+                    android:id="@+id/NoGpService"
+                    layout="@layout/custom_no_gp_service_area"
+                    android:visibility="gone" />
 
-                    <include
-                        android:id="@+id/NoGpService"
-                        layout="@layout/custom_no_gp_service_area"
-                        android:visibility="gone" />
+                <include
+                    android:id="@+id/noInternet"
+                    layout="@layout/custom_no_internet"
+                    android:visibility="gone" />
 
-                    <include
-                        android:id="@+id/noInternet"
-                        layout="@layout/custom_no_internet"
-                        android:visibility="gone" />
-
-                    <include layout="@layout/custom_small_progress" />
-
-                </FrameLayout>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <include layout="@layout/custom_progress" />

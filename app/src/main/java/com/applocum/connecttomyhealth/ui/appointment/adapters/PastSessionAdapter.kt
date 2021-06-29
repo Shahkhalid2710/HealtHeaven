@@ -58,20 +58,11 @@ class PastSessionAdapter(
             ITEM -> {
                 val pastSessionHolder: PastSessionHolder = holder as PastSessionHolder
 
-                pastSessionHolder.itemView.tvDoctorFName.text =
-                    bookAppointmentResponse?.gp_details?.first_name
-                pastSessionHolder.itemView.tvDoctorLName.text =
-                    bookAppointmentResponse?.gp_details?.last_name
-                pastSessionHolder.itemView.tvSessionType.text =
-                    bookAppointmentResponse?.appointment_type
-                pastSessionHolder.itemView.tvSlot.text =
-                    (bookAppointmentResponse?.duration.toString() + " " + "mins")
-                pastSessionHolder.itemView.tvSessionDateTime.text =
-                    bookAppointmentResponse?.actual_start_time?.let {
-                        convertDateTime(
-                            it
-                        )
-                    }
+                pastSessionHolder.itemView.tvDoctorFName.text = bookAppointmentResponse?.gp_details?.first_name
+                pastSessionHolder.itemView.tvDoctorLName.text = bookAppointmentResponse?.gp_details?.last_name
+                pastSessionHolder.itemView.tvSessionType.text = bookAppointmentResponse?.appointment_type
+                pastSessionHolder.itemView.tvSlot.text = (bookAppointmentResponse?.duration.toString() + " " + "mins")
+                pastSessionHolder.itemView.tvSessionDateTime.text = bookAppointmentResponse?.actual_start_time?.let { convertDateTime(it) }
 
                 Glide.with(mContext).load(bookAppointmentResponse?.gp_details?.image)
                     .into(pastSessionHolder.itemView.ivDoctor)

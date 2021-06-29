@@ -14,11 +14,12 @@ import com.applocum.connecttomyhealth.ui.investigation.adapters.InvestigationAda
 import com.applocum.connecttomyhealth.ui.investigation.presenters.InvestigationPresenter
 import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_investigation.*
 import kotlinx.android.synthetic.main.activity_investigation.ivBack
+import kotlinx.android.synthetic.main.activity_investigation.noInternet
 import kotlinx.android.synthetic.main.custom_investigation_xml.btnAddInvestigation
-import kotlinx.android.synthetic.main.custom_loader_progress.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -27,6 +28,10 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
 
     @Inject
     lateinit var investigationPresenter: InvestigationPresenter
+
+    lateinit var investigationAdapter: InvestigationAdapter
+
+    private var isLoading = false
 
     override fun getLayoutResourceId(): Int = R.layout.activity_investigation
 
@@ -37,6 +42,10 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         investigationPresenter.injectView(this)
+
+        investigationAdapter= InvestigationAdapter(this, ArrayList())
+        rvInvestigation.layoutManager=LinearLayoutManager(this)
+        rvInvestigation.adapter=investigationAdapter
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -63,9 +72,7 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
 
     override fun displayMessage(message: String) {}
 
-    override fun viewInvestigationProgress(isShow: Boolean) {
-        progress.visibility = if (isShow) View.VISIBLE else View.GONE
-    }
+    override fun viewInvestigationProgress(isShow: Boolean) {}
 
     override fun investigationList(list: ArrayList<Investigation>) {
         if (list.isEmpty()) {
@@ -77,15 +84,26 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
             tvAddInvestigation.visibility = View.VISIBLE
             rvInvestigation.visibility = View.VISIBLE
         }
-        rvInvestigation.layoutManager = LinearLayoutManager(this)
-        rvInvestigation.adapter = InvestigationAdapter(this, list)
+
+        investigationAdapter.mList.addAll(list)
+        investigationAdapter.notifyItemRangeInserted(investigationAdapter.mList.size, list.size)
+        RxRecyclerView.scrollEvents(rvInvestigation)
+            .subscribe {
+                val total = rvInvestigation.layoutManager?.itemCount ?: 0
+                val last = (rvInvestigation.layoutManager as LinearLayoutManager)
+                    .findLastVisibleItemPosition()
+                if (total > 0 && total <= last + 2) {
+                    if (!isLoading) {
+                        investigationPresenter.showInvestigationList()
+                    }
+                }
+            }.let { investigationPresenter.disposables.add(it) }
     }
 
     override fun noInternet(isConnect: Boolean) {
         if (!isConnect)
         {
             rvInvestigation.visibility=View.GONE
-            layoutNotFoundInvestigation.visibility=View.GONE
             noInternet.visibility=View.VISIBLE
 
             val snackBar = Snackbar.make(llInvestigation,R.string.no_internet, Snackbar.LENGTH_LONG)
@@ -95,13 +113,33 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
             snackBar.show()
         }else{
             rvInvestigation.visibility=View.VISIBLE
-            layoutNotFoundInvestigation.visibility=View.VISIBLE
             noInternet.visibility=View.GONE
+        }
+    }
+
+    override fun showProgress() {
+        isLoading = true
+        rvInvestigation.post {
+            investigationAdapter.mList.add(null)
+            investigationAdapter.notifyItemInserted(investigationAdapter.mList.size)
+        }
+    }
+
+    override fun hideProgress() {
+        isLoading = false
+        rvInvestigation.post {
+            investigationAdapter.mList.remove(null)
+            investigationAdapter.notifyItemRemoved(investigationAdapter.mList.size)
         }
     }
 
     override fun onResume() {
         super.onResume()
         investigationPresenter.showInvestigationList()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        investigationPresenter.safeDispose()
     }
 }

@@ -3,26 +3,25 @@ package com.applocum.connecttomyhealth.ui.appointment.fragments
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.addsymptoms.activities.AddSymptomActivity
-import com.applocum.connecttomyhealth.ui.appointment.presenters.BookAppointmentPresenter
 import com.applocum.connecttomyhealth.ui.appointment.adapters.PastSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
+import com.applocum.connecttomyhealth.ui.appointment.presenters.BookAppointmentPresenter
 import com.applocum.connecttomyhealth.ui.sessiondetails.activities.SessionDetailsActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
-import kotlinx.android.synthetic.main.custom_loader_progress.view.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.fragment_past_session_appointment.*
 import kotlinx.android.synthetic.main.fragment_past_session_appointment.view.*
@@ -58,6 +57,7 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
         pastSessionAdapter= PastSessionAdapter(requireActivity(), ArrayList(),this)
         v.rvPastSession.layoutManager=LinearLayoutManager(requireActivity())
         v.rvPastSession.adapter=pastSessionAdapter
+        pastSessionAdapter.notifyDataSetChanged()
 
         RxView.clicks(v.noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -102,10 +102,6 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
             }.let { presenter.disposables.add(it) }
       }
 
-    override fun viewProgress(isShow: Boolean) {
-      //  v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
-    }
-
     override fun viewFullProgress(isShow: Boolean) {}
 
     override fun showProgress() {
@@ -129,7 +125,6 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
         {
             v.rvPastSession.visibility=View.GONE
             v.noInternet.visibility=View.VISIBLE
-            v.layoutNotFoundPastSession.visibility=View.GONE
 
             val snackBar = Snackbar.make(llPastSession,R.string.no_internet, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
             snackBar.changeFont()
@@ -140,7 +135,6 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
         else{
             v.noInternet.visibility=View.GONE
             v.rvPastSession.visibility=View.VISIBLE
-            v.layoutNotFoundPastSession.visibility=View.VISIBLE
         }
     }
 

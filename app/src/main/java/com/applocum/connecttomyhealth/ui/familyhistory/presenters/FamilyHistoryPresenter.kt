@@ -5,7 +5,9 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inval
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
+import com.applocum.connecttomyhealth.ui.PaginationModel
 import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistory
+import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -17,6 +19,7 @@ import javax.inject.Inject
 class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
     var disposables = CompositeDisposable()
     lateinit var view: View
+    var nextPage: String? = "1"
 
     fun injectView(view: View) {
         this.view = view
@@ -40,6 +43,7 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
                     view.viewFamilyHistoryProgress(false)
                     when (it.status) {
                         Success -> {
+                            view.noInternet(true)
                             view.displaySuccessMessage(it.message)
                         }
                         InvalidCredentials, InternalServer -> {
@@ -61,29 +65,41 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun showFamilyHistoryList() {
-        view.viewFamilyHistoryProgress(true)
-        api.showFamilyHistory(userHolder.userToken, userHolder.clinicalToken, 66)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
-                when (it.status) {
-                    Success -> {
-                        view.viewFamilyHistoryProgress(false)
-                        view.familyHistoryList(it.data)
-                    }
-                    InvalidCredentials, InternalServer -> {
-                        view.displayErrorMessage(it.message)
-                    }
-                }
-            }, onError = {
-                view.viewFamilyHistoryProgress(false)
-                it.printStackTrace()
+        nextPage.let {
+            view.showProgress()
+            view.noInternet(true)
+            nextPage?.let { it1 ->
+                api.showFamilyHistory(userHolder.userToken, userHolder.clinicalToken, 66, it1)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext = {
+                        view.hideProgress()
+                        when (it.body()?.status) {
+                            Success -> {
+                                val paginationModel = Gson().fromJson(
+                                    it.headers()["X-Pagination"],
+                                    PaginationModel::class.java
+                                )
+                                nextPage = paginationModel.nextPage
+                                it.body()?.let {
+                                    view.familyHistoryList(it.data)
+                                }
+                            }
+                            InvalidCredentials, InternalServer -> {
+                                it.body()?.let {
+                                    view.displayErrorMessage(it.message)
+                                }
+                            }
+                        }
+                    }, onError = {
+                        view.hideProgress()
+                        it.printStackTrace()
+                        if (it is UnknownHostException) {
+                            view.noInternet(false)
+                        }
 
-                if (it is UnknownHostException)
-                {
-                    view.noInternet(false)
-                }
-
-            }).let { disposables.add(it) }
+                    }).let { disposables.add(it) }
+            }
+        }
     }
 
     private fun validateFamilyHistory(name: String): Boolean {
@@ -94,11 +110,18 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
         return true
     }
 
+    fun safeDispose() {
+        disposables.clear()
+        disposables.dispose()
+    }
+
     interface View {
         fun displayErrorMessage(message: String)
         fun displaySuccessMessage(message: String)
         fun viewFamilyHistoryProgress(isShow: Boolean)
         fun familyHistoryList(list: ArrayList<FamilyHistory>)
         fun noInternet(isConnect:Boolean)
+        fun showProgress()
+        fun hideProgress()
     }
 }

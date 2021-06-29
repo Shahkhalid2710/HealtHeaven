@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llFitNote"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:id="@+id/llFitNote"
     android:orientation="vertical"
     tools:context=".ui.fitnote.activities.FitNoteActivity">
 
@@ -44,48 +44,38 @@
 
     </RelativeLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:ignore="UselessParent">
 
-                <FrameLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvFitNote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:ignore="UselessParent">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvFitNote"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/spacing_16"
-                        android:nestedScrollingEnabled="false"
-                        android:scrollbars="vertical" />
-
-                    <include
-                        android:id="@+id/noInternet"
-                        layout="@layout/custom_no_internet"
-                        android:visibility="gone" />
-
-                    <include layout="@layout/custom_loader_progress" />
-                </FrameLayout>
+                    android:nestedScrollingEnabled="false"
+                    android:scrollbars="vertical" />
 
                 <include
-                    android:id="@+id/layoutNotFoundFitNote"
-                    layout="@layout/custom_fitnote"
+                    android:id="@+id/noInternet"
+                    layout="@layout/custom_no_internet"
                     android:visibility="gone" />
-            </RelativeLayout>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+            </FrameLayout>
 
+            <include
+                android:id="@+id/layoutNotFoundFitNote"
+                layout="@layout/custom_fitnote"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

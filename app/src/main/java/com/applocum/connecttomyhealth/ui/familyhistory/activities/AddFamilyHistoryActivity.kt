@@ -18,6 +18,7 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,11 +30,14 @@ import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHistoryPresenter.View {
+class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHistoryPresenter.View,
+    MedicalDiseaseAdapter.ItemClickListnter {
     var mListFamilyHistory: ArrayList<Medical> = ArrayList()
     private var selectedString = ""
     private var isMatched = false
     private var familyHistoryName = ""
+    lateinit var medicalDiseaseAdapter: MedicalDiseaseAdapter
+    private var isLoading = false
 
     @Inject
     lateinit var presenter: MedicalPresenter
@@ -51,6 +55,11 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
         familyHistoryPresenter.injectView(this)
+
+        medicalDiseaseAdapter = MedicalDiseaseAdapter(this, ArrayList(), this)
+        rvDisease.layoutManager = LinearLayoutManager(this)
+        rvDisease.adapter = medicalDiseaseAdapter
+
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -78,6 +87,10 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 if (!isMatched) {
+                    medicalDiseaseAdapter.mList.remove(null)
+                    medicalDiseaseAdapter.mList.clear()
+                    medicalDiseaseAdapter.notifyDataSetChanged()
+                    presenter.resetPage()
                     presenter.getDiseaseList(etAddFamilyHistory.text.toString())
                 }
             }.subscribe().let { presenter.disposables.add(it) }
@@ -96,25 +109,21 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
         mListFamilyHistory = list
         rvDisease.visibility = View.VISIBLE
         rlDisease.visibility = View.GONE
-        rvDisease.layoutManager = LinearLayoutManager(this)
-        rvDisease.adapter =
-            MedicalDiseaseAdapter(this, mListFamilyHistory,
-                object : MedicalDiseaseAdapter.ItemClickListnter {
-                    override fun onItemClick(medical: Medical, position: Int) {
-                        familyHistoryName = medical.id.toString()
-                        if (!etAddFamilyHistory.text.isNullOrBlank()) {
-                            mListFamilyHistory.clear()
-                        }
-                        selectedString = medical.description
-                        etAddFamilyHistory.setText(medical.description)
-                        rlDisease.visibility = View.VISIBLE
-                        tvDiseaseName.text = medical.description
-                        rvDisease.visibility = View.GONE
+
+        medicalDiseaseAdapter.mList.addAll(list)
+        medicalDiseaseAdapter.notifyItemRangeInserted(medicalDiseaseAdapter.mList.size, list.size)
+        RxRecyclerView.scrollEvents(rvDisease)
+            .subscribe {
+                val total = rvDisease.layoutManager?.itemCount ?: 0
+                val last = (rvDisease.layoutManager as LinearLayoutManager)
+                    .findLastVisibleItemPosition()
+                if (total > 0 && total <= last + 2) {
+                    if (!isLoading) {
+                        presenter.getDiseaseList(etAddFamilyHistory.text.toString())
                     }
-                })
-    }
-    override fun viewProgress(isShow: Boolean) {
-        progressfamilyHistory.visibility = if (isShow) View.VISIBLE else View.GONE
+                }
+            }.let { presenter.disposables.add(it) }
+
     }
 
     override fun viewMedicalProgress(isShow: Boolean) {}
@@ -136,6 +145,22 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
         }
     }
 
+    override fun showProgress() {
+        isLoading = true
+        rvDisease.post {
+            medicalDiseaseAdapter.mList.add(null)
+            medicalDiseaseAdapter.notifyItemInserted(medicalDiseaseAdapter.mList.size)
+        }
+    }
+
+    override fun hideProgress() {
+        isLoading = false
+        rvDisease.post {
+            medicalDiseaseAdapter.mList.remove(null)
+            medicalDiseaseAdapter.notifyItemRemoved(medicalDiseaseAdapter.mList.size)
+        }
+    }
+
     override fun displayErrorMessage(message: String) {
         val snackbar = Snackbar.make(lladdfamilyhistory, message, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
@@ -153,4 +178,16 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
     }
 
     override fun familyHistoryList(list: ArrayList<FamilyHistory>) {}
+
+    override fun onItemClick(medical: Medical, position: Int) {
+        familyHistoryName = medical.id.toString()
+        if (!etAddFamilyHistory.text.isNullOrBlank()) {
+            mListFamilyHistory.clear()
+        }
+        selectedString = medical.description
+        etAddFamilyHistory.setText(medical.description)
+        rlDisease.visibility = View.VISIBLE
+        tvDiseaseName.text = medical.description
+        rvDisease.visibility = View.GONE
+    }
 }

@@ -14,12 +14,12 @@ import com.applocum.connecttomyhealth.ui.familyhistory.adapters.FamilyHistoryAda
 import com.applocum.connecttomyhealth.ui.familyhistory.presenters.FamilyHistoryPresenter
 import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistory
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_family_history.*
 import kotlinx.android.synthetic.main.activity_family_history.ivBack
 import kotlinx.android.synthetic.main.activity_family_history.noInternet
 import kotlinx.android.synthetic.main.custom_family_history_xml.*
-import kotlinx.android.synthetic.main.custom_loader_progress.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -28,6 +28,10 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
 
     @Inject
     lateinit var presenter: FamilyHistoryPresenter
+
+    lateinit var familyHistoryAdapter: FamilyHistoryAdapter
+
+    private var isLoading = false
 
     override fun getLayoutResourceId(): Int = R.layout.activity_family_history
 
@@ -38,6 +42,10 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
         super.onCreate(savedInstanceState)
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
+
+        familyHistoryAdapter= FamilyHistoryAdapter(this, ArrayList())
+        rvFamilyHistory.layoutManager=LinearLayoutManager(this)
+        rvFamilyHistory.adapter=familyHistoryAdapter
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -64,9 +72,7 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
 
     override fun displaySuccessMessage(message: String) {}
 
-    override fun viewFamilyHistoryProgress(isShow: Boolean) {
-        progress.visibility = if (isShow) View.VISIBLE else View.GONE
-    }
+    override fun viewFamilyHistoryProgress(isShow: Boolean) {}
 
     override fun familyHistoryList(list: ArrayList<FamilyHistory>) {
         if (list.isEmpty()) {
@@ -78,19 +84,26 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
             tvAddFamilyHistory.visibility = View.VISIBLE
             rvFamilyHistory.visibility = View.VISIBLE
         }
-        rvFamilyHistory.layoutManager = LinearLayoutManager(this)
-        rvFamilyHistory.adapter =
-            FamilyHistoryAdapter(
-                this,
-                list
-            )
+
+        familyHistoryAdapter.mList.addAll(list)
+        familyHistoryAdapter.notifyItemRangeInserted(familyHistoryAdapter.mList.size, list.size)
+        RxRecyclerView.scrollEvents(rvFamilyHistory)
+            .subscribe {
+                val total = rvFamilyHistory.layoutManager?.itemCount ?: 0
+                val last = (rvFamilyHistory.layoutManager as LinearLayoutManager)
+                    .findLastVisibleItemPosition()
+                if (total > 0 && total <= last + 2) {
+                    if (!isLoading) {
+                        presenter.showFamilyHistoryList()
+                    }
+                }
+            }.let { presenter.disposables.add(it) }
     }
 
     override fun noInternet(isConnect: Boolean) {
         if (!isConnect)
         {
             rvFamilyHistory.visibility=View.GONE
-            layoutNotFoundFamilyHistory.visibility=View.GONE
             noInternet.visibility=View.VISIBLE
 
             val snackBar = Snackbar.make(llFamilyHistory,R.string.no_internet, Snackbar.LENGTH_LONG)
@@ -100,13 +113,33 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
             snackBar.show()
         }else{
             rvFamilyHistory.visibility=View.VISIBLE
-            layoutNotFoundFamilyHistory.visibility=View.VISIBLE
             noInternet.visibility=View.GONE
+        }
+    }
+
+    override fun showProgress() {
+        isLoading = true
+        rvFamilyHistory.post {
+            familyHistoryAdapter.mList.add(null)
+            familyHistoryAdapter.notifyItemInserted(familyHistoryAdapter.mList.size)
+        }
+    }
+
+    override fun hideProgress() {
+        isLoading = false
+        rvFamilyHistory.post {
+            familyHistoryAdapter.mList.remove(null)
+            familyHistoryAdapter.notifyItemRemoved(familyHistoryAdapter.mList.size)
         }
     }
 
     override fun onResume() {
         super.onResume()
         presenter.showFamilyHistoryList()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.safeDispose()
     }
 }

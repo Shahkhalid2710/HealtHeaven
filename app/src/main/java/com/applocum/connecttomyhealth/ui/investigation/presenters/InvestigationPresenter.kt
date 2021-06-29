@@ -5,7 +5,9 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inval
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
+import com.applocum.connecttomyhealth.ui.PaginationModel
 import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
+import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -17,6 +19,7 @@ import javax.inject.Inject
 class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
     var disposables = CompositeDisposable()
     lateinit var view: View
+    var nextPage: String? = "1"
 
     fun injectView(view: View) {
         this.view = view
@@ -63,31 +66,47 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun showInvestigationList() {
-        view.viewInvestigationProgress(true)
-        api.showInvestigation(userHolder.userToken, userHolder.clinicalToken, 66)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
-                when (it.status) {
-                    Success -> {
-                        view.noInternet(true)
-                        view.viewInvestigationProgress(false)
-                        view.investigationList(it.data)
-                    }
-                    InvalidCredentials, InternalServer -> {
-                        view.displayMessage(it.message)
-                    }
-                }
-            }, onError = {
-                view.viewInvestigationProgress(false)
-                it.printStackTrace()
+        nextPage.let {
+            view.showProgress()
+            view.noInternet(true)
+            nextPage?.let {
+                api.showInvestigation(userHolder.userToken, userHolder.clinicalToken, 66, it)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext = {
+                        view.hideProgress()
+                        when (it.body()?.status) {
+                            Success -> {
+                                val paginationModel = Gson().fromJson(
+                                    it.headers()["X-Pagination"],
+                                    PaginationModel::class.java
+                                )
+                                nextPage = paginationModel.nextPage
+                                it.body()?.let {
+                                    view.investigationList(it.data)
+                                }
+                            }
+                            InvalidCredentials, InternalServer -> {
+                                it.body()?.let {
+                                    view.displayMessage(it.message)
+                                }
+                            }
+                        }
+                    }, onError = {
+                        view.hideProgress()
+                        it.printStackTrace()
+                        if (it is UnknownHostException) {
+                            view.noInternet(false)
+                        }
 
-                if (it is UnknownHostException)
-                {
-                    view.noInternet(false)
-                }
+                    }).let { disposables.add(it) }
+            }
+        }
 
-            }).let { disposables.add(it) }
+    }
 
+    fun safeDispose() {
+        disposables.clear()
+        disposables.dispose()
     }
 
     private fun validateInvestigation(name: String, date: String, description: String): Boolean {
@@ -112,5 +131,7 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
         fun viewInvestigationProgress(isShow: Boolean)
         fun investigationList(list: ArrayList<Investigation>)
         fun noInternet(isConnect:Boolean)
+        fun showProgress()
+        fun hideProgress()
     }
 }
