@@ -21,15 +21,12 @@ class AppointmentFragment : Fragment() {
         v = inflater.inflate(R.layout.fragment_appointment, container, false)
 
         val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(requireActivity(), requireActivity().supportFragmentManager)
-        viewPagerFragmentAdapter.addfragment(
-            UpcomingSessionApointmentFragment(),
-            "Upcoming Session"
-        )
+        viewPagerFragmentAdapter.addfragment(UpcomingSessionApointmentFragment(), "Upcoming Session")
         viewPagerFragmentAdapter.addfragment(PastSessionAppointmentFragment(), "Past Session")
         v.viewPager.adapter = viewPagerFragmentAdapter
+        v.viewPager.adapter?.notifyDataSetChanged()
         v.tablayout.setupWithViewPager(v.viewPager)
         v.viewPager.setPagingEnabled(false)
-        v.viewPager.adapter?.notifyDataSetChanged()
 
         return v
     }

@@ -69,8 +69,6 @@ class BookSessionActivity : BaseActivity() {
 
         viewPager.setPagingEnabled(false)
 
-
-
         RxView.clicks(btnBookSession).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 val intent = Intent(this, AddSymptomActivity::class.java)
@@ -82,7 +80,7 @@ class BookSessionActivity : BaseActivity() {
                 appointment.therapistImage = specialist.image
                 appointment.threapistBio = specialist.bio
                 appointment.therapistName = "${specialist.first_name} ${specialist.last_name}"
-                specialist.usual_address.apply {
+                specialist.usual_address?.apply {
                     appointment.therapistAddress = "$line1, $line2,$line3, $town, $pincode"
                 }
                 userHolder.saveBookAppointmentData(appointment)

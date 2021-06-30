@@ -86,12 +86,7 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
 
                     doubleBackToExitPressedOnce = true
 
-                    Toast.makeText(
-                        requireContext(),
-                        R.string.press_once_again_to_exit,
-                        Toast.LENGTH_SHORT
-                    ).show()
-
+                    Toast.makeText(requireContext(), R.string.press_once_again_to_exit, Toast.LENGTH_SHORT).show()
                     Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
                 }
             }
@@ -122,9 +117,8 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
 
     override fun displaymessage(message: String) {}
 
-    override fun getdoctorlist(list: ArrayList<Specialist>) {
-        rvTopDoctors.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+    override fun getdoctorlist(list: ArrayList<Specialist?>,page:String?) {
+        rvTopDoctors.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         rvTopDoctors.adapter =
             DoctorAdapter(requireActivity(), list, object : DoctorAdapter.DoctorClickListner {
                 override fun onDoctorClick(specialist: Specialist, position: Int) {
@@ -137,7 +131,7 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
                     appointment.threapistBio = specialist.bio
                     appointment.therapistName =
                         "${specialist.first_name} ${specialist.last_name}"
-                    specialist.usual_address.apply {
+                    specialist.usual_address?.apply {
                         appointment.therapistAddress = "$line1, $line2,$line3, $town, $pincode"
                     }
                     userHolder.saveBookAppointmentData(appointment)
@@ -151,13 +145,9 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
         v.progressTopDoctors.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun hideProgress() {
+    override fun hideProgress() {}
 
-    }
-
-    override fun showProgress() {
-
-    }
+    override fun showProgress() {}
 
     override fun noInternet(isConnect: Boolean) {
         if (!isConnect) {
@@ -165,8 +155,7 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
             v.noInternet.visibility = View.VISIBLE
 
             val snackBar = Snackbar.make(llHome, R.string.no_internet, Snackbar.LENGTH_LONG).apply {
-                view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines =
-                    5
+                view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5
             }
             snackBar.changeFont()
             val snackView = snackBar.view

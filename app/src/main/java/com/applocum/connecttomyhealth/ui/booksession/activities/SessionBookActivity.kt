@@ -43,13 +43,15 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPresenter.View, OnDateSelectedListener {
+class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPresenter.View,
+    OnDateSelectedListener {
     private var selectSession = ""
     private var sType = ""
     private var sSlot = ""
     private var seleteddate = ""
     private var sTime = ""
     private var specialistId = 0
+
     //lateinit var specialist: Specialist
     private lateinit var commonData: Common
 
@@ -73,18 +75,18 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
-        RxView.clicks(tvCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
+        RxView.clicks(tvCancel).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 val intent = (Intent(this, BottomNavigationViewActivity::class.java))
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finishAffinity()
-                overridePendingTransition(0,0)
+                overridePendingTransition(0, 0)
             }
 
         //specialist = intent.getSerializableExtra("specialist") as Specialist
-        specialistId = intent.getIntExtra("specialistId",0)
+        specialistId = intent.getIntExtra("specialistId", 0)
 
 
         RxView.clicks(btnPhoneCall).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -98,7 +100,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 btnVideoCall.setTextColor(Color.parseColor("#008976"))
                 btnFaceToFace.setTextColor(Color.parseColor("#008976"))
 
-                sTime=""
+                sTime = ""
             }
 
         RxView.clicks(btnVideoCall).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -112,7 +114,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 btnVideoCall.setTextColor(Color.WHITE)
                 btnFaceToFace.setTextColor(Color.parseColor("#008976"))
 
-                sTime=""
+                sTime = ""
             }
 
         RxView.clicks(btnFaceToFace).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -126,7 +128,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 btnVideoCall.setTextColor(Color.parseColor("#008976"))
                 btnFaceToFace.setTextColor(Color.WHITE)
 
-                sTime=""
+                sTime = ""
             }
 
         RxView.clicks(btn10Mins).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -140,7 +142,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 btn20Mins.setTextColor(Color.parseColor("#008976"))
                 btn30Mins.setTextColor(Color.parseColor("#008976"))
 
-                sTime=""
+                sTime = ""
             }
 
         RxView.clicks(btn20Mins).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -154,7 +156,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 btn20Mins.setTextColor(Color.WHITE)
                 btn30Mins.setTextColor(Color.parseColor("#008976"))
 
-                sTime=""
+                sTime = ""
             }
 
         RxView.clicks(btn30Mins).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -168,7 +170,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 btn20Mins.setTextColor(Color.parseColor("#008976"))
                 btn30Mins.setTextColor(Color.WHITE)
 
-                sTime=""
+                sTime = ""
             }
 
         btn10Mins.performClick()
@@ -254,11 +256,11 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                     appointment.appointmentType = sType
                     appointment.appointmentSlot = sSlot
                     appointment.appointmentDate = seleteddate
-                    appointment.therapistId=specialistId
+                    appointment.therapistId = specialistId
                     userHolder.saveBookAppointmentData(appointment)
                     intent.putExtra("commonData", commonData)
                     startActivity(intent)
-                    overridePendingTransition(0,0)
+                    overridePendingTransition(0, 0)
                 }
             }
 
@@ -323,9 +325,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
     }
 
     override fun noInternet(isConnect: Boolean) {
-        if (!isConnect)
-        {
-            val snackbar = Snackbar.make(llSessionbook,R.string.no_internet, Snackbar.LENGTH_LONG)
+        if (!isConnect) {
+            val snackbar = Snackbar.make(llSessionbook, R.string.no_internet, Snackbar.LENGTH_LONG)
             snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
@@ -360,12 +361,18 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             val date = CalendarDay.today()
             return day.isBefore(date)
         }
+
         override fun decorate(view: DayViewFacade) {
             view.setDaysDisabled(true)
         }
     }
 
-    private fun validateBookSession(date: String, sessionType: String, slot: String, time: String): Boolean {
+    private fun validateBookSession(
+        date: String,
+        sessionType: String,
+        slot: String,
+        time: String
+    ): Boolean {
         if (date.isEmpty()) {
             val snackbar = Snackbar.make(llSessionbook, "Please select date", Snackbar.LENGTH_LONG)
             snackbar.changeFont()
@@ -375,7 +382,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             return false
         }
         if (sessionType.isEmpty()) {
-            val snackbar = Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
+            val snackbar =
+                Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
             snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
@@ -391,7 +399,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             return false
         }
         if (time.isEmpty()) {
-            val snackbar = Snackbar.make(llSessionbook, "Please select proper time slot", Snackbar.LENGTH_LONG)
+            val snackbar =
+                Snackbar.make(llSessionbook, "Please select proper time slot", Snackbar.LENGTH_LONG)
             snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))

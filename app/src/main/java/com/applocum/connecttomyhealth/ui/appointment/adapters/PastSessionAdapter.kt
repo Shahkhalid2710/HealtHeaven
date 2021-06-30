@@ -56,7 +56,7 @@ class PastSessionAdapter(
         val bookAppointmentResponse = mList[position]
         when (getItemViewType(position)) {
             ITEM -> {
-                val pastSessionHolder: PastSessionHolder = holder as PastSessionHolder
+                val pastSessionHolder = holder as PastSessionHolder
 
                 pastSessionHolder.itemView.tvDoctorFName.text = bookAppointmentResponse?.gp_details?.first_name
                 pastSessionHolder.itemView.tvDoctorLName.text = bookAppointmentResponse?.gp_details?.last_name
@@ -64,8 +64,7 @@ class PastSessionAdapter(
                 pastSessionHolder.itemView.tvSlot.text = (bookAppointmentResponse?.duration.toString() + " " + "mins")
                 pastSessionHolder.itemView.tvSessionDateTime.text = bookAppointmentResponse?.actual_start_time?.let { convertDateTime(it) }
 
-                Glide.with(mContext).load(bookAppointmentResponse?.gp_details?.image)
-                    .into(pastSessionHolder.itemView.ivDoctor)
+                Glide.with(mContext).load(bookAppointmentResponse?.gp_details?.image).into(pastSessionHolder.itemView.ivDoctor)
 
                 when (bookAppointmentResponse?.appointment_type) {
                     "face_to_face" -> {
@@ -82,9 +81,11 @@ class PastSessionAdapter(
                 when (bookAppointmentResponse?.status) {
                     "cancelled" -> {
                         pastSessionHolder.itemView.tvCancelled.visibility = View.VISIBLE
+                        pastSessionHolder.itemView.tvMissed.visibility = View.GONE
                     }
                     "not_attended" -> {
                         pastSessionHolder.itemView.tvMissed.visibility = View.VISIBLE
+                        pastSessionHolder.itemView.tvCancelled.visibility = View.GONE
                     }
                 }
 

@@ -27,11 +27,11 @@ class SpecilistPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun getDoctorlist() {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.viewProgress(true)
-
             view.noInternet(true)
+
             nextPage?.let { page ->
                 api.getdoctors(userHolder.userToken!!, 66, page)
                     .observeOn(AndroidSchedulers.mainThread())
@@ -40,13 +40,10 @@ class SpecilistPresenter @Inject constructor(private val api: AppEndPoint) {
                         view.viewProgress(false)
                         when (it.body()?.status) {
                             Success -> {
-                                val paginationModel = Gson().fromJson(
-                                    it.headers()["X-Pagination"],
-                                    PaginationModel::class.java
-                                )
+                                val paginationModel = Gson().fromJson(it.headers()["X-Pagination"], PaginationModel::class.java)
                                 nextPage = paginationModel.nextPage
                                 it.body()?.let {
-                                    view.getdoctorlist(it.data)
+                                    view.getdoctorlist(it.data,nextPage)
                                 }
                             }
                             InvalidCredentials, InternalServer -> {
@@ -75,7 +72,7 @@ class SpecilistPresenter @Inject constructor(private val api: AppEndPoint) {
 
     interface View {
         fun displaymessage(message: String)
-        fun getdoctorlist(list: ArrayList<Specialist>)
+        fun getdoctorlist(list: ArrayList<Specialist?>, page:String?)
         fun viewProgress(isShow: Boolean)
         fun showProgress()
         fun hideProgress()

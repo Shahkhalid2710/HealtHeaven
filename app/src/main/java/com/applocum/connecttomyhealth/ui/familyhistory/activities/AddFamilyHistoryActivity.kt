@@ -1,8 +1,10 @@
 package com.applocum.connecttomyhealth.ui.familyhistory.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -17,6 +19,7 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
+import com.applocum.connecttomyhealth.ui.securitycheck.activities.SecurityActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
@@ -60,12 +63,12 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
         rvDisease.layoutManager = LinearLayoutManager(this)
         rvDisease.adapter = medicalDiseaseAdapter
 
-
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
         RxView.clicks(ivCancel).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
+                familyHistoryName = ""
                 etAddFamilyHistory.text.clear()
                 rlDisease.visibility = View.GONE
             }
@@ -159,6 +162,15 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
             medicalDiseaseAdapter.mList.remove(null)
             medicalDiseaseAdapter.notifyItemRemoved(medicalDiseaseAdapter.mList.size)
         }
+    }
+
+    override fun sessionExpired(message: String) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        val intent=Intent(this,SecurityActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
     override fun displayErrorMessage(message: String) {

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -90,20 +89,26 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View,
         presenter.safeDispose()
     }
 
-    override fun getdoctorlist(list: ArrayList<Specialist>) {
-        specialistsAdapter.mList.addAll(list)
-        specialistsAdapter.notifyItemRangeInserted(specialistsAdapter.mList.size, list.size)
-        RxRecyclerView.scrollEvents(rvDoctors)
-            .subscribe {
-                val total = rvDoctors.layoutManager?.itemCount ?: 0
-                val last = (rvDoctors.layoutManager as LinearLayoutManager)
-                    .findLastVisibleItemPosition()
-                if (total > 0 && total <= last + 2) {
-                    if (!isLoading) {
-                        presenter.getDoctorlist()
+    override fun getdoctorlist(list: ArrayList<Specialist?>, page:String?) {
+        if (page == "1")
+        {
+            specialistsAdapter.updateList(list)
+        }
+        else {
+            specialistsAdapter.mList.addAll(list)
+            specialistsAdapter.notifyItemRangeInserted(specialistsAdapter.mList.size, list.size)
+            RxRecyclerView.scrollEvents(rvDoctors)
+                .subscribe {
+                    val total = rvDoctors.layoutManager?.itemCount ?: 0
+                    val last = (rvDoctors.layoutManager as LinearLayoutManager)
+                        .findLastVisibleItemPosition()
+                    if (total > 0 && total <= last + 2) {
+                        if (!isLoading) {
+                            presenter.getDoctorlist()
+                        }
                     }
-                }
-            }.let { presenter.disposables.add(it) }
+                }.let { presenter.disposables.add(it) }
+        }
     }
 
     override fun viewProgress(isShow: Boolean) {}
@@ -159,7 +164,7 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View,
         appointment.threapistBio = specialist.bio
         appointment.therapistName =
             "${specialist.first_name} ${specialist.last_name}"
-        specialist.usual_address.apply {
+        specialist.usual_address?.apply {
             appointment.therapistAddress = "$line1, $line2,$line3, $town, $pincode"
         }
         userHolder.saveBookAppointmentData(appointment)

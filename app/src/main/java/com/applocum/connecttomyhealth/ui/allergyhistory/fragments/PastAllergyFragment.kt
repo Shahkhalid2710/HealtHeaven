@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -17,11 +18,12 @@ import com.applocum.connecttomyhealth.ui.allergyhistory.adapters.PastAllergyHist
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.FalseAllergy
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.TrueAllergy
 import com.applocum.connecttomyhealth.ui.allergyhistory.presenters.AllergyHistoryPresenter
+import com.applocum.connecttomyhealth.ui.securitycheck.activities.SecurityActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.custom_allergy_xml.view.*
-import kotlinx.android.synthetic.main.custom_loader_progress.view.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
+import kotlinx.android.synthetic.main.custom_top_progress.view.*
 import kotlinx.android.synthetic.main.fragment_past_allergy.*
 import kotlinx.android.synthetic.main.fragment_past_allergy.view.*
 import kotlinx.android.synthetic.main.fragment_past_allergy.view.noInternet
@@ -93,7 +95,6 @@ class PastAllergyFragment : Fragment(), AllergyHistoryPresenter.View {
         if (!isConnect){
             v.rvPastAllergy.visibility=View.GONE
             v.noInternet.visibility=View.VISIBLE
-            v.layoutNotfoundPastAllergy.visibility=View.GONE
 
             val snackBar = Snackbar.make(llPastAllergy,R.string.no_internet, Snackbar.LENGTH_LONG)
             snackBar.changeFont()
@@ -103,8 +104,16 @@ class PastAllergyFragment : Fragment(), AllergyHistoryPresenter.View {
         }else {
             v.rvPastAllergy.visibility=View.VISIBLE
             v.noInternet.visibility=View.GONE
-            v.layoutNotfoundPastAllergy.visibility=View.VISIBLE
         }
+    }
+
+    override fun sessionExpired(message: String) {
+        Toast.makeText(requireActivity(),message, Toast.LENGTH_SHORT).show()
+        val intent=Intent(requireActivity(),SecurityActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     override fun onResume() {

@@ -1,7 +1,9 @@
 package com.applocum.connecttomyhealth.ui.medicalhistory.presenters
 
+import android.util.Log
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.SessionExpired
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -21,11 +23,9 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     lateinit var view: View
     var nextPage: String? = "1"
 
-
     companion object {
         const val activeMedicalHistory = "active"
         const val pastMedicalHistory = "past"
-        const val statusVerified = "verified"
         const val statusUnverified = "unverified"
     }
 
@@ -37,7 +37,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun getDiseaseList(search: String) {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternet(true)
             nextPage?.let {
@@ -52,6 +52,7 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                                     PaginationModel::class.java
                                 )
                                 nextPage = paginationModel.nextPage
+
                                 it.body()?.let {
                                     view.getDiseaseList(it.data)
                                 }
@@ -61,6 +62,12 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                                     view.displayMessage(it.message)
                                 }
                             }
+                            SessionExpired->
+                            {
+                                it.body()?.let {
+                                    view.sessionExpired(it.message)
+                                }
+                            }
                         }
                     }, onError = {
                         view.hideProgress()
@@ -68,7 +75,6 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                         if (it is UnknownHostException) {
                             view.noInternet(false)
                         }
-
                     }).let { disposables.addAll(it) }
             }
         }
@@ -118,6 +124,11 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                         InvalidCredentials, InternalServer -> {
                             view.displayMessage(it.message)
                         }
+
+                        SessionExpired->
+                        {
+                            view.sessionExpired(it.message)
+                        }
                     }
 
                 }, onError = {
@@ -133,73 +144,84 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun activeMedicalHistory() {
-        api.showMedicalHistory(
-            userHolder.userToken, userHolder.clinicalToken, userHolder.userid!!.toInt(),
-            activeMedicalHistory,
-            statusUnverified, 66
-        )
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
-                when (it.status) {
-                    Success -> {
-                        view.noInternet(true)
-                        val medicalHistoryTrueFalseResponse =
-                            Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
-                        view.showActiveMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.trueMedicalHistory)
-                    }
-                    InvalidCredentials, InternalServer -> {
-                        view.displayMessage(it.message)
-                    }
-                }
-            }, onError = {
-                it.printStackTrace()
+            view.viewMedicalProgress(true)
+            view.noInternet(true)
+                api.showMedicalHistory(userHolder.userToken, userHolder.clinicalToken, userHolder.userid!!.toInt(), activeMedicalHistory, statusUnverified, 66,)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext = {
+                        view.viewMedicalProgress(false)
+                        when (it.status) {
+                            Success -> {
+                                val medicalHistoryTrueFalseResponse = Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
+                                view.showActiveMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.trueMedicalHistory)
 
-                if (it is UnknownHostException) {
-                    view.noInternet(false)
-                }
+                            }
+                            InvalidCredentials, InternalServer -> {
+                                view.displayMessage(it.message)
+                            }
+                            SessionExpired->
+                            {
+                                view.sessionExpired(it.message)
+                            }
+                        }
+                    }, onError = {
+                        view.viewMedicalProgress(false)
+                        it.printStackTrace()
 
-            }).let { disposables.add(it) }
-    }
+                        if (it is UnknownHostException) {
+                            view.noInternet(false)
+                        }
+
+                    }).let { disposables.add(it) }
+            }
 
     fun pastMedicalHistory() {
-        api.showMedicalHistory(
-            userHolder.userToken, userHolder.clinicalToken, userHolder.userid!!.toInt(),
-            pastMedicalHistory, statusUnverified, 66
-        )
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
-                when (it.status) {
-                    Success -> {
-                        view.noInternet(true)
-                        val medicalHistoryTrueFalseResponse =
-                            Gson().fromJson(it.data, MedicalHistoryTrueFalseResponse::class.java)
-                        view.showPastMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.falseMedicalHistory)
-                    }
-                    InvalidCredentials, InternalServer -> {
-                        view.displayMessage(it.message)
-                    }
-                }
-            }, onError = {
-                it.printStackTrace()
+            view.viewMedicalProgress(true)
+            view.noInternet(true)
 
-                if (it is UnknownHostException) {
-                    view.noInternet(false)
-                }
+            nextPage?.let {
+                api.showMedicalHistory(
+                    userHolder.userToken, userHolder.clinicalToken, userHolder.userid!!.toInt(),
+                    pastMedicalHistory, statusUnverified, 66)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext = {
+                        view.viewMedicalProgress(false)
+                        when (it.status) {
+                            Success -> {
+                                    val medicalHistoryTrueFalseResponse =
+                                        Gson().fromJson(
+                                            it.data,
+                                            MedicalHistoryTrueFalseResponse::class.java
+                                        )
+                                    view.showPastMedicalHistory(medicalHistoryTrueFalseResponse.medical_history.falseMedicalHistory)
+                            }
+                            InvalidCredentials, InternalServer -> {
+                                    view.displayMessage(it.message)
+                            }
+                            SessionExpired->
+                            {
+                                view.sessionExpired(it.message)
+                            }
+                        }
+                    }, onError = {
+                        view.viewMedicalProgress(false)
+                        it.printStackTrace()
+                        if (it is UnknownHostException) {
+                            view.noInternet(false)
+                        }
 
-            }).let { disposables.add(it) }
-    }
+                    }).let { disposables.add(it) }
+            }
+        }
 
-
-    fun resetPage()
-    {
-        nextPage="1"
+    fun resetPage() {
+        nextPage = "1"
     }
 
     fun safeDispose() {
         disposables.clear()
         disposables.dispose()
     }
-
 
     private fun validationMedicalHistory(
         diseaseName: String,
@@ -246,5 +268,6 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
         fun noInternet(isConnect: Boolean)
         fun showProgress()
         fun hideProgress()
+        fun sessionExpired(message: String)
     }
 }

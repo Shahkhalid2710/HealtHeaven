@@ -34,7 +34,7 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
     lateinit var userHolder: UserHolder
 
     fun getPrescription() {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternet(true)
             nextPage?.let {
@@ -72,7 +72,7 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun getFitNote() {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternet(true)
             nextPage?.let {
@@ -110,7 +110,7 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun getReferral() {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternet(true)
             nextPage?.let {
@@ -148,7 +148,7 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun getOtherNote() {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternet(true)
             nextPage?.let {

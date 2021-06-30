@@ -32,7 +32,7 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
     lateinit var userHolder: UserHolder
 
     fun getgpList(search: String) {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternetConnection(true)
 

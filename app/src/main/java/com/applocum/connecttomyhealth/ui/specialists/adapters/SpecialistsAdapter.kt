@@ -84,6 +84,11 @@ class SpecialistsAdapter(
         }
     }
 
+    fun updateList(list: ArrayList<Specialist?>) {
+        mList = list
+        notifyDataSetChanged()
+    }
+
     interface ItemClickListner {
         fun onItemClick(specialist: Specialist, position: Int)
         fun onbookSession(specialist: Specialist, position: Int)

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -19,11 +20,12 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
+import com.applocum.connecttomyhealth.ui.securitycheck.activities.SecurityActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
-import kotlinx.android.synthetic.main.custom_loader_progress.view.*
 import kotlinx.android.synthetic.main.custom_medical_history.view.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
+import kotlinx.android.synthetic.main.custom_top_progress.view.*
 import kotlinx.android.synthetic.main.fragment_past_medical_history.*
 import kotlinx.android.synthetic.main.fragment_past_medical_history.view.*
 import kotlinx.android.synthetic.main.fragment_past_medical_history.view.noInternet
@@ -37,11 +39,14 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
 
     lateinit var v: View
 
+    lateinit var pastMedicalHistoryAdapter: PastMedicalHistoryAdapter
+
     @SuppressLint("CheckResult")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_past_medical_history, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
+
 
         RxView.clicks(v.layoutNotfoundPastMedicalHistory.btnAddMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -61,7 +66,9 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
 
     override fun getDiseaseList(list: ArrayList<Medical>) {}
 
-    override fun viewMedicalProgress(isShow: Boolean) {}
+    override fun viewMedicalProgress(isShow: Boolean) {
+        v.progress.visibility=if (isShow) View.VISIBLE else View.GONE
+    }
 
     override fun sendMedicalHistoryData(medicalHistory: MedicalHistory) {}
 
@@ -77,15 +84,17 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
             layoutNotfoundPastMedicalHistory.visibility=View.GONE
             rvPastMedicalHistory.visibility=View.VISIBLE
         }
-        rvPastMedicalHistory.layoutManager = LinearLayoutManager(requireActivity())
-        rvPastMedicalHistory.adapter = PastMedicalHistoryAdapter(requireActivity(), falseMedicalHistory)
+
+        pastMedicalHistoryAdapter= PastMedicalHistoryAdapter(requireActivity(),falseMedicalHistory)
+        v.rvPastMedicalHistory.layoutManager=LinearLayoutManager(requireActivity())
+        v.rvPastMedicalHistory.adapter=pastMedicalHistoryAdapter
+
     }
 
     override fun noInternet(isConnect: Boolean) {
         if (!isConnect){
             v.rvPastMedicalHistory.visibility=View.GONE
             v.noInternet.visibility=View.VISIBLE
-            v.layoutNotfoundPastMedicalHistory.visibility=View.GONE
 
             val snackBar = Snackbar.make(llPastMedicalHistory,R.string.no_internet, Snackbar.LENGTH_LONG)
             snackBar.changeFont()
@@ -95,15 +104,20 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
         }else {
             v.rvPastMedicalHistory.visibility=View.VISIBLE
             v.noInternet.visibility=View.GONE
-            v.layoutNotfoundPastMedicalHistory.visibility=View.VISIBLE
         }
     }
 
-    override fun showProgress() {
+    override fun showProgress() {}
 
-    }
+    override fun hideProgress() {}
 
-    override fun hideProgress() {
+    override fun sessionExpired(message: String) {
+        Toast.makeText(requireActivity(),message, Toast.LENGTH_SHORT).show()
+        val intent=Intent(requireActivity(),SecurityActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     override fun onResume() {

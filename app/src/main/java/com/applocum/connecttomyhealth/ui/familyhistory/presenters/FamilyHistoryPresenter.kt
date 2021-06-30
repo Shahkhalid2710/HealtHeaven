@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.ui.familyhistory.presenters
 
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.SessionExpired
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -49,6 +50,10 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
                         InvalidCredentials, InternalServer -> {
                             view.displayErrorMessage(it.message)
                         }
+                        SessionExpired ->
+                        {
+                            view.sessionExpired(it.message)
+                        }
                     }
 
                 }, onError = {
@@ -65,7 +70,7 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun showFamilyHistoryList() {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternet(true)
             nextPage?.let { it1 ->
@@ -89,6 +94,12 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
                                     view.displayErrorMessage(it.message)
                                 }
                             }
+                            SessionExpired ->
+                            {
+                                it.body()?.let {
+                                    view.sessionExpired(it.message)
+                                }
+                            }
                         }
                     }, onError = {
                         view.hideProgress()
@@ -110,6 +121,11 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
         return true
     }
 
+    fun resetPage()
+    {
+        nextPage="1"
+    }
+
     fun safeDispose() {
         disposables.clear()
         disposables.dispose()
@@ -123,5 +139,6 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
         fun noInternet(isConnect:Boolean)
         fun showProgress()
         fun hideProgress()
+        fun sessionExpired(message: String)
     }
 }

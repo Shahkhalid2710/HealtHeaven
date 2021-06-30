@@ -27,10 +27,10 @@ class AboutSpecialistFragment : Fragment() {
 
         specialist = arguments?.getSerializable("specialist") as Specialist
         v.tvDoctorBio.text = specialist.bio
-        v.tvDoctorLocation.text = (specialist.usual_address.line1 + "" + "," + specialist.usual_address.line2 + "" + "," + specialist.usual_address.town + "" + "," + specialist.usual_address.pincode)
+        v.tvDoctorLocation.text = (specialist.usual_address?.line1 + "" + "," + specialist.usual_address?.line2 + "" + "," + specialist.usual_address?.town + "" + "," + specialist.usual_address?.pincode)
 
         v.btnDirection.setOnClickListener {
-            val navigation = Uri.parse("google.navigation:q=" + specialist.usual_address.latitude + "," + specialist.usual_address.longitude + "")
+            val navigation = Uri.parse("google.navigation:q=" + specialist.usual_address?.latitude + "," + specialist.usual_address?.longitude + "")
             val navigationIntent = Intent(Intent.ACTION_VIEW, navigation)
             navigationIntent.setPackage("com.google.android.apps.maps")
             startActivity(navigationIntent)

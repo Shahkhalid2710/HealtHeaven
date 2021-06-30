@@ -110,6 +110,7 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View,
         gpServiceAdapter.mList.addAll(list)
 
         gpServiceAdapter.notifyItemRangeInserted(gpServiceAdapter.mList.size, list.size)
+
         RxRecyclerView.scrollEvents(rvAddGp)
             .subscribe {
                 val total = rvAddGp.layoutManager?.itemCount ?: 0

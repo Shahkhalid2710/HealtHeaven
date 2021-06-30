@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.ui.investigation.presenters
 
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.SessionExpired
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -50,6 +51,10 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
                         InvalidCredentials, InternalServer -> {
                             view.displayMessage(it.message)
                         }
+                        SessionExpired ->
+                        {
+                            view.sessionExpired(it.message)
+                        }
                     }
 
                 }, onError = {
@@ -66,7 +71,7 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
     }
 
     fun showInvestigationList() {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternet(true)
             nextPage?.let {
@@ -82,12 +87,18 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
                                 )
                                 nextPage = paginationModel.nextPage
                                 it.body()?.let {
-                                    view.investigationList(it.data)
+                                    view.investigationList(it.data,nextPage)
                                 }
                             }
                             InvalidCredentials, InternalServer -> {
                                 it.body()?.let {
                                     view.displayMessage(it.message)
+                                }
+                            }
+                            SessionExpired ->
+                            {
+                                it.body()?.let {
+                                    view.sessionExpired(it.message)
                                 }
                             }
                         }
@@ -101,7 +112,11 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
                     }).let { disposables.add(it) }
             }
         }
+    }
 
+    fun resetPage()
+    {
+        nextPage="1"
     }
 
     fun safeDispose() {
@@ -129,9 +144,10 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
         fun displaySuccessMessage(message: String)
         fun displayMessage(message: String)
         fun viewInvestigationProgress(isShow: Boolean)
-        fun investigationList(list: ArrayList<Investigation>)
+        fun investigationList(list: ArrayList<Investigation?>, page:String?)
         fun noInternet(isConnect:Boolean)
         fun showProgress()
         fun hideProgress()
+        fun sessionExpired(message: String)
     }
 }

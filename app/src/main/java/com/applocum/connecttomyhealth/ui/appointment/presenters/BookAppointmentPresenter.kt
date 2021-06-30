@@ -85,12 +85,13 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
     }
 
     fun showUpcomingSession() {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternet(true)
-
-            nextPage?.let {page->
-                api.sessions(userHolder.userToken!!, UPCOMING_APPOINTMENT, 66,page)
+            Log.d("nextpageValue1", "->" + nextPage)
+            nextPage?.let { page ->
+                Log.d("nextpageValue2", "->" + nextPage)
+                api.sessions(userHolder.userToken!!, UPCOMING_APPOINTMENT, 66, page)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(onNext = {
                         view.hideProgress()
@@ -100,7 +101,10 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                                     it.headers()["X-Pagination"],
                                     PaginationModel::class.java
                                 )
+
+                                Log.d("headerr", "->" + it.headers())
                                 nextPage = paginationModel.nextPage
+                                Log.d("nextpageValue3", "->" + nextPage)
                                 it.body()?.let {
                                     view.getSessions(it.data)
                                 }
@@ -124,7 +128,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
     }
 
     fun showPastSession() {
-        nextPage.let {
+        nextPage?.let {
             view.showProgress()
             view.noInternet(true)
 

@@ -1,8 +1,10 @@
 package com.applocum.connecttomyhealth.ui.allergyhistory.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -18,6 +20,7 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.FalseMedicalHisto
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
+import com.applocum.connecttomyhealth.ui.securitycheck.activities.SecurityActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
@@ -183,6 +186,15 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
             medicalDiseaseAdapter.mList.remove(null)
             medicalDiseaseAdapter.notifyItemRemoved(medicalDiseaseAdapter.mList.size)
         }
+    }
+
+    override fun sessionExpired(message: String) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        val intent=Intent(this,SecurityActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
     override fun displaySuccessMessage(message: String) { this.finish()}

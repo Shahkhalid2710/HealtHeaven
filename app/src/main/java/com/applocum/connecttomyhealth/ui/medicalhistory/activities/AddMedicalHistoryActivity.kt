@@ -2,9 +2,12 @@ package com.applocum.connecttomyhealth.ui.medicalhistory.activities
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -17,6 +20,7 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.MedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.TrueMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresenter
+import com.applocum.connecttomyhealth.ui.securitycheck.activities.SecurityActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
@@ -108,7 +112,6 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
                 }
             }.subscribe().let { presenter.disposables.add(it) }
 
-
         cbActiveCurrently.setOnCheckedChangeListener { _, b ->
             if (b) {
                 llEndDate.visibility = View.GONE
@@ -148,18 +151,17 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
 
         medicalDiseaseAdapter.mList.addAll(list)
         medicalDiseaseAdapter.notifyItemRangeInserted(medicalDiseaseAdapter.mList.size, list.size)
+
         RxRecyclerView.scrollEvents(rvMedicalDisease)
             .subscribe {
                 val total = rvMedicalDisease.layoutManager?.itemCount ?: 0
-                val last = (rvMedicalDisease.layoutManager as LinearLayoutManager)
-                    .findLastVisibleItemPosition()
+                val last = (rvMedicalDisease.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
                 if (total > 0 && total <= last + 2) {
                     if (!isLoading) {
                         presenter.getDiseaseList(etDiseaseName.text.toString())
                     }
                 }
             }.let { presenter.disposables.add(it) }
-
     }
 
     override fun viewMedicalProgress(isShow: Boolean) {
@@ -176,8 +178,7 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
 
     override fun noInternet(isConnect: Boolean) {
         if (!isConnect) {
-            val snackBar =
-                Snackbar.make(llMedicalHistory, R.string.no_internet, Snackbar.LENGTH_LONG)
+            val snackBar = Snackbar.make(llMedicalHistory, R.string.no_internet, Snackbar.LENGTH_LONG)
             snackBar.changeFont()
             val snackView = snackBar.view
             snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
@@ -186,6 +187,7 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
     }
 
     override fun showProgress() {
+        Log.d("Progressss","show")
         isLoading = true
         rvMedicalDisease.post {
             medicalDiseaseAdapter.mList.add(null)
@@ -194,11 +196,18 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
     }
 
     override fun hideProgress() {
+        Log.d("Progressss","hide")
         isLoading = false
         rvMedicalDisease.post {
             medicalDiseaseAdapter.mList.remove(null)
             medicalDiseaseAdapter.notifyItemRemoved(medicalDiseaseAdapter.mList.size)
         }
+    }
+
+    override fun sessionExpired(message: String) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this,SecurityActivity::class.java))
+        finish()
     }
 
     private fun selectStartMonth() {

@@ -14,7 +14,7 @@ data class Specialist (
 	@SerializedName("languages") val languages : ArrayList<String> = ArrayList(),
 	@SerializedName("designation") val designation : String="",
 	@SerializedName("corporate_organization_name") val corporate_organization_name : String="",
-	@SerializedName("usual_address") val usual_address : UsualAddress=UsualAddress(),
+	@SerializedName("usual_address") val usual_address : UsualAddress?=UsualAddress(),
 	@SerializedName("distance") val distance : String="",
 	@SerializedName("doc_type") val doc_type : String=""
 ):Serializable

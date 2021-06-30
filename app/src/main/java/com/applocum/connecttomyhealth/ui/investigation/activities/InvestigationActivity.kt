@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -13,6 +14,7 @@ import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.investigation.adapters.InvestigationAdapter
 import com.applocum.connecttomyhealth.ui.investigation.presenters.InvestigationPresenter
 import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
+import com.applocum.connecttomyhealth.ui.securitycheck.activities.SecurityActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
@@ -74,7 +76,7 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
 
     override fun viewInvestigationProgress(isShow: Boolean) {}
 
-    override fun investigationList(list: ArrayList<Investigation>) {
+    override fun investigationList(list: ArrayList<Investigation?>,page:String?) {
         if (list.isEmpty()) {
             layoutNotFoundInvestigation.visibility = View.VISIBLE
             tvAddInvestigation.visibility = View.GONE
@@ -86,18 +88,18 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
         }
 
         investigationAdapter.mList.addAll(list)
-        investigationAdapter.notifyItemRangeInserted(investigationAdapter.mList.size, list.size)
+        investigationAdapter.notifyItemRangeInserted(investigationAdapter.mList.size,list.size)
         RxRecyclerView.scrollEvents(rvInvestigation)
-            .subscribe {
-                val total = rvInvestigation.layoutManager?.itemCount ?: 0
-                val last = (rvInvestigation.layoutManager as LinearLayoutManager)
-                    .findLastVisibleItemPosition()
-                if (total > 0 && total <= last + 2) {
-                    if (!isLoading) {
-                        investigationPresenter.showInvestigationList()
-                    }
-                }
-            }.let { investigationPresenter.disposables.add(it) }
+                 .subscribe {
+                     val total = rvInvestigation.layoutManager?.itemCount ?: 0
+                     val last = (rvInvestigation.layoutManager as LinearLayoutManager)
+                         .findLastVisibleItemPosition()
+                     if (total > 0 && total <= last + 2) {
+                         if (!isLoading) {
+                             investigationPresenter.showInvestigationList()
+                         }
+                     }
+                 }.let { investigationPresenter.disposables.add(it) }
     }
 
     override fun noInternet(isConnect: Boolean) {
@@ -133,8 +135,20 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
         }
     }
 
+    override fun sessionExpired(message: String) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        val intent=Intent(this,SecurityActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
+    }
+
     override fun onResume() {
         super.onResume()
+        investigationAdapter.mList.clear()
+        investigationAdapter.notifyDataSetChanged()
+        investigationPresenter.resetPage()
         investigationPresenter.showInvestigationList()
     }
 

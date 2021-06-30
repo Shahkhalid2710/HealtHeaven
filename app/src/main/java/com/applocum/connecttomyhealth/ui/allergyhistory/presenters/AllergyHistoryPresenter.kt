@@ -2,6 +2,7 @@ package com.applocum.connecttomyhealth.ui.allergyhistory.presenters
 
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.SessionExpired
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
@@ -65,6 +66,10 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
                         InvalidCredentials,InternalServer -> {
                             view.displayErrorMessage(it.message)
                         }
+                        SessionExpired ->
+                        {
+                            view.sessionExpired(it.message)
+                        }
                     }
 
                 },onError = {
@@ -83,6 +88,7 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
     fun activeAllergy()
     {
         view.viewProgress(true)
+        view.noInternetConnection(true)
         api.showAllergyHistory(userHolder.userToken,userHolder.clinicalToken,userHolder.userid!!.toInt(),
             activeAllergy,
             statusUnverified,66)
@@ -90,13 +96,16 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
             .subscribeBy(onNext = {
                 when (it.status) {
                     Success -> {
-                        view.noInternetConnection(true)
                         view.viewProgress(false)
                         val allergyResponse = Gson().fromJson(it.data,AllergyResponse::class.java)
                         view.showActiveAllergy(allergyResponse.trueAllergy)
                     }
                     InvalidCredentials, InternalServer -> {
                         view.displayErrorMessage(it.message)
+                    }
+                    SessionExpired->
+                    {
+                        view.sessionExpired(it.message)
                     }
                 }
             }, onError = {
@@ -114,6 +123,7 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
    fun pastAllergy()
     {
         view.viewProgress(true)
+        view.noInternetConnection(true)
         api.showAllergyHistory(userHolder.userToken,userHolder.clinicalToken,userHolder.userid!!.toInt(),
             pastAllergy,
             statusUnverified,66)
@@ -121,13 +131,16 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
             .subscribeBy(onNext = {
                 when (it.status) {
                     Success -> {
-                        view.noInternetConnection(true)
                         view.viewProgress(false)
                         val allergyResponse = Gson().fromJson(it.data,AllergyResponse::class.java)
                         view.showPastAllergy(allergyResponse.falseAllergy)
                     }
                     InvalidCredentials, InternalServer -> {
                         view.displayErrorMessage(it.message)
+                    }
+                    SessionExpired->
+                    {
+                        view.sessionExpired(it.message)
                     }
                 }
             }, onError = {
@@ -161,5 +174,6 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
      fun viewProgress(isShow: Boolean)
      fun viewAllergyProgress(isShow: Boolean)
      fun noInternetConnection(isConnect:Boolean)
-  }
+     fun sessionExpired(message: String)
+ }
 }

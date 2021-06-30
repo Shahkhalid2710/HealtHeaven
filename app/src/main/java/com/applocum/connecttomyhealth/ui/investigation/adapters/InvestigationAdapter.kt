@@ -46,6 +46,10 @@ class InvestigationAdapter(context: Context, list: ArrayList<Investigation?>) :
         return if (mList[position] == null) LOADING else ITEM
     }
 
+    fun updateList(list:ArrayList<Investigation?>) {
+        mList.addAll(list)
+        notifyDataSetChanged()
+    }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val investigation = mList[position]
         when (getItemViewType(position)) {

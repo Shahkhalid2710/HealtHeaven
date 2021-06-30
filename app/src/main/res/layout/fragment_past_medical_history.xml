@@ -1,47 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llPastMedicalHistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    tools:context=".ui.medicalhistory.fragments.PastMedicalHistoryFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:id="@+id/llPastMedicalHistory"
-        tools:context=".ui.medicalhistory.fragments.PastMedicalHistoryFragment">
+        tools:ignore="UselessParent">
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_16"
             tools:ignore="UselessParent">
 
-            <FrameLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPastMedicalHistory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:ignore="UselessParent">
+                android:nestedScrollingEnabled="false" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvPastMedicalHistory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:nestedScrollingEnabled="false" />
+            <include layout="@layout/custom_top_progress" />
+        </FrameLayout>
 
-                <include layout="@layout/custom_loader_progress" />
-            </FrameLayout>
+        <include
+            android:id="@+id/layoutNotfoundPastMedicalHistory"
+            layout="@layout/custom_medical_history"
+            android:visibility="gone" />
 
-            <include
-                android:id="@+id/layoutNotfoundPastMedicalHistory"
-                layout="@layout/custom_medical_history"
-                android:visibility="gone" />
-
-            <include
-                android:id="@+id/noInternet"
-                layout="@layout/custom_no_internet" />
-        </RelativeLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+        <include
+            android:id="@+id/noInternet"
+            layout="@layout/custom_no_internet" />
+    </RelativeLayout>
+</LinearLayout>

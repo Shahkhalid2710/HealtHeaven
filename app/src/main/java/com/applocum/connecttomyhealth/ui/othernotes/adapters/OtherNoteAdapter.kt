@@ -56,8 +56,7 @@ class OtherNoteAdapter(
             ITEM -> {
                 val otherNoteHolder = holder as OtherNoteHolder
 
-                otherNoteHolder.itemView.tvDocType.text =
-                    mContext.resources.getString(R.string.others_notes)
+                otherNoteHolder.itemView.tvDocType.text = mContext.resources.getString(R.string.others_notes)
                 otherNoteHolder.itemView.tvDate.text = document?.created_at?.let {
                     convertDocumentTime(
                         it

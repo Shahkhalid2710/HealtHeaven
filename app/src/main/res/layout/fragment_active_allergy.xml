@@ -1,47 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llActiveAllergy"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:fillViewport="true">
+    tools:context=".ui.allergyhistory.fragments.ActiveAllergyFragment">
 
-    <LinearLayout
-        android:id="@+id/llActiveAllergy"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".ui.allergyhistory.fragments.ActiveAllergyFragment">
+        tools:ignore="UselessParent">
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_16"
             tools:ignore="UselessParent">
 
-            <FrameLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvActiveAllergy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:ignore="UselessParent">
+                android:nestedScrollingEnabled="false" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvActiveAllergy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_16"
-                    android:nestedScrollingEnabled="false" />
-
-                <include layout="@layout/custom_loader_progress" />
-
-                <include
-                    android:id="@+id/noInternet"
-                    layout="@layout/custom_no_internet" />
-            </FrameLayout>
+            <include layout="@layout/custom_top_progress" />
 
             <include
-                android:id="@+id/layoutNotfoundActiveAllergy"
-                layout="@layout/custom_allergy_xml"
-                android:visibility="gone" />
+                android:id="@+id/noInternet"
+                layout="@layout/custom_no_internet" />
+        </FrameLayout>
 
-        </RelativeLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+        <include
+            android:id="@+id/layoutNotfoundActiveAllergy"
+            layout="@layout/custom_allergy_xml"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</LinearLayout>
