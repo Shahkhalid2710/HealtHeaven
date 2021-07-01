@@ -19,7 +19,7 @@ fun SharedPreferences.prefString(def: String = "", key: String? = null) =
 /**
  * To store Boolean type of value in shared preferences
  * */
-fun SharedPreferences.prefBoolean(def: Boolean = true, key: String? = null) =
+fun SharedPreferences.prefBoolean(def: Boolean = false, key: String? = null) =
     preferenceManager(def, key, SharedPreferences::getBoolean, SharedPreferences.Editor::putBoolean)
 /**
  * To store Float type of value in shared preferences

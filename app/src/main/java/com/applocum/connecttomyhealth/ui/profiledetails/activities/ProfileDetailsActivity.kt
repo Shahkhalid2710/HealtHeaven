@@ -50,6 +50,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     private var countryCode =" "
     private var height:String ="0"
     private var weight:String ="0"
+    private var phoneNumber:String? = null
 
     @Inject
     lateinit var presenter: ProfileDetailsPresenter
@@ -128,6 +129,8 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
     @SuppressLint("SimpleDateFormat")
     override fun showProfile(patient: Patient) {
         patientData=patient
+        phoneNumber = patient.phone_detail?.number
+
         tvFName.text = patient.user.firstName
         tvLName.text = patient.user.lastName
         etFirstName.setText(patient.user.firstName)
@@ -186,6 +189,15 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         etCity.setText(patientData.addresses.primary.town)
         etSmoker.setText(patientData.smoke)
         etAlcohol.setText(patientData.alcohol)
+
+        if (patient.user.profile.weightValue1.isNotEmpty() && patient.user.profile.heightValue1.isNotEmpty())
+        {
+            val weightValue1=patient.user.profile.weightValue1.replaceFirst(" kg","")
+            weight=weightValue1
+
+            val heightValue1=patient.user.profile.heightValue1.replaceFirst(" cm","")
+            height=heightValue1
+        }
     }
 
     override fun displayMessage(message: String) {}
@@ -340,7 +352,6 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 dialog.show()
             }
 
-
         RxView.clicks(etDOB).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 val calendar: Calendar = Calendar.getInstance()
@@ -383,7 +394,7 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                 val dialog = AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
 
-                countryCode=showDialogView.ccp.selectedCountryCode
+                countryCode = showDialogView.ccp.selectedCountryCode
 
                 val font = Typeface.createFromAsset(this.assets, "fonts/montserrat_medium.ttf")
                 showDialogView.ccp.setTypeFace(font)
@@ -391,11 +402,21 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
                     countryCode = showDialogView.ccp.selectedCountryCode
                 }
 
-                showDialogView.etPhoneNumber.setText(patientData.phone_detail?.number)
+                if (phoneNumber.isNullOrEmpty())
+                {
+                    val snackbar = Snackbar.make(llProfileDetails,"Phone number not found", Snackbar.LENGTH_LONG)
+                    snackbar.changeFont()
+                    val snackview = snackbar.view
+                    snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                    snackbar.show()
+                }else {
+                    showDialogView.etPhoneNumber.setText(phoneNumber)
+                }
 
                 showDialogView.btnDonePhoneNumber.setOnClickListener {
                     if (validateMobileNumber(showDialogView.etPhoneNumber.text.toString())) {
                         val intent = Intent(this, VerificationActivity::class.java)
+                        intent.putExtra("PhoneVerify","ProfileDetails")
                         intent.putExtra("phoneNumber", showDialogView.etPhoneNumber.text.toString().trim())
                         intent.putExtra("countryCode",countryCode)
                         startActivity(intent)
@@ -487,17 +508,24 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         builder.setAdapter(dataAdapter) { _, which ->
             etWeight.setText(kg[which]).toString()
             weight=etWeight.text.toString().replaceFirst(" kg","")
-            calculateBMI(height, weight)
+            calculateBMI(height,weight)
         }
         val dialog = builder.create()
         dialog.show()
     }
 
     private fun calculateBMI(height:String,weight:String) {
-            val heightValue = height.toFloat() / 100
-            val weightValue = weight.toFloat()
-            val bmi = weightValue / (heightValue * heightValue)
-            displayBMI(bmi)
+
+             if (height.isNotEmpty() && height != "0" && weight.isNotEmpty() && weight!= "0")
+             {
+                 val heightValue = height.toFloat() / 100
+                 val weightValue = weight.toFloat()
+                 val bmi = weightValue / (heightValue * heightValue)
+                 displayBMI(bmi)
+             } else
+             {
+                 etBMI.setText(R.string.select_proper_height_and_weight_for_bmi)
+             }
     }
 
     @SuppressLint("SetTextI18n")
@@ -531,11 +559,8 @@ class ProfileDetailsActivity : BaseActivity(), ProfileDetailsPresenter.View, Dat
         } else {
             getString(R.string.obese_class_iii)
         }
-
         etBMI.setText("$bmi $bmiLabel")
     }
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {

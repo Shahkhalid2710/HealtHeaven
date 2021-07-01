@@ -1,6 +1,5 @@
 package com.applocum.connecttomyhealth.ui.medicalhistory.presenters
 
-import android.util.Log
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.SessionExpired
@@ -41,16 +40,13 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
             view.showProgress()
             view.noInternet(true)
             nextPage?.let {
-                api.getDiseaseList(search, it)
+                api.getDiseaseList(userHolder.userToken,search,it)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(onNext = {
                         view.hideProgress()
                         when (it.body()?.status) {
                             Success -> {
-                                val paginationModel = Gson().fromJson(
-                                    it.headers()["X-Pagination"],
-                                    PaginationModel::class.java
-                                )
+                                val paginationModel = Gson().fromJson(it.headers()["X-Pagination"], PaginationModel::class.java)
                                 nextPage = paginationModel.nextPage
 
                                 it.body()?.let {

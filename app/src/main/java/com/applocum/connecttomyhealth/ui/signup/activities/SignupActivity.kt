@@ -18,10 +18,10 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.login.activities.LoginActivity
 import com.applocum.connecttomyhealth.ui.signup.presenters.SignupPresenter
 import com.applocum.connecttomyhealth.ui.signup.models.User
+import com.applocum.connecttomyhealth.ui.verification.activities.VerificationActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_signup.*
@@ -102,7 +102,9 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
     }
 
     override fun sendUserData(user: User) {
-        val intent = Intent(this, BottomNavigationViewActivity::class.java)
+        val intent = Intent(this,VerificationActivity::class.java)
+        intent.putExtra("PhoneVerify","SignUp")
+        intent.putExtra("user",user)
         startActivity(intent)
         finish()
     }
@@ -206,8 +208,7 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
             this.month = calendar.get(Calendar.MONTH)
             this.year = calendar.get(Calendar.YEAR)
 
-            val datePickerDialog =
-                DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
+            val datePickerDialog = DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
             datePickerDialog.datePicker.maxDate = (System.currentTimeMillis() - 568025136000L)
             datePickerDialog.show()
         }

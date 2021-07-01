@@ -11,7 +11,7 @@ data class BookAppointmentResponse(
     @SerializedName("status") val status: String = "",
     @SerializedName("appointment_price") val appointment_price: Double = 0.0,
     @SerializedName("duration") val duration: Int = 0,
-    @SerializedName("activate_waiting_room") val activate_waiting_room: Boolean = false,
+    @SerializedName("activate_waiting_room") val activate_waiting_room: Boolean= false,
     @SerializedName("is_unpaid") val is_unpaid: Boolean = false,
     @SerializedName("doc_preference") val doc_preference: String = "",
     @SerializedName("appointment_booked_by") val appointment_booked_by: String = "",

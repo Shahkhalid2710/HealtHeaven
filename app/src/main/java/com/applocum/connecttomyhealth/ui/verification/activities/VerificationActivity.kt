@@ -1,6 +1,7 @@
 package com.applocum.connecttomyhealth.ui.verification.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,6 +15,8 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
+import com.applocum.connecttomyhealth.ui.signup.models.User
 import com.applocum.connecttomyhealth.ui.verification.presenters.OtpPresenter
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
@@ -28,6 +31,11 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
     @Inject
     lateinit var otpPresenter: OtpPresenter
 
+     var data:String?=null
+     lateinit var user: User
+    var mobileNumber:String?=null
+    var number:String?=null
+
     override fun getLayoutResourceId(): Int= R.layout.activity_verification
 
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
@@ -38,12 +46,21 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
         (application as MyApplication).component.inject(this)
         otpPresenter.injectView(this)
 
-        val phoneNumber=intent.getStringExtra("phoneNumber")
-        val countryCode=intent.getStringExtra("countryCode")
+        if (intent.hasExtra("PhoneVerify") )
+        {
+             data=intent.getStringExtra("PhoneVerify")
+            val phoneNumber=intent.getStringExtra("phoneNumber")
+            val countryCode=intent.getStringExtra("countryCode")
+            mobileNumber="+$countryCode$phoneNumber"
+            number = "<font color='#008976'>$mobileNumber</font>"
+        }
 
-        val mobileNumber= "+$countryCode$phoneNumber"
-
-        val number = "<font color='#008976'>$phoneNumber</font>"
+        if( intent.hasExtra("user"))
+        {
+            user=intent.getSerializableExtra("user") as User
+            number = "<font color='#008976'>${user.phone}</font>"
+            mobileNumber=user.phone
+        }
 
         tvVerificationNumber.text = HtmlCompat.fromHtml("Please enter the verification code we sent to your mobile number $number", HtmlCompat.FROM_HTML_MODE_LEGACY)
 
@@ -54,8 +71,7 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
         etno5.addTextChangedListener(loginTextWatcher)
         etno6.addTextChangedListener(loginTextWatcher)
 
-
-        otpPresenter.sendOtp(mobileNumber)
+        mobileNumber?.let { otpPresenter.sendOtp(it) }
 
         RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
@@ -64,13 +80,13 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
 
         RxView.clicks(tvResend).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
-                otpPresenter.sendOtp(mobileNumber)
+                mobileNumber?.let { it1 -> otpPresenter.sendOtp(it1) }
             }
 
 
         RxView.clicks(btnVerify).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
-                otpPresenter.verifyOtp(mobileNumber,etno1.text.toString()+etno2.text.toString()+etno3.text.toString()+etno4.text.toString()+etno5.text.toString()+etno6.text.toString())
+                mobileNumber?.let { it1 -> otpPresenter.verifyOtp(it1,etno1.text.toString()+etno2.text.toString()+etno3.text.toString()+etno4.text.toString()+etno5.text.toString()+etno6.text.toString()) }
             }
 
         etno1.addTextChangedListener(GenericTextWatcher(etno1, etno2))
@@ -124,6 +140,28 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
         snackbar.show()
     }
 
+    override fun userData(user: User) {
+         when(data)
+         {
+             "SignUp"->{
+                 val intent=Intent(this,BottomNavigationViewActivity::class.java)
+                 intent.putExtra("user",user)
+                 startActivity(intent)
+                 finish()
+             }
+             "ProfileDetails"->{
+                 finish()
+             }
+
+             "LogIn"->{
+                 val intent=Intent(this,BottomNavigationViewActivity::class.java)
+                 intent.putExtra("user",user)
+                 startActivity(intent)
+                 finish()
+             }
+         }
+    }
+
     override fun displayErrorMessage(message: String) {
         val snackbar = Snackbar.make(llVerification, message, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
@@ -134,7 +172,6 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
 
     override fun displaySuccessMessage(message: String) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
-        finish()
     }
 
     override fun viewProgress(isShow: Boolean) {

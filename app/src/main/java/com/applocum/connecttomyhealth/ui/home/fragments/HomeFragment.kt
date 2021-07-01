@@ -118,8 +118,8 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
     override fun displaymessage(message: String) {}
 
     override fun getdoctorlist(list: ArrayList<Specialist?>,page:String?) {
-        rvTopDoctors.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        rvTopDoctors.adapter =
+        v.rvTopDoctors.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        v.rvTopDoctors.adapter =
             DoctorAdapter(requireActivity(), list, object : DoctorAdapter.DoctorClickListner {
                 override fun onDoctorClick(specialist: Specialist, position: Int) {
                     val intent = Intent(requireActivity(), BookSessionActivity::class.java)

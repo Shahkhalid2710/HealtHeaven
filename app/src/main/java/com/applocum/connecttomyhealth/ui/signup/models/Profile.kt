@@ -1,5 +1,6 @@
 package com.applocum.connecttomyhealth.ui.signup.models
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Profile (
 
@@ -15,4 +16,4 @@ data class Profile (
 	@SerializedName("alcohol") val alcohol : String,
 	@SerializedName("bmi") val bmi : String,
 	@SerializedName("restore_id") val restoreId : String
-)
+):Serializable

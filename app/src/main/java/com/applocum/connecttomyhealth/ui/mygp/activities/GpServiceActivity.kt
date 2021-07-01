@@ -122,8 +122,8 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
     }
 
     @SuppressLint("CheckResult")
-    override fun showSurgery(surgery: Surgery) {
-          if (surgery.practice_name.isNullOrEmpty())
+    override fun showSurgery(surgery: Surgery?) {
+          if (surgery?.practice_name.isNullOrEmpty())
           {
               rlGpService.visibility = View.GONE
               llMyGp.visibility = View.VISIBLE
@@ -145,17 +145,29 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
 
             map.uiSettings.setAllGesturesEnabled(true)
             map.isMyLocationEnabled
-            val marker = surgery.long?.let { surgery.lat?.let { it1 -> LatLng(it1, it) } }
-            val cameraPosition = CameraPosition.Builder().target(marker).zoom(16.0f).build()
-            map.addMarker(marker.let { it -> it?.let { it1 -> MarkerOptions().position(it1) } }).setIcon(smallMarkerIcon)
-            val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
-            map.moveCamera(cameraUpdate)
 
-            map.setOnMarkerClickListener { false }
+            if (surgery?.lat != null && surgery.long !=null)
+            {
+                val marker = surgery.long.let { surgery.lat.let { it1 -> LatLng(it1, it) } }
+                val cameraPosition = CameraPosition.Builder().target(marker).zoom(16.0f).build()
+                map.addMarker(marker.let { it -> it.let { it1 -> MarkerOptions().position(it1) } }).setIcon(smallMarkerIcon)
+                val cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
+                map.moveCamera(cameraUpdate)
+
+                map.setOnMarkerClickListener { false }
+            }
+            else
+            {
+                val snackBar = Snackbar.make(flGpService, R.string.invalid_location, Snackbar.LENGTH_LONG)
+                snackBar.changeFont()
+                val snackView = snackBar.view
+                snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                snackBar.show()
+            }
         }
 
-        tvAddress.text = surgery.address?.let { capitalize(it+","+surgery.city) }
-        tvName.text = surgery.practice_name?.let { capitalize(it) }
+        tvAddress.text = surgery?.address?.let { capitalize(it+","+surgery.city+","+surgery.county) }
+        tvName.text = surgery?.practice_name?.let { capitalize(it) }
 
         RxView.clicks(btnCallGPService).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -163,7 +175,7 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
                 {
                     ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE), 1)
                 } else {
-                    startActivity(Intent(Intent.ACTION_CALL, Uri.fromParts("tel", surgery.phone, null)))
+                    startActivity(Intent(Intent.ACTION_CALL, Uri.fromParts("tel", surgery?.phone, null)))
                 }
             }
        }

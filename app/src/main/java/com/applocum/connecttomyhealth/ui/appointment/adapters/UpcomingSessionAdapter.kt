@@ -26,7 +26,6 @@ class UpcomingSessionAdapter(
     private val LOADING = 0
     private val ITEM = 1
 
-
     inner class SessionHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
     inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
 
@@ -53,11 +52,6 @@ class UpcomingSessionAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return if (mList[position] == null) LOADING else ITEM
-    }
-
-    interface ItemClickListner {
-        fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int)
-        fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -99,29 +93,47 @@ class UpcomingSessionAdapter(
                     sessionHolder.itemView.btnCheckin.isEnabled = false
                 }
 
-                RxView.clicks(sessionHolder.itemView.btnCheckin)
-                    .throttleFirst(500, TimeUnit.MILLISECONDS)
-                    .subscribe {
-                        bookAppointmentResponse?.let { it1 ->
-                            itemCLick.onButtonClick(
-                                it1,
-                                position
-                            )
+                if (bookAppointmentResponse!!.activate_waiting_room) {
+                    if (sessionHolder.itemView.btnCheckin.text == "Join") {
+                        sessionHolder.itemView.btnCheckin.isEnabled = true
+                    }
+                }
+
+                when (sessionHolder.itemView.btnCheckin.text) {
+                        "Check-in" -> {
+                            RxView.clicks(sessionHolder.itemView.btnCheckin)
+                                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                                .subscribe {
+                                    bookAppointmentResponse.let { it1 ->
+                                        itemCLick.onCheckInButtonClick(it1, sessionHolder.adapterPosition)
+                                    }
+                                }
+                        }
+                        "Join" -> {
+                            RxView.clicks(sessionHolder.itemView.btnCheckin)
+                                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                                .subscribe {
+                                    bookAppointmentResponse.let { it1 ->
+                                        itemCLick.onJoinButtonClick(it1, sessionHolder.adapterPosition)
+                                    }
+                                }
                         }
                     }
 
                 RxView.clicks(sessionHolder.itemView.btnCancel)
                     .throttleFirst(500, TimeUnit.MILLISECONDS)
                     .subscribe {
-                        bookAppointmentResponse?.let { it1 ->
-                            itemCLick.itemClick(
-                                it1,
-                                sessionHolder.adapterPosition
-                            )
+                        bookAppointmentResponse.let { it1 ->
+                            itemCLick.itemClick(it1, sessionHolder.adapterPosition)
                         }
                     }
             }
         }
+    }
 
+    interface ItemClickListner {
+        fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int)
+        fun onCheckInButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int)
+        fun onJoinButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int)
     }
 }

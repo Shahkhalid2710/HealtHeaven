@@ -1,6 +1,7 @@
 package com.applocum.connecttomyhealth.shareddata.endpoints
 
 import android.content.SharedPreferences
+import com.applocum.connecttomyhealth.extensions.prefBoolean
 import com.applocum.connecttomyhealth.extensions.prefString
 import com.google.gson.Gson
 
@@ -33,6 +34,7 @@ class UserHolder(pref: SharedPreferences) {
     var clinicalToken by pref.prefString()
         private set
 
+    var isLogin by pref.prefBoolean()
 
     fun saveUser(
         id: String,
@@ -70,24 +72,28 @@ class UserHolder(pref: SharedPreferences) {
         userToken = token
     }
 
-    fun saveClinicalToken(token:String)
-    {
-        clinicalToken=token
+    fun saveUserVerified(verified: Boolean) {
+        isLogin = verified
     }
 
-    fun clearClinicalToken(token:String)
-    {
-        clinicalToken=token
+    fun clearUserVerified(verified: Boolean) {
+        isLogin = verified
     }
 
-    fun saveUserPhoto(picUrl:String)
-    {
-        userPhoto=picUrl
+    fun saveClinicalToken(token: String) {
+        clinicalToken = token
     }
 
-    fun clearUserPhoto(picUrl:String)
-    {
-        userPhoto=picUrl
+    fun clearClinicalToken(token: String) {
+        clinicalToken = token
+    }
+
+    fun saveUserPhoto(picUrl: String) {
+        userPhoto = picUrl
+    }
+
+    fun clearUserPhoto(picUrl: String) {
+        userPhoto = picUrl
     }
 
     fun saveBookAppointmentData(appointment: BookAppointment?) {
@@ -97,6 +103,6 @@ class UserHolder(pref: SharedPreferences) {
     }
 
     fun getBookAppointmentData(): BookAppointment {
-        return Gson().fromJson(bookAppointmentData,BookAppointment::class.java)
+        return Gson().fromJson(bookAppointmentData, BookAppointment::class.java)
     }
 }

@@ -19,6 +19,7 @@ import com.applocum.connecttomyhealth.ui.forgotpassword.activities.ForgotPasswor
 import com.applocum.connecttomyhealth.ui.login.presenters.LoginPresenter
 import com.applocum.connecttomyhealth.ui.signup.activities.SignupActivity
 import com.applocum.connecttomyhealth.ui.signup.models.User
+import com.applocum.connecttomyhealth.ui.verification.activities.VerificationActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_login.*
@@ -38,6 +39,7 @@ class LoginActivity : BaseActivity(),
     lateinit var userHolder: UserHolder
 
     override fun getLayoutResourceId(): Int = R.layout.activity_login
+
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
@@ -83,11 +85,23 @@ class LoginActivity : BaseActivity(),
     }
 
     override fun senduserdata(user: User) {
-        userHolder.saveUserPhoto(user.image)
-        val intent = Intent(this,BottomNavigationViewActivity::class.java)
-        startActivity(intent)
-        this.finish()
-        overridePendingTransition(0,0)
+        if (user.isPhoneVerified)
+        {
+            userHolder.saveUserPhoto(user.image)
+            val intent = Intent(this,BottomNavigationViewActivity::class.java)
+            startActivity(intent)
+            finish()
+            overridePendingTransition(0,0)
+        }else
+        {
+            userHolder.saveUserPhoto(user.image)
+            val intent = Intent(this,VerificationActivity::class.java)
+            intent.putExtra("PhoneVerify","LogIn")
+            intent.putExtra("user",user)
+            startActivity(intent)
+            this.finish()
+            overridePendingTransition(0,0)
+        }
     }
 
     override fun viewProgress(isShow: Boolean) {

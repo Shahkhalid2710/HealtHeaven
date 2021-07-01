@@ -9,6 +9,9 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.OtpTr
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
+import com.applocum.connecttomyhealth.ui.signup.models.User
+import com.applocum.connecttomyhealth.ui.signup.models.UserResponse
+import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -78,6 +81,9 @@ class OtpPresenter@Inject constructor(private val api:AppEndPoint) {
                     when(it.status)
                     {
                         Success->{
+                            val userObject = Gson().fromJson(it.data, UserResponse::class.java)
+                            val user = userObject.user
+                            view.userData(user)
                             view.displaySuccessMessage(it.message)
                             view.noInternet(true)
                         }
@@ -104,6 +110,7 @@ class OtpPresenter@Inject constructor(private val api:AppEndPoint) {
 
     interface View{
         fun displayMessage(message:String)
+        fun userData(user: User)
         fun displayErrorMessage(message:String)
         fun displaySuccessMessage(message: String)
         fun viewProgress(isShow:Boolean)

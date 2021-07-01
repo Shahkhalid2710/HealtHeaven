@@ -166,6 +166,7 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
                     userHolder.clearUserData("", "", "", "", "", "", "")
                     userHolder.clearUserPhoto("")
                     userHolder.clearClinicalToken("")
+                    userHolder.clearUserVerified(false)
                 }
                 showDialogView.btnNo.setOnClickListener {
                     dialog.dismiss()

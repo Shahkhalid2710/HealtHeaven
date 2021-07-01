@@ -14,7 +14,7 @@ data class Surgery(
     @SerializedName("county") val county: String? = "",
     @SerializedName("post_code") val post_code: String? = "",
     @SerializedName("phone") val phone: String? = "",
-    @SerializedName("lat") val lat: Double ?= 0.0,
+    @SerializedName("lat") val lat: Double?= 0.0,
     @SerializedName("long") val long: Double? = 0.0,
     @SerializedName("status") val status: String? = ""
 ) : Serializable

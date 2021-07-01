@@ -2,7 +2,6 @@ package com.applocum.connecttomyhealth.ui.appointment.fragments
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,11 +17,11 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.appointment.adapters.UpcomingSessionAdapter
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.applocum.connecttomyhealth.ui.appointment.presenters.BookAppointmentPresenter
-import com.applocum.connecttomyhealth.ui.waitingarea.activities.WaitingAreaActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.custom_cancel_book_session_dialog.view.*
+import kotlinx.android.synthetic.main.custom_location_permission_dialog.view.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.*
 import kotlinx.android.synthetic.main.fragment_upcoming_session_apointment.view.*
@@ -176,8 +175,7 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
     }
 
     override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
-        val showDialogView = LayoutInflater.from(requireActivity())
-            .inflate(R.layout.custom_cancel_book_session_dialog, null, false)
+        val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_cancel_book_session_dialog, null, false)
         val dialog = AlertDialog.Builder(requireActivity()).create()
         dialog.setView(showDialogView)
 
@@ -193,9 +191,22 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         dialog.show()
     }
 
-    override fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
-        val intent = Intent(requireActivity(), WaitingAreaActivity::class.java)
-        startActivity(intent)
-        requireActivity().overridePendingTransition(0, 0)
+    override fun onCheckInButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
+
+    }
+
+    override fun onJoinButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
+
+        val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_location_permission_dialog, null, false)
+        val dialog = AlertDialog.Builder(requireActivity()).create()
+        dialog.setView(showDialogView)
+
+        showDialogView.tvContinue.setOnClickListener {
+
+        }
+        showDialogView.tvCancel.setOnClickListener {
+
+        }
+
     }
 }

@@ -188,6 +188,8 @@
     <string name="friday_14th_august_2020_1_00pm">Friday, 14th August 2020, 1:00PM</string>
     <string name="check_in">Check-in</string>
     <string name="cancel">Cancel</string>
+    <string name="cancel_">CANCEL</string>
+    <string name="continue_">CONTINUE</string>
     <string name="cancelled">Cancelled</string>
     <string name="missed">Missed</string>
     <string name="book_again">Book Again</string>
@@ -238,6 +240,7 @@
     <string name="session_cost">Session Cost</string>
     <string name="_35_00">€35.00</string>
     <string name="no_internet">No network connection</string>
+    <string name="invalid_location">Invalid Location</string>
     <string name="no_internet_connection">Something wrong,no connection</string>
     <string name="booking_cost">Booking Cost</string>
     <string name="_55_00">€55.00</string>
@@ -690,4 +693,6 @@
     <string name="to_add_medical_records_tap_on_button_above">To add Medical records, Tap on button above</string>
     <string name="height_cm">Height(cm)</string>
     <string name="weight_kg">Weight(kg)</string>
+    <string name="safety_measure">Safety Measure</string>
+    <string name="for_your_safety_our_specialists_may_need_visibility_of_your_location_only_during_the_consultation">For your safety our specialists may need visibility of your location,only during the consultation</string>
 </resources>

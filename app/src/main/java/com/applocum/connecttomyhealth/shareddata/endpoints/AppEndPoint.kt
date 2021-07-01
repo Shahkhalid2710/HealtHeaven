@@ -128,7 +128,8 @@ interface AppEndPoint {
                       @Body requestBody: RequestBody):Observable<SecurityGlobalResponse>
 
     @GET("/api/consultations/search_snomed_code.json")
-    fun getDiseaseList(@Query("search") search:String?,
+    fun getDiseaseList(@Header("AUTH_TOKEN")authtoken: String?,
+                       @Query("search") search:String?,
                        @Query("page")page:String ):Observable<Response<MedicalGlobalResponse>>
 
     @POST("/api/medical_histories.json")

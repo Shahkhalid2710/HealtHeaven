@@ -127,7 +127,7 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View,
         progress.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    override fun showSurgery(surgery: Surgery) {}
+    override fun showSurgery(surgery: Surgery?) {}
 
     override fun emptySurgery() {}
 
@@ -187,7 +187,6 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View,
         startActivity(Intent(this, GpServiceActivity::class.java))
         super.onBackPressed()
     }
-
 
     override fun onItemClick(gpService: GpService, position: Int) {
         val showDialogView = LayoutInflater.from(this@AddGPServiceActivity)

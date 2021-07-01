@@ -114,8 +114,7 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
                         view.noInternetConnection(true)
                         val surgeryObject = Gson().fromJson(it.data, SurgeryResponse::class.java)
                         val surgery = surgeryObject.surgery
-                        surgery?.let { it1 -> view.showSurgery(it1) }
-                            ?: kotlin.run { view.emptySurgery() }
+                        surgery?.let { it1 -> view.showSurgery(it1) } ?: kotlin.run { view.emptySurgery() }
                     }
                     InvalidCredentials, InternalServer -> {
                         view.displayMessage(it.message)
@@ -146,7 +145,7 @@ class GpservicePresenter @Inject constructor(private val api: AppEndPoint) {
         fun displayMessage(message: String)
         fun getGpList(list: ArrayList<GpService>)
         fun viewFullProgress(isShow: Boolean)
-        fun showSurgery(surgery: Surgery)
+        fun showSurgery(surgery: Surgery?)
         fun emptySurgery()
         fun showProgress()
         fun hideProgress()

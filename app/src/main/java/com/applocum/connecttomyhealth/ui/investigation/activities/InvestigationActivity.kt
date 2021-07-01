@@ -147,8 +147,8 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
     override fun onResume() {
         super.onResume()
         investigationAdapter.mList.clear()
-        investigationAdapter.notifyDataSetChanged()
         investigationPresenter.resetPage()
+        investigationAdapter.notifyDataSetChanged()
         investigationPresenter.showInvestigationList()
     }
 

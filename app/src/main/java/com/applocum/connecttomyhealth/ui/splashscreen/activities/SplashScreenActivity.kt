@@ -9,15 +9,15 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
+import com.applocum.connecttomyhealth.ui.login.activities.LoginActivity
 import com.applocum.connecttomyhealth.ui.walkthrough.activities.WalkThroughActivity
 import javax.inject.Inject
 
 class SplashScreenActivity : BaseActivity() {
 
     override fun getLayoutResourceId():Int = R.layout.activity_splash_screen
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
 
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -33,13 +33,21 @@ class SplashScreenActivity : BaseActivity() {
                 startActivity(intent)
                 finish()
                 overridePendingTransition(0,0)
-            }
-          else
+            } else
             {
-                val intent= Intent(this, BottomNavigationViewActivity::class.java)
-                startActivity(intent)
-                finish()
-                overridePendingTransition(0,0)
+                if (!userHolder.isLogin)
+                {
+                    val intent= Intent(this,LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    overridePendingTransition(0,0)
+                }
+                else {
+                    val intent= Intent(this, BottomNavigationViewActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    overridePendingTransition(0,0)
+                }
             }
         },1000)
     }

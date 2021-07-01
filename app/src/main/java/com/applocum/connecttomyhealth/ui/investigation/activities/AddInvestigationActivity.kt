@@ -108,8 +108,7 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
             this.month = calendar.get(Calendar.MONTH)
             this.year = calendar.get(Calendar.YEAR)
 
-            val datePickerDialog =
-                DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
+            val datePickerDialog = DatePickerDialog(this, R.style.DialogTheme, this, year, month, day)
             datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
             datePickerDialog.show()
         }

@@ -14,6 +14,7 @@ import com.applocum.connecttomyhealth.ui.booksession.fragments.AboutSpecialistFr
 import com.applocum.connecttomyhealth.ui.booksession.fragments.AvailabilityFragment
 import com.applocum.connecttomyhealth.ui.booksession.activities.BookSessionActivity
 import com.applocum.connecttomyhealth.ui.booksession.activities.SessionBookActivity
+import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.changepassword.activities.ChangePasswordActivity
 import com.applocum.connecttomyhealth.ui.clinicalrecords.activities.ClinicalRecordsActivity
 import com.applocum.connecttomyhealth.ui.confirmbooking.activities.ConfirmBookingActivity
@@ -94,6 +95,8 @@ interface NetworkComponent {
     fun inject(activity: AddMedicalHistoryActivity)
 
     fun inject(activity: InvestigationActivity)
+
+    fun inject(activity: BottomNavigationViewActivity)
 
     fun inject(activity: AddInvestigationActivity)
 

@@ -147,8 +147,8 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
     override fun onResume() {
         super.onResume()
         familyHistoryAdapter.mList.clear()
-        familyHistoryAdapter.notifyDataSetChanged()
         presenter.resetPage()
+        familyHistoryAdapter.notifyDataSetChanged()
         presenter.showFamilyHistoryList()
     }
 

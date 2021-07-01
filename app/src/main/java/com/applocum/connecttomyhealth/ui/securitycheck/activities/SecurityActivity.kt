@@ -20,8 +20,7 @@ import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SecurityActivity : BaseActivity(),
-    SecurityPresenter.View {
+class SecurityActivity : BaseActivity(), SecurityPresenter.View {
 
     @Inject
     lateinit var presenter: SecurityPresenter
@@ -46,7 +45,7 @@ class SecurityActivity : BaseActivity(),
     }
 
     override fun security(security: Security) {
-        val intent = Intent(this, ClinicalRecordsActivity::class.java)
+        val intent = Intent(this,ClinicalRecordsActivity::class.java)
         startActivity(intent)
         finish()
         overridePendingTransition(0,0)
