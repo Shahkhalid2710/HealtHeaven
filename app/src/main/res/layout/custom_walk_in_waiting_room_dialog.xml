@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/walk_in_waiting_room"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacing_24"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/spacing_24"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/have_you_arrived_at_the_clinic_if_you_then_continue_else_cancel"
+        android:textColor="@color/aapBlack"
+        android:textSize="@dimen/font_12" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="@dimen/spacing_16"
+        android:layout_marginBottom="27dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="110dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_btn"
+            android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
+            android:text="@string/_continue"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="110dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:background="@drawable/default_button"
+            android:fontFamily="@font/montserrat_semibold"
+            android:foreground="@drawable/effect_button"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/green"
+            android:textSize="@dimen/font_12"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

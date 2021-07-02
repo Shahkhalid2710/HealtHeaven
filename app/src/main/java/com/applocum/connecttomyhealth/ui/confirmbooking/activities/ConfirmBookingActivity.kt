@@ -75,13 +75,13 @@ class ConfirmBookingActivity : BaseActivity() {
         tvAppointmentDate.text = newDateString
 
         when (bookAppointment.appointmentType) {
-            "face_to_face" -> {
+            "offline_appointment" -> {
                 tvSessionType.text = ("Face to Face")
             }
-            "phone_call" -> {
+            "phone_call_appointment" -> {
                 tvSessionType.text = ("Phone Call")
             }
-            "video" -> {
+            "online_appointment" -> {
                 tvSessionType.text = ("Video Call")
             }
         }

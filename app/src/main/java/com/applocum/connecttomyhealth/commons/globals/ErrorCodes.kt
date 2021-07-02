@@ -5,6 +5,7 @@ class ErrorCodes {
     {
         const val Success = 200
         const val SessionInvalid = 950
+        const val UnAuthorizedAccess = 403
         const val InvalidCredentials = 808
         const val InternalServer = 500
         const val AlreadyExist=805

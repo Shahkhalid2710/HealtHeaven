@@ -89,43 +89,37 @@ class UpcomingSessionAdapter(
                     }
                 }
 
-                if (sessionHolder.itemView.btnCheckin.text == "Join") {
-                    sessionHolder.itemView.btnCheckin.isEnabled = false
-                }
-
                 if (bookAppointmentResponse!!.activate_waiting_room) {
-                    if (sessionHolder.itemView.btnCheckin.text == "Join") {
-                        sessionHolder.itemView.btnCheckin.isEnabled = true
+                    when (sessionHolder.itemView.btnCheckin.text) {
+                        "Join"->{ sessionHolder.itemView.btnCheckin.isEnabled = true}
+                        "Check-in"->{ sessionHolder.itemView.btnCheckin.isEnabled = true}
+                    }
+                }else
+                {
+                    when (sessionHolder.itemView.btnCheckin.text) {
+                        "Join"->{ sessionHolder.itemView.btnCheckin.isEnabled = false}
+                        "Check-in"->{ sessionHolder.itemView.btnCheckin.isEnabled = true}
                     }
                 }
 
-                when (sessionHolder.itemView.btnCheckin.text) {
-                        "Check-in" -> {
-                            RxView.clicks(sessionHolder.itemView.btnCheckin)
-                                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                                .subscribe {
-                                    bookAppointmentResponse.let { it1 ->
-                                        itemCLick.onCheckInButtonClick(it1, sessionHolder.adapterPosition)
-                                    }
-                                }
-                        }
-                        "Join" -> {
-                            RxView.clicks(sessionHolder.itemView.btnCheckin)
-                                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                                .subscribe {
-                                    bookAppointmentResponse.let { it1 ->
-                                        itemCLick.onJoinButtonClick(it1, sessionHolder.adapterPosition)
-                                    }
-                                }
-                        }
+
+                RxView.clicks(sessionHolder.itemView.btnCheckin)
+                    .throttleFirst(500, TimeUnit.MILLISECONDS)
+                    .subscribe {
+                        when (sessionHolder.itemView.btnCheckin.text.toString()) {
+                            "Check-in" -> {
+                                itemCLick.onCheckInButtonClick(bookAppointmentResponse, sessionHolder.adapterPosition)
+                              }
+                            "Join" -> {
+                                itemCLick.onJoinButtonClick(bookAppointmentResponse, sessionHolder.adapterPosition)
+                            }
                     }
+                }
 
                 RxView.clicks(sessionHolder.itemView.btnCancel)
                     .throttleFirst(500, TimeUnit.MILLISECONDS)
                     .subscribe {
-                        bookAppointmentResponse.let { it1 ->
-                            itemCLick.itemClick(it1, sessionHolder.adapterPosition)
-                        }
+                        bookAppointmentResponse.let { it1 -> itemCLick.itemClick(it1,sessionHolder.adapterPosition) }
                     }
             }
         }

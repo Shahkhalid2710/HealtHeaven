@@ -695,4 +695,8 @@
     <string name="weight_kg">Weight(kg)</string>
     <string name="safety_measure">Safety Measure</string>
     <string name="for_your_safety_our_specialists_may_need_visibility_of_your_location_only_during_the_consultation">For your safety our specialists may need visibility of your location,only during the consultation</string>
+    <string name="walk_in_waiting_room">Walk-in Waiting Room</string>
+    <string name="have_you_arrived_at_the_clinic_if_you_then_continue_else_cancel">Have you arrived at the clinic? If you then Continue,else Cancel</string>
+    <string name="setup_mobile_camera">Setup Mobile Camera</string>
+    <string name="please_select_your_camera_and_we_ll_complete_the_set_up_process_with_a_quick_speed_test">Please select your camera and we\'ll complete the set up process with a quick speed test</string>
 </resources>

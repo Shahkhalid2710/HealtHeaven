@@ -8,39 +8,26 @@ import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import com.applocum.connecttomyhealth.MyApplication
+import com.applocum.connecttomyhealth.*
 import com.applocum.connecttomyhealth.R
-import com.applocum.connecttomyhealth.changeFont
-import com.applocum.connecttomyhealth.dateTimeUTCFormat
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.booksession.presenters.BookSessionPresenter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeClickAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
+import com.applocum.connecttomyhealth.ui.booksession.presenters.BookSessionPresenter
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.applocum.connecttomyhealth.ui.confirmbooking.activities.ConfirmBookingActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.prolificinteractive.materialcalendarview.*
 import kotlinx.android.synthetic.main.activity_session_book.*
-import kotlinx.android.synthetic.main.activity_session_book.NotAvailabeTime
-import kotlinx.android.synthetic.main.activity_session_book.btn10Mins
-import kotlinx.android.synthetic.main.activity_session_book.btn20Mins
-import kotlinx.android.synthetic.main.activity_session_book.btn30Mins
-import kotlinx.android.synthetic.main.activity_session_book.btnFaceToFace
-import kotlinx.android.synthetic.main.activity_session_book.btnPhoneCall
-import kotlinx.android.synthetic.main.activity_session_book.btnVideoCall
-import kotlinx.android.synthetic.main.activity_session_book.calendarView
-import kotlinx.android.synthetic.main.activity_session_book.ivBack
-import kotlinx.android.synthetic.main.activity_session_book.rvAvailableTime
-import kotlinx.android.synthetic.main.activity_session_book.tvCancel
 import kotlinx.android.synthetic.main.custom_small_progress.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPresenter.View,
@@ -173,8 +160,6 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 sTime = ""
             }
 
-        btn10Mins.performClick()
-
         switchMultiSessions.setOnClickListener(this)
 
         ivMinus.setOnClickListener { decreaseInteger() }
@@ -266,6 +251,17 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
         calendarView.setOnDateChangedListener(this)
         calendarView.addDecorator(PrimeDayDisableDecorator())
+        calendarView.selectedDate = CalendarDay.today()
+
+        val c = Calendar.getInstance()
+        val day = c[Calendar.DAY_OF_MONTH]
+        val month = c[Calendar.MONTH]
+        val year = c[Calendar.YEAR]
+        val date = day.toString() + "/" + (month + 1) + "/" + year
+
+        seleteddate = convertCurrentDate(date)
+        btn10Mins.performClick()
+
     }
 
     override fun onClick(v: View?) {

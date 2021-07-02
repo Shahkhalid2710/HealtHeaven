@@ -98,3 +98,10 @@ fun convertCardDate(date: String): String {
     val sdf = SimpleDateFormat("MM/yy", Locale.getDefault())
     return sdf.format(defaultSdf.parse(date))
 }
+
+fun convertCurrentDate(date: String): String {
+    val defaultSdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    defaultSdf.timeZone = TimeZone.getTimeZone("UTC")
+    val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    return sdf.format(defaultSdf.parse(date))
+}

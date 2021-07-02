@@ -1,6 +1,5 @@
 package com.applocum.connecttomyhealth.ui.appointment.presenters
 
-import android.util.Log
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.AlreadyExist
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
@@ -88,9 +87,8 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
         nextPage?.let {
             view.showProgress()
             view.noInternet(true)
-            Log.d("nextpageValue1", "->" + nextPage)
+
             nextPage?.let { page ->
-                Log.d("nextpageValue2", "->" + nextPage)
                 api.sessions(userHolder.userToken!!, UPCOMING_APPOINTMENT, 66, page)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(onNext = {
@@ -102,9 +100,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                                     PaginationModel::class.java
                                 )
 
-                                Log.d("headerr", "->" + it.headers())
                                 nextPage = paginationModel.nextPage
-                                Log.d("nextpageValue3", "->" + nextPage)
                                 it.body()?.let {
                                     view.getSessions(it.data)
                                 }

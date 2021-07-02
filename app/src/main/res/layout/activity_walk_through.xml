@@ -42,7 +42,6 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:fontFamily="@font/montserrat_bold"
-                    android:foreground="@drawable/effect_button"
                     android:text="@string/skip"
                     android:textColor="@color/green"
                     android:textSize="@dimen/font_16" />

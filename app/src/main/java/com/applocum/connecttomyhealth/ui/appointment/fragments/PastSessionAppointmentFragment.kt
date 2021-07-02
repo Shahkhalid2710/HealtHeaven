@@ -141,6 +141,7 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
     override fun onResume() {
         super.onResume()
         presenter.showPastSession()
+        pastSessionAdapter.notifyDataSetChanged()
     }
 
     override fun onDestroy() {

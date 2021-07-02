@@ -154,6 +154,7 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:foreground="@drawable/effect_button"
                 android:text="@string/check_in"
+                android:enabled="false"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_12"
