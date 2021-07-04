@@ -4,6 +4,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.SessionExpired
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.PaginationModel
@@ -47,7 +48,7 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
                             view.noInternet(true)
                             view.displaySuccessMessage(it.message)
                         }
-                        InvalidCredentials, InternalServer -> {
+                        InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                             view.displayErrorMessage(it.message)
                         }
                         SessionExpired ->
@@ -89,7 +90,7 @@ class FamilyHistoryPresenter @Inject constructor(private val api: AppEndPoint) {
                                     view.familyHistoryList(it.data)
                                 }
                             }
-                            InvalidCredentials, InternalServer -> {
+                            InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                                 it.body()?.let {
                                     view.displayErrorMessage(it.message)
                                 }

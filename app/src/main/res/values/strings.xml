@@ -699,4 +699,19 @@
     <string name="have_you_arrived_at_the_clinic_if_you_then_continue_else_cancel">Have you arrived at the clinic? If you then Continue,else Cancel</string>
     <string name="setup_mobile_camera">Setup Mobile Camera</string>
     <string name="please_select_your_camera_and_we_ll_complete_the_set_up_process_with_a_quick_speed_test">Please select your camera and we\'ll complete the set up process with a quick speed test</string>
+    <string name="please_select_your_microphone_and_we_ll_complete_the_set_up_process_with_a_quick_speed_test">Please select your microphone and we\'ll complete the set up process with a quick speed test</string>
+    <string name="please_select_your_speakers_and_we_ll_complete_the_set_up_process_with_a_quick_speed_test">Please select your speakers and we\'ll complete the set up process with a quick speed test</string>
+    <string name="setup_microphone">Setup Microphone</string>
+    <string name="test_speakers">Test Speakers</string>
+    <string name="test_now">Test Now</string>
+    <string name="microphone_permission">Microphone Permission</string>
+    <string name="no_">NO</string>
+    <string name="yes_">YES</string>
+    <string name="microphone_permission_is_mandatory_to_proceed_for_your_video_consultation_session_please_approve_it">Microphone Permission is mandatory to proceed for your video consultation session,please approve it</string>
+    <string name="camera_permission_is_mandatory_to_proceed_for_your_video_consultation_session_please_approve_it">Camera Permission is mandatory to proceed for your video consultation session,please approve it</string>
+    <string name="camera_permission">Camera Permission</string>
+    <string name="camera_permission_denied_please_turn_on_camera_permission_from_the_setting_to_continue_with_your_session">Camera permission denied,Please turn on Camera permission from the setting to continue with your session</string>
+    <string name="microphone_permission_denied_please_turn_on_camera_permission_from_the_setting_to_continue_with_your_session">Microphone permission denied,Please turn on Microphone permission from the setting to continue with your session</string>
+    <string name="location_permission_denied_please_turn_on_camera_permission_from_the_setting_to_continue_with_your_session">Location permission denied,Please turn on Location permission from the setting to continue with your session</string>
+    <string name="location_permission">Location Permission</string>
 </resources>

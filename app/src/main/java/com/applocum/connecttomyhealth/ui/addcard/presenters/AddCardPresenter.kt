@@ -4,6 +4,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.MissingParameter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.addcard.models.Card
@@ -49,7 +50,7 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
                             view.addcard(cardobject)
                             view.displaySuccessmessage(it.message)
                         }
-                        InvalidCredentials, InternalServer, MissingParameter -> {
+                        InvalidCredentials, InternalServer, MissingParameter,UnAuthorizedAccess -> {
                             view.displaymessage(it.message)
                         }
                     }
@@ -77,7 +78,7 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
                         view.noInternet(true)
                         view.showcard(it.data)
                     }
-                    InvalidCredentials, InternalServer -> {
+                    InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                         view.displaymessage(it.message)
                     }
                 }
@@ -104,7 +105,7 @@ class AddCardPresenter @Inject constructor(val api: AppEndPoint) {
                         view.noInternet(true)
                         view.displaySuccessmessage(it.message)
                     }
-                    InvalidCredentials, InternalServer, MissingParameter -> {
+                    InvalidCredentials, InternalServer, MissingParameter,UnAuthorizedAccess -> {
                         view.displaymessage(it.message)
                     }
                 }

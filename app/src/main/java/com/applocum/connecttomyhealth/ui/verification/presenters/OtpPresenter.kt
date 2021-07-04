@@ -7,6 +7,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inval
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.MissingParameter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.OtpTryAgain
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.signup.models.User
@@ -47,7 +48,7 @@ class OtpPresenter@Inject constructor(private val api:AppEndPoint) {
                         view.displayMessage(it.message)
                         view.noInternet(true)
                     }
-                    InvalidCredentials,InternalServer -> {
+                    InvalidCredentials,InternalServer,UnAuthorizedAccess -> {
                         view.displayErrorMessage(it.message)
                     }
                 }
@@ -87,7 +88,7 @@ class OtpPresenter@Inject constructor(private val api:AppEndPoint) {
                             view.displaySuccessMessage(it.message)
                             view.noInternet(true)
                         }
-                        InvalidCredentials, InternalServer->
+                        InvalidCredentials, InternalServer,UnAuthorizedAccess->
                         {
                             view.displayErrorMessage(it.message)
                         }

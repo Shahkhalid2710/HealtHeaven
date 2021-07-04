@@ -3,6 +3,7 @@ package com.applocum.connecttomyhealth.ui.profiledetails.presenters
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.profiledetails.models.Patient
@@ -49,7 +50,7 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                         val patient = patientObject.patient
                         view.showProfile(patient)
                     }
-                    InvalidCredentials, InternalServer -> {
+                    InvalidCredentials, InternalServer, UnAuthorizedAccess -> {
                         view.displayErrorMessage(it.message)
                     }
                 }
@@ -105,7 +106,7 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                             val user = userObject.user
                             view.userData(user)
                         }
-                        InvalidCredentials, InternalServer -> {
+                        InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                             view.displayErrorMessage(it.message)
                         }
                     }
@@ -140,7 +141,7 @@ class ProfileDetailsPresenter @Inject constructor(private val api: AppEndPoint) 
                         view.userData(user)
                         view.displayMessage("Profile picture uploaded successfully")
                     }
-                    InvalidCredentials, InternalServer -> {
+                    InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                         view.displayErrorMessage(it.message)
                     }
                 }

@@ -5,6 +5,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.MissingParameter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.PaginationModel
@@ -61,7 +62,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                          view.noInternet(true)
                          view.displaySuccessMessage(it.message)
                     }
-                    InvalidCredentials, InternalServer -> {
+                    InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                         view.displayMessage(it.message)
                     }
                     AlreadyExist -> {
@@ -105,7 +106,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                                     view.getSessions(it.data)
                                 }
                             }
-                            InternalServer, InvalidCredentials -> {
+                            InternalServer, InvalidCredentials,UnAuthorizedAccess -> {
                                 it.body()?.let {
                                     view.displayMessage(it.message)
                                 }
@@ -144,7 +145,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                                     view.getSessions(it.data)
                                 }
                             }
-                            InternalServer, InvalidCredentials -> {
+                            InternalServer, InvalidCredentials,UnAuthorizedAccess -> {
                                 it.body()?.let {
                                     view.displayMessage(it.message)
                                 }
@@ -174,7 +175,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                         view.noInternet(true)
                         view.displaySuccessMessage(it.message)
                     }
-                    InvalidCredentials, InternalServer, MissingParameter -> {
+                    InvalidCredentials, InternalServer, MissingParameter,UnAuthorizedAccess -> {
                         view.displayMessage(it.message)
                     }
                 }

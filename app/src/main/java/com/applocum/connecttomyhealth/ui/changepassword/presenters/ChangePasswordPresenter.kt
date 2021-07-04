@@ -3,6 +3,7 @@ package com.applocum.connecttomyhealth.ui.changepassword.presenters
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
@@ -44,7 +45,7 @@ class ChangePasswordPresenter @Inject constructor(private val api: AppEndPoint) 
                             view.displaySuccessMessage("Password change successfully!")
                             view.storePassword(it)
                         }
-                        InvalidCredentials, InternalServer -> {
+                        InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                             view.displayMessage(it.message)
                         }
                     }

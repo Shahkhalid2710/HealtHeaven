@@ -3,6 +3,7 @@ package com.applocum.connecttomyhealth.ui.securitycheck.presenters
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.securitycheck.models.Security
@@ -45,7 +46,7 @@ class SecurityPresenter @Inject constructor(private val api: AppEndPoint) {
                             userHolder.saveClinicalToken(security.token)
                             view.security(security)
                         }
-                        InvalidCredentials, InternalServer -> {
+                        InvalidCredentials, InternalServer, UnAuthorizedAccess -> {
                             view.displayMessage(it.message)
                         }
                     }

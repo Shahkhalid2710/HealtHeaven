@@ -4,6 +4,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.NotFound
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -41,7 +42,7 @@ class ForgotPasswordPresenter @Inject constructor(private val api: AppEndPoint) 
                             view.displaySuccessMessage(it.message)
                             view.storePassword(it)
                         }
-                        InvalidCredentials,InternalServer,NotFound -> {
+                        InvalidCredentials,InternalServer,NotFound,UnAuthorizedAccess -> {
                             view.displayMessage(it.message)
                         }
                     }

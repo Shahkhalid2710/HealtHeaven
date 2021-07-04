@@ -28,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.custom_cancel_book_session_dialog.view.*
+import kotlinx.android.synthetic.main.custom_location_permission_denied_dialog.view.*
 import kotlinx.android.synthetic.main.custom_location_permission_dialog.view.*
 import kotlinx.android.synthetic.main.custom_no_internet.view.*
 import kotlinx.android.synthetic.main.custom_walk_in_waiting_room_dialog.view.*
@@ -93,24 +94,26 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
     }
 
     override fun displaySuccessMessage(message: String) {
+        val snackbar = Snackbar.make(llUpcomingSession, message, Snackbar.LENGTH_SHORT)
+        snackbar.changeFont()
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.blue))
+        snackbar.show()
+
         mListUpcomingSession.removeAt(bookAppointmentPosition)
         upcomingSessionAdapter.notifyItemRemoved(bookAppointmentPosition)
         mListUpcomingSession.trimToSize()
         upcomingSessionAdapter.mList.removeAt(bookAppointmentPosition)
 
         checkList()
-        val snackbar = Snackbar.make(llUpcomingSession, message, Snackbar.LENGTH_SHORT)
-        snackbar.changeFont()
-        val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.blue))
-        snackbar.show()
+
     }
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
         mListUpcomingSession = list
         checkList()
 
-        upcomingSessionAdapter.mList.addAll(list)
+        upcomingSessionAdapter.mList.addAll(mListUpcomingSession)
         upcomingSessionAdapter.notifyItemRangeInserted(upcomingSessionAdapter.mList.size, list.size)
 
         RxRecyclerView.scrollEvents(v.rvUpcomingSession)
@@ -250,25 +253,26 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
     ) {
 
         if (requestCode == 241) {
-
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startActivity(Intent(requireActivity(),MySessionActivity::class.java))
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)) {
                     // now, user has denied permission (but not permanently!)
                 } else {
-                    val dialog = AlertDialog.Builder(context,R.style.AlertDialogCustom)
-                    dialog.setTitle("Permission Required")
-                    dialog.setCancelable(false)
-                    dialog.setMessage("You have to Allow permission to access user location")
-                    dialog.setPositiveButton("Settings"
-                    ) { _, which ->
+                    val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_location_permission_denied_dialog, null, false)
+                    val dialog = AlertDialog.Builder(requireActivity()).create()
+                    dialog.setView(showDialogView)
+
+                    showDialogView.tvLocationSettingYes.setOnClickListener {
                         val i = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", requireActivity().packageName, null))
-                        //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivityForResult(i, 241)
+                        dialog.dismiss()
                     }
-                    val alertDialog = dialog.create()
-                    alertDialog.show()
+
+                    showDialogView.tvLocationSettingNo.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                    dialog.show()
                 }
             }
         }

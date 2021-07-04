@@ -20,7 +20,7 @@
             android:layout_marginStart="@dimen/spacing_15"
             android:layout_marginEnd="@dimen/spacing_15"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/safety_measure"
+            android:text="@string/camera_permission"
             android:textColor="@color/aapBlack"
             android:textSize="@dimen/font_16" />
 
@@ -31,7 +31,7 @@
             android:layout_marginTop="@dimen/spacing_25"
             android:layout_marginEnd="@dimen/spacing_15"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@string/for_your_safety_our_specialists_may_need_visibility_of_your_location_only_during_the_consultation"
+            android:text="@string/camera_permission_denied_please_turn_on_camera_permission_from_the_setting_to_continue_with_your_session"
             android:textColor="@color/grey"
             android:textSize="@dimen/font_15" />
 
@@ -50,24 +50,24 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvCancel"
+                    android:id="@+id/tvCameraSettingNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_30"
                     android:layout_marginEnd="@dimen/spacing_30"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/cancel_"
+                    android:text="@string/no_"
                     android:textColor="@color/green"
-                    android:textSize="@dimen/font_15" />
+                    android:textSize="@dimen/font_16" />
 
                 <TextView
-                    android:id="@+id/tvContinue"
+                    android:id="@+id/tvCameraSettingYes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/continue_"
+                    android:text="@string/yes_"
                     android:textColor="@color/green"
-                    android:textSize="@dimen/font_15"
+                    android:textSize="@dimen/font_16"
                     tools:ignore="RelativeOverlap" />
             </LinearLayout>
         </LinearLayout>

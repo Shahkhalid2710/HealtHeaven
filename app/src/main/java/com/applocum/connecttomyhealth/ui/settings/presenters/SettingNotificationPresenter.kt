@@ -3,6 +3,7 @@ package com.applocum.connecttomyhealth.ui.settings.presenters
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotification
@@ -49,7 +50,7 @@ class SettingNotificationPresenter @Inject constructor(private val api: AppEndPo
                     Success -> {
                         view.noInternet(true)
                     }
-                    InvalidCredentials, InternalServer -> {
+                    InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                         view.displayMessage(it.message)
                     }
                 }
@@ -79,7 +80,7 @@ class SettingNotificationPresenter @Inject constructor(private val api: AppEndPo
                         val notificationObject = Gson().fromJson(it.data, SettingNotification::class.java)
                         view.showNotification(notificationObject)
                     }
-                    InvalidCredentials, InternalServer -> {
+                    InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                         view.displayMessage(it.message)
                     }
                 }

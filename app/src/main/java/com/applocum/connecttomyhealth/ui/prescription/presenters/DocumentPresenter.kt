@@ -3,6 +3,7 @@ package com.applocum.connecttomyhealth.ui.prescription.presenters
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.PaginationModel
@@ -58,6 +59,11 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                                     view.displayErrorMessage(it.message)
                                 }
                             }
+                            UnAuthorizedAccess->{
+                                it.body()?.let {
+                                    view.displayErrorMessage(it.message)
+                                }
+                            }
                         }
                     }, onError = {
                         view.hideProgress()
@@ -92,6 +98,11 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                                 }
                             }
                             InvalidCredentials, InternalServer -> {
+                                it.body()?.let {
+                                    view.displayErrorMessage(it.message)
+                                }
+                            }
+                            UnAuthorizedAccess->{
                                 it.body()?.let {
                                     view.displayErrorMessage(it.message)
                                 }
@@ -134,6 +145,11 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                                     view.displayErrorMessage(it.message)
                                 }
                             }
+                            UnAuthorizedAccess->{
+                                it.body()?.let {
+                                    view.displayErrorMessage(it.message)
+                                }
+                            }
                         }
                     }, onError = {
                         it.printStackTrace()
@@ -168,6 +184,11 @@ class DocumentPresenter @Inject constructor(private val api: AppEndPoint) {
                                 }
                             }
                             InvalidCredentials, InternalServer -> {
+                                it.body()?.let {
+                                    view.displayErrorMessage(it.message)
+                                }
+                            }
+                            UnAuthorizedAccess->{
                                 it.body()?.let {
                                     view.displayErrorMessage(it.message)
                                 }

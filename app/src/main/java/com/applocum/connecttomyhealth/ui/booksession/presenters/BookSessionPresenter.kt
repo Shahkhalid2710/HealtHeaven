@@ -4,6 +4,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.NotFound
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
@@ -41,7 +42,7 @@ class BookSessionPresenter@Inject constructor(private val api:AppEndPoint) {
                                 view.getTimeSlot(it.data)
                                 view.getPrice(it.common)
                             }
-                            InvalidCredentials,InternalServer -> {
+                            InvalidCredentials,InternalServer,UnAuthorizedAccess -> {
                                 view.displaymessage(it.message)
                             }
                             NotFound->

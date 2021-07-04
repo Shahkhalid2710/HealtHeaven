@@ -18,6 +18,7 @@
         android:clickable="true"
         android:fitsSystemWindows="true"
         android:focusable="true"
+        app:itemBackground="?attr/selectableItemBackground"
         android:foreground="@drawable/effect"
         app:elevation="@dimen/spacing_5"
         app:itemIconSize="30dp"

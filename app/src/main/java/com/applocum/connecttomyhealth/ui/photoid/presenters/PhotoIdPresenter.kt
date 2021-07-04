@@ -1,9 +1,11 @@
 package com.applocum.connecttomyhealth.ui.photoid.presenters
 
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InternalServer
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.MissingParameter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.profiledetails.models.Documents
@@ -51,7 +53,7 @@ class PhotoIdPresenter@Inject constructor(private val api:AppEndPoint) {
                         val patient = patientObject.patient
                         view.showDocument(patient)
                     }
-                    InvalidCredentials,InternalServer -> {
+                    InvalidCredentials,InternalServer, ErrorCodes.UnAuthorizedAccess -> {
                         view.displayErrorMessage(it.message)
                     }
                 }
@@ -86,7 +88,7 @@ class PhotoIdPresenter@Inject constructor(private val api:AppEndPoint) {
                         val patient = patientObject.patient
                         view.showDocument(patient)
                     }
-                    InvalidCredentials,InternalServer -> {
+                    InvalidCredentials,InternalServer, ErrorCodes.UnAuthorizedAccess -> {
                         view.displayErrorMessage(it.message)
                     }
                 }
@@ -115,7 +117,7 @@ class PhotoIdPresenter@Inject constructor(private val api:AppEndPoint) {
                         val patient = patientObject.patient
                         view.showDocument(patient.documents)
                     }
-                    InvalidCredentials, InternalServer -> {
+                    InvalidCredentials, InternalServer, ErrorCodes.UnAuthorizedAccess -> {
                         view.displayErrorMessage(it.message)
                     }
                 }
@@ -142,7 +144,7 @@ class PhotoIdPresenter@Inject constructor(private val api:AppEndPoint) {
                         view.noInternet(true)
                         view.displayMessage(it.message)
                     }
-                    InvalidCredentials, InternalServer,MissingParameter -> {
+                    InvalidCredentials, InternalServer,MissingParameter,UnAuthorizedAccess -> {
                         view.displayErrorMessage(it.message)
                     }
                 }

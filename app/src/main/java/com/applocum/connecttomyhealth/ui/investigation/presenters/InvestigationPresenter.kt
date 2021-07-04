@@ -4,6 +4,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.SessionExpired
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.PaginationModel
@@ -48,7 +49,7 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
                             view.noInternet(true)
                             view.displaySuccessMessage(it.message)
                         }
-                        InvalidCredentials, InternalServer -> {
+                        InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                             view.displayMessage(it.message)
                         }
                         SessionExpired ->
@@ -90,7 +91,7 @@ class InvestigationPresenter @Inject constructor(private val api: AppEndPoint) {
                                     view.investigationList(it.data,nextPage)
                                 }
                             }
-                            InvalidCredentials, InternalServer -> {
+                            InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                                 it.body()?.let {
                                     view.displayMessage(it.message)
                                 }

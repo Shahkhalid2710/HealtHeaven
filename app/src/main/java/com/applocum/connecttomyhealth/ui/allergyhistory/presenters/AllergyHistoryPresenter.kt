@@ -4,6 +4,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.SessionExpired
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.AllergyResponse
@@ -63,7 +64,7 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
                             view.noInternetConnection(true)
                             view.displaySuccessMessage(it.message)
                         }
-                        InvalidCredentials,InternalServer -> {
+                        InvalidCredentials,InternalServer,UnAuthorizedAccess -> {
                             view.displayErrorMessage(it.message)
                         }
                         SessionExpired ->
@@ -100,7 +101,7 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
                         val allergyResponse = Gson().fromJson(it.data,AllergyResponse::class.java)
                         view.showActiveAllergy(allergyResponse.trueAllergy)
                     }
-                    InvalidCredentials, InternalServer -> {
+                    InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                         view.displayErrorMessage(it.message)
                     }
                     SessionExpired->
@@ -135,7 +136,7 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
                         val allergyResponse = Gson().fromJson(it.data,AllergyResponse::class.java)
                         view.showPastAllergy(allergyResponse.falseAllergy)
                     }
-                    InvalidCredentials, InternalServer -> {
+                    InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
                         view.displayErrorMessage(it.message)
                     }
                     SessionExpired->

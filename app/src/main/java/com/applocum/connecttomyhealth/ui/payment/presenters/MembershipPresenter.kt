@@ -4,6 +4,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Inter
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.InvalidCredentials
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.NotFound
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
+import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.payment.models.MembershipResponse
@@ -53,6 +54,9 @@ class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
                         }
                         InternalServer, InvalidCredentials,NotFound->
                         {
+                            view.displayErrorMessage(it.message)
+                        }
+                        UnAuthorizedAccess->{
                             view.displayErrorMessage(it.message)
                         }
                     }
