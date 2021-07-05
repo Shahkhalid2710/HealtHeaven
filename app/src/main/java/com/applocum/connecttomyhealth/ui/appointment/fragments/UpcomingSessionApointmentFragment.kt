@@ -44,7 +44,7 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
 
     private lateinit var upcomingSessionAdapter: UpcomingSessionAdapter
 
-    var locationRequestCode=241
+    private var locationRequestCode=241
 
     @Inject
     lateinit var presenter: BookAppointmentPresenter
@@ -52,9 +52,9 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
     @Inject
     lateinit var userHolder: UserHolder
 
-    var bookAppointmentPosition = 0
+    private var bookAppointmentPosition = 0
 
-    var mListUpcomingSession: ArrayList<BookAppointmentResponse> = ArrayList()
+    private var mListUpcomingSession: ArrayList<BookAppointmentResponse> = ArrayList()
 
     private var isLoading = false
 
@@ -74,7 +74,6 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         upcomingSessionAdapter = UpcomingSessionAdapter(requireActivity(), ArrayList(), this)
         v.rvUpcomingSession.layoutManager = LinearLayoutManager(requireActivity())
         v.rvUpcomingSession.adapter = upcomingSessionAdapter
-        upcomingSessionAdapter.notifyDataSetChanged()
 
         RxView.clicks(v.noInternet.tvRetry).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -99,14 +98,20 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.blue))
         snackbar.show()
+    }
 
-        mListUpcomingSession.removeAt(bookAppointmentPosition)
-        upcomingSessionAdapter.notifyItemRemoved(bookAppointmentPosition)
-        mListUpcomingSession.trimToSize()
-        upcomingSessionAdapter.mList.removeAt(bookAppointmentPosition)
+    override fun displaySuccessCheckInMessage(message: String) {
+        val snackbar = Snackbar.make(llUpcomingSession, message, Snackbar.LENGTH_SHORT)
+        snackbar.changeFont()
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.blue))
+        snackbar.show()
 
-        checkList()
-
+        upcomingSessionAdapter.mList.remove(null)
+        upcomingSessionAdapter.mList.clear()
+        upcomingSessionAdapter.notifyDataSetChanged()
+        presenter.resetPage()
+        presenter.showUpcomingSession()
     }
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
@@ -168,16 +173,6 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        presenter.showUpcomingSession()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.safeDispose()
-    }
-
     private fun checkList() {
         if (mListUpcomingSession.isNullOrEmpty()) {
             v.layoutNotFoundUpcomingSession.visibility = View.VISIBLE
@@ -204,14 +199,19 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         dialog.show()
     }
 
+    override fun removeApppintment(appointmentId: Int) {
+        upcomingSessionAdapter.removeAppointment(appointmentId,bookAppointmentPosition)
+        checkList()
+    }
+
     override fun onCheckInButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
         val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_walk_in_waiting_room_dialog, null, false)
         val dialog = AlertDialog.Builder(requireActivity()).create()
         dialog.setView(showDialogView)
 
         showDialogView.btnContinue.setOnClickListener {
-
-            dialog.dismiss()
+             presenter.checkInAppointment(bookAppointmentResponse.id)
+             dialog.dismiss()
         }
         showDialogView.btnCancel.setOnClickListener {
             dialog.dismiss()
@@ -240,6 +240,7 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
             startActivity(Intent(requireActivity(), MySessionActivity::class.java))
         }
     }
+
 
     private fun locationPermission() {
         ContextCompat.checkSelfPermission(requireActivity(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -278,4 +279,15 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.showUpcomingSession()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.safeDispose()
+    }
+
 }

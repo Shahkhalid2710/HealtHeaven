@@ -41,13 +41,14 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
     private lateinit var mediaPlayer:MediaPlayer
 
     override fun getLayoutResourceId(): Int = R.layout.activity_my_session
+
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.soundcheck)
+        mediaPlayer = MediaPlayer.create(this, R.raw.mpthreetest)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {

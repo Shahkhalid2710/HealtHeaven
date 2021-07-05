@@ -235,6 +235,8 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         }
     }
 
+    override fun removeApppintment(appointmentId: Int) {}
+
     override fun showcard(list: ArrayList<Card>) {
         if (list.isEmpty()) {
             customPaymentAdd.visibility = View.VISIBLE
@@ -292,6 +294,8 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
     override fun displaySuccessMessage(message: String) {
         openDialog()
     }
+
+    override fun displaySuccessCheckInMessage(message: String) {}
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {}
 

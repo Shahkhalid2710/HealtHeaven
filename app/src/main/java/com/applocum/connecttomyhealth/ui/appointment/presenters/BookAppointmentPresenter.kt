@@ -23,6 +23,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
     companion object {
         const val UPCOMING_APPOINTMENT = "upcoming"
         const val COMPLETED_APPOINTMENT = "past"
+        const val PATIENT_ARRIVED="patient_arrived"
     }
 
     val disposables = CompositeDisposable()
@@ -174,6 +175,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
                     Success -> {
                         view.noInternet(true)
                         view.displaySuccessMessage(it.message)
+                        view.removeApppintment(id)
                     }
                     InvalidCredentials, InternalServer, MissingParameter,UnAuthorizedAccess -> {
                         view.displayMessage(it.message)
@@ -189,6 +191,43 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
             }).let { disposables.addAll(it) }
     }
 
+
+    fun checkInAppointment(appointmentId:Int)
+    {
+        view.viewFullProgress(true)
+        val requestBody: RequestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("appointment[status]", PATIENT_ARRIVED)
+            .build()
+
+        api.checkInAppointment(userHolder.userToken,appointmentId,requestBody)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy (onNext = {
+                view.viewFullProgress(false)
+                when (it.status) {
+                    Success -> {
+                        view.noInternet(true)
+                        view.displaySuccessCheckInMessage(it.message)
+                    }
+                    InvalidCredentials, InternalServer, MissingParameter,UnAuthorizedAccess -> {
+                        view.displayMessage(it.message)
+                    }
+                }
+            } ,onError = {
+                view.viewFullProgress(false)
+                it.printStackTrace()
+
+                if (it is UnknownHostException) {
+                    view.noInternet(false)
+                }
+            }).let { disposables.addAll(it) }
+    }
+
+    fun resetPage()
+    {
+        nextPage="1"
+    }
+
     fun safeDispose() {
         disposables.clear()
         disposables.dispose()
@@ -197,10 +236,12 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
     interface View {
         fun displayMessage(mesage: String)
         fun displaySuccessMessage(message: String)
+        fun displaySuccessCheckInMessage(message: String)
         fun getSessions(list: ArrayList<BookAppointmentResponse>)
         fun viewFullProgress(isShow: Boolean)
         fun showProgress()
         fun hideProgress()
         fun noInternet(isConnect:Boolean)
+        fun removeApppintment(appointmentId:Int)
     }
 }

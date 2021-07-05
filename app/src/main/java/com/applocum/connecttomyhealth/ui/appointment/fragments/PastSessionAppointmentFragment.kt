@@ -79,6 +79,8 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
 
     override fun displaySuccessMessage(message: String) {}
 
+    override fun displaySuccessCheckInMessage(message: String) {}
+
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
         if (list.isEmpty()) {
             layoutNotFoundPastSession.visibility = View.VISIBLE
@@ -137,6 +139,8 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
             v.rvPastSession.visibility=View.VISIBLE
         }
     }
+
+    override fun removeApppintment(appointmentId: Int) {}
 
     override fun onResume() {
         super.onResume()

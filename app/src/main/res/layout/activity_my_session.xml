@@ -46,11 +46,11 @@
             tools:ignore="UselessParent">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="65dp"
+                android:layout_height="85dp"
                 android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_warning" />
+                android:src="@drawable/ic_web_camera_green" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,11 +113,11 @@
             tools:ignore="UselessParent">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="60dp"
+                android:layout_height="90dp"
                 android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_warning" />
+                android:src="@drawable/ic_microphone_green" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -147,7 +147,7 @@
                 android:id="@+id/progressMicroPhone"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="@dimen/spacing_30"
                 android:layout_marginEnd="@dimen/spacing_24" />
@@ -179,11 +179,11 @@
             tools:ignore="UselessParent">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="75dp"
                 android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_warning" />
+                android:src="@drawable/ic_volume_green" />
 
             <TextView
                 android:layout_width="wrap_content"

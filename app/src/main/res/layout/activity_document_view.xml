@@ -45,7 +45,7 @@
 
         <include
             android:id="@+id/progressWeb"
-            layout="@layout/custom_loader_progress"
+            layout="@layout/custom_document_progress"
             android:visibility="gone" />
     </FrameLayout>
 </LinearLayout>

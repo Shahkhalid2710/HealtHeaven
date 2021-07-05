@@ -98,7 +98,7 @@ class UpcomingSessionAdapter(
                 {
                     when (sessionHolder.itemView.btnCheckin.text) {
                         "Join"->{ sessionHolder.itemView.btnCheckin.isEnabled = false}
-                        "Check-in"->{ sessionHolder.itemView.btnCheckin.isEnabled = true}
+                        "Check-in"->{ sessionHolder.itemView.btnCheckin.isEnabled = false}
                     }
                 }
 
@@ -108,7 +108,7 @@ class UpcomingSessionAdapter(
                     .subscribe {
                         when (sessionHolder.itemView.btnCheckin.text.toString()) {
                             "Check-in" -> {
-                                itemCLick.onCheckInButtonClick(bookAppointmentResponse, sessionHolder.adapterPosition)
+                                itemCLick.onCheckInButtonClick(bookAppointmentResponse,sessionHolder.adapterPosition)
                               }
                             "Join" -> {
                                 itemCLick.onJoinButtonClick(bookAppointmentResponse, sessionHolder.adapterPosition)
@@ -123,6 +123,17 @@ class UpcomingSessionAdapter(
                     }
             }
         }
+    }
+
+    fun removeAppointment(id:Int ,position: Int)
+    {
+
+        mList.indices
+            .filter { id == mList[it]?.id }
+            .forEach { mList.remove(mList[it]) }
+        if (mList.size == 0) {
+        }
+        notifyItemRemoved(position)
     }
 
     interface ItemClickListner {

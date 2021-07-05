@@ -5,6 +5,7 @@ import com.applocum.connecttomyhealth.ui.addcard.models.CardResponse
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.AllergyGlobalResponse
 import com.applocum.connecttomyhealth.ui.allergyhistory.models.AllergyHistoryGlobalResponse
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentGlobalResponse
+import com.applocum.connecttomyhealth.ui.appointment.models.CheckInGlobalResponse
 import com.applocum.connecttomyhealth.ui.booksession.models.TimeResponse
 import com.applocum.connecttomyhealth.ui.changepassword.models.PasswordGlobalResponse
 import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistoryGlobalResponse
@@ -115,6 +116,11 @@ interface AppEndPoint {
     @DELETE("/api/priory/patient/appointments/{id}.json")
     fun deleteAppointment(@Header("AUTH_TOKEN")authtoken: String?,
                           @Path("id")appointmentId:Int ):Observable<BookAppointmentGlobalResponse>
+
+    @PUT("/api/appointments/{id}/update_status.json")
+    fun checkInAppointment(@Header("AUTH_TOKEN")authtoken: String?,
+                           @Path("id")appointmentId:Int,
+                           @Body requestBody: RequestBody ):Observable<CheckInGlobalResponse>
 
     @POST("/api/priory/users/password/change.json")
     fun changePassword(@Header("AUTH_TOKEN")authtoken: String?,
