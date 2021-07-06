@@ -1,10 +1,12 @@
 package com.applocum.connecttomyhealth.ui.forgotpassword.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
@@ -41,6 +43,8 @@ class ForgotPasswordActivity : BaseActivity(),ForgotPasswordPresenter.View, Text
 
         RxView.clicks(btnSend).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(llForgotPassword.windowToken, 0)
                 presenter.forgotPassword(etEmailNumber.text.toString())
             }
       }

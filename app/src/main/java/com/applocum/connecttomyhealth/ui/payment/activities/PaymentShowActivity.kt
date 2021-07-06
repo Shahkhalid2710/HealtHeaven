@@ -271,14 +271,15 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         )
 
         dialog.btnDone.setOnClickListener {
-            dialog.dismiss()
 
             val intent = (Intent(this, BottomNavigationViewActivity::class.java))
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
+
             finishAffinity()
             overridePendingTransition(0,0)
+            dialog.dismiss()
         }
         dialog.show()
     }

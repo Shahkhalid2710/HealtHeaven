@@ -65,7 +65,7 @@ class SecurityPresenter @Inject constructor(private val api: AppEndPoint) {
 
     private fun validation(password: String): Boolean {
         if (password.isEmpty()) {
-            view.displayMessage("Please enter password")
+            view.displayMessage("Please provide all mandatory details")
             return false
         }
         return true

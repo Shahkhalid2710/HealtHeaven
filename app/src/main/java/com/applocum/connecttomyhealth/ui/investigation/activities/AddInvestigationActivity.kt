@@ -2,9 +2,11 @@ package com.applocum.connecttomyhealth.ui.investigation.activities
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -99,6 +101,8 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
                     medicalDiseaseAdapter.notifyDataSetChanged()
                     presenter.resetPage()
                     presenter.getDiseaseList(etInvestigationName.text.toString())
+                    val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(llAddInvesigation.windowToken, 0)
                 }
             }.subscribe().let { presenter.disposables.add(it) }
 
@@ -117,6 +121,8 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
         investigationName = etInvestigationName.text.toString()
 
         btnAddInvestigation.setOnClickListener {
+            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(llAddInvesigation.windowToken, 0)
             investigationPresenter.addInvestigation(
                 investigationName,
                 etInvestigationdate.text.toString(),

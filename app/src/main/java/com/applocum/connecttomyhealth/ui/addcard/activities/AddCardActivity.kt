@@ -1,12 +1,14 @@
 package com.applocum.connecttomyhealth.ui.addcard.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.applocum.connecttomyhealth.MyApplication
@@ -74,6 +76,8 @@ class AddCardActivity : BaseActivity(), AddCardPresenter.View {
 
         RxView.clicks(btnAdd).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(llAddCard.windowToken, 0)
                 presenter.addCard(etCardNumber.text.toString().replace(" ",""),etHolderName.text.toString(), etExpiryDate.text.toString().replace("/",""), etCVV.text.toString())
             }
     }

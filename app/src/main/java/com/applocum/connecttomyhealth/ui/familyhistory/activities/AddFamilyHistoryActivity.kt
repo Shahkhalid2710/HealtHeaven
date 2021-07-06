@@ -1,9 +1,11 @@
 package com.applocum.connecttomyhealth.ui.familyhistory.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,8 +13,8 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.familyhistory.presenters.FamilyHistoryPresenter
 import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistory
+import com.applocum.connecttomyhealth.ui.familyhistory.presenters.FamilyHistoryPresenter
 import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.MedicalDiseaseAdapter
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.FalseMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
@@ -27,8 +29,6 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_family_history.*
-import kotlinx.android.synthetic.main.activity_add_family_history.ivBack
-import kotlinx.android.synthetic.main.activity_add_family_history.rvDisease
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -95,6 +95,8 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
                     medicalDiseaseAdapter.notifyDataSetChanged()
                     presenter.resetPage()
                     presenter.getDiseaseList(etAddFamilyHistory.text.toString())
+                    val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(lladdfamilyhistory.windowToken, 0)
                 }
             }.subscribe().let { presenter.disposables.add(it) }
 
@@ -102,9 +104,12 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
 
         RxView.clicks(btnSaveFamilyHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(lladdfamilyhistory.windowToken, 0)
                 familyHistoryPresenter.addFamilyHistory(familyHistoryName)
             }
     }
+
 
     override fun displayMessage(message: String) {}
 

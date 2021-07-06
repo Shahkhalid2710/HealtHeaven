@@ -1,9 +1,11 @@
 package com.applocum.connecttomyhealth.ui.securitycheck.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
@@ -40,6 +42,8 @@ class SecurityActivity : BaseActivity(), SecurityPresenter.View {
 
         RxView.clicks(btnDone).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(rlSecurity.windowToken, 0)
                 presenter.validateSecurity(etPassword.text.toString())
             }
     }

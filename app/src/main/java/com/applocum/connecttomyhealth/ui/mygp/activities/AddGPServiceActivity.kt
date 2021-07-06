@@ -2,10 +2,12 @@ package com.applocum.connecttomyhealth.ui.mygp.activities
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -199,6 +201,8 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View,
         showDialogView.tvGpCity.text = gpService.city?.let { capitalize(it) }
 
         showDialogView.btnSubmit.setOnClickListener {
+            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(llAddGp.windowToken, 0)
             gpService.id?.let { it1 -> presenter.addGpService(it1) }
             val intent = Intent(this@AddGPServiceActivity, GpServiceActivity::class.java)
             startActivity(intent)

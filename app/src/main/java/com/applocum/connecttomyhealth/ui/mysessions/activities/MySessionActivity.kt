@@ -7,8 +7,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +22,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.SepratedProgress
+import com.applocum.connecttomyhealth.SoundMeter
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.waitingarea.activities.WaitingAreaActivity
 import com.jakewharton.rxbinding2.view.RxView
@@ -30,15 +31,17 @@ import kotlinx.android.synthetic.main.custom_camera_permission_denied_dialog.vie
 import kotlinx.android.synthetic.main.custom_camera_permission_dialog.view.*
 import kotlinx.android.synthetic.main.custom_microphone_permission_denied_dialog.view.*
 import kotlinx.android.synthetic.main.custom_microphone_permission_dialog.view.*
+import java.util.*
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
+import kotlin.math.roundToInt
 
 class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
 
     private var cameraRequestCode=1
     private var microPhoneRequestCode=2
-    var progressMicro = 1
     private lateinit var mediaPlayer:MediaPlayer
+    lateinit var soundMeter: SoundMeter
 
     override fun getLayoutResourceId(): Int = R.layout.activity_my_session
 
@@ -49,6 +52,8 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
         super.onCreate(savedInstanceState)
 
         mediaPlayer = MediaPlayer.create(this, R.raw.mpthreetest)
+        soundMeter = SoundMeter()
+
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -63,20 +68,9 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
                 llMicroPhone.visibility=View.VISIBLE
 
                 if (llMicroPhone.visibility == View.VISIBLE) {
-                    audioPermission()
-
                     val progress=SepratedProgress(ContextCompat.getColor(this,R.color.green),ContextCompat.getColor(this,R.color.textcolorgrey),this)
-                    progressMicroPhone.progressDrawable=progress
-                    progressMicroPhone.max=100
-
-                    object : CountDownTimer(100000, 1000) {
-                        override fun onTick(millisUntilFinished: Long) {
-                            progressMicro += 1
-                            progressMicroPhone.progress = progressMicro
-                        }
-
-                        override fun onFinish() {}
-                    }.start()
+                    progressMicroPhone.progressDrawable = progress
+                    audioPermission()
                 }
             }
 
@@ -85,6 +79,7 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
                 llMobileCamera.visibility=View.GONE
                 llTestSpeakers.visibility=View.VISIBLE
                 llMicroPhone.visibility=View.GONE
+                soundMeter.stop()
             }
 
         RxView.clicks(btnSpeakersContinue).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -143,8 +138,12 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
     }
 
     private fun audioPermission() {
-        ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
-        ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.RECORD_AUDIO), microPhoneRequestCode)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.RECORD_AUDIO), microPhoneRequestCode)
+        }else {
+            micOn()
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -152,7 +151,6 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-
         when(requestCode)
         {
             1->{
@@ -201,9 +199,8 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
             }
 
             2-> {
-
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    progressMicroPhone.visibility=View.VISIBLE
+                    micOn()
                 } else {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
                         // now, user has denied permission (but not permanently!)
@@ -251,9 +248,38 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    private fun micOn()
+    {
+        soundMeter.start()
+        try {
+            Timer().scheduleAtFixedRate(object : TimerTask() {
+                override fun run() {
+                    val amplitude = soundMeter.amplitude
+
+                    val data = ((amplitude * 30) / 32767)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        progressMicroPhone.setProgress((data.roundToInt()), true)
+                    }
+                }
+            }, 0, 100)
+        } catch (e: Exception) {
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+       if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+        }
+    }
+
     override fun onDestroy() {
-        mediaPlayer.stop()
         super.onDestroy()
+        if (mediaPlayer.isPlaying)
+        {
+            mediaPlayer.stop()
+        }
+        soundMeter.stop()
     }
 
     override fun onCompletion(mp: MediaPlayer?) {

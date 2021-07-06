@@ -1,9 +1,11 @@
 package com.applocum.connecttomyhealth.ui.allergyhistory.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -89,6 +91,8 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
                     medicalDiseaseAdapter.notifyDataSetChanged()
                     presenter.resetPage()
                     presenter.getDiseaseList(etAddAllergy.text.toString())
+                    val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(llAddAllergy.windowToken, 0)
                 }
             }.subscribe().let { presenter.disposables.add(it) }
 
@@ -104,6 +108,8 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
 
         RxView.clicks(btnSaveAllergy).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(llAddAllergy.windowToken, 0)
                 allergyHistoryPresenter.addAllergy(allergyName, isActivePast)
             }
        }

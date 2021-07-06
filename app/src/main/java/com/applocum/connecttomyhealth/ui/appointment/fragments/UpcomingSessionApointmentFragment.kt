@@ -58,6 +58,7 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
 
     private var isLoading = false
 
+
     lateinit var v: View
 
     @SuppressLint("CheckResult")
@@ -220,7 +221,6 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
     }
 
     override fun onJoinButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
-
         if (ContextCompat.checkSelfPermission(requireActivity(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
             val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_location_permission_dialog, null, false)
@@ -255,7 +255,8 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
 
         if (requestCode == 241) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startActivity(Intent(requireActivity(),MySessionActivity::class.java))
+                val intent=(Intent(requireActivity(),MySessionActivity::class.java))
+                startActivity(intent)
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)) {
                     // now, user has denied permission (but not permanently!)

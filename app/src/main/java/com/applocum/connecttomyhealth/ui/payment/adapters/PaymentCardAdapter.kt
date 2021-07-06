@@ -19,7 +19,7 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
     var mList=list
     var isShow=isshow
     private var isDeleteShow=isDeleteShoww
-    private var selectCard=-1
+    private var selectCard = -1
 
     inner class PaymentHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
 
@@ -49,7 +49,7 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
 
         RxView.clicks(holder.itemView.llPaymentCard).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe{
-                selectCard=position
+                selectCard = position
                 cardClick.cardClick(card, position)
                 notifyDataSetChanged()
             }
@@ -62,12 +62,13 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
 
         if (selectCard == position)
         {
-            holder.itemView.cbotherPayment.isChecked=true
+            holder.itemView.cbotherPayment.isChecked = true
         }
         else
         {
-            holder.itemView.cbotherPayment.isChecked=false
+            holder.itemView.cbotherPayment.isChecked = false
         }
+
     }
 
     interface CardClickListener{

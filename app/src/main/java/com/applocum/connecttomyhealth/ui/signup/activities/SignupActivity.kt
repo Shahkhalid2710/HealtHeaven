@@ -3,6 +3,7 @@ package com.applocum.connecttomyhealth.ui.signup.activities
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.Toast
@@ -70,6 +72,9 @@ class SignupActivity : BaseActivity(), SignupPresenter.View, DatePickerDialog.On
 
         RxView.clicks(btnRegister).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(llSignup.windowToken, 0)
+
                 presenter.getSignup(
                     etFirstName.text.toString(),
                     etLastName.text.toString(),

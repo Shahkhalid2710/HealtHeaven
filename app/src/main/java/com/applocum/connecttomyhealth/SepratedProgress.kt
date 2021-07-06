@@ -53,6 +53,6 @@ class SepratedProgress(
     }
 
     companion object {
-        private const val NUM_SEGMENTS = 35
+        private const val NUM_SEGMENTS = 30
     }
 }

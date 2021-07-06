@@ -56,11 +56,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/spacing_30"
+                android:layout_marginTop="@dimen/spacing_20"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/setup_mobile_camera"
                 android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_18" />
+                android:textSize="@dimen/font_16" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="@dimen/spacing_50"
+                android:layout_marginTop="@dimen/spacing_45"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:layout_marginBottom="57dp"
                 android:background="@drawable/custom_btn"
@@ -123,11 +123,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/spacing_30"
+                android:layout_marginTop="@dimen/spacing_20"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/setup_microphone"
                 android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_18" />
+                android:textSize="@dimen/font_16" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,6 +148,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:max="100"
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginTop="@dimen/spacing_30"
                 android:layout_marginEnd="@dimen/spacing_24" />
@@ -158,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:layout_marginBottom="57dp"
                 android:background="@drawable/custom_btn"
@@ -189,11 +190,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/spacing_30"
+                android:layout_marginTop="@dimen/spacing_20"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/test_speakers"
                 android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_18" />
+                android:textSize="@dimen/font_16" />
 
             <TextView
                 android:layout_width="wrap_content"
