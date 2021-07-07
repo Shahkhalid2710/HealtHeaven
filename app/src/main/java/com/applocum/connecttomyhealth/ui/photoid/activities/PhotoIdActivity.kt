@@ -76,7 +76,13 @@ class PhotoIdActivity : BaseActivity(), PhotoIdPresenter.View {
         checkList()
     }
 
-    override fun displayErrorMessage(message: String) {}
+    override fun displayErrorMessage(message: String) {
+        val snackBar = Snackbar.make(llDocuments,message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
+    }
 
     override fun showDocument(patient: Patient) {}
 

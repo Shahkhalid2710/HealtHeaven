@@ -70,7 +70,13 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
             }
     }
 
-    override fun displayErrorMessage(message: String) {}
+    override fun displayErrorMessage(message: String) {
+        val snackBar = Snackbar.make(llFamilyHistory,message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
+    }
 
     override fun displaySuccessMessage(message: String) {}
 

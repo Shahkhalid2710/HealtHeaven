@@ -70,7 +70,11 @@ class ReferralActivity : BaseActivity(),
     }
 
     override fun displayErrorMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        val snackBar = Snackbar.make(llReferral,message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
     }
 
     override fun getDocument(list: ArrayList<Document>) {

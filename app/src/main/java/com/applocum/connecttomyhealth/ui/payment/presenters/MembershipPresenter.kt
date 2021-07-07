@@ -85,7 +85,7 @@ class MembershipPresenter @Inject constructor(private val api: AppEndPoint) {
                         view.showMembershipList(it.data)
                     }
                     InvalidCredentials, InternalServer -> {
-                        view.displayMessage(it.message)
+                        view.displayErrorMessage(it.message)
                     }
                     NotFound -> {
                         view.showMembershipList(it.data)

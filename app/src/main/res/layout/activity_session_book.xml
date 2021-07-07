@@ -418,39 +418,6 @@
                 android:textColor="@color/aapBlack"
                 android:textSize="@dimen/font_12" />
 
-            <CheckBox
-                android:id="@+id/cbAnuallyonApril13th"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/anually_on_april_13th"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
-
-            <CheckBox
-                android:id="@+id/cbEveryWeekday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/every_weekday"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
 
             <CheckBox
                 android:id="@+id/cbCustom"

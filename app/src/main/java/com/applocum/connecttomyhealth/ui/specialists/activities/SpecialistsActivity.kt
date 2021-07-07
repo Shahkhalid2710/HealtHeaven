@@ -82,7 +82,13 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View,
 
     }
 
-    override fun displaymessage(message: String) {}
+    override fun displaymessage(message: String) {
+        val snackBar = Snackbar.make(flSpecialist,message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
+    }
 
     override fun onDestroy() {
         super.onDestroy()

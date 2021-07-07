@@ -241,7 +241,6 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         }
     }
 
-
     private fun locationPermission() {
         ContextCompat.checkSelfPermission(requireActivity(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
         requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), locationRequestCode)

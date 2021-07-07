@@ -96,7 +96,13 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View,
             }.subscribe().let { presenter.disposables.add(it) }
     }
 
-    override fun displayMessage(message: String) {}
+    override fun displayMessage(message: String) {
+        val snackBar = Snackbar.make(llAddGp,message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
+    }
 
     override fun getGpList(list: ArrayList<GpService>) {
         mList=list

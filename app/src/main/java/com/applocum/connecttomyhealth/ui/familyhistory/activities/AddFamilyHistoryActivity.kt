@@ -111,7 +111,13 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
     }
 
 
-    override fun displayMessage(message: String) {}
+    override fun displayMessage(message: String) {
+        val snackbar = Snackbar.make(lladdfamilyhistory,message, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackbar.show()
+    }
 
     override fun getDiseaseList(list: ArrayList<Medical>) {
         mListFamilyHistory = list

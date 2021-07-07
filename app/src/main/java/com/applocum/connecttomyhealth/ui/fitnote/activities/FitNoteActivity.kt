@@ -67,8 +67,13 @@ class FitNoteActivity : BaseActivity(),
         super.onDestroy()
         presenter.safeDispose()
     }
+
     override fun displayErrorMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        val snackBar = Snackbar.make(llFitNote,message, Snackbar.LENGTH_LONG).apply { view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5 }
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
     }
 
     override fun getDocument(list: ArrayList<Document>) {

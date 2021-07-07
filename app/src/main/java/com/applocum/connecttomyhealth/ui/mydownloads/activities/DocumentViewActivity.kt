@@ -61,7 +61,12 @@ class DocumentViewActivity : BaseActivity() {
                 return false
             }
             override fun onPageFinished(view: WebView, url: String) {
-                progressWeb.visibility = View.GONE
+                if (view.contentHeight == 0)
+                {
+                    view.reload()
+                }else {
+                    progressWeb.visibility = View.GONE
+                }
             }
         }
     }

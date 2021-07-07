@@ -26,6 +26,7 @@ import com.applocum.connecttomyhealth.ui.medicalhistory.presenters.MedicalPresen
 import com.applocum.connecttomyhealth.ui.securitycheck.activities.SecurityActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
+import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -67,13 +68,18 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
 
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ivBack.setOnClickListener { finish() }
         (application as MyApplication).component.inject(this)
         presenter.injectView(this)
         investigationPresenter.injectView(this)
+
+        RxView.clicks(ivBack).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                finish()
+            }
 
         medicalDiseaseAdapter = MedicalDiseaseAdapter(this, ArrayList(), this)
         rvDisease.layoutManager = LinearLayoutManager(this)
@@ -120,15 +126,16 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
 
         investigationName = etInvestigationName.text.toString()
 
-        btnAddInvestigation.setOnClickListener {
-            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(llAddInvesigation.windowToken, 0)
-            investigationPresenter.addInvestigation(
-                investigationName,
-                etInvestigationdate.text.toString(),
-                etInvestigationDescription.text.toString()
-            )
-        }
+        RxView.clicks(btnAddInvestigation).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(llAddInvesigation.windowToken, 0)
+                investigationPresenter.addInvestigation(
+                    investigationName,
+                    etInvestigationdate.text.toString(),
+                    etInvestigationDescription.text.toString()
+                )
+            }
     }
 
     @SuppressLint("SimpleDateFormat")

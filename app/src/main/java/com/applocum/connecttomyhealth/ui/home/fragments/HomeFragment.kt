@@ -115,7 +115,13 @@ class HomeFragment : Fragment(), SpecilistPresenter.View {
         v.tvName.text = userHolder.userFirstName
     }
 
-    override fun displaymessage(message: String) {}
+    override fun displaymessage(message: String) {
+        val snackBar = Snackbar.make(llHome,message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+        snackBar.show()
+    }
 
     override fun getdoctorlist(list: ArrayList<Specialist?>,page:String?) {
         v.rvTopDoctors.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)

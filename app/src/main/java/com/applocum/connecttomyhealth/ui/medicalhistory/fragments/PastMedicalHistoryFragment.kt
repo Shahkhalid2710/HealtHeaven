@@ -62,7 +62,13 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
         return v
     }
 
-    override fun displayMessage(message: String) {}
+    override fun displayMessage(message: String) {
+        val snackBar = Snackbar.make(llPastMedicalHistory,message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+        snackBar.show()
+    }
 
     override fun getDiseaseList(list: ArrayList<Medical>) {}
 

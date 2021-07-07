@@ -197,7 +197,7 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
     }
 
     override fun displayMessage(message: String) {
-        Toast.makeText(requireActivity(), message, Toast.LENGTH_LONG).show()
+       Toast.makeText(requireActivity(),message,Toast.LENGTH_SHORT).show()
     }
 
     override fun displaySuccessMessage(message: String) {}
@@ -323,7 +323,13 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
         }
     }
 
-    override fun displaymessage(message: String?) {}
+    override fun displaymessage(message: String?) {
+        val snackBar = Snackbar.make(llProfile, message.toString(), Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.red))
+        snackBar.show()
+    }
 
     override fun displaySuccessMeessage(message: String?) {
         val intent = Intent(requireActivity(), LoginActivity::class.java)

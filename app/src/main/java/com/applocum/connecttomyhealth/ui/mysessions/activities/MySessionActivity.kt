@@ -241,7 +241,6 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
                         dialog.show()
                     }
                 }
-
             }
         }
 
@@ -256,7 +255,7 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
                 override fun run() {
                     val amplitude = soundMeter.amplitude
 
-                    val data = ((amplitude * 30) / 32767)
+                    val data = ((amplitude * 40) / 32767)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         progressMicroPhone.setProgress((data.roundToInt()), true)
                     }

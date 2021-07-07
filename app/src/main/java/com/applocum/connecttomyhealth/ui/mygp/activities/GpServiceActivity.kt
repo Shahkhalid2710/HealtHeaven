@@ -86,7 +86,13 @@ class GpServiceActivity : BaseActivity(), GpservicePresenter.View {
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
     }
 
-    override fun displayMessage(message: String) {}
+    override fun displayMessage(message: String) {
+        val snackBar = Snackbar.make(flGpService,message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
+    }
 
     override fun getGpList(list: ArrayList<GpService>) {}
 

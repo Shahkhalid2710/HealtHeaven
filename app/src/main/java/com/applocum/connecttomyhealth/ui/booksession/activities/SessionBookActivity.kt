@@ -1,10 +1,12 @@
 package com.applocum.connecttomyhealth.ui.booksession.activities
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,7 +15,9 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeClickAdapter
+import com.applocum.connecttomyhealth.ui.booksession.adapters.CustomDateAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
+import com.applocum.connecttomyhealth.ui.booksession.models.DateModel
 import com.applocum.connecttomyhealth.ui.booksession.models.Time
 import com.applocum.connecttomyhealth.ui.booksession.presenters.BookSessionPresenter
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
@@ -22,25 +26,35 @@ import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.prolificinteractive.materialcalendarview.*
 import kotlinx.android.synthetic.main.activity_session_book.*
+import kotlinx.android.synthetic.main.activity_session_book.tvCancel
+import kotlinx.android.synthetic.main.custom_date_dialog.view.*
 import kotlinx.android.synthetic.main.custom_small_progress.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPresenter.View,
-    OnDateSelectedListener {
+    OnDateSelectedListener, CustomDateAdapter.OnDateClickListner {
     private var selectSession = ""
     private var sType = ""
     private var sSlot = ""
     private var seleteddate = ""
     private var sTime = ""
     private var specialistId = 0
-
     //lateinit var specialist: Specialist
     private lateinit var commonData: Common
+    var mListDate:ArrayList<DateModel> = ArrayList()
+    lateinit var dateModel:DateModel
+    lateinit var customDateAdapter:CustomDateAdapter
+
+    val date = arrayOf("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20",
+                                     "21","22","23","24","25","26","27","28","29","30","31")
+
+    val day= arrayOf("Mo","Tu","We","Th","Fr","Sa","Su")
 
     @Inject
     lateinit var presenter: BookSessionPresenter
@@ -58,6 +72,10 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
         (application as MyApplication).component.inject(this)
         presenter.injectview(this)
+
+        dateModel = DateModel()
+
+        setDate()
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -170,8 +188,6 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 selectSession = "1"
                 cbWeeklyonthursday.isChecked = false
                 cbMonthly1stThursday.isChecked = false
-                cbAnuallyonApril13th.isChecked = false
-                cbEveryWeekday.isChecked = false
                 cbCustom.isChecked = false
             }
         }
@@ -181,8 +197,6 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 selectSession = "2"
                 cbDaily.isChecked = false
                 cbMonthly1stThursday.isChecked = false
-                cbAnuallyonApril13th.isChecked = false
-                cbEveryWeekday.isChecked = false
                 cbCustom.isChecked = false
             }
         }
@@ -192,42 +206,28 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 selectSession = "3"
                 cbDaily.isChecked = false
                 cbWeeklyonthursday.isChecked = false
-                cbAnuallyonApril13th.isChecked = false
-                cbEveryWeekday.isChecked = false
-                cbCustom.isChecked = false
-            }
-        }
-
-        cbAnuallyonApril13th.setOnCheckedChangeListener { _, b ->
-            if (b) {
-                selectSession = "4"
-                cbDaily.isChecked = false
-                cbWeeklyonthursday.isChecked = false
-                cbMonthly1stThursday.isChecked = false
-                cbEveryWeekday.isChecked = false
-                cbCustom.isChecked = false
-            }
-        }
-
-        cbEveryWeekday.setOnCheckedChangeListener { _, b ->
-            if (b) {
-                selectSession = "5"
-                cbDaily.isChecked = false
-                cbWeeklyonthursday.isChecked = false
-                cbMonthly1stThursday.isChecked = false
-                cbAnuallyonApril13th.isChecked = false
                 cbCustom.isChecked = false
             }
         }
 
         cbCustom.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession = "6"
+                val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_date_dialog, null, false)
+                val dialog = AlertDialog.Builder(this).create()
+                dialog.setView(showDialogView)
+
+                showDialogView.tvCancel.setOnClickListener {
+                    dialog.dismiss()
+                }
+
+                showDialogView.rvDates.layoutManager = GridLayoutManager(this, 7)
+                showDialogView.rvDates.adapter = customDateAdapter
+
+                dialog.show()
+
                 cbDaily.isChecked = false
                 cbWeeklyonthursday.isChecked = false
                 cbMonthly1stThursday.isChecked = false
-                cbAnuallyonApril13th.isChecked = false
-                cbEveryWeekday.isChecked = false
             }
         }
 
@@ -378,8 +378,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             return false
         }
         if (sessionType.isEmpty()) {
-            val snackbar =
-                Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
             snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
@@ -404,5 +403,21 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             return false
         }
         return true
+    }
+
+    private fun setDate()
+    {
+
+        for (i in date.indices)
+        {
+            val dateModel=DateModel(date[i])
+            mListDate.add(dateModel)
+        }
+        customDateAdapter = CustomDateAdapter(this, mListDate, this)
+
+    }
+
+    override fun onDateClick(date: ArrayList<DateModel>, position: Int) {
+
     }
 }

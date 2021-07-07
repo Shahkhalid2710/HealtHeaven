@@ -69,7 +69,12 @@ class MemberShipActivity : BaseActivity(), MembershipPresenter.View {
         snackbar.show()
     }
 
-    override fun displayErrorMessage(message: String) {}
+    override fun displayErrorMessage(message: String) {
+        val snackbar = Snackbar.make(flMembership, message, Snackbar.LENGTH_LONG)
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackbar.show()
+    }
 
     override fun viewProgress(isShow: Boolean) {
         progress.visibility = if (isShow) View.VISIBLE else View.GONE

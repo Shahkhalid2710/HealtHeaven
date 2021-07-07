@@ -205,7 +205,13 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
             }
     }
 
-    override fun displaymessage(message: String) {}
+    override fun displaymessage(message: String) {
+        val snackbar = Snackbar.make(flPayment,message, Snackbar.LENGTH_LONG)
+        snackbar.changeFont()
+        val snackview = snackbar.view
+        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackbar.show()
+    }
 
     override fun displaySuccessmessage(message: String) {}
 

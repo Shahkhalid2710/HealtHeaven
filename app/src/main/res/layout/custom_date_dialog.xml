@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_10"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/custom"
+            android:textColor="@color/aapBlack"
+            android:textSize="@dimen/font_15" />
+
+        <LinearLayout
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ripple_effect_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/spacing_10"
+            tools:ignore="RelativeOverlap">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="end"
+                android:text="@string/cancel"
+                android:textColor="@color/red"
+                android:textSize="@dimen/font_14"
+                tools:ignore="RelativeOverlap" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/spacing_10"
+        android:background="@color/textcolorgrey" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_10"
+            android:layout_marginEnd="@dimen/spacing_10"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            tools:ignore="UselessParent">
+
+            <RadioButton
+                android:id="@+id/rbDateOfMonth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:button="@drawable/radiobutton"
+                android:checked="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_bold"
+                android:foreground="@drawable/effect_button"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/spacing_10"
+                android:paddingEnd="@dimen/spacing_10"
+                android:text="@string/date_of_month"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_15" />
+
+            <RadioButton
+                android:id="@+id/rbDayOfWeek"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:button="@drawable/radiobutton"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_bold"
+                android:foreground="@drawable/effect_button"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/spacing_10"
+                android:paddingEnd="@dimen/spacing_10"
+                android:text="@string/day_of_week"
+                android:textColor="@color/aapBlack"
+                android:textSize="@dimen/font_15" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_10"
+        android:layout_marginTop="@dimen/spacing_24"
+        android:layout_marginEnd="@dimen/spacing_10"
+        android:background="@drawable/custom_date_layout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDates"
+            android:layout_width="match_parent"
+            android:overScrollMode="never"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_10" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacing_10"
+        android:layout_marginTop="@dimen/spacing_15"
+        android:layout_marginEnd="@dimen/spacing_10"
+        android:layout_marginBottom="@dimen/spacing_15"
+        android:background="@drawable/custom_btn"
+        android:fontFamily="@font/montserrat_semibold"
+        android:foreground="@drawable/effect_button"
+        android:text="@string/done"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</LinearLayout>

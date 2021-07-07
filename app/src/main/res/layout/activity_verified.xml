@@ -44,7 +44,7 @@
 
         <Button
             android:id="@+id/btnContinue"
-            android:layout_width="132dp"
+            android:layout_width="142dp"
             android:layout_height="34dp"
             android:layout_gravity="center"
             android:layout_marginTop="126dp"

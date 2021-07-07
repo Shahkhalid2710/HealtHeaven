@@ -72,7 +72,14 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
 
     override fun displaySuccessMessage(message: String) {}
 
-    override fun displayMessage(message: String) {}
+    override fun displayMessage(message: String) {
+        val snackBar = Snackbar.make(llInvestigation,message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
+
+    }
 
     override fun viewInvestigationProgress(isShow: Boolean) {}
 

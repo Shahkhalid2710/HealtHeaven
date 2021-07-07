@@ -16,9 +16,8 @@ import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 
 class VerifiedActivity : BaseActivity() {
     override fun getLayoutResourceId(): Int = R.layout.activity_verified
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
 
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

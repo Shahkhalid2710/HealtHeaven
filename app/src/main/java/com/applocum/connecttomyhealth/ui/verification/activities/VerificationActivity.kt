@@ -1,12 +1,14 @@
 package com.applocum.connecttomyhealth.ui.verification.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -21,6 +23,7 @@ import com.applocum.connecttomyhealth.ui.verification.presenters.OtpPresenter
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_verification.*
+import kotlinx.android.synthetic.main.activity_verification.ivBack
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -86,6 +89,8 @@ class VerificationActivity : BaseActivity(),OtpPresenter.View {
 
         RxView.clicks(btnVerify).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(llVerification.windowToken, 0)
                 mobileNumber?.let { it1 -> otpPresenter.verifyOtp(it1,etno1.text.toString()+etno2.text.toString()+etno3.text.toString()+etno4.text.toString()+etno5.text.toString()+etno6.text.toString()) }
             }
 
