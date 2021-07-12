@@ -42,8 +42,8 @@ import kotlin.collections.ArrayList
 class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
     MedicalDiseaseAdapter.ItemClickListnter {
 
-    var mListMedical: ArrayList<Medical> = ArrayList()
-    var diseaseid = ""
+    private var mListMedical: ArrayList<Medical> = ArrayList()
+    private var diseaseid = ""
     private var selectedString = ""
     private var isMatched = false
     private var isActivePast = false
@@ -132,14 +132,15 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
             .subscribe {
                 val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(llMedicalHistory.windowToken, 0)
-                presenter.addMedicalHistory(
-                    diseaseid,
-                    etStartMonth.text.toString(),
-                    etStartYear.text.toString(),
-                    isActivePast,
-                    etEndMonth.text.toString(),
-                    etEndYear.text.toString()
-                )
+
+                    presenter.addMedicalHistory(
+                        diseaseid,
+                        etStartMonth.text.toString(),
+                        etStartYear.text.toString(),
+                        isActivePast,
+                        etEndMonth.text.toString(),
+                        etEndYear.text.toString()
+                    )
             }
     }
 

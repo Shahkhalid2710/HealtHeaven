@@ -105,7 +105,7 @@ interface AppEndPoint {
 
     @POST("/api/priory/patient/appointments.json")
     fun bookAppointment(@Header("AUTH_TOKEN")authtoken: String?,
-                        @Body requestBody: RequestBody):Observable<BookAppointmentGlobalResponse>
+                        @Body requestBody:RequestBody):Observable<BookAppointmentGlobalResponse>
 
     @GET("/api/priory/doctors/appointments.json")
     fun sessions(@Header("AUTH_TOKEN")authtoken: String?,

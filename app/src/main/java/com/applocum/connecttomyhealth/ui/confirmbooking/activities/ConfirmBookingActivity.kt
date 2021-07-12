@@ -41,12 +41,6 @@ class ConfirmBookingActivity : BaseActivity() {
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
 
-        RxView.clicks(btnConfirm).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                startActivity(Intent(this, PaymentShowActivity::class.java))
-                overridePendingTransition(0,0)
-            }
-
         RxView.clicks(tvCancel).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
                 val intent = (Intent(this, BottomNavigationViewActivity::class.java))
@@ -57,22 +51,58 @@ class ConfirmBookingActivity : BaseActivity() {
                 overridePendingTransition(0,0)
             }
 
+        val bookAppointment = userHolder.getBookAppointmentData()
+
+        if (bookAppointment.recurringSessionCount == "")
+        {
+            tvSessions.text="1"
+        }else
+        {
+            tvSessions.text=bookAppointment.recurringSessionCount
+        }
+
         common = intent.getSerializableExtra("commonData") as Common
         val appointmentBasicPrice = common.appointment_basic_price
-        tvBookingCost.text = ("€$appointmentBasicPrice.00")
-        tvTotalCost.text = ("€$appointmentBasicPrice.00")
-        val bookAppointment = userHolder.getBookAppointmentData()
+
+         tvTotalSession.text=tvSessions.text
+         val totalSession:Int=tvTotalSession.text.toString().toInt()
+         val tax= totalSession * appointmentBasicPrice * 5 / 100
+
+         val sessionCost = totalSession * appointmentBasicPrice + 55 + tax
+
+        tvTax.text=("€$tax.00")
+        tvSessionCost.text=("€$appointmentBasicPrice.00")
+        tvTotalCost.text = ("€$sessionCost.00")
         tvTime.text = convertAvailableTimeSlots(bookAppointment.appointmentTime)
         tvDuration.text = (bookAppointment.appointmentSlot + " " + "mins")
         tvDoctorName.text = bookAppointment.therapistName
         tvDoctorBio.text = bookAppointment.threapistBio
         Glide.with(this).load(bookAppointment.therapistImage).into(ivDoctor)
 
-        var spf = SimpleDateFormat("yy-MM-dd")
-        val newDate = spf.parse(bookAppointment.appointmentDate)
-        spf = SimpleDateFormat("dd-MM-yyyy")
-        val newDateString = spf.format(newDate)
-        tvAppointmentDate.text = newDateString
+
+        if (bookAppointment.confirmDate.equals(""))
+        {
+            var spf = SimpleDateFormat("yy-MM-dd")
+            val newDate = spf.parse(bookAppointment.appointmentDate)
+            spf = SimpleDateFormat("d'th' MMMM yyyy")
+            val newDateString = spf.format(newDate)
+            tvAppointmentDate.text = newDateString
+        }else
+        {
+            tvAppointmentDate.text=bookAppointment.confirmDate
+        }
+
+        when(bookAppointment.confirmDate)
+        {
+            "Daily from"->
+            {
+                var spf = SimpleDateFormat("yy-MM-dd")
+                val newDate = spf.parse(bookAppointment.appointmentDate)
+                spf = SimpleDateFormat("d'th' MMMM yyyy")
+                val newDateString = spf.format(newDate)
+                tvAppointmentDate.text=(bookAppointment.confirmDate +" "+ newDateString)
+            }
+        }
 
         when (bookAppointment.appointmentType) {
             "offline_appointment" -> {
@@ -85,5 +115,15 @@ class ConfirmBookingActivity : BaseActivity() {
                 tvSessionType.text = ("Video Call")
             }
         }
+
+        RxView.clicks(btnConfirm).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                val intent=Intent(this, PaymentShowActivity::class.java)
+                intent.putExtra("date",tvAppointmentDate.text)
+                intent.putExtra("cost",tvTotalCost.text.toString())
+                startActivity(intent)
+                overridePendingTransition(0,0)
+            }
+
     }
 }

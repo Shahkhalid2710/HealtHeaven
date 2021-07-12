@@ -240,7 +240,7 @@
                         android:textSize="@dimen/font_12" />
 
                     <TextView
-                        android:id="@+id/tvSession"
+                        android:id="@+id/tvSessions"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -350,7 +350,6 @@
                     android:layout_weight="1.4"
                     android:fontFamily="@font/montserrat_semibold"
                     android:gravity="end"
-                    android:text="@string/_12"
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_16" />
 
@@ -406,7 +405,7 @@
                     android:layout_weight="0.6"
                     android:fontFamily="@font/montserrat_semibold"
                     android:gravity="end"
-                    android:text="@string/_00_00"
+                    android:text="@string/_55_00"
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_16" />
             </LinearLayout>
@@ -438,7 +437,7 @@
                     android:layout_weight="0.6"
                     android:fontFamily="@font/montserrat_semibold"
                     android:gravity="end"
-                    android:text="@string/_00_00"
+                    android:text="@string/_25_00"
                     android:textColor="@color/aapBlack"
                     android:textSize="@dimen/font_16" />
             </LinearLayout>
@@ -486,12 +485,13 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:layout_width="104dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="34dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:background="@drawable/custom_grey_layout"
                         android:orientation="vertical"
+                        android:padding="3dp"
                         tools:ignore="UselessParent">
 
                         <TextView

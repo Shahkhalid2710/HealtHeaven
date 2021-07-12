@@ -162,7 +162,7 @@ class PastSessionAppointmentFragment : Fragment(), BookAppointmentPresenter.View
 
     override fun onButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
         val intent=Intent(requireActivity(), AddSymptomActivity::class.java)
-        intent.putExtra("specialistId", bookAppointmentResponse.gp_details.id)
+        intent.putExtra("specialistId", bookAppointmentResponse.gp_details?.id)
         startActivity(intent)
     }
 }

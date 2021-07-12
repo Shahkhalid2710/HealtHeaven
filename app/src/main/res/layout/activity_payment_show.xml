@@ -98,7 +98,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1"
                         android:orientation="vertical"
                         tools:ignore="UselessParent">
 
@@ -125,15 +125,15 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.6">
+                        android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tvTotalCost"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tvSessionTotalCost"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/montserrat_bold"
-                            android:gravity="center"
+                            android:gravity="end"
                             android:text="@string/_25_00"
                             android:textColor="@color/aapBlack"
                             android:textSize="@dimen/font_20" />

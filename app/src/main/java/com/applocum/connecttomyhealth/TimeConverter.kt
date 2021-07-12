@@ -105,3 +105,18 @@ fun convertCurrentDate(date: String): String {
     val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     return sdf.format(defaultSdf.parse(date))
 }
+
+
+fun convertWeekDate(date: String): String {
+    val defaultSdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    defaultSdf.timeZone = TimeZone.getTimeZone("UTC")
+    val sdf = SimpleDateFormat("d", Locale.getDefault())
+    return sdf.format(defaultSdf.parse(date))
+}
+
+fun convertWeekDay(date: String): String {
+    val defaultSdf = SimpleDateFormat("EE", Locale.getDefault())
+    defaultSdf.timeZone = TimeZone.getTimeZone("UTC")
+    val sdf = SimpleDateFormat("EEEE", Locale.getDefault())
+    return sdf.format(defaultSdf.parse(date))
+}

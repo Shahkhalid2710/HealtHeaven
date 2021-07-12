@@ -718,4 +718,7 @@
     <string name="date_of_month">Date of month</string>
     <string name="day_of_week">Day of week</string>
     <string name="_31">31</string>
+    <string name="session_not_confirmed">Session not confirmed</string>
+    <string name="please_contact_the_booking_team_to_confirm_this_session">Please contact the booking team to confirm this session</string>
+    <string name="session_cancelled">Session cancelled</string>
 </resources>

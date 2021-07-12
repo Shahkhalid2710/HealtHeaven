@@ -60,19 +60,37 @@ class UpcomingSessionAdapter(
             ITEM -> {
                 val sessionHolder: SessionHolder = holder as SessionHolder
 
-                sessionHolder.itemView.tvDoctorFName.text =
-                    bookAppointmentResponse?.gp_details?.first_name
-                sessionHolder.itemView.tvDoctorLName.text =
-                    bookAppointmentResponse?.gp_details?.last_name
-                sessionHolder.itemView.tvSessionType.text =
-                    bookAppointmentResponse?.appointment_type
-                sessionHolder.itemView.tvSlot.text =
-                    (bookAppointmentResponse?.duration.toString() + " " + "mins")
-                sessionHolder.itemView.tvSessionDateTime.text =
-                    bookAppointmentResponse?.start_time?.let { convertDateTime(it) }
+                if (bookAppointmentResponse?.gp_details == null)
+                {
+                    sessionHolder.itemView.tvSessionType.text =
+                        bookAppointmentResponse?.appointment_type
+                    sessionHolder.itemView.tvSlot.text =
+                        (bookAppointmentResponse?.duration.toString() + " " + "mins")
+                    sessionHolder.itemView.tvSessionDateTime.text = bookAppointmentResponse?.start_time?.let { convertDateTime(it) }
 
-                Glide.with(mContext).load(bookAppointmentResponse?.gp_details?.image)
-                    .into(sessionHolder.itemView.ivDoctor)
+                    Glide.with(mContext).load(R.drawable.ic_blank_profile_pic)
+                        .into(sessionHolder.itemView.ivDoctor)
+                    holder.itemView.llSessionNotConfirmed.visibility=View.VISIBLE
+                    holder.itemView.llDocInfo.visibility=View.GONE
+                }else
+                {
+                    sessionHolder.itemView.tvDoctorFName.text =
+                        bookAppointmentResponse.gp_details.first_name
+                    sessionHolder.itemView.tvDoctorLName.text =
+                        bookAppointmentResponse.gp_details.last_name
+                    sessionHolder.itemView.tvSessionType.text =
+                        bookAppointmentResponse.appointment_type
+                    sessionHolder.itemView.tvSlot.text =
+                        (bookAppointmentResponse.duration.toString() + " " + "mins")
+                    sessionHolder.itemView.tvSessionDateTime.text = bookAppointmentResponse.start_time?.let { convertDateTime(it) }
+
+                    Glide.with(mContext).load(bookAppointmentResponse.gp_details.image)
+                        .into(sessionHolder.itemView.ivDoctor)
+
+                    holder.itemView.llSessionNotConfirmed.visibility=View.GONE
+                    holder.itemView.llDocInfo.visibility=View.VISIBLE
+                }
+
 
                 when (bookAppointmentResponse?.appointment_type) {
                     "face_to_face" -> {
@@ -102,7 +120,6 @@ class UpcomingSessionAdapter(
                     }
                 }
 
-
                 RxView.clicks(sessionHolder.itemView.btnCheckin)
                     .throttleFirst(500, TimeUnit.MILLISECONDS)
                     .subscribe {
@@ -125,11 +142,10 @@ class UpcomingSessionAdapter(
         }
     }
 
-    fun removeAppointment(id:Int ,position: Int)
+    fun removeAppointment(appointmentId:Int ,position: Int)
     {
-
         mList.indices
-            .filter { id == mList[it]?.id }
+            .filter { appointmentId == mList[it]?.id }
             .forEach { mList.remove(mList[it]) }
         if (mList.size == 0) {
         }

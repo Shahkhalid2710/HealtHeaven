@@ -307,7 +307,7 @@
                 android:layout_marginTop="@dimen/spacing_10"
                 android:layout_marginEnd="@dimen/spacing_24">
 
-                <ImageView
+               <!-- <ImageView
                     android:id="@+id/ivMinus"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -317,27 +317,22 @@
                     android:focusable="true"
                     android:foreground="@drawable/effect_button"
                     android:src="@drawable/ic_minuss" />
-
+-->
                 <EditText
                     android:id="@+id/etSessions"
-                    android:layout_width="50dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_10"
-                    android:layout_toEndOf="@+id/ivMinus"
                     android:autofillHints="0"
                     android:backgroundTint="@color/white"
-                    android:focusable="false"
+                    android:focusable="true"
                     android:fontFamily="@font/poppins_medium"
-                    android:gravity="center"
                     android:inputType="number"
-                    android:padding="@dimen/spacing_5"
-                    android:text="@string/_0"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="@dimen/font_11"
                     tools:ignore="LabelFor" />
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/ivPlus"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -348,7 +343,7 @@
                     android:focusable="true"
                     android:foreground="@drawable/effect_button"
                     android:src="@drawable/ic_add" />
-
+-->
             </RelativeLayout>
 
             <View
@@ -385,7 +380,7 @@
                 android:textSize="@dimen/font_12" />
 
             <CheckBox
-                android:id="@+id/cbWeeklyonthursday"
+                android:id="@+id/cbWeekly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
@@ -402,7 +397,7 @@
                 android:textSize="@dimen/font_12" />
 
             <CheckBox
-                android:id="@+id/cbMonthly1stThursday"
+                android:id="@+id/cbMonthly"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_24"
@@ -435,6 +430,18 @@
                 android:text="@string/custom"
                 android:textColor="@color/aapBlack"
                 android:textSize="@dimen/font_12" />
+
+            <TextView
+                android:id="@+id/tvDates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_24"
+                android:layout_marginTop="@dimen/spacing_20"
+                android:layout_marginEnd="@dimen/spacing_24"
+                android:visibility="gone"
+                android:textColor="@color/aapBlack"
+                android:fontFamily="@font/montserrat_medium"
+                android:textSize="@dimen/font_13" />
         </LinearLayout>
 
         <Button
@@ -442,7 +449,7 @@
             android:layout_width="168dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
-            android:layout_marginTop="72dp"
+            android:layout_marginTop="@dimen/spacing_40"
             android:layout_marginBottom="@dimen/spacing_48"
             android:background="@drawable/custom_btn"
             android:fontFamily="@font/montserrat_semibold"

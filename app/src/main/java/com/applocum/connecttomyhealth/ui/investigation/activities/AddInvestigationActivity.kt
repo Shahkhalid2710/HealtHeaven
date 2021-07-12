@@ -15,8 +15,8 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
-import com.applocum.connecttomyhealth.ui.investigation.presenters.InvestigationPresenter
 import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
+import com.applocum.connecttomyhealth.ui.investigation.presenters.InvestigationPresenter
 import com.applocum.connecttomyhealth.ui.medicalhistory.adapters.MedicalDiseaseAdapter
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.FalseMedicalHistory
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
@@ -31,8 +31,6 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_investigation.*
-import kotlinx.android.synthetic.main.activity_add_investigation.ivBack
-import kotlinx.android.synthetic.main.activity_add_investigation.rvDisease
 import kotlinx.android.synthetic.main.custom_progress.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -230,8 +228,7 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     override fun sessionExpired(message: String) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         val intent=Intent(this,SecurityActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
     }

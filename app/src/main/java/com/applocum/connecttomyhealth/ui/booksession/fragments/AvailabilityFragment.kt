@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
+import com.applocum.connecttomyhealth.convertCurrentDate
 import com.applocum.connecttomyhealth.ui.booksession.presenters.BookSessionPresenter
 import com.applocum.connecttomyhealth.ui.booksession.adapters.AvailableTimeAdapter
 import com.applocum.connecttomyhealth.ui.booksession.models.Common
@@ -23,11 +24,15 @@ import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import com.prolificinteractive.materialcalendarview.*
+import kotlinx.android.synthetic.main.activity_session_book.*
 import kotlinx.android.synthetic.main.custom_small_progress.view.*
 import kotlinx.android.synthetic.main.fragment_availability.*
+import kotlinx.android.synthetic.main.fragment_availability.calendarView
+import kotlinx.android.synthetic.main.fragment_availability.rvAvailableTime
 import kotlinx.android.synthetic.main.fragment_availability.view.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -125,10 +130,18 @@ class AvailabilityFragment : Fragment(), OnDateSelectedListener, BookSessionPres
                 v.btn30Mins.setTextColor(Color.WHITE)
             }
 
-        v.btn10Mins.performClick()
-
         v.calendarView.setOnDateChangedListener(this)
         v.calendarView.addDecorator(PrimeDayDisableDecorator())
+        v.calendarView.selectedDate = CalendarDay.today()
+
+        val c = Calendar.getInstance()
+        val day = c[Calendar.DAY_OF_MONTH]
+        val month = c[Calendar.MONTH]
+        val year = c[Calendar.YEAR]
+        val date = day.toString() + "/" + (month + 1) + "/" + year
+
+        seleteddate = convertCurrentDate(date)
+        v.btn10Mins.performClick()
 
         return v
     }

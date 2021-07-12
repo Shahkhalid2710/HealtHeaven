@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,7 +59,6 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
 
     private var isLoading = false
 
-
     lateinit var v: View
 
     @SuppressLint("CheckResult")
@@ -99,6 +99,8 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         val snackview = snackbar.view
         snackview.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.blue))
         snackbar.show()
+
+        checkList()
     }
 
     override fun displaySuccessCheckInMessage(message: String) {
@@ -251,7 +253,6 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-
         if (requestCode == 241) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val intent=(Intent(requireActivity(),MySessionActivity::class.java))
@@ -289,5 +290,4 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         super.onDestroy()
         presenter.safeDispose()
     }
-
 }

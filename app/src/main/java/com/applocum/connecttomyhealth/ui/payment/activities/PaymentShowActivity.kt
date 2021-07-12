@@ -29,7 +29,6 @@ import kotlinx.android.synthetic.main.activity_payment_show.*
 import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 import kotlinx.android.synthetic.main.custom_payment_add.*
 import kotlinx.android.synthetic.main.custom_payment_add.view.*
-import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -68,6 +67,12 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         presenter.injectview(this)
         bookAppointmentPresenter.injectView(this)
 
+        val date=intent.getStringExtra("date")
+        val cost=intent.getStringExtra("cost")
+
+        tvTotalCost.text=cost
+        tvSessionTotalCost.text=cost
+
         RxView.clicks(customPaymentAdd.tvCancelCustom).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe {
                 val intent = (Intent(this,BottomNavigationViewActivity::class.java))
@@ -98,15 +103,29 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
         bookAppointment.corporateId = 66
         userHolder.saveBookAppointmentData(bookAppointment)
 
-        var spf = SimpleDateFormat("yy-MM-dd")
-        val newDate = spf.parse(bookAppointment.appointmentDate)
-        spf = SimpleDateFormat("dd-MM-yyyy")
-        val newDateString = spf.format(newDate)
-        tvDate.text = newDateString
 
-        customPaymentAdd.tvSessionDate.text=newDateString
+        tvDate.text = date
 
-        RxView.clicks(btnConfirmSessionBooking).throttleFirst(500, TimeUnit.MILLISECONDS)
+        customPaymentAdd.tvSessionDate.text = date
+
+
+        RxView.clicks(tvAddNewCode).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this, AddCardActivity::class.java))
+                overridePendingTransition(0,0)
+            }
+        RxView.clicks(tvAddmembershipcode).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this, AddCodeActivity::class.java))
+                overridePendingTransition(0,0)
+            }
+        RxView.clicks(tvAddPaymentMethod).throttleFirst(500, TimeUnit.MILLISECONDS)
+            .subscribe {
+                startActivity(Intent(this, AddCardActivity::class.java))
+                overridePendingTransition(0,0)
+            }
+
+         RxView.clicks(customPaymentAdd.btnConfirmSessionBook).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
 
                 when (selectCard) {
@@ -130,37 +149,11 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
                             }
                         }
 
-                        bookAppointmentPresenter.bookAppointment(
-                            bookAppointment.appointmentTime,
-                            bookAppointment.appointmentSlot,
-                            bookAppointment.appointmentReason,
-                            bookAppointment.allowGeoAccess,
-                            bookAppointment.sharedRecordWithNhs,
-                            appointmentType,
-                            bookAppointment.therapistId,
-                            selectCard,
-                            bookAppointment.corporateId
-                        )
+                        bookAppointmentPresenter.bookAppointment(bookAppointment,appointmentType,selectCard)
                     }
                 }
             }
-
-        RxView.clicks(tvAddNewCode).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                startActivity(Intent(this, AddCardActivity::class.java))
-                overridePendingTransition(0,0)
-            }
-        RxView.clicks(tvAddmembershipcode).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                startActivity(Intent(this, AddCodeActivity::class.java))
-                overridePendingTransition(0,0)
-            }
-        RxView.clicks(tvAddPaymentMethod).throttleFirst(500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                startActivity(Intent(this, AddCardActivity::class.java))
-                overridePendingTransition(0,0)
-            }
-        RxView.clicks(btnConfirmSessionBook).throttleFirst(500, TimeUnit.MILLISECONDS)
+        RxView.clicks(btnConfirmSessionBooking).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 when (selectCard) {
                   0 -> {
@@ -183,17 +176,7 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
                         }
                     }
 
-                    bookAppointmentPresenter.bookAppointment(
-                        bookAppointment.appointmentTime,
-                        bookAppointment.appointmentSlot,
-                        bookAppointment.appointmentReason,
-                        bookAppointment.allowGeoAccess,
-                        bookAppointment.sharedRecordWithNhs,
-                        appointmentType,
-                        bookAppointment.therapistId,
-                        selectCard,
-                        bookAppointment.corporateId
-                    )
+                    bookAppointmentPresenter.bookAppointment(bookAppointment,appointmentType,selectCard)
                 }
               }
             }

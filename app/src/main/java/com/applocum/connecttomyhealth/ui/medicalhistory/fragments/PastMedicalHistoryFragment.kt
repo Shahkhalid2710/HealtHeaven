@@ -47,7 +47,6 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
         MyApplication.getAppContext().component.inject(this)
         presenter.injectView(this)
 
-
         RxView.clicks(v.layoutNotfoundPastMedicalHistory.btnAddMedicalHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(requireActivity(), AddMedicalHistoryActivity::class.java))
@@ -94,7 +93,6 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
         pastMedicalHistoryAdapter= PastMedicalHistoryAdapter(requireActivity(),falseMedicalHistory)
         v.rvPastMedicalHistory.layoutManager=LinearLayoutManager(requireActivity())
         v.rvPastMedicalHistory.adapter=pastMedicalHistoryAdapter
-
     }
 
     override fun noInternet(isConnect: Boolean) {
@@ -120,8 +118,7 @@ class PastMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
     override fun sessionExpired(message: String) {
         Toast.makeText(requireActivity(),message, Toast.LENGTH_SHORT).show()
         val intent=Intent(requireActivity(),SecurityActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         requireActivity().finish()
     }

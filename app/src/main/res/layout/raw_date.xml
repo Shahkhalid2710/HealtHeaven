@@ -5,7 +5,7 @@
     android:text="@string/_31"
     android:textColor="@color/grey"
     android:textSize="@dimen/font_12"
-    android:padding="7dp"
+    android:padding="3dp"
     android:gravity="center"
     android:fontFamily="@font/montserrat_semibold"
     xmlns:android="http://schemas.android.com/apk/res/android" />

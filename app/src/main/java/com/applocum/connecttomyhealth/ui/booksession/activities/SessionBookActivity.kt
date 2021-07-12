@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.applocum.connecttomyhealth.*
@@ -29,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_session_book.*
 import kotlinx.android.synthetic.main.activity_session_book.tvCancel
 import kotlinx.android.synthetic.main.custom_date_dialog.view.*
 import kotlinx.android.synthetic.main.custom_small_progress.*
+import java.text.DateFormatSymbols
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -37,24 +39,30 @@ import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPresenter.View,
-    OnDateSelectedListener, CustomDateAdapter.OnDateClickListner {
-    private var selectSession = ""
+class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
+    OnDateSelectedListener {
     private var sType = ""
     private var sSlot = ""
     private var seleteddate = ""
     private var sTime = ""
     private var specialistId = 0
-    //lateinit var specialist: Specialist
     private lateinit var commonData: Common
-    var mListDate:ArrayList<DateModel> = ArrayList()
-    lateinit var dateModel:DateModel
-    lateinit var customDateAdapter:CustomDateAdapter
+    private var mListDate:ArrayList<DateModel> = ArrayList()
+    private var mListDay:ArrayList<DateModel> = ArrayList()
+    private lateinit var dateModel:DateModel
+    private lateinit var customDateAdapter:CustomDateAdapter
+    private lateinit var customDateAdapterDay:CustomDateAdapter
+    private var multiDate:String=""
+    private var multiDateWeek:String=""
+    private var confirmDate=""
+    private var weekDay=""
+    private var weekDate=""
 
     val date = arrayOf("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20",
                                      "21","22","23","24","25","26","27","28","29","30","31")
 
-    val day= arrayOf("Mo","Tu","We","Th","Fr","Sa","Su")
+    private var isRecurringOrNot = false
+    private var recurringType=""
 
     @Inject
     lateinit var presenter: BookSessionPresenter
@@ -66,7 +74,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
-    @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult", "SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,7 +83,8 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
 
         dateModel = DateModel()
 
-        setDate()
+         setDate()
+         setDay()
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe { finish() }
@@ -90,9 +99,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 overridePendingTransition(0, 0)
             }
 
-        //specialist = intent.getSerializableExtra("specialist") as Specialist
         specialistId = intent.getIntExtra("specialistId", 0)
-
 
         RxView.clicks(btnPhoneCall).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -178,35 +185,43 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                 sTime = ""
             }
 
-        switchMultiSessions.setOnClickListener(this)
 
-        ivMinus.setOnClickListener { decreaseInteger() }
-        ivPlus.setOnClickListener { increaseInteger() }
+        //ivMinus.setOnClickListener { decreaseInteger() }
+        //ivPlus.setOnClickListener { increaseInteger() }
 
         cbDaily.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession = "1"
-                cbWeeklyonthursday.isChecked = false
-                cbMonthly1stThursday.isChecked = false
+                recurringType="daily"
+                confirmDate="Daily from"
+                cbWeekly.isChecked = false
+                cbMonthly.isChecked = false
                 cbCustom.isChecked = false
+                tvDates.visibility=View.GONE
+                tvDates.text=""
             }
         }
 
-        cbWeeklyonthursday.setOnCheckedChangeListener { _, b ->
+        cbWeekly.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession = "2"
+                recurringType="weekly"
+                confirmDate= cbWeekly.text.toString()
                 cbDaily.isChecked = false
-                cbMonthly1stThursday.isChecked = false
+                cbMonthly.isChecked = false
                 cbCustom.isChecked = false
+                tvDates.visibility=View.GONE
+                tvDates.text=""
             }
         }
 
-        cbMonthly1stThursday.setOnCheckedChangeListener { _, b ->
+        cbMonthly.setOnCheckedChangeListener { _, b ->
             if (b) {
-                selectSession = "3"
+                recurringType="monthly"
+                confirmDate=cbMonthly.text.toString()
                 cbDaily.isChecked = false
-                cbWeeklyonthursday.isChecked = false
+                cbWeekly.isChecked = false
                 cbCustom.isChecked = false
+                tvDates.visibility=View.GONE
+                tvDates.text=""
             }
         }
 
@@ -220,28 +235,127 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
                     dialog.dismiss()
                 }
 
+                showDialogView.rbDateOfMonth.isChecked = true
+                recurringType="monthly"
+                confirmDate=tvDates.text.toString()
                 showDialogView.rvDates.layoutManager = GridLayoutManager(this, 7)
                 showDialogView.rvDates.adapter = customDateAdapter
+
+                showDialogView.rbDateOfMonth.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked)
+                    {
+                        recurringType="monthly"
+                        confirmDate=tvDates.text.toString()
+                        showDialogView.rvDates.layoutManager = GridLayoutManager(this, 7)
+                        showDialogView.rvDates.adapter = customDateAdapter
+                    }
+                }
+
+                showDialogView.rbDayOfWeek.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked)
+                    {
+                        recurringType="weekly"
+                        confirmDate=tvDates.text.toString()
+                        showDialogView.rvDates.layoutManager = GridLayoutManager(this, 7)
+                        showDialogView.rvDates.adapter = customDateAdapterDay
+                    }
+                }
+
+                showDialogView.btnDone.setOnClickListener {
+
+                    if (showDialogView.rbDateOfMonth.isChecked)
+                    {
+                    val selectedItems:ArrayList<String> = ArrayList()
+                        for (i in customDateAdapter.selectedItem().indices) {
+                            selectedItems.add(customDateAdapter.selectedItem()[i].date)
+                        }
+
+                        if (selectedItems.joinToString().isEmpty())
+                        {
+                            Toast.makeText(this,"Please select at least one option",Toast.LENGTH_SHORT).show()
+                        }else
+                        {
+                            multiDate = selectedItems.joinToString()
+                            dialog.dismiss()
+                            tvDates.visibility=View.VISIBLE
+                        }
+
+                        tvDates.text = "Monthly on $multiDate"
+                        confirmDate=tvDates.text.toString()
+
+                    }
+
+                    if (showDialogView.rbDayOfWeek.isChecked)
+                    {
+                        val selectedItems:ArrayList<String> = ArrayList()
+                        for (i in customDateAdapterDay.selectedItem().indices) {
+                            selectedItems.add(convertWeekDay(customDateAdapterDay.selectedItem()[i].date))
+                        }
+
+                        if (selectedItems.joinToString().isEmpty())
+                        {
+                            Toast.makeText(this,"Please select at least one option",Toast.LENGTH_SHORT).show()
+                        }else
+                        {
+                            multiDateWeek = selectedItems.joinToString()
+                            dialog.dismiss()
+                            tvDates.visibility=View.VISIBLE
+                        }
+                        tvDates.text = "Weekly on $multiDateWeek"
+                        confirmDate=tvDates.text.toString()
+                    }
+
+                }
 
                 dialog.show()
 
                 cbDaily.isChecked = false
-                cbWeeklyonthursday.isChecked = false
-                cbMonthly1stThursday.isChecked = false
+                cbWeekly.isChecked = false
+                cbMonthly.isChecked = false
+            }
+        }
+
+
+        switchMultiSessions.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked)
+            {
+                llMultiSessions.visibility = View.VISIBLE
+                isRecurringOrNot = true
+            }else
+            {
+                llMultiSessions.visibility = View.GONE
+                etSessions.setText("")
+                recurringType=""
+                confirmDate=""
+                isRecurringOrNot = false
             }
         }
 
         RxView.clicks(btnContinue).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                if (validateBookSession(seleteddate, sType, sSlot, sTime)) {
-                    val intent = Intent(this, ConfirmBookingActivity::class.java)
+
+                if (validateBookSession(seleteddate, sType, sSlot, sTime,isRecurringOrNot,etSessions.text.toString(),recurringType)) {
+                    val intent = Intent(this,ConfirmBookingActivity::class.java)
                     val appointment = userHolder.getBookAppointmentData()
                     appointment.appointmentDateTime = dateTimeUTCFormat(sTime)
                     appointment.appointmentTime = sTime
                     appointment.appointmentType = sType
                     appointment.appointmentSlot = sSlot
+                    appointment.confirmDate = confirmDate
                     appointment.appointmentDate = seleteddate
                     appointment.therapistId = specialistId
+                    appointment.isRecurring = isRecurringOrNot
+                    appointment.recurringSessionCount=etSessions.text.toString()
+                    appointment.recurringType=recurringType
+
+                    if(cbCustom.isChecked)
+                    {
+                        appointment.recurringWeekDays = multiDateWeek.toLowerCase(Locale.ROOT)
+                        appointment.recurringMonthDate = multiDate
+                    }else {
+                        appointment.recurringWeekDays = weekDay.toLowerCase(Locale.ROOT)
+                        appointment.recurringMonthDate = weekDate
+                    }
                     userHolder.saveBookAppointmentData(appointment)
                     intent.putExtra("commonData", commonData)
                     startActivity(intent)
@@ -253,35 +367,23 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         calendarView.addDecorator(PrimeDayDisableDecorator())
         calendarView.selectedDate = CalendarDay.today()
 
+
         val c = Calendar.getInstance()
         val day = c[Calendar.DAY_OF_MONTH]
         val month = c[Calendar.MONTH]
         val year = c[Calendar.YEAR]
         val date = day.toString() + "/" + (month + 1) + "/" + year
 
+        val wDay=c.get(Calendar.DAY_OF_WEEK)
+        weekDay = DateFormatSymbols().weekdays[wDay]
+
+        weekDate= convertWeekDate(date)
         seleteddate = convertCurrentDate(date)
         btn10Mins.performClick()
 
-    }
+        cbMonthly.text ="Monthly on"+" "+weekDate+"th"
+        cbWeekly.text = "Weekly on $weekDay"
 
-    override fun onClick(v: View?) {
-        if (switchMultiSessions.isChecked) {
-            llMultiSessions.visibility = View.VISIBLE
-        } else {
-            llMultiSessions.visibility = View.GONE
-        }
-    }
-
-    private fun increaseInteger() {
-        display(etSessions.text.toString().toInt() + 1)
-    }
-
-    private fun decreaseInteger() {
-        display(etSessions.text.toString().toInt() - 1)
-    }
-
-    private fun display(number: Int) {
-        etSessions.setText("$number")
     }
 
     override fun getTimeSlot(list: ArrayList<Time>) {
@@ -330,7 +432,7 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         }
     }
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onDateSelected(
         widget: MaterialCalendarView,
         date1: CalendarDay,
@@ -347,9 +449,18 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             e.printStackTrace()
         }
 
+        sTime = ""
+
         val formateDate = SimpleDateFormat("yyyy-MM-dd").format(date)
+        weekDate=SimpleDateFormat("d").format(date)
+
+        val day=date1.calendar.get(Calendar.DAY_OF_WEEK)
+        weekDay = DateFormatSymbols().weekdays[day]
         seleteddate = formateDate
         presenter.getTimeSlots(specialistId, seleteddate, sType, sSlot)
+
+        cbMonthly.text = "Monthly on"+" "+weekDate+"th"
+        cbWeekly.text = "Weekly on $weekDay"
     }
 
     private class PrimeDayDisableDecorator : DayViewDecorator {
@@ -367,7 +478,10 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
         date: String,
         sessionType: String,
         slot: String,
-        time: String
+        time: String,
+        isRecurring:Boolean,
+        sessionCount:String,
+        recurringType:String
     ): Boolean {
         if (date.isEmpty()) {
             val snackbar = Snackbar.make(llSessionbook, "Please select date", Snackbar.LENGTH_LONG)
@@ -394,30 +508,68 @@ class SessionBookActivity : BaseActivity(), View.OnClickListener, BookSessionPre
             return false
         }
         if (time.isEmpty()) {
-            val snackbar =
-                Snackbar.make(llSessionbook, "Please select proper time slot", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(llSessionbook, "Please select proper time slot", Snackbar.LENGTH_LONG)
             snackbar.changeFont()
             val snackview = snackbar.view
             snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
             snackbar.show()
             return false
         }
+
+        if(isRecurring)
+        {
+            if (sessionCount.isEmpty()) {
+                val snackbar = Snackbar.make(llSessionbook, "Session count must be greater than 1", Snackbar.LENGTH_LONG)
+                snackbar.changeFont()
+                val snackview = snackbar.view
+                snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                snackbar.show()
+                return false
+            }
+            if (sessionCount.toInt() < 2) {
+                val snackbar = Snackbar.make(llSessionbook, "Session count must be greater than 1", Snackbar.LENGTH_LONG)
+                snackbar.changeFont()
+                val snackview = snackbar.view
+                snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                snackbar.show()
+                return false
+            }
+
+            if (recurringType.isEmpty()) {
+                val snackbar = Snackbar.make(llSessionbook, "Please select recurring session interval", Snackbar.LENGTH_LONG)
+                snackbar.changeFont()
+                val snackview = snackbar.view
+                snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                snackbar.show()
+                return false
+            }
+
+            return true
+        }
         return true
     }
 
+
     private fun setDate()
     {
-
         for (i in date.indices)
         {
             val dateModel=DateModel(date[i])
             mListDate.add(dateModel)
         }
-        customDateAdapter = CustomDateAdapter(this, mListDate, this)
+        customDateAdapter = CustomDateAdapter(this, mListDate)
 
     }
 
-    override fun onDateClick(date: ArrayList<DateModel>, position: Int) {
+    private fun setDay()
+    {
+        val day= arrayOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
 
+        for (i in day.indices)
+        {
+            val dateModel=DateModel(day[i])
+            mListDay.add(dateModel)
+        }
+        customDateAdapterDay = CustomDateAdapter(this, mListDay)
     }
 }

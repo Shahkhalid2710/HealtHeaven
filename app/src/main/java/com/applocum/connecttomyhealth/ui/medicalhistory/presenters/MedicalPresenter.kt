@@ -21,7 +21,7 @@ import javax.inject.Inject
 class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     var disposables = CompositeDisposable()
     lateinit var view: View
-    var nextPage: String? = "1"
+    private var nextPage: String? = "1"
 
     companion object {
         const val activeMedicalHistory = "active"
@@ -253,6 +253,11 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
             }
             if (endYear.isEmpty()) {
                 view.displayMessage("Please select end year")
+                return false
+            }
+            if (startYear.toInt() > endYear.toInt())
+            {
+                view.displayMessage("End date should be greater than start date")
                 return false
             }
             return true

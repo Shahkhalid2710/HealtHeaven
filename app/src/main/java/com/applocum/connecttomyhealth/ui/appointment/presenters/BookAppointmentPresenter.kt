@@ -7,6 +7,7 @@ import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Missi
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.Success
 import com.applocum.connecttomyhealth.commons.globals.ErrorCodes.Companion.UnAuthorizedAccess
 import com.applocum.connecttomyhealth.shareddata.endpoints.AppEndPoint
+import com.applocum.connecttomyhealth.shareddata.endpoints.BookAppointment
 import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.PaginationModel
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
@@ -38,23 +39,106 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
         this.view = view
     }
 
-    fun bookAppointment(time: String, duration: String, comment: String, allowGeoAccess: Boolean, sharedRecordsWithNhsGp: Boolean, appointmentType: String, doctorId: Int, cardIdentifier: Int, organizationId: Int)
+
+    fun bookAppointment(bookAppointment: BookAppointment,appointmentType:String,cardIdentifier: Int)
     {
         view.viewFullProgress(true)
-        val requestBody: RequestBody = MultipartBody.Builder()
+        val requestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
-            .addFormDataPart("appointment[start_time]", time)
-            .addFormDataPart("appointment[duration]", duration)
-            .addFormDataPart("appointment[comments]", comment)
-            .addFormDataPart("appointment_access[allow_geo_access]", allowGeoAccess.toString())
-            .addFormDataPart("appointment_access[consent_for_share_record_with_my_nhs_gp]", sharedRecordsWithNhsGp.toString())
-            .addFormDataPart("appointment[appointment_type]", appointmentType)
-            .addFormDataPart("appointment[doctor_id]", doctorId.toString())
-            .addFormDataPart("cardIdentifier", cardIdentifier.toString())
-            .addFormDataPart("organization_id", organizationId.toString())
-            .build()
+        requestBody.addFormDataPart("appointment[start_time]", bookAppointment.appointmentTime)
+        requestBody.addFormDataPart("appointment[duration]", bookAppointment.appointmentSlot)
+        requestBody.addFormDataPart("appointment[comments]",bookAppointment.appointmentReason)
+        requestBody.addFormDataPart("appointment_access[allow_geo_access]", bookAppointment.allowGeoAccess.toString())
+        requestBody.addFormDataPart("appointment_access[consent_for_share_record_with_my_nhs_gp]", bookAppointment.sharedRecordWithNhs.toString())
+        requestBody.addFormDataPart("appointment[appointment_type]",appointmentType)
+        requestBody.addFormDataPart("appointment[doctor_id]", bookAppointment.therapistId.toString())
+        requestBody.addFormDataPart("cardIdentifier", cardIdentifier.toString())
+        requestBody.addFormDataPart("organization_id", bookAppointment.corporateId.toString())
 
-        api.bookAppointment(userHolder.userToken!!, requestBody)
+        if (bookAppointment.isRecurring)
+        {
+            requestBody.addFormDataPart("is_recurring", bookAppointment.isRecurring.toString())
+            requestBody.addFormDataPart("recurring[type]",bookAppointment.recurringType.toString())
+
+            when(bookAppointment.recurringType.toString())
+            {
+                "monthly"->{
+                    requestBody.addFormDataPart("recurring[day_of_month]", bookAppointment.recurringMonthDate.toString())
+                }
+                "weekly"->{
+                    requestBody.addFormDataPart("recurring[day_of_week]",bookAppointment.recurringWeekDays.toString())
+                }
+            }
+            requestBody.addFormDataPart("recurring[appointment_count]", bookAppointment.recurringSessionCount.toString())
+        }
+        requestBody.build()
+
+        api.bookAppointment(userHolder.userToken!!,requestBody.build())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(onNext = {
+                view.viewFullProgress(false)
+                when (it.status) {
+                    Success -> {
+                        view.noInternet(true)
+                        view.displaySuccessMessage(it.message)
+                    }
+                    InvalidCredentials, InternalServer,UnAuthorizedAccess -> {
+                        view.displayMessage(it.message)
+                    }
+                    AlreadyExist -> {
+                        view.displayMessage(it.message)
+                    }
+                    MissingParameter -> {
+                        view.displayMessage(it.message)
+                    }
+                }
+            }, onError = {
+                view.viewFullProgress(false)
+                it.printStackTrace()
+
+                if (it is UnknownHostException)
+                {
+                    view.noInternet(false)
+                }
+
+            }).let { disposables.addAll(it) }
+    }
+
+
+    /* fun bookAppointment(time: String, duration: String, comment: String, allowGeoAccess: Boolean, sharedRecordsWithNhsGp: Boolean, appointmentType: String, doctorId: Int, cardIdentifier: Int, organizationId: Int,isRecurring:Boolean,recurringType:String,recurringDayOfMonth:String,recuuringDayOfWeek:String,appointmentCount:String)
+    {
+        view.viewFullProgress(true)
+        val requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            requestBody.addFormDataPart("appointment[start_time]", time)
+            requestBody.addFormDataPart("appointment[duration]", duration)
+            requestBody.addFormDataPart("appointment[comments]", comment)
+            requestBody.addFormDataPart("appointment_access[allow_geo_access]", allowGeoAccess.toString())
+            requestBody.addFormDataPart("appointment_access[consent_for_share_record_with_my_nhs_gp]", sharedRecordsWithNhsGp.toString())
+            requestBody.addFormDataPart("appointment[appointment_type]", appointmentType)
+            requestBody.addFormDataPart("appointment[doctor_id]", doctorId.toString())
+            requestBody.addFormDataPart("cardIdentifier", cardIdentifier.toString())
+            requestBody.addFormDataPart("organization_id", organizationId.toString())
+
+            if (isRecurring)
+            {
+                requestBody.addFormDataPart("is_recurring", isRecurring.toString())
+                requestBody.addFormDataPart("recurring[type]", recurringType)
+
+                when(recurringType)
+                {
+                    recurringDayOfMonth->{
+                        requestBody.addFormDataPart("recurring[day_of_month]",recurringDayOfMonth)
+                    }
+                    recuuringDayOfWeek->{
+                        requestBody.addFormDataPart("recurring[day_of_week]", recuuringDayOfWeek)
+                    }
+                }
+                requestBody.addFormDataPart("recurring[appointment_count]", appointmentCount)
+            }
+            requestBody.build()
+
+        api.bookAppointment(userHolder.userToken!!,requestBody.build())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onNext = {
                 view.viewFullProgress(false)
@@ -84,7 +168,7 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
 
             }).let { disposables.addAll(it) }
     }
-
+*/
     fun showUpcomingSession() {
         nextPage?.let {
             view.showProgress()

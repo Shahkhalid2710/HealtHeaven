@@ -17,7 +17,7 @@ data class BookAppointmentResponse(
     @SerializedName("appointment_booked_by") val appointment_booked_by: String = "",
     @SerializedName("patient_detail") val patient_detail: PatientDetail = PatientDetail(),
     @SerializedName("invoice") val invoice: String = "",
-    @SerializedName("gp_details") val gp_details: GpDetails = GpDetails(),
+    @SerializedName("gp_details") val gp_details: GpDetails?= GpDetails(),
     @SerializedName("comments") val comments: String = "",
     @SerializedName("reason_image") val reason_image: String = "",
     @SerializedName("reason_text") val reason_text: String = "",

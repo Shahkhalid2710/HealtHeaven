@@ -13,9 +13,7 @@ class SessionDetailsActivity : BaseActivity() {
     lateinit var bookAppointmentResponse: BookAppointmentResponse
 
     override fun getLayoutResourceId(): Int = R.layout.activity_session_details
-    override fun handleInternetConnectivity(isConnect: Boolean?) {
-
-    }
+    override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,13 +24,20 @@ class SessionDetailsActivity : BaseActivity() {
         val startTime = convertTime(bookAppointmentResponse.actual_start_time)
         val endTime = convertTime(bookAppointmentResponse.actual_end_time)
 
-        tvDoctorFName.text = bookAppointmentResponse.gp_details.first_name
-        tvDoctorLName.text = bookAppointmentResponse.gp_details.last_name
+        tvDoctorFName.text = bookAppointmentResponse.gp_details?.first_name
+        tvDoctorLName.text = bookAppointmentResponse.gp_details?.last_name
         tvDate.text = convertDate(bookAppointmentResponse.actual_start_time)
         tvAmount.text = ("€" + bookAppointmentResponse.appointment_price.toString() + "0")
         tvTime.text = ("$startTime - $endTime")
-        tvDoctorGmcno.text = ("GMC NO." + " " + bookAppointmentResponse.gp_details.gmc)
-        Glide.with(this).load(bookAppointmentResponse.gp_details.image).into(ivDoctor)
+        tvDoctorGmcno.text = ("GMC NO." + " " + bookAppointmentResponse.gp_details?.gmc)
+
+        if (bookAppointmentResponse.gp_details?.image == null)
+        {
+            Glide.with(this).load(R.drawable.ic_blank_profile_pic).into(ivDoctor)
+        }else
+        {
+            Glide.with(this).load(bookAppointmentResponse.gp_details?.image).into(ivDoctor)
+        }
 
         when (bookAppointmentResponse.appointment_type) {
             "face_to_face" -> {

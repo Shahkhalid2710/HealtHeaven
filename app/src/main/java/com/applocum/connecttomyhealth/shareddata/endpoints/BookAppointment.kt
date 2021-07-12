@@ -26,6 +26,7 @@ class BookAppointment {
     var recurringSessionCount: String? = null
     var recurringMonthDate: String? = null
     var recurringWeekDays: String? = null
+    var confirmDate: String? = null
     var discountCode: String? = null
     var memberShipCode: String? = null
 }
