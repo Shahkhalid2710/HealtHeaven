@@ -35,11 +35,11 @@ import javax.inject.Inject
 
 class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHistoryPresenter.View,
     MedicalDiseaseAdapter.ItemClickListnter {
-    var mListFamilyHistory: ArrayList<Medical> = ArrayList()
+    private var mListFamilyHistory: ArrayList<Medical> = ArrayList()
     private var selectedString = ""
     private var isMatched = false
     private var familyHistoryName = ""
-    lateinit var medicalDiseaseAdapter: MedicalDiseaseAdapter
+    private lateinit var medicalDiseaseAdapter: MedicalDiseaseAdapter
     private var isLoading = false
 
     @Inject
@@ -95,8 +95,6 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
                     medicalDiseaseAdapter.notifyDataSetChanged()
                     presenter.resetPage()
                     presenter.getDiseaseList(etAddFamilyHistory.text.toString())
-                    val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(lladdfamilyhistory.windowToken, 0)
                 }
             }.subscribe().let { presenter.disposables.add(it) }
 

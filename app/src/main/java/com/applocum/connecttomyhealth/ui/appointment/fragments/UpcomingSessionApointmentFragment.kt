@@ -239,7 +239,8 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
             dialog.show()
         }else
         {
-            startActivity(Intent(requireActivity(), MySessionActivity::class.java))
+            val intent=(Intent(requireActivity(), MySessionActivity::class.java))
+            startActivity(intent)
         }
     }
 

@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
@@ -111,8 +110,6 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
                     medicalDiseaseAdapter.notifyDataSetChanged()
                     presenter.resetPage()
                     presenter.getDiseaseList(etDiseaseName.text.toString())
-                    val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(llMedicalHistory.windowToken, 0)
                 }
             }.subscribe().let { presenter.disposables.add(it) }
 
@@ -194,7 +191,6 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
     }
 
     override fun showProgress() {
-        Log.d("Progressss","show")
         isLoading = true
         rvMedicalDisease.post {
             medicalDiseaseAdapter.mList.add(null)
@@ -203,7 +199,6 @@ class AddMedicalHistoryActivity : BaseActivity(), MedicalPresenter.View,
     }
 
     override fun hideProgress() {
-        Log.d("Progressss","hide")
         isLoading = false
         rvMedicalDisease.post {
             medicalDiseaseAdapter.mList.remove(null)

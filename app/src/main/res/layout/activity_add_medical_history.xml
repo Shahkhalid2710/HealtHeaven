@@ -80,6 +80,7 @@
                     android:hint="@string/select_disease_name"
                     android:imeOptions="actionDone"
                     android:inputType="textCapSentences"
+                    android:importantForAutofill="noExcludeDescendants"
                     android:textColor="@color/aapBlack"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/font_12"

@@ -91,8 +91,6 @@ class AddAllergyActivity : BaseActivity(), MedicalPresenter.View,
                     medicalDiseaseAdapter.notifyDataSetChanged()
                     presenter.resetPage()
                     presenter.getDiseaseList(etAddAllergy.text.toString())
-                    val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(llAddAllergy.windowToken, 0)
                 }
             }.subscribe().let { presenter.disposables.add(it) }
 

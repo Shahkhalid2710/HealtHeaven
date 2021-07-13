@@ -53,7 +53,7 @@ class ConfirmBookingActivity : BaseActivity() {
 
         val bookAppointment = userHolder.getBookAppointmentData()
 
-        if (bookAppointment.recurringSessionCount == "")
+        if (bookAppointment.recurringSessionCount == "0")
         {
             tvSessions.text="1"
         }else
@@ -78,7 +78,6 @@ class ConfirmBookingActivity : BaseActivity() {
         tvDoctorName.text = bookAppointment.therapistName
         tvDoctorBio.text = bookAppointment.threapistBio
         Glide.with(this).load(bookAppointment.therapistImage).into(ivDoctor)
-
 
         if (bookAppointment.confirmDate.equals(""))
         {
@@ -124,6 +123,5 @@ class ConfirmBookingActivity : BaseActivity() {
                 startActivity(intent)
                 overridePendingTransition(0,0)
             }
-
     }
 }

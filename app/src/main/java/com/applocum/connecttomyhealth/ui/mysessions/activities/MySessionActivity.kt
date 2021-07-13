@@ -54,7 +54,6 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
         mediaPlayer = MediaPlayer.create(this, R.raw.mpthreetest)
         soundMeter = SoundMeter()
 
-
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 mediaPlayer.stop()
@@ -99,7 +98,6 @@ class MySessionActivity : BaseActivity(), MediaPlayer.OnCompletionListener {
             }
 
         mediaPlayer.setOnCompletionListener(this)
-
 
         if (llMobileCamera.visibility == View.VISIBLE) {
             cameraPermission()

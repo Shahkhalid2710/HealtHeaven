@@ -186,8 +186,8 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
             }
 
 
-        //ivMinus.setOnClickListener { decreaseInteger() }
-        //ivPlus.setOnClickListener { increaseInteger() }
+        ivMinus.setOnClickListener { decreaseInteger() }
+        ivPlus.setOnClickListener { increaseInteger() }
 
         cbDaily.setOnCheckedChangeListener { _, b ->
             if (b) {
@@ -215,13 +215,13 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
 
         cbMonthly.setOnCheckedChangeListener { _, b ->
             if (b) {
-                recurringType="monthly"
-                confirmDate=cbMonthly.text.toString()
+                recurringType = "monthly"
+                confirmDate = cbMonthly.text.toString()
                 cbDaily.isChecked = false
                 cbWeekly.isChecked = false
                 cbCustom.isChecked = false
-                tvDates.visibility=View.GONE
-                tvDates.text=""
+                tvDates.visibility = View.GONE
+                tvDates.text = ""
             }
         }
 
@@ -230,6 +230,7 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                 val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_date_dialog, null, false)
                 val dialog = AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
+                dialog.setCanceledOnTouchOutside(false)
 
                 showDialogView.tvCancel.setOnClickListener {
                     dialog.dismiss()
@@ -304,7 +305,6 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                         tvDates.text = "Weekly on $multiDateWeek"
                         confirmDate=tvDates.text.toString()
                     }
-
                 }
 
                 dialog.show()
@@ -324,10 +324,15 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
             }else
             {
                 llMultiSessions.visibility = View.GONE
-                etSessions.setText("")
                 recurringType=""
                 confirmDate=""
                 isRecurringOrNot = false
+                etSessions.setText("0")
+
+                cbCustom.isChecked = false
+                cbWeekly.isChecked = false
+                cbMonthly.isChecked = false
+                cbDaily.isChecked = false
             }
         }
 
@@ -345,8 +350,8 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                     appointment.appointmentDate = seleteddate
                     appointment.therapistId = specialistId
                     appointment.isRecurring = isRecurringOrNot
-                    appointment.recurringSessionCount=etSessions.text.toString()
-                    appointment.recurringType=recurringType
+                    appointment.recurringSessionCount = etSessions.text.toString()
+                    appointment.recurringType = recurringType
 
                     if(cbCustom.isChecked)
                     {
@@ -356,6 +361,7 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                         appointment.recurringWeekDays = weekDay.toLowerCase(Locale.ROOT)
                         appointment.recurringMonthDate = weekDate
                     }
+
                     userHolder.saveBookAppointmentData(appointment)
                     intent.putExtra("commonData", commonData)
                     startActivity(intent)
@@ -366,7 +372,6 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
         calendarView.setOnDateChangedListener(this)
         calendarView.addDecorator(PrimeDayDisableDecorator())
         calendarView.selectedDate = CalendarDay.today()
-
 
         val c = Calendar.getInstance()
         val day = c[Calendar.DAY_OF_MONTH]
@@ -406,11 +411,11 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
     }
 
     override fun displaymessage(message: String) {
-        val snackbar = Snackbar.make(llSessionbook, message, Snackbar.LENGTH_LONG)
-        snackbar.changeFont()
-        val snackview = snackbar.view
-        snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-        snackbar.show()
+        val snackBar = Snackbar.make(llSessionbook, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
+        val snackView = snackBar.view
+        snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+        snackBar.show()
     }
 
     override fun viewProgress(isShow: Boolean) {
@@ -463,6 +468,17 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
         cbWeekly.text = "Weekly on $weekDay"
     }
 
+    private fun increaseInteger() {
+        display(etSessions.text.toString().toInt() + 1)
+    }
+
+    private fun decreaseInteger() {
+        display(etSessions.text.toString().toInt() - 1)
+    }
+
+    private fun display(number: Int) {
+        etSessions.setText("$number")
+    }
     private class PrimeDayDisableDecorator : DayViewDecorator {
         override fun shouldDecorate(day: CalendarDay): Boolean {
             val date = CalendarDay.today()
@@ -484,71 +500,69 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
         recurringType:String
     ): Boolean {
         if (date.isEmpty()) {
-            val snackbar = Snackbar.make(llSessionbook, "Please select date", Snackbar.LENGTH_LONG)
-            snackbar.changeFont()
-            val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-            snackbar.show()
+            val snackBar = Snackbar.make(llSessionbook, "Please select date", Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
             return false
         }
         if (sessionType.isEmpty()) {
-            val snackbar = Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
-            snackbar.changeFont()
-            val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-            snackbar.show()
+            val snackBar = Snackbar.make(llSessionbook, "Please select session type", Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
             return false
         }
         if (slot.isEmpty()) {
-            val snackbar = Snackbar.make(llSessionbook, "Please select slot", Snackbar.LENGTH_LONG)
-            snackbar.changeFont()
-            val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-            snackbar.show()
+            val snackBar = Snackbar.make(llSessionbook, "Please select slot", Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
             return false
         }
         if (time.isEmpty()) {
-            val snackbar = Snackbar.make(llSessionbook, "Please select proper time slot", Snackbar.LENGTH_LONG)
-            snackbar.changeFont()
-            val snackview = snackbar.view
-            snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-            snackbar.show()
+            val snackBar = Snackbar.make(llSessionbook, "Please select proper time slot", Snackbar.LENGTH_LONG)
+            snackBar.changeFont()
+            val snackView = snackBar.view
+            snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+            snackBar.show()
             return false
         }
 
         if(isRecurring)
         {
             if (sessionCount.isEmpty()) {
-                val snackbar = Snackbar.make(llSessionbook, "Session count must be greater than 1", Snackbar.LENGTH_LONG)
-                snackbar.changeFont()
-                val snackview = snackbar.view
-                snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-                snackbar.show()
+                val snackBar = Snackbar.make(llSessionbook, "Please enter session count", Snackbar.LENGTH_LONG)
+                snackBar.changeFont()
+                val snackView = snackBar.view
+                snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                snackBar.show()
                 return false
             }
             if (sessionCount.toInt() < 2) {
-                val snackbar = Snackbar.make(llSessionbook, "Session count must be greater than 1", Snackbar.LENGTH_LONG)
-                snackbar.changeFont()
-                val snackview = snackbar.view
-                snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-                snackbar.show()
+                val snackBar = Snackbar.make(llSessionbook, "Session count must be greater than 1", Snackbar.LENGTH_LONG)
+                snackBar.changeFont()
+                val snackView = snackBar.view
+                snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                snackBar.show()
                 return false
             }
 
             if (recurringType.isEmpty()) {
-                val snackbar = Snackbar.make(llSessionbook, "Please select recurring session interval", Snackbar.LENGTH_LONG)
-                snackbar.changeFont()
-                val snackview = snackbar.view
-                snackview.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-                snackbar.show()
+                val snackBar = Snackbar.make(llSessionbook, "Please select recurring session interval", Snackbar.LENGTH_LONG)
+                snackBar.changeFont()
+                val snackView = snackBar.view
+                snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                snackBar.show()
                 return false
             }
-
             return true
         }
         return true
     }
-
 
     private fun setDate()
     {
@@ -558,7 +572,6 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
             mListDate.add(dateModel)
         }
         customDateAdapter = CustomDateAdapter(this, mListDate)
-
     }
 
     private fun setDay()

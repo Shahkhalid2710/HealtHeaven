@@ -68,6 +68,7 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="@string/add_family_history"
                 android:imeOptions="actionDone"
+                android:importantForAutofill="noExcludeDescendants"
                 android:inputType="textCapSentences"
                 android:paddingBottom="@dimen/spacing_10"
                 android:textColor="@color/aapBlack"
@@ -75,7 +76,7 @@
                 android:textSize="@dimen/font_12"
                 tools:ignore="LabelFor" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/rlDisease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,41 +85,49 @@
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:background="@drawable/custom_exemption_layout"
                 android:orientation="horizontal"
+                android:padding="@dimen/spacing_10"
                 android:visibility="gone"
                 tools:ignore="UselessParent">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/spacing_10"
-                    android:layout_marginEnd="@dimen/spacing_10"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/spacing_5">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tvDiseaseName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:ellipsize="end"
                         android:fontFamily="@font/montserrat_medium"
                         android:lines="1"
-                        android:text="@string/looks_like_you_are_facing_some_problem_while_using_the_apps_feel_free_to_contact_us"
+                        android:maxLength="45"
+                        android:maxLines="1"
+                        android:text="@string/location_permission_denied_please_turn_on_camera_permission_from_the_setting_to_continue_with_your_session"
                         android:textColor="@color/aapBlack"
-                        android:textSize="@dimen/font_10"
+                        android:textSize="@dimen/font_11"
                         tools:ignore="RelativeOverlap" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="7dp"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/ivCancel"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="7dp"
                         android:contentDescription="@string/todo"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_gray_cancel" />
                 </LinearLayout>
-            </RelativeLayout>
+            </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"

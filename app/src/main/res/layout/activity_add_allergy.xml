@@ -68,6 +68,7 @@
                 android:imeOptions="actionDone"
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="@string/add_allergy"
+                android:importantForAutofill="noExcludeDescendants"
                 android:inputType="textCapSentences"
                 android:paddingBottom="@dimen/spacing_10"
                 android:textColor="@color/aapBlack"

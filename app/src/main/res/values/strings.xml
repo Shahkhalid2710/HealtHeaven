@@ -721,4 +721,6 @@
     <string name="session_not_confirmed">Session not confirmed</string>
     <string name="please_contact_the_booking_team_to_confirm_this_session">Please contact the booking team to confirm this session</string>
     <string name="session_cancelled">Session cancelled</string>
+    <string name="no_info">No info</string>
+    <string name="information_not_available">Information not available</string>
 </resources>

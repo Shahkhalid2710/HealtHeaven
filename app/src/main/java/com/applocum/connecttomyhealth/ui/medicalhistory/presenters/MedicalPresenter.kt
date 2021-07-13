@@ -21,7 +21,7 @@ import javax.inject.Inject
 class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
     var disposables = CompositeDisposable()
     lateinit var view: View
-    private var nextPage: String? = "1"
+    var nextPage: String? = "1"
 
     companion object {
         const val activeMedicalHistory = "active"

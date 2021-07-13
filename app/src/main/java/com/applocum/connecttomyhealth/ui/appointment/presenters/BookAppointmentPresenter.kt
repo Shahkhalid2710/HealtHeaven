@@ -39,7 +39,6 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
         this.view = view
     }
 
-
     fun bookAppointment(bookAppointment: BookAppointment,appointmentType:String,cardIdentifier: Int)
     {
         view.viewFullProgress(true)

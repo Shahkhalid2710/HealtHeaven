@@ -105,8 +105,7 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
                     medicalDiseaseAdapter.notifyDataSetChanged()
                     presenter.resetPage()
                     presenter.getDiseaseList(etInvestigationName.text.toString())
-                    val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(llAddInvesigation.windowToken, 0)
+
                 }
             }.subscribe().let { presenter.disposables.add(it) }
 

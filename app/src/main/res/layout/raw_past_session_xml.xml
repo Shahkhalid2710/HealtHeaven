@@ -142,7 +142,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="@string/session_cancelled"
+                            android:text="@string/information_not_available"
                             android:textColor="@color/red"
                             android:textSize="@dimen/font_12" />
                     </LinearLayout>
