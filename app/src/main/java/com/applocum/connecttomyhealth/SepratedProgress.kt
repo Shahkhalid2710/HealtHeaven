@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
 
-
 class SepratedProgress(
     private val mForeground: Int,
     private val mBackground: Int,
@@ -29,16 +28,12 @@ class SepratedProgress(
             val loLevel = i / NUM_SEGMENTS.toFloat()
             val hiLevel = (i+1) / NUM_SEGMENTS.toFloat()
             if (level in loLevel..hiLevel) {
-                //val middle = mSegment.left + NUM_SEGMENTS * segmentWidth * (level - loLevel)
-                //canvas.drawRect(mSegment.left, mSegment.top, middle, mSegment.bottom, mPaint)
                 val rectF= RectF(mSegment.left,mSegment.top,mSegment.right,mSegment.bottom)
                 canvas.drawRoundRect(rectF,6f,6f,mPaint)
                 mPaint.color = mBackground
-                //canvas.drawRect(middle, mSegment.top, mSegment.right, mSegment.bottom, mPaint)
                 val rectF2= RectF(mSegment.left,mSegment.top,mSegment.right,mSegment.bottom)
                 canvas.drawRoundRect(rectF2,6f,6f,mPaint)
             } else {
-               // canvas.drawRect(mSegment, mPaint)
                 val rectF2= RectF(mSegment.left,mSegment.top,mSegment.right,mSegment.bottom)
                 canvas.drawRoundRect(rectF2,6f,6f,mPaint)
             }
