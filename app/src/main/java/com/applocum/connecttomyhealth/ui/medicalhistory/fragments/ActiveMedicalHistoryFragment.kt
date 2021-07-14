@@ -113,9 +113,7 @@ class ActiveMedicalHistoryFragment : Fragment(), MedicalPresenter.View {
 
     override fun sessionExpired(message: String) {
         Toast.makeText(requireActivity(),message, Toast.LENGTH_SHORT).show()
-        val intent=Intent(requireActivity(),SecurityActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        startActivity(Intent(requireActivity(),SecurityActivity::class.java))
         requireActivity().finish()
     }
 

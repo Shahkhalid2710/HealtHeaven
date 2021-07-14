@@ -62,7 +62,9 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                                      "21","22","23","24","25","26","27","28","29","30","31")
 
     private var isRecurringOrNot = false
+    private var customIsCheckOrNot = false
     private var recurringType=""
+    private var customSelections=""
 
     @Inject
     lateinit var presenter: BookSessionPresenter
@@ -185,52 +187,54 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                 sTime = ""
             }
 
-
         ivMinus.setOnClickListener { decreaseInteger() }
         ivPlus.setOnClickListener { increaseInteger() }
 
-        cbDaily.setOnCheckedChangeListener { _, b ->
+        rbDaily.setOnCheckedChangeListener { _, b ->
             if (b) {
                 recurringType="daily"
                 confirmDate="Daily from"
-                cbWeekly.isChecked = false
-                cbMonthly.isChecked = false
-                cbCustom.isChecked = false
+                customSelections=""
+                rbWeekly.isChecked = false
+                rbMonthly.isChecked = false
+                rbCustom.isChecked = false
                 tvDates.visibility=View.GONE
                 tvDates.text=""
             }
         }
 
-        cbWeekly.setOnCheckedChangeListener { _, b ->
+        rbWeekly.setOnCheckedChangeListener { _, b ->
             if (b) {
                 recurringType="weekly"
-                confirmDate= cbWeekly.text.toString()
-                cbDaily.isChecked = false
-                cbMonthly.isChecked = false
-                cbCustom.isChecked = false
+                customSelections=""
+                confirmDate= rbWeekly.text.toString()
+                rbDaily.isChecked = false
+                rbMonthly.isChecked = false
+                rbCustom.isChecked = false
                 tvDates.visibility=View.GONE
                 tvDates.text=""
             }
         }
 
-        cbMonthly.setOnCheckedChangeListener { _, b ->
+        rbMonthly.setOnCheckedChangeListener { _, b ->
             if (b) {
                 recurringType = "monthly"
-                confirmDate = cbMonthly.text.toString()
-                cbDaily.isChecked = false
-                cbWeekly.isChecked = false
-                cbCustom.isChecked = false
+                customSelections=""
+                confirmDate = rbMonthly.text.toString()
+                rbDaily.isChecked = false
+                rbWeekly.isChecked = false
+                rbCustom.isChecked = false
                 tvDates.visibility = View.GONE
                 tvDates.text = ""
             }
         }
 
-        cbCustom.setOnCheckedChangeListener { _, b ->
+        rbCustom.setOnCheckedChangeListener { _, b ->
             if (b) {
+                customIsCheckOrNot=true
                 val showDialogView = LayoutInflater.from(this).inflate(R.layout.custom_date_dialog, null, false)
                 val dialog = AlertDialog.Builder(this).create()
                 dialog.setView(showDialogView)
-                dialog.setCanceledOnTouchOutside(false)
 
                 showDialogView.tvCancel.setOnClickListener {
                     dialog.dismiss()
@@ -276,6 +280,7 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                             Toast.makeText(this,"Please select at least one option",Toast.LENGTH_SHORT).show()
                         }else
                         {
+                            customSelections = selectedItems.joinToString()
                             multiDate = selectedItems.joinToString()
                             dialog.dismiss()
                             tvDates.visibility=View.VISIBLE
@@ -283,7 +288,6 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
 
                         tvDates.text = "Monthly on $multiDate"
                         confirmDate=tvDates.text.toString()
-
                     }
 
                     if (showDialogView.rbDayOfWeek.isChecked)
@@ -298,6 +302,7 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                             Toast.makeText(this,"Please select at least one option",Toast.LENGTH_SHORT).show()
                         }else
                         {
+                            customSelections = selectedItems.joinToString()
                             multiDateWeek = selectedItems.joinToString()
                             dialog.dismiss()
                             tvDates.visibility=View.VISIBLE
@@ -309,9 +314,11 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
 
                 dialog.show()
 
-                cbDaily.isChecked = false
-                cbWeekly.isChecked = false
-                cbMonthly.isChecked = false
+                rbDaily.isChecked = false
+                rbWeekly.isChecked = false
+                rbMonthly.isChecked = false
+            }else{
+                customIsCheckOrNot=false
             }
         }
 
@@ -329,17 +336,17 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                 isRecurringOrNot = false
                 etSessions.setText("0")
 
-                cbCustom.isChecked = false
-                cbWeekly.isChecked = false
-                cbMonthly.isChecked = false
-                cbDaily.isChecked = false
+                rbCustom.isChecked = false
+                rbWeekly.isChecked = false
+                rbMonthly.isChecked = false
+                rbDaily.isChecked = false
             }
         }
 
         RxView.clicks(btnContinue).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
 
-                if (validateBookSession(seleteddate, sType, sSlot, sTime,isRecurringOrNot,etSessions.text.toString(),recurringType)) {
+                if (validateBookSession(seleteddate, sType, sSlot, sTime,isRecurringOrNot,etSessions.text.toString(),recurringType,customIsCheckOrNot,customSelections)) {
                     val intent = Intent(this,ConfirmBookingActivity::class.java)
                     val appointment = userHolder.getBookAppointmentData()
                     appointment.appointmentDateTime = dateTimeUTCFormat(sTime)
@@ -353,7 +360,7 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                     appointment.recurringSessionCount = etSessions.text.toString()
                     appointment.recurringType = recurringType
 
-                    if(cbCustom.isChecked)
+                    if(rbCustom.isChecked)
                     {
                         appointment.recurringWeekDays = multiDateWeek.toLowerCase(Locale.ROOT)
                         appointment.recurringMonthDate = multiDate
@@ -386,8 +393,8 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
         seleteddate = convertCurrentDate(date)
         btn10Mins.performClick()
 
-        cbMonthly.text ="Monthly on"+" "+weekDate+"th"
-        cbWeekly.text = "Weekly on $weekDay"
+        rbMonthly.text ="Monthly on"+" "+weekDate+"th"
+        rbWeekly.text = "Weekly on $weekDay"
 
     }
 
@@ -464,8 +471,8 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
         seleteddate = formateDate
         presenter.getTimeSlots(specialistId, seleteddate, sType, sSlot)
 
-        cbMonthly.text = "Monthly on"+" "+weekDate+"th"
-        cbWeekly.text = "Weekly on $weekDay"
+        rbMonthly.text = "Monthly on"+" "+weekDate+"th"
+        rbWeekly.text = "Weekly on $weekDay"
     }
 
     private fun increaseInteger() {
@@ -497,7 +504,9 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
         time: String,
         isRecurring:Boolean,
         sessionCount:String,
-        recurringType:String
+        recurringType:String,
+        customCheckOrNot:Boolean,
+        selections:String
     ): Boolean {
         if (date.isEmpty()) {
             val snackBar = Snackbar.make(llSessionbook, "Please select date", Snackbar.LENGTH_LONG)
@@ -558,6 +567,18 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
                 snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
                 snackBar.show()
                 return false
+            }
+            if (customCheckOrNot)
+            {
+                if (selections.isEmpty()) {
+                    val snackBar = Snackbar.make(llSessionbook, "Please select at least one option", Snackbar.LENGTH_LONG)
+                    snackBar.changeFont()
+                    val snackView = snackBar.view
+                    snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+                    snackBar.show()
+                    return false
+                }
+                return true
             }
             return true
         }

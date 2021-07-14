@@ -2,7 +2,6 @@ package com.applocum.connecttomyhealth.ui.settings.activities
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.location.LocationManager
@@ -14,6 +13,7 @@ import com.applocum.connecttomyhealth.MyApplication
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.changeFont
 import com.applocum.connecttomyhealth.ui.BaseActivity
+import com.applocum.connecttomyhealth.ui.passwordsecurity.activities.PasswordSecurityActivity
 import com.applocum.connecttomyhealth.ui.settings.presenters.SettingNotificationPresenter
 import com.applocum.connecttomyhealth.ui.settings.models.SettingNotification
 import com.google.android.material.snackbar.Snackbar
@@ -35,7 +35,7 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
     private var switchEmail = ""
     private var switchphone = ""
     private var switchpuchNotification = ""
-    private var Gpsstatus: Boolean = false
+    private var GpsStatus: Boolean = false
 
     override fun getLayoutResourceId(): Int = R.layout.activity_setting
 
@@ -85,16 +85,13 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
             presenter.notificationSetting(switchText,switchEmail, switchphone, switchpuchNotification)
         }
 
-        val INTENT_AUTHENTICATE=241
-
         switchtouchidfaceid.setOnCheckedChangeListener { _, isChecked ->
-             val km = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-               if (km.isKeyguardSecure) {
-                   val authIntent = km.createConfirmDeviceCredentialIntent(getString(R.string.done), getString(R.string.cancel))
-                   startActivityForResult(authIntent, INTENT_AUTHENTICATE)
-               }
+            if (isChecked)
+            {
+                val intent = Intent(this, PasswordSecurityActivity::class.java)
+                startActivity(intent)
+            }
         }
-
     }
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llSetting, message, Snackbar.LENGTH_LONG)
@@ -138,8 +135,8 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
 
     private fun checkGpsStatus() {
         val manager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        Gpsstatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        switchlocatinservices.isChecked = Gpsstatus == true
+        GpsStatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        switchlocatinservices.isChecked = GpsStatus == true
     }
 
     private fun turnOffGps() {

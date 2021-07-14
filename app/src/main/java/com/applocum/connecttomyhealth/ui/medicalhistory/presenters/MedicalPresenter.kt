@@ -126,7 +126,6 @@ class MedicalPresenter @Inject constructor(private val api: AppEndPoint) {
                         InvalidCredentials, InternalServer -> {
                             view.displayMessage(it.message)
                         }
-
                         SessionExpired->
                         {
                             view.sessionExpired(it.message)

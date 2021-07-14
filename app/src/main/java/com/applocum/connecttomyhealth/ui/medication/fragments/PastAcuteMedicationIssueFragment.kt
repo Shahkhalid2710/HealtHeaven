@@ -18,6 +18,15 @@ class PastAcuteMedicationIssueFragment : Fragment() {
 
         val v= inflater.inflate(R.layout.fragment_past_acute_medication_issue, container, false)
 
+        val medication1=Medication("Aciclovir 500mg/20ml solution for infusion vials","07 Jan 2019","10")
+        val medication2=Medication("Anadin Paracetamol 500mg tablets","20 Jan 2019","20")
+        val medication3=Medication("ActiLmphy class 1 (18-21mmHg) below knee closed toe lymphonedema garment petite extra large","12 Feb 2019","15")
+
+        mListPastAcuteMedication.add(medication3)
+        mListPastAcuteMedication.add(medication2)
+        mListPastAcuteMedication.add(medication1)
+
+
         if (mListPastAcuteMedication.isEmpty())
         {
             v.noMedication.visibility=View.VISIBLE

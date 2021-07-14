@@ -13,7 +13,6 @@ import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.raw_other_payment.view.*
 import java.util.concurrent.TimeUnit
 
-
 class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boolean,isDeleteShoww:Boolean,private val cardClick:CardClickListener):RecyclerView.Adapter<PaymentCardAdapter.PaymentHolder>() {
     var mContext=context
     var mList=list
@@ -40,19 +39,17 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
         holder.itemView.tvHolderName.text=card.card_holder_name
         holder.itemView.tvDate.text = (expires+" "+ convertCardDate(card.expiry_date.toString()))
 
-        if (isShow) holder.itemView.cbotherPayment.visibility=View.VISIBLE
-        else holder.itemView.cbotherPayment.visibility=View.GONE
+        if (isShow) holder.itemView.cbOtherPayment.visibility=View.VISIBLE
+        else holder.itemView.cbOtherPayment.visibility=View.GONE
 
         if (isDeleteShow) holder.itemView.ivDelete.visibility=View.VISIBLE
         else holder.itemView.ivDelete.visibility=View.GONE
 
-
-        RxView.clicks(holder.itemView.llPaymentCard).throttleFirst(500,TimeUnit.MILLISECONDS)
-            .subscribe{
-                selectCard = position
-                cardClick.cardClick(card, position)
-                notifyDataSetChanged()
-            }
+       holder.itemView.llPaymentCard.setOnClickListener {
+           selectCard = holder.adapterPosition
+           cardClick.cardClick(card,position)
+           notifyDataSetChanged()
+       }
 
         RxView.clicks(holder.itemView.ivDelete).throttleFirst(500,TimeUnit.MILLISECONDS)
             .subscribe{
@@ -62,13 +59,12 @@ class PaymentCardAdapter(context: Context, list:ArrayList<Card>,val isshow:Boole
 
         if (selectCard == position)
         {
-            holder.itemView.cbotherPayment.isChecked = true
+            holder.itemView.cbOtherPayment.isChecked = true
         }
         else
         {
-            holder.itemView.cbotherPayment.isChecked = false
+            holder.itemView.cbOtherPayment.isChecked = false
         }
-
     }
 
     interface CardClickListener{

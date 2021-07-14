@@ -197,8 +197,10 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View,
     }
 
     override fun onItemClick(gpService: GpService, position: Int) {
-        val showDialogView = LayoutInflater.from(this@AddGPServiceActivity)
-            .inflate(R.layout.custom_gp_service_dialog, null, false)
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(llAddGp.windowToken, 0)
+
+        val showDialogView = LayoutInflater.from(this@AddGPServiceActivity).inflate(R.layout.custom_gp_service_dialog, null, false)
         val dialog = AlertDialog.Builder(this@AddGPServiceActivity).create()
         dialog.setView(showDialogView)
 
@@ -207,8 +209,8 @@ class AddGPServiceActivity : BaseActivity(), GpservicePresenter.View,
         showDialogView.tvGpCity.text = gpService.city?.let { capitalize(it) }
 
         showDialogView.btnSubmit.setOnClickListener {
-            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(llAddGp.windowToken, 0)
+            val imm2: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm2.hideSoftInputFromWindow(llAddGp.windowToken, 0)
             gpService.id?.let { it1 -> presenter.addGpService(it1) }
             val intent = Intent(this@AddGPServiceActivity, GpServiceActivity::class.java)
             startActivity(intent)

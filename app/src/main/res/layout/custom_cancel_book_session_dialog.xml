@@ -40,14 +40,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnYes"
             android:layout_width="88dp"
             android:layout_height="34dp"
             android:layout_gravity="center"
             android:background="@drawable/custom_red_btn"
             android:fontFamily="@font/montserrat_semibold"
             android:foreground="@drawable/effect_button"
-            android:text="@string/cancel"
+            android:text="@string/yes"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/font_12"

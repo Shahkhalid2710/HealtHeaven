@@ -1,14 +1,9 @@
 package com.applocum.connecttomyhealth.ui.payment.activities
 
 import android.annotation.SuppressLint
-import android.app.ActionBar
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.applocum.connecttomyhealth.MyApplication
@@ -26,7 +21,6 @@ import com.applocum.connecttomyhealth.ui.payment.adapters.PaymentCardAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_payment_show.*
-import kotlinx.android.synthetic.main.custom_booked_succesfully_dialog.*
 import kotlinx.android.synthetic.main.custom_payment_add.*
 import kotlinx.android.synthetic.main.custom_payment_add.view.*
 import java.util.concurrent.TimeUnit
@@ -245,34 +239,6 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
             })
     }
 
-    private fun openDialog() {
-        val dialog = Dialog(this, android.R.style.Theme_Translucent_NoTitleBar)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.custom_booked_succesfully_dialog)
-        val window = dialog.window
-        val wlp: WindowManager.LayoutParams = window!!.attributes
-        wlp.gravity = Gravity.CENTER
-        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
-        window.attributes = wlp
-        dialog.window!!.setLayout(
-            ActionBar.LayoutParams.MATCH_PARENT,
-            ActionBar.LayoutParams.MATCH_PARENT
-        )
-
-        dialog.btnDone.setOnClickListener {
-
-            val intent = (Intent(this, BottomNavigationViewActivity::class.java))
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-
-            finishAffinity()
-            overridePendingTransition(0,0)
-            dialog.dismiss()
-        }
-        dialog.show()
-    }
-
     override fun displayMessage(mesage: String) {
         val snackbar = Snackbar.make(flPayment, mesage, Snackbar.LENGTH_LONG)
         snackbar.changeFont()
@@ -282,7 +248,9 @@ class PaymentShowActivity : BaseActivity(), AddCardPresenter.View, BookAppointme
     }
 
     override fun displaySuccessMessage(message: String) {
-        openDialog()
+        val intent=Intent(this,BookingSuccessActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(0,0)
     }
 
     override fun displaySuccessCheckInMessage(message: String) {}

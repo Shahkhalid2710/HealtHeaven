@@ -175,9 +175,7 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
 
     override fun sessionExpired(message: String) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
-        val intent=Intent(this,SecurityActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        startActivity(Intent(this,SecurityActivity::class.java))
         finish()
     }
 

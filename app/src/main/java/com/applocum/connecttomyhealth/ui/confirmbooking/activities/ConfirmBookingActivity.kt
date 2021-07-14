@@ -64,13 +64,10 @@ class ConfirmBookingActivity : BaseActivity() {
         common = intent.getSerializableExtra("commonData") as Common
         val appointmentBasicPrice = common.appointment_basic_price
 
-         tvTotalSession.text=tvSessions.text
-         val totalSession:Int=tvTotalSession.text.toString().toInt()
-         val tax= totalSession * appointmentBasicPrice * 5 / 100
+        tvTotalSession.text=tvSessions.text
+        val totalSession:Int=tvTotalSession.text.toString().toInt()
+        val sessionCost = totalSession * appointmentBasicPrice
 
-         val sessionCost = totalSession * appointmentBasicPrice + 55 + tax
-
-        tvTax.text=("€$tax.00")
         tvSessionCost.text=("€$appointmentBasicPrice.00")
         tvTotalCost.text = ("€$sessionCost.00")
         tvTime.text = convertAvailableTimeSlots(bookAppointment.appointmentTime)

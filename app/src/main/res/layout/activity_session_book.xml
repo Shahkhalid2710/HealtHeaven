@@ -366,74 +366,79 @@
                 android:textColor="@color/yellow"
                 android:textSize="@dimen/font_10" />
 
-            <CheckBox
-                android:id="@+id/cbDaily"
+
+            <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="26dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/daily"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
+                android:layout_marginTop="26dp">
 
-            <CheckBox
-                android:id="@+id/cbWeekly"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/weekly_on_thursday"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
+                <RadioButton
+                    android:id="@+id/rbDaily"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:button="@drawable/checkbox"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/daily"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_12" />
 
-            <CheckBox
-                android:id="@+id/cbMonthly"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/monthly_on_1st_thursday"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
+                <RadioButton
+                    android:id="@+id/rbWeekly"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:button="@drawable/checkbox"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/weekly_on_thursday"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_12" />
 
+                <RadioButton
+                    android:id="@+id/rbMonthly"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:button="@drawable/checkbox"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/monthly_on_1st_thursday"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_12" />
 
-            <CheckBox
-                android:id="@+id/cbCustom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_24"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="@dimen/spacing_24"
-                android:button="@drawable/checkbox"
-                android:clickable="true"
-                android:focusable="true"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/custom"
-                android:textColor="@color/aapBlack"
-                android:textSize="@dimen/font_12" />
+                <RadioButton
+                    android:id="@+id/rbCustom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:button="@drawable/checkbox"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/custom"
+                    android:textColor="@color/aapBlack"
+                    android:textSize="@dimen/font_12" />
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/tvDates"

@@ -57,8 +57,7 @@ class AboutSpecialistFragment : Fragment() {
             tv.id = i + 1
             tv.layoutParams = buttonLayoutParams
             tv.tag = i
-            val font =
-                Typeface.createFromAsset(requireActivity().assets, "fonts/montserrat_medium.ttf")
+            val font = Typeface.createFromAsset(requireActivity().assets, "fonts/montserrat_medium.ttf")
             tv.typeface = font
             tv.setPadding(30, 30, 30, 30)
             v.flSpecialities.addView(tv)

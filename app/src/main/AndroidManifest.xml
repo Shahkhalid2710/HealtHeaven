@@ -17,19 +17,6 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
-    <!--<queries>
-        <intent>
-            <action android:name="android.intent.action.GET_CONTENT" />
-
-            <category android:name="android.intent.category.OPENABLE" />
-
-            <data android:mimeType="*/*" />
-        </intent>
-        <intent>
-            <action android:name="android.media.action.IMAGE_CAPTURE" />
-        </intent>
-    </queries>-->
-
     <application
         android:name=".MyApplication"
         android:icon="@drawable/ic_app_icon"
@@ -39,8 +26,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.mysessions.activities.MySessionActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.payment.activities.BookingSuccessActivity"></activity>
+        <activity android:name=".ui.payment.activities.ActForMySessionFragmentActivity" />
+        <activity android:name=".ui.passwordsecurity.activities.PasswordSecurityActivity" />
+        <activity
+            android:name=".ui.mysessions.activities.MySessionActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.chat.activities.ChatActivity"
             android:screenOrientation="portrait" />

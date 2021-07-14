@@ -58,7 +58,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rlDeletedby"
+                    android:id="@+id/rlDeletedBy"
                     android:layout_width="133dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"

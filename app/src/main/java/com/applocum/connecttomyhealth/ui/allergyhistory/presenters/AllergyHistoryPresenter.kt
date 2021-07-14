@@ -176,5 +176,5 @@ class AllergyHistoryPresenter@Inject constructor(private val api:AppEndPoint) {
      fun viewAllergyProgress(isShow: Boolean)
      fun noInternetConnection(isConnect:Boolean)
      fun sessionExpired(message: String)
- }
+  }
 }

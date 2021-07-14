@@ -18,6 +18,21 @@ class ActiveAcuteMedicationIssueFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v= inflater.inflate(R.layout.fragment_active_acute_medication_issue, container, false)
 
+
+        val medication1=Medication("Aciclovir 500mg/20ml solution for infusion vials","07 Jan 2020","10")
+        val medication2=Medication("Anadin Paracetamol 500mg tablets","20 Jan 2020","20")
+        val medication3=Medication("ActiLmphy class 1 (18-21mmHg) below knee closed toe lymphonedema garment petite extra large","12 Feb 2020","15")
+        val medication4=Medication("Aciclovir 500mg/20ml solution for infusion vials","07 Jan 2020","12")
+        val medication5=Medication("Anadin Paracetamol 500mg tablets","20 Jan 2020","20")
+        val medication6=Medication("ActiLmphy class 1 (18-21mmHg) below knee closed toe lymphonedema garment petite extra large","12 Dec 2019","15")
+
+        mListActiveAcuteMedication.add(medication1)
+        mListActiveAcuteMedication.add(medication2)
+        mListActiveAcuteMedication.add(medication3)
+        mListActiveAcuteMedication.add(medication4)
+        mListActiveAcuteMedication.add(medication5)
+        mListActiveAcuteMedication.add(medication6)
+
         if (mListActiveAcuteMedication.isEmpty())
         {
             v.noMedication.visibility=View.VISIBLE

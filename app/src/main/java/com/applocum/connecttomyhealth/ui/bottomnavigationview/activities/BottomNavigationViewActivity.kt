@@ -39,6 +39,8 @@ class BottomNavigationViewActivity : BaseActivity(),
 
         userHolder.saveUserVerified(true)
 
+        val isAppointmentBook=intent.getStringExtra("isAppointmentBook")
+
         bottomnavigationView.setOnNavigationItemSelectedListener(this)
         bottomnavigationView.setOnNavigationItemReselectedListener(this)
 
@@ -47,9 +49,30 @@ class BottomNavigationViewActivity : BaseActivity(),
             view.setOnLongClickListener { true }
         }
 
+        when(isAppointmentBook)
+        {
+            "true"->{
+                bottomnavigationView.menu.getItem(2).isChecked = true
+                loadFragment(AppointmentFragment())
+            }
+            "security"->{
+                bottomnavigationView.menu.getItem(3).isChecked = true
+                loadFragment(ProfileFragment())
+            }
+            else->{
+                loadFragment(HomeFragment())
+            }
+        }
+        /*if (isAppointmentBook == "true")
+        {
+            bottomnavigationView.menu.getItem(2).isChecked = true
+            loadFragment(AppointmentFragment())
+        }else{
+            loadFragment(HomeFragment())
+        }
+*/
         //showBadge(this, bottomnavigationView, R.id.nav_notification, "15")
-        // removeBadge(bottomnavigationView, R.id.nav_notification)
-        loadFragment(HomeFragment())
+        //removeBadge(bottomnavigationView, R.id.nav_notification)
 
     }
 

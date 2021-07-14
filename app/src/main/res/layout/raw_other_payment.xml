@@ -46,7 +46,7 @@
                         android:orientation="vertical">
 
                         <CheckBox
-                            android:id="@+id/cbotherPayment"
+                            android:id="@+id/cbOtherPayment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@drawable/checkbox"

@@ -723,4 +723,8 @@
     <string name="session_cancelled">Session cancelled</string>
     <string name="no_info">No info</string>
     <string name="information_not_available">Information not available</string>
+    <string name="use_pin_pattern_password_for_security">Use PIN/Pattern/Password for security</string>
+    <string name="secure_access_to_clinical_records_by_using_same_pin_password_or_fingerprint_you_use_to_unlock_your_phone">Secure access to Clinical records,by using same PIN/Password or fingerprint you use to unlock your phone.</string>
+    <string name="use_device_security">Use Device Security</string>
+    <string name="not_now">Not Now</string>
 </resources>
