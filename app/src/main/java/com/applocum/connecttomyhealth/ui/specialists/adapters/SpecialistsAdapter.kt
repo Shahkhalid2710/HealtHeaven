@@ -9,6 +9,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
+import kotlinx.android.synthetic.main.item_progress.view.*
 import kotlinx.android.synthetic.main.raw_doctor_xml.view.*
 import java.util.concurrent.TimeUnit
 
@@ -80,6 +81,10 @@ class SpecialistsAdapter(
                     Glide.with(mContext).load(specialist?.image)
                         .into(specialistHolder.itemView.ivDoctor)
                 }
+            }
+            LOADING->{
+                val loadingViewHolder: LoadingViewHolder = holder as LoadingViewHolder
+                loadingViewHolder.itemView.itemProgress.visibility=View.VISIBLE
             }
         }
     }

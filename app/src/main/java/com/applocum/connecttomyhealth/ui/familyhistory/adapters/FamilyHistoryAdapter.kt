@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.familyhistory.models.FamilyHistory
+import kotlinx.android.synthetic.main.item_progress.view.*
 import kotlinx.android.synthetic.main.raw_family_history.view.*
 
 class FamilyHistoryAdapter(context: Context, list: ArrayList<FamilyHistory?>) :
@@ -50,6 +51,10 @@ class FamilyHistoryAdapter(context: Context, list: ArrayList<FamilyHistory?>) :
             ITEM -> {
                 val familyHolder = holder as FamilyHolder
                 familyHolder.itemView.tvFamilyHistoryName.text = familyHistory?.disorder
+            }
+            LOADING->{
+                val loadingViewHolder=holder as FamilyHistoryAdapter.LoadingViewHolder
+                loadingViewHolder.itemView.itemProgress.visibility=View.VISIBLE
             }
         }
     }

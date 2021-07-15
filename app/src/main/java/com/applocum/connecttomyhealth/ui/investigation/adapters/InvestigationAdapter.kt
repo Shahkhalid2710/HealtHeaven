@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertInvestigationDate
 import com.applocum.connecttomyhealth.ui.investigation.models.Investigation
+import kotlinx.android.synthetic.main.item_progress.view.*
 import kotlinx.android.synthetic.main.raw_investigation_xml.view.*
 
 class InvestigationAdapter(context: Context, list: ArrayList<Investigation?>) :
@@ -77,6 +78,10 @@ class InvestigationAdapter(context: Context, list: ArrayList<Investigation?>) :
                         investigationHolder.itemView.ivList.setImageResource(R.drawable.ic_drop_list)
                     }
                 }
+            }
+            LOADING->{
+                val loadingViewHolder=holder as InvestigationAdapter.LoadingViewHolder
+                loadingViewHolder.itemView.itemProgress.visibility=View.VISIBLE
             }
         }
     }

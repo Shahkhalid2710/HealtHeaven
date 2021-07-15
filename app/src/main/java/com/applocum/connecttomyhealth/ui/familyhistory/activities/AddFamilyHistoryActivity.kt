@@ -83,7 +83,6 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
                     isMatched = false
                     selectedString = ""
                 }
-
             }
             .observeOn(Schedulers.computation())
             .filter { s -> s.length >= 2 }
@@ -123,6 +122,7 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
         rlDisease.visibility = View.GONE
 
         medicalDiseaseAdapter.mList.addAll(list)
+
         medicalDiseaseAdapter.notifyItemRangeInserted(medicalDiseaseAdapter.mList.size, list.size)
         RxRecyclerView.scrollEvents(rvDisease)
             .subscribe {
@@ -188,7 +188,10 @@ class AddFamilyHistoryActivity : BaseActivity(), MedicalPresenter.View, FamilyHi
     }
 
     override fun displaySuccessMessage(message: String) {
-        this.finish()
+        val intent = Intent()
+        intent.putExtra(FamilyHistoryActivity().isFamilyHistory,true)
+        setResult(5,intent)
+        finish()
     }
 
     override fun viewFamilyHistoryProgress(isShow: Boolean) {

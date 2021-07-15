@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.medicalhistory.models.Medical
+import kotlinx.android.synthetic.main.item_progress.view.*
 import kotlinx.android.synthetic.main.raw_medical_list.view.*
 
 class MedicalDiseaseAdapter(
@@ -57,6 +58,10 @@ class MedicalDiseaseAdapter(
                     notifyDataSetChanged()
                     mList.clear()
                 }
+            }
+            LOADING->{
+                val loadingViewHolder= holder as MedicalDiseaseAdapter.LoadingViewHolder
+                loadingViewHolder.itemView.itemProgress.visibility=View.VISIBLE
             }
         }
     }

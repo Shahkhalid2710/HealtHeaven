@@ -35,6 +35,8 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
 
     private var isLoading = false
 
+    var isFamilyHistory="isFamilyHistory"
+
     override fun getLayoutResourceId(): Int = R.layout.activity_family_history
 
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
@@ -54,7 +56,8 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
 
         RxView.clicks(tvAddFamilyHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this, AddFamilyHistoryActivity::class.java))
+                val intent=(Intent(this, AddFamilyHistoryActivity::class.java))
+                startActivityForResult(intent,5)
                 overridePendingTransition(0,0)
             }
 
@@ -68,6 +71,11 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
             .subscribe {
                presenter.showFamilyHistoryList()
             }
+
+        familyHistoryAdapter.mList.clear()
+        presenter.resetPage()
+        presenter.showFamilyHistoryList()
+        familyHistoryAdapter.notifyDataSetChanged()
     }
 
     override fun displayErrorMessage(message: String) {
@@ -147,12 +155,22 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
         finish()
     }
 
-    override fun onResume() {
-        super.onResume()
-        familyHistoryAdapter.mList.clear()
-        presenter.resetPage()
-        familyHistoryAdapter.notifyDataSetChanged()
-        presenter.showFamilyHistoryList()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 5)
+        {
+            if (resultCode == 5)
+            {
+                val familyHistory = data?.getBooleanExtra(isFamilyHistory,false)
+                if (familyHistory!!)
+                {
+                    familyHistoryAdapter.mList.clear()
+                    presenter.resetPage()
+                    presenter.showFamilyHistoryList()
+                    familyHistoryAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onDestroy() {

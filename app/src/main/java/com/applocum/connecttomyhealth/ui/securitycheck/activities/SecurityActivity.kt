@@ -59,8 +59,6 @@ class SecurityActivity : BaseActivity(), SecurityPresenter.View {
 
     override fun security(security: Security) {
         val intent = Intent(this,ClinicalRecordsActivity::class.java)
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-       // intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()
         overridePendingTransition(0,0)

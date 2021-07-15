@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -20,19 +19,19 @@ import com.applocum.connecttomyhealth.shareddata.endpoints.UserHolder
 import com.applocum.connecttomyhealth.ui.BaseActivity
 import com.applocum.connecttomyhealth.ui.booksession.activities.SessionBookActivity
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
-import com.applocum.connecttomyhealth.ui.specialists.models.Specialist
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.activity_add_symptom.*
 import kotlinx.android.synthetic.main.activity_add_symptom.ivBack
 import kotlinx.android.synthetic.main.activity_add_symptom.tvCancel
-import java.io.InputStream
+import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AddSymptomActivity : BaseActivity() {
     private val requestCodeGallery = 999
     private var selectedImagePath: String = ""
+    private  var fileOfPic:File? = null
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -77,10 +76,8 @@ class AddSymptomActivity : BaseActivity() {
             .subscribe {
                 if (checkCondition(cbGeoLocation.isChecked, cbRecords.isChecked)) {
                     val intent = Intent(this,SessionBookActivity::class.java)
-                    //intent.putExtra("specialist", specialist)
                     intent.putExtra("specialistId", specialistId)
                     val appointment = userHolder.getBookAppointmentData()
-                    appointment.pickedFilePath = selectedImagePath
                     appointment.appointmentReason = etAddSymptoms.text.toString()
                     appointment.allowGeoAccess = cbGeoLocation.isChecked
                     appointment.sharedRecordWithNhs = cbRecords.isChecked
@@ -111,10 +108,12 @@ class AddSymptomActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == requestCodeGallery && resultCode == Activity.RESULT_OK && data != null) {
             val uri = data.data
-            val inputStream: InputStream = uri.let { it?.let { it1 -> contentResolver.openInputStream(it1) } }!!
-            val bitmap = BitmapFactory.decodeStream(inputStream)
-            ivSymptom.setImageBitmap(bitmap)
-            selectedImagePath = getRealPathFromURI(uri)
+            ivSymptom.setImageURI(uri)
+            fileOfPic = File(getRealPathFromURI(uri))
+            selectedImagePath = fileOfPic!!.absolutePath
+            val appointment = userHolder.getBookAppointmentData()
+            appointment.pickedFilePath = selectedImagePath
+            userHolder.saveBookAppointmentData(appointment)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

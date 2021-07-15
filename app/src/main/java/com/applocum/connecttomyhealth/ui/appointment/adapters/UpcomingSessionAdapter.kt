@@ -10,6 +10,7 @@ import com.applocum.connecttomyhealth.convertDateTime
 import com.applocum.connecttomyhealth.ui.appointment.models.BookAppointmentResponse
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.view.RxView
+import kotlinx.android.synthetic.main.item_progress.view.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.*
 import kotlinx.android.synthetic.main.raw_session_xml.view.btnCancel
 import java.util.concurrent.TimeUnit
@@ -138,6 +139,10 @@ class UpcomingSessionAdapter(
                     .subscribe {
                         bookAppointmentResponse.let { it1 -> itemCLick.itemClick(it1,sessionHolder.adapterPosition) }
                     }
+            }
+            LOADING->{
+                val loadingViewHolder= holder as LoadingViewHolder
+                loadingViewHolder.itemView.itemProgress.visibility=View.VISIBLE
             }
         }
     }

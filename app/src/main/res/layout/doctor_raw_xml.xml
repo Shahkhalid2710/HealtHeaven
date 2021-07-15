@@ -93,8 +93,8 @@
 
                 <ImageView
                     android:id="@+id/ivSave"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/spacing_10"
                     android:layout_marginBottom="@dimen/spacing_10"

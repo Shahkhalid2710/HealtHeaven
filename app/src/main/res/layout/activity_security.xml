@@ -120,7 +120,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/montserrat_medium"
-                android:foreground="@drawable/effect_button"
                 android:text="@string/enter_password_or_use_face_id"
                 android:textColor="@color/aapBlack"
                 android:textSize="@dimen/font_12" />

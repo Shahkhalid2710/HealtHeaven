@@ -9,6 +9,7 @@ import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.convertDocumentTime
 import com.applocum.connecttomyhealth.ui.prescription.models.Document
 import com.jakewharton.rxbinding2.view.RxView
+import kotlinx.android.synthetic.main.item_progress.view.*
 import kotlinx.android.synthetic.main.raw_download.view.*
 import java.util.concurrent.TimeUnit
 
@@ -66,6 +67,10 @@ class FitNoteAdapter(
                     .subscribe {
                         document?.let { it1 -> onNoteClick.onNoteClick(it1, position) }
                     }
+            }
+            LOADING->{
+                val loadingViewHolder =holder as FitNoteAdapter.LoadingViewHolder
+                loadingViewHolder.itemView.itemProgress.visibility=View.VISIBLE
             }
         }
     }

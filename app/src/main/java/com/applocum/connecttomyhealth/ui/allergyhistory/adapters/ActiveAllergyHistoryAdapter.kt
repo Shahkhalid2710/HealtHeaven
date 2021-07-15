@@ -28,8 +28,5 @@ class ActiveAllergyHistoryAdapter(context: Context, list: ArrayList<TrueAllergy>
     override fun onBindViewHolder(holder: AllergyHistoryHolder, position: Int) {
         val trueAllergy = mList[position]
         holder.itemView.tvName.text = trueAllergy.allergy.name
-
-
-
     }
 }

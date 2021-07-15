@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.applocum.connecttomyhealth.R
 import com.applocum.connecttomyhealth.ui.mygp.models.GpService
 import com.jakewharton.rxbinding2.view.RxView
+import kotlinx.android.synthetic.main.item_progress.view.*
 import kotlinx.android.synthetic.main.raw_gp_service.view.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -21,7 +22,7 @@ class GpServiceAdapter(
     list: ArrayList<GpService?>,
     private val itemclick: ItemClickListner
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var mContext = context
+    var mContext = context
     var mList = list
     private val LOADING = 0
     private val ITEM = 1
@@ -68,6 +69,10 @@ class GpServiceAdapter(
                     .subscribe {
                         gpService?.let { it1 -> itemclick.onItemClick(it1, position) }
                     }
+            }
+            LOADING->{
+                val loadingViewHolder = holder as GpServiceAdapter.LoadingViewHolder
+                loadingViewHolder.itemView.itemProgress.visibility=View.VISIBLE
             }
         }
     }

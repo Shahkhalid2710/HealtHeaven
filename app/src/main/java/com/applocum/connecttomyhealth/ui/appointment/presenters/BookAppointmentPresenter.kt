@@ -15,8 +15,10 @@ import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.io.File
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -41,9 +43,9 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
 
     fun bookAppointment(bookAppointment: BookAppointment,appointmentType:String,cardIdentifier: Int)
     {
+        val pickImageFile = File(bookAppointment.pickedFilePath)
         view.viewFullProgress(true)
-        val requestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
+        val requestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
         requestBody.addFormDataPart("appointment[start_time]", bookAppointment.appointmentTime)
         requestBody.addFormDataPart("appointment[duration]", bookAppointment.appointmentSlot)
         requestBody.addFormDataPart("appointment[comments]",bookAppointment.appointmentReason)
@@ -53,6 +55,11 @@ class BookAppointmentPresenter @Inject constructor(private val api: AppEndPoint)
         requestBody.addFormDataPart("appointment[doctor_id]", bookAppointment.therapistId.toString())
         requestBody.addFormDataPart("cardIdentifier", cardIdentifier.toString())
         requestBody.addFormDataPart("organization_id", bookAppointment.corporateId.toString())
+
+        if (pickImageFile.exists()) {
+            val fileBody = RequestBody.create("image/jpeg".toMediaTypeOrNull(), pickImageFile)
+            requestBody.addFormDataPart("appointment_file[file]", "symptomPic", fileBody)
+        }
 
         if (bookAppointment.isRecurring)
         {

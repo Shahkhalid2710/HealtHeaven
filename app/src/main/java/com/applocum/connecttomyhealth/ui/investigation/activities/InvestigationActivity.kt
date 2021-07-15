@@ -153,8 +153,8 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
         super.onResume()
         investigationAdapter.mList.clear()
         investigationPresenter.resetPage()
-        investigationAdapter.notifyDataSetChanged()
         investigationPresenter.showInvestigationList()
+        investigationAdapter.notifyDataSetChanged()
     }
 
     override fun onDestroy() {
