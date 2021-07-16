@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.applocum.connecttomyhealth">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -23,6 +25,7 @@
         android:roundIcon="@drawable/ic_app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectToMyHealth"
+        tools:ignore="LockedOrientationActivity"
         android:usesCleartextTraffic="true">
         
         <activity android:name=".ui.payment.activities.BookingSuccessActivity"
@@ -101,6 +104,8 @@
             android:name=".ui.exemptions.activities.UploadCertificateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
+
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:launchMode="singleTop"
@@ -286,5 +291,14 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.PICK" />
+        </intent>
+    </queries>
 
 </manifest>

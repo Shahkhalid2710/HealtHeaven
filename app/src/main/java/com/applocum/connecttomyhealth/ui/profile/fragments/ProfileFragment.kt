@@ -66,7 +66,7 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
     lateinit var loginPresenter: LoginPresenter
 
     @SuppressLint("CheckResult")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         v = inflater.inflate(R.layout.fragment_profile, container, false)
         MyApplication.getAppContext().component.inject(this)
         presenter.injectview(this)
@@ -344,7 +344,6 @@ class ProfileFragment : Fragment(), ProfileDetailsPresenter.View,ProfileProgress
 
     override fun viewProgress(isShow: Boolean) {
         v.progress.visibility = if (isShow) View.VISIBLE else View.GONE
-
     }
 
     override fun noInternet(isConnect: Boolean) {

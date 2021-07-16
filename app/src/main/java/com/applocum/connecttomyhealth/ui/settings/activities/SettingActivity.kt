@@ -95,6 +95,7 @@ class SettingActivity : BaseActivity(), SettingNotificationPresenter.View {
     }
     override fun displayMessage(message: String) {
         val snackBar = Snackbar.make(llSetting, message, Snackbar.LENGTH_LONG)
+        snackBar.changeFont()
         val snackView = snackBar.view
         snackView.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
         snackBar.show()

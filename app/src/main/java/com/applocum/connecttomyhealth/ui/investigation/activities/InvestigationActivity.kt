@@ -35,6 +35,9 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
 
     private var isLoading = false
 
+    var isInvestigation="isInvestigation"
+
+
     override fun getLayoutResourceId(): Int = R.layout.activity_investigation
 
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
@@ -54,13 +57,15 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
 
         RxView.clicks(tvAddInvestigation).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this, AddInvestigationActivity::class.java))
+                val intent=Intent(this, AddInvestigationActivity::class.java)
+                startActivityForResult(intent,4)
                 overridePendingTransition(0,0)
             }
 
         RxView.clicks(btnAddInvestigation).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this, AddInvestigationActivity::class.java))
+                val intent=Intent(this, AddInvestigationActivity::class.java)
+                startActivityForResult(intent,4)
                 overridePendingTransition(0,0)
             }
 
@@ -68,6 +73,11 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
             .subscribe {
                 investigationPresenter.showInvestigationList()
             }
+
+        investigationAdapter.mList.clear()
+        investigationPresenter.resetPage()
+        investigationPresenter.showInvestigationList()
+        investigationAdapter.notifyDataSetChanged()
     }
 
     override fun displaySuccessMessage(message: String) {}
@@ -149,14 +159,23 @@ class InvestigationActivity : BaseActivity(), InvestigationPresenter.View {
         finish()
     }
 
-    override fun onResume() {
-        super.onResume()
-        investigationAdapter.mList.clear()
-        investigationPresenter.resetPage()
-        investigationPresenter.showInvestigationList()
-        investigationAdapter.notifyDataSetChanged()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 4)
+        {
+            if (resultCode == 4)
+            {
+                val investigation = data?.getBooleanExtra(isInvestigation,false)
+                if (investigation!!)
+                {
+                    investigationAdapter.mList.clear()
+                    investigationPresenter.resetPage()
+                    investigationPresenter.showInvestigationList()
+                    investigationAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
-
     override fun onDestroy() {
         super.onDestroy()
         investigationPresenter.safeDispose()

@@ -31,7 +31,7 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
     @Inject
     lateinit var presenter: FamilyHistoryPresenter
 
-    lateinit var familyHistoryAdapter: FamilyHistoryAdapter
+    private lateinit var familyHistoryAdapter: FamilyHistoryAdapter
 
     private var isLoading = false
 
@@ -64,6 +64,7 @@ class FamilyHistoryActivity : BaseActivity(), FamilyHistoryPresenter.View {
         RxView.clicks(btnAddFamilyHistory).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
                 startActivity(Intent(this, AddFamilyHistoryActivity::class.java))
+                startActivityForResult(intent,5)
                 overridePendingTransition(0,0)
             }
 

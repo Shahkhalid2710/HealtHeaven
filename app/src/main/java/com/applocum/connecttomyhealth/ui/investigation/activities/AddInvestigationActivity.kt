@@ -151,7 +151,10 @@ class AddInvestigationActivity : BaseActivity(), DatePickerDialog.OnDateSetListe
     }
 
     override fun displaySuccessMessage(message: String) {
-        this.finish()
+        val intent = Intent()
+        intent.putExtra(InvestigationActivity().isInvestigation,true)
+        setResult(4,intent)
+        finish()
     }
 
     override fun displayMessage(message: String) {

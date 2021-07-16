@@ -3,13 +3,8 @@ package com.applocum.connecttomyhealth.ui.addsymptoms.activities
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.applocum.connecttomyhealth.MyApplication
@@ -21,17 +16,20 @@ import com.applocum.connecttomyhealth.ui.booksession.activities.SessionBookActiv
 import com.applocum.connecttomyhealth.ui.bottomnavigationview.activities.BottomNavigationViewActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.RxView
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_add_symptom.*
 import kotlinx.android.synthetic.main.activity_add_symptom.ivBack
 import kotlinx.android.synthetic.main.activity_add_symptom.tvCancel
+import kotlinx.android.synthetic.main.custom_profile_dialog.view.*
 import java.io.File
+import java.net.URI
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AddSymptomActivity : BaseActivity() {
-    private val requestCodeGallery = 999
     private var selectedImagePath: String = ""
-    private  var fileOfPic:File? = null
+    private var fileOfPic:File? = null
 
     @Inject
     lateinit var userHolder: UserHolder
@@ -46,7 +44,6 @@ class AddSymptomActivity : BaseActivity() {
 
         (application as MyApplication).component.inject(this)
 
-       // val specialist = intent.getSerializableExtra("specialist") as Specialist
         val specialistId = intent.getIntExtra("specialistId",0)
 
         RxView.clicks(ivBack).throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -62,15 +59,44 @@ class AddSymptomActivity : BaseActivity() {
                 overridePendingTransition(0,0)
             }
 
+
+        RxView.clicks(ivSymptom).throttleFirst(500,TimeUnit.MILLISECONDS)
+            .subscribe {
+                val showDialogView = LayoutInflater.from(this)
+                    .inflate(R.layout.custom_profile_dialog, null, false)
+                val dialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
+                dialog.setView(showDialogView)
+
+                showDialogView.tvChooseImage.setOnClickListener {
+                    this.let {
+                        CropImage.activity()
+                            .setAllowFlipping(false)
+                            .setAllowCounterRotation(false)
+                            .setActivityMenuIconColor(resources.getColor(R.color.black))
+                            .setBorderLineColor(resources.getColor(R.color.green))
+                            .setBorderCornerColor(resources.getColor(R.color.green))
+                            .setMinCropResultSize(400,400)
+                            .setGuidelines(CropImageView.Guidelines.ON)
+                            .setCropShape(CropImageView.CropShape.RECTANGLE)
+                            .setCropMenuCropButtonIcon(R.drawable.ic_yes)
+                            .setRequestedSize(500, 500)
+                            .start(this)
+                    }
+                    dialog.dismiss()
+                }
+
+                showDialogView.tvCancel.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.show()
+            }
+
         val allDayDr = "<font color='#008976'>alldayDr</font>"
         val nhsGP = "<font color='#008976'>NHS GP.</font>"
 
         cbGeoLocation.text = HtmlCompat.fromHtml("I allow $allDayDr to access my geo Location. (This will only be used in an emergency)", HtmlCompat.FROM_HTML_MODE_LEGACY)
         cbRecords.text = HtmlCompat.fromHtml("I give consult to alldayDr to share my records with my $nhsGP", HtmlCompat.FROM_HTML_MODE_LEGACY)
 
-        ivSymptom.setOnClickListener {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),requestCodeGallery)
-        }
 
         RxView.clicks(btnContinue).throttleFirst(500, TimeUnit.MILLISECONDS)
             .subscribe {
@@ -88,42 +114,19 @@ class AddSymptomActivity : BaseActivity() {
             }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == requestCodeGallery) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                val intent = Intent(Intent.ACTION_PICK)
-                intent.type = "image/*"
-                startActivityForResult(intent, requestCodeGallery)
-            } else {
-                Toast.makeText(this, "You don't have permission", Toast.LENGTH_LONG).show()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode == Activity.RESULT_OK) {
+                ivSymptom.setImageURI(result.uri)
+                fileOfPic = File(URI(result.uri.toString()))
+                selectedImagePath=fileOfPic!!.absolutePath
+                val appointment = userHolder.getBookAppointmentData()
+                appointment.pickedFilePath = selectedImagePath
+                userHolder.saveBookAppointmentData(appointment)
             }
         }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == requestCodeGallery && resultCode == Activity.RESULT_OK && data != null) {
-            val uri = data.data
-            ivSymptom.setImageURI(uri)
-            fileOfPic = File(getRealPathFromURI(uri))
-            selectedImagePath = fileOfPic!!.absolutePath
-            val appointment = userHolder.getBookAppointmentData()
-            appointment.pickedFilePath = selectedImagePath
-            userHolder.saveBookAppointmentData(appointment)
-        }
         super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    private fun getRealPathFromURI(uri: Uri?): String {
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor: Cursor = managedQuery(uri, projection, null, null, null)
-        val columnIndex: Int = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        cursor.moveToFirst()
-        return cursor.getString(columnIndex)
     }
 
     private fun checkCondition(geolocation: Boolean, records: Boolean): Boolean {

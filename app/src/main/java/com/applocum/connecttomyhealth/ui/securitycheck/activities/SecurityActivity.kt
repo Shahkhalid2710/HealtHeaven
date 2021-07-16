@@ -93,7 +93,7 @@ class SecurityActivity : BaseActivity(), SecurityPresenter.View {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
-        finishAffinity()
+        finish()
         overridePendingTransition(0,0)
     }
 }

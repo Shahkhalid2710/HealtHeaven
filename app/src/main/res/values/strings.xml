@@ -727,4 +727,6 @@
     <string name="secure_access_to_clinical_records_by_using_same_pin_password_or_fingerprint_you_use_to_unlock_your_phone">Secure access to Clinical records,by using same PIN/Password or fingerprint you use to unlock your phone.</string>
     <string name="use_device_security">Use Device Security</string>
     <string name="not_now">Not Now</string>
+    <string name="pin_pattern_password_is_ready_to_go">PIN/Pattern/Password is ready to go</string>
+    <string name="remember_if_someone_else_has_your_device_s_pin_password_or_fingerprint_then_will_have_access_to_your_account">Remember,if someone else has your device\'s PIN/Password or fingerprint,then will have access to your account</string>
 </resources>

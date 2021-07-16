@@ -153,7 +153,7 @@
         <item name="android:background">@drawable/custom_solid_white</item>
         <item name="android:colorControlActivated">@color/green</item>
         <item name="android:textColorPrimary">@color/black</item>
-        <item name="android:textSize">@dimen/font_13</item>
+        <item name="android:textSize">@dimen/font_15</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 

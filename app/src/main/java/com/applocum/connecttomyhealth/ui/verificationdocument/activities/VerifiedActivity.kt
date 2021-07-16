@@ -16,4 +16,8 @@ class VerifiedActivity : BaseActivity() {
             finish()
         }
     }
+
+    override fun onBackPressed() {
+      //  super.onBackPressed()
+    }
 }
