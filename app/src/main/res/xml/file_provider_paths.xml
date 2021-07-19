@@ -3,7 +3,7 @@
     <files-path name="cropper" path="cropper-internal/" />
     <external-files-path name="my_images" path="/" />
 
-    <!--<external-cache-path
+    <external-cache-path
         name="labels"
         path="labels/"/>
     <external-cache-path
@@ -12,13 +12,13 @@
     <external-cache-path
         name="images"
         path="." />
-    &lt;!&ndash; Listing images &ndash;&gt;
-    &lt;!&ndash; Context.getExternalFilesDir(String) &ndash;&gt;
+    <!-- Listing images -->
+    <!-- Context.getExternalFilesDir(String) -->
     <external-files-path
         name="my-pictures"
         path="/" />
-    &lt;!&ndash; Context.getFilesDir()&ndash;&gt;
+    <!-- Context.getFilesDir()-->
     <files-path
         name="my-local-pictures"
-        path="." />-->
+        path="." />
 </paths>

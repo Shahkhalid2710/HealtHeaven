@@ -11,7 +11,6 @@ android {
     def API_URL ="\"https://dev-api.alldaydr.com\""
 
     defaultConfig {
-
         applicationId "com.applocum.connecttomyhealth"
         minSdkVersion 23
         targetSdkVersion 30
@@ -107,8 +106,6 @@ dependencies {
     implementation "androidx.camera:camera-camera2:$camerax_version"
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation 'androidx.camera:camera-view:1.0.0-alpha20'
-
-
 }
 
 kapt {

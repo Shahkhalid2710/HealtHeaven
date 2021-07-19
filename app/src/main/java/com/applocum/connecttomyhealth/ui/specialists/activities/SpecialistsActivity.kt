@@ -42,7 +42,6 @@ class SpecialistsActivity : BaseActivity(), SpecilistPresenter.View,
 
     override fun getLayoutResourceId(): Int = R.layout.activity_specialists
 
-
     override fun handleInternetConnectivity(isConnect: Boolean?) {}
 
     @SuppressLint("CheckResult")

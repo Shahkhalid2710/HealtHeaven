@@ -65,7 +65,7 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_upcoming_session_apointment, container, false)
 
         MyApplication.getAppContext().component.inject(this)
@@ -118,9 +118,10 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
 
     override fun getSessions(list: ArrayList<BookAppointmentResponse>) {
         mListUpcomingSession = list
+
         checkList()
 
-        upcomingSessionAdapter.mList.addAll(mListUpcomingSession)
+        upcomingSessionAdapter.mList.addAll(list)
         upcomingSessionAdapter.notifyItemRangeInserted(upcomingSessionAdapter.mList.size, list.size)
 
         RxRecyclerView.scrollEvents(v.rvUpcomingSession)
@@ -175,16 +176,6 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
         }
     }
 
-    private fun checkList() {
-        if (mListUpcomingSession.isNullOrEmpty()) {
-            v.layoutNotFoundUpcomingSession.visibility = View.VISIBLE
-            v.rvUpcomingSession.visibility = View.GONE
-        } else {
-            v.layoutNotFoundUpcomingSession.visibility = View.GONE
-            v.rvUpcomingSession.visibility = View.VISIBLE
-        }
-    }
-
     override fun itemClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
         bookAppointmentPosition = position
         val showDialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.custom_cancel_book_session_dialog, null, false)
@@ -203,7 +194,6 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
 
     override fun removeApppintment(appointmentId: Int) {
         upcomingSessionAdapter.removeAppointment(appointmentId,bookAppointmentPosition)
-        checkList()
     }
 
     override fun onCheckInButtonClick(bookAppointmentResponse: BookAppointmentResponse, position: Int) {
@@ -242,6 +232,17 @@ class UpcomingSessionApointmentFragment : Fragment(), BookAppointmentPresenter.V
             startActivity(intent)
         }
     }
+
+    private fun checkList() {
+        if (mListUpcomingSession.isNullOrEmpty()) {
+            v.layoutNotFoundUpcomingSession.visibility = View.VISIBLE
+            v.rvUpcomingSession.visibility = View.GONE
+        } else {
+            v.layoutNotFoundUpcomingSession.visibility = View.GONE
+            v.rvUpcomingSession.visibility = View.VISIBLE
+        }
+    }
+
 
     private fun locationPermission() {
         ContextCompat.checkSelfPermission(requireActivity(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED

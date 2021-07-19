@@ -380,6 +380,9 @@ class SessionBookActivity : BaseActivity(), BookSessionPresenter.View,
         calendarView.addDecorator(PrimeDayDisableDecorator())
         calendarView.selectedDate = CalendarDay.today()
 
+
+        calendarView.isDynamicHeightEnabled = true
+
         val c = Calendar.getInstance()
         val day = c[Calendar.DAY_OF_MONTH]
         val month = c[Calendar.MONTH]
